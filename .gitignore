@@ -1,0 +1,49 @@
+# Local-only notes and learning material
+.local/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+clearml.conf
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ClearML local state and offline runs
+.clearml/
+clearml_offline/
+
+# Raw data, generated outputs and model artifacts
+data/*
+!data/README.md
+!data/manifests/
+!data/manifests/**
+datasets/
+artifacts/
+outputs/
+runs/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
