@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520" role="img" aria-labelledby="title description">
+  <title id="title">B0 development result</title>
+  <desc id="description">B0 ranked an anomaly first in 65 percent of 40 training scenes and reached mean average precision 0.7771.</desc>
+  <rect width="1100" height="520" fill="#ffffff"/>
+  <text x="60" y="70" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#1f2933">B0 development result</text>
+  <text x="60" y="105" font-family="Arial, sans-serif" font-size="20" fill="#52606d">40 ToysAD-8K training scenes, fixed view 0000</text>
+
+  <text x="60" y="175" font-family="Arial, sans-serif" font-size="22" fill="#1f2933">Top-1 accuracy</text>
+  <rect x="300" y="150" width="650" height="36" rx="4" fill="#d9e2ec"/>
+  <rect x="300" y="150" width="423" height="36" rx="4" fill="#486f96"/>
+  <text x="970" y="177" font-family="Arial, sans-serif" font-size="22" text-anchor="end" fill="#1f2933">65.0%</text>
+
+  <text x="60" y="245" font-family="Arial, sans-serif" font-size="22" fill="#1f2933">Mean AP</text>
+  <rect x="300" y="220" width="650" height="36" rx="4" fill="#d9e2ec"/>
+  <rect x="300" y="220" width="505" height="36" rx="4" fill="#486f96"/>
+  <text x="970" y="247" font-family="Arial, sans-serif" font-size="22" text-anchor="end" fill="#1f2933">0.7771</text>
+
+  <text x="60" y="315" font-family="Arial, sans-serif" font-size="22" fill="#1f2933">Random expectation</text>
+  <rect x="300" y="290" width="650" height="36" rx="4" fill="#d9e2ec"/>
+  <rect x="300" y="290" width="211" height="36" rx="4" fill="#7b8794"/>
+  <text x="970" y="317" font-family="Arial, sans-serif" font-size="22" text-anchor="end" fill="#1f2933">32.5%</text>
+
+  <line x1="60" y1="375" x2="1040" y2="375" stroke="#bcccdc" stroke-width="2"/>
+  <text x="60" y="420" font-family="Arial, sans-serif" font-size="22" fill="#1f2933">Permutation checks</text>
+  <text x="970" y="420" font-family="Arial, sans-serif" font-size="22" text-anchor="end" fill="#1f2933">40 of 40 passed</text>
+  <text x="60" y="470" font-family="Arial, sans-serif" font-size="18" fill="#52606d">Training-only feasibility result. This is not final-test evidence.</text>
+</svg>

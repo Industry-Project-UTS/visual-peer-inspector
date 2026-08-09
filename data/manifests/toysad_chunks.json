@@ -1,0 +1,64 @@
+{
+  "dataset": "ToysAD-8K",
+  "repo_id": "ankankbhunia/odd-one-out",
+  "revision": "ad98caffa9d136bfaec49d847e5c9eec44ffe30c",
+  "segment_prefix": "toysAD8K_part_",
+  "expected_total_bytes": 52993751003,
+  "files": [
+    {
+      "name": "toysAD8K_part_aa",
+      "size_bytes": 5242880000,
+      "sha256": "efdd718a10a1e757d889e8a542edf03a44a620c845a8bd60851d4075d7eb7490"
+    },
+    {
+      "name": "toysAD8K_part_ab",
+      "size_bytes": 5242880000,
+      "sha256": "811e92b264102c7c03fe4ae600a5809cc0f556513a82c7adc014fb323860c187"
+    },
+    {
+      "name": "toysAD8K_part_ac",
+      "size_bytes": 5242880000,
+      "sha256": "9b0742733834a168223533728fda21a0fdf10a2a5abcc331ba638b52b698fe54"
+    },
+    {
+      "name": "toysAD8K_part_ad",
+      "size_bytes": 5242880000,
+      "sha256": "1ef911809312291c79105e3767ddd67ae1cfc6982a1517ec0813c9dca55f567f"
+    },
+    {
+      "name": "toysAD8K_part_ae",
+      "size_bytes": 5242880000,
+      "sha256": "19de82879d348a23e43d6282b20cab890a9edba64348ebaeb302d5a661feb16f"
+    },
+    {
+      "name": "toysAD8K_part_af",
+      "size_bytes": 5242880000,
+      "sha256": "f86d558bd69942b0e10c79cccd0794be618f409ec96c7b251cfd6cb202e27c23"
+    },
+    {
+      "name": "toysAD8K_part_ag",
+      "size_bytes": 5242880000,
+      "sha256": "844686f8f72a79a66b7319584ef690738793d0f218e3aac13400f406ccafb036"
+    },
+    {
+      "name": "toysAD8K_part_ah",
+      "size_bytes": 5242880000,
+      "sha256": "97c0e9e6abf223dc2f7534fdfeafc149d54ab30c1517a6904d051defba30a281"
+    },
+    {
+      "name": "toysAD8K_part_ai",
+      "size_bytes": 5242880000,
+      "sha256": "897ebcbdbded9fa15703732502c31a32478a1625f6da3f2ab4f5bbf5430c9439"
+    },
+    {
+      "name": "toysAD8K_part_aj",
+      "size_bytes": 5242880000,
+      "sha256": "c35eba3f83f5478f37098b21b2c362d7d3e968c61239c06b434a7bc0e0d5708a"
+    },
+    {
+      "name": "toysAD8K_part_ak",
+      "size_bytes": 564951003,
+      "sha256": "763adb38c65f78c72af82758b2ae0a336a61528899772ff7b7c6e3cacd49ab3f"
+    }
+  ]
+}
