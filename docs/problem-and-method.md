@@ -38,13 +38,14 @@ Important settings are the camera view, mask threshold, crop padding, feature
 layer and image background. B0 is fast and easy to explain. Its main weakness
 is that one whole-object vector can hide a small defect.
 
-### B1: nearest peer
+### B1: median pairwise distance
 
-B1 will compare each object with its most similar peer instead of the mean of
-all peers. This can reduce the effect of a second anomaly contaminating the
-reference. It can also select a poor peer when normal objects vary strongly.
+B1 compares each object with every other object separately. The object score is
+the median of those cosine distances. This reduces the effect of one unusually
+different peer while keeping the result easy to explain.
 
-Important settings are the distance measure and the number of neighbours.
+Important settings are the distance measure and the peer aggregation rule. A
+median can still be unstable when a scene contains only a few objects.
 
 ### P1: patch comparison
 
@@ -57,10 +58,10 @@ spatial matching rule.
 
 ## Current evidence
 
-B0 was tested on a deterministic 40-scene training cohort. It ranked an
-anomalous object first in 26 scenes and produced a mean scene average precision
-of 0.7771. These results support the next experiment, but they are not final
-test results.
+B0 and B1 were tested on the same deterministic 40-scene training cohort. Both
+ranked an anomalous object first in 26 scenes. B0 produced mean scene average
+precision of 0.7771 and B1 produced 0.7758. B1 did not improve B0 on this
+cohort. These are development results, not final test results.
 
 ## References
 

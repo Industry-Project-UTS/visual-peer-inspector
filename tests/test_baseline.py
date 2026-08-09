@@ -8,7 +8,12 @@ import unittest
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
-from visual_peer_inspector import average_precision, peer_mean_scores, permutation_error
+from visual_peer_inspector import (
+    average_precision,
+    median_peer_scores,
+    peer_mean_scores,
+    permutation_error,
+)
 
 
 class BaselineTests(unittest.TestCase):
@@ -21,6 +26,19 @@ class BaselineTests(unittest.TestCase):
         vectors = [[1.0, 0.0], [0.9, 0.1], [0.2, 0.8], [0.0, 1.0]]
         scores = peer_mean_scores(vectors)
         self.assertLess(permutation_error(vectors, scores), 1e-12)
+
+    def test_median_score_is_not_changed_by_object_order(self) -> None:
+        vectors = [[1.0, 0.0], [0.9, 0.1], [0.2, 0.8], [0.0, 1.0]]
+        scores = median_peer_scores(vectors)
+        self.assertLess(
+            permutation_error(vectors, scores, scorer=median_peer_scores),
+            1e-12,
+        )
+
+    def test_median_score_uses_all_peers(self) -> None:
+        vectors = [[1.0, 0.0], [0.99, 0.01], [0.98, 0.02], [0.0, 1.0]]
+        scores = median_peer_scores(vectors)
+        self.assertEqual(max(range(len(scores)), key=scores.__getitem__), 3)
 
     def test_average_precision_uses_full_ranking(self) -> None:
         labels = [True, False, True, False]

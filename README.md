@@ -9,7 +9,7 @@ ToysAD-8K, supplied object masks and frozen DINOv2 features.
 - One fixed camera view
 - Supplied object segmentations
 - Frozen DINOv2 ViT-S/14 features
-- B0 peer-mean anomaly score
+- B0 peer-mean and B1 median pairwise anomaly scores
 - A fixed 40-scene training cohort
 - No use of object order or filenames as predictive inputs
 
@@ -21,7 +21,7 @@ does not provide all-normal scenes in the inspected scene catalogue.
 ```text
 data/manifests/       Dataset and cohort records
 docs/                 Problem, method and experiment notes
-scripts/              Verification, extraction and B0 commands
+scripts/              Verification, extraction and baseline commands
 src/                  Reusable project code
 tests/                Small unit and integration tests
 ```
@@ -51,18 +51,27 @@ Run B0 after installing the optional baseline dependencies:
 ```bash
 python3 -m pip install -e '.[baseline]'
 
-python3 scripts/run_b0.py \
+python3 scripts/run_baseline.py b0 \
   data/local/development-40 \
   outputs/b0-development.json
 ```
 
 Add `--local-files-only` when the pinned DINOv2 model is already cached.
 
+Run B1 on the same cohort:
+
+```bash
+python3 scripts/run_baseline.py b1 \
+  data/local/development-40 \
+  outputs/b1-development.json
+```
+
 ## Documents
 
 - [Problem and proposed method](docs/problem-and-method.md)
 - [Dataset checks](docs/dataset.md)
 - [B0 development result](docs/experiments/b0-development.md)
+- [B1 development comparison](docs/experiments/b1-development.md)
 
 ## Data boundary
 

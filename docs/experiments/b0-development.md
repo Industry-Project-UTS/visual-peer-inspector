@@ -55,9 +55,13 @@ unseen-test splits.
 ## Next experiment
 
 1. Inspect the 14 missed scenes without changing the cohort.
-2. Run B1 on the same images and cached DINOv2 features.
-3. Compare B0 and B1 before opening the official test splits.
+2. Use the completed B1 comparison to identify ranking changes.
+3. Implement P1 patch comparison and inspect its heatmaps.
 4. Lock the development protocol and thresholds before final evaluation.
+
+B1 has now been run on the same cohort. It matched B0's top-1 count and had a
+slightly lower mean average precision. See the
+[B1 development comparison](b1-development.md).
 
 The tracked machine-readable summary is
 [`b0-development-summary.json`](b0-development-summary.json).

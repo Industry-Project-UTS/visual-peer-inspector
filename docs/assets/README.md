@@ -16,3 +16,8 @@ clarity and are not part of the evaluation policy.
 
 This chart was created from the tracked B0 development summary in
 `docs/experiments/b0-development-summary.json`.
+
+## `b0-b1-comparison.svg`
+
+This chart compares the tracked B0 and B1 results on the same fixed 40-scene
+development cohort. Its values come from the tracked experiment summaries.

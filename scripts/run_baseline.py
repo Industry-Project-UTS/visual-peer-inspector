@@ -22,6 +22,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from visual_peer_inspector import (
     average_precision,
     load_scene_view,
+    median_peer_scores,
     peer_mean_scores,
     permutation_error,
 )
@@ -32,7 +33,8 @@ DEFAULT_CONFIG = PROJECT_ROOT / "data" / "manifests" / "development_40.json"
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Run the B0 peer-mean baseline")
+    parser = argparse.ArgumentParser(description="Run a whole-object baseline")
+    parser.add_argument("method", choices=("b0", "b1"))
     parser.add_argument("data_root", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
@@ -91,6 +93,10 @@ def run(args: argparse.Namespace) -> dict[str, object]:
         raise FileExistsError(f"Output already exists: {output}")
 
     config = load_json(args.config)
+    scorer = {
+        "b0": peer_mean_scores,
+        "b1": median_peer_scores,
+    }[args.method]
     device = choose_device(args.device)
     model_config = config["model"]
     crop_config = config["crop"]
@@ -145,7 +151,7 @@ def run(args: argparse.Namespace) -> dict[str, object]:
         with torch.inference_mode():
             output_features = model(pixel_values=pixel_values)
         vectors = output_features.last_hidden_state[:, 0, :].detach().cpu().tolist()
-        scores = peer_mean_scores(vectors)
+        scores = scorer(vectors)
         ranking = sorted(range(len(scores)), key=scores.__getitem__, reverse=True)
         labels = [item.is_anomaly for item in scene.objects]
         ranks = {object_index: rank for rank, object_index in enumerate(ranking, 1)}
@@ -157,7 +163,11 @@ def run(args: argparse.Namespace) -> dict[str, object]:
                 "anomaly_count": scene.anomaly_count,
                 "top1_correct": labels[ranking[0]],
                 "average_precision": average_precision(labels, ranking),
-                "permutation_error": permutation_error(vectors, scores),
+                "permutation_error": permutation_error(
+                    vectors,
+                    scores,
+                    scorer=scorer,
+                ),
                 "seconds": time.perf_counter() - scene_started,
                 "objects": [
                     {
@@ -172,12 +182,17 @@ def run(args: argparse.Namespace) -> dict[str, object]:
                 ],
             }
         )
-        print(f"{scene.scene_id}: top1={labels[ranking[0]]}", flush=True)
+        print(
+            f"{scene.scene_id}: {args.method.upper()} top1={labels[ranking[0]]}",
+            flush=True,
+        )
 
     run_seconds = time.perf_counter() - run_started
     result = {
         "schema_version": 1,
-        "run_id": str(config["id"]),
+        "run_id": f"{config['id']}-{args.method}",
+        "cohort_id": str(config["id"]),
+        "method": args.method.upper(),
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "dataset_revision": str(config["dataset_revision"]),
         "split": str(config["split"]),
@@ -216,6 +231,7 @@ def main() -> int:
         print(f"ERROR: {error}", file=sys.stderr)
         return 1
 
+    print(f"Method: {result['method']}")
     print(f"Top-1: {result['top1_correct_count']}/{result['scene_count']}")
     print(f"Mean AP: {result['mean_average_precision']:.4f}")
     print(f"Output: {args.output.expanduser().resolve()}")
