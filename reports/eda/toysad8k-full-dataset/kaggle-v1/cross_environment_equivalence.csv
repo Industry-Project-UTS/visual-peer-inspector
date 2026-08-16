@@ -1,0 +1,13 @@
+measure,local_reference,current_run,matches
+catalogue_scenes,7396,7396,True
+categories,51,51,True
+base_assets,974,974,True
+objects,27290,27290,True
+anomalous_objects,8482,8482,True
+availability_ready_scenes,7373,7373,True
+indexed_files,1161604,1161604,True
+validated_png_and_exr_headers,1139405,1139405,True
+image_header_failures,11,11,True
+eligible_train_scenes,4107,4107,True
+eligible_train_assets,545,545,True
+eligible_train_categories,39,39,True

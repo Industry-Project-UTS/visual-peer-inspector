@@ -1,10 +1,21 @@
 # Visual Peer Inspector
 
 Visual Peer Inspector compares similar objects in one scene and ranks the
-objects that look different from their peers. The first experiment uses
-ToysAD-8K, supplied object masks and frozen DINOv2 features.
+objects that look different from their peers. ToysAD-8K is the first dataset
+used to develop and evaluate the project.
 
-## Current scope
+## Project status
+
+The full ToysAD-8K exploratory analysis is complete. It covers the complete
+7,396-scene catalogue and the available archive inventory. The next stage is
+to confirm the controlled experiment design and validate the automatic
+box-to-mask pipeline before fixing the final feature backbone.
+
+The earlier 40-scene, one-view experiment remains in this repository as a
+historical baseline and regression check. It is not the current project
+architecture.
+
+## Historical baseline
 
 - One fixed camera view
 - Supplied object segmentations
@@ -68,6 +79,8 @@ python3 scripts/run_baseline.py b1 \
 
 ## Documents
 
+- [Full ToysAD-8K EDA](reports/eda/toysad8k-full-dataset/README.md)
+- [Week 3 data and EDA record](docs/progress/week-03-data-and-eda.md)
 - [Problem and proposed method](docs/problem-and-method.md)
 - [Dataset checks](docs/dataset.md)
 - [B0 development result](docs/experiments/b0-development.md)

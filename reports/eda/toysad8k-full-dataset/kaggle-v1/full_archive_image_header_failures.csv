@@ -1,0 +1,12 @@
+member,scene_id,split,component,error
+toysad8k/bread_037-007/segmentations/object.001/object.001_0019.png,bread_037-007,[not-in-scene2d-catalogue],object mask,Zero-byte image member.
+toysad8k/hammer_083-003/RGB/0016.png,hammer_083-003,[not-in-official-split],RGB,Zero-byte image member.
+toysad8k/fox_025-006/segmentations/object.004/object.004_0016.png,fox_025-006,[not-in-scene2d-catalogue],object mask,Zero-byte image member.
+toysad8k/bottle_091-009/segmentations/object/object_0000.png,bottle_091-009,[not-in-scene2d-catalogue],object mask,Zero-byte image member.
+toysad8k/mug_018-005/segmentations/object.003/object.003_0003.png,mug_018-005,[not-in-scene2d-catalogue],object mask,Zero-byte image member.
+toysad8k/apple_048-007/segmentations/object.002/object.002_0001.png,apple_048-007,[not-in-scene2d-catalogue],object mask,Zero-byte image member.
+toysad8k/robot_042-001/RGB/0008.png,robot_042-001,[not-in-official-split],RGB,Zero-byte image member.
+toysad8k/bottle_060-002/segmentations/object/object_0007.png,bottle_060-002,[not-in-scene2d-catalogue],object mask,Zero-byte image member.
+toysad8k/glass_010-001/segmentations/object/object_0010.png,glass_010-001,[not-in-scene2d-catalogue],object mask,Zero-byte image member.
+toysad8k/mug_009-004/segmentations/object.002/object.002_0008.png,mug_009-004,[not-in-scene2d-catalogue],object mask,Zero-byte image member.
+toysad8k/glass_061-007/RGB/0010.png,glass_061-007,[not-in-official-split],RGB,Zero-byte image member.

@@ -1,0 +1,9 @@
+# Core versions recorded by the completed Kaggle EDA run.
+# This records the libraries used by the notebook. It is not a full snapshot
+# of every package in the Kaggle container.
+
+numpy==2.0.2
+pandas==2.3.3
+matplotlib==3.10.0
+seaborn==0.13.2
+Pillow==11.3.0

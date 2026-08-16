@@ -1,0 +1,56 @@
+[{"stream_name":"stderr","time":9.199622287,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":9.199695378,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":9.19970247,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":9.199706107,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":10.038396982,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":10.038436312,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":10.038442403,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":10.038447269,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":14.959307691,"data":"Environment: Kaggle\n"}
+,{"stream_name":"stdout","time":14.959370317,"data":"Dataset support root: /kaggle/input/datasets/esreekarreddy/toysad8k-full-private-eda\n"}
+,{"stream_name":"stdout","time":14.959377207,"data":"Archive storage: Kaggle unpacked members\n"}
+,{"stream_name":"stdout","time":14.959382358,"data":"Output folder: /kaggle/working/toysad8k_full_dataset_eda\n"}
+,{"stream_name":"stdout","time":18.64190007,"data":"Important label finding:\n"}
+,{"stream_name":"stdout","time":18.64193993,"data":"Every catalogue scene contains at least one anomaly.\n"}
+,{"stream_name":"stdout","time":18.641946175,"data":"All anomalous objects occur first in source object order, so order is a leakage risk.\n"}
+,{"stream_name":"stdout","time":27.104268842,"data":"Indexed non-directory files: 1,161,604\n"}
+,{"stream_name":"stdout","time":27.104309464,"data":"Compressed archive total: 49.070 GiB\n"}
+,{"stream_name":"stdout","time":27.104313731,"data":"Uncompressed archive total: 51.250 GiB\n"}
+,{"stream_name":"stdout","time":2508.510825928,"data":"Checked 250,000 raw image headers\n"}
+,{"stream_name":"stdout","time":5140.343116501,"data":"Checked 500,000 raw image headers\n"}
+,{"stream_name":"stdout","time":7660.630035164,"data":"Checked 750,000 raw image headers\n"}
+,{"stream_name":"stdout","time":10316.837598693,"data":"Checked 1,000,000 raw image headers\n"}
+,{"stream_name":"stdout","time":11769.616772926,"data":"Checked 1,139,416 complete-archive image headers in 11738.2 seconds.\n"}
+,{"stream_name":"stdout","time":11769.616882536,"data":"Non-empty images are 256 x 256; 11 indexed image files are zero bytes.\n"}
+,{"stream_name":"stdout","time":11781.673842725,"data":"1. The complete scene2d catalogue contains 7,396 scenes across 51 categories.\n"}
+,{"stream_name":"stdout","time":11781.673904552,"data":"2. The catalogue represents 974 base assets and 27,290 peer objects.\n"}
+,{"stream_name":"stdout","time":11781.673913462,"data":"3. There are 8,482 anomalous objects and no native all-normal scenes.\n"}
+,{"stream_name":"stdout","time":11781.673920162,"data":"4. 7,373 scenes are availability-ready; 23 scenes carry one or more warnings.\n"}
+,{"stream_name":"stdout","time":11781.673926379,"data":"5. All 1,139,416 PNG and EXR members were checked; 11 are zero-byte image files and every non-empty image is 256 x 256.\n"}
+,{"stream_name":"stdout","time":11781.673932492,"data":"6. All anomalous objects are first in source order, so object order and source names must be hidden from models.\n"}
+,{"stream_name":"stdout","time":11781.673938642,"data":"7. The leakage-safe train-derived pool contains 4,107 scenes, 545 assets, and 39 categories.\n"}
+,{"stream_name":"stdout","time":11781.674017132,"data":"8. Official test pixels were not displayed; their raw file headers and aggregate counts were audited.\n"}
+,{"stream_name":"stdout","time":11781.674024948,"data":"9. Supplied segmentations are whole-object references, not defect masks.\n"}
+,{"stream_name":"stdout","time":11782.055451966,"data":"Generated 35 hashed artifacts plus the artifact manifest.\n"}
+,{"stream_name":"stdout","time":11782.055507498,"data":"Run record: /kaggle/working/toysad8k_full_dataset_eda/run_record.json\n"}
+,{"stream_name":"stderr","time":11787.184127008,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":11787.184181247,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":11787.475784961,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":11787.475833475,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":11788.327202305,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":11788.879725376,"data":"[NbConvertApp] Writing 5484145 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":11792.304045156,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":11793.905623645,"data":"[NbConvertApp] Support files will be in __results___files/\n"}
+,{"stream_name":"stderr","time":11793.90568527,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":11793.906335243,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":11793.906537725,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":11793.906773685,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":11793.90699211,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":11793.907172605,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":11793.90734271,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":11793.90759092,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":11793.90886465,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":11793.910619047,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":11793.910942015,"data":"[NbConvertApp] Making directory __results___files\n"}
+,{"stream_name":"stderr","time":11793.912043797,"data":"[NbConvertApp] Writing 631494 bytes to __results__.html\n"}
+]

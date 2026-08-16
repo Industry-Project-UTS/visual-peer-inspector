@@ -1,0 +1,9 @@
+order,scene_id,view_id,heading,ground_truth,challenge
+1,airplane_000-001,0009,Missing component,One anomalous object: miss-001,Separate missing geometry from normal viewpoint and size variation.
+2,apple_003-002,0003,Crack,One anomalous object: crack-001,The local crack changes contrast under different lighting and poses.
+3,apple_000-001,0004,Fracture,One anomalous object: frac-001,Self-occlusion can make the same missing region less visible in other views.
+4,airplane_021-002,0000,Rotation misalignment,One anomalous object: rota-001,The orientation is abnormal only relative to the peer arrangement.
+5,bottle_017-001,0000,Translation misalignment,One anomalous object: tran-002,The useful signal is peer-relative placement rather than appearance.
+6,airplane_001-006,0004,Geometric deformation,One anomalous object: defr-001,Pose differences between peers can resemble silhouette deformation.
+7,apple_000-004,0004,Material or colour mismatch,One anomalous object: disc-001,The pale region must be separated from highlights and lighting changes.
+8,apple_015-004,0009,Two anomalies,Two anomalous objects: crack-003 and bump-001,Two abnormal peers can contaminate the reference in different ways.

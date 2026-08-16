@@ -1,0 +1,5 @@
+issue,train,seen-test,unseen-test,[not-in-official-split],all_splits
+object_segmentation_count_above_expected,8,0,3,0,11
+object_segmentation_count_below_expected,6,0,2,0,8
+rgb_view_count_mismatches,0,0,0,4,4
+scene_mask_count_mismatches,1,0,0,0,1

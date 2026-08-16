@@ -1,0 +1,6 @@
+component,file_type,width,height,bit_depth,encoding,file_count
+RGB,PNG,256,256,8,RGBA,148136
+depth EXR,EXR,256,256,0,OpenEXR version 2,148283
+floor mask,PNG,256,256,8,RGBA,148145
+object mask,PNG,256,256,8,RGBA,546861
+scene mask,PNG,256,256,8,grayscale,147980

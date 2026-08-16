@@ -1,0 +1,9 @@
+anomaly_family,train,seen-test,unseen-test,[not-in-official-split],all_splits
+disc,1432,184,550,0,2166
+miss,878,189,397,3,1467
+crack,830,192,410,0,1432
+frac,848,137,431,0,1416
+bump,431,50,566,3,1050
+defr,274,38,282,0,594
+rota,106,25,86,0,217
+tran,68,8,64,0,140

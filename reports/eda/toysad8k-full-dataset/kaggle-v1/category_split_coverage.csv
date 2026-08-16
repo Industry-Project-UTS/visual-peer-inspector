@@ -1,0 +1,5 @@
+split,category_count,categories
+train,40,"airplane, apple, boat, bottle, bowl, bread, bunny, bus, butterfly, cake, car, chess_piece, chicken, cookie, cow, cupcake, deer_moose, dinosaur, dog, donut, elephant, fish, fox, frog, giraffe, hamburger, hammer, hat, horse, ice_cream, light_bulb, lion, lizard, monkey, mouse, octopus, orange, panda, pig, shark"
+seen-test,40,"airplane, apple, boat, bottle, bowl, bread, bunny, bus, butterfly, cake, car, chess_piece, chicken, cookie, cow, cupcake, deer_moose, dinosaur, dog, donut, elephant, fish, fox, frog, giraffe, hamburger, hammer, hat, horse, ice_cream, light_bulb, lion, lizard, monkey, mouse, octopus, orange, panda, pig, shark"
+unseen-test,11,"banana, cup, glass, key, mug, penguin, plate, robot, sheep, shoe, train"
+[not-in-official-split],5,"bottle, glass, hammer, penguin, robot"

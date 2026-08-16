@@ -1,0 +1,5 @@
+stage,stage_name,rule,scene_count,removed_at_stage,base_asset_count,category_count
+1,Full scene2d catalogue,Starting point,7396,0,974,51
+2,Official train split,Remove all non-train scenes,4238,3158,578,40
+3,Availability-ready train,Remove train scenes with archive warnings,4224,14,578,40
+4,Leakage-safe eligible pool,Remove train assets also present in seen-test,4107,117,545,39
