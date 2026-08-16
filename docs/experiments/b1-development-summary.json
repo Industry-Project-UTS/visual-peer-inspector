@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "run_id": "toysad-development-40-v1-b1",
+  "run_date": "2026-08-09",
+  "dataset": "ToysAD-8K",
+  "dataset_revision": "ad98caffa9d136bfaec49d847e5c9eec44ffe30c",
+  "split": "train",
+  "view_id": "0000",
+  "method": "B1",
+  "aggregation": "Median pairwise cosine distance",
+  "device": "cpu",
+  "model": {
+    "repo_id": "facebook/dinov2-small",
+    "revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+    "descriptor": "Last-layer CLS token"
+  },
+  "scene_count": 40,
+  "top1_correct_count": 26,
+  "top1_accuracy": 0.65,
+  "mean_average_precision": 0.7758333333333333,
+  "permutation_checks_pass": true,
+  "comparison_to_b0": {
+    "top1_correct_change": 0,
+    "mean_average_precision_change": -0.0012500000000000844,
+    "changed_top1_scene_count": 0,
+    "changed_ap_scene_count": 7
+  },
+  "claim_boundary": "Training-only development result. It is not final-test evidence."
+}

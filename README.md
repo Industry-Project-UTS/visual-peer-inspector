@@ -1,27 +1,83 @@
 # Visual Peer Inspector
 
-Visual Peer Inspector is a computer vision prototype for inspecting small
-groups of similar objects without requiring a stored library of normal product
-images.
+Visual Peer Inspector compares similar objects in one scene and ranks the
+objects that look different from their peers. The first experiment uses
+ToysAD-8K, supplied object masks and frozen DINOv2 features.
 
-The objects in the current scene act as references for one another. The system
-compares them, identifies unusual objects and returns one of three decisions:
-pass, flag for inspection, or manual review.
+## Current scope
 
-## Project scope
+- One fixed camera view
+- Supplied object segmentations
+- Frozen DINOv2 ViT-S/14 features
+- B0 peer-mean and B1 median pairwise anomaly scores
+- A fixed 40-scene training cohort
+- No use of object order or filenames as predictive inputs
 
-The initial implementation focuses on:
+The current ToysAD-8K release contains one-anomaly and two-anomaly scenes. It
+does not provide all-normal scenes in the inspected scene catalogue.
 
-- a bounded ToysAD-8K evaluation subset;
-- a one-view core experiment;
-- supplied object masks;
-- frozen DINOv2 visual features;
-- peer-comparison anomaly scoring;
-- all-normal, single-anomaly and multi-anomaly cases; and
-- reproducible experiment tracking with ClearML.
+## Repository layout
 
-A matched two-view comparison will be considered after the one-view baseline is
-working reliably.
+```text
+data/manifests/       Dataset and cohort records
+docs/                 Problem, method and experiment notes
+scripts/              Verification, extraction and baseline commands
+src/                  Reusable project code
+tests/                Small unit and integration tests
+```
+
+## Run the checks
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+Verify the downloaded chunks:
+
+```bash
+python3 scripts/verify_chunks.py /path/to/ToysAD-8K/chunks
+```
+
+Extract only the fixed development cohort:
+
+```bash
+python3 scripts/extract_cohort.py \
+  /path/to/ToysAD-8K/chunks \
+  data/local/development-40
+```
+
+Run B0 after installing the optional baseline dependencies:
+
+```bash
+python3 -m pip install -e '.[baseline]'
+
+python3 scripts/run_baseline.py b0 \
+  data/local/development-40 \
+  outputs/b0-development.json
+```
+
+Add `--local-files-only` when the pinned DINOv2 model is already cached.
+
+Run B1 on the same cohort:
+
+```bash
+python3 scripts/run_baseline.py b1 \
+  data/local/development-40 \
+  outputs/b1-development.json
+```
+
+## Documents
+
+- [Problem and proposed method](docs/problem-and-method.md)
+- [Dataset checks](docs/dataset.md)
+- [B0 development result](docs/experiments/b0-development.md)
+- [B1 development comparison](docs/experiments/b1-development.md)
+
+## Data boundary
+
+Raw datasets, extracted scenes, model files, credentials and private university
+documents are not committed. The tracked manifests record the exact dataset
+revision and development cohort.
 
 ## Team
 
@@ -29,27 +85,3 @@ working reliably.
 - Vaibhav Bairathi
 
 UTS 32040 Industry Project, Spring 2026.
-
-## Development workflow
-
-Development takes place on short-lived branches. Changes are merged into
-`main` through pull requests reviewed by the other team member.
-
-## Experiment tracking
-
-Experiments are tracked in the
-[Visual Peer Inspector ClearML dashboard](https://app.clear.ml/projects/9a5b29af465e4b51b09af451e62e8b2b/overview).
-
-ClearML records experiment configurations, Git revisions, metrics and selected
-artifacts. Each team member uses individual credentials in the shared
-workspace.
-
-## Data and credentials
-
-Raw datasets, downloaded models, API credentials and private university
-documents are not committed to this repository. Dataset download and setup
-instructions will be documented separately.
-
-## Status
-
-Repository setup and feasibility validation are in progress.

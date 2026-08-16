@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" role="img" aria-labelledby="title description">
+  <title id="title">B0 and B1 development comparison</title>
+  <desc id="description">Both methods ranked an anomaly first in 26 of 40 scenes. B0 mean average precision was 0.7771 and B1 was 0.7758.</desc>
+  <rect width="960" height="520" fill="#ffffff"/>
+  <text x="60" y="58" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#202124">B0 and B1 on the same 40 scenes</text>
+  <text x="60" y="92" font-family="Arial, sans-serif" font-size="18" fill="#5f6368">Training-only development result</text>
+
+  <text x="60" y="156" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#202124">Top-1 correct</text>
+  <rect x="250" y="126" width="442" height="34" rx="4" fill="#386cb0"/>
+  <text x="710" y="151" font-family="Arial, sans-serif" font-size="19" fill="#202124">B0  26/40</text>
+  <rect x="250" y="178" width="442" height="34" rx="4" fill="#7a7f85"/>
+  <text x="710" y="203" font-family="Arial, sans-serif" font-size="19" fill="#202124">B1  26/40</text>
+
+  <text x="60" y="292" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#202124">Mean AP</text>
+  <rect x="250" y="262" width="528" height="34" rx="4" fill="#386cb0"/>
+  <text x="796" y="287" font-family="Arial, sans-serif" font-size="19" fill="#202124">B0  0.7771</text>
+  <rect x="250" y="314" width="527" height="34" rx="4" fill="#7a7f85"/>
+  <text x="796" y="339" font-family="Arial, sans-serif" font-size="19" fill="#202124">B1  0.7758</text>
+
+  <line x1="60" y1="400" x2="900" y2="400" stroke="#dadce0" stroke-width="2"/>
+  <text x="60" y="447" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#202124">Result</text>
+  <text x="148" y="447" font-family="Arial, sans-serif" font-size="22" fill="#202124">B1 did not improve B0 on this cohort.</text>
+  <text x="60" y="482" font-family="Arial, sans-serif" font-size="16" fill="#5f6368">The official test splits remain closed.</text>
+</svg>

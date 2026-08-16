@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "visual-peer-inspector"
+version = "0.1.0"
+description = "Peer comparison for visual anomaly inspection"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+baseline = [
+  "pillow==12.3.0",
+  "torch==2.13.0",
+  "transformers==5.14.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
