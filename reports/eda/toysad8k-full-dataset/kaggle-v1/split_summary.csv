@@ -1,0 +1,5 @@
+split,scene_count,category_count,base_asset_count,object_count,anomalous_object_count,availability_ready,scene_percent,expected_rgb_views,availability_ready_percent
+train,4238,40,578,15686,4867,4224,57.3,84760,99.67
+seen-test,715,40,113,2652,823,715,9.67,14300,100.0
+unseen-test,2437,11,316,8930,2786,2432,32.95,48740,99.79
+[not-in-official-split],6,5,6,22,6,2,0.08,120,33.33

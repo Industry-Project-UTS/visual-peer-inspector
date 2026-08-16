@@ -1,0 +1,3 @@
+split,component,error,file_count
+[not-in-official-split],RGB,Zero-byte image member.,3
+[not-in-scene2d-catalogue],object mask,Zero-byte image member.,8

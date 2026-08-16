@@ -1,0 +1,6 @@
+source,path,bytes,sha256,verification
+scene master,/kaggle/input/datasets/esreekarreddy/toysad8k-full-private-eda/toysad8k_scene_master.json,13783686,6a2cbc575365208d72a4509d25fde9565e24a3f68341d38535ce67e13d9b9f24,computed during this run
+readiness audit,/kaggle/input/datasets/esreekarreddy/toysad8k-full-private-eda/readiness_audit.json,4578,81b781739e98c40c722bf68c044a47cfb387c4fd10d159d6b9b8e1101497da53,computed during this run
+archive index,/kaggle/input/datasets/esreekarreddy/toysad8k-full-private-eda/archive_index.sqlite3,245460992,c502d779f9b9e78ed7e2766402b7ba10337b1ee43fa467da03b6f997d6bc7e36,computed during this run
+archive manifest,/kaggle/input/datasets/esreekarreddy/toysad8k-full-private-eda/archive-manifest.json,1210,0c180c25e5df358f24e1414f0e596985fab4c59cc50991f15b530cf2635731c5,computed during this run
+complete archive payload,/kaggle/input/datasets/esreekarreddy/toysad8k-full-private-eda/toysAD8K/toysad8k,52993751003,e49c30857b96fdede3f374c773ce0758174f225958ba29c9ad5ca5b075dfc733,Kaggle unpacked payload; package manifest records source CRC validation and SHA-256
