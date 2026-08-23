@@ -1,0 +1,7 @@
+# LocateAnything add-ons for the pinned Kaggle container.
+# PyTorch, TorchVision, NumPy and Pillow come from the recorded Kaggle image.
+decord==0.6.0
+lmdb==1.7.5
+opencv-python-headless==4.11.0.86
+peft==0.20.0
+transformers==4.57.1

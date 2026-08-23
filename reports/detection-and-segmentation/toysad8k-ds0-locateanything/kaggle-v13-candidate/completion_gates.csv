@@ -1,0 +1,10 @@
+gate,status,observed,expected
+unique jobs,pass,400,400
+successful jobs,pass,400,400
+failed jobs,pass,0,0
+truncated responses,pass,0,0
+scene coverage,pass,20,20
+view coverage,pass,20,20
+zero-proposal successes,pass,0,0
+invalid boxes,pass,0,0
+duplicate boxes,pass,0,0

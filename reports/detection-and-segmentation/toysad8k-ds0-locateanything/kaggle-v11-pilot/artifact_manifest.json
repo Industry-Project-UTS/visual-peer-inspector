@@ -1,0 +1,26 @@
+{
+  "evidence_scope": "repository_safe_aggregate",
+  "files": [
+    {"path": "README.md", "sha256": "f04552f41863bbf6d6e9bdf880ed5f4393c63805d1e55e1626c845f156294ee1"},
+    {"path": "attempt_summary.csv", "sha256": "ea1f574179ffb237542fa1e0ab5167ec3df44b4bac888dc8c789821310000b76"},
+    {"path": "box_area_fraction_distribution.png", "sha256": "50d7649d0d073d2233fd1cd7770ea05db95574be95a6a30a10fef16583b1bc4c"},
+    {"path": "box_aspect_ratio_distribution.png", "sha256": "f309d318edfd3ebc8376bedd9dc4bd8b7449bbe8187f3f3095e048e718d46d74"},
+    {"path": "box_geometry_summary.json", "sha256": "6e63690c3d32e6a3b89b5948dd42ef5fb2358a79148b738e7fa32745b2461cd8"},
+    {"path": "completion_gates.csv", "sha256": "049fb22f38c618ff67f23ee8a125f97243e28714e796df64296564179be2b366"},
+    {"path": "failure_summary.csv", "sha256": "b64d07f3ae956fd2cb0078f1558e4209f1df03d860ece12b82b59b1d7572fb7c"},
+    {"path": "mean_proposals_by_view.png", "sha256": "1b2a7a894d7c4a9c16c4d653b867292323375602921113177d1ae249b2d67437"},
+    {"path": "model_load_checkpoints.jsonl", "sha256": "a835cd0fad8e29487424a2aeab02212c1c6c1c40150f73b48e695dd4815a6857"},
+    {"path": "one_image_preflight.json", "sha256": "72c5b093cdf61a6592b833ea27709f3731499fc4ac5733e291b7779676c6389f"},
+    {"path": "pilot_summary.json", "sha256": "4d6a9c7e4e5f0ea2c5c3174d6278deb3a2b96372b507bb384884dd0e3dc73b76"},
+    {"path": "proposal_count_distribution.png", "sha256": "bfcc9afc42fd6051db820b94461921fc3e34d618010431af2bcc6785f25aab3c"},
+    {"path": "proposal_summary.json", "sha256": "0cb41735f11384c80157162dcf7af7dd99fcfe0599110bcb92c64eaca3ae31b9"},
+    {"path": "proposal_summary_by_view.csv", "sha256": "858d834d7abeec65b618c5a0819485aa62e7d675337d47181777b6b091b3cd25"},
+    {"path": "repeat_agreement.json", "sha256": "e925ad85cdfc56572a4998ead0617b1b389ee5b681dc3f11b8446eb7d91c943a"},
+    {"path": "response_token_distribution.png", "sha256": "7e37331484d0f598cb0412030dcb2320e60a86930024d7b4faf5bc6dd110ff30"},
+    {"path": "run_record.json", "sha256": "66f058cfb8462eca5e0ec55cf7b53674f942a3265a677bf0065eb2aa7f6e4352"},
+    {"path": "runtime_by_proposal_count.png", "sha256": "c27a4f449c1837e353cb35c5f9dfb7edc402be11ecc76adc483854df878b81ab"},
+    {"path": "runtime_distribution.png", "sha256": "938e8ae456e7e7ec37ec60f38ee21832cb90d0be9423cc7e0bbb0b5fa7514b84"}
+  ],
+  "kaggle_notebook_version": 11,
+  "schema_version": 1
+}
