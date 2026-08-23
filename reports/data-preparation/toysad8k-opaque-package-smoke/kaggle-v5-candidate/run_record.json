@@ -1,0 +1,97 @@
+{
+  "clearml_task_id": "0d3a84b512a94dcaad9a2a1040625aff",
+  "configuration": {
+    "expected_height": 256,
+    "expected_image_count": 400,
+    "expected_width": 256,
+    "fresh_output_required": true,
+    "media_kind": "opaque PNG colour views converted to RGB at model load",
+    "package_operation": "verify_published_package",
+    "scene_count": 20,
+    "views_per_scene": 20
+  },
+  "configuration_sha256": "093be7b4c1889a49d97e29b842e208beb63212d095520d13fa52ee3208ace335",
+  "error_type": null,
+  "execution_environment": "kaggle",
+  "kaggle_notebook_slug": "esreekarreddy/toysad-8k-opaque-package-smoke",
+  "media_summary": {
+    "height": 256,
+    "image_count": 400,
+    "maximum_image_kib": 157.312,
+    "mean_image_kib": 127.109,
+    "media_mode": "RGBA",
+    "median_image_kib": 126.757,
+    "minimum_image_kib": 99.681,
+    "total_media_mib": 49.652,
+    "width": 256
+  },
+  "notebook_name": "03_toysad8k_opaque_package_smoke.ipynb",
+  "package": {
+    "all_checks_passed": true,
+    "cohort_id": "toysad8k-development-smoke-20-v1",
+    "content_checksums_sha256": "010088d59809f5060a85ed9c41da69a26cd18c5b1a05854e4db0895318e64133",
+    "decoded_image_failure_count": 0,
+    "duplicate_archive_member_count": 0,
+    "duplicate_package_path_count": 0,
+    "height": 256,
+    "image_count": 400,
+    "manifest_sha256": "21a3299244db7ebb3e080731d0f8577513a852eb04e5d169fb21bcbcdc03c710",
+    "media_mode": "RGBA",
+    "membership_sha256": "5439c5db10b19a47706d2f5eb135e672bb0387076462d967c326b1bcc15f0460",
+    "release_id": "toysad8k-train-2000-v2",
+    "scene_count": 20,
+    "total_media_bytes": 52063817,
+    "verified_image_count": 400,
+    "view_count": 20,
+    "width": 256
+  },
+  "platform_versions": {
+    "code_dataset_version": "5",
+    "kaggle_notebook_version_03": "5",
+    "model_input_dataset_version": "1"
+  },
+  "provenance": {
+    "git_commit": "7c28d8904670402f180198150d3904e399ca5fef",
+    "git_dirty": true,
+    "notebook_sha256": "46054ec0e57cee8de33d4a5fa71561c8484e19c2c085384ab80a3cce075a9968",
+    "platform_versions": {
+      "code_dataset_version": "5",
+      "kaggle_notebook_version_03": "5",
+      "kaggle_notebook_version_04": "1",
+      "model_input_dataset_version": "1"
+    },
+    "precommit_candidate": true,
+    "snapshot_sha256": "041b13f8a0ef1507e5811b00285d4ee37330a91699dba487110712c3839a15f3"
+  },
+  "resume_summary": {
+    "first_elapsed_seconds": 13.3301,
+    "first_files_reused": 0,
+    "first_files_written": 400,
+    "hashes_identical": true,
+    "package_operation": "verify_published_package",
+    "second_elapsed_seconds": 1.0927,
+    "second_files_reused": 400,
+    "second_files_written": 0
+  },
+  "schema_version": 3,
+  "selection_summary": {
+    "all_checks_passed": true,
+    "asset_group_count": 20,
+    "category_count": 20,
+    "cohort_id": "toysad8k-development-smoke-20-v1",
+    "membership_sha256": "5439c5db10b19a47706d2f5eb135e672bb0387076462d967c326b1bcc15f0460",
+    "prefix_coverage_count": 8,
+    "scene_count": 20,
+    "stratum_coverage_count": 5
+  },
+  "stage": "opaque_package_smoke",
+  "status": "completed",
+  "tracking_status": "completed",
+  "trusted_inputs": {
+    "all_checks_passed": true,
+    "selected_source_members_verified": 400,
+    "source_access_mode": "published_opaque_package",
+    "source_content_checksums_sha256": "010088d59809f5060a85ed9c41da69a26cd18c5b1a05854e4db0895318e64133",
+    "source_manifest_sha256": "21a3299244db7ebb3e080731d0f8577513a852eb04e5d169fb21bcbcdc03c710"
+  }
+}

@@ -1,0 +1,3 @@
+# Notebook 03 uses Pillow supplied by the recorded Kaggle image.
+# Installing Pillow inside a running Kaggle kernel can replace modules that
+# were already imported and leave the interpreter with a mixed installation.

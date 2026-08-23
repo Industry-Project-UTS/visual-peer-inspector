@@ -1,0 +1,9 @@
+{
+  "image_size_distribution.png": "88347234337bf9f0eb135bc3d2c435f8fab90a17b67b80b8f515a251077a7024",
+  "media_summary.json": "2c2456a1c9205af212d1d762d4e68c5a7a0f705dbedb7068f4ae79f51c397185",
+  "run_record.json": "a9ac6a1f8a5770be7bc21a7296e724cfed1a2b61169998b8620e1d757f1e8cc9",
+  "scene_completeness.csv": "6c4ef298d4e84e114e5c18205b45916fea1cca316d121ca3c6ead50ccfe42ddb",
+  "validation_gates.csv": "cf1fbba285f6982da8c7e2ef510ffc9c05d175463e8bbe247a0f1bd54c8a73af",
+  "view_coverage.csv": "357d7b74b732259a27414c8b0e88022205e2e46274794bb703cc4491ba169467",
+  "view_coverage.png": "eef56868d740fecc07ab79fcc6054431ddf14d46bf9c99e69dd2948fe24937bf"
+}
