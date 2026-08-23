@@ -1,0 +1,22 @@
+{
+  "id": "esreekarreddy/toysad-8k-opaque-package-smoke",
+  "id_no": 131682722,
+  "title": "ToysAD-8K Opaque Package Smoke",
+  "code_file": "toysad-8k-opaque-package-smoke.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-smoke20-model-input"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:dafd4ce5668bbf1ad422e4c109e0f18c9623c3a7c7f48b0235f13142755c40b9",
+  "machine_shape": "None"
+}

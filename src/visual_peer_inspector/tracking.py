@@ -9,10 +9,30 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import os
+from pathlib import Path
 from typing import Any, Mapping
 
 
 TRACKING_MODES = frozenset({"disabled", "offline", "online"})
+
+
+def _configure_clearml_request_timeouts() -> None:
+    """Keep one slow tracking request from blocking an experiment run."""
+
+    try:
+        from clearml.backend_api.session.session import Session
+    except (ImportError, AttributeError):
+        return
+
+    timeout_seconds = float(
+        os.getenv("VPI_CLEARML_REQUEST_TIMEOUT_SECONDS", "30")
+    )
+    timeout_seconds = max(5.0, min(timeout_seconds, 120.0))
+    connect_seconds = min(5.0, timeout_seconds)
+    bounded_timeout = (connect_seconds, timeout_seconds)
+    Session._session_initial_timeout = bounded_timeout
+    Session._session_timeout = bounded_timeout
+    Session._write_session_timeout = bounded_timeout
 
 _FORBIDDEN_KEY_PARTS = (
     "source_path",
@@ -123,6 +143,8 @@ class ExperimentTracker:
         if resolved_mode == "offline":
             Task.set_offline(True)
 
+        _configure_clearml_request_timeouts()
+
         clearml_task_type = getattr(Task.TaskTypes, task_type, task_type)
         task = Task.init(
             project_name=project_name,
@@ -130,7 +152,7 @@ class ExperimentTracker:
             task_type=clearml_task_type,
             reuse_last_task_id=False,
             auto_connect_arg_parser=False,
-            auto_connect_frameworks=False,
+            auto_connect_frameworks={"detect_repository": False},
             auto_connect_streams=False,
             auto_resource_monitoring=False,
         )
@@ -181,8 +203,89 @@ class ExperimentTracker:
         if self.task is not None:
             self.task.upload_artifact(name=name, artifact_object=safe_summary)
 
+    def report_table(
+        self,
+        *,
+        title: str,
+        series: str,
+        columns: list[str],
+        rows: list[Mapping[str, Any]],
+        iteration: int = 0,
+    ) -> None:
+        """Report one sanitized table without requiring pandas."""
+
+        safe_rows = [dict(row) for row in rows]
+        validate_safe_tracking_payload(
+            {
+                "title": title,
+                "series": series,
+                "columns": columns,
+                "rows": safe_rows,
+            },
+            "table",
+        )
+        missing = [
+            column
+            for row in safe_rows
+            for column in columns
+            if column not in row
+        ]
+        if missing:
+            raise ValueError(f"Tracking table is missing columns: {sorted(set(missing))}")
+        if self.task is not None:
+            table = [list(columns)] + [
+                [row[column] for column in columns] for row in safe_rows
+            ]
+            self.task.get_logger().report_table(
+                title=title,
+                series=series,
+                iteration=iteration,
+                table_plot=table,
+            )
+
+    def report_image_file(
+        self,
+        *,
+        title: str,
+        series: str,
+        path: Path,
+        evidence_kind: str,
+        iteration: int = 0,
+    ) -> None:
+        """Report an aggregate chart while rejecting raw-image uploads."""
+
+        validate_safe_tracking_payload(
+            {"title": title, "series": series, "evidence_kind": evidence_kind},
+            "image",
+        )
+        if evidence_kind != "aggregate_chart":
+            raise ValueError("ClearML image uploads are limited to aggregate charts")
+        path = path.expanduser().resolve()
+        if not path.is_file() or path.suffix.lower() not in {".png", ".jpg", ".jpeg"}:
+            raise ValueError("Tracking image must be an existing PNG or JPEG")
+        if self.task is not None:
+            self.task.get_logger().report_image(
+                title=title,
+                series=series,
+                iteration=iteration,
+                local_path=str(path),
+                max_image_history=-1,
+                delete_after_upload=False,
+            )
+
+    def add_tags(self, tags: list[str]) -> None:
+        validate_safe_tracking_payload(tags, "tags")
+        if self.task is not None:
+            self.task.add_tags(tags)
+
+    def mark_failed(self, reason: str) -> None:
+        validate_safe_tracking_payload(reason, "failure_reason")
+        if self.task is not None:
+            self.task.mark_failed(status_reason=reason[:512])
+
     def close(self) -> None:
         if self.task is not None:
+            self.task.flush(wait_for_uploads=True)
             self.task.close()
 
 
