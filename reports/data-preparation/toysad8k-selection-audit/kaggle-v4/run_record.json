@@ -1,0 +1,23 @@
+{
+  "audit_passed": true,
+  "clearml_task_id": "ce9b220344b2435fac60d8e180c37fdd",
+  "configuration_sha256": "c38575e77b5def3ac73fa9c76d999134ceaaefb351ea2c093e98c3ac0146e113",
+  "development_checksum_file_sha256": "f8896d3ff4bc7d0329a5d3442ca215534bf777548e9fb3e6b102217f62577d47",
+  "execution_environment": "kaggle",
+  "git_commit": "7abcb49197f23d576433e5b76426f1046e977517",
+  "git_dirty": "true",
+  "kaggle_dataset_version": "esreekarreddy/vpi-toysad-selection-audit-inputs/1; esreekarreddy/toysad8k-full-private-eda/1",
+  "kaggle_notebook_version": "4",
+  "matplotlib_version": "3.10.0",
+  "notebook_name": "02_toysad8k_2000_selection_audit.ipynb",
+  "notebook_sha256": "not-recorded",
+  "pandas_version": "2.3.3",
+  "pillow_version": "11.3.0",
+  "python_version": "3.12.13",
+  "release_id": "toysad8k-train-2000-v2",
+  "repeat_build_evidence_sha256": "0340ceda1ad46288fd8dd3e7157cb842fb814a1653af75dad210899e92eac5e4",
+  "repeat_build_passed": true,
+  "selection_checksum_file_sha256": "06645dd4dca16dab234983a306592eb78f1d6520fe9d18104693bdb6b06eabaf",
+  "source_master_sha256": "6a2cbc575365208d72a4509d25fde9565e24a3f68341d38535ce67e13d9b9f24",
+  "tracking_mode": "online"
+}

@@ -1,0 +1,11 @@
+{
+  "asset_role_overlap_count": 0,
+  "audit_passed": true,
+  "byte_identical_repeat_build": true,
+  "eligible_scene_count": 4107,
+  "official_test_scene_count": 0,
+  "release_id": "toysad8k-train-2000-v2",
+  "required_indexed_path_count": 238000,
+  "selected_asset_count": 545,
+  "selected_scene_count": 2000
+}
