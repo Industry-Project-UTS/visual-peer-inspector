@@ -1,0 +1,22 @@
+{
+  "id": "esreekarreddy/toysad-8k-2-000-scene-selection-audit",
+  "id_no": 131659313,
+  "title": "ToysAD-8K 2,000-Scene Selection Audit",
+  "code_file": "toysad8k-2000-selection-audit.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-toysad-selection-audit-inputs",
+    "esreekarreddy/toysad8k-full-private-eda"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-images/python@sha256:dafd4ce5668bbf1ad422e4c109e0f18c9623c3a7c7f48b0235f13142755c40b9",
+  "machine_shape": "None"
+}

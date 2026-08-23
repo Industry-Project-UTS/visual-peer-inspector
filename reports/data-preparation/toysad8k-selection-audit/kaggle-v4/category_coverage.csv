@@ -1,0 +1,4 @@
+Role,Covered categories,Eligible categories,Anomaly prefix coverage
+Development,39,39,8
+Calibration,38,39,8
+Internal lock,39,39,8

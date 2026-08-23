@@ -1,0 +1,9 @@
+Gate,Status
+Pinned compact selection inputs,PASS
+"4,107-scene eligibility audit",PASS
+"Exact 2,000 scenes and 545 asset groups",PASS
+No asset crosses experiment roles,PASS
+Exact 100 plus 300 nested pilot,PASS
+"238,000 required source paths indexed",PASS
+Byte-identical repeat build,PASS
+Full private source available in this environment,PASS

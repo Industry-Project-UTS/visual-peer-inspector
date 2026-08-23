@@ -1,0 +1,6 @@
+Component,Indexed files,Indexed uncompressed GiB,Planned model-safe media
+RGB images,40000,4.7357056103646755,True
+Whole-scene masks,40000,0.05029056500643492,True
+Object masks,154000,4.91087069362402,True
+Source scene2d metadata,2000,0.004441261291503906,False
+Source scene3d metadata,2000,0.04607646260410547,False
