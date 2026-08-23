@@ -1,0 +1,19 @@
+{
+  "id": "esreekarreddy/toysad-8k-ds0-locateanything-proposals",
+  "title": "ToysAD-8K DS0 LocateAnything Proposals",
+  "code_file": "04-toysad8k-ds0-locateanything-proposals.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-smoke20-model-input"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}

@@ -1,0 +1,129 @@
+{
+  "clearml_task_id": "396c1a1c1b35414888d833365b78597e",
+  "configuration": {
+    "do_sample": true,
+    "generation_mode": "hybrid",
+    "inference_stage": "pilot",
+    "max_new_tokens": 8192,
+    "maximum_attempts_per_job": 2,
+    "maximum_consecutive_failed_jobs": 3,
+    "model_id": "nvidia/LocateAnything-3B",
+    "model_revision": "c32291ca5e996f5a7a485845b4f57a233936bba0",
+    "producer_kind": "locateanything_model",
+    "prompt": "object",
+    "repetition_penalty": 1.1,
+    "run_mode": "model_inference",
+    "scene_count": 20,
+    "seed": 32040,
+    "temperature": 0.7,
+    "top_k": 0,
+    "top_p": 0.9,
+    "upscale_factor": 1,
+    "views_per_scene": 20
+  },
+  "configuration_sha256": "97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636",
+  "error_type": null,
+  "estimated_full_run_seconds": 256.522125424,
+  "execution_environment": "kaggle",
+  "gpu": {
+    "compute_capability": "7.5",
+    "gpu_name": "Tesla T4",
+    "torch_architecture": "sm_75",
+    "torch_architecture_supported": true,
+    "torch_version": "2.10.0+cu128",
+    "total_memory_gib": 14.562,
+    "transformers_version": "4.57.1"
+  },
+  "inference_stage": "pilot",
+  "input_manifest_sha256": "21a3299244db7ebb3e080731d0f8577513a852eb04e5d169fb21bcbcdc03c710",
+  "kaggle_notebook_slug": "esreekarreddy/toysad-8k-ds0-locateanything-proposals",
+  "model_download_seconds": 35.7377,
+  "model_load_seconds": 72.4001,
+  "notebook_name": "04_toysad8k_ds0_locateanything_proposals.ipynb",
+  "one_image_preflight": {
+    "possibly_truncated": false,
+    "proposal_count": 4,
+    "response_token_count": 28,
+    "result_sha256": "8ea42434db48ce2be4b789fe9613c93510af5680549deb14762e1802cf20cd03",
+    "status": "ok",
+    "truncation_check": "token_count_heuristic"
+  },
+  "peak_gpu_allocated_gib": 7.4433,
+  "peak_gpu_reserved_gib": 7.8809,
+  "pilot_summary": {
+    "configuration_sha256": "97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636",
+    "failed_job_count": 0,
+    "images_per_second": 2.1724725996893364,
+    "job_count": 20,
+    "maximum_proposals_per_successful_image": 5,
+    "mean_proposals_per_successful_image": 3.95,
+    "mean_runtime_seconds": 0.460305,
+    "median_proposals_per_successful_image": 4.0,
+    "median_runtime_seconds": 0.38295,
+    "minimum_proposals_per_successful_image": 2,
+    "p95_runtime_seconds": 1.9452,
+    "possibly_truncated_count": 0,
+    "scene_count": 20,
+    "successful_job_count": 20,
+    "total_runtime_seconds": 9.2061,
+    "truncation_check_counts": {
+      "token_count_heuristic": 20
+    },
+    "zero_proposal_image_count": 0
+  },
+  "platform_versions": {
+    "code_dataset_version": "11",
+    "kaggle_notebook_version_04": "11",
+    "model_input_dataset_version": "1"
+  },
+  "producer_kind": "locateanything_model",
+  "provenance": {
+    "git_commit": "7ce2161d06e44257befb4828c870e297cf7a6529",
+    "git_dirty": true,
+    "notebook_sha256": "fb6d9de3bb67772658137b820fc713707a0247a5ed66561d3a38381643e15cb8",
+    "platform_versions": {
+      "code_dataset_version": "11",
+      "kaggle_notebook_version_03": "5",
+      "kaggle_notebook_version_04": "11",
+      "model_input_dataset_version": "1"
+    },
+    "precommit_candidate": true,
+    "snapshot_sha256": "e7bd6d8fbe38ff2fb24bfed39ebee04109c3a6888aa97c8998fdddf03ae13368"
+  },
+  "repeat_agreement": {
+    "box_agreement_rate": 1.0,
+    "job_count": 20,
+    "matching_job_count": 20,
+    "result_file_sha256": "1b2ba486885dca39fd5b24abbd8708907e99070339a84262ae20694836fb2122"
+  },
+  "run_mode": "model_inference",
+  "run_session": {
+    "requested_stage": "pilot",
+    "successful_job_count": 20
+  },
+  "schema_version": 3,
+  "stage": "ds0_locateanything_proposals",
+  "status": "diagnostic_completed",
+  "summary": {
+    "configuration_sha256": "97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636",
+    "failed_job_count": 0,
+    "images_per_second": 2.1724725996893364,
+    "job_count": 20,
+    "maximum_proposals_per_successful_image": 5,
+    "mean_proposals_per_successful_image": 3.95,
+    "mean_runtime_seconds": 0.460305,
+    "median_proposals_per_successful_image": 4.0,
+    "median_runtime_seconds": 0.38295,
+    "minimum_proposals_per_successful_image": 2,
+    "p95_runtime_seconds": 1.9452,
+    "possibly_truncated_count": 0,
+    "scene_count": 20,
+    "successful_job_count": 20,
+    "total_runtime_seconds": 9.2061,
+    "truncation_check_counts": {
+      "token_count_heuristic": 20
+    },
+    "zero_proposal_image_count": 0
+  },
+  "tracking_status": "completed"
+}

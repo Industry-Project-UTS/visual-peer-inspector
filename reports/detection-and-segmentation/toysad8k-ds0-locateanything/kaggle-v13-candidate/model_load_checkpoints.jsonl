@@ -1,0 +1,13 @@
+{"elapsed_seconds": 0.002, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "snapshot_download_started", "working_free_gib": 19.502}
+{"download_seconds": 51.662, "elapsed_seconds": 51.668, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "snapshot_file_count": 47, "snapshot_gib": 7.261, "stage": "snapshot_download_completed", "working_free_gib": 19.502}
+{"elapsed_seconds": 60.173, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "waiting", "working_free_gib": 19.502}
+{"device": "cuda", "dtype": "torch.float16", "elapsed_seconds": 72.245, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "dependencies_ready", "working_free_gib": 19.502}
+{"elapsed_seconds": 72.246, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "source_kind": "local_snapshot", "stage": "tokenizer_load_started", "working_free_gib": 19.502}
+{"elapsed_seconds": 72.753, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "tokenizer_ready", "working_free_gib": 19.502}
+{"elapsed_seconds": 72.755, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "source_kind": "local_snapshot", "stage": "processor_load_started", "working_free_gib": 19.502}
+{"elapsed_seconds": 73.624, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "processor_ready", "working_free_gib": 19.502}
+{"elapsed_seconds": 73.625, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "source_kind": "local_snapshot", "stage": "model_weights_load_started", "working_free_gib": 19.502}
+{"elapsed_seconds": 80.726, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "model_weights_loaded", "working_free_gib": 19.502}
+{"device": "cuda", "elapsed_seconds": 80.727, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "model_device_move_started", "working_free_gib": 19.502}
+{"device": "cuda", "elapsed_seconds": 83.114, "gpu_allocated_gib": 7.232, "gpu_reserved_gib": 7.541, "stage": "model_ready", "working_free_gib": 19.502}
+{"elapsed_seconds": 83.116, "gpu_allocated_gib": 7.232, "gpu_reserved_gib": 7.541, "model_load_seconds": 83.116, "stage": "worker_ready", "working_free_gib": 19.502}

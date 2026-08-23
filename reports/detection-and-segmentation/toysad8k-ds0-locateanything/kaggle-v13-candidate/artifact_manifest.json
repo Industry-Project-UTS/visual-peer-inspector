@@ -1,0 +1,27 @@
+{
+  "evidence_scope": "repository_safe_aggregate",
+  "files": [
+    {"path": "README.md", "sha256": "23c528c9b63299fbb2ff2cb99e0794ad8e9e09f16dcaeddcef881602950276ba"},
+    {"path": "attempt_summary.csv", "sha256": "1d41f4d270de3bc5bc2c532b46349d4d23e8e16788cf14d69b717ea563d4723c"},
+    {"path": "box_area_fraction_distribution.png", "sha256": "02ee82137887376504d42cc2184afa77a8b35c0247cbf9579e63e7799c23c71e"},
+    {"path": "box_aspect_ratio_distribution.png", "sha256": "dc47426d0f5946b2719f30ce5eca3a71b726461935759289388d48b7013fc979"},
+    {"path": "box_geometry_summary.json", "sha256": "d322b3d0dbb1bd84f52bdc9c7adf01128577a7e7e57cad71d45bebd308329410"},
+    {"path": "completion_gates.csv", "sha256": "87d9341fa0773410ee435b31fb586ea82ebbbbf0b356b7dff394b2c124918b67"},
+    {"path": "failure_summary.csv", "sha256": "b64d07f3ae956fd2cb0078f1558e4209f1df03d860ece12b82b59b1d7572fb7c"},
+    {"path": "mean_proposals_by_view.png", "sha256": "71ed3a304e221aa955d4afd98311917d6ecc9d9d340b89cb3950a94622a4dea9"},
+    {"path": "model_load_checkpoints.jsonl", "sha256": "e9a73f054b4f3a878df1277923db838adc00a133e70bd41725dd51f3d68fcd8e"},
+    {"path": "one_image_preflight.json", "sha256": "e7e9ab23fd636025215c43880c64d7026ac9957df2af33e2e97d5b59d71d9dd5"},
+    {"path": "pilot_summary.json", "sha256": "734bd851e06fa40eed376eedb4dd685b205820a31b70c7506b05961ce7aabd0a"},
+    {"path": "progress_checkpoints.csv", "sha256": "cba4e7a81543bff903a49f216e76f27ad728b992adeefbcaff73c6cf1b7dcf8a"},
+    {"path": "proposal_count_distribution.png", "sha256": "0e1027bea32a3de72906303358d0d38d9291c5a1ab83b82b7546bf35b4b62efd"},
+    {"path": "proposal_summary.json", "sha256": "6aebc12109c4033b89ec563ee3e0edc355f32127f1bf513dd7fbf07d211c2ad7"},
+    {"path": "proposal_summary_by_view.csv", "sha256": "eaba538db24c7e94f61f04d0b60ba762054a15660819442ba74a0acedfb05719"},
+    {"path": "repeat_agreement.json", "sha256": "ebae148bbd9ae80169e695cad7c22b7524bd4aee725c289a5cb350f3a3fd51d4"},
+    {"path": "response_token_distribution.png", "sha256": "fbd13288c305d5db0e7bf574b6d962bd77e6aa12fd5e7c2885c5dd69d7d632bd"},
+    {"path": "run_record.json", "sha256": "358ee6e054d813c98e4ac7185d0aa39fd4df0f619b4b482c10231a122216a0b3"},
+    {"path": "runtime_by_proposal_count.png", "sha256": "69512f858c2017e68607c8c40eb3f29c76edd282d924056468b2dab8fd1f19e6"},
+    {"path": "runtime_distribution.png", "sha256": "556cc2857b914d14d59228566e311f1ca9dabcf433a4147401fc192e8a1d8edb"}
+  ],
+  "kaggle_notebook_version": 13,
+  "schema_version": 1
+}
