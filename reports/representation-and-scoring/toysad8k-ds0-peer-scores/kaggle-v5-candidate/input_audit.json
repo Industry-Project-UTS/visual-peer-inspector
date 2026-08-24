@@ -1,0 +1,16 @@
+{
+  "image_count": 400,
+  "insufficient_peer_images": {
+    "automatic_box": 11
+  },
+  "join_sha256": "4cb7f7a0ec7e3aee9ab47426e4a415d3cea1606a1b7f8905d4a646ed9c244065",
+  "membership_sha256": "5439c5db10b19a47706d2f5eb135e672bb0387076462d967c326b1bcc15f0460",
+  "rgb_manifest_sha256": "21a3299244db7ebb3e080731d0f8577513a852eb04e5d169fb21bcbcdc03c710",
+  "route_counts": {
+    "automatic_box": 1616,
+    "reference_box": 1640,
+    "supplied_mask": 1640
+  },
+  "route_manifest_sha256": "e44d6d8594f49988f4dc58e4352885230f0dfa642c8c4443db518f931989a6e7",
+  "scene_count": 20
+}
