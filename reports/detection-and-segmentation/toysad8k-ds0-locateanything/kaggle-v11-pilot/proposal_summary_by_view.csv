@@ -1,0 +1,2 @@
+view_id,image_count,successful_count,failed_count,mean_proposal_count,mean_runtime_seconds,truncated_count
+V00,20,20,0,3.95,0.4603,0

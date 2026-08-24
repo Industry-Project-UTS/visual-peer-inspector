@@ -1,0 +1,11 @@
+{
+  "box_count": 1616,
+  "duplicate_box_count": 0,
+  "invalid_box_count": 0,
+  "mean_box_area_fraction": 0.09071404863112044,
+  "mean_box_aspect_ratio": 0.9344678392865806,
+  "median_box_area_fraction": 0.072723388671875,
+  "median_box_aspect_ratio": 0.9117647058823529,
+  "retried_image_count": 0,
+  "total_attempt_count": 400
+}

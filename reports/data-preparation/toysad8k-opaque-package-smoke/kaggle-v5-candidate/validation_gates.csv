@@ -1,0 +1,9 @@
+gate,status,observed,expected
+scene count,pass,20,20
+view count per scene,pass,20,20
+image count,pass,400,400
+verified images,pass,400,400
+duplicate package paths,pass,0,0
+duplicate archive members,pass,0,0
+decode failures,pass,0,0
+exact file allowlist,pass,403,403

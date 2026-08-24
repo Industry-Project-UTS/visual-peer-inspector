@@ -1,0 +1,13 @@
+{"elapsed_seconds": 0.002, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "snapshot_download_started", "working_free_gib": 19.502}
+{"download_seconds": 35.738, "elapsed_seconds": 35.744, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "snapshot_file_count": 47, "snapshot_gib": 7.261, "stage": "snapshot_download_completed", "working_free_gib": 19.502}
+{"elapsed_seconds": 60.024, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "waiting", "working_free_gib": 19.502}
+{"device": "cuda", "dtype": "torch.float16", "elapsed_seconds": 62.238, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "dependencies_ready", "working_free_gib": 19.502}
+{"elapsed_seconds": 62.239, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "source_kind": "local_snapshot", "stage": "tokenizer_load_started", "working_free_gib": 19.502}
+{"elapsed_seconds": 62.751, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "tokenizer_ready", "working_free_gib": 19.502}
+{"elapsed_seconds": 62.753, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "source_kind": "local_snapshot", "stage": "processor_load_started", "working_free_gib": 19.502}
+{"elapsed_seconds": 63.567, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "processor_ready", "working_free_gib": 19.502}
+{"elapsed_seconds": 63.568, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "source_kind": "local_snapshot", "stage": "model_weights_load_started", "working_free_gib": 19.502}
+{"elapsed_seconds": 70.011, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "model_weights_loaded", "working_free_gib": 19.502}
+{"device": "cuda", "elapsed_seconds": 70.012, "gpu_allocated_gib": 0.0, "gpu_reserved_gib": 0.0, "stage": "model_device_move_started", "working_free_gib": 19.502}
+{"device": "cuda", "elapsed_seconds": 72.399, "gpu_allocated_gib": 7.232, "gpu_reserved_gib": 7.541, "stage": "model_ready", "working_free_gib": 19.502}
+{"elapsed_seconds": 72.4, "gpu_allocated_gib": 7.232, "gpu_reserved_gib": 7.541, "model_load_seconds": 72.4, "stage": "worker_ready", "working_free_gib": 19.502}

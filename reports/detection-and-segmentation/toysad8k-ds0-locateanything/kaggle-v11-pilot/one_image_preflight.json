@@ -1,0 +1,8 @@
+{
+  "possibly_truncated": false,
+  "proposal_count": 4,
+  "response_token_count": 28,
+  "result_sha256": "8ea42434db48ce2be4b789fe9613c93510af5680549deb14762e1802cf20cd03",
+  "status": "ok",
+  "truncation_check": "token_count_heuristic"
+}
