@@ -1,0 +1,10 @@
+gate,observed,expected,status
+verified evaluator package,True,True,pass
+verified LocateAnything full model run,locateanything_model,locateanything_model,pass
+LocateAnything repeat agreement,1.0,0.98,pass
+accepted Notebook 05 run mode,sam2.1_model,sam2.1_model,pass
+scene coverage,20,20,pass
+image coverage,400,400,pass
+decoded SAM masks,3256,3256,pass
+reference route prompts,1640,1640,pass
+automatic route prompts,1616,1616,pass

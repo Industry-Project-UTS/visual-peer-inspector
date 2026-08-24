@@ -1,0 +1,9 @@
+gate,observed,threshold,status
+proposal exact count,0.905,0.9,pass
+proposal box recall at 0.50,0.9652439024390244,0.95,pass
+proposal repeat agreement,1.0,0.98,pass
+SAM repeat agreement,1.0,0.98,pass
+reference route mask recall at 0.75,0.9963414634146341,0.9,pass
+reference route mean matched mask IoU,0.9591240326049157,0.9,pass
+automatic route mask recall at 0.75,0.9396341463414634,0.9,pass
+automatic route mean matched mask IoU,0.9484905266312418,0.9,pass
