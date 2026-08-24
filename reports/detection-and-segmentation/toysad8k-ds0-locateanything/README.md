@@ -14,8 +14,13 @@ responses, invalid boxes, duplicate boxes, or zero-proposal images. The exact
 
 This evidence confirms that the frozen model can run reliably on the selected
 cohort. It does not prove that every proposal is correct. Reference boxes remain
-outside the model-facing notebook and will be used later in the evaluator-only
-proposal quality notebook.
+outside the model-facing notebook.
+
+Notebook 06 later evaluated the proposals inside the evaluator-only boundary.
+The automatic route reached 0.9396 recall at mask IoU 0.75 and 0.9485 mean
+matched mask IoU. See the
+[DS0 proposal and mask evaluation](../toysad8k-ds0-mask-evaluation/README.md)
+for the complete reviewed evidence and claim limits.
 
 The Version 13 folder is called `candidate` because the run record reports a
 verified pre-commit source snapshot with `git_dirty: true`. That record must not

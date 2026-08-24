@@ -1,10 +1,13 @@
 # Week 5 progress: SAM 2.1 DS0 segmentation
 
+**Follow-up:** Notebook 06 completed the mask-quality evaluation described in
+the original next step below.
+
 ## Work completed
 
-- prepared model-safe prompts for the supplied-box and automatic-box routes
+- prepared model-safe prompts for the reference-box and automatic-box routes
 - ran the pinned SAM 2.1 model on all 400 DS0 images
-- produced 1,640 supplied-box masks and 1,616 automatic-box masks
+- produced 1,640 reference-box masks and 1,616 automatic-box masks
 - repeated 20 images and confirmed identical mask hashes and quality scores
 - recorded runtime, mask count, mask area, predicted score and failure evidence
 - added six direct visual comparisons across both prompt routes

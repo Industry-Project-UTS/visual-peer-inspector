@@ -1,96 +1,117 @@
 # Visual Peer Inspector
 
-Visual Peer Inspector compares similar objects in one scene and ranks the
-objects that look different from their peers. ToysAD-8K is the first dataset
-used to develop and evaluate the project.
+Visual Peer Inspector compares similar objects visible in the same scene and
+ranks the objects that look most unusual relative to their peers. The project
+uses multiple RGB views from ToysAD-8K to develop a reproducible object
+proposal, segmentation, representation, peer-scoring, and evaluation pipeline.
 
-## Project status
+This repository contains code, tests, notebook sources, compact experiment
+evidence, and documentation for the UTS 32040 Industry Project.
 
-The full ToysAD-8K exploratory analysis is complete. It covers the complete
-7,396-scene catalogue and the available archive inventory. The next stage is
-to confirm the controlled experiment design and validate the automatic
-box-to-mask pipeline before fixing the final feature backbone.
+## Current status
 
-The earlier 40-scene, one-view experiment remains in this repository as a
-historical baseline and regression check. It is not the current project
-architecture.
+The controlled 2,000-scene experiment is fixed and leakage checked. The first
+20-scene gate, called DS0, has completed across all 20 views per scene.
 
-## Historical baseline
+| Stage | Result |
+| --- | --- |
+| 01 Full Dataset EDA | Complete on the 7,396-scene catalogue |
+| 02 Selection Audit | Complete for 1,000 development, 600 calibration, and 400 internal-lock scenes |
+| 03 Opaque Package Smoke | Complete for 20 scenes and 400 images |
+| 04 LocateAnything Proposals | Complete for all 400 DS0 images |
+| 05 SAM 2.1 Segmentation | Complete for reference-box and automatic-box routes |
+| 06 Proposal and Mask Evaluation | Complete; all eight declared DS0 gates passed |
+| 07 Representation and Peer Scores | Next: B0, B1, P1, encoder screening, geometry, and heatmaps |
 
-- One fixed camera view
-- Supplied object segmentations
-- Frozen DINOv2 ViT-S/14 features
-- B0 peer-mean and B1 median pairwise anomaly scores
-- A fixed 40-scene training cohort
-- No use of object order or filenames as predictive inputs
+The DS0 results support progression to the 100-scene DS1 screen. They do not
+freeze the final encoder, automatic mask route, view-fusion method, or web
+application behaviour.
 
-The current ToysAD-8K release contains one-anomaly and two-anomaly scenes. It
-does not provide all-normal scenes in the inspected scene catalogue.
+## Pipeline
+
+The current system uses LocateAnything to propose object boxes and SAM 2.1 to
+produce prompted whole-object masks. A frozen visual encoder then represents
+each object for B0, B1, and P1 peer comparison. Geometry and cross-view fusion
+remain separate parts of the method.
+
+See [System architecture](docs/architecture.md) for the research pipeline,
+application pipeline, data boundaries, route names, and claim limits.
 
 ## Repository layout
 
 ```text
-data/manifests/       Dataset and cohort records
-docs/                 Problem, method and experiment notes
-scripts/              Verification, extraction and baseline commands
-src/                  Reusable project code
-tests/                Small unit and integration tests
+data/manifests/       Public-safe dataset and historical cohort records
+docs/                 Architecture, method, dataset, experiment, and progress notes
+notebooks/            Ordered Kaggle and experiment entry points
+reports/              Reviewed aggregate evidence and compact figures
+requirements/         Stage-specific dependency locks
+scripts/              Verification, preparation, execution, and finalisation commands
+src/                  Reusable data, model, workflow, and evaluation code
+tests/                Unit and integration tests
 ```
 
+Large private datasets, model inputs, model outputs, feature caches, masks,
+weights, credentials, and evaluator crosswalks are intentionally excluded.
+
 ## Run the checks
+
+The core checks do not require the large ToysAD source:
 
 ```bash
 python3 -m unittest discover -s tests -v
 ```
 
-Verify the downloaded chunks:
+Stage-specific dependencies are pinned under `requirements/`. The ordered
+notebook responsibilities and upstream inputs are documented in
+[notebooks/README.md](notebooks/README.md).
 
-```bash
-python3 scripts/verify_chunks.py /path/to/ToysAD-8K/chunks
-```
-
-Extract only the fixed development cohort:
-
-```bash
-python3 scripts/extract_cohort.py \
-  /path/to/ToysAD-8K/chunks \
-  data/local/development-40
-```
-
-Run B0 after installing the optional baseline dependencies:
+The earlier one-view B0 and B1 commands remain available as historical
+regression checks:
 
 ```bash
 python3 -m pip install -e '.[baseline]'
-
-python3 scripts/run_baseline.py b0 \
-  data/local/development-40 \
-  outputs/b0-development.json
+python3 scripts/run_baseline.py b0 data/local/development-40 outputs/b0-development.json
+python3 scripts/run_baseline.py b1 data/local/development-40 outputs/b1-development.json
 ```
 
-Add `--local-files-only` when the pinned DINOv2 model is already cached.
+These 40-scene results are not the current multi-view architecture or final
+evaluation.
 
-Run B1 on the same cohort:
+## Data and evaluation boundary
 
-```bash
-python3 scripts/run_baseline.py b1 \
-  data/local/development-40 \
-  outputs/b1-development.json
-```
+The project uses three separate data zones:
 
-## Documents
+1. Trusted preparation may read private source metadata and protocol records.
+2. Model execution receives opaque IDs and only the media or prompts required
+   by that stage.
+3. Evaluator-only code joins frozen predictions with protected references and
+   labels after inference is complete.
 
+Object order, source names, source paths, labels, categories, base-asset
+groups, role assignments, and official-test information must not enter model
+inputs. ClearML stores approved aggregate evidence and provenance, not private
+data or credentials.
+
+## Key documents
+
+- [System architecture](docs/architecture.md)
+- [Notebook sequence](notebooks/README.md)
+- [Dataset and protocol checks](docs/dataset.md)
+- [Problem and method](docs/problem-and-method.md)
+- [Progress index](docs/progress/README.md)
 - [Full ToysAD-8K EDA](reports/eda/toysad8k-full-dataset/README.md)
-- [Week 3 data and EDA record](docs/progress/week-03-data-and-eda.md)
-- [Problem and proposed method](docs/problem-and-method.md)
-- [Dataset checks](docs/dataset.md)
-- [B0 development result](docs/experiments/b0-development.md)
-- [B1 development comparison](docs/experiments/b1-development.md)
+- [DS0 LocateAnything evidence](reports/detection-and-segmentation/toysad8k-ds0-locateanything/README.md)
+- [DS0 SAM 2.1 evidence](reports/detection-and-segmentation/toysad8k-ds0-sam21/README.md)
+- [DS0 proposal and mask evaluation](reports/detection-and-segmentation/toysad8k-ds0-mask-evaluation/README.md)
+- [Contribution rules](CONTRIBUTING.md)
 
-## Data boundary
+## Claim boundary
 
-Raw datasets, extracted scenes, model files, credentials and private university
-documents are not committed. The tracked manifests record the exact dataset
-revision and development cohort.
+ToysAD-8K catalogue scenes contain at least one anomalous object. The project
+therefore evaluates relative peer ranking, not a general normal-versus-anomaly
+classifier. Supplied and predicted masks are whole-object masks, not
+pixel-accurate annotations of the defective region. P1 heatmaps will be
+reported as coarse supporting evidence only.
 
 ## Team
 
