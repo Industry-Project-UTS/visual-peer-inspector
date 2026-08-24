@@ -1,0 +1,97 @@
+{
+  "artifact_count": 18,
+  "artifacts": [
+    {
+      "path": "automatic_box_boundary_f1_distribution.png",
+      "sha256": "2833c5c3600daab5743e3c9d2c8d667897d83d83754c00c37a696ad4f9cbbfd6",
+      "size_bytes": 28564
+    },
+    {
+      "path": "automatic_box_mask_iou_distribution.png",
+      "sha256": "28880963d6b195259175422ccc2d39d0037949dda0d876879c9d8e19129b561b",
+      "size_bytes": 27385
+    },
+    {
+      "path": "automatic_box_prompt_iou_vs_mask_iou.png",
+      "sha256": "64c199446a4e49be144a40ae5f1e4e147d6bbe9a0b7525efbfdaf69403ae5de2",
+      "size_bytes": 30156
+    },
+    {
+      "path": "automatic_box_recall_by_view.png",
+      "sha256": "029b3837789fa5634bb99b31c6cfa13947d72c9537c081b3a422e561f3daa155",
+      "size_bytes": 24647
+    },
+    {
+      "path": "bootstrap_intervals.csv",
+      "sha256": "73a18721a70d2c82efe20338cdd153316039cf239e0dd73184b4eff643fd7889",
+      "size_bytes": 833
+    },
+    {
+      "path": "completion_gates.csv",
+      "sha256": "ef9850b9ffe89204d1b781e2fd89ae9d61f9e4c7f0a0b37ba21eb3d19816030d",
+      "size_bytes": 440
+    },
+    {
+      "path": "decision_gates.csv",
+      "sha256": "a317a0cb06ee4670c73b9db5e4c42990a4c79e5bea659fc8118a7d7da606b372",
+      "size_bytes": 468
+    },
+    {
+      "path": "metric_definitions.json",
+      "sha256": "81e689bccf6ea51bac9665ad395b83ca7315a8b363cfc478bb8356027dc98439",
+      "size_bytes": 807
+    },
+    {
+      "path": "misses_and_extras_by_route.png",
+      "sha256": "4d47f017f40e4b0c741098d8bf5f7418a9c6905b5a0b5fcf723a8a1e086e10d1",
+      "size_bytes": 18353
+    },
+    {
+      "path": "proposal_gate_summary.csv",
+      "sha256": "65d74f6f10b91dba6e06871f2d72d5fc6e9fef17a902fa0c27a4e63ddedb5b97",
+      "size_bytes": 733
+    },
+    {
+      "path": "reference_box_boundary_f1_distribution.png",
+      "sha256": "1d931ccc09ad23581a3120d034ed4221079b9085467b2e30dd0e5a1275966f9a",
+      "size_bytes": 28373
+    },
+    {
+      "path": "reference_box_mask_iou_distribution.png",
+      "sha256": "f649dd0f99f91ce46e64c21978b31193566a0be6ccae7d39546dbb1e5eafa435",
+      "size_bytes": 27136
+    },
+    {
+      "path": "reference_box_recall_by_view.png",
+      "sha256": "fa28a293a379000fc3b743ccf40287745740a81f0fa68c7ac37d2b7d918f1815",
+      "size_bytes": 23893
+    },
+    {
+      "path": "route_comparison.csv",
+      "sha256": "cf4f60886308913d4e2b9438fd30f5d783f92802fdbdaa9b44af983d24f6c857",
+      "size_bytes": 513
+    },
+    {
+      "path": "route_metric_comparison.png",
+      "sha256": "4ca342baaee962489520b21ac1e1ce769c2c288151ab90da689b28ef0021bd02",
+      "size_bytes": 26820
+    },
+    {
+      "path": "route_summary.csv",
+      "sha256": "78de59884591a6c6656e60a73a31aa48711da684440e7593b7c4ab75e9c5c002",
+      "size_bytes": 1104
+    },
+    {
+      "path": "run_record.json",
+      "sha256": "6800c0d233b4ed583028b62ebd964bc6578dadb25c6c753f3d5972f42cca13c2",
+      "size_bytes": 7966
+    },
+    {
+      "path": "view_route_summary.csv",
+      "sha256": "4942deb7db4072231edc9a6e6ea5f9bf0a414f31cb0288266183e2fe31d17e98",
+      "size_bytes": 4311
+    }
+  ],
+  "manifest_content_sha256": "36243b6bc99027d2d733dea52c6ef00e6362a762bffd5dbd2ed53a237292536f",
+  "schema_version": 1
+}

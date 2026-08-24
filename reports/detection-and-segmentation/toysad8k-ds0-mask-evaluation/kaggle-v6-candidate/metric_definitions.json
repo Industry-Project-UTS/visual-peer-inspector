@@ -1,0 +1,16 @@
+{
+  "boundary_f1": "boundary precision and recall within the fixed pixel tolerance",
+  "confidence_interval": "paired scene means with complete asset groups resampled together",
+  "detection_aware_metrics": "missed references contribute zero; unmatched predictions remain counted",
+  "dice": "twice the intersection divided by total foreground area",
+  "mask_iou": "intersection divided by union for matched binary masks",
+  "ranking_metrics": "B0, B1 and P1 are deferred to Notebook 07",
+  "routes": {
+    "automatic_box": "SAM 2.1 prompted with frozen LocateAnything boxes",
+    "reference_box": "SAM 2.1 prompted with supplied-mask boxes"
+  },
+  "schema_version": 1,
+  "scope": "DS0 provisional integration evidence",
+  "statistical_unit": "scene",
+  "views": "repeated observations within each scene"
+}
