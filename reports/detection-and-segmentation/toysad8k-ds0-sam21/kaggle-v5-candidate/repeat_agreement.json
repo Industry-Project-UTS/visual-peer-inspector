@@ -1,0 +1,8 @@
+{
+  "mask_digest_agreement_rate": 1.0,
+  "matching_mask_digest_count": 169,
+  "matching_score_count": 169,
+  "prompt_count": 169,
+  "score_agreement_rate": 1.0,
+  "score_tolerance": 1e-05
+}

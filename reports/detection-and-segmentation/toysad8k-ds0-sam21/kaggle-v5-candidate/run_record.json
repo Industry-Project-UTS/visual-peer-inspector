@@ -1,0 +1,123 @@
+{
+  "automatic_prompt_count": 1616,
+  "checkpoint_sha256": "2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318",
+  "completion_gate_passed": true,
+  "configuration": {
+    "checkpoint_filename": "sam2.1_hiera_large.pt",
+    "checkpoint_sha256": "2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318",
+    "checkpoint_size_bytes": 898083611,
+    "code_repository": "https://github.com/facebookresearch/sam2",
+    "code_revision": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+    "device": "cuda",
+    "image_height": 256,
+    "image_width": 256,
+    "mask_threshold": 0.0,
+    "max_hole_area": 0.0,
+    "max_sprinkle_area": 0.0,
+    "model_config": "configs/sam2.1/sam2.1_hiera_l.yaml",
+    "model_repository": "facebook/sam2.1-hiera-large",
+    "model_revision": "665f8e2ad61cf5f53d65644ff27c8ee525124610",
+    "multimask_output": false,
+    "precision": "float16",
+    "seed": 20260824
+  },
+  "configuration_sha256": "39690d431d70c2192a6ba0c4530785c9208e07b035842d05022a67fb700a850b",
+  "error_type": null,
+  "gpu": {
+    "compute_capability": "7.5",
+    "cuda_available": true,
+    "device_count": 2,
+    "device_name": "Tesla T4",
+    "peak_allocated_gib": 1.6055,
+    "peak_reserved_gib": 1.9043,
+    "torch_architecture": "sm_75",
+    "torch_architecture_supported": true,
+    "total_memory_gib": 14.562
+  },
+  "inference_stage": "full",
+  "model_load_checkpoints": [
+    {
+      "elapsed_seconds": 0.0,
+      "stage": "dependency_install_started"
+    },
+    {
+      "elapsed_seconds": 119.306,
+      "stage": "dependency_install_completed"
+    },
+    {
+      "elapsed_seconds": 119.367,
+      "stage": "sam_installation_verified"
+    },
+    {
+      "elapsed_seconds": 123.799,
+      "stage": "checkpoint_download_started"
+    },
+    {
+      "checkpoint_sha256": "2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318",
+      "checkpoint_size_bytes": 898083611,
+      "download_seconds": 6.787,
+      "elapsed_seconds": 130.586,
+      "stage": "checkpoint_download_completed"
+    },
+    {
+      "elapsed_seconds": 137.811,
+      "stage": "sam_import_started"
+    },
+    {
+      "elapsed_seconds": 143.537,
+      "stage": "sam_model_build_started"
+    },
+    {
+      "elapsed_seconds": 146.834,
+      "stage": "sam_worker_ready"
+    }
+  ],
+  "platform_versions": {
+    "code_dataset_version": "24",
+    "kaggle_notebook_version": "5",
+    "model_input_dataset_version": "1",
+    "numpy": "2.0.2",
+    "pillow": "11.3.0",
+    "prompt_dataset_version": "1",
+    "python": "3.12.13",
+    "torch": "2.10.0+cu128",
+    "torchvision": "0.25.0+cu128"
+  },
+  "producer_kind": "sam2.1_model",
+  "prompt_package_sha256": "7b6bd834b3dd2aec47d8ad35d362beaa1aa87a5e1d354b94f101d0bdd16ebc84",
+  "provenance": {
+    "code_dataset_version": "24",
+    "git_commit": "a7b983664efa6a5e21b42b535d0cc01c9b4175d7",
+    "git_dirty": true,
+    "kaggle_notebook_slug": "esreekarreddy/toysad-8k-ds0-sam-2-1-segmentation",
+    "kaggle_notebook_version": "5",
+    "model_input_dataset_version": "1",
+    "notebook_sha256": "ad098d247f680689ccd6246cacaa2280ad29a0693a8d63393c8e891824b7351a",
+    "precommit_candidate": true,
+    "prompt_dataset_version": "1",
+    "snapshot_sha256": "3ea029b8119a467b180c5d8d24d4f1976046737dd00bd7b55258d1e3ea71e14c"
+  },
+  "python_version": "3.12.13",
+  "reference_prompt_count": 1640,
+  "repeat_agreement": {
+    "mask_digest_agreement_rate": 1.0,
+    "matching_mask_digest_count": 169,
+    "matching_score_count": 169,
+    "prompt_count": 169,
+    "score_agreement_rate": 1.0,
+    "score_tolerance": 1e-05
+  },
+  "run_mode": "model_inference",
+  "schema_version": 1,
+  "stage": "ds0_sam21_prompted_masks",
+  "status": "completed",
+  "summary": {
+    "empty_mask_count": 0,
+    "image_count": 400,
+    "mask_count": 3256,
+    "median_image_runtime_seconds": 0.248185,
+    "p95_image_runtime_seconds": 0.2624995,
+    "scene_count": 20
+  },
+  "tracking_status": "pending"
+}

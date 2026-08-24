@@ -48,6 +48,34 @@ def _font(size: int, *, bold: bool = False) -> ImageFont.ImageFont:
         return ImageFont.load_default()
 
 
+def _draw_vertical_axis_label(
+    image: Image.Image,
+    text: str,
+    *,
+    y_center: int,
+    font: ImageFont.ImageFont,
+) -> None:
+    """Draw a standard vertical y-axis label without clipping the text."""
+
+    bounds = font.getbbox(text)
+    width = bounds[2] - bounds[0]
+    height = bounds[3] - bounds[1]
+    label = Image.new("RGBA", (width + 6, height + 6), (255, 255, 255, 0))
+    label_draw = ImageDraw.Draw(label)
+    label_draw.text(
+        (3 - bounds[0], 3 - bounds[1]),
+        text,
+        fill=TEXT,
+        font=font,
+    )
+    rotated = label.rotate(90, expand=True)
+    image.paste(
+        rotated,
+        (14, round(y_center - rotated.height / 2)),
+        rotated,
+    )
+
+
 def save_bar_chart(
     labels: Sequence[str],
     values: Sequence[int | float],
@@ -55,6 +83,8 @@ def save_bar_chart(
     *,
     title: str,
     y_label: str,
+    integer_ticks: bool = False,
+    show_values: bool = False,
 ) -> None:
     """Save a compact vertical bar chart without a plotting dependency."""
 
@@ -70,14 +100,25 @@ def save_bar_chart(
     body_font = _font(18)
     small_font = _font(14)
     draw.text((left, 28), title, fill=TEXT, font=title_font)
-    draw.text((20, top + chart_height // 2), y_label, fill=TEXT, font=body_font)
+    _draw_vertical_axis_label(
+        image,
+        y_label,
+        y_center=top + chart_height // 2,
+        font=body_font,
+    )
     maximum = max(float(value) for value in values)
-    axis_maximum = maximum if maximum > 0 else 1.0
+    if integer_ticks:
+        axis_maximum = float(max(5, math.ceil(maximum / 5) * 5))
+    else:
+        axis_maximum = maximum if maximum > 0 else 1.0
     for tick in range(6):
         ratio = tick / 5
         y = top + chart_height - round(ratio * chart_height)
         draw.line((left, y, width - right, y), fill=GRID, width=1)
-        label = f"{axis_maximum * ratio:.1f}".rstrip("0").rstrip(".")
+        tick_value = axis_maximum * ratio
+        label = str(round(tick_value)) if integer_ticks else (
+            f"{tick_value:.1f}".rstrip("0").rstrip(".")
+        )
         draw.text((left - 62, y - 9), label, fill=TEXT, font=small_font)
     slot = chart_width / len(values)
     bar_width = max(8, round(slot * 0.68))
@@ -92,6 +133,19 @@ def save_bar_chart(
             radius=4,
             fill=BLUE,
         )
+        if show_values:
+            value_label = (
+                str(int(round(float(value))))
+                if integer_ticks
+                else f"{float(value):.3f}".rstrip("0").rstrip(".")
+            )
+            draw.text(
+                (round(x_center), max(top + 4, y1 - 10)),
+                value_label,
+                fill=TEXT,
+                font=small_font,
+                anchor="ms",
+            )
         draw.text(
             (round(x_center), top + chart_height + 14),
             str(label),
@@ -110,6 +164,7 @@ def save_histogram(
     title: str,
     x_label: str,
     bins: int = 12,
+    count_label: str = "Count",
 ) -> None:
     """Save a histogram with stable bin boundaries."""
 
@@ -129,10 +184,17 @@ def save_histogram(
             index = min(bin_count - 1, int((value - lower) / width))
             counts[index] += 1
         labels = [
-            f"{lower + index * width:.1f}"
+            f"{lower + (index + 0.5) * width:.2f}"
             for index in range(bin_count)
         ]
-    save_bar_chart(labels, counts, path, title=title, y_label="Images")
+    save_bar_chart(
+        labels,
+        counts,
+        path,
+        title=title,
+        y_label=count_label,
+        integer_ticks=True,
+    )
     image = Image.open(path).convert("RGB")
     draw = ImageDraw.Draw(image)
     draw.text(
@@ -205,7 +267,12 @@ def save_scatter_plot(
         font=_font(18),
         anchor="mm",
     )
-    draw.text((28, (top + bottom) // 2), y_label, fill=TEXT, font=_font(18))
+    _draw_vertical_axis_label(
+        image,
+        y_label,
+        y_center=(top + bottom) // 2,
+        font=_font(18),
+    )
     path.parent.mkdir(parents=True, exist_ok=True)
     image.save(path, format="PNG")
 
