@@ -1,0 +1,6 @@
+{
+  "median_image_runtime_seconds": 0.248185,
+  "median_prompts_per_image": 8.0,
+  "p95_image_runtime_seconds": 0.2624995,
+  "workflow_seconds": 137.0854
+}

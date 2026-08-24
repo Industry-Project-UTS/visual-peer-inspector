@@ -1,0 +1,12 @@
+{
+  "one_image_completed": true,
+  "passed": true,
+  "pilot_image_count": 20,
+  "pilot_required": true,
+  "pilot_scene_count": 20,
+  "pilot_view_count": 20,
+  "repeat_mask_digest_agreement_rate": 1.0,
+  "repeat_prompt_count": 169,
+  "repeat_score_agreement_rate": 1.0,
+  "schema_version": 1
+}

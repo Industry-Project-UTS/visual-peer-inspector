@@ -1,0 +1,7 @@
+gate,observed,expected,status
+image coverage,400,400,pass
+reference-route masks,1640,1640,pass
+automatic-route masks,1616,1616,pass
+unresolved failures,0,0,pass
+repeat mask digest agreement,1.0,1.0,pass
+repeat score agreement,1.0,1.0,pass

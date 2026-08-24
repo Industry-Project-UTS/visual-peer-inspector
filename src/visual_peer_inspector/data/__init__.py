@@ -8,12 +8,26 @@ from .archive_members import (
     read_indexed_member,
 )
 from .integrity import VerificationReport, load_manifest, verify_chunk_directory
+from .model_safe_package import (
+    PackageAudit,
+    SMOKE20_COHORT_ID,
+    build_smoke20_rgb_package,
+    choose_smoke20_rows,
+    collect_model_input_evidence,
+    verify_model_input_package,
+    verify_trusted_package_inputs,
+)
 from .segmented_file import SegmentedFile
 from .scene_catalog import (
     anomaly_variant,
     build_scene_catalog,
     load_split_mapping,
     scene2d_anomaly_flags,
+)
+from .sam_prompt_package import (
+    SAM_PROMPT_SCHEMA_VERSION,
+    build_sam_prompt_package,
+    verify_sam_prompt_package,
 )
 from .selected_examples import ToysObjectView, ToysSceneView, load_toys_scene_view
 from .toysad_selection import (
@@ -36,6 +50,7 @@ __all__ = [
     "SegmentedFile",
     "IndexedMember",
     "VerificationReport",
+    "PackageAudit",
     "build_archive_index",
     "build_scene_catalog",
     "extract_indexed_member",
@@ -44,6 +59,15 @@ __all__ = [
     "read_indexed_member",
     "read_central_directory_record",
     "verify_chunk_directory",
+    "SMOKE20_COHORT_ID",
+    "SAM_PROMPT_SCHEMA_VERSION",
+    "build_sam_prompt_package",
+    "build_smoke20_rgb_package",
+    "choose_smoke20_rows",
+    "collect_model_input_evidence",
+    "verify_model_input_package",
+    "verify_trusted_package_inputs",
+    "verify_sam_prompt_package",
     "anomaly_variant",
     "load_split_mapping",
     "scene2d_anomaly_flags",
