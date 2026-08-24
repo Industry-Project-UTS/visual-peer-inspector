@@ -1,0 +1,17 @@
+encoder_a,encoder_b,comparable_view_count,top_candidate_agreement
+dinov2_base,dinov2_base,400,1.0
+dinov2_base,dinov2_small,400,0.7025
+dinov2_base,dinov2_small_registers,400,0.725
+dinov2_base,resnet50_control,400,0.6025
+dinov2_small,dinov2_base,400,0.7025
+dinov2_small,dinov2_small,400,1.0
+dinov2_small,dinov2_small_registers,400,0.8075
+dinov2_small,resnet50_control,400,0.6575
+dinov2_small_registers,dinov2_base,400,0.725
+dinov2_small_registers,dinov2_small,400,0.8075
+dinov2_small_registers,dinov2_small_registers,400,1.0
+dinov2_small_registers,resnet50_control,400,0.6325
+resnet50_control,dinov2_base,400,0.6025
+resnet50_control,dinov2_small,400,0.6575
+resnet50_control,dinov2_small_registers,400,0.6325
+resnet50_control,resnet50_control,400,1.0

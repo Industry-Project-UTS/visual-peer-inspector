@@ -1,4 +1,4 @@
-"""Build the code-only Kaggle input for the DS0 SAM evaluation notebooks."""
+"""Build the code-only Kaggle input for the staged DS0 notebooks."""
 
 from __future__ import annotations
 
@@ -22,6 +22,10 @@ NOTEBOOK_TARGETS = {
         "notebooks/detection-and-segmentation/toysad8k-ds0-mask-evaluation/"
         "06-toysad8k-ds0-mask-evaluation.ipynb"
     ): Path("notebooks/06-toysad8k-ds0-mask-evaluation.ipynb"),
+    Path(
+        "notebooks/representation-and-scoring/toysad8k-ds0-peer-scores/"
+        "07-toysad8k-ds0-representation-and-peer-scores.ipynb"
+    ): Path("notebooks/07-toysad8k-ds0-representation-and-peer-scores.ipynb"),
 }
 
 SOURCE_ROOTS = (
@@ -78,6 +82,7 @@ def build_snapshot(
     code_dataset_version: str,
     notebook_version_05: str,
     notebook_version_06: str,
+    notebook_version_07: str,
 ) -> Path:
     output_root = output_root.resolve()
     if output_root.exists():
@@ -139,6 +144,7 @@ def build_snapshot(
             "kaggle_notebook_version_04": "13",
             "kaggle_notebook_version_05": str(notebook_version_05),
             "kaggle_notebook_version_06": str(notebook_version_06),
+            "kaggle_notebook_version_07": str(notebook_version_07),
             "code_dataset_version": str(code_dataset_version),
             "model_input_dataset_version": "1",
             "prompt_dataset_version": "1",
@@ -178,6 +184,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--code-dataset-version", required=True)
     parser.add_argument("--notebook-version-05", required=True)
     parser.add_argument("--notebook-version-06", required=True)
+    parser.add_argument("--notebook-version-07", required=True)
     parser.add_argument("--allow-dirty", action="store_true")
     return parser.parse_args()
 
@@ -191,5 +198,6 @@ if __name__ == "__main__":
             code_dataset_version=arguments.code_dataset_version,
             notebook_version_05=arguments.notebook_version_05,
             notebook_version_06=arguments.notebook_version_06,
+            notebook_version_07=arguments.notebook_version_07,
         )
     )

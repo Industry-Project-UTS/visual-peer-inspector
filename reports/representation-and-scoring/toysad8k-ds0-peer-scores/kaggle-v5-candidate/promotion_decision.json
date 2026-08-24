@@ -1,0 +1,18 @@
+{
+  "available_encoders": [
+    "dinov2_small",
+    "dinov2_small_registers",
+    "dinov2_base",
+    "resnet50_control"
+  ],
+  "decision": "retain_dinov2_small_anchor_pending_ds1",
+  "dino3_ds0_comparison_completed": false,
+  "ds1_promotion_rule": {
+    "maximum_declared_subgroup_loss": 0.03,
+    "maximum_runtime_ratio": 2.0,
+    "minimum_mean_scene_ap_gain": 0.01,
+    "paired_ci_lower_must_exceed": 0.0
+  },
+  "final_encoder_selected": false,
+  "reason": "DS0 is a 20-scene development smoke cohort. Encoder selection requires the 100-scene DS1 supplied-mask screen."
+}

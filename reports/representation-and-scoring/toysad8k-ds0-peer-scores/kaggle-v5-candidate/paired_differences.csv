@@ -1,0 +1,8 @@
+comparison_family,candidate_encoder,candidate_route,candidate_method,baseline_encoder,baseline_route,baseline_method,metric,mean_difference,ci_lower,ci_upper,paired_scene_count,cluster_count,repetitions,seed
+encoder_vs_anchor,dinov2_base,supplied_mask,B0,dinov2_small,supplied_mask,B0,average_precision,-0.009770833333333336,-0.029708333333333326,0.012146874999999982,20,20,10000,32040
+encoder_vs_anchor,dinov2_small_registers,supplied_mask,B0,dinov2_small,supplied_mask,B0,average_precision,0.014854166666666651,-0.002166666666666665,0.03283385416666665,20,20,10000,32040
+encoder_vs_anchor,resnet50_control,supplied_mask,B0,dinov2_small,supplied_mask,B0,average_precision,-0.037979166666666675,-0.06631302083333336,-0.00808333333333335,20,20,10000,32040
+scorer_vs_anchor,dinov2_small,supplied_mask,B1,dinov2_small,supplied_mask,B0,average_precision,-0.003833333333333344,-0.02175104166666669,0.013126041666666649,20,20,10000,32040
+scorer_vs_anchor,dinov2_small,supplied_mask,P1,dinov2_small,supplied_mask,B0,average_precision,0.016333333333333325,-0.010229166666666687,0.044,20,20,10000,32040
+route_vs_anchor,dinov2_small,automatic_box,B0,dinov2_small,supplied_mask,B0,average_precision,-0.01771211013645225,-0.04144142909356728,0.004719739887914215,20,20,10000,32040
+route_vs_anchor,dinov2_small,reference_box,B0,dinov2_small,supplied_mask,B0,average_precision,0.00039583333333332026,-0.019730208333333363,0.01843802083333333,20,20,10000,32040

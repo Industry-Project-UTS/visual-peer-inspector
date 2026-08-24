@@ -1,0 +1,12 @@
+{
+  "all_completion_gates_passed": true,
+  "decision": "retain_dinov2_small_anchor_pending_ds1",
+  "evaluation_row_count": 9145,
+  "evaluator_opened_after_score_lock": true,
+  "run_mode": "model_evidence",
+  "scene_metric_row_count": 460,
+  "schema_version": 1,
+  "score_package_sha256": "1b0e476dadc8fedac01afc74253e4a4c86a4255f851d7dddeb29694ac70be03c",
+  "stage": "ds0_representation_and_peer_scores",
+  "status": "completed"
+}

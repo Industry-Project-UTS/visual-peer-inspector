@@ -14,7 +14,7 @@ model, scoring, evaluation, and tracking logic belongs in tested modules under
 | 04 Box Proposals | Runs pinned LocateAnything on DS0 and records frozen proposal evidence | Complete candidate evidence |
 | 05 Segmentation | Runs pinned SAM 2.1 for the reference-box and automatic-box routes | Complete candidate evidence |
 | 06 Proposal and Mask Evaluation | Compares proposals and masks with protected references inside evaluator-only code | Complete candidate evidence |
-| 07 Representation and Peer Scores | Adds feature caching, encoder screening, B0, B1, P1, geometry, and heatmaps | Next |
+| 07 Representation and Peer Scores | Adds feature caching, encoder screening, B0, B1, P1, geometry, and heatmaps | Kaggle DS0 candidate evidence complete; DINOv3 access pending |
 | 08 Views, Fusion, and Calibration | Evaluates view subsets, identity association, fusion, thresholds, and review rules | Planned |
 | 09 Frozen Evaluation | Opens internal-lock and official evaluation only after settings and predictions are frozen | Planned |
 | 10 Full-Pool Sensitivity | Runs the optional role-preserving 4,107-scene analysis after the primary method freezes | Optional |
@@ -55,6 +55,8 @@ flowchart LR
   `detection-and-segmentation/toysad8k-ds0-sam21/05-toysad8k-ds0-sam21-segmentation.ipynb`
 - Notebook 06:
   `detection-and-segmentation/toysad8k-ds0-mask-evaluation/06-toysad8k-ds0-mask-evaluation.ipynb`
+- Notebook 07:
+  `representation-and-scoring/toysad8k-ds0-peer-scores/07-toysad8k-ds0-representation-and-peer-scores.ipynb`
 
 Planned notebook directories are created only when their design and required
 inputs are ready.
