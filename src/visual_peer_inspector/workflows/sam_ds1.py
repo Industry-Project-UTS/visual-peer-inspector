@@ -352,19 +352,60 @@ def run_ds1_sam_workflow(
             handle.flush()
 
     def report(completed: int, total: int, row: Mapping[str, Any]) -> None:
-        if progress_callback is not None:
+        if progress_callback is not None and (
+            completed == 1 or completed == total or completed % 100 == 0
+        ):
             progress_callback(
                 "inference_progress",
                 {"completed": completed, "total": total, "latest_status": row["status"]},
             )
 
+    def report_phase(stage: str, **details: Any) -> None:
+        if progress_callback is not None:
+            progress_callback(stage, details)
+
+    report_phase(
+        "one_image_preflight_started",
+        image_count=1,
+        already_completed=stress_job.key in result_store.completed_keys,
+    )
     if worker is not None:
         run_sam_jobs(worker=worker, jobs=[stress_job], result_store=result_store, maximum_consecutive_failed_jobs=1, progress_callback=report, attempt_callback=record_attempt)
+    report_phase(
+        "one_image_preflight_completed",
+        completed=stress_job.key in result_store.completed_keys,
+    )
     if stress_job.key not in result_store.completed_keys:
         raise RuntimeError("The one-image DS1 SAM preflight did not complete")
-    if inference_stage in {"pilot", "full"} and worker is not None:
-        run_sam_jobs(worker=worker, jobs=pilot_jobs, result_store=result_store, maximum_consecutive_failed_jobs=1, progress_callback=report, attempt_callback=record_attempt)
-        run_sam_jobs(worker=worker, jobs=pilot_jobs, result_store=repeat_store, maximum_consecutive_failed_jobs=1, progress_callback=report, attempt_callback=record_attempt)
+    if inference_stage in {"pilot", "full"}:
+        report_phase(
+            "pilot_started",
+            image_count=PILOT_IMAGE_COUNT,
+            completed_before=sum(
+                job.key in result_store.completed_keys for job in pilot_jobs
+            ),
+        )
+        if worker is not None:
+            run_sam_jobs(worker=worker, jobs=pilot_jobs, result_store=result_store, maximum_consecutive_failed_jobs=1, progress_callback=report, attempt_callback=record_attempt)
+        report_phase(
+            "pilot_completed",
+            completed=sum(job.key in result_store.completed_keys for job in pilot_jobs),
+            expected=PILOT_IMAGE_COUNT,
+        )
+        report_phase(
+            "repeatability_started",
+            image_count=PILOT_IMAGE_COUNT,
+            completed_before=sum(
+                job.key in repeat_store.completed_keys for job in pilot_jobs
+            ),
+        )
+        if worker is not None:
+            run_sam_jobs(worker=worker, jobs=pilot_jobs, result_store=repeat_store, maximum_consecutive_failed_jobs=1, progress_callback=report, attempt_callback=record_attempt)
+        report_phase(
+            "repeatability_completed",
+            completed=sum(job.key in repeat_store.completed_keys for job in pilot_jobs),
+            expected=PILOT_IMAGE_COUNT,
+        )
 
     pilot_keys = {job.key for job in pilot_jobs}
     pilot_rows = [row for row in result_store.rows if (str(row["opaque_scene_id"]), str(row["view_id"])) in pilot_keys]
@@ -400,11 +441,23 @@ def run_ds1_sam_workflow(
         raise RuntimeError("DS1 SAM preflight gates failed")
 
     run_error = None
-    if inference_stage == "full" and worker is not None:
-        try:
-            run_sam_jobs(worker=worker, jobs=jobs, result_store=result_store, maximum_consecutive_failed_jobs=2, progress_callback=report, attempt_callback=record_attempt)
-        except Exception as error:
-            run_error = error
+    if inference_stage == "full":
+        report_phase(
+            "full_inference_started",
+            image_count=DS1_SCREEN_CONTRACT.image_count,
+            completed_before=len(result_store.completed_keys),
+        )
+        if worker is not None:
+            try:
+                run_sam_jobs(worker=worker, jobs=jobs, result_store=result_store, maximum_consecutive_failed_jobs=2, progress_callback=report, attempt_callback=record_attempt)
+            except Exception as error:
+                run_error = error
+        report_phase(
+            "full_inference_completed",
+            completed=len(result_store.completed_keys),
+            expected=DS1_SCREEN_CONTRACT.image_count,
+            error_type=type(run_error).__name__ if run_error is not None else None,
+        )
     result_store.write_index(private_root / "mask_results.jsonl")
     if repeat_store.rows:
         repeat_store.write_index(private_root / "repeat_mask_results.jsonl")
@@ -427,6 +480,11 @@ def run_ds1_sam_workflow(
         {"gate": "repeat score agreement", "observed": repeat["score_agreement_rate"], "expected": 1.0 if inference_stage != "one_image" else "not assessed", "status": "pass" if inference_stage == "one_image" or repeat["score_agreement_rate"] == 1.0 else "fail"},
     ]
     gate_passed = all(row["status"] == "pass" for row in gates)
+    report_phase(
+        "acceptance_gates_completed",
+        passed=gate_passed,
+        failed_gate_count=sum(row["status"] != "pass" for row in gates),
+    )
     write_csv_rows(safe_root / "completion_gates.csv", ["gate", "observed", "expected", "status"], gates)
     write_csv_rows(safe_root / "route_summary.csv", ["route", "mask_count", "empty_mask_count", "empty_mask_rate", "mean_area_fraction", "median_area_fraction", "p95_area_fraction", "mean_predicted_quality_score", "p10_predicted_quality_score"], evidence["route_rows"])
     write_csv_rows(safe_root / "view_summary.csv", ["view_id", "route", "mask_count", "empty_mask_count", "mean_area_fraction", "mean_predicted_quality_score"], evidence["view_rows"])

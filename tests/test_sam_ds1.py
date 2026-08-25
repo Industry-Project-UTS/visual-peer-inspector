@@ -124,7 +124,7 @@ class Ds1SamWorkflowTests(unittest.TestCase):
             json.dumps(record), encoding="utf-8"
         )
 
-    def _run(self):
+    def _run(self, progress_callback=None):
         return run_ds1_sam_workflow(
             prompt_root=self.prompt_root,
             media_root=self.media_root,
@@ -138,6 +138,7 @@ class Ds1SamWorkflowTests(unittest.TestCase):
             platform_versions={"python": "test"},
             gpu_evidence={"cuda_available": False, "device_count": 0},
             model_load_rows=[],
+            progress_callback=progress_callback,
         )
 
     def test_complete_contract_run_is_resumable(self):
@@ -188,6 +189,38 @@ class Ds1SamWorkflowTests(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "membership_sha256"):
             build_ds1_sam_jobs(self.prompt_root, self.media_root)
+
+    def test_full_run_reports_phases_without_per_image_log_noise(self):
+        events = []
+
+        def capture(stage, details):
+            events.append((stage, details))
+
+        record = self._run(progress_callback=capture)
+        phase_names = [
+            stage for stage, _ in events if stage != "inference_progress"
+        ]
+        self.assertEqual(
+            phase_names,
+            [
+                "one_image_preflight_started",
+                "one_image_preflight_completed",
+                "pilot_started",
+                "pilot_completed",
+                "repeatability_started",
+                "repeatability_completed",
+                "full_inference_started",
+                "full_inference_completed",
+                "acceptance_gates_completed",
+            ],
+        )
+        progress_events = [
+            details for stage, details in events if stage == "inference_progress"
+        ]
+        self.assertLessEqual(len(progress_events), 26)
+        self.assertEqual(progress_events[-1]["completed"], progress_events[-1]["total"])
+        self.assertTrue(events[-1][1]["passed"])
+        self.assertTrue(record["completion_gate_passed"])
 
     def test_clearml_validator_accepts_only_completed_model_evidence(self):
         self._run()

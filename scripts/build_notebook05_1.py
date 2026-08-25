@@ -78,6 +78,10 @@ NOTEBOOK_SLUG = "esreekarreddy/toysad-8k-ds1-sam-2-1-segmentation"
 OUTPUT_ROOT = Path("/kaggle/working/toysad8k_ds1_sam21_segmentation")
 OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
 EXECUTION_ENVIRONMENT = "kaggle" if Path("/kaggle/input").is_dir() else "local"
+
+
+def emit_notebook_stage(stage: str, **details) -> None:
+    print(json.dumps({"stage": stage, **details}, sort_keys=True), flush=True)
 """
     ),
     markdown("## Locate and verify the frozen inputs"),
@@ -189,16 +193,29 @@ display(
     code(
         """
 install_started = time.perf_counter()
-model_load_checkpoints: list[dict] = [
-    {"stage": "dependency_install_started", "elapsed_seconds": 0.0}
-]
+model_load_checkpoints: list[dict] = []
+
+
+def record_model_load_stage(stage: str, **details) -> None:
+    row = {
+        "stage": stage,
+        "elapsed_seconds": round(time.perf_counter() - install_started, 3),
+        **details,
+    }
+    model_load_checkpoints.append(row)
+    emit_notebook_stage(stage, **{key: value for key, value in row.items() if key != "stage"})
+
+
 install_environment = os.environ.copy()
 install_environment["SAM2_BUILD_CUDA"] = "0"
+record_model_load_stage("dependency_install_started")
 subprocess.check_call(
     [sys.executable, "-m", "pip", "install", "-q", "-r", str(CODE_ROOT / "requirements/sam2-lock.txt")],
     env=install_environment,
     timeout=300,
 )
+record_model_load_stage("dependency_install_completed")
+record_model_load_stage("sam_repo_install_started")
 subprocess.check_call(
     [
         sys.executable,
@@ -212,12 +229,7 @@ subprocess.check_call(
     env=install_environment,
     timeout=600,
 )
-model_load_checkpoints.append(
-    {
-        "stage": "dependency_install_completed",
-        "elapsed_seconds": round(time.perf_counter() - install_started, 3),
-    }
-)
+record_model_load_stage("sam_repo_install_completed")
 
 from visual_peer_inspector.models.sam2 import Sam2Configuration
 
@@ -261,12 +273,7 @@ gpu_evidence = {
 }
 if not gpu_evidence["torch_architecture_supported"]:
     raise RuntimeError("The installed PyTorch build does not support this GPU")
-model_load_checkpoints.append(
-    {
-        "stage": "checkpoint_download_started",
-        "elapsed_seconds": round(time.perf_counter() - install_started, 3),
-    }
-)
+record_model_load_stage("checkpoint_download_started")
 download_started = time.perf_counter()
 checkpoint_path = Path(
     hf_hub_download(
@@ -284,14 +291,11 @@ if checkpoint_path.stat().st_size != configuration.checkpoint_size_bytes:
     raise RuntimeError("The downloaded SAM checkpoint size is incorrect")
 if checkpoint_sha256 != configuration.checkpoint_sha256:
     raise RuntimeError("The downloaded SAM checkpoint hash is incorrect")
-model_load_checkpoints.append(
-    {
-        "stage": "checkpoint_download_completed",
-        "elapsed_seconds": round(time.perf_counter() - install_started, 3),
-        "download_seconds": round(time.perf_counter() - download_started, 3),
-        "checkpoint_size_bytes": checkpoint_path.stat().st_size,
-        "checkpoint_sha256": checkpoint_sha256,
-    }
+record_model_load_stage(
+    "checkpoint_download_completed",
+    download_seconds=round(time.perf_counter() - download_started, 3),
+    checkpoint_size_bytes=checkpoint_path.stat().st_size,
+    checkpoint_sha256=checkpoint_sha256,
 )
 display({**gpu_evidence, "checkpoint_sha256": checkpoint_sha256})
 """
@@ -380,7 +384,12 @@ run_record = run_ds1_sam_workflow(
     progress_callback=report_progress,
 )
 if not run_record["completion_gate_passed"]:
-    raise RuntimeError("The DS1 SAM completion gate failed")
+    print(
+        "WARNING: Notebook 05.1 materialized a non-promotable run. "
+        "The output remains downloadable for diagnosis, but ClearML and downstream "
+        "verification must reject it until every acceptance gate passes.",
+        flush=True,
+    )
 display(run_record)
 """
     ),
@@ -537,7 +546,11 @@ from visual_peer_inspector.workflows.sam_ds1 import _write_artifact_manifest
 _write_artifact_manifest(OUTPUT_ROOT / "private")
 display(final_summary)
 if not run_record["completion_gate_passed"]:
-    raise RuntimeError("Notebook 05.1 did not complete its operational contract")
+    print(
+        "WARNING: Notebook 05.1 finished with failed acceptance gates. "
+        "Do not publish or promote this run; retain it only as diagnostic evidence.",
+        flush=True,
+    )
 """
     ),
 ]

@@ -3,13 +3,18 @@ from __future__ import annotations
 from hashlib import sha256
 import json
 from pathlib import Path
+import shutil
 
 import numpy as np
 from PIL import Image
+import pytest
 
 from visual_peer_inspector.data.cohort_contract import CohortContract
 from visual_peer_inspector.data.model_safe_package import canonical_json_bytes, file_sha256, membership_sha256
-from visual_peer_inspector.evaluation import ds1_evaluator_package
+from visual_peer_inspector.evaluation import (
+    ds1_evaluator_package,
+    proposal_reference_ds1,
+)
 from visual_peer_inspector.models.sam2 import binary_mask_sha256, encode_binary_mask
 from visual_peer_inspector.workflows import mask_evaluation_ds1
 from visual_peer_inspector.data import ds1_mask_route_package
@@ -63,7 +68,9 @@ def _inputs(tmp_path: Path):
     references = []
     attributes = []
     crosswalk = []
-    mask_root = tmp_path / "source_masks"
+    geometry_root = tmp_path / "geometry_source"
+    attributes_root = tmp_path / "attributes_source"
+    mask_root = geometry_root / "masks"
     box = [40, 50, 120, 150]
     mask = np.zeros((256, 256), dtype=np.uint8)
     mask[50:150, 40:120] = 255
@@ -91,6 +98,7 @@ def _inputs(tmp_path: Path):
                 "box_xyxy": box,
                 "mask_path": relative.as_posix(),
                 "mask_sha256": file_sha256(path),
+                "foreground_pixels": int(np.count_nonzero(mask)),
             })
             for route, prompt in (("reference_box", "R000"), ("automatic_box", "P000")):
                 crosswalk.append({
@@ -103,12 +111,77 @@ def _inputs(tmp_path: Path):
                     "opaque_object_id": "O01",
                     "proposal_index": 0 if route == "automatic_box" else None,
                 })
-    reference_path = tmp_path / "reference.jsonl"
-    attributes_path = tmp_path / "attributes.jsonl"
+    reference_path = geometry_root / "reference_manifest.jsonl"
+    attributes_path = attributes_root / "protected_scene_attributes.jsonl"
     crosswalk_path = tmp_path / "crosswalk.jsonl"
     _write_jsonl(reference_path, references)
     _write_jsonl(attributes_path, attributes)
     _write_jsonl(crosswalk_path, crosswalk)
+    geometry_checksums = {
+        "reference_manifest.jsonl": file_sha256(reference_path),
+        **{
+            f"masks/{row['mask_path']}": file_sha256(mask_root / row["mask_path"])
+            for row in references
+        },
+    }
+    geometry_checksum_path = geometry_root / "content_checksums.sha256"
+    geometry_checksum_path.write_text(
+        "".join(
+            f"{digest}  {relative}\n"
+            for relative, digest in sorted(geometry_checksums.items())
+        ),
+        encoding="utf-8",
+    )
+    geometry_record_path = geometry_root / "package_record.json"
+    geometry_record_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "package_kind": "ds1-oracle-geometry",
+                "cohort_id": _small_contract().cohort_id,
+                "release_id": _small_contract().release_id,
+                "membership_sha256": _small_contract().membership_sha256,
+                "scene_count": _small_contract().scene_count,
+                "views_per_scene": _small_contract().views_per_scene,
+                "image_count": _small_contract().image_count,
+                "asset_group_count": _small_contract().asset_group_count,
+                "object_view_count": len(references),
+                "visible_object_view_count": len(references),
+                "mask_threshold": 128,
+                "reference_manifest_sha256": file_sha256(reference_path),
+                "content_checksums_sha256": file_sha256(geometry_checksum_path),
+                "all_checks_passed": True,
+            },
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+    attributes_checksum_path = attributes_root / "content_checksums.sha256"
+    attributes_checksum_path.write_text(
+        f"{file_sha256(attributes_path)}  protected_scene_attributes.jsonl\n",
+        encoding="utf-8",
+    )
+    attributes_record_path = attributes_root / "package_record.json"
+    attributes_record_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "package_kind": "ds1-evaluator-attributes",
+                "cohort_id": _small_contract().cohort_id,
+                "release_id": _small_contract().release_id,
+                "membership_sha256": _small_contract().membership_sha256,
+                "scene_count": _small_contract().scene_count,
+                "views_per_scene": _small_contract().views_per_scene,
+                "image_count": _small_contract().image_count,
+                "asset_group_count": _small_contract().asset_group_count,
+                "protected_attributes_sha256": file_sha256(attributes_path),
+                "content_checksums_sha256": file_sha256(attributes_checksum_path),
+                "all_checks_passed": True,
+            },
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
     crosswalk_record_path = tmp_path / "crosswalk_package_record.json"
     crosswalk_record_path.write_text(json.dumps({
         "schema_version": 1,
@@ -124,23 +197,44 @@ def _inputs(tmp_path: Path):
         "prompt_package_record_sha256": "1" * 64,
         "prompt_manifest_sha256": "5" * 64,
         "model_input_manifest_sha256": "6" * 64,
-        "geometry_package_record_sha256": "2" * 64,
-        "geometry_manifest_sha256": "3" * 64,
+        "geometry_package_record_sha256": file_sha256(geometry_record_path),
+        "geometry_manifest_sha256": file_sha256(reference_path),
         "proposal_results_sha256": "4" * 64,
         "crosswalk_sha256": file_sha256(crosswalk_path),
         "all_checks_passed": True,
     }), encoding="utf-8")
-    return reference_path, attributes_path, crosswalk_path, crosswalk_record_path, mask_root, references
+    return (
+        reference_path,
+        geometry_record_path,
+        attributes_path,
+        attributes_record_path,
+        crosswalk_path,
+        crosswalk_record_path,
+        mask_root,
+        references,
+    )
 
 
 def test_ds1_evaluator_package_is_private_and_checksum_locked(tmp_path, monkeypatch):
     contract = _small_contract()
     monkeypatch.setattr(ds1_evaluator_package, "DS1_SCREEN_CONTRACT", contract)
-    reference, attributes, crosswalk, crosswalk_record, mask_root, _ = _inputs(tmp_path)
+    monkeypatch.setattr(proposal_reference_ds1, "DS1_SCREEN_CONTRACT", contract)
+    (
+        reference,
+        geometry_record,
+        attributes,
+        attributes_record,
+        crosswalk,
+        crosswalk_record,
+        mask_root,
+        _,
+    ) = _inputs(tmp_path)
     output = tmp_path / "evaluator"
     record = ds1_evaluator_package.build_ds1_evaluator_package(
         reference_manifest_path=reference,
+        geometry_package_record_path=geometry_record,
         protected_attributes_path=attributes,
+        attributes_package_record_path=attributes_record,
         evaluator_crosswalk_path=crosswalk,
         crosswalk_package_record_path=crosswalk_record,
         source_mask_root=mask_root,
@@ -157,6 +251,11 @@ def test_ds1_evaluator_package_is_private_and_checksum_locked(tmp_path, monkeypa
     )
     assert copied_crosswalk_record["prompt_manifest_sha256"] == "5" * 64
     assert copied_crosswalk_record["model_input_manifest_sha256"] == "6" * 64
+    assert record["geometry_package_record_sha256"] == file_sha256(geometry_record)
+    assert record["attributes_package_record_sha256"] == file_sha256(
+        attributes_record
+    )
+    assert record["protected_attributes_sha256"] == file_sha256(attributes)
     assert ds1_evaluator_package.verify_ds1_evaluator_package(output)["all_checks_passed"]
     try:
         ds1_evaluator_package.verify_ds1_evaluator_package(output, intended_use="model_facing")
@@ -166,19 +265,201 @@ def test_ds1_evaluator_package_is_private_and_checksum_locked(tmp_path, monkeypa
         raise AssertionError("Evaluator package was accepted as model input")
 
 
+def test_ds1_evaluator_builder_rejects_tampered_geometry_source(
+    tmp_path, monkeypatch
+):
+    contract = _small_contract()
+    monkeypatch.setattr(ds1_evaluator_package, "DS1_SCREEN_CONTRACT", contract)
+    monkeypatch.setattr(proposal_reference_ds1, "DS1_SCREEN_CONTRACT", contract)
+    (
+        reference,
+        geometry_record,
+        attributes,
+        attributes_record,
+        crosswalk,
+        crosswalk_record,
+        mask_root,
+        _,
+    ) = _inputs(tmp_path)
+    rows = [json.loads(line) for line in reference.read_text().splitlines()]
+    rows[0]["box_xyxy"] = [41, 50, 120, 150]
+    _write_jsonl(reference, rows)
+
+    with pytest.raises(ValueError, match="geometry"):
+        ds1_evaluator_package.build_ds1_evaluator_package(
+            reference_manifest_path=reference,
+            geometry_package_record_path=geometry_record,
+            protected_attributes_path=attributes,
+            attributes_package_record_path=attributes_record,
+            evaluator_crosswalk_path=crosswalk,
+            crosswalk_package_record_path=crosswalk_record,
+            source_mask_root=mask_root,
+            output_root=tmp_path / "evaluator",
+            provenance={"snapshot_sha256": "a" * 64},
+        )
+
+
+def test_ds1_evaluator_builder_rejects_tampered_attribute_source(
+    tmp_path, monkeypatch
+):
+    contract = _small_contract()
+    monkeypatch.setattr(ds1_evaluator_package, "DS1_SCREEN_CONTRACT", contract)
+    monkeypatch.setattr(proposal_reference_ds1, "DS1_SCREEN_CONTRACT", contract)
+    (
+        reference,
+        geometry_record,
+        attributes,
+        attributes_record,
+        crosswalk,
+        crosswalk_record,
+        mask_root,
+        _,
+    ) = _inputs(tmp_path)
+    rows = [json.loads(line) for line in attributes.read_text().splitlines()]
+    rows[0]["category"] = "altered_category"
+    _write_jsonl(attributes, rows)
+
+    with pytest.raises(ValueError, match="attribute"):
+        ds1_evaluator_package.build_ds1_evaluator_package(
+            reference_manifest_path=reference,
+            geometry_package_record_path=geometry_record,
+            protected_attributes_path=attributes,
+            attributes_package_record_path=attributes_record,
+            evaluator_crosswalk_path=crosswalk,
+            crosswalk_package_record_path=crosswalk_record,
+            source_mask_root=mask_root,
+            output_root=tmp_path / "evaluator",
+            provenance={"snapshot_sha256": "a" * 64},
+        )
+
+
+def test_ds1_evaluator_builder_rejects_package_record_from_another_root(
+    tmp_path, monkeypatch
+):
+    contract = _small_contract()
+    monkeypatch.setattr(ds1_evaluator_package, "DS1_SCREEN_CONTRACT", contract)
+    monkeypatch.setattr(proposal_reference_ds1, "DS1_SCREEN_CONTRACT", contract)
+    (
+        reference,
+        geometry_record,
+        attributes,
+        attributes_record,
+        crosswalk,
+        crosswalk_record,
+        mask_root,
+        _,
+    ) = _inputs(tmp_path)
+    other_root = tmp_path / "other_geometry"
+    other_root.mkdir()
+    other_record = other_root / "package_record.json"
+    other_record.write_bytes(geometry_record.read_bytes())
+
+    with pytest.raises(ValueError, match="canonical geometry package"):
+        ds1_evaluator_package.build_ds1_evaluator_package(
+            reference_manifest_path=reference,
+            geometry_package_record_path=other_record,
+            protected_attributes_path=attributes,
+            attributes_package_record_path=attributes_record,
+            evaluator_crosswalk_path=crosswalk,
+            crosswalk_package_record_path=crosswalk_record,
+            source_mask_root=mask_root,
+            output_root=tmp_path / "evaluator",
+            provenance={"snapshot_sha256": "a" * 64},
+        )
+
+
+def test_ds1_evaluator_builder_rejects_masks_outside_geometry_package(
+    tmp_path, monkeypatch
+):
+    contract = _small_contract()
+    monkeypatch.setattr(ds1_evaluator_package, "DS1_SCREEN_CONTRACT", contract)
+    monkeypatch.setattr(proposal_reference_ds1, "DS1_SCREEN_CONTRACT", contract)
+    (
+        reference,
+        geometry_record,
+        attributes,
+        attributes_record,
+        crosswalk,
+        crosswalk_record,
+        mask_root,
+        _,
+    ) = _inputs(tmp_path)
+    other_mask_root = tmp_path / "other_masks"
+    shutil.copytree(mask_root, other_mask_root)
+
+    with pytest.raises(ValueError, match="canonical geometry package"):
+        ds1_evaluator_package.build_ds1_evaluator_package(
+            reference_manifest_path=reference,
+            geometry_package_record_path=geometry_record,
+            protected_attributes_path=attributes,
+            attributes_package_record_path=attributes_record,
+            evaluator_crosswalk_path=crosswalk,
+            crosswalk_package_record_path=crosswalk_record,
+            source_mask_root=other_mask_root,
+            output_root=tmp_path / "evaluator",
+            provenance={"snapshot_sha256": "a" * 64},
+        )
+
+
+def test_ds1_evaluator_builder_rejects_crosswalk_geometry_identity_mismatch(
+    tmp_path, monkeypatch
+):
+    contract = _small_contract()
+    monkeypatch.setattr(ds1_evaluator_package, "DS1_SCREEN_CONTRACT", contract)
+    monkeypatch.setattr(proposal_reference_ds1, "DS1_SCREEN_CONTRACT", contract)
+    (
+        reference,
+        geometry_record,
+        attributes,
+        attributes_record,
+        crosswalk,
+        crosswalk_record,
+        mask_root,
+        _,
+    ) = _inputs(tmp_path)
+    record = json.loads(crosswalk_record.read_text())
+    record["geometry_package_record_sha256"] = "f" * 64
+    crosswalk_record.write_text(json.dumps(record), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="canonical package chain"):
+        ds1_evaluator_package.build_ds1_evaluator_package(
+            reference_manifest_path=reference,
+            geometry_package_record_path=geometry_record,
+            protected_attributes_path=attributes,
+            attributes_package_record_path=attributes_record,
+            evaluator_crosswalk_path=crosswalk,
+            crosswalk_package_record_path=crosswalk_record,
+            source_mask_root=mask_root,
+            output_root=tmp_path / "evaluator",
+            provenance={"snapshot_sha256": "a" * 64},
+        )
+
+
 def test_ds1_workflow_reports_metrics_and_builds_label_free_routes(tmp_path, monkeypatch):
     contract = _small_contract()
     monkeypatch.setattr(ds1_evaluator_package, "DS1_SCREEN_CONTRACT", contract)
+    monkeypatch.setattr(proposal_reference_ds1, "DS1_SCREEN_CONTRACT", contract)
     monkeypatch.setattr(mask_evaluation_ds1, "DS1_SCREEN_CONTRACT", contract)
     monkeypatch.setattr(mask_evaluation_ds1, "SUBGROUP_MINIMUM_CLUSTERS", 1)
     monkeypatch.setattr(mask_evaluation_ds1, "SUBGROUP_MINIMUM_SCENES", 1)
     monkeypatch.setattr(mask_evaluation_ds1, "SUBGROUP_MINIMUM_SUPPORT", 1)
     monkeypatch.setattr(ds1_mask_route_package, "DS1_SCREEN_CONTRACT", contract)
-    reference, attributes, crosswalk, crosswalk_record, mask_root, reference_rows = _inputs(tmp_path)
+    (
+        reference,
+        geometry_record,
+        attributes,
+        attributes_record,
+        crosswalk,
+        crosswalk_record,
+        mask_root,
+        reference_rows,
+    ) = _inputs(tmp_path)
     evaluator = tmp_path / "evaluator"
     ds1_evaluator_package.build_ds1_evaluator_package(
         reference_manifest_path=reference,
+        geometry_package_record_path=geometry_record,
         protected_attributes_path=attributes,
+        attributes_package_record_path=attributes_record,
         evaluator_crosswalk_path=crosswalk,
         crosswalk_package_record_path=crosswalk_record,
         source_mask_root=mask_root,

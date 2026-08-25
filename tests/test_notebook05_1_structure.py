@@ -14,7 +14,7 @@ NOTEBOOK_PATH = NOTEBOOK_ROOT / "05.1-toysad8k-ds1-sam21-segmentation.ipynb"
 
 
 class Notebook051StructureTests(unittest.TestCase):
-    def test_notebook_is_clean_compilable_and_fail_closed(self) -> None:
+    def test_notebook_is_clean_compilable_and_keeps_failed_evidence(self) -> None:
         notebook = json.loads(NOTEBOOK_PATH.read_text(encoding="utf-8"))
         code_cells = [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
         source = "\n".join("".join(cell["source"]) for cell in code_cells)
@@ -31,8 +31,33 @@ class Notebook051StructureTests(unittest.TestCase):
         self.assertIn("Notebook 05.1 requires a clean committed code snapshot", source)
         self.assertIn("NOTEBOOK_RELATIVE", source)
         self.assertIn("import_ds1_sam_resume", source)
+        self.assertIn("materialized a non-promotable run", source)
+        self.assertIn("Do not publish or promote this run", source)
+        self.assertNotIn("The DS1 SAM completion gate failed", source)
+        self.assertNotIn(
+            "Notebook 05.1 did not complete its operational contract", source
+        )
         self.assertNotIn("UserSecretsClient", source)
         self.assertNotIn("get_secret", source)
+
+    def test_notebook_logs_runtime_setup_stages_with_flush(self) -> None:
+        notebook = json.loads(NOTEBOOK_PATH.read_text(encoding="utf-8"))
+        source = "\n".join(
+            "".join(cell["source"])
+            for cell in notebook["cells"]
+            if cell["cell_type"] == "code"
+        )
+        for stage in (
+            "dependency_install_started",
+            "dependency_install_completed",
+            "sam_repo_install_started",
+            "sam_repo_install_completed",
+            "checkpoint_download_started",
+            "checkpoint_download_completed",
+        ):
+            self.assertIn(stage, source)
+        self.assertIn("emit_notebook_stage", source)
+        self.assertIn("flush=True", source)
 
     def test_tracking_is_after_compute_and_bounded(self) -> None:
         notebook = json.loads(NOTEBOOK_PATH.read_text(encoding="utf-8"))

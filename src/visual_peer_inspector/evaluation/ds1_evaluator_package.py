@@ -11,6 +11,7 @@ from hashlib import sha256
 import json
 import os
 from pathlib import Path, PurePosixPath
+import re
 import shutil
 from typing import Any, Iterable, Mapping
 
@@ -20,6 +21,10 @@ from visual_peer_inspector.data.model_safe_package import (
     file_sha256,
     membership_sha256,
     read_jsonl,
+)
+from visual_peer_inspector.evaluation.proposal_reference_ds1 import (
+    verify_ds1_attributes_package,
+    verify_ds1_geometry_package,
 )
 
 
@@ -33,6 +38,7 @@ _FILES = {
     "crosswalk_package_record.json",
     "usage_policy.json",
 }
+_SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
 
 
 def _jsonl_bytes(rows: Iterable[Mapping[str, Any]]) -> bytes:
@@ -144,7 +150,9 @@ def _check_inputs(
 def build_ds1_evaluator_package(
     *,
     reference_manifest_path: Path,
+    geometry_package_record_path: Path,
     protected_attributes_path: Path,
+    attributes_package_record_path: Path,
     evaluator_crosswalk_path: Path,
     crosswalk_package_record_path: Path,
     source_mask_root: Path,
@@ -153,6 +161,48 @@ def build_ds1_evaluator_package(
 ) -> dict[str, Any]:
     """Create an immutable evaluator-only DS1 package from trusted records."""
 
+    expanded_geometry_record = geometry_package_record_path.expanduser()
+    expanded_attributes_record = attributes_package_record_path.expanduser()
+    if expanded_geometry_record.is_symlink() or expanded_attributes_record.is_symlink():
+        raise ValueError("DS1 canonical package records cannot be symbolic links")
+    reference_manifest_path = reference_manifest_path.expanduser().resolve(
+        strict=True
+    )
+    geometry_package_record_path = expanded_geometry_record.resolve(strict=True)
+    protected_attributes_path = protected_attributes_path.expanduser().resolve(
+        strict=True
+    )
+    attributes_package_record_path = expanded_attributes_record.resolve(strict=True)
+    evaluator_crosswalk_path = evaluator_crosswalk_path.expanduser().resolve(
+        strict=True
+    )
+    crosswalk_package_record_path = (
+        crosswalk_package_record_path.expanduser().resolve(strict=True)
+    )
+    geometry_root = geometry_package_record_path.parent
+    attributes_root = attributes_package_record_path.parent
+    expected_reference_path = geometry_root / "reference_manifest.jsonl"
+    expected_attributes_path = attributes_root / "protected_scene_attributes.jsonl"
+    expected_mask_root = geometry_root / "masks"
+    if geometry_package_record_path.name != "package_record.json" or (
+        reference_manifest_path != expected_reference_path
+    ):
+        raise ValueError("DS1 reference manifest is outside its canonical geometry package")
+    if attributes_package_record_path.name != "package_record.json" or (
+        protected_attributes_path != expected_attributes_path
+    ):
+        raise ValueError(
+            "DS1 protected attributes are outside their canonical attribute package"
+        )
+    expanded_mask_root = source_mask_root.expanduser()
+    if expanded_mask_root.is_symlink():
+        raise ValueError("DS1 source-mask root cannot be a symbolic link")
+    source_mask_root = expanded_mask_root.resolve(strict=True)
+    if source_mask_root != expected_mask_root:
+        raise ValueError("DS1 source masks are outside the canonical geometry package")
+
+    geometry_record = verify_ds1_geometry_package(geometry_root)
+    attributes_record = verify_ds1_attributes_package(attributes_root)
     references = read_jsonl(reference_manifest_path)
     attributes = read_jsonl(protected_attributes_path)
     crosswalk = read_jsonl(evaluator_crosswalk_path)
@@ -178,6 +228,21 @@ def build_ds1_evaluator_package(
     crosswalk_bytes = evaluator_crosswalk_path.read_bytes()
     if crosswalk_record.get("crosswalk_sha256") != sha256(crosswalk_bytes).hexdigest():
         raise ValueError("DS1 crosswalk package record identifies another crosswalk")
+    geometry_package_record_sha256 = file_sha256(geometry_package_record_path)
+    geometry_manifest_sha256 = file_sha256(reference_manifest_path)
+    attributes_package_record_sha256 = file_sha256(attributes_package_record_path)
+    protected_attributes_sha256 = file_sha256(protected_attributes_path)
+    if (
+        crosswalk_record.get("geometry_package_record_sha256")
+        != geometry_package_record_sha256
+        or crosswalk_record.get("geometry_manifest_sha256")
+        != geometry_manifest_sha256
+        or geometry_record.get("reference_manifest_sha256")
+        != geometry_manifest_sha256
+        or attributes_record.get("protected_attributes_sha256")
+        != protected_attributes_sha256
+    ):
+        raise ValueError("DS1 evaluator sources differ from their canonical package chain")
     required_crosswalk_hashes = (
         "prompt_package_record_sha256",
         "prompt_manifest_sha256",
@@ -188,7 +253,7 @@ def build_ds1_evaluator_package(
         "crosswalk_sha256",
     )
     if any(
-        len(str(crosswalk_record.get(key, ""))) != 64
+        not _SHA256_PATTERN.fullmatch(str(crosswalk_record.get(key, "")))
         for key in required_crosswalk_hashes
     ):
         raise ValueError("DS1 crosswalk package record has incomplete upstream hashes")
@@ -273,6 +338,14 @@ def build_ds1_evaluator_package(
                 "proposal_results_sha256"
             ],
             "crosswalk_sha256": crosswalk_record["crosswalk_sha256"],
+            "attributes_package_record_sha256": attributes_package_record_sha256,
+            "protected_attributes_sha256": protected_attributes_sha256,
+            "geometry_content_checksums_sha256": geometry_record[
+                "content_checksums_sha256"
+            ],
+            "attributes_content_checksums_sha256": attributes_record[
+                "content_checksums_sha256"
+            ],
             "content_file_count": len(content),
             "content_checksums_sha256": sha256(checksums).hexdigest(),
             "all_checks_passed": True,
@@ -347,6 +420,27 @@ def verify_ds1_evaluator_package(root: Path, *, intended_use: str = INTENDED_USE
     for key, value in counts.items():
         if int(record.get(key, -1)) != value:
             raise ValueError(f"DS1 evaluator package count differs for {key}")
+    source_hashes = {
+        "geometry_package_record_sha256",
+        "geometry_manifest_sha256",
+        "geometry_content_checksums_sha256",
+        "attributes_package_record_sha256",
+        "protected_attributes_sha256",
+        "attributes_content_checksums_sha256",
+    }
+    if any(
+        not isinstance(record.get(key), str)
+        or not _SHA256_PATTERN.fullmatch(record[key])
+        for key in source_hashes
+    ):
+        raise ValueError("DS1 evaluator source identity chain is incomplete")
+    if (
+        file_sha256(root / "reference_manifest.jsonl")
+        != record["geometry_manifest_sha256"]
+        or file_sha256(root / "protected_scene_attributes.jsonl")
+        != record["protected_attributes_sha256"]
+    ):
+        raise ValueError("DS1 evaluator copied sources differ from their identity chain")
     checksums: dict[str, str] = {}
     for line in (root / "content_checksums.sha256").read_text(encoding="utf-8").splitlines():
         digest, relative = line.split("  ", 1)
