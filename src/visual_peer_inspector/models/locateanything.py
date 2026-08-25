@@ -28,6 +28,11 @@ DEFAULT_LOCATEANYTHING_REVISION = (
 DEFAULT_PROMPT = "object"
 DEFAULT_UPSCALE_FACTOR = 1
 DEFAULT_SEED = 32040
+PINNED_MAX_NEW_TOKENS = 8192
+PRIMARY_GENERATION_MODE = "hybrid"
+FALLBACK_GENERATION_MODE = "slow"
+PRIMARY_GENERATION_ATTEMPTS = 4
+MAXIMUM_GENERATION_ATTEMPTS = 6
 MODEL_PRODUCER_KIND = "locateanything_model"
 CONTRACT_PRODUCER_KIND = "contract_smoke"
 PRODUCER_KINDS = frozenset({MODEL_PRODUCER_KIND, CONTRACT_PRODUCER_KIND})
@@ -42,6 +47,9 @@ _RESULT_FIELDS = frozenset(
         "attempt",
         "image_sha256",
         "configuration_sha256",
+        "execution_policy_sha256",
+        "effective_generation_mode",
+        "effective_max_new_tokens",
         "producer_kind",
         "model_id",
         "model_revision",
@@ -61,6 +69,34 @@ _RESULT_FIELDS = frozenset(
 )
 
 
+def locateanything_execution_policy() -> dict[str, Any]:
+    """Return the canonical retry policy without mutating model configuration."""
+
+    return {
+        "schema_version": 1,
+        "policy_kind": "locateanything_truncation_recovery",
+        "maximum_attempts_per_job": MAXIMUM_GENERATION_ATTEMPTS,
+        "primary": {
+            "attempts": list(range(1, PRIMARY_GENERATION_ATTEMPTS + 1)),
+            "generation_mode": PRIMARY_GENERATION_MODE,
+            "max_new_tokens": PINNED_MAX_NEW_TOKENS,
+        },
+        "truncation_fallback": {
+            "attempts": list(
+                range(PRIMARY_GENERATION_ATTEMPTS + 1, MAXIMUM_GENERATION_ATTEMPTS + 1)
+            ),
+            "generation_mode": FALLBACK_GENERATION_MODE,
+            "max_new_tokens": PINNED_MAX_NEW_TOKENS,
+            "trigger": "previous_attempt_possible_truncation",
+        },
+    }
+
+
+EXECUTION_POLICY_SHA256 = sha256(
+    canonical_json_bytes(locateanything_execution_policy())
+).hexdigest()
+
+
 @dataclass(frozen=True)
 class LocateAnythingConfiguration:
     """Resolved settings for one proposal run."""
@@ -70,8 +106,8 @@ class LocateAnythingConfiguration:
     prompt: str = DEFAULT_PROMPT
     upscale_factor: int = DEFAULT_UPSCALE_FACTOR
     seed: int = DEFAULT_SEED
-    max_new_tokens: int = 8192
-    generation_mode: str = "hybrid"
+    max_new_tokens: int = PINNED_MAX_NEW_TOKENS
+    generation_mode: str = PRIMARY_GENERATION_MODE
     do_sample: bool = True
     temperature: float = 0.7
     top_p: float = 0.9
@@ -81,6 +117,36 @@ class LocateAnythingConfiguration:
     @property
     def sha256(self) -> str:
         return sha256(canonical_json_bytes(asdict(self))).hexdigest()
+
+
+@dataclass(frozen=True)
+class LocateAnythingGenerationPolicy:
+    """Effective generation settings for one bounded retry attempt."""
+
+    generation_mode: str
+    max_new_tokens: int
+    phase: str
+
+
+def resolve_generation_policy(
+    configuration: LocateAnythingConfiguration,
+    attempt: int,
+) -> LocateAnythingGenerationPolicy:
+    """Use the documented slow mode only after four pinned hybrid attempts."""
+
+    if attempt < 1:
+        raise ValueError("Proposal attempt must be positive")
+    if attempt <= PRIMARY_GENERATION_ATTEMPTS:
+        return LocateAnythingGenerationPolicy(
+            generation_mode=configuration.generation_mode,
+            max_new_tokens=configuration.max_new_tokens,
+            phase="primary",
+        )
+    return LocateAnythingGenerationPolicy(
+        generation_mode=FALLBACK_GENERATION_MODE,
+        max_new_tokens=configuration.max_new_tokens,
+        phase="slow_fallback",
+    )
 
 
 @dataclass(frozen=True)
@@ -272,6 +338,23 @@ def validate_proposal_result(row: Mapping[str, Any]) -> None:
         raise ValueError("Proposal result has an invalid truncation check")
     if not isinstance(row["generation_stats"], dict):
         raise ValueError("Generation statistics must be a JSON object")
+    attempt = int(row["attempt"])
+    if attempt > MAXIMUM_GENERATION_ATTEMPTS:
+        raise ValueError("Proposal attempt exceeds the canonical retry policy")
+    expected_policy = resolve_generation_policy(LocateAnythingConfiguration(), attempt)
+    if row["execution_policy_sha256"] != EXECUTION_POLICY_SHA256:
+        raise ValueError("Proposal result uses another execution policy")
+    if row["effective_generation_mode"] != expected_policy.generation_mode:
+        raise ValueError("Proposal result has an invalid effective generation mode")
+    if row["effective_max_new_tokens"] != expected_policy.max_new_tokens:
+        raise ValueError("Proposal result has an invalid effective token limit")
+    if (
+        row["generation_stats"].get("effective_generation_mode")
+        != row["effective_generation_mode"]
+        or row["generation_stats"].get("effective_max_new_tokens")
+        != row["effective_max_new_tokens"]
+    ):
+        raise ValueError("Generation statistics do not match the effective policy")
     for digest_name in ("image_sha256", "input_manifest_sha256", "configuration_sha256"):
         digest = str(row[digest_name])
         if len(digest) != 64 or any(character not in "0123456789abcdef" for character in digest):
@@ -316,8 +399,12 @@ class ProposalResultStore:
                 if attempt_key in self._attempts:
                     raise ValueError("Existing proposal results contain a duplicate attempt")
                 previous = self._rows.get(key)
+                if previous is None and int(row["attempt"]) != 1:
+                    raise ValueError("Proposal history must start at attempt one")
                 if previous is not None and int(row["attempt"]) <= int(previous["attempt"]):
                     raise ValueError("Proposal attempts must increase for each job")
+                if previous is not None:
+                    _validate_retry_transition(previous, row)
                 self._attempts.add(attempt_key)
                 self._history.append(row)
                 self._rows[key] = row
@@ -368,14 +455,33 @@ class ProposalResultStore:
         if attempt_key in self._attempts:
             raise ValueError("Refusing to append a duplicate proposal attempt")
         previous = self._rows.get(key)
+        if previous is None and int(value["attempt"]) != 1:
+            raise ValueError("Proposal history must start at attempt one")
         if previous is not None and int(value["attempt"]) != int(previous["attempt"]) + 1:
             raise ValueError("Proposal retry attempt is not sequential")
+        if previous is not None:
+            _validate_retry_transition(previous, value)
         with self.path.open("a", encoding="utf-8", newline="\n") as handle:
             handle.write(canonical_json_bytes(value).decode("utf-8") + "\n")
             handle.flush()
         self._attempts.add(attempt_key)
         self._history.append(value)
         self._rows[key] = value
+
+
+def _validate_retry_transition(
+    previous: Mapping[str, Any],
+    current: Mapping[str, Any],
+) -> None:
+    """Permit slow fallback only after a directly preceding truncation."""
+
+    current_attempt = int(current["attempt"])
+    if current_attempt <= PRIMARY_GENERATION_ATTEMPTS:
+        return
+    if previous.get("status") != "error" or previous.get("error_type") != "PossibleTruncation":
+        raise ValueError("Slow fallback requires a directly preceding possible truncation")
+    if int(previous["attempt"]) != current_attempt - 1:
+        raise ValueError("Slow fallback must follow the preceding proposal attempt")
 
 
 class LocateAnythingWorker:
@@ -433,9 +539,11 @@ class LocateAnythingWorker:
         self.model = model.to(device).eval()
         report("model_ready", device=device)
 
-    def _job_seed(self, scene_id: str, view_id: str) -> int:
+    def _job_seed(self, scene_id: str, view_id: str, attempt: int = 1) -> int:
+        if attempt < 1:
+            raise ValueError("Proposal attempt must be positive")
         payload = (
-            f"{self.configuration.seed}|{scene_id}|{view_id}".encode("utf-8")
+            f"{self.configuration.seed}|{scene_id}|{view_id}|{attempt}".encode("utf-8")
         )
         return int.from_bytes(sha256(payload).digest()[:4], "big")
 
@@ -444,10 +552,14 @@ class LocateAnythingWorker:
         image: Image.Image,
         scene_id: str,
         view_id: str,
+        *,
+        attempt: int = 1,
     ) -> dict[str, Any]:
         """Return the model answer and optional generation statistics."""
 
         import torch
+
+        generation_policy = resolve_generation_policy(self.configuration, attempt)
 
         prompt = (
             "Locate all the instances that match the following description: "
@@ -472,7 +584,7 @@ class LocateAnythingWorker:
             videos=videos,
             return_tensors="pt",
         ).to(self.device)
-        seed = self._job_seed(scene_id, view_id)
+        seed = self._job_seed(scene_id, view_id, attempt)
         torch.manual_seed(seed)
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(seed)
@@ -483,9 +595,9 @@ class LocateAnythingWorker:
                 attention_mask=inputs["attention_mask"],
                 image_grid_hws=inputs.get("image_grid_hws"),
                 tokenizer=self.tokenizer,
-                max_new_tokens=self.configuration.max_new_tokens,
+                max_new_tokens=generation_policy.max_new_tokens,
                 use_cache=True,
-                generation_mode=self.configuration.generation_mode,
+                generation_mode=generation_policy.generation_mode,
                 do_sample=self.configuration.do_sample,
                 temperature=self.configuration.temperature,
                 top_p=self.configuration.top_p,
@@ -508,6 +620,7 @@ class LocateAnythingWorker:
         """Run one job and return a schema-checked result row."""
 
         started = time.perf_counter()
+        generation_policy = resolve_generation_policy(self.configuration, attempt)
         try:
             with Image.open(job.image_path) as opened:
                 image = opened.convert("RGB")
@@ -520,7 +633,12 @@ class LocateAnythingWorker:
                     ),
                     Image.Resampling.BICUBIC,
                 )
-            prediction = self.predict(image, job.opaque_scene_id, job.view_id)
+            prediction = self.predict(
+                image,
+                job.opaque_scene_id,
+                job.view_id,
+                attempt=attempt,
+            )
             if isinstance(prediction, Mapping):
                 raw_response = str(prediction.get("answer", ""))
                 stats_value = _safe_generation_stats(prediction.get("stats", {}))
@@ -538,7 +656,7 @@ class LocateAnythingWorker:
             possibly_truncated, truncation_check = _detect_possible_truncation(
                 generation_stats,
                 response_token_count,
-                self.configuration.max_new_tokens,
+                generation_policy.max_new_tokens,
             )
             boxes = parse_locateanything_boxes(
                 raw_response, original_size[0], original_size[1]
@@ -565,6 +683,13 @@ class LocateAnythingWorker:
             status = "error"
             error_type = type(error).__name__
             error_message = f"Proposal worker raised {type(error).__name__}"
+        generation_stats.update(
+            {
+                "effective_generation_mode": generation_policy.generation_mode,
+                "effective_max_new_tokens": generation_policy.max_new_tokens,
+                "retry_policy_phase": generation_policy.phase,
+            }
+        )
         row = {
             "schema_version": 1,
             "cohort_id": job.cohort_id,
@@ -574,6 +699,9 @@ class LocateAnythingWorker:
             "attempt": attempt,
             "image_sha256": job.image_sha256,
             "configuration_sha256": self.configuration.sha256,
+            "execution_policy_sha256": EXECUTION_POLICY_SHA256,
+            "effective_generation_mode": generation_policy.generation_mode,
+            "effective_max_new_tokens": generation_policy.max_new_tokens,
             "producer_kind": MODEL_PRODUCER_KIND,
             "model_id": self.configuration.model_id,
             "model_revision": self.configuration.model_revision,
@@ -602,6 +730,7 @@ class ProposalContractWorker:
 
     def run_job(self, job: ProposalJob, *, attempt: int = 1) -> dict[str, Any]:
         started = time.perf_counter()
+        generation_policy = resolve_generation_policy(self.configuration, attempt)
         with Image.open(job.image_path) as opened:
             width, height = opened.size
         digest = sha256(
@@ -632,6 +761,9 @@ class ProposalContractWorker:
             "attempt": attempt,
             "image_sha256": job.image_sha256,
             "configuration_sha256": self.configuration.sha256,
+            "execution_policy_sha256": EXECUTION_POLICY_SHA256,
+            "effective_generation_mode": generation_policy.generation_mode,
+            "effective_max_new_tokens": generation_policy.max_new_tokens,
             "producer_kind": CONTRACT_PRODUCER_KIND,
             "model_id": self.configuration.model_id,
             "model_revision": self.configuration.model_revision,
@@ -639,7 +771,11 @@ class ProposalContractWorker:
             "proposal_count": len(boxes),
             "boxes_xyxy": boxes,
             "raw_response": raw_response,
-            "generation_stats": {},
+            "generation_stats": {
+                "effective_generation_mode": generation_policy.generation_mode,
+                "effective_max_new_tokens": generation_policy.max_new_tokens,
+                "retry_policy_phase": generation_policy.phase,
+            },
             "response_token_count": len(normalized_boxes) * 6,
             "possibly_truncated": False,
             "truncation_check": "not_applicable",
@@ -671,11 +807,23 @@ def run_proposal_jobs(
     attempted_rows = 0
     session_started = time.perf_counter()
     for completed_index, job in enumerate(pending, 1):
-        final_row: dict[str, Any] | None = None
+        existing_rows = [
+            row
+            for row in result_store.history_rows
+            if (row["opaque_scene_id"], row["view_id"]) == job.key
+        ]
+        final_row: dict[str, Any] | None = existing_rows[-1] if existing_rows else None
         while result_store.next_attempt(job) <= maximum_attempts_per_job:
+            next_attempt = result_store.next_attempt(job)
+            if (
+                next_attempt > PRIMARY_GENERATION_ATTEMPTS
+                and final_row is not None
+                and final_row.get("error_type") != "PossibleTruncation"
+            ):
+                break
             final_row = worker.run_job(
                 job,
-                attempt=result_store.next_attempt(job),
+                attempt=next_attempt,
             )
             result_store.append(final_row)
             attempted_rows += 1
@@ -984,13 +1132,17 @@ def collect_proposal_evidence(
         },
     ]
     overlay_items: list[dict[str, Any]] = []
-    for scene_index, scene_id in enumerate(sorted(scene_groups), 1):
-        key = (scene_id, "V00")
+    coverage_scenes = sorted(scene_groups)[:20]
+    coverage_views = sorted(view_groups)[:20]
+    for scene_index, (scene_id, view_id) in enumerate(
+        zip(coverage_scenes, coverage_views, strict=True), 1
+    ):
+        key = (scene_id, view_id)
         job = job_by_key[key]
         row = latest[key]
         overlay_items.append(
             {
-                "label": f"Scene {scene_index:02d} / V00",
+                "label": f"Scene {scene_index:02d} / {view_id}",
                 "path": job.image_path,
                 "boxes": row["boxes_xyxy"],
             }
@@ -1076,16 +1228,25 @@ __all__ = [
     "CONTRACT_PRODUCER_KIND",
     "DEFAULT_LOCATEANYTHING_MODEL",
     "DEFAULT_LOCATEANYTHING_REVISION",
+    "EXECUTION_POLICY_SHA256",
+    "FALLBACK_GENERATION_MODE",
     "LocateAnythingConfiguration",
+    "LocateAnythingGenerationPolicy",
     "LocateAnythingWorker",
+    "MAXIMUM_GENERATION_ATTEMPTS",
     "MODEL_PRODUCER_KIND",
+    "PINNED_MAX_NEW_TOKENS",
+    "PRIMARY_GENERATION_ATTEMPTS",
+    "PRIMARY_GENERATION_MODE",
     "ProposalContractWorker",
     "ProposalJob",
     "ProposalResultStore",
     "build_proposal_jobs",
     "collect_proposal_evidence",
+    "locateanything_execution_policy",
     "parse_locateanything_boxes",
     "repeat_agreement",
+    "resolve_generation_policy",
     "run_proposal_jobs",
     "summarize_proposal_rows",
     "validate_proposal_result",

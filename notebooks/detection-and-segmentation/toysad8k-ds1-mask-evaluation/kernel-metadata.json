@@ -1,0 +1,22 @@
+{
+  "id": "esreekarreddy/toysad-8k-ds1-proposal-and-mask-evaluation",
+  "title": "ToysAD-8K DS1 Proposal and Mask Evaluation",
+  "code_file": "06.1-toysad8k-ds1-proposal-and-mask-evaluation.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-ds1-mask-evaluator",
+    "esreekarreddy/vpi-toysad-ds1-locateanything-output"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [
+    "esreekarreddy/toysad-8k-ds1-sam-2-1-segmentation"
+  ],
+  "model_sources": []
+}

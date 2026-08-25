@@ -1,0 +1,26 @@
+{
+  "routes": [
+    {
+      "empty_mask_count": 45,
+      "empty_mask_rate": 0.004865390853065196,
+      "mask_count": 9249,
+      "mean_area_fraction": 0.04756084536588415,
+      "mean_predicted_quality_score": 0.908110057795959,
+      "median_area_fraction": 0.034027099609375,
+      "p10_predicted_quality_score": 0.66748046875,
+      "p95_area_fraction": 0.14118041992187508,
+      "route": "automatic_box"
+    },
+    {
+      "empty_mask_count": 0,
+      "empty_mask_rate": 0.0,
+      "mask_count": 7700,
+      "mean_area_fraction": 0.05377409501509233,
+      "mean_predicted_quality_score": 0.979259968547078,
+      "median_area_fraction": 0.03966522216796875,
+      "p10_predicted_quality_score": 0.95751953125,
+      "p95_area_fraction": 0.14392471313476557,
+      "route": "reference_box"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "esreekarreddy/toysad-8k-ds1-sam-2-1-segmentation",
+  "title": "ToysAD-8K DS1 SAM 2.1 Segmentation",
+  "code_file": "05.1-toysad8k-ds1-sam21-segmentation.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-ds1-screen100-model-input",
+    "esreekarreddy/vpi-toysad-ds1-sam-prompts"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}

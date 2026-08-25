@@ -10,10 +10,203 @@ from __future__ import annotations
 from dataclasses import dataclass
 import os
 from pathlib import Path
+import re
+import time
+from collections.abc import Callable, Sequence
 from typing import Any, Mapping
 
 
 TRACKING_MODES = frozenset({"disabled", "offline", "online"})
+OFFICIAL_CLEARML_HOSTS = {
+    "CLEARML_API_HOST": "https://api.clear.ml",
+    "CLEARML_WEB_HOST": "https://app.clear.ml",
+    "CLEARML_FILES_HOST": "https://files.clear.ml",
+}
+DEFAULT_CLEARML_RETRY_DELAYS_SECONDS = (2.0, 5.0)
+
+
+@dataclass(frozen=True)
+class ClearMLRetryOutcome:
+    """Bounded Task.init result without retaining exception text."""
+
+    attempt_count: int
+    retry_count: int
+    transient_failure_count: int
+
+    def to_receipt_fields(self) -> dict[str, int]:
+        return {
+            "tracking_attempt_count": self.attempt_count,
+            "tracking_retry_count": self.retry_count,
+            "tracking_transient_failure_count": self.transient_failure_count,
+        }
+
+
+class ClearMLTrackingFailure(RuntimeError):
+    """Sanitized failure raised after a bounded ClearML initialization attempt."""
+
+    def __init__(
+        self,
+        *,
+        category: str,
+        error_type: str,
+        attempt_count: int,
+        retry_count: int,
+        transient_failure_count: int,
+    ) -> None:
+        self.category = category
+        self.error_type = _safe_error_type(error_type)
+        self.attempt_count = attempt_count
+        self.retry_count = retry_count
+        self.transient_failure_count = transient_failure_count
+        super().__init__(
+            f"ClearML {category} after {attempt_count} bounded attempt(s)"
+        )
+
+
+def configure_official_clearml_hosts() -> dict[str, str]:
+    """Force the hosted ClearML endpoints inside the isolated finalizer."""
+
+    for name, value in OFFICIAL_CLEARML_HOSTS.items():
+        os.environ[name] = value
+    os.environ.setdefault("CLEARML_LOG_ENVIRONMENT", "")
+    os.environ.setdefault("VPI_CLEARML_REQUEST_TIMEOUT_SECONDS", "20")
+    return dict(OFFICIAL_CLEARML_HOSTS)
+
+
+def _safe_error_type(value: str) -> str:
+    cleaned = re.sub(r"[^A-Za-z0-9_.]", "", value)[:80]
+    return cleaned or "UnknownError"
+
+
+def _tracking_error_category(error: Exception) -> tuple[str, bool]:
+    """Classify an exception without returning or persisting its message."""
+
+    name = type(error).__name__
+    lowered_name = name.lower()
+    message = str(error).lower()
+    if isinstance(error, TimeoutError) and "finalisation exceeded" in message:
+        return "deadline_exceeded", False
+    authentication_markers = (
+        "unauthorized",
+        "forbidden",
+        "invalid credential",
+        "authentication",
+        "status code 401",
+        "status code 403",
+    )
+    if any(marker in message for marker in authentication_markers):
+        return "authentication_error", False
+    transient_names = (
+        "connectionerror",
+        "connecttimeout",
+        "readtimeout",
+        "proxyerror",
+        "retryerror",
+        "gaierror",
+    )
+    transient_messages = (
+        "connection error",
+        "connection reset",
+        "connection aborted",
+        "temporarily unavailable",
+        "temporary failure",
+        "timed out",
+        "timeout",
+        "name resolution",
+        "failed to resolve",
+        "bad gateway",
+        "service unavailable",
+        "gateway timeout",
+        "status code 502",
+        "status code 503",
+        "status code 504",
+    )
+    transient = (
+        isinstance(error, ConnectionError)
+        or any(marker in lowered_name for marker in transient_names)
+        or any(marker in message for marker in transient_messages)
+    )
+    return ("transient_connection_error", True) if transient else (
+        "non_transient_error",
+        False,
+    )
+
+
+def initialize_clearml_task_with_retry(
+    operation: Callable[[], Any],
+    *,
+    online: bool,
+    retry_delays_seconds: Sequence[float] = DEFAULT_CLEARML_RETRY_DELAYS_SECONDS,
+    sleep: Callable[[float], None] = time.sleep,
+) -> tuple[Any, ClearMLRetryOutcome]:
+    """Retry only transient Task.init failures within a small fixed budget."""
+
+    delays = tuple(float(value) for value in retry_delays_seconds) if online else ()
+    if any(value < 0 or value > 30 for value in delays) or len(delays) > 4:
+        raise ValueError("ClearML retry delays are outside the bounded policy")
+    attempts = 0
+    transient_failures = 0
+    while True:
+        attempts += 1
+        try:
+            task = operation()
+            return task, ClearMLRetryOutcome(
+                attempt_count=attempts,
+                retry_count=attempts - 1,
+                transient_failure_count=transient_failures,
+            )
+        except Exception as error:
+            category, transient = _tracking_error_category(error)
+            if transient:
+                transient_failures += 1
+            retry_index = attempts - 1
+            if transient and retry_index < len(delays):
+                try:
+                    sleep(delays[retry_index])
+                except TimeoutError:
+                    raise ClearMLTrackingFailure(
+                        category="deadline_exceeded",
+                        error_type="TimeoutError",
+                        attempt_count=attempts,
+                        retry_count=max(0, attempts - 1),
+                        transient_failure_count=transient_failures,
+                    ) from None
+                continue
+            raise ClearMLTrackingFailure(
+                category=category,
+                error_type=type(error).__name__,
+                attempt_count=attempts,
+                retry_count=max(0, attempts - 1),
+                transient_failure_count=transient_failures,
+            ) from None
+
+
+def sanitized_tracking_failure_fields(error: Exception) -> dict[str, Any]:
+    """Return receipt-safe diagnostics without exception messages or secrets."""
+
+    if isinstance(error, ClearMLTrackingFailure):
+        return {
+            "tracking_error_category": error.category,
+            "tracking_error_type": error.error_type,
+            "tracking_attempt_count": error.attempt_count,
+            "tracking_retry_count": error.retry_count,
+            "tracking_transient_failure_count": error.transient_failure_count,
+        }
+    if isinstance(error, TimeoutError):
+        category = "deadline_exceeded"
+    elif isinstance(error, ValueError):
+        category = "validation_error"
+    elif isinstance(error, RuntimeError):
+        category = "configuration_error"
+    else:
+        category = "internal_error"
+    return {
+        "tracking_error_category": category,
+        "tracking_error_type": _safe_error_type(type(error).__name__),
+        "tracking_attempt_count": 0,
+        "tracking_retry_count": 0,
+        "tracking_transient_failure_count": 0,
+    }
 
 
 def _configure_clearml_request_timeouts() -> None:

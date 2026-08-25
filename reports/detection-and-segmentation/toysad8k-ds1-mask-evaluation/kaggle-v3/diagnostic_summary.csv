@@ -1,0 +1,7 @@
+diagnostic_kind,route,reference_count,prediction_count,miss_count,extra_count,detection_aware_mean_iou
+representative,reference_box,4,4,0,0,0.9621197853158394
+representative,automatic_box,4,4,0,0,0.9596473591545946
+worst,reference_box,4,4,0,0,0.972622594836057
+worst,automatic_box,4,1,4,1,0.0
+outlier,reference_box,3,3,0,0,0.9896068531888966
+outlier,automatic_box,3,1,3,1,0.0

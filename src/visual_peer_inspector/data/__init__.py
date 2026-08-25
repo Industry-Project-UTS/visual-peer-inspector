@@ -8,9 +8,11 @@ from .archive_members import (
     read_indexed_member,
 )
 from .integrity import VerificationReport, load_manifest, verify_chunk_directory
+from .cohort_contract import CohortContract, DS1_SCREEN_CONTRACT
 from .model_safe_package import (
     PackageAudit,
     SMOKE20_COHORT_ID,
+    build_cohort_rgb_package,
     build_smoke20_rgb_package,
     choose_smoke20_rows,
     collect_model_input_evidence,
@@ -51,6 +53,8 @@ __all__ = [
     "IndexedMember",
     "VerificationReport",
     "PackageAudit",
+    "CohortContract",
+    "DS1_SCREEN_CONTRACT",
     "build_archive_index",
     "build_scene_catalog",
     "extract_indexed_member",
@@ -62,6 +66,7 @@ __all__ = [
     "SMOKE20_COHORT_ID",
     "SAM_PROMPT_SCHEMA_VERSION",
     "build_sam_prompt_package",
+    "build_cohort_rgb_package",
     "build_smoke20_rgb_package",
     "choose_smoke20_rows",
     "collect_model_input_evidence",

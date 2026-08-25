@@ -49,6 +49,9 @@ def verify_code_snapshot_record(code_root: Path, snapshot_path: Path) -> dict[st
     """Verify every file and the aggregate digest in a code snapshot record."""
 
     code_root = code_root.expanduser().resolve()
+    snapshot_path = snapshot_path.expanduser().resolve(strict=True)
+    if snapshot_path != code_root / "snapshot_record.json":
+        raise ValueError("Code snapshot record must be the root snapshot_record.json")
     snapshot = read_json_object(snapshot_path)
     recorded_files = snapshot.get("files")
     if not isinstance(recorded_files, dict) or not recorded_files:
@@ -69,6 +72,19 @@ def verify_code_snapshot_record(code_root: Path, snapshot_path: Path) -> dict[st
     aggregate = sha256("".join(verified_lines).encode("utf-8")).hexdigest()
     if aggregate != snapshot.get("snapshot_sha256"):
         raise ValueError("Code snapshot aggregate hash mismatch")
+    expected_inventory = set(recorded_files) | {"snapshot_record.json"}
+    actual_inventory: set[str] = set()
+    for path in code_root.rglob("*"):
+        if path.is_symlink():
+            raise ValueError("Code snapshot cannot contain symbolic links")
+        if path.is_file():
+            actual_inventory.add(path.relative_to(code_root).as_posix())
+    if actual_inventory != expected_inventory:
+        raise ValueError(
+            "Code snapshot inventory mismatch: "
+            f"missing={sorted(expected_inventory-actual_inventory)}, "
+            f"undeclared={sorted(actual_inventory-expected_inventory)}"
+        )
     return snapshot
 
 

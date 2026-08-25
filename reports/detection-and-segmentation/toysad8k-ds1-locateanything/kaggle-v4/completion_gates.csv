@@ -1,0 +1,24 @@
+gate,status,observed,expected
+preflight images,pass,1,1
+preflight successes,pass,1,1
+preflight failures,pass,0,0
+preflight truncated responses,pass,0,0
+preflight zero-proposal successes,pass,0,0
+pilot images,pass,20,20
+pilot successes,pass,20,20
+pilot failures,pass,0,0
+pilot scene coverage,pass,20,20
+pilot truncated responses,pass,0,0
+pilot zero-proposal successes,pass,0,0
+repeat images,pass,20,20
+repeat matching images,pass,20,20
+repeat box agreement,pass,1.0,1.0
+unique jobs,pass,2000,2000
+successful jobs,pass,2000,2000
+failed jobs,pass,0,0
+truncated responses,pass,0,0
+scene coverage,pass,100,100
+view coverage,pass,20,20
+zero-proposal successes,pass,0,0
+invalid boxes,pass,0,0
+duplicate boxes,pass,0,0

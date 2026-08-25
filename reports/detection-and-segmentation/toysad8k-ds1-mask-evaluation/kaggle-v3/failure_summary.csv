@@ -1,0 +1,7 @@
+failure_type,count
+background_extra,1660
+complete_miss,243
+merge_candidate,93
+split_or_duplicate_candidate,81
+weak_localisation_extra,232
+weak_localisation_miss,88

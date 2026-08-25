@@ -1,0 +1,97 @@
+{
+  "cohort_summary": {
+    "all_checks_passed": true,
+    "asset_group_count": 27,
+    "cohort_id": "toysad8k-development-screen-100-v1",
+    "membership_sha256": "308e2e104448612dc60b5392a5258d97f6d93f52ca553aa68fa1b447500f4f2f",
+    "scene_count": 100
+  },
+  "configuration": {
+    "expected_height": 256,
+    "expected_image_count": 2000,
+    "expected_width": 256,
+    "fresh_output_required": true,
+    "media_kind": "opaque PNG colour views converted to RGB at model load",
+    "package_operation": "verify_published_package",
+    "scene_count": 100,
+    "views_per_scene": 20
+  },
+  "configuration_sha256": "ab82ccc7b79c1bc6e084439de20473ce6ce56b1a0f2931e7bcc9aa34c65b973d",
+  "error_type": null,
+  "execution_environment": "kaggle",
+  "kaggle_notebook_slug": "esreekarreddy/toysad-8k-ds1-opaque-package",
+  "media_summary": {
+    "height": 256,
+    "image_count": 2000,
+    "maximum_image_kib": 168.514,
+    "mean_image_kib": 125.96,
+    "media_mode": "RGBA",
+    "median_image_kib": 124.63,
+    "minimum_image_kib": 98.193,
+    "total_media_mib": 246.017,
+    "width": 256
+  },
+  "notebook_name": "03.1-toysad8k-ds1-opaque-package.ipynb",
+  "package": {
+    "all_checks_passed": true,
+    "cohort_id": "toysad8k-development-screen-100-v1",
+    "content_checksums_sha256": "6b751c59182a4df98ea6034624a585a4195fde03cc026c38b459420676178b7b",
+    "decoded_image_failure_count": 0,
+    "duplicate_archive_member_count": 0,
+    "duplicate_package_path_count": 0,
+    "height": 256,
+    "image_count": 2000,
+    "manifest_sha256": "37e2143ae097077f9fa35ffc8a1a281d2e1dfb8a9802dc88865fce54daa123b3",
+    "media_mode": "RGBA",
+    "membership_sha256": "308e2e104448612dc60b5392a5258d97f6d93f52ca553aa68fa1b447500f4f2f",
+    "release_id": "toysad8k-train-2000-v2",
+    "scene_count": 100,
+    "total_media_bytes": 257967061,
+    "verified_image_count": 2000,
+    "view_count": 20,
+    "width": 256
+  },
+  "provenance": {
+    "git_commit": "b913647fbd125d80d289418c7db51dd59e86d81b",
+    "git_dirty": false,
+    "notebook_sha256": "8693421b1c0ded2d15016b4ee09000ad6a7ee0dfef064c41aa1c490ab3aec7e5",
+    "platform_versions": {
+      "code_dataset_version": "33",
+      "kaggle_notebook_version_03": "5",
+      "kaggle_notebook_version_03_1": "3",
+      "kaggle_notebook_version_04": "13",
+      "kaggle_notebook_version_04_1": "2",
+      "kaggle_notebook_version_05": "5",
+      "kaggle_notebook_version_05_1": "2",
+      "kaggle_notebook_version_06": "6",
+      "kaggle_notebook_version_06_1": "3",
+      "kaggle_notebook_version_07": "5",
+      "mask_evaluator_dataset_version": "1",
+      "model_input_dataset_version": "1",
+      "prompt_dataset_version": "1"
+    },
+    "precommit_candidate": false,
+    "snapshot_sha256": "addca2a8f442d5fccdedf6dd91de76dab5ee3e138c99de52eb4b34e6cf9a023a"
+  },
+  "resume_summary": {
+    "first_elapsed_seconds": 23.3362,
+    "first_files_reused": 0,
+    "first_files_written": 2000,
+    "hashes_identical": true,
+    "package_operation": "verify_published_package",
+    "second_elapsed_seconds": 8.0192,
+    "second_files_reused": 2000,
+    "second_files_written": 0
+  },
+  "schema_version": 1,
+  "stage": "ds1_opaque_package",
+  "status": "completed",
+  "tracking_status": "handled_by_bounded_finalizer",
+  "trusted_inputs": {
+    "all_checks_passed": true,
+    "selected_source_members_verified": 2000,
+    "source_access_mode": "published_opaque_package",
+    "source_content_checksums_sha256": "6b751c59182a4df98ea6034624a585a4195fde03cc026c38b459420676178b7b",
+    "source_manifest_sha256": "37e2143ae097077f9fa35ffc8a1a281d2e1dfb8a9802dc88865fce54daa123b3"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "evaluator_seconds": 396.918742112,
+  "proposal_median_seconds_per_image": 0.4119,
+  "proposal_p95_seconds_per_image": 0.62776,
+  "proposal_total_seconds": 1059.5058,
+  "sam_median_seconds_per_image": 0.2514825,
+  "sam_p95_seconds_per_image": 0.2602399,
+  "sam_total_seconds": 508.779031
+}

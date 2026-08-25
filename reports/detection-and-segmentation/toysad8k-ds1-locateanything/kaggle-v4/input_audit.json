@@ -1,0 +1,32 @@
+{
+  "all_checks_passed": true,
+  "asset_group_count": 27,
+  "cohort_id": "toysad8k-development-screen-100-v1",
+  "image_count": 2000,
+  "input_manifest_sha256": "37e2143ae097077f9fa35ffc8a1a281d2e1dfb8a9802dc88865fce54daa123b3",
+  "membership_sha256": "308e2e104448612dc60b5392a5258d97f6d93f52ca553aa68fa1b447500f4f2f",
+  "model_input_package": {
+    "all_checks_passed": true,
+    "cohort_id": "toysad8k-development-screen-100-v1",
+    "content_checksums_sha256": "6b751c59182a4df98ea6034624a585a4195fde03cc026c38b459420676178b7b",
+    "decoded_image_failure_count": 0,
+    "duplicate_archive_member_count": 0,
+    "duplicate_package_path_count": 0,
+    "height": 256,
+    "image_count": 2000,
+    "manifest_sha256": "37e2143ae097077f9fa35ffc8a1a281d2e1dfb8a9802dc88865fce54daa123b3",
+    "media_mode": "RGBA",
+    "membership_sha256": "308e2e104448612dc60b5392a5258d97f6d93f52ca553aa68fa1b447500f4f2f",
+    "release_id": "toysad8k-train-2000-v2",
+    "scene_count": 100,
+    "total_media_bytes": 257967061,
+    "verified_image_count": 2000,
+    "view_count": 20,
+    "width": 256
+  },
+  "pilot_stage": "screen_100",
+  "release_id": "toysad8k-train-2000-v2",
+  "role": "development",
+  "scene_count": 100,
+  "views_per_scene": 20
+}

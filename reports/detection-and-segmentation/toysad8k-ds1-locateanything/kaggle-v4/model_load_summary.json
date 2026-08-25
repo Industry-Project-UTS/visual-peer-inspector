@@ -1,0 +1,129 @@
+{
+  "checkpoints": [
+    {
+      "device": "cuda",
+      "dtype": "torch.float16",
+      "elapsed_seconds": 9.1,
+      "stage": "dependencies_ready"
+    },
+    {
+      "elapsed_seconds": 9.101,
+      "source_kind": "hub",
+      "stage": "tokenizer_load_started"
+    },
+    {
+      "elapsed_seconds": 9.729,
+      "stage": "tokenizer_ready"
+    },
+    {
+      "elapsed_seconds": 9.73,
+      "source_kind": "hub",
+      "stage": "processor_load_started"
+    },
+    {
+      "elapsed_seconds": 11.056,
+      "stage": "processor_ready"
+    },
+    {
+      "elapsed_seconds": 11.057,
+      "source_kind": "hub",
+      "stage": "model_weights_load_started"
+    },
+    {
+      "elapsed_seconds": 17.756,
+      "stage": "model_weights_loaded"
+    },
+    {
+      "device": "cuda",
+      "elapsed_seconds": 17.756,
+      "stage": "model_device_move_started"
+    },
+    {
+      "device": "cuda",
+      "elapsed_seconds": 20.048,
+      "stage": "model_ready"
+    }
+  ],
+  "device": {
+    "compute_capability": "7.5",
+    "cuda_available": true,
+    "device_count": 2,
+    "device_name": "Tesla T4",
+    "total_memory_gib": 14.562
+  },
+  "disposable_preflight": {
+    "checkpoints": [
+      {
+        "elapsed_seconds": 27.278,
+        "images": 2000,
+        "stage": "input_verified"
+      },
+      {
+        "device": "cuda",
+        "dtype": "torch.float16",
+        "elapsed_seconds": 57.76,
+        "stage": "dependencies_ready"
+      },
+      {
+        "elapsed_seconds": 57.76,
+        "source_kind": "hub",
+        "stage": "tokenizer_load_started"
+      },
+      {
+        "elapsed_seconds": 59.123,
+        "stage": "tokenizer_ready"
+      },
+      {
+        "elapsed_seconds": 59.123,
+        "source_kind": "hub",
+        "stage": "processor_load_started"
+      },
+      {
+        "elapsed_seconds": 60.879,
+        "stage": "processor_ready"
+      },
+      {
+        "elapsed_seconds": 60.879,
+        "source_kind": "hub",
+        "stage": "model_weights_load_started"
+      },
+      {
+        "elapsed_seconds": 106.127,
+        "stage": "model_weights_loaded"
+      },
+      {
+        "device": "cuda",
+        "elapsed_seconds": 106.127,
+        "stage": "model_device_move_started"
+      },
+      {
+        "device": "cuda",
+        "elapsed_seconds": 108.593,
+        "stage": "model_ready"
+      }
+    ],
+    "configuration_sha256": "97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636",
+    "cuda_version": "12.8",
+    "cudnn_version": "91002",
+    "device_name": "Tesla T4",
+    "elapsed_seconds": 110.932,
+    "error_type": null,
+    "load_seconds": 81.315,
+    "model_id": "nvidia/LocateAnything-3B",
+    "model_revision": "c32291ca5e996f5a7a485845b4f57a233936bba0",
+    "peak_gpu_allocated_gib": 7.4433,
+    "peak_gpu_reserved_gib": 7.8809,
+    "proposal_count": 5,
+    "python_version": "3.12.13",
+    "runtime_seconds": 2.3345,
+    "schema_version": 1,
+    "stage": "ds1_locateanything_disposable_preflight",
+    "status": "passed",
+    "torch_version": "2.10.0+cu128",
+    "transformers_version": "4.57.1"
+  },
+  "download_seconds": 0.0,
+  "load_seconds": 20.049,
+  "peak_gpu_allocated_gib": 7.232,
+  "peak_gpu_reserved_gib": 7.541
+}

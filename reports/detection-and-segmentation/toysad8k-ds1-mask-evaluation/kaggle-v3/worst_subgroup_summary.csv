@@ -1,0 +1,7 @@
+component,metric,dimension,value,point_estimate,ci_lower_95,cluster_count,scene_count,support_count,support_unit,gate_statistic,gate_observed,threshold,status
+automatic_box,detection_aware_mean_iou,view_id,V09,0.8415552605104117,0.7634547688953723,27,100,385,references,ci_lower_95,0.7634547688953723,0.8,fail
+automatic_box,detection_aware_recall_at_0_75,view_id,V09,0.8727272727272727,0.7912066393136888,27,100,385,references,ci_lower_95,0.7912066393136888,0.8,fail
+proposal,precision_at_0_50,view_id,V09,0.3906605922551253,0.20012119328775638,27,100,878,proposals,ci_lower_95,0.20012119328775638,0.8,fail
+proposal,recall_at_0_50,view_id,V09,0.8909090909090909,0.8079751958303754,27,100,385,references,ci_lower_95,0.8079751958303754,0.85,fail
+reference_box,detection_aware_mean_iou,anomaly_family,disc,0.9410478932806928,0.9182452079668884,9,27,2120,references,ci_lower_95,0.9182452079668884,0.8,pass
+reference_box,detection_aware_recall_at_0_75,anomaly_family,crack,0.9839449541284404,0.9578506108515991,10,29,2180,references,ci_lower_95,0.9578506108515991,0.8,pass

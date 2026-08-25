@@ -1,0 +1,21 @@
+{
+  "configuration_sha256": "97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636",
+  "failed_job_count": 0,
+  "images_per_second": 1.8876725356293473,
+  "job_count": 2000,
+  "maximum_proposals_per_successful_image": 297,
+  "mean_proposals_per_successful_image": 4.6245,
+  "mean_runtime_seconds": 0.5297529,
+  "median_proposals_per_successful_image": 4.0,
+  "median_runtime_seconds": 0.4119,
+  "minimum_proposals_per_successful_image": 1,
+  "p95_runtime_seconds": 0.6277,
+  "possibly_truncated_count": 0,
+  "scene_count": 100,
+  "successful_job_count": 2000,
+  "total_runtime_seconds": 1059.5058,
+  "truncation_check_counts": {
+    "token_count_heuristic": 2000
+  },
+  "zero_proposal_image_count": 0
+}
