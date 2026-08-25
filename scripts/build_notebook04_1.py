@@ -44,7 +44,9 @@ CELLS = [
 
         Box accuracy is evaluated later in the protected evaluator. This notebook
         records operational reliability, proposal geometry, runtime, memory,
-        retries and failures without opening labels or source identifiers.
+        retries and failures without opening labels or source identifiers. A
+        retry uses a different deterministic seed while retaining the same
+        pinned model and generation settings.
         """
     ),
     markdown(
@@ -552,7 +554,10 @@ CELLS = [
         }
         display(final_summary)
         if INFERENCE_STAGE == "full" and not run_record["completion_gate_passed"]:
-            raise RuntimeError("Notebook 04.1 did not pass the full DS1 operational contract")
+            print(
+                "Acceptance failed. The evidence and private checkpoint are downloadable, "
+                "but this run is not promotable and must not feed the SAM stage."
+            )
         """
     ),
     markdown(

@@ -146,6 +146,8 @@ class Ds1LocateAnythingWorkflowTests(unittest.TestCase):
             first["output_identity"]["proposal_results_sha256"], first_digest
         )
         self.assertEqual(first["output_identity"]["result_count"], 400)
+        self.assertEqual(first["retry_policy"]["maximum_attempts_per_job"], 4)
+        self.assertEqual(first["retry_policy"]["seed_scope"], "scene_view_attempt")
         self.assertEqual(second["run_session"]["pending_job_count_at_start"], 0)
         self.assertEqual(sha256(proposal_path.read_bytes()).hexdigest(), first_digest)
         self.assertTrue((self.output_root / "safe/artifact_manifest.json").is_file())

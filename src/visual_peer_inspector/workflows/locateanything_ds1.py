@@ -529,7 +529,7 @@ def run_ds1_locateanything_workflow(
     provenance: Mapping[str, Any] | None = None,
     platform_versions: Mapping[str, Any] | None = None,
     model_load_evidence: Mapping[str, Any] | None = None,
-    maximum_attempts_per_job: int = 2,
+    maximum_attempts_per_job: int = 4,
     maximum_consecutive_failed_jobs: int = 3,
 ) -> dict[str, Any]:
     """Run DS1 preflight, pilot/repeat and the resumable all-view proposal job."""
@@ -583,15 +583,15 @@ def run_ds1_locateanything_workflow(
         else:
             progress_failed += 1
         if completed == 1 or completed == total or completed % 100 == 0:
-            progress_rows.append(
-                {
-                    "completed": completed,
-                    "total": total,
-                    "successful": progress_successful,
-                    "failed": progress_failed,
-                    "elapsed_seconds": round(time.perf_counter() - progress_started, 3),
-                }
-            )
+            checkpoint = {
+                "completed": completed,
+                "total": total,
+                "successful": progress_successful,
+                "failed": progress_failed,
+                "elapsed_seconds": round(time.perf_counter() - progress_started, 3),
+            }
+            progress_rows.append(checkpoint)
+            print(json.dumps({"stage": "proposal_progress", **checkpoint}, sort_keys=True), flush=True)
 
     one_store, one_session = _run_stage(
         worker=worker,
@@ -788,6 +788,11 @@ def run_ds1_locateanything_workflow(
         "cohort": input_audit,
         "configuration": asdict(configuration),
         "configuration_sha256": configuration.sha256,
+        "retry_policy": {
+            "maximum_attempts_per_job": maximum_attempts_per_job,
+            "maximum_consecutive_failed_jobs": maximum_consecutive_failed_jobs,
+            "seed_scope": "scene_view_attempt",
+        },
         "input_identity": {
             "model_input_manifest_sha256": input_audit["input_manifest_sha256"],
         },

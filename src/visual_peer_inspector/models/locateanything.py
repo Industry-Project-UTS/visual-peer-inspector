@@ -433,9 +433,11 @@ class LocateAnythingWorker:
         self.model = model.to(device).eval()
         report("model_ready", device=device)
 
-    def _job_seed(self, scene_id: str, view_id: str) -> int:
+    def _job_seed(self, scene_id: str, view_id: str, attempt: int = 1) -> int:
+        if attempt < 1:
+            raise ValueError("Proposal attempt must be positive")
         payload = (
-            f"{self.configuration.seed}|{scene_id}|{view_id}".encode("utf-8")
+            f"{self.configuration.seed}|{scene_id}|{view_id}|{attempt}".encode("utf-8")
         )
         return int.from_bytes(sha256(payload).digest()[:4], "big")
 
@@ -444,6 +446,8 @@ class LocateAnythingWorker:
         image: Image.Image,
         scene_id: str,
         view_id: str,
+        *,
+        attempt: int = 1,
     ) -> dict[str, Any]:
         """Return the model answer and optional generation statistics."""
 
@@ -472,7 +476,7 @@ class LocateAnythingWorker:
             videos=videos,
             return_tensors="pt",
         ).to(self.device)
-        seed = self._job_seed(scene_id, view_id)
+        seed = self._job_seed(scene_id, view_id, attempt)
         torch.manual_seed(seed)
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(seed)
@@ -520,7 +524,12 @@ class LocateAnythingWorker:
                     ),
                     Image.Resampling.BICUBIC,
                 )
-            prediction = self.predict(image, job.opaque_scene_id, job.view_id)
+            prediction = self.predict(
+                image,
+                job.opaque_scene_id,
+                job.view_id,
+                attempt=attempt,
+            )
             if isinstance(prediction, Mapping):
                 raw_response = str(prediction.get("answer", ""))
                 stats_value = _safe_generation_stats(prediction.get("stats", {}))

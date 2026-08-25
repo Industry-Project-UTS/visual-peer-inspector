@@ -271,7 +271,7 @@ class LocateAnythingTests(unittest.TestCase):
             worker = object.__new__(LocateAnythingWorker)
             worker.configuration = configuration
             worker.tokenizer = FakeTokenizer()
-            worker.predict = lambda image, scene_id, view_id: "no boxes found"
+            worker.predict = lambda image, scene_id, view_id, attempt=1: "no boxes found"
 
             row = worker.run_job(job)
 
@@ -303,7 +303,7 @@ class LocateAnythingTests(unittest.TestCase):
             worker = object.__new__(LocateAnythingWorker)
             worker.configuration = configuration
             worker.tokenizer = FakeTokenizer()
-            worker.predict = lambda image, scene_id, view_id: {
+            worker.predict = lambda image, scene_id, view_id, attempt=1: {
                 "answer": "<box><100><100><900><900></box>",
                 "stats": {"finish_reason": "max_token_limit"},
             }
@@ -313,6 +313,19 @@ class LocateAnythingTests(unittest.TestCase):
             self.assertEqual(row["status"], "error")
             self.assertTrue(row["possibly_truncated"])
             self.assertEqual(row["truncation_check"], "generation_stats")
+
+    def test_retry_seed_is_repeatable_per_attempt_and_changes_between_attempts(self) -> None:
+        worker = object.__new__(LocateAnythingWorker)
+        worker.configuration = LocateAnythingConfiguration()
+
+        first = worker._job_seed("S000001", "V13", attempt=1)
+        repeated = worker._job_seed("S000001", "V13", attempt=1)
+        retry = worker._job_seed("S000001", "V13", attempt=2)
+
+        self.assertEqual(first, repeated)
+        self.assertNotEqual(first, retry)
+        with self.assertRaisesRegex(ValueError, "positive"):
+            worker._job_seed("S000001", "V13", attempt=0)
 
 
 if __name__ == "__main__":
