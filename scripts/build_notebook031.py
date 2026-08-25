@@ -669,8 +669,9 @@ print(f"Safe artifacts: {safe_manifest['artifact_count']}")
 print(f"Private artifacts: {private_manifest['artifact_count']}")
 print(f"ClearML finalisation: {tracking_receipt['status']}")
 if finalizer_return_code != 0:
-    raise RuntimeError(
-        "ClearML finalisation failed after computation. The verified package and evidence remain available."
+    print(
+        "ClearML finalisation did not complete. The package remains downloadable, "
+        "but this run must not be promoted until tracking succeeds."
     )
 """
     ),

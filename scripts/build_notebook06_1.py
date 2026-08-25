@@ -55,12 +55,15 @@ from __future__ import annotations
 
 import json
 import os
+from hashlib import sha256
 from pathlib import Path
 import subprocess
 import sys
 
 from IPython.display import Image as DisplayImage, display
 import pandas as pd
+
+sys.dont_write_bytecode = True
 
 NOTEBOOK_NAME = "06.1-toysad8k-ds1-proposal-and-mask-evaluation.ipynb"
 ENVIRONMENT = "kaggle" if Path("/kaggle/working").is_dir() else "local"
@@ -141,13 +144,32 @@ The workflow checks all input coverage and upstream identities before calculatin
         """
 from visual_peer_inspector.workflows.mask_evaluation_ds1 import run_ds1_mask_evaluation
 
+snapshot_versions = snapshot.get("platform_versions", {})
+
+
+def required_version(key: str) -> str:
+    value = os.getenv(f"VPI_{key.upper()}") or snapshot_versions.get(key)
+    if not value or str(value).strip().lower() in {"pending", "unknown", "unavailable"}:
+        raise RuntimeError(f"The code snapshot is missing version pin: {key}")
+    return str(value)
+
+
+notebook_path = CODE_ROOT / (
+    "notebooks/detection-and-segmentation/toysad8k-ds1-mask-evaluation/"
+    "06.1-toysad8k-ds1-proposal-and-mask-evaluation.ipynb"
+)
+if not notebook_path.is_file():
+    raise FileNotFoundError("The code snapshot does not contain the exact Notebook 06.1 source")
 provenance = {
     "notebook_name": NOTEBOOK_NAME,
     "execution_environment": ENVIRONMENT,
     "git_commit": snapshot["git_commit"],
     "git_dirty": snapshot["git_dirty"],
+    "precommit_candidate": snapshot["precommit_candidate"],
     "snapshot_sha256": snapshot["snapshot_sha256"],
-    "code_dataset_version": snapshot["platform_versions"]["code_dataset_version"],
+    "notebook_sha256": sha256(notebook_path.read_bytes()).hexdigest(),
+    "code_dataset_version": required_version("code_dataset_version"),
+    "kaggle_notebook_version_06_1": required_version("kaggle_notebook_version_06_1"),
 }
 
 run_record = run_ds1_mask_evaluation(

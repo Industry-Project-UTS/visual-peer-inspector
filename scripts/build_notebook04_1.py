@@ -320,6 +320,22 @@ CELLS = [
                 raise RuntimeError("A canonical full run requires a clean committed code snapshot")
             if not notebook_path.is_file():
                 raise RuntimeError("The code snapshot must include the exact Notebook 04.1 source")
+        snapshot_versions = snapshot.get("platform_versions", {})
+
+
+        def required_version(key: str) -> str:
+            value = os.getenv(f"VPI_{key.upper()}") or snapshot_versions.get(key)
+            if not value or str(value).strip().lower() in {"pending", "unknown", "unavailable"}:
+                if RUN_MODE == "model_inference" and INFERENCE_STAGE == "full":
+                    raise RuntimeError(f"The code snapshot is missing version pin: {key}")
+                return "local-contract"
+            return str(value)
+
+
+        version_pins = {
+            key: required_version(key)
+            for key in ("kaggle_notebook_version_04_1", "code_dataset_version")
+        }
         provenance = {
             "git_commit": snapshot.get("git_commit", "local-contract"),
             "git_dirty": snapshot.get("git_dirty", True),
@@ -330,6 +346,7 @@ CELLS = [
                 if notebook_path.is_file() else ""
             ),
             "kaggle_notebook_slug": "esreekarreddy/toysad-8k-ds1-locateanything-screen",
+            **version_pins,
         }
         platform_versions = {
             "python": platform.python_version(),
@@ -356,6 +373,7 @@ CELLS = [
             ),
             "kaggle_container_image": os.getenv("KAGGLE_CONTAINER_IMAGE", "unavailable"),
             "kaggle_kernel_run_type": os.getenv("KAGGLE_KERNEL_RUN_TYPE", "unavailable"),
+            **version_pins,
         }
         load_evidence = {
             "load_seconds": model_load_seconds,

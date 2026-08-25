@@ -70,6 +70,8 @@ class Ds1LocateAnythingClearmlFinalizerTests(unittest.TestCase):
                 "precommit_candidate": False,
                 "snapshot_sha256": "b" * 64,
                 "notebook_sha256": "c" * 64,
+                "kaggle_notebook_version_04_1": "2",
+                "code_dataset_version": "32",
             },
             "output_identity": {
                 "result_filename": "proposal_results.jsonl",
@@ -158,6 +160,8 @@ class Ds1LocateAnythingClearmlFinalizerTests(unittest.TestCase):
                     "cudnn": "90501",
                     "kaggle_container_image": "test",
                     "kaggle_kernel_run_type": "batch",
+                    "kaggle_notebook_version_04_1": "2",
+                    "code_dataset_version": "32",
                 },
             },
             "input_audit.json": {"image_count": 2_000, "all_checks_passed": True},
@@ -225,6 +229,14 @@ class Ds1LocateAnythingClearmlFinalizerTests(unittest.TestCase):
         (self.root / "run_record.json").write_text(json.dumps(record), encoding="utf-8")
         self._write_manifest()
         with self.assertRaisesRegex(ValueError, "canonical provenance"):
+            FINALIZER.validate_safe_root(self.root)
+
+    def test_version_provenance_mismatch_is_rejected(self) -> None:
+        record = self._run_record()
+        record["provenance"]["code_dataset_version"] = "31"
+        (self.root / "run_record.json").write_text(json.dumps(record), encoding="utf-8")
+        self._write_manifest()
+        with self.assertRaisesRegex(ValueError, "version provenance"):
             FINALIZER.validate_safe_root(self.root)
 
     def test_incomplete_retry_evidence_is_rejected(self) -> None:

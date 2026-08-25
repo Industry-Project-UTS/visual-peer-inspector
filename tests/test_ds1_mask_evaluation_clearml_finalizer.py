@@ -107,8 +107,13 @@ def _safe_root(tmp_path: Path, *, git_dirty: bool = False) -> Path:
             "execution_environment": "kaggle",
             "git_commit": "a" * 40,
             "git_dirty": git_dirty,
+            "precommit_candidate": False,
             "snapshot_sha256": "b" * 64,
+            "notebook_sha256": sha256(
+                (ROOT / "notebooks/detection-and-segmentation/toysad8k-ds1-mask-evaluation/06.1-toysad8k-ds1-proposal-and-mask-evaluation.ipynb").read_bytes()
+            ).hexdigest(),
             "code_dataset_version": "12",
+            "kaggle_notebook_version_06_1": "2",
         },
         "runtime": runtime,
     }
@@ -155,6 +160,23 @@ def test_final_task_rejects_dirty_provenance(tmp_path):
         raise AssertionError("Dirty final evidence was accepted")
 
 
+def test_final_task_rejects_precommit_provenance(tmp_path):
+    root = _safe_root(tmp_path)
+    record = json.loads((root / "run_record.json").read_text(encoding="utf-8"))
+    record["evaluator_provenance"]["precommit_candidate"] = True
+    (root / "run_record.json").write_text(json.dumps(record), encoding="utf-8")
+    rows = []
+    for path in sorted(item for item in root.iterdir() if item.is_file() and item.name != "artifact_manifest.json"):
+        rows.append({"path": path.name, "sha256": sha256(path.read_bytes()).hexdigest(), "size_bytes": path.stat().st_size})
+    (root / "artifact_manifest.json").write_text(json.dumps({"schema_version": 1, "artifact_count": len(rows), "artifacts": rows, "manifest_content_sha256": _manifest_digest(rows)}), encoding="utf-8")
+    try:
+        finalizer.validate_safe_root(root, require_clean_provenance=True)
+    except ValueError as error:
+        assert "clean code snapshot" in str(error)
+    else:
+        raise AssertionError("Precommit final evidence was accepted")
+
+
 def test_disabled_finalizer_writes_verified_receipt_without_credentials(tmp_path, monkeypatch):
     root = _safe_root(tmp_path)
     receipt = tmp_path / "receipt.json"
@@ -185,9 +207,13 @@ def test_notebook_isolated_secret_loading_and_snapshot_verification():
     assert "UserSecretsClient" not in source
     assert "CLEARML_API_ACCESS_KEY" not in source
     assert "pip\", \"install" not in source
+    assert "sys.dont_write_bytecode = True" in source
+    assert "kaggle_notebook_version_06_1" in source
+    assert "notebook_sha256" in source
     assert all(cell.get("execution_count") is None and not cell.get("outputs") for cell in notebook["cells"] if cell["cell_type"] == "code")
     metadata = json.loads((notebook_path.parent / "kernel-metadata.json").read_text(encoding="utf-8"))
     assert metadata["enable_internet"] is True
+    assert metadata["id"] == "esreekarreddy/toysad-8k-ds1-proposal-and-mask-evaluation"
     assert metadata["dataset_sources"] == [
         "esreekarreddy/vpi-code-snapshot",
         "esreekarreddy/vpi-toysad-ds1-mask-evaluator",

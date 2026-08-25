@@ -33,6 +33,8 @@ class Notebook031StructureTests(unittest.TestCase):
         self.assertNotIn("prepare_clearml_tracking", source)
         self.assertNotIn("ExperimentTracker.start", source)
         self.assertNotIn("display(Image.open(contact_sheet))", source)
+        self.assertNotIn("if finalizer_return_code != 0:\n    raise RuntimeError", source)
+        self.assertIn("must not be promoted until tracking succeeds", source)
 
     def test_clearml_finalizer_occurs_after_safe_manifest(self) -> None:
         notebook = json.loads(NOTEBOOK_PATH.read_text(encoding="utf-8"))

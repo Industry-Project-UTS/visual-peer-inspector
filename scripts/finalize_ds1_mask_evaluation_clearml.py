@@ -16,6 +16,10 @@ import sys
 from typing import Any
 
 CODE_ROOT = Path(__file__).resolve().parents[1]
+NOTEBOOK_RELATIVE = Path(
+    "notebooks/detection-and-segmentation/toysad8k-ds1-mask-evaluation/"
+    "06.1-toysad8k-ds1-proposal-and-mask-evaluation.ipynb"
+)
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(CODE_ROOT / "src"))
 
@@ -204,14 +208,31 @@ def validate_safe_root(root: Path, *, require_clean_provenance: bool = False) ->
     if decision.get("status") not in DECISIONS or decision.get("final_acceptance") is not False:
         raise ValueError("ClearML DS1 component decision is missing its claim boundary")
     provenance = record.get("evaluator_provenance", {})
-    required_provenance = {"notebook_name", "execution_environment", "git_commit", "git_dirty", "snapshot_sha256", "code_dataset_version"}
+    required_provenance = {
+        "notebook_name", "execution_environment", "git_commit", "git_dirty",
+        "precommit_candidate", "snapshot_sha256", "notebook_sha256",
+        "code_dataset_version", "kaggle_notebook_version_06_1",
+    }
     if set(provenance) != required_provenance:
         raise ValueError("ClearML evaluator provenance schema differs")
-    if not _is_digest(provenance["git_commit"], 40) or not _is_digest(provenance["snapshot_sha256"]):
+    if (
+        not _is_digest(provenance["git_commit"], 40)
+        or not _is_digest(provenance["snapshot_sha256"])
+        or not _is_digest(provenance["notebook_sha256"])
+    ):
         raise ValueError("ClearML evaluator provenance hashes are invalid")
-    if not isinstance(provenance["git_dirty"], bool):
-        raise ValueError("ClearML evaluator dirty state is invalid")
-    if require_clean_provenance and provenance["git_dirty"]:
+    notebook_path = CODE_ROOT / NOTEBOOK_RELATIVE
+    if sha256(notebook_path.read_bytes()).hexdigest() != provenance["notebook_sha256"]:
+        raise ValueError("ClearML evaluator notebook identity differs")
+    if not isinstance(provenance["git_dirty"], bool) or not isinstance(provenance["precommit_candidate"], bool):
+        raise ValueError("ClearML evaluator source state is invalid")
+    placeholders = {"", "pending", "unknown", "unavailable"}
+    if any(
+        str(provenance[key]).strip().lower() in placeholders
+        for key in ("code_dataset_version", "kaggle_notebook_version_06_1")
+    ):
+        raise ValueError("ClearML evaluator version provenance is incomplete")
+    if require_clean_provenance and (provenance["git_dirty"] or provenance["precommit_candidate"]):
         raise ValueError("Final ClearML evidence requires a clean code snapshot")
     inputs = record.get("inputs", {})
     if not inputs or any(not _is_digest(value) for value in inputs.values()):

@@ -271,6 +271,17 @@ def validate_safe_root(
             raise ValueError("ClearML requires the disposable one-image GPU gate")
         environment = json.loads((root / "environment_summary.json").read_text(encoding="utf-8"))
         versions = environment.get("platform_versions", {})
+        version_pin_keys = {"kaggle_notebook_version_04_1", "code_dataset_version"}
+        placeholder_versions = {"", "pending", "unknown", "unavailable"}
+        for key in version_pin_keys:
+            provenance_value = str(provenance.get(key, "")).strip()
+            environment_value = str(versions.get(key, "")).strip()
+            if (
+                provenance_value.lower() in placeholder_versions
+                or environment_value.lower() in placeholder_versions
+                or provenance_value != environment_value
+            ):
+                raise ValueError("ClearML version provenance is incomplete or inconsistent")
         required_versions = {
             "python",
             "pillow",
@@ -282,6 +293,7 @@ def validate_safe_root(
             "cudnn",
             "kaggle_container_image",
             "kaggle_kernel_run_type",
+            *version_pin_keys,
         }
         if not required_versions.issubset(versions):
             raise ValueError("ClearML environment evidence is incomplete")
