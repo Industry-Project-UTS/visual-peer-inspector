@@ -263,5 +263,7 @@ def test_notebook_isolated_secret_loading_and_snapshot_verification():
         "esreekarreddy/vpi-code-snapshot",
         "esreekarreddy/vpi-toysad-ds1-mask-evaluator",
         "esreekarreddy/vpi-toysad-ds1-locateanything-output",
-        "esreekarreddy/vpi-toysad-ds1-sam21-output",
+    ]
+    assert metadata["kernel_sources"] == [
+        "esreekarreddy/toysad-8k-ds1-sam-2-1-segmentation",
     ]

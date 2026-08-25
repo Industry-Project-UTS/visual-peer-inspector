@@ -1,0 +1,13 @@
+gate,observed,threshold,status
+proposal precision at 0.50,0.7866796410422748,0.9,fail
+proposal recall at 0.50,0.944935064935065,0.95,fail
+reference mask recall at 0.75,0.9923376623376623,0.9,pass
+reference detection-aware mean mask IoU,0.9526748960503852,0.9,pass
+automatic mask recall at 0.75,0.9248051948051949,0.9,pass
+automatic detection-aware mean mask IoU,0.8938810723703136,0.9,fail
+automatic_box worst supported subgroup detection_aware_mean_iou lower 95% CI,0.7634547688953723,0.8,fail
+automatic_box worst supported subgroup detection_aware_recall_at_0_75 lower 95% CI,0.7912066393136888,0.8,fail
+proposal worst supported subgroup precision_at_0_50 lower 95% CI,0.20012119328775638,0.8,fail
+proposal worst supported subgroup recall_at_0_50 lower 95% CI,0.8079751958303754,0.85,fail
+reference_box worst supported subgroup detection_aware_mean_iou lower 95% CI,0.9182452079668884,0.8,pass
+reference_box worst supported subgroup detection_aware_recall_at_0_75 lower 95% CI,0.9578506108515991,0.8,pass

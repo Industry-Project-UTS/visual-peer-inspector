@@ -1,0 +1,249 @@
+{
+  "cohort": {
+    "all_checks_passed": true,
+    "asset_group_count": 27,
+    "cohort_id": "toysad8k-development-screen-100-v1",
+    "image_count": 2000,
+    "input_manifest_sha256": "37e2143ae097077f9fa35ffc8a1a281d2e1dfb8a9802dc88865fce54daa123b3",
+    "membership_sha256": "308e2e104448612dc60b5392a5258d97f6d93f52ca553aa68fa1b447500f4f2f",
+    "model_input_package": {
+      "all_checks_passed": true,
+      "cohort_id": "toysad8k-development-screen-100-v1",
+      "content_checksums_sha256": "6b751c59182a4df98ea6034624a585a4195fde03cc026c38b459420676178b7b",
+      "decoded_image_failure_count": 0,
+      "duplicate_archive_member_count": 0,
+      "duplicate_package_path_count": 0,
+      "height": 256,
+      "image_count": 2000,
+      "manifest_sha256": "37e2143ae097077f9fa35ffc8a1a281d2e1dfb8a9802dc88865fce54daa123b3",
+      "media_mode": "RGBA",
+      "membership_sha256": "308e2e104448612dc60b5392a5258d97f6d93f52ca553aa68fa1b447500f4f2f",
+      "release_id": "toysad8k-train-2000-v2",
+      "scene_count": 100,
+      "total_media_bytes": 257967061,
+      "verified_image_count": 2000,
+      "view_count": 20,
+      "width": 256
+    },
+    "pilot_stage": "screen_100",
+    "release_id": "toysad8k-train-2000-v2",
+    "role": "development",
+    "scene_count": 100,
+    "views_per_scene": 20
+  },
+  "completion_gate_passed": true,
+  "configuration": {
+    "do_sample": true,
+    "generation_mode": "hybrid",
+    "max_new_tokens": 8192,
+    "model_id": "nvidia/LocateAnything-3B",
+    "model_revision": "c32291ca5e996f5a7a485845b4f57a233936bba0",
+    "prompt": "object",
+    "repetition_penalty": 1.1,
+    "seed": 32040,
+    "temperature": 0.7,
+    "top_k": 0,
+    "top_p": 0.9,
+    "upscale_factor": 1
+  },
+  "configuration_sha256": "97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636",
+  "error_type": null,
+  "generation_mode_counts": {
+    "hybrid": 2007,
+    "slow": 1
+  },
+  "inference_stage": "full",
+  "input_identity": {
+    "model_input_manifest_sha256": "37e2143ae097077f9fa35ffc8a1a281d2e1dfb8a9802dc88865fce54daa123b3"
+  },
+  "one_image_preflight": {
+    "configuration_sha256": "97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636",
+    "failed_job_count": 0,
+    "images_per_second": 0.8532423208191127,
+    "job_count": 1,
+    "maximum_proposals_per_successful_image": 5,
+    "mean_proposals_per_successful_image": 5,
+    "mean_runtime_seconds": 1.172,
+    "median_proposals_per_successful_image": 5,
+    "median_runtime_seconds": 1.172,
+    "minimum_proposals_per_successful_image": 5,
+    "p95_runtime_seconds": 1.172,
+    "possibly_truncated_count": 0,
+    "scene_count": 1,
+    "session": {
+      "attempted_rows_this_session": 1,
+      "elapsed_seconds": 1.1724,
+      "history_row_count": 1,
+      "latest_row_count": 1,
+      "pending_job_count_at_start": 1,
+      "successful_job_count": 1
+    },
+    "successful_job_count": 1,
+    "total_runtime_seconds": 1.172,
+    "truncation_check_counts": {
+      "token_count_heuristic": 1
+    },
+    "zero_proposal_image_count": 0
+  },
+  "output_identity": {
+    "proposal_results_sha256": "a2cad5e3efca26386607d1b388e9806edb25b66601c6aa43a8fb29d70bd50f9a",
+    "result_count": 2000,
+    "result_filename": "proposal_results.jsonl",
+    "result_sha256": "a2cad5e3efca26386607d1b388e9806edb25b66601c6aa43a8fb29d70bd50f9a"
+  },
+  "pilot_summary": {
+    "configuration_sha256": "97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636",
+    "failed_job_count": 0,
+    "images_per_second": 2.278786773921564,
+    "job_count": 20,
+    "maximum_proposals_per_successful_image": 5,
+    "mean_proposals_per_successful_image": 3.9,
+    "mean_runtime_seconds": 0.43883,
+    "median_proposals_per_successful_image": 4.0,
+    "median_runtime_seconds": 0.4162,
+    "minimum_proposals_per_successful_image": 3,
+    "p95_runtime_seconds": 0.6888,
+    "possibly_truncated_count": 0,
+    "scene_count": 20,
+    "session": {
+      "attempted_rows_this_session": 20,
+      "elapsed_seconds": 8.7818,
+      "history_row_count": 20,
+      "latest_row_count": 20,
+      "pending_job_count_at_start": 20,
+      "successful_job_count": 20
+    },
+    "successful_job_count": 20,
+    "total_runtime_seconds": 8.7766,
+    "truncation_check_counts": {
+      "token_count_heuristic": 20
+    },
+    "zero_proposal_image_count": 0
+  },
+  "producer_kind": "locateanything_model",
+  "provenance": {
+    "checkpoint_import": {
+      "archive_sha256": null,
+      "files": {},
+      "imported": false,
+      "verification_status": "not_applicable"
+    },
+    "code_dataset_version": "36",
+    "git_commit": "99df76322deccfc4d502635712f08a3dd79cfcac",
+    "git_dirty": false,
+    "kaggle_notebook_slug": "esreekarreddy/toysad-8k-ds1-locateanything-screen",
+    "kaggle_notebook_version_04_1": "4",
+    "notebook_sha256": "5c78ff7e44a5f4c2c13214bc1444e112778e1f86a5536821d4767024db06b8cd",
+    "precommit_candidate": false,
+    "snapshot_sha256": "1ca23711ec9533d156be80c9682dc4865c555ec404dff5274f480aa1c42fc824"
+  },
+  "repeat_agreement": {
+    "box_agreement_rate": 1.0,
+    "job_count": 20,
+    "matching_job_count": 20,
+    "session": {
+      "attempted_rows_this_session": 20,
+      "elapsed_seconds": 8.7692,
+      "history_row_count": 20,
+      "latest_row_count": 20,
+      "pending_job_count_at_start": 20,
+      "successful_job_count": 20
+    }
+  },
+  "retry_policy": {
+    "configuration_sha256": "97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636",
+    "execution_policy": {
+      "maximum_attempts_per_job": 6,
+      "policy_kind": "locateanything_truncation_recovery",
+      "primary": {
+        "attempts": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "generation_mode": "hybrid",
+        "max_new_tokens": 8192
+      },
+      "schema_version": 1,
+      "truncation_fallback": {
+        "attempts": [
+          5,
+          6
+        ],
+        "generation_mode": "slow",
+        "max_new_tokens": 8192,
+        "trigger": "previous_attempt_possible_truncation"
+      }
+    },
+    "execution_policy_sha256": "1477c554722790d78df5979555bb78e22e87eb60a4c75d03e9eb885bba2d6f9e",
+    "maximum_attempts_per_job": 6,
+    "maximum_consecutive_failed_jobs": 3,
+    "primary": {
+      "attempts": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "generation_mode": "hybrid",
+      "max_new_tokens": 8192
+    },
+    "seed_scope": "scene_view_attempt",
+    "separate_from_model_configuration": true,
+    "truncation_fallback": {
+      "attempts": [
+        5,
+        6
+      ],
+      "generation_mode": "slow",
+      "max_new_tokens": 8192,
+      "trigger": "previous_attempt_possible_truncation"
+    }
+  },
+  "run_mode": "model_inference",
+  "run_session": {
+    "attempted_rows_this_session": 2008,
+    "elapsed_seconds": 1845.8122,
+    "history_row_count": 2008,
+    "latest_row_count": 2000,
+    "pending_job_count_at_start": 2000,
+    "successful_job_count": 2000
+  },
+  "runtime": {
+    "images_per_second": 1.8876725356293473,
+    "median_image_runtime_seconds": 0.4119,
+    "model_download_seconds": 0.0,
+    "model_load_seconds": 20.049,
+    "p95_image_runtime_seconds": 0.6277,
+    "peak_gpu_allocated_gib": 7.9565,
+    "peak_gpu_reserved_gib": 8.4824,
+    "session_elapsed_seconds": 1845.8122,
+    "total_inference_seconds": 1059.5058
+  },
+  "schema_version": 1,
+  "stage": "ds1_locateanything_screen",
+  "status": "completed",
+  "summary": {
+    "configuration_sha256": "97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636",
+    "failed_job_count": 0,
+    "images_per_second": 1.8876725356293473,
+    "job_count": 2000,
+    "maximum_proposals_per_successful_image": 297,
+    "mean_proposals_per_successful_image": 4.6245,
+    "mean_runtime_seconds": 0.5297529,
+    "median_proposals_per_successful_image": 4.0,
+    "median_runtime_seconds": 0.4119,
+    "minimum_proposals_per_successful_image": 1,
+    "p95_runtime_seconds": 0.6277,
+    "possibly_truncated_count": 0,
+    "scene_count": 100,
+    "successful_job_count": 2000,
+    "total_runtime_seconds": 1059.5058,
+    "truncation_check_counts": {
+      "token_count_heuristic": 2000
+    },
+    "zero_proposal_image_count": 0
+  },
+  "tracking_status": "pending"
+}

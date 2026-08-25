@@ -1,0 +1,13 @@
+{
+  "box_agreement_rate": 1.0,
+  "job_count": 20,
+  "matching_job_count": 20,
+  "session": {
+    "attempted_rows_this_session": 20,
+    "elapsed_seconds": 8.7692,
+    "history_row_count": 20,
+    "latest_row_count": 20,
+    "pending_job_count_at_start": 20,
+    "successful_job_count": 20
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "artifact_count": 6,
+  "artifacts": [
+    {
+      "path": "image_size_distribution.png",
+      "sha256": "207ff1dc6aa9f7707f8ef12c04b6100051ffbd747ab4ab70389f8d777bf73082",
+      "size_bytes": 22756
+    },
+    {
+      "path": "media_summary.json",
+      "sha256": "a0aeadbbb1c9d44edfdcf8ae5bbae11f85c7c8b098121c932249156a1cef999e",
+      "size_bytes": 234
+    },
+    {
+      "path": "run_record.json",
+      "sha256": "88aea0b6a188bad95043b3f62826dcac6c385866cfcd457344e19d08b82f86bd",
+      "size_bytes": 3607
+    },
+    {
+      "path": "validation_gates.csv",
+      "sha256": "ab80ac59a569b1bdd02deace7b692a593d0d79ed58a75eb2ab449d7b890bf036",
+      "size_bytes": 283
+    },
+    {
+      "path": "view_coverage.csv",
+      "sha256": "f1c04a5d44e8b8bf67ce30edc227ee1650ec5d4ee8d00a00452a4662c7ad8915",
+      "size_bytes": 411
+    },
+    {
+      "path": "view_coverage.png",
+      "sha256": "e5f57a9373738bb1f62dc8d278b2ef3223de5d3876a4e3d3939d48862892c380",
+      "size_bytes": 21039
+    }
+  ],
+  "schema_version": 1
+}

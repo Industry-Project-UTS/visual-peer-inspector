@@ -15,6 +15,10 @@ model, scoring, evaluation, and tracking logic belongs in tested modules under
 | 05 Segmentation | Runs pinned SAM 2.1 for the reference-box and automatic-box routes | Complete candidate evidence |
 | 06 Proposal and Mask Evaluation | Compares proposals and masks with protected references inside evaluator-only code | Complete candidate evidence |
 | 07 Representation and Peer Scores | Adds feature caching, encoder screening, B0, B1, P1, geometry, and heatmaps | Kaggle DS0 candidate evidence complete; DINOv3 access pending |
+| 03.1 DS1 Opaque Package | Verifies the label-free 100-scene, 2,000-image DS1 input package | Complete clean-snapshot evidence |
+| 04.1 DS1 Box Proposals | Runs pinned LocateAnything on all 2,000 DS1 images | Complete clean-snapshot evidence |
+| 05.1 DS1 Segmentation | Runs pinned SAM 2.1 for supplied and automatic boxes | Complete clean-snapshot evidence |
+| 06.1 DS1 Proposal and Mask Evaluation | Measures DS1 proposal and mask quality with protected references | Complete; refine or replace LocateAnything |
 | 08 Views, Fusion, and Calibration | Evaluates view subsets, identity association, fusion, thresholds, and review rules | Planned |
 | 09 Frozen Evaluation | Opens internal-lock and official evaluation only after settings and predictions are frozen | Planned |
 | 10 Full-Pool Sensitivity | Runs the optional role-preserving 4,107-scene analysis after the primary method freezes | Optional |
@@ -39,6 +43,13 @@ flowchart LR
     N7 --> N8["08 Views, fusion, and calibration"]
     N8 --> N9["09 Frozen evaluation"]
     N9 --> N10["10 Optional sensitivity"]
+    N2 --> N31["03.1 DS1 opaque package"]
+    N31 --> N41["04.1 DS1 LocateAnything"]
+    N31 --> N51["05.1 DS1 SAM"]
+    N41 --> N51
+    N41 --> N61["06.1 DS1 evaluation"]
+    N51 --> N61
+    N61 --> N71["07.1 DS1 representation screen"]
 ```
 
 ## Notebook locations
@@ -57,6 +68,14 @@ flowchart LR
   `detection-and-segmentation/toysad8k-ds0-mask-evaluation/06-toysad8k-ds0-mask-evaluation.ipynb`
 - Notebook 07:
   `representation-and-scoring/toysad8k-ds0-peer-scores/07-toysad8k-ds0-representation-and-peer-scores.ipynb`
+- Notebook 03.1:
+  `data-preparation/toysad8k-ds1-opaque-package/03.1-toysad8k-ds1-opaque-package.ipynb`
+- Notebook 04.1:
+  `detection-and-segmentation/toysad8k-ds1-locateanything/04.1-toysad8k-ds1-locateanything-screen.ipynb`
+- Notebook 05.1:
+  `detection-and-segmentation/toysad8k-ds1-sam21/05.1-toysad8k-ds1-sam21-segmentation.ipynb`
+- Notebook 06.1:
+  `detection-and-segmentation/toysad8k-ds1-mask-evaluation/06.1-toysad8k-ds1-proposal-and-mask-evaluation.ipynb`
 
 Planned notebook directories are created only when their design and required
 inputs are ready.

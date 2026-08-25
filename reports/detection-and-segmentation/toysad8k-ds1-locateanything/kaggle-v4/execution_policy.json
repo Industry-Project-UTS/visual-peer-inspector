@@ -1,0 +1,24 @@
+{
+  "maximum_attempts_per_job": 6,
+  "policy_kind": "locateanything_truncation_recovery",
+  "primary": {
+    "attempts": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "generation_mode": "hybrid",
+    "max_new_tokens": 8192
+  },
+  "schema_version": 1,
+  "truncation_fallback": {
+    "attempts": [
+      5,
+      6
+    ],
+    "generation_mode": "slow",
+    "max_new_tokens": 8192,
+    "trigger": "previous_attempt_possible_truncation"
+  }
+}

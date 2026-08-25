@@ -1,0 +1,102 @@
+{
+  "artifact_count": 19,
+  "artifacts": [
+    {
+      "path": "automatic_box_mask_iou_distribution.png",
+      "sha256": "5df9ad0c0006796a433dbe7990b6a5e016b72f19d4fe292e9f0da95e48f59be3",
+      "size_bytes": 21338
+    },
+    {
+      "path": "automatic_spill_vs_mask_iou.png",
+      "sha256": "38a65306825b7468a73c16fcc7143ad477c4feda986877558e76daaf2403fb5b",
+      "size_bytes": 26408
+    },
+    {
+      "path": "decision_gates.csv",
+      "sha256": "9aa42b4d9c71747bde75d00965a63044558f4e0b3d3af5eb2ba01ed44d941d38",
+      "size_bytes": 1020
+    },
+    {
+      "path": "diagnostic_summary.csv",
+      "sha256": "f7c540974b70632bf0988745eeac8f5671ab1e3e18e4aee4842d38672b422525",
+      "size_bytes": 383
+    },
+    {
+      "path": "failure_summary.csv",
+      "sha256": "b2d3f31c978346d16ab45f13bdb904dc7adf99a08e380cf46bcc313bbf943839",
+      "size_bytes": 171
+    },
+    {
+      "path": "mask_bootstrap_intervals.csv",
+      "sha256": "3cf3ce5af0a97128c3be4398119fc36dc322293bf4b8d7a4f155bd6254f8d870",
+      "size_bytes": 686
+    },
+    {
+      "path": "mask_recall_by_route.png",
+      "sha256": "8c9666a385fec4be121e9b58bb46cfc63e0e98313271910f4fefbb480cea3f82",
+      "size_bytes": 19768
+    },
+    {
+      "path": "mask_route_summary.csv",
+      "sha256": "ffd6e6fd0aa5aba09beb02840ac86f5e0046b11f1a318034c799b2e275bf376b",
+      "size_bytes": 1110
+    },
+    {
+      "path": "mask_subgroups.csv",
+      "sha256": "6527d80c7c8caa1849fd258cc375cd071d4e53148c2c5daddb81e9cd29627504",
+      "size_bytes": 34839
+    },
+    {
+      "path": "proposal_bootstrap_intervals.csv",
+      "sha256": "afb4fcc9e5229850dfa5f8179933770ef8778fdff9988bf0f51a66f8222b2af8",
+      "size_bytes": 728
+    },
+    {
+      "path": "proposal_matched_iou_distribution.png",
+      "sha256": "3496a827615cfcc0abd7e0a14a06a8543ee6df3268f3cfe624050ef8ef3802c7",
+      "size_bytes": 21021
+    },
+    {
+      "path": "proposal_precision_recall.png",
+      "sha256": "b6a0cb61a9e025fd45cdd15797a0c82ebd6e2073822b09687439aa55b4d00c56",
+      "size_bytes": 19162
+    },
+    {
+      "path": "proposal_subgroups.csv",
+      "sha256": "283f8e4c5a46330ea1b03c8be3f38802657038ed19e52bb4f07b517e246bd58c",
+      "size_bytes": 5262
+    },
+    {
+      "path": "proposal_summary.csv",
+      "sha256": "2b4675d53d07c5c46208bc8d94e21e656af0babb34be951cccf195177bc72f0d",
+      "size_bytes": 746
+    },
+    {
+      "path": "reference_box_mask_iou_distribution.png",
+      "sha256": "5f5095e54690167e8bbef996d1bbb7650f051b8d67aa2ddde2e27cd175d4c47a",
+      "size_bytes": 21906
+    },
+    {
+      "path": "run_record.json",
+      "sha256": "d884641459242439f0b19a3aca0718c2675ea7daae38bf58a6d6bc96378fe3b4",
+      "size_bytes": 6404
+    },
+    {
+      "path": "runtime_summary.json",
+      "sha256": "8071b4ccce41e3542e41af3b2fbc2c29d405e1e3394d68a983ea24d26b813dc9",
+      "size_bytes": 294
+    },
+    {
+      "path": "subgroup_bootstrap_intervals.csv",
+      "sha256": "44dcb526261c8434ec72d7378faec4e07a2279e066d08108fea3f3ab5d7d1b88",
+      "size_bytes": 45297
+    },
+    {
+      "path": "worst_subgroup_summary.csv",
+      "sha256": "87dbbeceba694346f3993676bfa576025fe2f6c3eb84a59d4c070517b8690084",
+      "size_bytes": 1075
+    }
+  ],
+  "manifest_content_sha256": "f57305f7a5e4fb081d780582adc57f611eaf68346a3e48ce03c42b852b5fb96e",
+  "schema_version": 1
+}

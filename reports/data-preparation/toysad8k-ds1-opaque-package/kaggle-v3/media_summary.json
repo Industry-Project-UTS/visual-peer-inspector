@@ -1,0 +1,11 @@
+{
+  "height": 256,
+  "image_count": 2000,
+  "maximum_image_kib": 168.514,
+  "mean_image_kib": 125.96,
+  "media_mode": "RGBA",
+  "median_image_kib": 124.63,
+  "minimum_image_kib": 98.193,
+  "total_media_mib": 246.017,
+  "width": 256
+}

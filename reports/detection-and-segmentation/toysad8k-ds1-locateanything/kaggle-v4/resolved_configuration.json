@@ -1,0 +1,14 @@
+{
+  "do_sample": true,
+  "generation_mode": "hybrid",
+  "max_new_tokens": 8192,
+  "model_id": "nvidia/LocateAnything-3B",
+  "model_revision": "c32291ca5e996f5a7a485845b4f57a233936bba0",
+  "prompt": "object",
+  "repetition_penalty": 1.1,
+  "seed": 32040,
+  "temperature": 0.7,
+  "top_k": 0,
+  "top_p": 0.9,
+  "upscale_factor": 1
+}

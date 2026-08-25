@@ -1,0 +1,26 @@
+{
+  "device": {
+    "compute_capability": "7.5",
+    "cuda_available": true,
+    "device_count": 2,
+    "device_name": "Tesla T4",
+    "total_memory_gib": 14.562
+  },
+  "inference_stage": "full",
+  "platform_versions": {
+    "code_dataset_version": "36",
+    "cuda_runtime": "12.8",
+    "cudnn": "91002",
+    "kaggle_container_image": "unavailable",
+    "kaggle_kernel_run_type": "Batch",
+    "kaggle_notebook_version_04_1": "4",
+    "numpy": "2.0.2",
+    "pillow": "11.3.0",
+    "python": "3.12.13",
+    "torch": "2.10.0+cu128",
+    "torchvision": "0.25.0+cu128",
+    "transformers": "4.57.1"
+  },
+  "python_version": "3.12.13",
+  "run_mode": "model_inference"
+}

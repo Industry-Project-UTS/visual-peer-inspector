@@ -13,12 +13,17 @@ describe a next step that has since been completed. Use the current
 | Week 5 | [SAM 2.1 DS0](week-05-sam21-ds0.md) | Reference-box and automatic-box masks completed |
 | Week 5 | [Proposal and mask evaluation](week-05-proposal-mask-evaluation.md) | Eight evaluation gates passed; DS1 supported |
 | Week 6 | [Representation and peer scores](week-06-representation-peer-scores.md) | B0, B1, P1 and bounded encoder screen completed on DS0 |
+| Week 6 | [DS1 detection and segmentation](week-06-ds1-detection-and-segmentation.md) | Reference-box SAM passed; the automatic proposal route needs refinement |
 
 ## Current position
 
-Notebooks 01 to 07 are complete as candidate evidence. The next experiment is
-the 100-scene DS1 representation and encoder screen. Notebook 08 begins after
-the encoder and scorer are frozen.
+Notebooks 01 to 07 are complete on DS0. Notebooks 03.1 to 06.1 are also
+complete on the 100-scene DS1 development screen using clean source snapshots.
+The next experiment is the DS1 representation and encoder screen. Notebook 08
+begins after the encoder and scorer are frozen.
 
-Current completion does not freeze the automatic deployment route. That choice
-depends on wider evaluation, DINOv3 access and downstream fusion evidence.
+The automatic deployment route is not frozen. The DS1 evaluator supports the
+reference-box SAM 2.1 route but requires LocateAnything to be refined or
+replaced. The supplied-mask and reference-box routes can continue into
+representation testing while the automatic proposal route remains
+experimental.
