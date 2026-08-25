@@ -30,11 +30,13 @@ from visual_peer_inspector.evaluation.proposals import (
     evaluate_proposal_dataset,
     summarize_proposal_evaluation,
 )
+from visual_peer_inspector.evaluation.proposal_history import (
+    resolve_committed_proposal_history,
+)
 from visual_peer_inspector.evidence import save_bar_chart, save_histogram, save_scatter_plot, write_csv_rows
 from visual_peer_inspector.models.sam2 import binary_mask_sha256, decode_binary_mask, encode_binary_mask
 from visual_peer_inspector.models.locateanything import (
     MODEL_PRODUCER_KIND as LOCATEANYTHING_MODEL_PRODUCER_KIND,
-    validate_proposal_result,
 )
 from visual_peer_inspector.models.sam2 import MODEL_PRODUCER_KIND as SAM_MODEL_PRODUCER_KIND
 
@@ -232,9 +234,8 @@ def _verify_upstream_identity(
     sam_root: Path,
     proposal_path: Path,
     sam_path: Path,
-    proposal_rows: Sequence[Mapping[str, Any]],
     sam_rows: Sequence[Mapping[str, Any]],
-) -> dict[str, str]:
+) -> tuple[dict[str, str], list[dict[str, Any]]]:
     """Bind the evaluator to exact accepted model runs and their prompt chain."""
 
     evaluator_record = json.loads(
@@ -267,31 +268,45 @@ def _verify_upstream_identity(
         )
     ):
         raise ValueError("Notebook 04.1 evidence is not a completed DS1 model run")
-    for row in proposal_rows:
-        validate_proposal_result(row)
     proposal_config = str(proposal_run.get("configuration_sha256", ""))
-    proposal_inputs = {str(row["input_manifest_sha256"]) for row in proposal_rows}
+    proposal_configuration = proposal_run.get("configuration", {})
+    proposal_model_id = str(proposal_configuration.get("model_id", ""))
+    proposal_model_revision = str(
+        proposal_configuration.get("model_revision", "")
+    )
     proposal_output_identity = proposal_run.get("output_identity", {})
+    proposal_results_sha256 = file_sha256(proposal_path)
     if (
-        len(proposal_inputs) != 1
-        or {str(row["configuration_sha256"]) for row in proposal_rows}
-        != {proposal_config}
-        or {str(row["producer_kind"]) for row in proposal_rows}
-        != {LOCATEANYTHING_MODEL_PRODUCER_KIND}
-        or any(row.get("status") != "ok" for row in proposal_rows)
-        or proposal_output_identity.get("result_filename") != "proposal_results.jsonl"
-        or proposal_output_identity.get("result_sha256") != file_sha256(proposal_path)
+        not proposal_config
+        or not proposal_model_id
+        or not proposal_model_revision
+        or proposal_output_identity.get("result_filename")
+        != "proposal_results.jsonl"
+        or proposal_output_identity.get("result_sha256")
+        != proposal_results_sha256
         or proposal_output_identity.get("proposal_results_sha256")
-        != file_sha256(proposal_path)
-        or int(proposal_output_identity.get("result_count", -1)) != len(proposal_rows)
+        != proposal_results_sha256
     ):
-        raise ValueError("Notebook 04.1 proposal rows differ from their accepted run")
-    model_input_manifest_sha256 = next(iter(proposal_inputs))
-    if (
-        crosswalk_record.get("model_input_manifest_sha256")
-        != model_input_manifest_sha256
-    ):
-        raise ValueError("Evaluator crosswalk identifies another RGB manifest")
+        raise ValueError("Notebook 04.1 run does not commit its proposal history")
+    model_input_manifest_sha256 = str(
+        crosswalk_record.get("model_input_manifest_sha256", "")
+    )
+    resolved_proposals = resolve_committed_proposal_history(
+        proposal_path,
+        configuration_sha256=proposal_config,
+        producer_kind=LOCATEANYTHING_MODEL_PRODUCER_KIND,
+        expected_file_sha256=proposal_results_sha256,
+        expected_result_count=int(
+            proposal_output_identity.get("result_count", -1)
+        ),
+        expected_cohort_id=DS1_SCREEN_CONTRACT.cohort_id,
+        expected_input_manifest_sha256=model_input_manifest_sha256,
+        expected_model_id=proposal_model_id,
+        expected_model_revision=proposal_model_revision,
+    )
+    proposal_rows = list(resolved_proposals.latest_rows)
+    if len(proposal_rows) != DS1_SCREEN_CONTRACT.image_count:
+        raise ValueError("Notebook 04.1 latest proposal coverage is incomplete")
 
     sam_safe = sam_root / "safe"
     sam_private = sam_root / "private"
@@ -353,7 +368,7 @@ def _verify_upstream_identity(
         "model_input_manifest_sha256": model_input_manifest_sha256,
         "proposal_configuration_sha256": proposal_config,
         "sam_configuration_sha256": sam_configuration,
-    }
+    }, proposal_rows
 
 
 def _dimension_values(row: Mapping[str, Any], dimension: str) -> list[str]:
@@ -704,17 +719,15 @@ def run_ds1_mask_evaluation(
     crosswalk = read_jsonl(evaluator_root / "evaluator_crosswalk.jsonl")
     proposal_path = _result_path(proposal_output_root, "proposal_results.jsonl")
     sam_path = _result_path(sam_output_root, "mask_results.jsonl")
-    proposal_rows = read_jsonl(proposal_path)
     sam_rows = read_jsonl(sam_path)
-    if len(proposal_rows) != DS1_SCREEN_CONTRACT.image_count or len(sam_rows) != DS1_SCREEN_CONTRACT.image_count:
-        raise ValueError("DS1 proposal and SAM results must cover all 2,000 images")
-    upstream_identity = _verify_upstream_identity(
+    if len(sam_rows) != DS1_SCREEN_CONTRACT.image_count:
+        raise ValueError("DS1 SAM results must cover all 2,000 images")
+    upstream_identity, proposal_rows = _verify_upstream_identity(
         evaluator_root,
         proposal_output_root,
         sam_output_root,
         proposal_path,
         sam_path,
-        proposal_rows,
         sam_rows,
     )
 

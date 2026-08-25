@@ -10,9 +10,16 @@ from typing import Any, Iterable, Mapping
 
 from visual_peer_inspector.data.cohort_contract import DS1_SCREEN_CONTRACT
 from visual_peer_inspector.data.model_safe_package import canonical_json_bytes, file_sha256, membership_sha256, read_jsonl
-from visual_peer_inspector.data.sam_prompt_package_ds1 import verify_ds1_sam_prompt_package
+from visual_peer_inspector.data.sam_prompt_package_ds1 import (
+    _verify_safe_artifact_manifest,
+    verify_ds1_sam_prompt_package,
+)
+from visual_peer_inspector.evaluation.proposal_history import (
+    resolve_committed_proposal_history,
+)
 from visual_peer_inspector.evaluation.proposal_reference_ds1 import verify_ds1_geometry_package
 from visual_peer_inspector.evaluation.proposals import evaluate_proposal_dataset
+from visual_peer_inspector.models.locateanything import MODEL_PRODUCER_KIND
 
 
 PACKAGE_KIND = "ds1-sam-evaluator-crosswalk"
@@ -47,12 +54,103 @@ def build_ds1_sam_evaluator_crosswalk(
     geometry_record = verify_ds1_geometry_package(geometry_root)
     prompt_rows = read_jsonl(prompt_root / "sam_prompt_manifest.jsonl")
     geometry_rows = read_jsonl(geometry_root / "reference_manifest.jsonl")
-    proposal_rows = read_jsonl(proposal_results_path)
     upstream = json.loads((prompt_root / "upstream_decision.json").read_text(encoding="utf-8"))
     if upstream.get("geometry_manifest_sha256") != file_sha256(geometry_root / "reference_manifest.jsonl"):
         raise ValueError("DS1 prompt package identifies another geometry manifest")
     if upstream.get("proposal_results_sha256") != file_sha256(proposal_results_path):
         raise ValueError("DS1 prompt package identifies another proposal result set")
+
+    proposal_root = proposal_results_path.parent.parent
+    if proposal_results_path != proposal_root / "private" / "proposal_results.jsonl":
+        raise ValueError("DS1 proposal history is outside the accepted output layout")
+    proposal_run_path = proposal_root / "safe" / "run_record.json"
+    proposal_manifest_path = proposal_root / "safe" / "artifact_manifest.json"
+    if (
+        not proposal_run_path.is_file()
+        or not proposal_manifest_path.is_file()
+        or upstream.get("proposal_run_record_sha256")
+        != file_sha256(proposal_run_path)
+        or upstream.get("proposal_artifact_manifest_sha256")
+        != file_sha256(proposal_manifest_path)
+    ):
+        raise ValueError("DS1 prompt package identifies another proposal run")
+    _verify_safe_artifact_manifest(proposal_manifest_path)
+    proposal_run = json.loads(proposal_run_path.read_text(encoding="utf-8"))
+    expected_cohort = {
+        key: getattr(DS1_SCREEN_CONTRACT, key)
+        for key in (
+            "cohort_id",
+            "release_id",
+            "role",
+            "pilot_stage",
+            "membership_sha256",
+            "scene_count",
+            "views_per_scene",
+            "image_count",
+            "asset_group_count",
+        )
+    }
+    if (
+        proposal_run.get("stage") != "ds1_locateanything_screen"
+        or proposal_run.get("status") != "completed"
+        or proposal_run.get("completion_gate_passed") is not True
+        or proposal_run.get("run_mode") != "model_inference"
+        or proposal_run.get("inference_stage") != "full"
+        or proposal_run.get("producer_kind") != MODEL_PRODUCER_KIND
+        or any(
+            proposal_run.get("cohort", {}).get(key) != value
+            for key, value in expected_cohort.items()
+        )
+    ):
+        raise ValueError("DS1 crosswalk requires an accepted proposal run")
+    configuration_sha256 = str(proposal_run.get("configuration_sha256", ""))
+    configuration = proposal_run.get("configuration", {})
+    model_id = str(configuration.get("model_id", ""))
+    model_revision = str(configuration.get("model_revision", ""))
+    output_identity = proposal_run.get("output_identity", {})
+    full_history_sha256 = file_sha256(proposal_results_path)
+    if (
+        configuration_sha256 != upstream.get("proposal_configuration_sha256")
+        or model_id != upstream.get("proposal_model_id")
+        or model_revision != upstream.get("proposal_model_revision")
+        or output_identity.get("result_filename") != "proposal_results.jsonl"
+        or output_identity.get("result_sha256") != full_history_sha256
+        or output_identity.get("proposal_results_sha256") != full_history_sha256
+    ):
+        raise ValueError("DS1 proposal run identity differs from the prompt package")
+    resolved = resolve_committed_proposal_history(
+        proposal_results_path,
+        configuration_sha256=configuration_sha256,
+        producer_kind=MODEL_PRODUCER_KIND,
+        expected_file_sha256=full_history_sha256,
+        expected_result_count=int(output_identity.get("result_count", -1)),
+        expected_cohort_id=DS1_SCREEN_CONTRACT.cohort_id,
+        expected_input_manifest_sha256=str(prompt_record["model_manifest_sha256"]),
+        expected_model_id=model_id,
+        expected_model_revision=model_revision,
+    )
+    proposal_rows = list(resolved.latest_rows)
+    if len(proposal_rows) != DS1_SCREEN_CONTRACT.image_count:
+        raise ValueError("DS1 proposal latest rows do not cover all images")
+    prompt_by_image = {
+        (str(row["opaque_scene_id"]), str(row["view_id"])): row
+        for row in prompt_rows
+    }
+    proposal_by_image = {
+        (str(row["opaque_scene_id"]), str(row["view_id"])): row
+        for row in proposal_rows
+    }
+    if (
+        len(prompt_by_image) != len(prompt_rows)
+        or len(proposal_by_image) != len(proposal_rows)
+        or set(proposal_by_image) != set(prompt_by_image)
+        or any(
+            str(row["image_sha256"])
+            != str(prompt_by_image[key]["image_sha256"])
+            for key, row in proposal_by_image.items()
+        )
+    ):
+        raise ValueError("DS1 proposal latest rows identify different RGB inputs")
 
     evaluation = evaluate_proposal_dataset(reference_rows=geometry_rows, proposal_rows=proposal_rows)
     match_by_proposal = {
@@ -151,6 +249,8 @@ def build_ds1_sam_evaluator_crosswalk(
         "geometry_package_record_sha256": file_sha256(geometry_root / "package_record.json"),
         "geometry_manifest_sha256": geometry_record["reference_manifest_sha256"],
         "proposal_results_sha256": file_sha256(proposal_results_path),
+        "proposal_history_row_count": len(resolved.history_rows),
+        "proposal_result_count": len(proposal_rows),
         "crosswalk_sha256": sha256(crosswalk_bytes).hexdigest(),
         "content_checksums_sha256": sha256(checksum_bytes).hexdigest(),
         "all_checks_passed": True,
@@ -199,6 +299,12 @@ def verify_ds1_sam_evaluator_crosswalk(root: Path) -> dict[str, Any]:
     route_counts = {route: sum(row["route"] == route for row in rows) for route in ("reference_box", "automatic_box")}
     if route_counts["reference_box"] != int(record["reference_prompt_count"]) or route_counts["automatic_box"] != int(record["automatic_prompt_count"]):
         raise ValueError("DS1 evaluator crosswalk route counts differ")
+    if (
+        int(record.get("proposal_result_count", -1)) != contract.image_count
+        or int(record.get("proposal_history_row_count", -1))
+        < int(record["proposal_result_count"])
+    ):
+        raise ValueError("DS1 evaluator crosswalk proposal history counts differ")
     for key in (
         "prompt_package_record_sha256",
         "prompt_manifest_sha256",

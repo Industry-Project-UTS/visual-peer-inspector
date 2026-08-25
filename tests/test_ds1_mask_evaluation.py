@@ -506,22 +506,38 @@ def test_ds1_workflow_reports_metrics_and_builds_label_free_routes(tmp_path, mon
         })
     proposal_root = tmp_path / "proposals"
     sam_root = tmp_path / "sam"
-    _write_jsonl(proposal_root / "private" / "proposal_results.jsonl", proposal_rows)
+    proposal_history_rows = [
+        {
+            **proposal_rows[0],
+            "status": "error",
+            "proposal_count": 0,
+            "boxes_xyxy": [],
+            "runtime_seconds": 99.0,
+        },
+        *proposal_rows,
+    ]
+    _write_jsonl(
+        proposal_root / "private" / "proposal_results.jsonl",
+        proposal_history_rows,
+    )
     _write_jsonl(sam_root / "private" / "mask_results.jsonl", sam_rows)
     monkeypatch.setattr(
         mask_evaluation_ds1,
         "_verify_upstream_identity",
-        lambda *args, **kwargs: {
-            "proposal_run_record_sha256": "5" * 64,
-            "proposal_artifact_manifest_sha256": "6" * 64,
-            "sam_run_record_sha256": "7" * 64,
-            "sam_artifact_manifest_sha256": "8" * 64,
-            "prompt_package_record_sha256": "1" * 64,
-            "prompt_manifest_sha256": "5" * 64,
-            "model_input_manifest_sha256": "9" * 64,
-            "proposal_configuration_sha256": "a" * 64,
-            "sam_configuration_sha256": "b" * 64,
-        },
+        lambda *args, **kwargs: (
+            {
+                "proposal_run_record_sha256": "5" * 64,
+                "proposal_artifact_manifest_sha256": "6" * 64,
+                "sam_run_record_sha256": "7" * 64,
+                "sam_artifact_manifest_sha256": "8" * 64,
+                "prompt_package_record_sha256": "1" * 64,
+                "prompt_manifest_sha256": "5" * 64,
+                "model_input_manifest_sha256": "9" * 64,
+                "proposal_configuration_sha256": "a" * 64,
+                "sam_configuration_sha256": "b" * 64,
+            },
+            proposal_rows,
+        ),
     )
     output = tmp_path / "evaluation"
     record = mask_evaluation_ds1.run_ds1_mask_evaluation(
@@ -534,6 +550,9 @@ def test_ds1_workflow_reports_metrics_and_builds_label_free_routes(tmp_path, mon
         bootstrap_seed=7,
     )
     assert record["component_decision"]["status"] == "proceed_with_locateanything_and_sam21"
+    assert record["coverage"]["proposal_images"] == 4
+    assert record["proposal_summary"]["image_count"] == 4
+    assert record["runtime"]["proposal_total_seconds"] == pytest.approx(0.8)
     assert (output / "safe" / "proposal_subgroups.csv").is_file()
     assert (output / "safe" / "mask_bootstrap_intervals.csv").is_file()
     model_text = (output / "model_input" / "mask_routes.jsonl").read_text(encoding="utf-8").lower()
@@ -652,7 +671,6 @@ def test_mask_route_contract_rejects_unknown_automatic_peer(monkeypatch):
 def test_upstream_identity_rejects_another_rgb_manifest(tmp_path, monkeypatch):
     contract = _small_contract()
     monkeypatch.setattr(mask_evaluation_ds1, "DS1_SCREEN_CONTRACT", contract)
-    monkeypatch.setattr(mask_evaluation_ds1, "validate_proposal_result", lambda row: None)
     cohort = {
         key: getattr(contract, key)
         for key in (
@@ -708,6 +726,10 @@ def test_upstream_identity_rejects_another_rgb_manifest(tmp_path, monkeypatch):
         "producer_kind": mask_evaluation_ds1.LOCATEANYTHING_MODEL_PRODUCER_KIND,
         "completion_gate_passed": True,
         "cohort": cohort,
+        "configuration": {
+            "model_id": "test-model",
+            "model_revision": "test-revision",
+        },
         "configuration_sha256": "d" * 64,
         "output_identity": {
             "result_filename": "proposal_results.jsonl",
@@ -756,16 +778,27 @@ def test_upstream_identity_rejects_another_rgb_manifest(tmp_path, monkeypatch):
     }
     crosswalk_record_path = evaluator_root / "crosswalk_package_record.json"
     crosswalk_record_path.write_text(json.dumps(crosswalk_record), encoding="utf-8")
-    verified = mask_evaluation_ds1._verify_upstream_identity(
+    class _Resolved:
+        latest_rows = tuple(proposal_rows)
+
+    def resolve(*args, **kwargs):
+        if kwargs["expected_input_manifest_sha256"] != "a" * 64:
+            raise ValueError("Proposal history identifies another model-input manifest")
+        return _Resolved()
+
+    monkeypatch.setattr(
+        mask_evaluation_ds1, "resolve_committed_proposal_history", resolve
+    )
+    verified, latest = mask_evaluation_ds1._verify_upstream_identity(
         evaluator_root,
         proposal_root,
         sam_root,
         proposal_path,
         sam_path,
-        proposal_rows,
         sam_rows,
     )
     assert verified["model_input_manifest_sha256"] == "a" * 64
+    assert latest == proposal_rows
     crosswalk_record["model_input_manifest_sha256"] = "f" * 64
     crosswalk_record_path.write_text(json.dumps(crosswalk_record), encoding="utf-8")
     try:
@@ -775,10 +808,9 @@ def test_upstream_identity_rejects_another_rgb_manifest(tmp_path, monkeypatch):
             sam_root,
             proposal_path,
             sam_path,
-            proposal_rows,
             sam_rows,
         )
     except ValueError as error:
-        assert "RGB manifest" in str(error)
+        assert "model-input manifest" in str(error)
     else:
         raise AssertionError("Another RGB manifest was accepted")
