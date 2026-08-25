@@ -1,4 +1,4 @@
-"""Build the code-only Kaggle input for the staged DS0 notebooks."""
+"""Build the code-only Kaggle input for the staged evaluation notebooks."""
 
 from __future__ import annotations
 
@@ -26,7 +26,56 @@ NOTEBOOK_TARGETS = {
         "notebooks/representation-and-scoring/toysad8k-ds0-peer-scores/"
         "07-toysad8k-ds0-representation-and-peer-scores.ipynb"
     ): Path("notebooks/07-toysad8k-ds0-representation-and-peer-scores.ipynb"),
+    Path(
+        "notebooks/data-preparation/toysad8k-ds1-opaque-package/"
+        "03.1-toysad8k-ds1-opaque-package.ipynb"
+    ): Path(
+        "notebooks/data-preparation/toysad8k-ds1-opaque-package/"
+        "03.1-toysad8k-ds1-opaque-package.ipynb"
+    ),
+    Path(
+        "notebooks/detection-and-segmentation/toysad8k-ds1-locateanything/"
+        "04.1-toysad8k-ds1-locateanything-screen.ipynb"
+    ): Path(
+        "notebooks/detection-and-segmentation/toysad8k-ds1-locateanything/"
+        "04.1-toysad8k-ds1-locateanything-screen.ipynb"
+    ),
+    Path(
+        "notebooks/detection-and-segmentation/toysad8k-ds1-sam21/"
+        "05.1-toysad8k-ds1-sam21-segmentation.ipynb"
+    ): Path(
+        "notebooks/detection-and-segmentation/toysad8k-ds1-sam21/"
+        "05.1-toysad8k-ds1-sam21-segmentation.ipynb"
+    ),
+    Path(
+        "notebooks/detection-and-segmentation/toysad8k-ds1-mask-evaluation/"
+        "06.1-toysad8k-ds1-proposal-and-mask-evaluation.ipynb"
+    ): Path(
+        "notebooks/detection-and-segmentation/toysad8k-ds1-mask-evaluation/"
+        "06.1-toysad8k-ds1-proposal-and-mask-evaluation.ipynb"
+    ),
 }
+
+DS1_NOTEBOOK_PATHS = frozenset(
+    {
+        Path(
+            "notebooks/data-preparation/toysad8k-ds1-opaque-package/"
+            "03.1-toysad8k-ds1-opaque-package.ipynb"
+        ),
+        Path(
+            "notebooks/detection-and-segmentation/toysad8k-ds1-locateanything/"
+            "04.1-toysad8k-ds1-locateanything-screen.ipynb"
+        ),
+        Path(
+            "notebooks/detection-and-segmentation/toysad8k-ds1-sam21/"
+            "05.1-toysad8k-ds1-sam21-segmentation.ipynb"
+        ),
+        Path(
+            "notebooks/detection-and-segmentation/toysad8k-ds1-mask-evaluation/"
+            "06.1-toysad8k-ds1-proposal-and-mask-evaluation.ipynb"
+        ),
+    }
+)
 
 SOURCE_ROOTS = (
     Path("src/visual_peer_inspector"),
@@ -42,6 +91,27 @@ ALLOWED_SUFFIXES = {
     Path("tests"): {".py"},
 }
 
+FORBIDDEN_FILE_NAMES = frozenset(
+    {
+        ".env",
+        "clearml.conf",
+        "credentials.json",
+        "kaggle.json",
+        "secrets.json",
+    }
+)
+FORBIDDEN_PATH_PARTS = frozenset(
+    {
+        "__pycache__",
+        ".git",
+        ".local",
+        ".venv",
+        "outputs",
+        "private-vault",
+        "transfers",
+    }
+)
+
 
 def file_sha256(path: Path) -> str:
     digest = sha256()
@@ -52,13 +122,55 @@ def file_sha256(path: Path) -> str:
 
 
 def _source_files(root: Path, suffixes: set[str]) -> Iterable[Path]:
-    return sorted(
-        path
-        for path in root.rglob("*")
+    files: list[Path] = []
+    for path in sorted(root.rglob("*")):
+        if path.is_symlink():
+            raise ValueError(f"Snapshot source cannot contain a symlink: {path}")
+        if not path.is_file() or path.suffix not in suffixes:
+            continue
+        relative = path.relative_to(REPOSITORY_ROOT)
+        if path.name.lower() in FORBIDDEN_FILE_NAMES or any(
+            part.lower() in FORBIDDEN_PATH_PARTS for part in relative.parts
+        ):
+            continue
+        files.append(path)
+    return files
+
+
+def verify_snapshot_record(payload_root: Path) -> dict[str, object]:
+    """Verify the complete snapshot inventory, hashes and aggregate digest."""
+
+    payload_root = payload_root.expanduser().resolve()
+    record_path = payload_root / "snapshot_record.json"
+    record = json.loads(record_path.read_text(encoding="utf-8"))
+    files = record.get("files")
+    if not isinstance(files, dict) or not files:
+        raise ValueError("Snapshot record does not contain file hashes")
+    if int(record.get("file_count", -1)) != len(files):
+        raise ValueError("Snapshot record file count differs")
+    verified_lines = []
+    for name, digest in sorted(files.items()):
+        relative = Path(str(name))
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError("Snapshot record contains an unsafe path")
+        path = payload_root / relative
+        if path.is_symlink() or not path.is_file():
+            raise ValueError(f"Snapshot record file is missing or unsafe: {name}")
+        if file_sha256(path) != digest:
+            raise ValueError(f"Snapshot record hash mismatch: {name}")
+        verified_lines.append(f"{digest}  {name}\n")
+    expected_files = set(files) | {"snapshot_record.json"}
+    actual_files = {
+        path.relative_to(payload_root).as_posix()
+        for path in payload_root.rglob("*")
         if path.is_file()
-        and path.suffix in suffixes
-        and "__pycache__" not in path.parts
-    )
+    }
+    if actual_files != expected_files:
+        raise ValueError("Snapshot payload contains an undeclared or missing file")
+    aggregate = sha256("".join(verified_lines).encode("utf-8")).hexdigest()
+    if aggregate != record.get("snapshot_sha256"):
+        raise ValueError("Snapshot aggregate SHA-256 differs")
+    return record
 
 
 def _git_state() -> tuple[str, bool]:
@@ -83,6 +195,10 @@ def build_snapshot(
     notebook_version_05: str,
     notebook_version_06: str,
     notebook_version_07: str,
+    notebook_version_03_1: str = "pending",
+    notebook_version_04_1: str = "pending",
+    notebook_version_05_1: str = "pending",
+    notebook_version_06_1: str = "pending",
 ) -> Path:
     output_root = output_root.resolve()
     if output_root.exists():
@@ -103,7 +219,7 @@ def build_snapshot(
 
     for source_relative in SOURCE_ROOTS:
         source_root = REPOSITORY_ROOT / source_relative
-        if not source_root.is_dir():
+        if source_root.is_symlink() or not source_root.is_dir():
             raise FileNotFoundError(f"Snapshot source is missing: {source_relative}")
         for source_file in _source_files(
             source_root, ALLOWED_SUFFIXES[source_relative]
@@ -116,12 +232,20 @@ def build_snapshot(
 
     for source_relative, target_relative in NOTEBOOK_TARGETS.items():
         source = REPOSITORY_ROOT / source_relative
-        if not source.is_file():
+        if source.is_symlink() or not source.is_file():
             raise FileNotFoundError(f"Snapshot notebook is missing: {source_relative}")
+        if target_relative in copied:
+            raise ValueError(f"Snapshot target is duplicated: {target_relative}")
         destination = payload_root / target_relative
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, destination)
         copied.append(target_relative)
+
+    missing_ds1_notebooks = DS1_NOTEBOOK_PATHS.difference(copied)
+    if missing_ds1_notebooks:
+        raise RuntimeError(
+            f"Snapshot omits DS1 notebook paths: {sorted(map(str, missing_ds1_notebooks))}"
+        )
 
     file_hashes = {
         relative.as_posix(): file_sha256(payload_root / relative)
@@ -145,6 +269,10 @@ def build_snapshot(
             "kaggle_notebook_version_05": str(notebook_version_05),
             "kaggle_notebook_version_06": str(notebook_version_06),
             "kaggle_notebook_version_07": str(notebook_version_07),
+            "kaggle_notebook_version_03_1": str(notebook_version_03_1),
+            "kaggle_notebook_version_04_1": str(notebook_version_04_1),
+            "kaggle_notebook_version_05_1": str(notebook_version_05_1),
+            "kaggle_notebook_version_06_1": str(notebook_version_06_1),
             "code_dataset_version": str(code_dataset_version),
             "model_input_dataset_version": "1",
             "prompt_dataset_version": "1",
@@ -156,14 +284,7 @@ def build_snapshot(
         encoding="utf-8",
     )
 
-    actual_files = {
-        path.relative_to(payload_root).as_posix()
-        for path in payload_root.rglob("*")
-        if path.is_file()
-    }
-    expected_files = set(file_hashes) | {"snapshot_record.json"}
-    if actual_files != expected_files:
-        raise RuntimeError("Snapshot contains undeclared or missing payload files")
+    verify_snapshot_record(payload_root)
 
     metadata = {
         "title": "Visual Peer Inspector Code Snapshot",
@@ -185,6 +306,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--notebook-version-05", required=True)
     parser.add_argument("--notebook-version-06", required=True)
     parser.add_argument("--notebook-version-07", required=True)
+    parser.add_argument("--notebook-version-03-1", default="pending")
+    parser.add_argument("--notebook-version-04-1", default="pending")
+    parser.add_argument("--notebook-version-05-1", default="pending")
+    parser.add_argument("--notebook-version-06-1", default="pending")
     parser.add_argument("--allow-dirty", action="store_true")
     return parser.parse_args()
 
@@ -199,5 +324,9 @@ if __name__ == "__main__":
             notebook_version_05=arguments.notebook_version_05,
             notebook_version_06=arguments.notebook_version_06,
             notebook_version_07=arguments.notebook_version_07,
+            notebook_version_03_1=arguments.notebook_version_03_1,
+            notebook_version_04_1=arguments.notebook_version_04_1,
+            notebook_version_05_1=arguments.notebook_version_05_1,
+            notebook_version_06_1=arguments.notebook_version_06_1,
         )
     )

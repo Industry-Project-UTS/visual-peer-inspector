@@ -984,13 +984,17 @@ def collect_proposal_evidence(
         },
     ]
     overlay_items: list[dict[str, Any]] = []
-    for scene_index, scene_id in enumerate(sorted(scene_groups), 1):
-        key = (scene_id, "V00")
+    coverage_scenes = sorted(scene_groups)[:20]
+    coverage_views = sorted(view_groups)[:20]
+    for scene_index, (scene_id, view_id) in enumerate(
+        zip(coverage_scenes, coverage_views, strict=True), 1
+    ):
+        key = (scene_id, view_id)
         job = job_by_key[key]
         row = latest[key]
         overlay_items.append(
             {
-                "label": f"Scene {scene_index:02d} / V00",
+                "label": f"Scene {scene_index:02d} / {view_id}",
                 "path": job.image_path,
                 "boxes": row["boxes_xyxy"],
             }

@@ -16,6 +16,7 @@ import zipfile
 
 from PIL import Image
 
+from .cohort_contract import CohortContract, DS1_SCREEN_CONTRACT
 from .toysad_selection import RELEASE_ID, validate_model_facing_media_record
 
 
@@ -43,6 +44,23 @@ EXPECTED_ADMINISTRATIVE_CHECKSUM_MANIFEST_SHA256 = (
 EXPECTED_SOURCE_CHECKSUM_MANIFEST_SHA256 = (
     "0630cc7c011bbea0b80036c9ea4d71f6abd6fc178ff105c84ef3543ad9a0b6fa"
 )
+
+SMOKE20_CONTRACT = CohortContract(
+    cohort_id=SMOKE20_COHORT_ID,
+    release_id=RELEASE_ID,
+    role="development",
+    pilot_stage="screen_100",
+    membership_sha256=SMOKE20_MEMBERSHIP_SHA256,
+    scene_count=EXPECTED_SCENE_COUNT,
+    views_per_scene=EXPECTED_VIEWS_PER_SCENE,
+    image_count=EXPECTED_SCENE_COUNT * EXPECTED_VIEWS_PER_SCENE,
+    asset_group_count=EXPECTED_SCENE_COUNT,
+)
+
+_COHORT_CONTRACTS = {
+    contract.cohort_id: contract
+    for contract in (SMOKE20_CONTRACT, DS1_SCREEN_CONTRACT)
+}
 
 _FORBIDDEN_MODEL_FIELD_PARTS = (
     "anomaly",
@@ -220,6 +238,77 @@ def choose_smoke20_rows(
     return selected, audit
 
 
+def cohort_contract_for(cohort_id: str) -> CohortContract:
+    """Return the frozen contract for a supported model-safe cohort."""
+
+    try:
+        return _COHORT_CONTRACTS[cohort_id]
+    except KeyError as error:
+        raise ValueError(f"Unsupported model-safe cohort: {cohort_id}") from error
+
+
+def select_contract_rows(
+    development_source_rows: Sequence[Mapping[str, Any]],
+    contract: CohortContract,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Select and verify every trusted row declared by a cohort contract."""
+
+    selected = [
+        dict(row)
+        for row in development_source_rows
+        if row.get("role") == contract.role
+        and row.get("pilot_stage") == contract.pilot_stage
+    ]
+    required_fields = {
+        "opaque_scene_id",
+        "opaque_asset_group_id",
+        "category",
+        "object_count",
+        "anomaly_count",
+        "raw_anomaly_prefixes",
+    }
+    for row in selected:
+        missing = required_fields.difference(row)
+        if missing:
+            raise ValueError(f"Cohort row is missing fields: {sorted(missing)}")
+    if len(selected) != contract.scene_count:
+        raise ValueError(
+            f"Expected {contract.scene_count} cohort scenes, found {len(selected)}"
+        )
+    scene_ids = [str(row["opaque_scene_id"]) for row in selected]
+    if len(scene_ids) != len(set(scene_ids)):
+        raise ValueError("Cohort contains duplicate opaque scene IDs")
+    observed_membership = membership_sha256(scene_ids)
+    if observed_membership != contract.membership_sha256:
+        raise ValueError("Cohort does not match the frozen membership hash")
+    asset_ids = {str(row["opaque_asset_group_id"]) for row in selected}
+    if len(asset_ids) != contract.asset_group_count:
+        raise ValueError(
+            "Cohort asset-group count does not match the frozen contract"
+        )
+    categories = {str(row["category"]) for row in selected}
+    prefixes = {
+        str(prefix)
+        for row in selected
+        for prefix in row["raw_anomaly_prefixes"]
+    }
+    strata = {
+        (int(row["object_count"]), int(row["anomaly_count"]))
+        for row in selected
+    }
+    audit = {
+        "cohort_id": contract.cohort_id,
+        "membership_sha256": observed_membership,
+        "scene_count": len(selected),
+        "asset_group_count": len(asset_ids),
+        "category_count": len(categories),
+        "prefix_coverage_count": len(prefixes),
+        "stratum_coverage_count": len(strata),
+        "all_checks_passed": True,
+    }
+    return sorted(selected, key=lambda row: str(row["opaque_scene_id"])), audit
+
+
 def _assert_no_forbidden_fields(value: Any, location: str = "root") -> None:
     if isinstance(value, Mapping):
         for key, child in value.items():
@@ -343,6 +432,7 @@ def verify_trusted_package_inputs(
     administrative_root: Path,
     source_root: Path,
     verify_archive_bytes: bool = True,
+    expected_image_count: int = EXPECTED_SCENE_COUNT * EXPECTED_VIEWS_PER_SCENE,
 ) -> dict[str, Any]:
     """Verify the trusted inputs before building a model-facing package."""
 
@@ -437,7 +527,7 @@ def verify_trusted_package_inputs(
         "source_archive_bytes_verified": archive_bytes_verified,
         "source_access_mode": source_access_mode,
         "source_identity_file_count_verified": identity_file_count,
-        "selected_source_members_verified": EXPECTED_SCENE_COUNT * EXPECTED_VIEWS_PER_SCENE,
+        "selected_source_members_verified": expected_image_count,
         "all_checks_passed": True,
     }
 
@@ -468,16 +558,29 @@ def _content_checksum_bytes(model_input_root: Path, relative_paths: Sequence[Pat
     return "".join(lines).encode("utf-8")
 
 
-def build_smoke20_rgb_package(
+def _build_selected_rgb_package(
     *,
     selection_root: Path,
     development_root: Path,
     administrative_root: Path,
     source_root: Path,
     output_root: Path,
+    contract: CohortContract,
+    selected_rows: Sequence[Mapping[str, Any]],
+    selection_audit: Mapping[str, Any],
     verify_archive_bytes: bool = True,
 ) -> tuple[PackageAudit, dict[str, Any]]:
-    """Build a resumable opaque colour package for the frozen smoke cohort."""
+    """Build one resumable opaque RGB package from verified trusted rows."""
+
+    if contract.release_id != RELEASE_ID:
+        raise ValueError("Cohort contract identifies another selection release")
+    if len(selected_rows) != contract.scene_count:
+        raise ValueError("Selected rows do not match the cohort scene count")
+    selected_ids = {str(row["opaque_scene_id"]) for row in selected_rows}
+    if len(selected_ids) != contract.scene_count:
+        raise ValueError("Selected rows contain duplicate opaque scene IDs")
+    if membership_sha256(selected_ids) != contract.membership_sha256:
+        raise ValueError("Selected rows do not match the cohort membership hash")
 
     input_audit = verify_trusted_package_inputs(
         selection_root=selection_root,
@@ -485,14 +588,12 @@ def build_smoke20_rgb_package(
         administrative_root=administrative_root,
         source_root=source_root,
         verify_archive_bytes=verify_archive_bytes,
+        expected_image_count=contract.image_count,
     )
     neutral_rows = read_jsonl(selection_root / "neutral_corpus_manifest.jsonl")
-    development_rows = read_jsonl(development_root / "development_source_map.jsonl")
     required_rows = read_jsonl(
         administrative_root / "required_source_members.jsonl"
     )
-    selected_rows, selection_audit = choose_smoke20_rows(development_rows)
-    selected_ids = {str(row["opaque_scene_id"]) for row in selected_rows}
 
     neutral_by_id = {str(row["opaque_scene_id"]): row for row in neutral_rows}
     if len(neutral_by_id) != len(neutral_rows):
@@ -500,7 +601,7 @@ def build_smoke20_rgb_package(
     selected_neutral: list[dict[str, Any]] = []
     for opaque_scene_id in sorted(selected_ids):
         if opaque_scene_id not in neutral_by_id:
-            raise ValueError("A smoke scene is missing from the neutral manifest")
+            raise ValueError("A cohort scene is missing from the neutral manifest")
         row = dict(neutral_by_id[opaque_scene_id])
         validate_model_facing_media_record(row)
         _assert_no_forbidden_fields(row)
@@ -513,7 +614,7 @@ def build_smoke20_rgb_package(
         and row.get("component") == "rgb"
         and row.get("include_in_media_package") is True
     ]
-    expected_images = EXPECTED_SCENE_COUNT * EXPECTED_VIEWS_PER_SCENE
+    expected_images = contract.image_count
     if len(rgb_rows) != expected_images:
         raise ValueError(f"Expected {expected_images} RGB members, found {len(rgb_rows)}")
     source_names = [str(row["source_member"]) for row in rgb_rows]
@@ -606,10 +707,10 @@ def build_smoke20_rgb_package(
     _write_bytes_if_consistent(model_input_root / checksum_relative, checksum_bytes)
 
     package_audit = PackageAudit(
-        cohort_id=SMOKE20_COHORT_ID,
-        release_id=RELEASE_ID,
-        scene_count=EXPECTED_SCENE_COUNT,
-        view_count=EXPECTED_VIEWS_PER_SCENE,
+        cohort_id=contract.cohort_id,
+        release_id=contract.release_id,
+        scene_count=contract.scene_count,
+        view_count=contract.views_per_scene,
         image_count=expected_images,
         width=EXPECTED_RGB_SIZE[0],
         height=EXPECTED_RGB_SIZE[1],
@@ -632,25 +733,91 @@ def build_smoke20_rgb_package(
         package_audit.to_dict(), indent=2, sort_keys=True
     ).encode("utf-8") + b"\n"
     _write_bytes_if_consistent(model_input_root / "package_record.json", record_bytes)
+    selection_audit = dict(selection_audit)
     selection_audit["files_written_this_run"] = extracted_count
     selection_audit["files_reused_this_run"] = resumed_count
     selection_audit["trusted_input_audit"] = input_audit
-    verified = verify_model_input_package(model_input_root)
+    verified = verify_model_input_package(model_input_root, contract=contract)
     if verified.manifest_sha256 != package_audit.manifest_sha256:
         raise ValueError("Package verification returned a different manifest hash")
     return package_audit, selection_audit
 
 
-def verify_model_input_package(model_input_root: Path) -> PackageAudit:
+def build_smoke20_rgb_package(
+    *,
+    selection_root: Path,
+    development_root: Path,
+    administrative_root: Path,
+    source_root: Path,
+    output_root: Path,
+    verify_archive_bytes: bool = True,
+) -> tuple[PackageAudit, dict[str, Any]]:
+    """Build a resumable opaque colour package for the frozen smoke cohort."""
+
+    development_rows = read_jsonl(development_root / "development_source_map.jsonl")
+    selected_rows, selection_audit = choose_smoke20_rows(development_rows)
+    return _build_selected_rgb_package(
+        selection_root=selection_root,
+        development_root=development_root,
+        administrative_root=administrative_root,
+        source_root=source_root,
+        output_root=output_root,
+        contract=SMOKE20_CONTRACT,
+        selected_rows=selected_rows,
+        selection_audit=selection_audit,
+        verify_archive_bytes=verify_archive_bytes,
+    )
+
+
+def build_cohort_rgb_package(
+    *,
+    selection_root: Path,
+    development_root: Path,
+    administrative_root: Path,
+    source_root: Path,
+    output_root: Path,
+    contract: CohortContract,
+    verify_archive_bytes: bool = True,
+) -> tuple[PackageAudit, dict[str, Any]]:
+    """Build a complete model-safe package for a frozen cohort contract."""
+
+    development_rows = read_jsonl(development_root / "development_source_map.jsonl")
+    selected_rows, selection_audit = select_contract_rows(
+        development_rows,
+        contract,
+    )
+    return _build_selected_rgb_package(
+        selection_root=selection_root,
+        development_root=development_root,
+        administrative_root=administrative_root,
+        source_root=source_root,
+        output_root=output_root,
+        contract=contract,
+        selected_rows=selected_rows,
+        selection_audit=selection_audit,
+        verify_archive_bytes=verify_archive_bytes,
+    )
+
+
+def verify_model_input_package(
+    model_input_root: Path,
+    *,
+    contract: CohortContract | None = None,
+) -> PackageAudit:
     """Verify a model-safe package without any trusted source records."""
 
     model_input_root = model_input_root.expanduser().resolve()
     manifest_path = model_input_root / "neutral_corpus_manifest.jsonl"
     record_path = model_input_root / "package_record.json"
     checksum_path = model_input_root / "content_checksums.sha256"
+    record = json.loads(record_path.read_text(encoding="utf-8"))
+    _assert_no_forbidden_fields(record)
+    resolved_contract = contract or cohort_contract_for(str(record.get("cohort_id")))
     rows = read_jsonl(manifest_path)
-    if len(rows) != EXPECTED_SCENE_COUNT:
-        raise ValueError("Model input manifest must contain 20 scenes")
+    if len(rows) != resolved_contract.scene_count:
+        raise ValueError(
+            "Model input manifest scene count does not match the cohort contract"
+        )
     scene_ids: list[str] = []
     expected_media: list[Path] = []
     for row in rows:
@@ -659,14 +826,19 @@ def verify_model_input_package(model_input_root: Path) -> PackageAudit:
         scene_id = str(row["opaque_scene_id"])
         scene_ids.append(scene_id)
         view_ids = [str(value) for value in row["view_ids"]]
-        if len(view_ids) != EXPECTED_VIEWS_PER_SCENE or len(set(view_ids)) != len(view_ids):
-            raise ValueError("Every model-input scene must contain 20 unique views")
+        if (
+            len(view_ids) != resolved_contract.views_per_scene
+            or len(set(view_ids)) != len(view_ids)
+        ):
+            raise ValueError(
+                "Every model-input scene must contain the contracted unique views"
+            )
         for view_id in view_ids:
             expected_media.append(Path(f"media/{scene_id}/rgb/{view_id}.png"))
     if len(scene_ids) != len(set(scene_ids)):
         raise ValueError("Model input manifest contains duplicate scenes")
-    if membership_sha256(scene_ids) != SMOKE20_MEMBERSHIP_SHA256:
-        raise ValueError("Model input manifest has the wrong smoke membership")
+    if membership_sha256(scene_ids) != resolved_contract.membership_sha256:
+        raise ValueError("Model input manifest has the wrong cohort membership")
 
     actual_media = sorted(
         path.relative_to(model_input_root)
@@ -718,14 +890,15 @@ def verify_model_input_package(model_input_root: Path) -> PackageAudit:
         if file_sha256(model_input_root / relative) != expected_digest:
             raise ValueError("Model input content checksum mismatch")
 
-    record = json.loads(record_path.read_text(encoding="utf-8"))
-    _assert_no_forbidden_fields(record)
     audit = PackageAudit(**record)
-    if audit.cohort_id != SMOKE20_COHORT_ID or audit.release_id != RELEASE_ID:
+    if (
+        audit.cohort_id != resolved_contract.cohort_id
+        or audit.release_id != resolved_contract.release_id
+    ):
         raise ValueError("Package record identifies a different cohort or release")
     derived = {
         "scene_count": len(rows),
-        "view_count": EXPECTED_VIEWS_PER_SCENE,
+        "view_count": resolved_contract.views_per_scene,
         "image_count": len(actual_media),
         "width": EXPECTED_RGB_SIZE[0],
         "height": EXPECTED_RGB_SIZE[1],
@@ -746,11 +919,16 @@ def verify_model_input_package(model_input_root: Path) -> PackageAudit:
     return audit
 
 
-def collect_model_input_evidence(model_input_root: Path) -> dict[str, Any]:
+def collect_model_input_evidence(
+    model_input_root: Path,
+    *,
+    contract: CohortContract | None = None,
+) -> dict[str, Any]:
     """Collect safe tables and plotting values from a verified package."""
 
     model_input_root = model_input_root.expanduser().resolve()
-    audit = verify_model_input_package(model_input_root)
+    audit = verify_model_input_package(model_input_root, contract=contract)
+    resolved_contract = contract or cohort_contract_for(audit.cohort_id)
     rows = read_jsonl(model_input_root / "neutral_corpus_manifest.jsonl")
     view_counts: Counter[str] = Counter()
     scene_rows: list[dict[str, Any]] = []
@@ -767,8 +945,8 @@ def collect_model_input_evidence(model_input_root: Path) -> dict[str, Any]:
                 "scene_index": scene_index,
                 "opaque_scene_id": scene_id,
                 "view_count": len(view_ids),
-                "expected_view_count": EXPECTED_VIEWS_PER_SCENE,
-                "complete": len(view_ids) == EXPECTED_VIEWS_PER_SCENE,
+                "expected_view_count": resolved_contract.views_per_scene,
+                "complete": len(view_ids) == resolved_contract.views_per_scene,
             }
         )
         for view_id in view_ids:
@@ -786,20 +964,60 @@ def collect_model_input_evidence(model_input_root: Path) -> dict[str, Any]:
         {
             "view_id": view_id,
             "scene_count": view_counts[view_id],
-            "expected_scene_count": EXPECTED_SCENE_COUNT,
-            "complete": view_counts[view_id] == EXPECTED_SCENE_COUNT,
+            "expected_scene_count": resolved_contract.scene_count,
+            "complete": view_counts[view_id] == resolved_contract.scene_count,
         }
         for view_id in sorted(view_counts)
     ]
     gate_rows = [
-        {"gate": "scene count", "status": "pass", "observed": audit.scene_count, "expected": 20},
-        {"gate": "view count per scene", "status": "pass", "observed": audit.view_count, "expected": 20},
-        {"gate": "image count", "status": "pass", "observed": audit.image_count, "expected": 400},
-        {"gate": "verified images", "status": "pass", "observed": audit.verified_image_count, "expected": 400},
-        {"gate": "duplicate package paths", "status": "pass", "observed": audit.duplicate_package_path_count, "expected": 0},
-        {"gate": "duplicate archive members", "status": "pass", "observed": audit.duplicate_archive_member_count, "expected": 0},
-        {"gate": "decode failures", "status": "pass", "observed": audit.decoded_image_failure_count, "expected": 0},
-        {"gate": "exact file allowlist", "status": "pass", "observed": audit.image_count + 3, "expected": 403},
+        {
+            "gate": "scene count",
+            "status": "pass",
+            "observed": audit.scene_count,
+            "expected": resolved_contract.scene_count,
+        },
+        {
+            "gate": "view count per scene",
+            "status": "pass",
+            "observed": audit.view_count,
+            "expected": resolved_contract.views_per_scene,
+        },
+        {
+            "gate": "image count",
+            "status": "pass",
+            "observed": audit.image_count,
+            "expected": resolved_contract.image_count,
+        },
+        {
+            "gate": "verified images",
+            "status": "pass",
+            "observed": audit.verified_image_count,
+            "expected": resolved_contract.image_count,
+        },
+        {
+            "gate": "duplicate package paths",
+            "status": "pass",
+            "observed": audit.duplicate_package_path_count,
+            "expected": 0,
+        },
+        {
+            "gate": "duplicate archive members",
+            "status": "pass",
+            "observed": audit.duplicate_archive_member_count,
+            "expected": 0,
+        },
+        {
+            "gate": "decode failures",
+            "status": "pass",
+            "observed": audit.decoded_image_failure_count,
+            "expected": 0,
+        },
+        {
+            "gate": "exact file allowlist",
+            "status": "pass",
+            "observed": audit.image_count + 3,
+            "expected": resolved_contract.image_count + 3,
+        },
     ]
     media_summary = {
         "image_count": len(media_sizes_kib),
@@ -831,14 +1049,18 @@ __all__ = [
     "EXPECTED_VIEWS_PER_SCENE",
     "PackageAudit",
     "SMOKE20_COHORT_ID",
+    "SMOKE20_CONTRACT",
     "SMOKE20_MEMBERSHIP_SHA256",
+    "build_cohort_rgb_package",
     "build_smoke20_rgb_package",
     "canonical_json_bytes",
+    "cohort_contract_for",
     "choose_smoke20_rows",
     "collect_model_input_evidence",
     "file_sha256",
     "membership_sha256",
     "read_jsonl",
+    "select_contract_rows",
     "verify_model_input_package",
     "verify_checksum_manifest",
     "verify_trusted_package_inputs",

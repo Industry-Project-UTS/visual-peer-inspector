@@ -102,6 +102,7 @@ class SamImageJob:
     image_sha256: str
     prompts: tuple[SamPrompt, ...]
     prompt_package_sha256: str
+    cohort_id: str = SMOKE20_COHORT_ID
 
     @property
     def key(self) -> tuple[str, str]:
@@ -253,6 +254,7 @@ def build_sam_jobs(prompt_root: Path, media_root: Path) -> list[SamImageJob]:
                 image_sha256=str(row["image_sha256"]),
                 prompts=tuple(prompts),
                 prompt_package_sha256=prompt_package_sha256,
+                cohort_id=str(package_record["cohort_id"]),
             )
         )
     if len(jobs) != int(package_record["image_count"]) or len(jobs) != 400:
@@ -470,7 +472,7 @@ def _build_result(
     return {
         "schema_version": SAM_RESULT_SCHEMA_VERSION,
         "producer_kind": producer_kind,
-        "cohort_id": SMOKE20_COHORT_ID,
+        "cohort_id": job.cohort_id,
         "opaque_scene_id": job.opaque_scene_id,
         "view_id": job.view_id,
         "image_sha256": job.image_sha256,
@@ -497,12 +499,14 @@ class SamResultStore:
         configuration_sha256: str,
         prompt_package_sha256: str,
         producer_kind: str,
+        cohort_id: str = SMOKE20_COHORT_ID,
     ):
         self.root = root.expanduser().resolve()
         self.root.mkdir(parents=True, exist_ok=True)
         self.configuration_sha256 = configuration_sha256
         self.prompt_package_sha256 = prompt_package_sha256
         self.producer_kind = producer_kind
+        self.cohort_id = cohort_id
         self._rows: dict[tuple[str, str], dict[str, Any]] = {}
         for path in sorted(self.root.glob("S*/V*.json")):
             row = json.loads(path.read_text(encoding="utf-8"))
@@ -531,7 +535,7 @@ class SamResultStore:
             raise ValueError("Stored SAM prompt package differs from this run")
         if row.get("status") != "ok":
             raise ValueError("Only successful SAM image results may be stored")
-        if row.get("cohort_id") != SMOKE20_COHORT_ID:
+        if row.get("cohort_id") != self.cohort_id:
             raise ValueError("Stored SAM result identifies another cohort")
         if not SCENE_PATTERN.fullmatch(str(row.get("opaque_scene_id", ""))):
             raise ValueError("Stored SAM result has an invalid opaque scene ID")
@@ -591,6 +595,8 @@ class SamResultStore:
             raise ValueError("Stored SAM results contain unexpected images")
         for key, row in self._rows.items():
             job = job_by_key[key]
+            if job.cohort_id != self.cohort_id:
+                raise ValueError("SAM job identifies another cohort")
             if row["image_sha256"] != job.image_sha256:
                 raise ValueError("Stored SAM result identifies another image")
             expected = Counter(

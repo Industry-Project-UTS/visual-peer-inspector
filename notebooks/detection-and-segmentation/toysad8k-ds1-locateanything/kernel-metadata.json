@@ -1,0 +1,20 @@
+{
+  "id": "esreekarreddy/toysad-8k-ds1-locateanything-screen",
+  "title": "ToysAD-8K DS1 LocateAnything Screen",
+  "code_file": "04.1-toysad8k-ds1-locateanything-screen.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-ds1-screen100-model-input"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}
