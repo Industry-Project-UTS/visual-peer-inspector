@@ -45,8 +45,10 @@ CELLS = [
         Box accuracy is evaluated later in the protected evaluator. This notebook
         records operational reliability, proposal geometry, runtime, memory,
         retries and failures without opening labels or source identifiers. A
-        retry uses a different deterministic seed while retaining the same
-        pinned model and generation settings.
+        retry uses a different deterministic seed. Attempts 1 to 4 use the
+        pinned hybrid mode. Attempts 5 and 6 use the pinned slow mode only when
+        the preceding attempt was truncated. Every attempt keeps the same model
+        and 8,192-token generation limit.
         """
     ),
     markdown(
@@ -192,6 +194,12 @@ CELLS = [
         if len(checkpoint_candidates) > 1:
             raise RuntimeError("Attach only one private DS1 LocateAnything checkpoint archive")
         checkpoint_import = None
+        checkpoint_import_provenance = {
+            "imported": False,
+            "verification_status": "not_applicable",
+            "archive_sha256": None,
+            "files": {},
+        }
         if checkpoint_candidates:
             checkpoint_import = import_ds1_checkpoint(
                 checkpoint_candidates[0],
@@ -202,6 +210,19 @@ CELLS = [
                 ),
                 input_manifest_sha256=input_manifest_sha256,
             )
+            checkpoint_import_provenance = {
+                "imported": True,
+                "verification_status": "passed",
+                "archive_sha256": checkpoint_import["archive_sha256"],
+                "checkpoint_schema_version": checkpoint_import["schema_version"],
+                "cohort_id": checkpoint_import["cohort_id"],
+                "membership_sha256": checkpoint_import["membership_sha256"],
+                "configuration_sha256": checkpoint_import["configuration_sha256"],
+                "execution_policy_sha256": checkpoint_import["execution_policy_sha256"],
+                "producer_kind": checkpoint_import["producer_kind"],
+                "input_manifest_sha256": checkpoint_import["input_manifest_sha256"],
+                "files": dict(checkpoint_import["files"]),
+            }
             display({"checkpoint_imported": True, "files": sorted(checkpoint_import["files"])})
 
         watchdog_receipt = OUTPUT_ROOT / "disposable_preflight_receipt.json"
@@ -348,6 +369,7 @@ CELLS = [
                 if notebook_path.is_file() else ""
             ),
             "kaggle_notebook_slug": "esreekarreddy/toysad-8k-ds1-locateanything-screen",
+            "checkpoint_import": checkpoint_import_provenance,
             **version_pins,
         }
         platform_versions = {

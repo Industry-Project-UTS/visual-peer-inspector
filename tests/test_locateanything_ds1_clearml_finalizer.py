@@ -63,7 +63,14 @@ class Ds1LocateAnythingClearmlFinalizerTests(unittest.TestCase):
                 "model_revision": FINALIZER.EXPECTED_MODEL_REVISION,
                 "prompt": "object",
                 "seed": 32_040,
+                "generation_mode": "hybrid",
+                "max_new_tokens": 8_192,
             },
+            "retry_policy": {
+                "execution_policy_sha256": FINALIZER.EXECUTION_POLICY_SHA256,
+                "execution_policy": FINALIZER.locateanything_execution_policy(),
+            },
+            "generation_mode_counts": {"hybrid": 2_000},
             "provenance": {
                 "git_commit": "a" * 40,
                 "git_dirty": False,
@@ -145,6 +152,9 @@ class Ds1LocateAnythingClearmlFinalizerTests(unittest.TestCase):
             "gate,status,observed,expected\nfull coverage,pass,2000,2000\n",
             encoding="utf-8",
         )
+        (self.root / "generation_mode_summary.csv").write_text(
+            "generation_mode,attempt_count\nhybrid,2000\n", encoding="utf-8"
+        )
         generic = {
             "box_geometry_summary.json": {"box_count": 8_000},
             "environment_summary.json": {
@@ -164,6 +174,7 @@ class Ds1LocateAnythingClearmlFinalizerTests(unittest.TestCase):
                     "code_dataset_version": "32",
                 },
             },
+            "execution_policy.json": FINALIZER.locateanything_execution_policy(),
             "input_audit.json": {"image_count": 2_000, "all_checks_passed": True},
             "model_load_summary.json": {
                 "load_seconds": 80.0,

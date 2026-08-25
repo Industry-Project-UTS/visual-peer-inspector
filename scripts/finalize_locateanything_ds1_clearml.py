@@ -20,6 +20,7 @@ ALLOWED_TABLES = {
     "attempt_summary.csv": ["attempt_count", "image_count"],
     "completion_gates.csv": ["gate", "status", "observed", "expected"],
     "failure_summary.csv": ["error_type", "count"],
+    "generation_mode_summary.csv": ["generation_mode", "attempt_count"],
     "progress_checkpoints.csv": [
         "completed",
         "total",
@@ -41,6 +42,7 @@ ALLOWED_JSON = {
     "artifact_manifest.json",
     "box_geometry_summary.json",
     "environment_summary.json",
+    "execution_policy.json",
     "input_audit.json",
     "model_load_summary.json",
     "one_image_preflight.json",
@@ -77,6 +79,11 @@ EXPECTED_MODEL_REVISION = "c32291ca5e996f5a7a485845b4f57a233936bba0"
 CODE_ROOT = Path(__file__).resolve().parents[1]
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(CODE_ROOT / "src"))
+
+from visual_peer_inspector.models.locateanything import (  # noqa: E402
+    EXECUTION_POLICY_SHA256,
+    locateanything_execution_policy,
+)
 
 from visual_peer_inspector.tracking import (
     OFFICIAL_CLEARML_HOSTS,
@@ -199,8 +206,32 @@ def validate_safe_root(
         or configuration.get("model_revision") != EXPECTED_MODEL_REVISION
         or configuration.get("prompt") != "object"
         or configuration.get("seed") != 32_040
+        or configuration.get("generation_mode") != "hybrid"
+        or configuration.get("max_new_tokens") != 8_192
     ):
         raise ValueError("ClearML run record differs from the frozen DS1 settings")
+    execution_policy = json.loads(
+        (root / "execution_policy.json").read_text(encoding="utf-8")
+    )
+    retry_policy = record.get("retry_policy", {})
+    if (
+        execution_policy != locateanything_execution_policy()
+        or retry_policy.get("execution_policy_sha256") != EXECUTION_POLICY_SHA256
+        or retry_policy.get("execution_policy") != execution_policy
+    ):
+        raise ValueError("ClearML run record differs from the canonical execution policy")
+    generation_mode_rows = _csv_rows(root / "generation_mode_summary.csv")
+    observed_mode_counts = {
+        row["generation_mode"]: int(row["attempt_count"])
+        for row in generation_mode_rows
+    }
+    if (
+        not generation_mode_rows
+        or not set(observed_mode_counts).issubset({"hybrid", "slow"})
+        or record.get("generation_mode_counts") != observed_mode_counts
+        or sum(observed_mode_counts.values()) < (2_000 if require_full_model else 1)
+    ):
+        raise ValueError("ClearML generation-mode evidence is incomplete or inconsistent")
     if require_full_model:
         summary = record.get("summary", {})
         if (

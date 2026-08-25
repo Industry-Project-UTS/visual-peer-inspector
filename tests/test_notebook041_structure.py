@@ -26,6 +26,8 @@ class Notebook041StructureTests(unittest.TestCase):
         self.assertIn("this run is not promotable", source)
         self.assertIn("must not feed the SAM stage", source)
         self.assertIn("different deterministic seed", source)
+        self.assertIn('"checkpoint_import": checkpoint_import_provenance', source)
+        self.assertIn('"verification_status": "passed"', source)
 
 
 if __name__ == "__main__":

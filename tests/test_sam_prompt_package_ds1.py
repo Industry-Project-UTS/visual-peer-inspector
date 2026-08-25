@@ -20,6 +20,7 @@ from visual_peer_inspector.data.model_safe_package import (
 from visual_peer_inspector.data import sam_prompt_package_ds1 as PACKAGE
 from visual_peer_inspector.data.toysad_selection import RELEASE_ID
 from visual_peer_inspector.models.locateanything import (
+    EXECUTION_POLICY_SHA256,
     LocateAnythingConfiguration,
     MODEL_PRODUCER_KIND,
 )
@@ -91,6 +92,9 @@ class Ds1SamPromptPackageTests(unittest.TestCase):
                         "attempt": 1,
                         "image_sha256": file_sha256(image_path),
                         "configuration_sha256": self.configuration.sha256,
+                        "execution_policy_sha256": EXECUTION_POLICY_SHA256,
+                        "effective_generation_mode": "hybrid",
+                        "effective_max_new_tokens": 8192,
                         "producer_kind": MODEL_PRODUCER_KIND,
                         "model_id": self.configuration.model_id,
                         "model_revision": self.configuration.model_revision,
@@ -98,7 +102,10 @@ class Ds1SamPromptPackageTests(unittest.TestCase):
                         "proposal_count": 1,
                         "boxes_xyxy": [[10, 10, 82, 92]],
                         "raw_response": "<box><39><39><320><359></box>",
-                        "generation_stats": {},
+                        "generation_stats": {
+                            "effective_generation_mode": "hybrid",
+                            "effective_max_new_tokens": 8192,
+                        },
                         "response_token_count": 1,
                         "possibly_truncated": False,
                         "truncation_check": "token_count_heuristic",

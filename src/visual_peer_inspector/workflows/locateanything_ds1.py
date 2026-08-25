@@ -33,11 +33,18 @@ from visual_peer_inspector.evidence import (
 )
 from visual_peer_inspector.models.locateanything import (
     CONTRACT_PRODUCER_KIND,
+    EXECUTION_POLICY_SHA256,
+    FALLBACK_GENERATION_MODE,
+    MAXIMUM_GENERATION_ATTEMPTS,
     MODEL_PRODUCER_KIND,
+    PINNED_MAX_NEW_TOKENS,
+    PRIMARY_GENERATION_ATTEMPTS,
+    PRIMARY_GENERATION_MODE,
     LocateAnythingConfiguration,
     ProposalJob,
     ProposalResultStore,
     collect_proposal_evidence,
+    locateanything_execution_policy,
     repeat_agreement,
     run_proposal_jobs,
     summarize_proposal_rows,
@@ -61,6 +68,7 @@ SAFE_TABLES = frozenset(
         "attempt_summary.csv",
         "completion_gates.csv",
         "failure_summary.csv",
+        "generation_mode_summary.csv",
         "progress_checkpoints.csv",
         "proposal_summary_by_view.csv",
     }
@@ -70,6 +78,7 @@ SAFE_JSON = frozenset(
         "artifact_manifest.json",
         "box_geometry_summary.json",
         "environment_summary.json",
+        "execution_policy.json",
         "input_audit.json",
         "model_load_summary.json",
         "one_image_preflight.json",
@@ -320,6 +329,7 @@ def export_ds1_checkpoint(
         "cohort_id": DS1_SCREEN_CONTRACT.cohort_id,
         "membership_sha256": DS1_SCREEN_CONTRACT.membership_sha256,
         "configuration_sha256": configuration_sha256,
+        "execution_policy_sha256": EXECUTION_POLICY_SHA256,
         "producer_kind": producer_kind,
         "input_manifest_sha256": input_manifest_sha256,
         "files": {
@@ -373,6 +383,7 @@ def import_ds1_checkpoint(
             "cohort_id": DS1_SCREEN_CONTRACT.cohort_id,
             "membership_sha256": DS1_SCREEN_CONTRACT.membership_sha256,
             "configuration_sha256": configuration_sha256,
+            "execution_policy_sha256": EXECUTION_POLICY_SHA256,
             "producer_kind": producer_kind,
             "input_manifest_sha256": input_manifest_sha256,
         }
@@ -400,6 +411,14 @@ def _failure_rows(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     return [
         {"error_type": error_type, "count": count}
         for error_type, count in sorted(counts.items())
+    ]
+
+
+def _generation_mode_rows(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+    counts = Counter(str(row["effective_generation_mode"]) for row in rows)
+    return [
+        {"generation_mode": generation_mode, "attempt_count": count}
+        for generation_mode, count in sorted(counts.items())
     ]
 
 
@@ -447,11 +466,17 @@ def _save_safe_evidence(
         evidence["failure_rows"],
     )
     write_csv_rows(
+        safe_root / "generation_mode_summary.csv",
+        ["generation_mode", "attempt_count"],
+        evidence["generation_mode_rows"],
+    )
+    write_csv_rows(
         safe_root / "progress_checkpoints.csv",
         ["completed", "total", "successful", "failed", "elapsed_seconds"],
         progress_rows,
     )
     _write_json(safe_root / "resolved_configuration.json", asdict(configuration))
+    _write_json(safe_root / "execution_policy.json", locateanything_execution_policy())
     _write_json(safe_root / "input_audit.json", input_audit)
     _write_json(safe_root / "one_image_preflight.json", one_image_summary)
     _write_json(safe_root / "pilot_summary.json", pilot_summary)
@@ -529,7 +554,7 @@ def run_ds1_locateanything_workflow(
     provenance: Mapping[str, Any] | None = None,
     platform_versions: Mapping[str, Any] | None = None,
     model_load_evidence: Mapping[str, Any] | None = None,
-    maximum_attempts_per_job: int = 4,
+    maximum_attempts_per_job: int = MAXIMUM_GENERATION_ATTEMPTS,
     maximum_consecutive_failed_jobs: int = 3,
 ) -> dict[str, Any]:
     """Run DS1 preflight, pilot/repeat and the resumable all-view proposal job."""
@@ -551,6 +576,15 @@ def run_ds1_locateanything_workflow(
     worker_configuration = getattr(worker, "configuration", None)
     if worker_configuration is None or worker_configuration.sha256 != configuration.sha256:
         raise ValueError("LocateAnything worker and resolved configuration differ")
+    if (
+        configuration.generation_mode != PRIMARY_GENERATION_MODE
+        or configuration.max_new_tokens != PINNED_MAX_NEW_TOKENS
+    ):
+        raise ValueError(
+            "DS1 LocateAnything requires the pinned hybrid 8,192-token configuration"
+        )
+    if maximum_attempts_per_job != MAXIMUM_GENERATION_ATTEMPTS:
+        raise ValueError("DS1 LocateAnything requires exactly six bounded attempts")
 
     from visual_peer_inspector.models.locateanything import build_proposal_jobs
 
@@ -723,6 +757,7 @@ def run_ds1_locateanything_workflow(
         inference_stage=inference_stage,
     )
     evidence["gate_rows"] = [*stage_gates, *evidence["gate_rows"]]
+    evidence["generation_mode_rows"] = _generation_mode_rows(result_store.history_rows)
     all_gates_passed = all(row["status"] == "pass" for row in evidence["gate_rows"])
     status = (
         "completed"
@@ -789,9 +824,30 @@ def run_ds1_locateanything_workflow(
         "configuration": asdict(configuration),
         "configuration_sha256": configuration.sha256,
         "retry_policy": {
+            "execution_policy_sha256": EXECUTION_POLICY_SHA256,
+            "execution_policy": locateanything_execution_policy(),
             "maximum_attempts_per_job": maximum_attempts_per_job,
             "maximum_consecutive_failed_jobs": maximum_consecutive_failed_jobs,
+            "primary": {
+                "attempts": list(range(1, PRIMARY_GENERATION_ATTEMPTS + 1)),
+                "generation_mode": PRIMARY_GENERATION_MODE,
+                "max_new_tokens": PINNED_MAX_NEW_TOKENS,
+            },
+            "truncation_fallback": {
+                "attempts": list(
+                    range(PRIMARY_GENERATION_ATTEMPTS + 1, MAXIMUM_GENERATION_ATTEMPTS + 1)
+                ),
+                "generation_mode": FALLBACK_GENERATION_MODE,
+                "max_new_tokens": PINNED_MAX_NEW_TOKENS,
+                "trigger": "previous_attempt_possible_truncation",
+            },
+            "configuration_sha256": configuration.sha256,
+            "separate_from_model_configuration": True,
             "seed_scope": "scene_view_attempt",
+        },
+        "generation_mode_counts": {
+            row["generation_mode"]: row["attempt_count"]
+            for row in evidence["generation_mode_rows"]
         },
         "input_identity": {
             "model_input_manifest_sha256": input_audit["input_manifest_sha256"],

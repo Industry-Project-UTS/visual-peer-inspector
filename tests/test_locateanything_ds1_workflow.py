@@ -146,7 +146,20 @@ class Ds1LocateAnythingWorkflowTests(unittest.TestCase):
             first["output_identity"]["proposal_results_sha256"], first_digest
         )
         self.assertEqual(first["output_identity"]["result_count"], 400)
-        self.assertEqual(first["retry_policy"]["maximum_attempts_per_job"], 4)
+        self.assertEqual(first["retry_policy"]["maximum_attempts_per_job"], 6)
+        self.assertEqual(first["retry_policy"]["primary"]["attempts"], [1, 2, 3, 4])
+        self.assertEqual(
+            first["retry_policy"]["truncation_fallback"]["attempts"], [5, 6]
+        )
+        self.assertEqual(
+            first["retry_policy"]["truncation_fallback"]["generation_mode"], "slow"
+        )
+        self.assertEqual(
+            first["retry_policy"]["truncation_fallback"]["max_new_tokens"], 8192
+        )
+        self.assertTrue(first["retry_policy"]["separate_from_model_configuration"])
+        self.assertEqual(first["retry_policy"]["configuration_sha256"], configuration.sha256)
+        self.assertEqual(first["generation_mode_counts"], {"hybrid": 400})
         self.assertEqual(first["retry_policy"]["seed_scope"], "scene_view_attempt")
         self.assertEqual(second["run_session"]["pending_job_count_at_start"], 0)
         self.assertEqual(sha256(proposal_path.read_bytes()).hexdigest(), first_digest)
@@ -252,9 +265,18 @@ class Ds1LocateAnythingWorkflowTests(unittest.TestCase):
             )
         self.assertEqual(exported["archive_sha256"], imported["archive_sha256"])
         self.assertEqual(
+            exported["execution_policy_sha256"], imported["execution_policy_sha256"]
+        )
+        self.assertEqual(
             (private_root / "one_image_results.jsonl").read_bytes(),
             (restored / "private/one_image_results.jsonl").read_bytes(),
         )
+        restored_store = ProposalResultStore(
+            restored / "private/one_image_results.jsonl",
+            configuration.sha256,
+            "contract_smoke",
+        )
+        self.assertEqual(restored_store.completed_keys, {jobs[0].key})
 
     def test_canonical_model_run_requires_clean_provenance(self) -> None:
         configuration = LocateAnythingConfiguration()
