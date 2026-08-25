@@ -75,6 +75,16 @@ EXPECTED_MEMBERSHIP_SHA256 = (
 EXPECTED_MODEL_ID = "nvidia/LocateAnything-3B"
 EXPECTED_MODEL_REVISION = "c32291ca5e996f5a7a485845b4f57a233936bba0"
 CODE_ROOT = Path(__file__).resolve().parents[1]
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(CODE_ROOT / "src"))
+
+from visual_peer_inspector.tracking import (
+    OFFICIAL_CLEARML_HOSTS,
+    _configure_clearml_request_timeouts,
+    configure_official_clearml_hosts,
+    initialize_clearml_task_with_retry,
+    sanitized_tracking_failure_fields,
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -285,6 +295,7 @@ def _alarm(_signum: int, _frame: Any) -> None:
 def _prepare_tracking_environment(mode: str) -> None:
     """Install tracking support and resolve Kaggle credentials in this child."""
 
+    configure_official_clearml_hosts()
     if mode in {"online", "offline"}:
         subprocess.check_call(
             [
@@ -307,25 +318,31 @@ def _prepare_tracking_environment(mode: str) -> None:
             if not value:
                 raise RuntimeError(f"Kaggle Secret {name} is missing or disabled")
             os.environ[name] = value
-    os.environ.setdefault("CLEARML_API_HOST", "https://api.clear.ml")
-    os.environ.setdefault("CLEARML_WEB_HOST", "https://app.clear.ml")
-    os.environ.setdefault("CLEARML_FILES_HOST", "https://files.clear.ml")
-    os.environ.setdefault("VPI_CLEARML_REQUEST_TIMEOUT_SECONDS", "30")
-
-
-def _log_online(root: Path, project: str, task_name: str, tags: list[str]) -> str:
+def _log_online(
+    root: Path,
+    project: str,
+    task_name: str,
+    tags: list[str],
+    *,
+    online: bool,
+) -> tuple[str, dict[str, int]]:
+    configure_official_clearml_hosts()
     from clearml import Task
 
-    task = Task.init(
-        project_name=project,
-        task_name=task_name,
-        task_type=Task.TaskTypes.inference,
-        reuse_last_task_id=False,
-        output_uri=False,
-        auto_connect_arg_parser=False,
-        auto_connect_frameworks={"detect_repository": False},
-        auto_connect_streams=False,
-        auto_resource_monitoring=False,
+    _configure_clearml_request_timeouts()
+    task, retry_outcome = initialize_clearml_task_with_retry(
+        lambda: Task.init(
+            project_name=project,
+            task_name=task_name,
+            task_type=Task.TaskTypes.inference,
+            reuse_last_task_id=False,
+            output_uri=False,
+            auto_connect_arg_parser=False,
+            auto_connect_frameworks={"detect_repository": False},
+            auto_connect_streams=False,
+            auto_resource_monitoring=False,
+        ),
+        online=online,
     )
     if tags:
         task.add_tags(tags)
@@ -362,7 +379,7 @@ def _log_online(root: Path, project: str, task_name: str, tags: list[str]) -> st
         task.upload_artifact(relative, artifact_object=root / relative, wait_on_upload=False)
     task.flush(wait_for_uploads=True)
     task.close()
-    return str(task.id)
+    return str(task.id), retry_outcome.to_receipt_fields()
 
 
 def main() -> None:
@@ -376,6 +393,10 @@ def main() -> None:
         "safe_manifest_sha256": None,
         "task_id": None,
         "run_status": None,
+        "clearml_hosts": dict(OFFICIAL_CLEARML_HOSTS),
+        "tracking_attempt_count": 0,
+        "tracking_retry_count": 0,
+        "tracking_transient_failure_count": 0,
     }
     previous_handler = signal.signal(signal.SIGALRM, _alarm)
     signal.alarm(max(1, args.wall_time_seconds))
@@ -391,12 +412,19 @@ def main() -> None:
         _prepare_tracking_environment(args.mode)
         if args.mode == "offline":
             os.environ["CLEARML_OFFLINE_MODE"] = "1"
-        receipt["task_id"] = _log_online(root, args.project, args.task_name, args.tag)
+        task_id, retry_fields = _log_online(
+            root,
+            args.project,
+            args.task_name,
+            args.tag,
+            online=args.mode == "online",
+        )
+        receipt["task_id"] = task_id
+        receipt.update(retry_fields)
         receipt["status"] = "completed" if args.mode == "online" else "offline_completed"
     except Exception as error:
         receipt["status"] = "failed"
-        receipt["error_type"] = type(error).__name__
-        receipt["error_message"] = str(error)[:300]
+        receipt.update(sanitized_tracking_failure_fields(error))
     finally:
         signal.alarm(0)
         signal.signal(signal.SIGALRM, previous_handler)

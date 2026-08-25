@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 import sys
 import tempfile
@@ -14,12 +15,133 @@ CODE_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(CODE_ROOT / "src"))
 
 from visual_peer_inspector.tracking import (
+    ClearMLTrackingFailure,
     ExperimentTracker,
+    OFFICIAL_CLEARML_HOSTS,
+    configure_official_clearml_hosts,
+    initialize_clearml_task_with_retry,
+    sanitized_tracking_failure_fields,
     validate_safe_tracking_payload,
 )
 
 
 class SafeTrackingTests(unittest.TestCase):
+    def test_official_hosts_replace_ambient_clearml_hosts(self) -> None:
+        poisoned = {
+            name: "https://invalid.example.test" for name in OFFICIAL_CLEARML_HOSTS
+        }
+        with patch.dict("os.environ", poisoned, clear=False):
+            observed = configure_official_clearml_hosts()
+            self.assertEqual(observed, OFFICIAL_CLEARML_HOSTS)
+            for name, expected in OFFICIAL_CLEARML_HOSTS.items():
+                self.assertEqual(os.environ[name], expected)
+
+    def test_transient_initialization_is_retried_and_can_recover(self) -> None:
+        calls = []
+        delays = []
+
+        def initialise():
+            calls.append(len(calls) + 1)
+            if len(calls) < 3:
+                raise ConnectionError("temporary connection error")
+            return "task"
+
+        task, outcome = initialize_clearml_task_with_retry(
+            initialise,
+            online=True,
+            retry_delays_seconds=(0.1, 0.2),
+            sleep=delays.append,
+        )
+        self.assertEqual(task, "task")
+        self.assertEqual(calls, [1, 2, 3])
+        self.assertEqual(delays, [0.1, 0.2])
+        self.assertEqual(
+            outcome.to_receipt_fields(),
+            {
+                "tracking_attempt_count": 3,
+                "tracking_retry_count": 2,
+                "tracking_transient_failure_count": 2,
+            },
+        )
+
+    def test_non_transient_initialization_is_not_retried(self) -> None:
+        calls = []
+
+        def initialise():
+            calls.append(1)
+            raise ValueError("invalid task configuration")
+
+        with self.assertRaises(ClearMLTrackingFailure) as captured:
+            initialize_clearml_task_with_retry(
+                initialise,
+                online=True,
+                retry_delays_seconds=(0.1, 0.2),
+                sleep=lambda _: None,
+            )
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(captured.exception.category, "non_transient_error")
+
+    def test_exhausted_failure_diagnostics_do_not_persist_exception_text(self) -> None:
+        secret_text = (
+            "Connection error for CLEARML_API_SECRET_KEY=top-secret "
+            "at /Users/person/private"
+        )
+
+        def initialise():
+            raise ConnectionError(secret_text)
+
+        with self.assertRaises(ClearMLTrackingFailure) as captured:
+            initialize_clearml_task_with_retry(
+                initialise,
+                online=True,
+                retry_delays_seconds=(0.0,),
+                sleep=lambda _: None,
+            )
+        fields = sanitized_tracking_failure_fields(captured.exception)
+        serialized = str(fields) + str(captured.exception)
+        self.assertNotIn("top-secret", serialized)
+        self.assertNotIn("/Users/", serialized)
+        self.assertNotIn("error_message", fields)
+        self.assertEqual(fields["tracking_attempt_count"], 2)
+        self.assertEqual(
+            fields["tracking_error_category"], "transient_connection_error"
+        )
+
+    def test_finalizer_deadline_is_never_retried(self) -> None:
+        calls = []
+
+        def initialise():
+            calls.append(1)
+            raise TimeoutError("ClearML finalisation exceeded its wall-time limit")
+
+        with self.assertRaises(ClearMLTrackingFailure) as captured:
+            initialize_clearml_task_with_retry(
+                initialise,
+                online=True,
+                sleep=lambda _: None,
+            )
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(captured.exception.category, "deadline_exceeded")
+
+    def test_deadline_during_retry_backoff_stops_immediately(self) -> None:
+        calls = []
+
+        def initialise():
+            calls.append(1)
+            raise ConnectionError("temporary connection error")
+
+        def deadline(_seconds: float) -> None:
+            raise TimeoutError("ClearML finalisation exceeded its wall-time limit")
+
+        with self.assertRaises(ClearMLTrackingFailure) as captured:
+            initialize_clearml_task_with_retry(
+                initialise,
+                online=True,
+                sleep=deadline,
+            )
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(captured.exception.category, "deadline_exceeded")
+
     def test_enabled_tracker_reports_and_closes_with_upload_flush(self) -> None:
         class FakeLogger:
             def __init__(self) -> None:

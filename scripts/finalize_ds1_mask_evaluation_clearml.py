@@ -15,7 +15,18 @@ import subprocess
 import sys
 from typing import Any
 
+CODE_ROOT = Path(__file__).resolve().parents[1]
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(CODE_ROOT / "src"))
+
 from visual_peer_inspector.data.cohort_contract import DS1_SCREEN_CONTRACT
+from visual_peer_inspector.tracking import (
+    OFFICIAL_CLEARML_HOSTS,
+    _configure_clearml_request_timeouts,
+    configure_official_clearml_hosts,
+    initialize_clearml_task_with_retry,
+    sanitized_tracking_failure_fields,
+)
 
 
 ALLOWED_TABLES = {
@@ -101,9 +112,6 @@ DECISIONS = {
     "refine_or_replace_sam21",
     "retain_sam21_and_refine_automatic_proposals",
 }
-CODE_ROOT = Path(__file__).resolve().parents[1]
-
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--safe-root", type=Path, required=True)
@@ -214,6 +222,7 @@ def validate_safe_root(root: Path, *, require_clean_provenance: bool = False) ->
 def _load_credentials(secret_source: str) -> None:
     """Load credentials only inside the isolated finaliser process."""
 
+    configure_official_clearml_hosts()
     names = ("CLEARML_API_ACCESS_KEY", "CLEARML_API_SECRET_KEY")
     if secret_source == "kaggle":
         from kaggle_secrets import UserSecretsClient
@@ -226,12 +235,6 @@ def _load_credentials(secret_source: str) -> None:
             os.environ[name] = value
     elif any(not os.environ.get(name) for name in names):
         raise RuntimeError("ClearML credentials are missing from the finaliser environment")
-    os.environ.setdefault("CLEARML_API_HOST", "https://api.clear.ml")
-    os.environ.setdefault("CLEARML_WEB_HOST", "https://app.clear.ml")
-    os.environ.setdefault("CLEARML_FILES_HOST", "https://files.clear.ml")
-    os.environ.setdefault("CLEARML_LOG_ENVIRONMENT", "")
-
-
 def _install_tracking_requirement() -> None:
     subprocess.run(
         [
@@ -252,25 +255,33 @@ def _alarm(_signum: int, _frame: Any) -> None:
     raise TimeoutError("ClearML finalisation exceeded its wall-time limit")
 
 
-def _log(root: Path, project: str, task_name: str, tags: list[str], mode: str) -> tuple[str, str | None]:
+def _log(
+    root: Path,
+    project: str,
+    task_name: str,
+    tags: list[str],
+    mode: str,
+) -> tuple[str, str | None, dict[str, int]]:
+    configure_official_clearml_hosts()
     from clearml import Task
     import pandas as pd
-
-    from visual_peer_inspector.tracking import _configure_clearml_request_timeouts
 
     if mode == "offline":
         Task.set_offline(True)
     _configure_clearml_request_timeouts()
-    task = Task.init(
-        project_name=project,
-        task_name=task_name,
-        task_type=Task.TaskTypes.testing,
-        auto_connect_frameworks=False,
-        auto_connect_arg_parser=False,
-        auto_resource_monitoring=False,
-        auto_connect_streams=False,
-        reuse_last_task_id=False,
-        output_uri=False,
+    task, retry_outcome = initialize_clearml_task_with_retry(
+        lambda: Task.init(
+            project_name=project,
+            task_name=task_name,
+            task_type=Task.TaskTypes.testing,
+            auto_connect_frameworks=False,
+            auto_connect_arg_parser=False,
+            auto_resource_monitoring=False,
+            auto_connect_streams=False,
+            reuse_last_task_id=False,
+            output_uri=False,
+        ),
+        online=mode == "online",
     )
     task.add_tags(tags)
     logger = task.get_logger()
@@ -297,7 +308,7 @@ def _log(root: Path, project: str, task_name: str, tags: list[str], mode: str) -
     offline = str(task.get_offline_mode_folder()) if mode == "offline" else None
     task.flush(wait_for_uploads=True)
     task.close()
-    return task_id, offline
+    return task_id, offline, retry_outcome.to_receipt_fields()
 
 
 def main() -> None:
@@ -311,6 +322,10 @@ def main() -> None:
         "offline_session_folder": None,
         "project": args.project,
         "task_name": args.task_name,
+        "clearml_hosts": dict(OFFICIAL_CLEARML_HOSTS),
+        "tracking_attempt_count": 0,
+        "tracking_retry_count": 0,
+        "tracking_transient_failure_count": 0,
     }
     alarm_enabled = False
     previous_handler = None
@@ -340,14 +355,16 @@ def main() -> None:
             alarm_enabled = True
         _install_tracking_requirement()
         _load_credentials(args.secret_source)
-        task_id, offline = _log(root, args.project, args.task_name, tags, args.mode)
+        task_id, offline, retry_fields = _log(
+            root, args.project, args.task_name, tags, args.mode
+        )
         receipt["clearml_task_id"] = task_id
         receipt["offline_session_folder"] = offline
+        receipt.update(retry_fields)
         receipt["status"] = "completed" if args.mode == "online" else "offline_completed"
     except Exception as error:
         receipt["status"] = "failed"
-        receipt["error_type"] = type(error).__name__
-        receipt["error_message"] = str(error)[:300]
+        receipt.update(sanitized_tracking_failure_fields(error))
     finally:
         if alarm_enabled:
             signal.alarm(0)

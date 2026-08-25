@@ -436,7 +436,7 @@ display(NotebookImage(filename=str(route_examples)))
         """
 ## Bounded ClearML finalisation
 
-Tracking starts only after inference, evidence generation and artifact manifests finish. A ClearML failure is written to a receipt and does not remove the completed model output.
+Tracking starts only after inference, evidence generation and artifact manifests finish. The isolated finaliser uses the official ClearML hosts and retries only transient task-creation connection failures. Its receipt stores sanitized categories and retry counts without exception text. A ClearML failure does not remove the completed model output.
 """
     ),
     code(

@@ -474,7 +474,7 @@ print("Private image examples were written to the private run folder.")
         """
 ## Run record and ClearML
 
-The run record links the cohort, code, notebook, package, resume check, and evidence hashes. Computation and both evidence manifests finish before a bounded finaliser starts. ClearML receives the strict safe allowlist only. It does not receive RGB images, opaque scene rows, private contact sheets, labels, masks, source records, or local paths.
+The run record links the cohort, code, notebook, package, resume check, and evidence hashes. Computation and both evidence manifests finish before a bounded finaliser starts. The finaliser uses the official ClearML hosts and retries only transient task-creation connection failures. Its receipt contains sanitized categories and retry counts, never exception text. ClearML receives the strict safe allowlist only. It does not receive RGB images, opaque scene rows, private contact sheets, labels, masks, source records, or local paths.
 """
     ),
     code(

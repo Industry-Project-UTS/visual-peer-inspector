@@ -464,7 +464,15 @@ CELLS = [
         })
         """
     ),
-    markdown("## Finalise aggregate ClearML evidence"),
+    markdown(
+        """
+        ## Finalise aggregate ClearML evidence
+
+        This isolated, wall-time-bounded child uses the official ClearML hosts.
+        It retries only transient task-creation connection failures and writes
+        sanitized retry counts and failure categories to the receipt.
+        """
+    ),
     code(
         """
         tracking_mode = os.getenv(

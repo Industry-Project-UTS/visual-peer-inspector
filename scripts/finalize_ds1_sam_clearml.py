@@ -11,9 +11,21 @@ import os
 from pathlib import Path
 import re
 import signal
+import sys
 from typing import Any
 
+CODE_ROOT = Path(__file__).resolve().parents[1]
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(CODE_ROOT / "src"))
+
 from visual_peer_inspector.data.cohort_contract import DS1_SCREEN_CONTRACT
+from visual_peer_inspector.tracking import (
+    OFFICIAL_CLEARML_HOSTS,
+    _configure_clearml_request_timeouts,
+    configure_official_clearml_hosts,
+    initialize_clearml_task_with_retry,
+    sanitized_tracking_failure_fields,
+)
 
 
 ALLOWED_TABLES = {
@@ -252,6 +264,7 @@ def _alarm(_signum: int, _frame: Any) -> None:
 def _load_credentials(source: str, mode: str) -> None:
     """Load credentials only inside the bounded finaliser process."""
 
+    configure_official_clearml_hosts()
     if mode != "online" or source == "none":
         return
     if source == "kaggle":
@@ -270,33 +283,31 @@ def _load_credentials(source: str, mode: str) -> None:
     ]
     if missing:
         raise RuntimeError(f"ClearML credentials are missing: {missing}")
-    os.environ.setdefault("CLEARML_API_HOST", "https://api.clear.ml")
-    os.environ.setdefault("CLEARML_WEB_HOST", "https://app.clear.ml")
-    os.environ.setdefault("CLEARML_FILES_HOST", "https://files.clear.ml")
-    os.environ.setdefault("CLEARML_LOG_ENVIRONMENT", "")
 
 
 def _log_online(
     root: Path, project: str, task_name: str, tags: list[str], mode: str
-) -> tuple[str, str | None]:
+) -> tuple[str, str | None, dict[str, int]]:
     from clearml import Task
     import pandas as pd
 
-    from visual_peer_inspector.tracking import _configure_clearml_request_timeouts
-
+    configure_official_clearml_hosts()
     if mode == "offline":
         Task.set_offline(True)
     _configure_clearml_request_timeouts()
-    task = Task.init(
-        project_name=project,
-        task_name=task_name,
-        task_type=Task.TaskTypes.inference,
-        auto_connect_frameworks=False,
-        auto_connect_arg_parser=False,
-        auto_resource_monitoring=False,
-        auto_connect_streams=False,
-        reuse_last_task_id=False,
-        output_uri=False,
+    task, retry_outcome = initialize_clearml_task_with_retry(
+        lambda: Task.init(
+            project_name=project,
+            task_name=task_name,
+            task_type=Task.TaskTypes.inference,
+            auto_connect_frameworks=False,
+            auto_connect_arg_parser=False,
+            auto_resource_monitoring=False,
+            auto_connect_streams=False,
+            reuse_last_task_id=False,
+            output_uri=False,
+        ),
+        online=mode == "online",
     )
     task.add_tags(tags)
     logger = task.get_logger()
@@ -363,7 +374,7 @@ def _log_online(
     offline = str(task.get_offline_mode_folder()) if mode == "offline" else None
     task.flush(wait_for_uploads=True)
     task.close()
-    return task_id, offline
+    return task_id, offline, retry_outcome.to_receipt_fields()
 
 
 def main() -> None:
@@ -398,6 +409,10 @@ def main() -> None:
             (root / "artifact_manifest.json").read_bytes()
         ).hexdigest(),
         "run_status": None if record is None else record["status"],
+        "clearml_hosts": dict(OFFICIAL_CLEARML_HOSTS),
+        "tracking_attempt_count": 0,
+        "tracking_retry_count": 0,
+        "tracking_transient_failure_count": 0,
     }
     if args.mode == "disabled":
         receipt["status"] = "disabled"
@@ -409,16 +424,16 @@ def main() -> None:
     signal.alarm(args.wall_time_seconds)
     try:
         _load_credentials(args.credentials_source, args.mode)
-        task_id, offline = _log_online(
+        task_id, offline, retry_fields = _log_online(
             root, args.project, args.task_name, tags, args.mode
         )
         receipt["clearml_task_id"] = task_id
         receipt["offline_session_folder"] = offline
+        receipt.update(retry_fields)
         receipt["status"] = "completed" if args.mode == "online" else "offline_completed"
     except Exception as error:
         receipt["status"] = "failed"
-        receipt["error_type"] = type(error).__name__
-        receipt["error_message"] = str(error)[:300]
+        receipt.update(sanitized_tracking_failure_fields(error))
     finally:
         signal.alarm(0)
         signal.signal(signal.SIGALRM, previous_handler)

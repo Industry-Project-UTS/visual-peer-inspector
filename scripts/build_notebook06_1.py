@@ -222,7 +222,7 @@ print(json.dumps(run_record["component_decision"], indent=2))
         """
 ## Bounded ClearML finalisation
 
-Tracking starts only after evaluator compute and artifact manifests have finished. The finaliser verifies the complete aggregate allowlist before it reads ClearML credentials. Kaggle Secrets are loaded only inside that isolated subprocess. Tracking failure writes a receipt and does not remove or invalidate the completed evaluation outputs.
+Tracking starts only after evaluator compute and artifact manifests have finished. The finaliser verifies the complete aggregate allowlist before it reads ClearML credentials. Kaggle Secrets are loaded only inside that isolated subprocess. The child uses the official ClearML hosts and retries only transient task-creation connection failures. Its receipt stores sanitized categories and retry counts without exception text. Tracking failure does not remove or invalidate the completed evaluation outputs.
 """
     ),
     code(
