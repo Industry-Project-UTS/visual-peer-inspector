@@ -274,6 +274,98 @@ def _failure_summary(rows: list[Mapping[str, Any]]) -> list[dict[str, Any]]:
     )
 
 
+def _empty_repeat_agreement() -> dict[str, Any]:
+    return {
+        "prompt_count": 0,
+        "matching_mask_digest_count": 0,
+        "mask_digest_agreement_rate": 0.0,
+        "matching_score_count": 0,
+        "score_agreement_rate": 0.0,
+        "score_tolerance": 1e-5,
+    }
+
+
+def _empty_sam_evidence() -> dict[str, Any]:
+    route_rows = [
+        {
+            "route": route,
+            "mask_count": 0,
+            "empty_mask_count": 0,
+            "empty_mask_rate": None,
+            "mean_area_fraction": None,
+            "median_area_fraction": None,
+            "p95_area_fraction": None,
+            "mean_predicted_quality_score": None,
+            "p10_predicted_quality_score": None,
+        }
+        for route in ROUTES
+    ]
+    return {
+        "image_count": 0,
+        "scene_count": 0,
+        "mask_count": 0,
+        "empty_mask_count": 0,
+        "median_image_runtime_seconds": None,
+        "p95_image_runtime_seconds": None,
+        "median_prompts_per_image": None,
+        "route_rows": route_rows,
+        "view_rows": [],
+        "image_runtimes": [],
+        "prompt_counts": [],
+        "area_values_by_route": {route: [] for route in ROUTES},
+        "score_values_by_route": {route: [] for route in ROUTES},
+    }
+
+
+def _save_histogram_or_empty(
+    values: list[int | float],
+    path: Path,
+    *,
+    title: str,
+    x_label: str,
+    bins: int,
+) -> None:
+    if values:
+        save_histogram(values, path, title=title, x_label=x_label, bins=bins)
+        return
+    save_bar_chart(
+        ["No completed values"],
+        [0],
+        path,
+        title=f"{title}: no completed values",
+        y_label="Count",
+        integer_ticks=True,
+    )
+
+
+def _save_scatter_or_empty(
+    x_values: list[int | float],
+    y_values: list[int | float],
+    path: Path,
+    *,
+    title: str,
+    x_label: str,
+    y_label: str,
+) -> None:
+    if x_values:
+        save_scatter_plot(
+            x_values,
+            y_values,
+            path,
+            title=title,
+            x_label=x_label,
+            y_label=y_label,
+        )
+        return
+    save_bar_chart(
+        ["No completed images"],
+        [0],
+        path,
+        title=f"{title}: no completed images",
+        y_label=y_label,
+    )
+
+
 def run_ds1_sam_workflow(
     *,
     prompt_root: Path,
@@ -364,20 +456,51 @@ def run_ds1_sam_workflow(
         if progress_callback is not None:
             progress_callback(stage, details)
 
+    run_error: Exception | None = None
+    failed_phase: str | None = None
+
+    def record_phase_failure(phase: str, error: Exception) -> None:
+        nonlocal run_error, failed_phase
+        if run_error is None:
+            run_error = error
+            failed_phase = phase
+        report_phase(
+            f"{phase}_failed",
+            error_type=type(error).__name__,
+        )
+
     report_phase(
         "one_image_preflight_started",
         image_count=1,
         already_completed=stress_job.key in result_store.completed_keys,
     )
     if worker is not None:
-        run_sam_jobs(worker=worker, jobs=[stress_job], result_store=result_store, maximum_consecutive_failed_jobs=1, progress_callback=report, attempt_callback=record_attempt)
+        try:
+            run_sam_jobs(
+                worker=worker,
+                jobs=[stress_job],
+                result_store=result_store,
+                maximum_consecutive_failed_jobs=1,
+                progress_callback=report,
+                attempt_callback=record_attempt,
+            )
+        except Exception as error:
+            record_phase_failure("one_image_preflight", error)
     report_phase(
         "one_image_preflight_completed",
         completed=stress_job.key in result_store.completed_keys,
+        error_type=(
+            type(run_error).__name__
+            if failed_phase == "one_image_preflight"
+            else None
+        ),
     )
-    if stress_job.key not in result_store.completed_keys:
-        raise RuntimeError("The one-image DS1 SAM preflight did not complete")
-    if inference_stage in {"pilot", "full"}:
+    if stress_job.key not in result_store.completed_keys and run_error is None:
+        record_phase_failure(
+            "one_image_preflight",
+            RuntimeError("The one-image DS1 SAM preflight did not complete"),
+        )
+    if inference_stage in {"pilot", "full"} and run_error is None:
         report_phase(
             "pilot_started",
             image_count=PILOT_IMAGE_COUNT,
@@ -386,12 +509,32 @@ def run_ds1_sam_workflow(
             ),
         )
         if worker is not None:
-            run_sam_jobs(worker=worker, jobs=pilot_jobs, result_store=result_store, maximum_consecutive_failed_jobs=1, progress_callback=report, attempt_callback=record_attempt)
+            try:
+                run_sam_jobs(
+                    worker=worker,
+                    jobs=pilot_jobs,
+                    result_store=result_store,
+                    maximum_consecutive_failed_jobs=1,
+                    progress_callback=report,
+                    attempt_callback=record_attempt,
+                )
+            except Exception as error:
+                record_phase_failure("pilot", error)
         report_phase(
             "pilot_completed",
             completed=sum(job.key in result_store.completed_keys for job in pilot_jobs),
             expected=PILOT_IMAGE_COUNT,
+            error_type=type(run_error).__name__ if failed_phase == "pilot" else None,
         )
+        if (
+            sum(job.key in result_store.completed_keys for job in pilot_jobs)
+            != PILOT_IMAGE_COUNT
+            and run_error is None
+        ):
+            record_phase_failure(
+                "pilot", RuntimeError("The DS1 SAM pilot did not complete")
+            )
+    if inference_stage in {"pilot", "full"} and run_error is None:
         report_phase(
             "repeatability_started",
             image_count=PILOT_IMAGE_COUNT,
@@ -400,20 +543,49 @@ def run_ds1_sam_workflow(
             ),
         )
         if worker is not None:
-            run_sam_jobs(worker=worker, jobs=pilot_jobs, result_store=repeat_store, maximum_consecutive_failed_jobs=1, progress_callback=report, attempt_callback=record_attempt)
+            try:
+                run_sam_jobs(
+                    worker=worker,
+                    jobs=pilot_jobs,
+                    result_store=repeat_store,
+                    maximum_consecutive_failed_jobs=1,
+                    progress_callback=report,
+                    attempt_callback=record_attempt,
+                )
+            except Exception as error:
+                record_phase_failure("repeatability", error)
         report_phase(
             "repeatability_completed",
             completed=sum(job.key in repeat_store.completed_keys for job in pilot_jobs),
             expected=PILOT_IMAGE_COUNT,
+            error_type=(
+                type(run_error).__name__
+                if failed_phase == "repeatability"
+                else None
+            ),
         )
+        if (
+            sum(job.key in repeat_store.completed_keys for job in pilot_jobs)
+            != PILOT_IMAGE_COUNT
+            and run_error is None
+        ):
+            record_phase_failure(
+                "repeatability",
+                RuntimeError("The DS1 SAM repeatability run did not complete"),
+            )
 
     pilot_keys = {job.key for job in pilot_jobs}
     pilot_rows = [row for row in result_store.rows if (str(row["opaque_scene_id"]), str(row["view_id"])) in pilot_keys]
-    repeat = (
-        compare_repeat_results(pilot_rows, repeat_store.rows)
-        if inference_stage in {"pilot", "full"}
-        else {"prompt_count": 0, "mask_digest_agreement_rate": 0.0, "score_agreement_rate": 0.0}
-    )
+    repeat = _empty_repeat_agreement()
+    if (
+        inference_stage in {"pilot", "full"}
+        and len(pilot_rows) == PILOT_IMAGE_COUNT
+        and len(repeat_store.rows) == PILOT_IMAGE_COUNT
+    ):
+        try:
+            repeat = compare_repeat_results(pilot_rows, repeat_store.rows)
+        except Exception as error:
+            record_phase_failure("repeatability", error)
     preflight = {
         "schema_version": 1,
         "one_image_completed": stress_job.key in result_store.completed_keys,
@@ -425,7 +597,9 @@ def run_ds1_sam_workflow(
         "repeat_mask_digest_agreement_rate": repeat["mask_digest_agreement_rate"],
         "repeat_score_agreement_rate": repeat["score_agreement_rate"],
     }
-    preflight["passed"] = preflight["one_image_completed"] and (
+    preflight["failure_phase"] = failed_phase
+    preflight["error_type"] = type(run_error).__name__ if run_error is not None else None
+    preflight["passed"] = run_error is None and preflight["one_image_completed"] and (
         inference_stage == "one_image"
         or (
             preflight["pilot_image_count"] == PILOT_IMAGE_COUNT
@@ -437,11 +611,8 @@ def run_ds1_sam_workflow(
         )
     )
     _write_json(safe_root / "preflight_gates.json", preflight)
-    if not preflight["passed"]:
-        raise RuntimeError("DS1 SAM preflight gates failed")
 
-    run_error = None
-    if inference_stage == "full":
+    if inference_stage == "full" and preflight["passed"]:
         report_phase(
             "full_inference_started",
             image_count=DS1_SCREEN_CONTRACT.image_count,
@@ -452,17 +623,24 @@ def run_ds1_sam_workflow(
                 run_sam_jobs(worker=worker, jobs=jobs, result_store=result_store, maximum_consecutive_failed_jobs=2, progress_callback=report, attempt_callback=record_attempt)
             except Exception as error:
                 run_error = error
+                failed_phase = "full_inference"
         report_phase(
             "full_inference_completed",
             completed=len(result_store.completed_keys),
             expected=DS1_SCREEN_CONTRACT.image_count,
             error_type=type(run_error).__name__ if run_error is not None else None,
         )
+    elif inference_stage == "full":
+        report_phase(
+            "full_inference_skipped",
+            reason="preflight_not_accepted",
+            failure_phase=failed_phase,
+        )
     result_store.write_index(private_root / "mask_results.jsonl")
-    if repeat_store.rows:
+    if inference_stage in {"pilot", "full"}:
         repeat_store.write_index(private_root / "repeat_mask_results.jsonl")
     rows = result_store.rows
-    evidence = collect_sam_evidence(rows)
+    evidence = collect_sam_evidence(rows) if rows else _empty_sam_evidence()
     route_counts = {route: sum(len(row["routes"][route]) for row in rows) for route in ROUTES}
     expected_jobs = [stress_job] if inference_stage == "one_image" else pilot_jobs if inference_stage == "pilot" else jobs
     expected_route_counts = {
@@ -479,7 +657,11 @@ def run_ds1_sam_workflow(
         {"gate": "repeat mask digest agreement", "observed": repeat["mask_digest_agreement_rate"], "expected": 1.0 if inference_stage != "one_image" else "not assessed", "status": "pass" if inference_stage == "one_image" or repeat["mask_digest_agreement_rate"] == 1.0 else "fail"},
         {"gate": "repeat score agreement", "observed": repeat["score_agreement_rate"], "expected": 1.0 if inference_stage != "one_image" else "not assessed", "status": "pass" if inference_stage == "one_image" or repeat["score_agreement_rate"] == 1.0 else "fail"},
     ]
-    gate_passed = all(row["status"] == "pass" for row in gates)
+    gate_passed = (
+        run_error is None
+        and preflight["passed"]
+        and all(row["status"] == "pass" for row in gates)
+    )
     report_phase(
         "acceptance_gates_completed",
         passed=gate_passed,
@@ -493,17 +675,18 @@ def run_ds1_sam_workflow(
     _write_json(safe_root / "repeat_agreement.json", repeat)
     _write_json(safe_root / "runtime_summary.json", {"workflow_seconds": round(time.perf_counter() - started, 4), "median_image_runtime_seconds": evidence["median_image_runtime_seconds"], "p95_image_runtime_seconds": evidence["p95_image_runtime_seconds"], "median_prompts_per_image": evidence["median_prompts_per_image"]})
     _write_json(safe_root / "mask_geometry_summary.json", {"routes": evidence["route_rows"]})
-    save_histogram(evidence["image_runtimes"], safe_root / "runtime_distribution.png", title="DS1 SAM 2.1 runtime distribution", x_label="Seconds per image", bins=20)
-    save_histogram(evidence["prompt_counts"], safe_root / "mask_count_distribution.png", title="DS1 SAM 2.1 mask count per image", x_label="Masks per image", bins=12)
-    save_scatter_plot(evidence["prompt_counts"], evidence["image_runtimes"], safe_root / "runtime_by_prompt_count.png", title="DS1 SAM 2.1 runtime by prompt count", x_label="Prompts per image", y_label="Seconds per image")
+    _save_histogram_or_empty(evidence["image_runtimes"], safe_root / "runtime_distribution.png", title="DS1 SAM 2.1 runtime distribution", x_label="Seconds per image", bins=20)
+    _save_histogram_or_empty(evidence["prompt_counts"], safe_root / "mask_count_distribution.png", title="DS1 SAM 2.1 mask count per image", x_label="Masks per image", bins=12)
+    _save_scatter_or_empty(evidence["prompt_counts"], evidence["image_runtimes"], safe_root / "runtime_by_prompt_count.png", title="DS1 SAM 2.1 runtime by prompt count", x_label="Prompts per image", y_label="Seconds per image")
     for route, values in evidence["area_values_by_route"].items():
-        save_histogram(values, safe_root / f"{route}_mask_area_distribution.png", title=f"{route.replace('_', ' ').title()} mask area distribution", x_label="Mask area as a fraction of image area", bins=20)
+        _save_histogram_or_empty(values, safe_root / f"{route}_mask_area_distribution.png", title=f"{route.replace('_', ' ').title()} mask area distribution", x_label="Mask area as a fraction of image area", bins=20)
     for route, values in evidence["score_values_by_route"].items():
-        save_histogram(values, safe_root / f"{route}_predicted_score_distribution.png", title=f"{route.replace('_', ' ').title()} predicted score distribution", x_label="SAM predicted quality score", bins=20)
+        _save_histogram_or_empty(values, safe_root / f"{route}_predicted_score_distribution.png", title=f"{route.replace('_', ' ').title()} predicted score distribution", x_label="SAM predicted quality score", bins=20)
     save_bar_chart([row["route"] for row in evidence["route_rows"]], [row["mask_count"] for row in evidence["route_rows"]], safe_root / "mask_count_by_route.png", title="Completed DS1 SAM 2.1 masks by route", y_label="Masks")
     if pilot_rows:
         _save_private_mask_grid(private_root / "reference_mask_overlays.png", pilot_rows, job_by_key, "reference_box")
         _save_private_mask_grid(private_root / "automatic_mask_overlays.png", pilot_rows, job_by_key, "automatic_box")
+    if len(pilot_rows) >= 6:
         _save_private_route_comparison_grid(private_root / "mask_route_examples.png", private_root / "qualitative_example_manifest.csv", pilot_rows, job_by_key)
 
     recorded_gpu = dict(gpu_evidence)
@@ -557,6 +740,7 @@ def run_ds1_sam_workflow(
         "repeat_agreement": repeat,
         "completion_gate_passed": gate_passed,
         "error_type": type(run_error).__name__ if run_error is not None else None,
+        "failure_phase": failed_phase,
     }
     _write_json(safe_root / "run_record.json", run_record)
     _write_artifact_manifest(private_root)

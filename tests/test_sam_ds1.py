@@ -3,9 +3,11 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 
 from PIL import Image
 
+import visual_peer_inspector.workflows.sam_ds1 as sam_ds1_workflow
 from visual_peer_inspector.data.cohort_contract import DS1_SCREEN_CONTRACT
 from visual_peer_inspector.data.model_safe_package import file_sha256
 from visual_peer_inspector.models.sam2 import Sam2Configuration
@@ -141,6 +143,69 @@ class Ds1SamWorkflowTests(unittest.TestCase):
             progress_callback=progress_callback,
         )
 
+    def _assert_downloadable_phase_failure(
+        self, *, failed_call: int, expected_phase: str
+    ) -> None:
+        original_run_sam_jobs = sam_ds1_workflow.run_sam_jobs
+        call_count = 0
+
+        class FailingWorker:
+            def __init__(self, worker):
+                self.configuration = worker.configuration
+                self.producer_kind = worker.producer_kind
+
+            def process(self, _job, _attempt):
+                raise OSError("synthetic worker failure")
+
+        def dispatch(**kwargs):
+            nonlocal call_count
+            call_count += 1
+            if call_count == failed_call:
+                kwargs["worker"] = FailingWorker(kwargs["worker"])
+            return original_run_sam_jobs(**kwargs)
+
+        with mock.patch.object(
+            sam_ds1_workflow, "run_sam_jobs", side_effect=dispatch
+        ):
+            record = self._run()
+
+        self.assertEqual(record["status"], "failed")
+        self.assertFalse(record["completion_gate_passed"])
+        self.assertEqual(record["failure_phase"], expected_phase)
+        self.assertEqual(record["error_type"], "RuntimeError")
+        safe_root = self.output_root / "safe"
+        expected_safe_files = (
+            set(FINALIZER.ALLOWED_TABLES)
+            | FINALIZER.ALLOWED_JSON
+            | FINALIZER.ALLOWED_CHARTS
+            | {"artifact_manifest.json"}
+        )
+        actual_safe_files = {
+            path.relative_to(safe_root).as_posix()
+            for path in safe_root.rglob("*")
+            if path.is_file()
+        }
+        self.assertEqual(actual_safe_files, expected_safe_files)
+        self.assertTrue((self.output_root / "private" / "artifact_manifest.json").is_file())
+        self.assertTrue((self.output_root / "private" / "mask_results.jsonl").is_file())
+        self.assertTrue(
+            (self.output_root / "private" / "repeat_mask_results.jsonl").is_file()
+        )
+        preflight = json.loads(
+            (safe_root / "preflight_gates.json").read_text(encoding="utf-8")
+        )
+        self.assertFalse(preflight["passed"])
+        self.assertEqual(preflight["failure_phase"], expected_phase)
+        safe_manifest_before = (safe_root / "artifact_manifest.json").read_bytes()
+        with self.assertRaisesRegex(
+            ValueError, "completed DS1 model run: status"
+        ):
+            FINALIZER.validate_safe_root(safe_root)
+        self.assertEqual(
+            (safe_root / "artifact_manifest.json").read_bytes(),
+            safe_manifest_before,
+        )
+
     def test_complete_contract_run_is_resumable(self):
         first = self._run()
         attempt_path = self.output_root / "private" / "attempts.jsonl"
@@ -221,6 +286,21 @@ class Ds1SamWorkflowTests(unittest.TestCase):
         self.assertEqual(progress_events[-1]["completed"], progress_events[-1]["total"])
         self.assertTrue(events[-1][1]["passed"])
         self.assertTrue(record["completion_gate_passed"])
+
+    def test_preflight_worker_failure_is_downloadable_and_not_promotable(self):
+        self._assert_downloadable_phase_failure(
+            failed_call=1, expected_phase="one_image_preflight"
+        )
+
+    def test_pilot_worker_failure_is_downloadable_and_not_promotable(self):
+        self._assert_downloadable_phase_failure(
+            failed_call=2, expected_phase="pilot"
+        )
+
+    def test_repeat_worker_failure_is_downloadable_and_not_promotable(self):
+        self._assert_downloadable_phase_failure(
+            failed_call=3, expected_phase="repeatability"
+        )
 
     def test_clearml_validator_accepts_only_completed_model_evidence(self):
         self._run()

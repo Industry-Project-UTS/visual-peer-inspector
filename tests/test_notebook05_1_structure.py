@@ -33,6 +33,10 @@ class Notebook051StructureTests(unittest.TestCase):
         self.assertIn("import_ds1_sam_resume", source)
         self.assertIn("materialized a non-promotable run", source)
         self.assertIn("Do not publish or promote this run", source)
+        self.assertIn("No qualitative panel is available", source)
+        self.assertNotIn(
+            "The DS1 qualitative route panel was not generated", source
+        )
         self.assertNotIn("The DS1 SAM completion gate failed", source)
         self.assertNotIn(
             "Notebook 05.1 did not complete its operational contract", source

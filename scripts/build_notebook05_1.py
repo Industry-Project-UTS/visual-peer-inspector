@@ -436,9 +436,14 @@ These images are retained in Kaggle output for review and report preparation. Th
     code(
         """
 route_examples = OUTPUT_ROOT / "private" / "mask_route_examples.png"
-if not route_examples.is_file():
-    raise FileNotFoundError("The DS1 qualitative route panel was not generated")
-display(NotebookImage(filename=str(route_examples)))
+if route_examples.is_file():
+    display(NotebookImage(filename=str(route_examples)))
+else:
+    print(
+        "No qualitative panel is available because the pilot did not complete. "
+        "Use the failed run record, gates and attempt summary for diagnosis.",
+        flush=True,
+    )
 """
     ),
     markdown(
