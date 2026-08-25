@@ -6,6 +6,8 @@ from __future__ import annotations
 import argparse
 import csv
 from hashlib import sha256
+import importlib
+import importlib.metadata
 import json
 import os
 from pathlib import Path
@@ -116,6 +118,9 @@ DECISIONS = {
     "refine_or_replace_sam21",
     "retain_sam21_and_refine_automatic_proposals",
 }
+PINNED_CLEARML_VERSION = "2.1.10"
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--safe-root", type=Path, required=True)
@@ -256,7 +261,27 @@ def _load_credentials(secret_source: str) -> None:
             os.environ[name] = value
     elif any(not os.environ.get(name) for name in names):
         raise RuntimeError("ClearML credentials are missing from the finaliser environment")
-def _install_tracking_requirement() -> None:
+
+
+def _pinned_clearml_is_importable() -> bool:
+    try:
+        installed_version = importlib.metadata.version("clearml")
+    except importlib.metadata.PackageNotFoundError:
+        return False
+    if installed_version != PINNED_CLEARML_VERSION:
+        return False
+    try:
+        importlib.import_module("clearml")
+    except Exception:
+        return False
+    return True
+
+
+def _install_tracking_requirement() -> bool:
+    """Install the locked tracker only when the exact version is unavailable."""
+
+    if _pinned_clearml_is_importable():
+        return False
     subprocess.run(
         [
             sys.executable,
@@ -270,6 +295,9 @@ def _install_tracking_requirement() -> None:
         timeout=120,
         check=True,
     )
+    if not _pinned_clearml_is_importable():
+        raise RuntimeError("The pinned ClearML version is unavailable after installation")
+    return True
 
 
 def _alarm(_signum: int, _frame: Any) -> None:

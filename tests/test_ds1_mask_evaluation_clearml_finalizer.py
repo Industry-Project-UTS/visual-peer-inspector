@@ -6,6 +6,7 @@ import importlib.util
 import json
 from pathlib import Path
 import sys
+from unittest import mock
 
 from visual_peer_inspector.data.cohort_contract import DS1_SCREEN_CONTRACT
 
@@ -195,6 +196,50 @@ def test_disabled_finalizer_writes_verified_receipt_without_credentials(tmp_path
     assert value["status"] == "disabled"
     assert value["snapshot_sha256"] == "b" * 64
     assert value["safe_manifest_sha256"] == sha256((root / "artifact_manifest.json").read_bytes()).hexdigest()
+
+
+def test_tracking_install_is_skipped_for_importable_pinned_version():
+    with (
+        mock.patch.object(
+            finalizer.importlib.metadata,
+            "version",
+            return_value=finalizer.PINNED_CLEARML_VERSION,
+        ),
+        mock.patch.object(finalizer.importlib, "import_module", return_value=object()),
+        mock.patch.object(finalizer.subprocess, "run") as install,
+    ):
+        installed = finalizer._install_tracking_requirement()
+
+    assert installed is False
+    install.assert_not_called()
+
+
+def test_tracking_install_repairs_a_version_mismatch():
+    with (
+        mock.patch.object(
+            finalizer.importlib.metadata,
+            "version",
+            side_effect=["2.0.0", finalizer.PINNED_CLEARML_VERSION],
+        ),
+        mock.patch.object(finalizer.importlib, "import_module", return_value=object()),
+        mock.patch.object(finalizer.subprocess, "run") as install,
+    ):
+        installed = finalizer._install_tracking_requirement()
+
+    assert installed is True
+    install.assert_called_once_with(
+        [
+            finalizer.sys.executable,
+            "-m",
+            "pip",
+            "install",
+            "-q",
+            "-r",
+            str(finalizer.CODE_ROOT / "requirements/tracking-lock.txt"),
+        ],
+        timeout=120,
+        check=True,
+    )
 
 
 def test_notebook_isolated_secret_loading_and_snapshot_verification():

@@ -26,7 +26,7 @@ from visual_peer_inspector.data.sam_prompt_package import (
 )
 from visual_peer_inspector.models.locateanything import (
     MODEL_PRODUCER_KIND,
-    validate_proposal_result,
+    ProposalResultStore,
 )
 
 
@@ -81,7 +81,8 @@ def _verify_safe_artifact_manifest(path: Path) -> None:
 
 def _validate_upstream_run(
     run_record: Mapping[str, Any],
-    proposal_rows: list[dict[str, Any]],
+    latest_proposal_rows: list[dict[str, Any]],
+    proposal_history_rows: list[dict[str, Any]],
 ) -> tuple[str, str, str]:
     contract = DS1_SCREEN_CONTRACT
     if run_record.get("stage") != "ds1_locateanything_screen":
@@ -131,11 +132,11 @@ def _validate_upstream_run(
     model_revision = str(configuration.get("model_revision", ""))
     if not configuration_sha256 or not model_id or not model_revision:
         raise ValueError("LocateAnything DS1 run is missing frozen model configuration")
-    if {str(row["configuration_sha256"]) for row in proposal_rows} != {configuration_sha256}:
+    if {str(row["configuration_sha256"]) for row in proposal_history_rows} != {configuration_sha256}:
         raise ValueError("LocateAnything results use another configuration")
-    if {str(row["model_id"]) for row in proposal_rows} != {model_id}:
+    if {str(row["model_id"]) for row in proposal_history_rows} != {model_id}:
         raise ValueError("LocateAnything results use another model")
-    if {str(row["model_revision"]) for row in proposal_rows} != {model_revision}:
+    if {str(row["model_revision"]) for row in proposal_history_rows} != {model_revision}:
         raise ValueError("LocateAnything results use another model revision")
     output_identity = run_record.get("output_identity", {})
     proposal_results_sha256 = str(
@@ -148,10 +149,31 @@ def _validate_upstream_run(
         )
         or not re.fullmatch(r"[0-9a-f]{64}", proposal_results_sha256)
         or proposal_results_sha256 != output_identity.get("result_sha256")
-        or int(output_identity.get("result_count", -1)) != len(proposal_rows)
+        or int(output_identity.get("result_count", -1))
+        != len(latest_proposal_rows)
     ):
-        raise ValueError("LocateAnything run record does not commit its full result set")
+        raise ValueError("LocateAnything run record does not commit its current result set")
     return configuration_sha256, model_id, model_revision
+
+
+def _validate_proposal_history_sequence(
+    history_rows: list[dict[str, Any]],
+) -> None:
+    """Require every append-only retry history to use consecutive attempts."""
+
+    previous_attempt_by_image: dict[tuple[str, str], int] = {}
+    previous_row_by_image: dict[tuple[str, str], dict[str, Any]] = {}
+    for row in history_rows:
+        key = (str(row["opaque_scene_id"]), str(row["view_id"]))
+        previous_attempt = previous_attempt_by_image.get(key, 0)
+        if int(row["attempt"]) != previous_attempt + 1:
+            raise ValueError("LocateAnything proposal retry history is not sequential")
+        if previous_attempt and previous_row_by_image[key]["status"] == "ok":
+            raise ValueError(
+                "LocateAnything proposal retry history continues after success"
+            )
+        previous_attempt_by_image[key] = int(row["attempt"])
+        previous_row_by_image[key] = row
 
 
 def build_ds1_sam_prompt_package(
@@ -214,10 +236,38 @@ def build_ds1_sam_prompt_package(
     run_record = json.loads(proposal_run_record_path.read_text(encoding="utf-8"))
     if proposal_run_record_path.resolve() != (proposal_artifact_manifest_path.parent / "run_record.json").resolve():
         raise ValueError("Proposal run record is outside the verified safe evidence root")
-    proposal_rows = read_jsonl(proposal_results_path)
+    proposal_results_sha256 = file_sha256(proposal_results_path)
+    output_identity = run_record.get("output_identity", {})
+    if (
+        output_identity.get("result_sha256") != proposal_results_sha256
+        or output_identity.get("proposal_results_sha256")
+        != proposal_results_sha256
+    ):
+        raise ValueError("LocateAnything run record identifies another proposal file")
+    configuration_sha256 = str(run_record.get("configuration_sha256", ""))
+    proposal_store = ProposalResultStore(
+        proposal_results_path,
+        configuration_sha256,
+        MODEL_PRODUCER_KIND,
+    )
+    proposal_history_rows = proposal_store.history_rows
+    _validate_proposal_history_sequence(proposal_history_rows)
+    proposal_rows = proposal_store.rows
+    expected_image_sha256: dict[tuple[str, str], str] = {}
+    for row in proposal_history_rows:
+        key = (str(row["opaque_scene_id"]), str(row["view_id"]))
+        if key not in expected_images:
+            raise ValueError("LocateAnything history contains an unexpected image")
+        if row["cohort_id"] != contract.cohort_id:
+            raise ValueError("LocateAnything history identifies another cohort")
+        _, image_path = expected_images[key]
+        if key not in expected_image_sha256:
+            expected_image_sha256[key] = file_sha256(image_path)
+        expected_digest = expected_image_sha256[key]
+        if str(row["image_sha256"]) != expected_digest:
+            raise ValueError("LocateAnything history identifies another image")
     proposal_by_image: dict[tuple[str, str], dict[str, Any]] = {}
     for row in proposal_rows:
-        validate_proposal_result(row)
         key = (str(row["opaque_scene_id"]), str(row["view_id"]))
         if key in proposal_by_image or key not in expected_images:
             raise ValueError("LocateAnything results contain duplicate or unexpected images")
@@ -227,17 +277,9 @@ def build_ds1_sam_prompt_package(
     if set(proposal_by_image) != set(expected_images):
         raise ValueError("LocateAnything results do not cover all DS1 images")
     configuration_sha256, model_id, model_revision = _validate_upstream_run(
-        run_record, proposal_rows
+        run_record, proposal_rows, proposal_history_rows
     )
-    proposal_results_sha256 = file_sha256(proposal_results_path)
-    if (
-        run_record["output_identity"].get("result_sha256")
-        != proposal_results_sha256
-        or run_record["output_identity"].get("proposal_results_sha256")
-        != proposal_results_sha256
-    ):
-        raise ValueError("LocateAnything run record identifies another proposal file")
-    if {str(row["input_manifest_sha256"]) for row in proposal_rows} != {model_manifest_sha256}:
+    if {str(row["input_manifest_sha256"]) for row in proposal_history_rows} != {model_manifest_sha256}:
         raise ValueError("LocateAnything results identify another model-input manifest")
 
     manifest_rows: list[dict[str, Any]] = []
@@ -246,7 +288,7 @@ def build_ds1_sam_prompt_package(
     for key in sorted(expected_images):
         scene_id, view_id = key
         image_relative, image_path = expected_images[key]
-        image_sha256 = file_sha256(image_path)
+        image_sha256 = expected_image_sha256[key]
         proposal_row = proposal_by_image[key]
         if image_sha256 != str(proposal_row["image_sha256"]):
             raise ValueError("A DS1 image differs from the frozen proposal input")

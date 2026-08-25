@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import asdict
 from hashlib import sha256
 import json
@@ -250,6 +251,87 @@ class Ds1SamPromptPackageTests(unittest.TestCase):
                 output_root=self.output_root,
             )
 
+    def refresh_safe_artifact_manifest(self) -> None:
+        artifact_row = {
+            "path": "run_record.json",
+            "sha256": file_sha256(self.run_record_path),
+            "size_bytes": self.run_record_path.stat().st_size,
+        }
+        self.write_json(
+            self.artifact_manifest_path,
+            {
+                "schema_version": 1,
+                "artifact_count": 1,
+                "artifacts": [artifact_row],
+                "manifest_content_sha256": sha256(
+                    canonical_json_bytes(artifact_row) + b"\n"
+                ).hexdigest(),
+            },
+        )
+
+    def commit_proposal_history(
+        self,
+        rows: list[dict],
+        *,
+        result_count: int = 40,
+    ) -> None:
+        self.write_jsonl(self.proposal_path, rows)
+        record = json.loads(self.run_record_path.read_text(encoding="utf-8"))
+        digest = file_sha256(self.proposal_path)
+        record["output_identity"].update(
+            {
+                "result_sha256": digest,
+                "proposal_results_sha256": digest,
+                "result_count": result_count,
+            }
+        )
+        self.write_json(self.run_record_path, record)
+        self.refresh_safe_artifact_manifest()
+
+    @staticmethod
+    def retry_row(
+        source: dict,
+        attempt: int,
+        *,
+        status: str,
+        error_type: str | None = None,
+    ) -> dict:
+        row = deepcopy(source)
+        mode = "hybrid" if attempt <= 4 else "slow"
+        row.update(
+            {
+                "attempt": attempt,
+                "effective_generation_mode": mode,
+                "effective_max_new_tokens": 8192,
+                "generation_stats": {
+                    "effective_generation_mode": mode,
+                    "effective_max_new_tokens": 8192,
+                },
+                "status": status,
+            }
+        )
+        if status == "ok":
+            row.update(
+                {
+                    "proposal_count": 1,
+                    "boxes_xyxy": [[10, 10, 82, 92]],
+                    "possibly_truncated": False,
+                    "error_type": None,
+                    "error_message": None,
+                }
+            )
+        else:
+            row.update(
+                {
+                    "proposal_count": 0,
+                    "boxes_xyxy": [],
+                    "possibly_truncated": error_type == "PossibleTruncation",
+                    "error_type": error_type,
+                    "error_message": f"Sanitized {error_type} failure",
+                }
+            )
+        return row
+
     def test_builds_two_routes_without_copying_evaluator_records(self) -> None:
         record = self.build()
         text = (self.output_root / "sam_prompt_manifest.jsonl").read_text(encoding="utf-8")
@@ -267,8 +349,102 @@ class Ds1SamPromptPackageTests(unittest.TestCase):
     def test_rejects_results_from_another_configuration(self) -> None:
         rows = [json.loads(line) for line in self.proposal_path.read_text().splitlines()]
         rows[0]["configuration_sha256"] = "0" * 64
-        self.write_jsonl(self.proposal_path, rows)
+        self.commit_proposal_history(rows)
         with self.assertRaisesRegex(ValueError, "configuration"):
+            self.build()
+
+    def test_accepts_append_only_retry_history_and_uses_latest_success(self) -> None:
+        rows = [json.loads(line) for line in self.proposal_path.read_text().splitlines()]
+        source = rows.pop(0)
+        history = [
+            self.retry_row(
+                source,
+                attempt,
+                status="error",
+                error_type="PossibleTruncation",
+            )
+            for attempt in range(1, 5)
+        ]
+        history.append(self.retry_row(source, 5, status="ok"))
+        self.commit_proposal_history(history + rows)
+
+        record = self.build()
+
+        self.assertEqual(record["image_count"], 40)
+        self.assertEqual(record["automatic_prompt_count"], 40)
+        upstream = json.loads(
+            (self.output_root / "upstream_decision.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            upstream["proposal_results_sha256"], file_sha256(self.proposal_path)
+        )
+
+    def test_rejects_duplicate_retry_attempt(self) -> None:
+        rows = [json.loads(line) for line in self.proposal_path.read_text().splitlines()]
+        rows.insert(1, deepcopy(rows[0]))
+        self.commit_proposal_history(rows)
+        with self.assertRaisesRegex(ValueError, "duplicate attempt"):
+            self.build()
+
+    def test_rejects_skipped_retry_attempt(self) -> None:
+        rows = [json.loads(line) for line in self.proposal_path.read_text().splitlines()]
+        source = rows.pop(0)
+        history = [
+            self.retry_row(
+                source,
+                1,
+                status="error",
+                error_type="PossibleTruncation",
+            ),
+            self.retry_row(source, 3, status="ok"),
+        ]
+        self.commit_proposal_history(history + rows)
+        with self.assertRaisesRegex(ValueError, "not sequential"):
+            self.build()
+
+    def test_rejects_retry_history_continuing_after_success(self) -> None:
+        rows = [json.loads(line) for line in self.proposal_path.read_text().splitlines()]
+        source = rows.pop(0)
+        history = [self.retry_row(source, 1, status="ok")]
+        history.append(
+            self.retry_row(
+                source,
+                2,
+                status="error",
+                error_type="PossibleTruncation",
+            )
+        )
+        self.commit_proposal_history(history + rows)
+        with self.assertRaisesRegex(ValueError, "continues after success"):
+            self.build()
+
+    def test_rejects_invalid_slow_retry_transition(self) -> None:
+        rows = [json.loads(line) for line in self.proposal_path.read_text().splitlines()]
+        source = rows.pop(0)
+        history = [
+            self.retry_row(
+                source,
+                attempt,
+                status="error",
+                error_type="NoValidBoxes",
+            )
+            for attempt in range(1, 5)
+        ]
+        history.append(self.retry_row(source, 5, status="ok"))
+        self.commit_proposal_history(history + rows)
+        with self.assertRaisesRegex(ValueError, "directly preceding"):
+            self.build()
+
+    def test_rejects_history_whose_latest_attempt_failed(self) -> None:
+        rows = [json.loads(line) for line in self.proposal_path.read_text().splitlines()]
+        rows[0] = self.retry_row(
+            rows[0],
+            1,
+            status="error",
+            error_type="NoValidBoxes",
+        )
+        self.commit_proposal_history(rows)
+        with self.assertRaisesRegex(ValueError, "not accepted model outputs"):
             self.build()
 
     def test_rejects_unverified_trusted_geometry(self) -> None:
@@ -282,26 +458,11 @@ class Ds1SamPromptPackageTests(unittest.TestCase):
         record = json.loads(self.run_record_path.read_text(encoding="utf-8"))
         record["provenance"]["git_dirty"] = True
         self.write_json(self.run_record_path, record)
-        artifact_row = {
-            "path": "run_record.json",
-            "sha256": file_sha256(self.run_record_path),
-            "size_bytes": self.run_record_path.stat().st_size,
-        }
-        self.write_json(
-            self.artifact_manifest_path,
-            {
-                "schema_version": 1,
-                "artifact_count": 1,
-                "artifacts": [artifact_row],
-                "manifest_content_sha256": sha256(
-                    canonical_json_bytes(artifact_row) + b"\n"
-                ).hexdigest(),
-            },
-        )
+        self.refresh_safe_artifact_manifest()
         with self.assertRaisesRegex(ValueError, "clean committed"):
             self.build()
 
-    def test_rejects_proposal_file_not_committed_by_run_record(self) -> None:
+    def test_rejects_tampered_history_not_committed_by_run_record(self) -> None:
         rows = [json.loads(line) for line in self.proposal_path.read_text().splitlines()]
         rows[0]["boxes_xyxy"] = [[11, 11, 83, 93]]
         self.write_jsonl(self.proposal_path, rows)

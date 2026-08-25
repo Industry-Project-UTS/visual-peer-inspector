@@ -7,6 +7,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 from PIL import Image
 
@@ -273,6 +274,47 @@ class Ds1LocateAnythingClearmlFinalizerTests(unittest.TestCase):
         self._write_manifest()
         with self.assertRaisesRegex(ValueError, "proposal-result identity"):
             FINALIZER.validate_safe_root(self.root)
+
+    def test_tracking_install_is_skipped_for_importable_pinned_version(self) -> None:
+        with (
+            mock.patch.object(
+                FINALIZER.importlib.metadata,
+                "version",
+                return_value=FINALIZER.PINNED_CLEARML_VERSION,
+            ),
+            mock.patch.object(FINALIZER.importlib, "import_module", return_value=object()),
+            mock.patch.object(FINALIZER.subprocess, "check_call") as install,
+        ):
+            installed = FINALIZER._install_tracking_requirement()
+
+        self.assertFalse(installed)
+        install.assert_not_called()
+
+    def test_tracking_install_repairs_a_version_mismatch(self) -> None:
+        with (
+            mock.patch.object(
+                FINALIZER.importlib.metadata,
+                "version",
+                side_effect=["2.0.0", FINALIZER.PINNED_CLEARML_VERSION],
+            ),
+            mock.patch.object(FINALIZER.importlib, "import_module", return_value=object()),
+            mock.patch.object(FINALIZER.subprocess, "check_call") as install,
+        ):
+            installed = FINALIZER._install_tracking_requirement()
+
+        self.assertTrue(installed)
+        install.assert_called_once_with(
+            [
+                FINALIZER.sys.executable,
+                "-m",
+                "pip",
+                "install",
+                "-q",
+                "-r",
+                str(FINALIZER.CODE_ROOT / "requirements/tracking-lock.txt"),
+            ],
+            timeout=120,
+        )
 
     def test_notebook_leaves_tracking_setup_to_bounded_child(self) -> None:
         notebook_path = CODE_ROOT / (

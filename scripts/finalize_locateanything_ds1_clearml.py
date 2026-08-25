@@ -6,6 +6,8 @@ from __future__ import annotations
 import argparse
 import csv
 from hashlib import sha256
+import importlib
+import importlib.metadata
 import json
 import os
 from pathlib import Path
@@ -76,6 +78,7 @@ EXPECTED_MEMBERSHIP_SHA256 = (
 )
 EXPECTED_MODEL_ID = "nvidia/LocateAnything-3B"
 EXPECTED_MODEL_REVISION = "c32291ca5e996f5a7a485845b4f57a233936bba0"
+PINNED_CLEARML_VERSION = "2.1.10"
 CODE_ROOT = Path(__file__).resolve().parents[1]
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(CODE_ROOT / "src"))
@@ -335,23 +338,48 @@ def _alarm(_signum: int, _frame: Any) -> None:
     raise TimeoutError("ClearML finalisation exceeded its wall-time limit")
 
 
+def _pinned_clearml_is_importable() -> bool:
+    try:
+        installed_version = importlib.metadata.version("clearml")
+    except importlib.metadata.PackageNotFoundError:
+        return False
+    if installed_version != PINNED_CLEARML_VERSION:
+        return False
+    try:
+        importlib.import_module("clearml")
+    except Exception:
+        return False
+    return True
+
+
+def _install_tracking_requirement() -> bool:
+    """Install the locked tracker only when the exact version is unavailable."""
+
+    if _pinned_clearml_is_importable():
+        return False
+    subprocess.check_call(
+        [
+            sys.executable,
+            "-m",
+            "pip",
+            "install",
+            "-q",
+            "-r",
+            str(CODE_ROOT / "requirements/tracking-lock.txt"),
+        ],
+        timeout=120,
+    )
+    if not _pinned_clearml_is_importable():
+        raise RuntimeError("The pinned ClearML version is unavailable after installation")
+    return True
+
+
 def _prepare_tracking_environment(mode: str) -> None:
     """Install tracking support and resolve Kaggle credentials in this child."""
 
     configure_official_clearml_hosts()
     if mode in {"online", "offline"}:
-        subprocess.check_call(
-            [
-                sys.executable,
-                "-m",
-                "pip",
-                "install",
-                "-q",
-                "-r",
-                str(CODE_ROOT / "requirements/tracking-lock.txt"),
-            ],
-            timeout=120,
-        )
+        _install_tracking_requirement()
     if mode == "online" and Path("/kaggle/input").is_dir():
         from kaggle_secrets import UserSecretsClient
 
@@ -361,6 +389,8 @@ def _prepare_tracking_environment(mode: str) -> None:
             if not value:
                 raise RuntimeError(f"Kaggle Secret {name} is missing or disabled")
             os.environ[name] = value
+
+
 def _log_online(
     root: Path,
     project: str,
