@@ -12,10 +12,11 @@
   "dataset_sources": [
     "esreekarreddy/vpi-code-snapshot",
     "esreekarreddy/vpi-toysad-ds1-mask-evaluator",
-    "esreekarreddy/vpi-toysad-ds1-locateanything-output",
-    "esreekarreddy/vpi-toysad-ds1-sam21-output"
+    "esreekarreddy/vpi-toysad-ds1-locateanything-output"
   ],
   "competition_sources": [],
-  "kernel_sources": [],
+  "kernel_sources": [
+    "esreekarreddy/toysad-8k-ds1-sam-2-1-segmentation"
+  ],
   "model_sources": []
 }
