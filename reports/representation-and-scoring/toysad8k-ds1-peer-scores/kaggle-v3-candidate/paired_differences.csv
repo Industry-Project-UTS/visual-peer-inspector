@@ -1,0 +1,13 @@
+comparison_family,candidate_encoder,candidate_route,candidate_method,baseline_encoder,baseline_route,baseline_method,metric,mean_difference,ci_lower,ci_upper,paired_scene_count,cluster_count,repetitions,seed
+encoder_vs_anchor,dinov2_base,supplied_mask,B0,dinov2_small,supplied_mask,B0,average_precision,0.000554166666666664,-0.012095694403999229,0.0140156502678391,100,27,10000,32040
+encoder_vs_anchor,dinov2_small_registers,supplied_mask,B0,dinov2_small,supplied_mask,B0,average_precision,0.005841666666666666,-0.0034002864583333368,0.01592084935897436,100,27,10000,32040
+encoder_vs_anchor,resnet50_control,supplied_mask,B0,dinov2_small,supplied_mask,B0,average_precision,-0.01724166666666667,-0.030773309844771238,-0.0036052682436611026,100,27,10000,32040
+scorer_vs_b0,dinov2_base,supplied_mask,B1,dinov2_base,supplied_mask,B0,average_precision,-0.0075499999999999986,-0.013082569355867345,-0.0022716346153846146,100,27,10000,32040
+scorer_vs_b0,dinov2_base,supplied_mask,P1,dinov2_base,supplied_mask,B0,average_precision,0.033712500000000006,0.020744033029878626,0.04713821115567438,100,27,10000,32040
+scorer_vs_b0,dinov2_small,supplied_mask,B1,dinov2_small,supplied_mask,B0,average_precision,-0.003058333333333335,-0.009979969720272996,0.003237640678694157,100,27,10000,32040
+scorer_vs_b0,dinov2_small,supplied_mask,P1,dinov2_small,supplied_mask,B0,average_precision,0.026470833333333332,0.012083125000000007,0.042950770459699014,100,27,10000,32040
+scorer_vs_b0,dinov2_small_registers,supplied_mask,B1,dinov2_small_registers,supplied_mask,B0,average_precision,-0.007870833333333334,-0.013860565265710246,-0.0021956513047138096,100,27,10000,32040
+scorer_vs_b0,dinov2_small_registers,supplied_mask,P1,dinov2_small_registers,supplied_mask,B0,average_precision,0.01522083333333333,0.002106568567961165,0.030714285714285704,100,27,10000,32040
+scorer_vs_b0,resnet50_control,supplied_mask,B1,resnet50_control,supplied_mask,B0,average_precision,-0.005254166666666664,-0.012366885738831612,5.003865979381621e-05,100,27,10000,32040
+route_vs_anchor,dinov2_small,automatic_box,B0,dinov2_small,supplied_mask,B0,average_precision,-0.020377361720666672,-0.03404930365348859,-0.008952297794646449,100,27,10000,32040
+route_vs_anchor,dinov2_small,reference_box,B0,dinov2_small,supplied_mask,B0,average_precision,0.0004499999999999965,-0.009674195544554464,0.009733924795136123,100,27,10000,32040

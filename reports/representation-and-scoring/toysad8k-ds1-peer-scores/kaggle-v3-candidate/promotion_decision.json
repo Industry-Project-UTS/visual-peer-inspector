@@ -1,0 +1,91 @@
+{
+  "anchor_encoder": "dinov2_small",
+  "anchor_scorer": "B0",
+  "available_encoders": [
+    "dinov2_small",
+    "dinov2_small_registers",
+    "dinov2_base",
+    "resnet50_control"
+  ],
+  "claim_boundary": "This freezes the representation configuration for the next development stage. It is not final test acceptance.",
+  "decision": "freeze_encoder_and_scorer_on_ds1",
+  "dino3_access_result_recorded": true,
+  "encoder_candidates": [
+    {
+      "encoder_key": "dinov2_base",
+      "gain_over_anchor": 0.0005541666666665224,
+      "maximum_anomaly_count_subgroup_loss": 0.006483333333333285,
+      "mean_scene_ap": 0.6412916666666666,
+      "paired_ci_lower": -0.012095694403999229,
+      "paired_ci_upper": 0.0140156502678391,
+      "promotion_passed": false,
+      "runtime_ratio": 1.2503406487617623
+    },
+    {
+      "encoder_key": "dinov2_small",
+      "gain_over_anchor": 0.0,
+      "maximum_anomaly_count_subgroup_loss": 0.0,
+      "mean_scene_ap": 0.6407375000000001,
+      "paired_ci_lower": 0.0,
+      "paired_ci_upper": 0.0,
+      "promotion_passed": true,
+      "runtime_ratio": 1.0
+    },
+    {
+      "encoder_key": "dinov2_small_registers",
+      "gain_over_anchor": 0.005841666666666634,
+      "maximum_anomaly_count_subgroup_loss": -0.004033333333333333,
+      "mean_scene_ap": 0.6465791666666667,
+      "paired_ci_lower": -0.0034002864583333368,
+      "paired_ci_upper": 0.01592084935897436,
+      "promotion_passed": false,
+      "runtime_ratio": 0.9529641733067621
+    },
+    {
+      "encoder_key": "resnet50_control",
+      "gain_over_anchor": -0.01724166666666671,
+      "maximum_anomaly_count_subgroup_loss": 0.021511111111111147,
+      "mean_scene_ap": 0.6234958333333334,
+      "paired_ci_lower": -0.030773309844771238,
+      "paired_ci_upper": -0.0036052682436611026,
+      "promotion_passed": false,
+      "runtime_ratio": 0.5991436129227055
+    }
+  ],
+  "final_encoder_selected": true,
+  "promotion_rule": {
+    "maximum_anomaly_count_subgroup_loss": 0.03,
+    "maximum_runtime_ratio": 2.0,
+    "minimum_mean_scene_ap_gain": 0.01,
+    "paired_ci_lower_must_exceed": 0.0
+  },
+  "route_for_selection": "supplied_mask",
+  "scorer_candidates": [
+    {
+      "gain_over_b0": 0.0,
+      "mean_scene_ap": 0.6407375000000001,
+      "method": "B0",
+      "paired_ci_lower": 0.0,
+      "paired_ci_upper": 0.0,
+      "promotion_passed": true
+    },
+    {
+      "gain_over_b0": -0.003058333333333274,
+      "mean_scene_ap": 0.6376791666666668,
+      "method": "B1",
+      "paired_ci_lower": -0.009979969720272996,
+      "paired_ci_upper": 0.003237640678694157,
+      "promotion_passed": false
+    },
+    {
+      "gain_over_b0": 0.02647083333333311,
+      "mean_scene_ap": 0.6672083333333332,
+      "method": "P1",
+      "paired_ci_lower": 0.012083125000000007,
+      "paired_ci_upper": 0.042950770459699014,
+      "promotion_passed": true
+    }
+  ],
+  "selected_encoder": "dinov2_small",
+  "selected_scorer": "P1"
+}

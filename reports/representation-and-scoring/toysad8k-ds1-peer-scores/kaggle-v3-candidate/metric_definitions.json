@@ -1,0 +1,9 @@
+{
+  "B0": "Cosine distance to the normalized leave-one-out peer mean.",
+  "B1": "Median cosine distance to all peer objects in the same view.",
+  "P1": "Median symmetric top-tail patch mismatch to peer objects.",
+  "average_precision": "Ranking AP with missed visible anomalies retained in the denominator.",
+  "claim_boundary": "DS1 selects the encoder and scorer for the next development stage. It does not provide final test acceptance.",
+  "layout_B1": "Median peer distance using centroid and peer-spacing features only.",
+  "shape_B1": "Median peer distance using shape features only."
+}

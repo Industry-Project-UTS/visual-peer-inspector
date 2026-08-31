@@ -1,0 +1,115 @@
+{
+  "crop_configuration": {
+    "background_rgb": [
+      238,
+      241,
+      245
+    ],
+    "input_size": 224,
+    "minimum_foreground_pixels": 4,
+    "padding_fraction": 0.15
+  },
+  "crop_configuration_sha256": "31a77a0b4e6acd5801502e8acd2852c4f84ab8577a4f4cc65d0208947300c14c",
+  "encoder_batch_size": 32,
+  "encoder_keys": [
+    "dinov2_small",
+    "dinov2_small_registers",
+    "dinov3_small",
+    "dinov3_small_plus",
+    "dinov2_base",
+    "resnet50_control"
+  ],
+  "encoder_registry_sha256": "fa44d17fa783117636f774ae3186fbd232c77453406b90110d6852b7136c318c",
+  "encoders": [
+    {
+      "backend": "transformers_dino",
+      "family": "DINOv2",
+      "gated": false,
+      "key": "dinov2_small",
+      "model_id": "facebook/dinov2-small",
+      "parameters_millions": 21,
+      "screen_stage": "core",
+      "supports_patches": true
+    },
+    {
+      "backend": "transformers_dino",
+      "family": "DINOv2",
+      "gated": false,
+      "key": "dinov2_small_registers",
+      "model_id": "facebook/dinov2-with-registers-small",
+      "parameters_millions": 21,
+      "screen_stage": "core",
+      "supports_patches": true
+    },
+    {
+      "backend": "transformers_dino",
+      "family": "DINOv3",
+      "gated": true,
+      "key": "dinov3_small",
+      "model_id": "facebook/dinov3-vits16-pretrain-lvd1689m",
+      "parameters_millions": 21,
+      "screen_stage": "core",
+      "supports_patches": true
+    },
+    {
+      "backend": "transformers_dino",
+      "family": "DINOv3",
+      "gated": true,
+      "key": "dinov3_small_plus",
+      "model_id": "facebook/dinov3-vits16plus-pretrain-lvd1689m",
+      "parameters_millions": 29,
+      "screen_stage": "core",
+      "supports_patches": true
+    },
+    {
+      "backend": "transformers_dino",
+      "family": "DINOv2",
+      "gated": false,
+      "key": "dinov2_base",
+      "model_id": "facebook/dinov2-base",
+      "parameters_millions": 86,
+      "screen_stage": "confirmation",
+      "supports_patches": true
+    },
+    {
+      "backend": "transformers_resnet",
+      "family": "ResNet",
+      "gated": false,
+      "key": "resnet50_control",
+      "model_id": "microsoft/resnet-50",
+      "parameters_millions": 26,
+      "screen_stage": "control",
+      "supports_patches": false
+    }
+  ],
+  "global_input_size": 224,
+  "minimum_candidate_count": 3,
+  "p1_top_fraction": 0.1,
+  "patch_validity_minimum_fraction": 0.5,
+  "random_seed": 32040,
+  "route_scope_by_encoder": {
+    "dinov2_base": [
+      "supplied_mask"
+    ],
+    "dinov2_small": [
+      "supplied_mask",
+      "reference_box",
+      "automatic_box"
+    ],
+    "dinov2_small_registers": [
+      "supplied_mask"
+    ],
+    "dinov3_small": [
+      "supplied_mask"
+    ],
+    "dinov3_small_plus": [
+      "supplied_mask"
+    ],
+    "resnet50_control": [
+      "supplied_mask"
+    ]
+  },
+  "run_mode": "model_evidence",
+  "schema_version": 1,
+  "stage": "ds1_representation_and_peer_scores"
+}

@@ -1,0 +1,9 @@
+{
+  "cache_is_private": true,
+  "configuration_sha256": "f730cab31f4ed54c23750eeed9e4749246225bb76acf09bbfd68b438b8792dc4",
+  "global_features_retained": true,
+  "p1_heatmaps_retained": true,
+  "patch_features_retained": false,
+  "resumed_scene_shard_count": 0,
+  "scene_shard_count": 400
+}
