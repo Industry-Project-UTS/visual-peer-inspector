@@ -1,0 +1,45 @@
+{
+  "bootstrap_repetitions": 5000,
+  "bootstrap_seed": 32040,
+  "image_height": 256,
+  "image_width": 256,
+  "maximum_recall_loss_for_diagnostic_selection": 0.005,
+  "policies": [
+    {
+      "key": "baseline",
+      "maximum_area_fraction": 1.0,
+      "minimum_area_fraction": 0.0,
+      "nms_iou": null
+    },
+    {
+      "key": "area_only",
+      "maximum_area_fraction": 0.7,
+      "minimum_area_fraction": 0.0015,
+      "nms_iou": null
+    },
+    {
+      "key": "nms_090",
+      "maximum_area_fraction": 1.0,
+      "minimum_area_fraction": 0.0,
+      "nms_iou": 0.9
+    },
+    {
+      "key": "nms_075",
+      "maximum_area_fraction": 1.0,
+      "minimum_area_fraction": 0.0,
+      "nms_iou": 0.75
+    },
+    {
+      "key": "area_nms_075",
+      "maximum_area_fraction": 0.7,
+      "minimum_area_fraction": 0.0015,
+      "nms_iou": 0.75
+    }
+  ],
+  "precision_gate": 0.9,
+  "recall_gate": 0.95,
+  "schema_version": 1,
+  "selection_metric": "micro_f1_at_0_50",
+  "stage": "ds1_proposal_refinement",
+  "uses_evaluator_information_during_filtering": false
+}

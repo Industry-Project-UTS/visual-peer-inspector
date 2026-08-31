@@ -1,0 +1,72 @@
+{
+  "artifact_count": 13,
+  "artifacts": [
+    {
+      "path": "completion_gates.csv",
+      "sha256": "0e3f2d963cdf4024c1a1f31b72be88d014e7ab5f6cb0ccbfe1f44f24db117793",
+      "size_bytes": 280
+    },
+    {
+      "path": "decision.json",
+      "sha256": "e8e4acceb17b9bbac0a02687a54388531f2644ae73fbb31fa6d363e402a98800",
+      "size_bytes": 533
+    },
+    {
+      "path": "figures/misses_and_extras.png",
+      "sha256": "3700267a9d0e5357cb8cf7c2d5761612ed460464458334071d70851127f3fdd2",
+      "size_bytes": 66542
+    },
+    {
+      "path": "figures/policy_metrics.png",
+      "sha256": "51694b1a39db263bfc91cb9d65039fa07e025730a58801463d9ccce5c207c902",
+      "size_bytes": 61176
+    },
+    {
+      "path": "figures/proposal_count_vs_f1.png",
+      "sha256": "5189365c28a7326eda1d49cdbd6dd717beb8a417d86219fdf8f54344fca2bb0e",
+      "size_bytes": 58257
+    },
+    {
+      "path": "input_audit.json",
+      "sha256": "6a7703a2fde9c0d2808bc6ceb6f67aa6c3848e41795107d8aa715c6781117f15",
+      "size_bytes": 325
+    },
+    {
+      "path": "paired_f1_intervals.csv",
+      "sha256": "ad4120a60b2c3aac55dfdc1707099920b7c92e3a87a1526621c16e7ba718cbaf",
+      "size_bytes": 463
+    },
+    {
+      "path": "policy_gates.csv",
+      "sha256": "78a723503277aba84f666d2cafa6c23f0c00f7009d9202e4ed6b78ebb689e20b",
+      "size_bytes": 367
+    },
+    {
+      "path": "policy_summary.csv",
+      "sha256": "11eb0c5ed69c64894daad6709225ba919566ac744cc569a6d3dba41d78ad7d70",
+      "size_bytes": 713
+    },
+    {
+      "path": "removal_summary.csv",
+      "sha256": "62d04036e2b9edb2d01b2c10f22706af263407da63262c036b9c851e3e2feaae",
+      "size_bytes": 510
+    },
+    {
+      "path": "resolved_configuration.json",
+      "sha256": "68252b2d146460a07faa0c5530793dd8d3640b0abf1eb6345a0c53a01188ed81",
+      "size_bytes": 1060
+    },
+    {
+      "path": "run_record.json",
+      "sha256": "3baf30c10f9029f65016cf60c2eda03cf6eb91d4cb8cf736c2def227ebc6a6eb",
+      "size_bytes": 658
+    },
+    {
+      "path": "subgroup_summary.csv",
+      "sha256": "24c52537833d6596a95508ae44e7c513cc1f567a790d9ead2d8d2f1275f7c6ee",
+      "size_bytes": 14897
+    }
+  ],
+  "manifest_content_sha256": "5f0eea12582ed6dcd67e181b7167d8c7a6d6803820b0b751dabf55a74783be91",
+  "schema_version": 1
+}

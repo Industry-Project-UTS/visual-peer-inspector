@@ -1,0 +1,12 @@
+{
+  "automatic_proposal_route_accepted": false,
+  "decision": "retain_refinement_as_diagnostic_and_replace_or_reprompt_detector",
+  "final_acceptance": false,
+  "precision_gate": 0.9,
+  "reason": "The selected label-free filter reduces duplicate and extreme-size extras, but filtering cannot recover objects missed by the proposal model.",
+  "recall_gate": 0.95,
+  "selected_diagnostic_policy": "area_nms_075",
+  "selected_f1": 0.9271151885830785,
+  "selected_precision": 0.9099549774887443,
+  "selected_recall": 0.944935064935065
+}

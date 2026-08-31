@@ -1,0 +1,8 @@
+{
+  "evaluator_package_sha256": "6d17f04581d066495d03d321576e9738d10ed83bc00c2cebee769759869a87f6",
+  "image_count": 2000,
+  "model_input_locked_before_evaluator": true,
+  "proposal_results_sha256": "a2cad5e3efca26386607d1b388e9806edb25b66601c6aa43a8fb29d70bd50f9a",
+  "scene_count": 100,
+  "upstream_proposal_count": 9249
+}

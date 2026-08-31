@@ -1,0 +1,6 @@
+policy,precision_gate_passed,recall_gate_passed,recall_loss_vs_baseline,paired_f1_ci_lower,diagnostic_selection_eligible
+baseline,False,False,0.0,0.0,True
+area_only,False,False,0.0,0.0017022855519311434,True
+nms_090,False,False,0.0,0.0028191274220246395,True
+nms_075,False,False,0.0,0.00822227957529228,True
+area_nms_075,True,False,0.0,0.01610507783802932,True

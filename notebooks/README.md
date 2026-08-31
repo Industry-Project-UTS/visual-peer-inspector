@@ -19,6 +19,7 @@ model, scoring, evaluation, and tracking logic belongs in tested modules under
 | 04.1 DS1 Box Proposals | Runs pinned LocateAnything on all 2,000 DS1 images | Complete clean-snapshot evidence |
 | 05.1 DS1 Segmentation | Runs pinned SAM 2.1 for supplied and automatic boxes | Complete clean-snapshot evidence |
 | 06.1 DS1 Proposal and Mask Evaluation | Measures DS1 proposal and mask quality with protected references | Complete; refine or replace LocateAnything |
+| 04.2 DS1 Proposal Refinement | Tests fixed label-free filters on the frozen LocateAnything proposals | Complete candidate evidence; recall gate still fails |
 | 08 Views, Fusion, and Calibration | Evaluates view subsets, identity association, fusion, thresholds, and review rules | Planned |
 | 09 Frozen Evaluation | Opens internal-lock and official evaluation only after settings and predictions are frozen | Planned |
 | 10 Full-Pool Sensitivity | Runs the optional role-preserving 4,107-scene analysis after the primary method freezes | Optional |
@@ -49,6 +50,7 @@ flowchart LR
     N41 --> N51
     N41 --> N61["06.1 DS1 evaluation"]
     N51 --> N61
+    N61 --> N42["04.2 DS1 proposal refinement"]
     N61 --> N71["07.1 DS1 representation screen"]
 ```
 
@@ -76,6 +78,8 @@ flowchart LR
   `detection-and-segmentation/toysad8k-ds1-sam21/05.1-toysad8k-ds1-sam21-segmentation.ipynb`
 - Notebook 06.1:
   `detection-and-segmentation/toysad8k-ds1-mask-evaluation/06.1-toysad8k-ds1-proposal-and-mask-evaluation.ipynb`
+- Notebook 04.2:
+  `detection-and-segmentation/toysad8k-ds1-proposal-refinement/04.2-toysad8k-ds1-proposal-refinement.ipynb`
 
 Planned notebook directories are created only when their design and required
 inputs are ready.
