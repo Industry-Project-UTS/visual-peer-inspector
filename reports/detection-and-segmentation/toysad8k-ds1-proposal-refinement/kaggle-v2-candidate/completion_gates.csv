@@ -1,0 +1,8 @@
+gate,passed
+all_2000_images_evaluated,True
+policy_manifest_locked_before_evaluator,True
+filters_use_geometry_only,True
+baseline_preserved,True
+paired_asset_bootstrap_completed,True
+acceptance_matches_declared_precision_and_recall_gates,True
+no_final_acceptance_claim,True

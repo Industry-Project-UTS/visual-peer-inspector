@@ -1,0 +1,16 @@
+policy,reason,removed_count
+baseline,below_area_floor,0
+baseline,above_area_ceiling,0
+baseline,overlap_suppression,0
+area_only,below_area_floor,540
+area_only,above_area_ceiling,17
+area_only,overlap_suppression,0
+nms_090,below_area_floor,0
+nms_090,above_area_ceiling,0
+nms_090,overlap_suppression,541
+nms_075,below_area_floor,0
+nms_075,above_area_ceiling,0
+nms_075,overlap_suppression,863
+area_nms_075,below_area_floor,540
+area_nms_075,above_area_ceiling,17
+area_nms_075,overlap_suppression,696

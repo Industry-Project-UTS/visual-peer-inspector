@@ -1,0 +1,9 @@
+{
+  "mode": "online",
+  "run_status": "completed",
+  "safe_manifest_sha256": "77effce5997d5e230c5d414347e789cb99d9ff90096259d4bc01ead0f4961ebb",
+  "schema_version": 1,
+  "stage": "notebook_04_2_clearml_finalisation",
+  "status": "completed",
+  "task_id": "a6ed57afb183494daac98816f89c7957"
+}

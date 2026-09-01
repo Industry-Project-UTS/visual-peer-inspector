@@ -1,0 +1,16 @@
+{
+  "all_completion_gates_passed": true,
+  "automatic_proposal_route_accepted": false,
+  "cohort_id": "toysad8k-development-screen-100-v1",
+  "decision": "retain_refinement_as_diagnostic_and_replace_or_reprompt_detector",
+  "image_count": 2000,
+  "model_input_package_sha256": "12d584a48784ec45f7a796664df390a2b09f63b3dcdd2f377fc541a2636186be",
+  "policy_count": 5,
+  "scene_count": 100,
+  "schema_version": 1,
+  "selected_diagnostic_policy": "area_nms_075",
+  "stage": "ds1_proposal_refinement",
+  "status": "completed",
+  "tracking_status": "pending",
+  "upstream_configuration_sha256": "97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636"
+}
