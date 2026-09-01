@@ -1,0 +1,14 @@
+{
+  "all_completion_gates_passed": true,
+  "decision": "freeze_encoder_and_scorer_on_ds1",
+  "evaluation_row_count": 45585,
+  "evaluator_opened_after_score_lock": true,
+  "run_mode": "model_evidence",
+  "scene_metric_row_count": 2300,
+  "schema_version": 1,
+  "score_package_sha256": "de8bbecc81409d64d8f629559c21db9645a9493e7106d1c2685236beb7c49f7e",
+  "selected_encoder": "dinov2_small",
+  "selected_scorer": "P1",
+  "stage": "ds1_representation_and_peer_scores",
+  "status": "completed"
+}

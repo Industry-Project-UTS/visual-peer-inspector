@@ -1,0 +1,24 @@
+{
+  "image_count": 2000,
+  "insufficient_peer_images": {
+    "automatic_box": 83
+  },
+  "join_sha256": "9cf74671887ed60855a0e0304da8745dda6e29bd77488c3527fe309b5d1b198c",
+  "membership_sha256": "308e2e104448612dc60b5392a5258d97f6d93f52ca553aa68fa1b447500f4f2f",
+  "rejected_mask_counts": {
+    "automatic_box": 56
+  },
+  "rgb_manifest_sha256": "37e2143ae097077f9fa35ffc8a1a281d2e1dfb8a9802dc88865fce54daa123b3",
+  "route_counts": {
+    "automatic_box": 9249,
+    "reference_box": 7700,
+    "supplied_mask": 7700
+  },
+  "route_manifest_sha256": "97b0ee754ff92f4482aabed0e2cda39a57561bfd1fe8801a77a8d3f0de30e01d",
+  "scene_count": 100,
+  "usable_route_counts": {
+    "automatic_box": 9193,
+    "reference_box": 7700,
+    "supplied_mask": 7700
+  }
+}

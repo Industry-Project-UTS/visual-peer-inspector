@@ -1,0 +1,8 @@
+gate,passed
+score_package_locked_before_evaluator,True
+labels_absent_from_feature_and_score_generation,True
+required_ungated_encoder_screen_succeeded,True
+gated_encoder_access_outcome_recorded,True
+automatic_route_coverage_reported,True
+one_and_two_anomaly_metrics_separated,True
+encoder_and_scorer_selected_for_confirmation,True

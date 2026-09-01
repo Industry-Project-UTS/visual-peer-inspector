@@ -1,0 +1,23 @@
+{
+  "id": "esreekarreddy/toysad-8k-ds1-representation-and-peer-scores",
+  "title": "ToysAD-8K DS1 Representation and Peer Scores",
+  "code_file": "07.1-toysad8k-ds1-representation-and-peer-scores.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-ds1-screen100-model-input",
+    "esreekarreddy/vpi-toysad-ds1-mask-evaluator"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [
+    "esreekarreddy/toysad-8k-ds1-proposal-and-mask-evaluation"
+  ],
+  "model_sources": []
+}

@@ -1,0 +1,7 @@
+encoder_key,status,model_id,resolved_revision,family,screen_stage,gated,reason,feature_dimension,patch_grid_size,repeat_minimum_cosine,repeat_maximum_absolute_delta,repeatability_passed,peak_gpu_memory_bytes,route_scope
+dinov2_small,available,facebook/dinov2-small,ed25f3a31f01632728cabb09d1542f84ab7b0056,DINOv2,core,False,,384,16,0.9999999403953552,0.0,True,293035520,supplied_mask+reference_box+automatic_box
+dinov2_small_registers,available,facebook/dinov2-with-registers-small,0d9846e56b43a21fa46d7f3f5070f0506a5795a9,DINOv2,core,False,,384,16,0.9999998807907104,0.0,True,293083648,supplied_mask
+dinov3_small,unavailable,facebook/dinov3-vits16-pretrain-lvd1689m,,DINOv3,core,True,OSError: gated model access or load failed,,,,,False,0,
+dinov3_small_plus,unavailable,facebook/dinov3-vits16plus-pretrain-lvd1689m,,DINOv3,core,True,OSError: gated model access or load failed,,,,,False,0,
+dinov2_base,available,facebook/dinov2-base,f9e44c814b77203eaa57a6bdbbd535f21ede1415,DINOv2,confirmation,False,,768,16,0.9999998807907104,0.0,True,821083136,supplied_mask
+resnet50_control,available,microsoft/resnet-50,34c2154c194f829b11125337b98c8f5f9965ff19,ResNet,control,False,,2048,,0.9999999403953552,0.0,True,307453952,supplied_mask

@@ -1,0 +1,11 @@
+{
+  "available_encoder_count": 4,
+  "configuration_sha256": "f730cab31f4ed54c23750eeed9e4749246225bb76acf09bbfd68b438b8792dc4",
+  "evaluator_opened": false,
+  "requested_encoder_count": 6,
+  "run_mode": "model_evidence",
+  "schema_version": 1,
+  "score_package_sha256": "de8bbecc81409d64d8f629559c21db9645a9493e7106d1c2685236beb7c49f7e",
+  "stage": "ds1_representation_and_peer_scores",
+  "status": "label_free_scores_complete"
+}
