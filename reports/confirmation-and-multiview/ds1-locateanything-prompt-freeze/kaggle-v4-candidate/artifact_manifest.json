@@ -1,0 +1,82 @@
+{
+  "artifact_count": 15,
+  "artifacts": [
+    {
+      "path": "complete_detection_rate.png",
+      "sha256": "21b96412780ce4467536877c87cad49d406d913183e620a1bd1b2c66b9593499",
+      "size_bytes": 23445
+    },
+    {
+      "path": "completion_checks.csv",
+      "sha256": "e4fa7027351de5290c11faaf7685e01b19ff6d2c78ea7ab973be5f8a1ec9579c",
+      "size_bytes": 402
+    },
+    {
+      "path": "detection_aware_mean_iou.png",
+      "sha256": "ac3402baf6cf85d38b8c89d53feb9c12abf6cf4d39b768fbc0b3ba61bd753e02",
+      "size_bytes": 27201
+    },
+    {
+      "path": "mean_proposals_by_prompt.png",
+      "sha256": "d89c90482539bec659c2e84edb45ab5a6bf14901544bbf9bda5261b5a2d22e7c",
+      "size_bytes": 24217
+    },
+    {
+      "path": "median_runtime_by_prompt.png",
+      "sha256": "0943dc22cc64f0a10d2b4812df50cca6a0d25d28fab696db6381995d0abd41a4",
+      "size_bytes": 22283
+    },
+    {
+      "path": "missed_objects.png",
+      "sha256": "2ae1e2cd4201c2272ffabc01a6cb0c8ff8bf76e210d777493383d78b1e9bd417",
+      "size_bytes": 24788
+    },
+    {
+      "path": "model_load_summary.json",
+      "sha256": "19adfaa532713caeb0709cdb0d60d94ad23cb86c448c705d119e553c9a53e622",
+      "size_bytes": 1248
+    },
+    {
+      "path": "prompt_operational_summary.csv",
+      "sha256": "dd4c0d2a0791b12a3c44e2269d23799db19d8cb8d16283abac50ef63c3971daf",
+      "size_bytes": 340
+    },
+    {
+      "path": "prompt_policy_f2.png",
+      "sha256": "c4f950db03f7796273173a5ec79760c318638d354cd2374f0eefd61575a6ca8d",
+      "size_bytes": 26994
+    },
+    {
+      "path": "prompt_policy_summary.csv",
+      "sha256": "2083c91d9723409ec58c4169d378f23ddbfc4fae3f97a2423bf24cb426af4de3",
+      "size_bytes": 2405
+    },
+    {
+      "path": "prompt_repeatability.csv",
+      "sha256": "cedd9c5a14fefaa3251fbc61be589e34e2dad2591fc6010f00dcccd9f59fe959",
+      "size_bytes": 128
+    },
+    {
+      "path": "run_record.json",
+      "sha256": "e126e9b1b964a78ad60e66977895d7b926ab70639ed4188bc75586cbce6e95b1",
+      "size_bytes": 506
+    },
+    {
+      "path": "selected_prompt.json",
+      "sha256": "13e3f9b659ec7b96efd99fcbe3f20507a54c174ac2fccbe7bf89c127e456bedb",
+      "size_bytes": 1591
+    },
+    {
+      "path": "split_or_duplicate_candidates.png",
+      "sha256": "cd67f6c0cf2d6dcb0232e1b12f61b9ec70279b8f167eb8f286ddd13934ded762",
+      "size_bytes": 24081
+    },
+    {
+      "path": "study_protocol.json",
+      "sha256": "9f4fc10ff46dfec162bf665a2efad7269965517f49566ba914304fa0ff1ca96d",
+      "size_bytes": 607
+    }
+  ],
+  "manifest_content_sha256": "cedcd3fee564b5af99c5d820cc574fc0225cf41a704531e98119c3f2b5a1391a",
+  "schema_version": 1
+}

@@ -1,0 +1,2 @@
+route,image_count,mask_count,zero_prompt_image_count,empty_mask_count,mean_predicted_quality_score,median_runtime_seconds,p95_runtime_seconds
+reference_box,6000,23100,0,0,0.978648625988981,0.268637,0.2740022

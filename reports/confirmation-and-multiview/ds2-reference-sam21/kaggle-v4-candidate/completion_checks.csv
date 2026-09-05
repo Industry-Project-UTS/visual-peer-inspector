@@ -1,0 +1,5 @@
+check,passed
+all DS2 images recorded,True
+stored prompts match the frozen input,True
+pilot repeat completed and was measured,True
+no unresolved SAM image failures,True

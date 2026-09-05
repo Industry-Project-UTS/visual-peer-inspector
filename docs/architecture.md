@@ -30,11 +30,9 @@ flowchart LR
     G --> I
     H --> I
     I --> J["Frozen visual encoder"]
-    J --> K["B0, B1, and P1 peer scores"]
-    B --> L["Geometry features"]
+    J --> K["B0 and P1 peer scores"]
     K --> M["Per-view object ranking"]
-    L --> M
-    M --> N["Cross-view identity and fusion"]
+    M --> N["Evaluator-only identity association and fusion"]
     N --> O["Ranked unusual objects and review state"]
     O --> P["Evaluator-only metrics and failure analysis"]
     Q["Protected references and labels"] --> P
@@ -53,8 +51,8 @@ flowchart LR
     C --> D["User confirms or corrects boxes when required"]
     D --> E["SAM 2.1 produces whole-object masks"]
     E --> F["Object crops and frozen visual features"]
-    F --> G["B0, B1, and P1 peer comparison"]
-    G --> H["Cross-view identity and score fusion"]
+    F --> G["B0 and P1 peer comparison"]
+    G --> H["Future identity matching or user confirmation"]
     H --> I["Ranked unusual object and relative score"]
     I --> J["Highlighted views, coarse heatmap, and inspection report"]
 ```
@@ -73,10 +71,10 @@ uncertain result into a confident anomaly claim.
 | Crop preparation | Applies the same masking, padding, and resizing rules to every route | Preserving full-scene geometry |
 | Frozen visual encoder | Produces global and patch-level object features | Deciding which object is anomalous by itself |
 | B0 | Compares one global feature with the leave-one-out peer mean | Local defect localisation |
-| B1 | Aggregates pairwise global-feature distances with a median | Guaranteed improvement over B0 |
+| B1 | Retains the tested median pairwise baseline for comparison | Part of the promoted application method |
 | P1 | Compares local patch features and produces a coarse mismatch map | Pixel-accurate defect segmentation |
-| Geometry branch | Retains centroid, size, aspect-ratio, and relative-layout evidence | Visual appearance comparison |
-| Identity and fusion | Links supported objects across views and combines per-view evidence | Inventing correspondence when evidence is weak |
+| Geometry branch | Planned future scoring for pose and arrangement changes | Part of the current DS2 B0 or P1 result |
+| Identity and fusion | Evaluator-supported correspondence measures fusion; the application still needs label-free matching or user confirmation | Inventing correspondence when evidence is weak |
 | Evaluator | Joins frozen predictions with protected references and labels | Supplying information to model execution |
 
 ## Route names
@@ -142,8 +140,8 @@ to the model path.
 | Gate | Scope | Purpose | Current status |
 | --- | --- | --- | --- |
 | DS0 | 20 scenes, 20 views, 400 images | Validate packaging, proposals, segmentation, repeatability, and evaluator separation | Complete; candidate evidence supports progression |
-| DS1 | 100 scenes, all 20 views | Screen proposal settings, mask routes, encoders, scoring, and geometry | Next |
-| DS2 | Separate 300 scenes, all 20 views | Confirm the selected component settings without retuning | Planned |
+| DS1 | 100 scenes, all 20 views | Screen proposal settings, mask routes, encoders, and scoring | Complete; prompt freeze verified on Kaggle Version 4 |
+| DS2 | Separate 300 scenes, all 20 views | Confirm the selected component settings without retuning | Frozen model run and protected evaluation complete |
 | Development scale | Remaining development scenes | Build the selected feature cache and evaluate view policies | Planned |
 | Calibration | 600 scenes | Freeze thresholds and review behaviour | Planned |
 | Internal lock | 400 scenes | One evaluation after predictions and configuration are saved | Planned |
@@ -153,14 +151,31 @@ not be used to retune the primary 2,000-scene experiment.
 
 ## Current implementation status
 
-Notebooks 01 to 06 are complete and merged. The codebase currently implements
-data verification, leakage-safe selection, opaque packaging, LocateAnything
-proposal generation, SAM 2.1 mask generation, proposal evaluation, mask
-evaluation, safe evidence generation, and ClearML finalisation.
+Notebooks 01 to 07.1 are complete and merged. DINOv2-small with P1 is the
+working freeze, B0 remains the baseline, and B1 is not promoted. The DS2
+release contains 300 untouched scenes and 6,000 views. The Notebook 04.3
+development evaluation selects `individual object` with area filtering, NMS at
+0.75, and an eight-proposal outlier safeguard. Kaggle Version 4 verified this
+selection. Notebook 08B kept the model revision, prompt and post-processing
+fixed. Its separately hashed operational policy used 4,096 tokens, at most two
+attempts, a 75-second attempt timeout, and explicit zero-proposal records for
+terminal generation failures. Notebook 08C opened protected evaluator data
+only after the prediction hashes were frozen.
 
-Notebook 07 is the next implementation stage. It will validate B0, B1, and P1
-on the frozen mask routes, screen the bounded encoder set using supplied masks,
-add the geometry branch, and create report-ready ranking and heatmap evidence.
+The frozen DS2 run processed 6,000 images. LocateAnything reached 0.9383 recall
+at box IoU 0.50 and found every reference object in 0.8792 of images. The two
+terminal generation failures and 36 genuine zero-proposal images were kept as
+misses. SAM 2.1 reached 0.9478 mean mask IoU with reference boxes and 0.8834
+through the automatic route.
+
+DINOv2-small with P1 remains the working appearance method. On the supplied
+mask route, P1 improved 20-view scene average precision over B0 by 0.0505. The
+paired 95 percent interval was 0.0249 to 0.0777. The declared three-view
+automatic route reached 0.6531 scene average precision with mean-rank fusion.
+
+The automatic and assisted routes remain separate. LocateAnything is an
+automatic proposal assistant. A user-confirmed box route remains necessary
+when boxes are missing, loose, duplicated, or attached to the background.
 
 ## Claim limits
 
@@ -170,10 +185,10 @@ add the geometry branch, and create report-ready ranking and heatmap evidence.
 - P1 heatmaps indicate feature mismatch, not a causal or pixel-accurate defect.
 - Twenty dataset views are repeated observations of one scene, not twenty
   independent samples.
-- The automatic route is not the final application default until DS1, DS2, and
-  downstream ranking checks are complete.
-- The final encoder, identity method, fusion rule, and review threshold are not
-  yet frozen.
+- The automatic route is the current application candidate, with an assisted
+  fallback. It is not a fully automatic production claim.
+- DINOv2-small and P1 are frozen for DS2. Label-free cross-view identity and the
+  user-review threshold are not yet frozen.
 
 ## Evidence and reproducibility
 

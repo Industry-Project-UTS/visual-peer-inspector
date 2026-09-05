@@ -68,6 +68,34 @@ NOTEBOOK_TARGETS = {
         "notebooks/representation-and-scoring/toysad8k-ds1-peer-scores/"
         "07.1-toysad8k-ds1-representation-and-peer-scores.ipynb"
     ),
+    Path(
+        "notebooks/detection-and-segmentation/toysad8k-ds1-locateanything-prompt-freeze/"
+        "04.3-toysad8k-ds1-locateanything-prompt-freeze.ipynb"
+    ): Path(
+        "notebooks/detection-and-segmentation/toysad8k-ds1-locateanything-prompt-freeze/"
+        "04.3-toysad8k-ds1-locateanything-prompt-freeze.ipynb"
+    ),
+    Path(
+        "notebooks/confirmation-and-multiview/"
+        "08a-toysad8k-ds2-confirmation-release.ipynb"
+    ): Path(
+        "notebooks/confirmation-and-multiview/"
+        "08a-toysad8k-ds2-confirmation-release.ipynb"
+    ),
+    Path(
+        "notebooks/confirmation-and-multiview/"
+        "08b-toysad8k-ds2-frozen-pipeline.ipynb"
+    ): Path(
+        "notebooks/confirmation-and-multiview/"
+        "08b-toysad8k-ds2-frozen-pipeline.ipynb"
+    ),
+    Path(
+        "notebooks/confirmation-and-multiview/"
+        "08c-toysad8k-ds2-confirmation-and-multiview.ipynb"
+    ): Path(
+        "notebooks/confirmation-and-multiview/"
+        "08c-toysad8k-ds2-confirmation-and-multiview.ipynb"
+    ),
 }
 
 DS1_NOTEBOOK_PATHS = frozenset(
@@ -95,6 +123,27 @@ DS1_NOTEBOOK_PATHS = frozenset(
         Path(
             "notebooks/representation-and-scoring/toysad8k-ds1-peer-scores/"
             "07.1-toysad8k-ds1-representation-and-peer-scores.ipynb"
+        ),
+        Path(
+            "notebooks/detection-and-segmentation/toysad8k-ds1-locateanything-prompt-freeze/"
+            "04.3-toysad8k-ds1-locateanything-prompt-freeze.ipynb"
+        ),
+    }
+)
+
+DS2_NOTEBOOK_PATHS = frozenset(
+    {
+        Path(
+            "notebooks/confirmation-and-multiview/"
+            "08a-toysad8k-ds2-confirmation-release.ipynb"
+        ),
+        Path(
+            "notebooks/confirmation-and-multiview/"
+            "08b-toysad8k-ds2-frozen-pipeline.ipynb"
+        ),
+        Path(
+            "notebooks/confirmation-and-multiview/"
+            "08c-toysad8k-ds2-confirmation-and-multiview.ipynb"
         ),
     }
 )
@@ -223,6 +272,10 @@ def build_snapshot(
     notebook_version_06_1: str = "pending",
     notebook_version_04_2: str = "pending",
     notebook_version_07_1: str = "pending",
+    notebook_version_04_3: str = "pending",
+    notebook_version_08a: str = "pending",
+    notebook_version_08b: str = "pending",
+    notebook_version_08c: str = "pending",
 ) -> Path:
     output_root = output_root.resolve()
     if output_root.exists():
@@ -270,6 +323,11 @@ def build_snapshot(
         raise RuntimeError(
             f"Snapshot omits DS1 notebook paths: {sorted(map(str, missing_ds1_notebooks))}"
         )
+    missing_ds2_notebooks = DS2_NOTEBOOK_PATHS.difference(copied)
+    if missing_ds2_notebooks:
+        raise RuntimeError(
+            f"Snapshot omits DS2 notebook paths: {sorted(map(str, missing_ds2_notebooks))}"
+        )
 
     file_hashes = {
         relative.as_posix(): file_sha256(payload_root / relative)
@@ -299,6 +357,10 @@ def build_snapshot(
             "kaggle_notebook_version_06_1": str(notebook_version_06_1),
             "kaggle_notebook_version_04_2": str(notebook_version_04_2),
             "kaggle_notebook_version_07_1": str(notebook_version_07_1),
+            "kaggle_notebook_version_04_3": str(notebook_version_04_3),
+            "kaggle_notebook_version_08a": str(notebook_version_08a),
+            "kaggle_notebook_version_08b": str(notebook_version_08b),
+            "kaggle_notebook_version_08c": str(notebook_version_08c),
             "code_dataset_version": str(code_dataset_version),
             "model_input_dataset_version": "1",
             "prompt_dataset_version": "1",
@@ -338,6 +400,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--notebook-version-06-1", default="pending")
     parser.add_argument("--notebook-version-04-2", default="pending")
     parser.add_argument("--notebook-version-07-1", default="pending")
+    parser.add_argument("--notebook-version-04-3", default="pending")
+    parser.add_argument("--notebook-version-08a", default="pending")
+    parser.add_argument("--notebook-version-08b", default="pending")
+    parser.add_argument("--notebook-version-08c", default="pending")
     parser.add_argument("--allow-dirty", action="store_true")
     return parser.parse_args()
 
@@ -358,5 +424,9 @@ if __name__ == "__main__":
             notebook_version_06_1=arguments.notebook_version_06_1,
             notebook_version_04_2=arguments.notebook_version_04_2,
             notebook_version_07_1=arguments.notebook_version_07_1,
+            notebook_version_04_3=arguments.notebook_version_04_3,
+            notebook_version_08a=arguments.notebook_version_08a,
+            notebook_version_08b=arguments.notebook_version_08b,
+            notebook_version_08c=arguments.notebook_version_08c,
         )
     )

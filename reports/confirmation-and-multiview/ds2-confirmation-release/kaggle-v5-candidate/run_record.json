@@ -1,0 +1,11 @@
+{
+  "all_completion_gates_passed": true,
+  "asset_group_count": 82,
+  "cohort_id": "toysad8k-development-confirm-300-v1",
+  "image_count": 6000,
+  "membership_sha256": "bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac",
+  "scene_count": 300,
+  "schema_version": 1,
+  "stage": "ds2_confirmation_input_release",
+  "status": "completed"
+}

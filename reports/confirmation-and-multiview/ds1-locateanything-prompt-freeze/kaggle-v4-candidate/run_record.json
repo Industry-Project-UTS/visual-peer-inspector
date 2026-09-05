@@ -1,0 +1,16 @@
+{
+  "all_completion_checks_passed": true,
+  "baseline_reused": true,
+  "candidate_count": 6,
+  "cohort_id": "toysad8k-development-screen-100-v1",
+  "image_count": 2000,
+  "model_load_count": 1,
+  "new_model_prompt_count": 1,
+  "scene_count": 100,
+  "schema_version": 1,
+  "selected_candidate": "individual_object__area_nms_075_cap8",
+  "selected_postprocessing_policy": "area_nms_075_cap8",
+  "selected_prompt": "individual object",
+  "stage": "ds1_locateanything_prompt_freeze",
+  "status": "completed"
+}

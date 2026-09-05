@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from binascii import crc32
 from collections import Counter
 from hashlib import sha256
 import json
@@ -11,7 +12,7 @@ import shutil
 from typing import Any, Iterable, Mapping
 
 from visual_peer_inspector.data.archive_members import read_indexed_member
-from visual_peer_inspector.data.cohort_contract import DS1_SCREEN_CONTRACT
+from visual_peer_inspector.data.cohort_contract import CohortContract, DS1_SCREEN_CONTRACT
 from visual_peer_inspector.data.model_safe_package import (
     EXPECTED_ARCHIVE_SHA256,
     EXPECTED_ARCHIVE_SIZE_BYTES,
@@ -52,6 +53,29 @@ def _checksum_bytes(root: Path, paths: Iterable[Path]) -> bytes:
     ).encode("utf-8")
 
 
+def _find_extracted_source_root(source_archive_path: Path) -> Path | None:
+    """Locate the extracted ToysAD tree used by the private Kaggle dataset."""
+
+    source_root = source_archive_path.parent
+    for candidate in (source_root / "toysAD8K", source_root):
+        if (candidate / "toysad8k").is_dir():
+            return candidate
+    return None
+
+
+def _read_extracted_source_member(root: Path, name: str, expected_size: int, expected_crc32: int) -> bytes:
+    relative = Path(name)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError("Extracted source member has an unsafe path")
+    path = root / relative
+    if path.is_symlink() or not path.is_file():
+        raise ValueError("A required extracted mask is missing or unsafe")
+    data = path.read_bytes()
+    if len(data) != expected_size or (crc32(data) & 0xFFFFFFFF) != expected_crc32:
+        raise ValueError("Extracted mask bytes differ from the accepted archive member")
+    return data
+
+
 def build_ds1_reference_packages(
     *,
     model_manifest_path: Path,
@@ -63,22 +87,30 @@ def build_ds1_reference_packages(
     geometry_output_root: Path,
     attributes_output_root: Path,
     mask_threshold: int = DEFAULT_MASK_THRESHOLD,
+    contract: CohortContract | None = None,
+    geometry_kind: str = GEOMETRY_KIND,
+    attributes_kind: str = ATTRIBUTES_KIND,
 ) -> dict[str, Any]:
-    """Extract the 100-scene supplied masks and protected attributes."""
+    """Extract supplied masks and protected attributes for one frozen cohort."""
 
-    contract = DS1_SCREEN_CONTRACT
+    if contract is None:
+        contract = DS1_SCREEN_CONTRACT
     if not 1 <= int(mask_threshold) <= 255:
         raise ValueError("Mask threshold must be between 1 and 255")
     model_rows = read_jsonl(model_manifest_path)
     selected_ids = {str(row["opaque_scene_id"]) for row in model_rows}
     if len(model_rows) != contract.scene_count or len(selected_ids) != contract.scene_count:
-        raise ValueError("DS1 model manifest must contain 100 unique scenes")
+        raise ValueError(
+            f"Reference model manifest must contain {contract.scene_count} unique scenes"
+        )
     if membership_sha256(selected_ids) != contract.membership_sha256:
         raise ValueError("DS1 reference membership differs from the frozen contract")
     expected_views = [f"V{index:02d}" for index in range(contract.views_per_scene)]
     for row in model_rows:
         if [str(value) for value in row["view_ids"]] != expected_views:
-            raise ValueError("Every DS1 scene must contain the frozen 20 views")
+            raise ValueError(
+                f"Every reference scene must contain the frozen {contract.views_per_scene} views"
+            )
 
     source_rows = [row for row in read_jsonl(development_source_map_path) if str(row.get("opaque_scene_id")) in selected_ids]
     label_rows = [row for row in read_jsonl(development_labels_path) if str(row.get("opaque_scene_id")) in selected_ids]
@@ -104,10 +136,17 @@ def build_ds1_reference_packages(
 
     source_archive_path = source_archive_path.expanduser().resolve()
     archive_index_path = archive_index_path.expanduser().resolve()
-    if source_archive_path.is_symlink() or source_archive_path.stat().st_size != EXPECTED_ARCHIVE_SIZE_BYTES:
-        raise ValueError("Source archive size differs from the accepted ToysAD archive")
-    if file_sha256(source_archive_path) != EXPECTED_ARCHIVE_SHA256:
-        raise ValueError("Source archive SHA-256 differs from the accepted ToysAD archive")
+    extracted_source_root = _find_extracted_source_root(source_archive_path)
+    if source_archive_path.is_file() and not source_archive_path.is_symlink():
+        if source_archive_path.stat().st_size != EXPECTED_ARCHIVE_SIZE_BYTES:
+            raise ValueError("Source archive size differs from the accepted ToysAD archive")
+        if file_sha256(source_archive_path) != EXPECTED_ARCHIVE_SHA256:
+            raise ValueError("Source archive SHA-256 differs from the accepted ToysAD archive")
+        source_access_mode = "zip_archive"
+    elif extracted_source_root is not None:
+        source_access_mode = "kaggle_extracted_members"
+    else:
+        raise ValueError("Neither the accepted source archive nor its extracted tree was found")
     if archive_index_path.is_symlink() or not archive_index_path.is_file():
         raise ValueError("ToysAD archive index is missing or unsafe")
     indexed = _load_indexed_members(archive_index_path, (str(row["source_member"]) for row in required_rows))
@@ -126,12 +165,23 @@ def build_ds1_reference_packages(
         reference_rows: list[dict[str, Any]] = []
         mask_paths: list[Path] = []
         visible_count = 0
-        with source_archive_path.open("rb") as archive:
+        archive = source_archive_path.open("rb") if source_access_mode == "zip_archive" else None
+        try:
             for row in sorted(required_rows, key=lambda item: (str(item["opaque_scene_id"]), str(item["view_id"]), str(item["opaque_object_id"]))):
                 member = indexed[str(row["source_member"])]
                 if member.crc32 != int(str(row["crc32"]), 16) or member.uncompressed_size != int(row["uncompressed_size"]):
                     raise ValueError("Archive member metadata differs from the protected DS1 record")
-                data = read_indexed_member(archive, member)
+                if archive is not None:
+                    data = read_indexed_member(archive, member)
+                else:
+                    if extracted_source_root is None:
+                        raise RuntimeError("Extracted source root was not resolved")
+                    data = _read_extracted_source_member(
+                        extracted_source_root,
+                        member.name,
+                        member.uncompressed_size,
+                        member.crc32,
+                    )
                 box, foreground = _mask_geometry(data, int(mask_threshold))
                 relative = Path(str(row["opaque_scene_id"])) / str(row["opaque_object_id"]) / f"{row['view_id']}.png"
                 _write(geometry_staging / "masks" / relative, data)
@@ -148,6 +198,9 @@ def build_ds1_reference_packages(
                     "visible": box is not None,
                     "box_xyxy": box,
                 })
+        finally:
+            if archive is not None:
+                archive.close()
         protected_rows = []
         model_by_scene = {str(row["opaque_scene_id"]): row for row in model_rows}
         for scene_id in sorted(selected_ids):
@@ -186,13 +239,14 @@ def build_ds1_reference_packages(
         }
         geometry_record = {
             **common,
-            "package_kind": GEOMETRY_KIND,
+            "package_kind": geometry_kind,
             "object_view_count": len(reference_rows),
             "visible_object_view_count": visible_count,
             "empty_object_view_count": len(reference_rows) - visible_count,
             "mask_threshold": int(mask_threshold),
             "source_archive_sha256": EXPECTED_ARCHIVE_SHA256,
             "source_archive_size_bytes": EXPECTED_ARCHIVE_SIZE_BYTES,
+            "source_access_mode": source_access_mode,
             "archive_index_sha256": file_sha256(archive_index_path),
             "reference_manifest_sha256": file_sha256(reference_path),
             "content_checksums_sha256": sha256(geometry_checksums).hexdigest(),
@@ -200,15 +254,23 @@ def build_ds1_reference_packages(
         }
         attributes_record = {
             **common,
-            "package_kind": ATTRIBUTES_KIND,
+            "package_kind": attributes_kind,
             "protected_attributes_sha256": file_sha256(attributes_path),
             "content_checksums_sha256": sha256(attributes_checksums).hexdigest(),
             "all_checks_passed": True,
         }
         _write(geometry_staging / "package_record.json", json.dumps(geometry_record, indent=2, sort_keys=True).encode() + b"\n")
         _write(attributes_staging / "package_record.json", json.dumps(attributes_record, indent=2, sort_keys=True).encode() + b"\n")
-        verify_ds1_geometry_package(geometry_staging)
-        verify_ds1_attributes_package(attributes_staging)
+        verify_ds1_geometry_package(
+            geometry_staging,
+            contract=contract,
+            package_kind=geometry_kind,
+        )
+        verify_ds1_attributes_package(
+            attributes_staging,
+            contract=contract,
+            package_kind=attributes_kind,
+        )
         os.replace(geometry_staging, geometry_output_root)
         os.replace(attributes_staging, attributes_output_root)
         return {"geometry": geometry_record, "attributes": attributes_record}
@@ -228,13 +290,19 @@ def _checksums(root: Path) -> dict[str, str]:
     return rows
 
 
-def verify_ds1_geometry_package(root: Path) -> dict[str, Any]:
+def verify_ds1_geometry_package(
+    root: Path,
+    *,
+    contract: CohortContract | None = None,
+    package_kind: str = GEOMETRY_KIND,
+) -> dict[str, Any]:
+    if contract is None:
+        contract = DS1_SCREEN_CONTRACT
     root = root.expanduser().resolve()
     if root.is_symlink() or not root.is_dir() or any(path.is_symlink() for path in root.rglob("*")):
         raise ValueError("DS1 geometry package is missing or unsafe")
     record = json.loads((root / "package_record.json").read_text(encoding="utf-8"))
-    contract = DS1_SCREEN_CONTRACT
-    for key, expected in {"package_kind": GEOMETRY_KIND, "cohort_id": contract.cohort_id, "release_id": contract.release_id, "membership_sha256": contract.membership_sha256, "scene_count": contract.scene_count, "views_per_scene": contract.views_per_scene, "image_count": contract.image_count, "asset_group_count": contract.asset_group_count}.items():
+    for key, expected in {"package_kind": package_kind, "cohort_id": contract.cohort_id, "release_id": contract.release_id, "membership_sha256": contract.membership_sha256, "scene_count": contract.scene_count, "views_per_scene": contract.views_per_scene, "image_count": contract.image_count, "asset_group_count": contract.asset_group_count}.items():
         if record.get(key) != expected:
             raise ValueError(f"DS1 geometry package mismatch: {key}")
     rows = read_jsonl(root / "reference_manifest.jsonl")
@@ -281,13 +349,19 @@ def verify_ds1_geometry_package(root: Path) -> dict[str, Any]:
     return record
 
 
-def verify_ds1_attributes_package(root: Path) -> dict[str, Any]:
+def verify_ds1_attributes_package(
+    root: Path,
+    *,
+    contract: CohortContract | None = None,
+    package_kind: str = ATTRIBUTES_KIND,
+) -> dict[str, Any]:
+    if contract is None:
+        contract = DS1_SCREEN_CONTRACT
     root = root.expanduser().resolve()
     if root.is_symlink() or not root.is_dir() or any(path.is_symlink() for path in root.rglob("*")):
         raise ValueError("DS1 attribute package is missing or unsafe")
     record = json.loads((root / "package_record.json").read_text(encoding="utf-8"))
-    contract = DS1_SCREEN_CONTRACT
-    for key, expected in {"package_kind": ATTRIBUTES_KIND, "cohort_id": contract.cohort_id, "release_id": contract.release_id, "membership_sha256": contract.membership_sha256, "scene_count": contract.scene_count, "asset_group_count": contract.asset_group_count}.items():
+    for key, expected in {"package_kind": package_kind, "cohort_id": contract.cohort_id, "release_id": contract.release_id, "membership_sha256": contract.membership_sha256, "scene_count": contract.scene_count, "asset_group_count": contract.asset_group_count}.items():
         if record.get(key) != expected:
             raise ValueError(f"DS1 attribute package mismatch: {key}")
     rows = read_jsonl(root / "protected_scene_attributes.jsonl")

@@ -1,0 +1,31 @@
+{
+  "baseline_prompt_key": "object",
+  "baseline_reused": true,
+  "labels_opened_after_candidate_hash_lock": true,
+  "new_prompt_keys": [
+    "individual_object"
+  ],
+  "ordered_gates": [
+    "one_image",
+    "pilot_20",
+    "pilot_repeat_20",
+    "full_ds1"
+  ],
+  "postprocessing_policies": [
+    "raw",
+    "area_nms_075",
+    "area_nms_075_cap8"
+  ],
+  "prompts": [
+    {
+      "prompt": "object",
+      "prompt_key": "object"
+    },
+    {
+      "prompt": "individual object",
+      "prompt_key": "individual_object"
+    }
+  ],
+  "schema_version": 1,
+  "selection_uses_fixed_acceptance_cutoff": false
+}

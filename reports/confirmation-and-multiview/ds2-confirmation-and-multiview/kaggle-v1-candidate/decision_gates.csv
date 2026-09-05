@@ -1,0 +1,4 @@
+gate,passed
+frozen predictions evaluated,True
+all three routes reported,True
+no DS2 tuning or accuracy cutoff applied,True

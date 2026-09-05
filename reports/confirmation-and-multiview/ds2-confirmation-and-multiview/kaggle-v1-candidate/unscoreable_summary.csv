@@ -1,0 +1,7 @@
+route,method,candidate_view_count,scored_candidate_view_count,unscoreable_candidate_view_count,invalid_mask_candidate_view_count,insufficient_peer_candidate_view_count,missing_proposal_candidate_view_count,other_unscoreable_candidate_view_count
+supplied_mask,B0,23100,23100,0,0,0,0,0
+supplied_mask,P1,23100,23100,0,0,0,0,0
+reference_box,B0,23100,23100,0,0,0,0,0
+reference_box,P1,23100,23100,0,0,0,0,0
+automatic_box,B0,24606,22915,1691,1,264,1426,0
+automatic_box,P1,24606,22915,1691,1,264,1426,0

@@ -1,0 +1,50 @@
+{
+  "all_completion_gates_passed": true,
+  "cohort_id": "toysad8k-development-confirm-300-v1",
+  "decision": {
+    "accuracy_acceptance_gate_applied": false,
+    "application_mask_route": "automatic_box",
+    "claim_boundary": "Development confirmation only. Calibration and locked evaluation remain unopened.",
+    "ds2_used_for_tuning": false,
+    "encoder": "dinov2_small",
+    "fusion_method": "mean_rank",
+    "primary_view_count": 3,
+    "primary_view_ids": [
+      "V00",
+      "V06",
+      "V13"
+    ],
+    "reference_diagnostic_route": "reference_box",
+    "schema_version": 1,
+    "scientific_anchor_route": "supplied_mask",
+    "scorer": "P1",
+    "status": "confirmation_measured"
+  },
+  "evaluator_opened_after_prediction_lock": true,
+  "frozen_predictions": {
+    "automatic_sam_results_sha256": "3c9a14d6ad7a10b25966770405848af2117b7bca9e570cc10b88fc144c4a9d78",
+    "sam_results_sha256": "34529093e5e973d3003e46178b5a505c259c41ec12b4ed26cfa363fde1d545a8",
+    "score_manifest_sha256": "7ec12d99432d2be0aac56835c77e543f32c824f3f1489d7706aa25664d14faf9",
+    "score_package_sha256": "3510904e0f06f45889fed34639da4400de235370920c17967e04e2f4d7e4545e"
+  },
+  "fused_object_row_count": 95332,
+  "fusion_methods": [
+    "mean_rank",
+    "visibility_weighted_rank"
+  ],
+  "invalid_mask_candidate_view_count": 2,
+  "scene_count": 300,
+  "scene_metric_row_count": 21600,
+  "schema_version": 1,
+  "stage": "ds2_confirmation_and_multiview",
+  "status": "completed",
+  "unscoreable_candidate_view_count": 3382,
+  "view_counts": [
+    1,
+    2,
+    3,
+    5,
+    10,
+    20
+  ]
+}

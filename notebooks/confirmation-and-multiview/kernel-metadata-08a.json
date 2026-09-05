@@ -1,0 +1,20 @@
+{
+  "id": "esreekarreddy/toysad-8k-ds2-confirmation-release",
+  "title": "ToysAD-8K DS2 Confirmation Release",
+  "code_file": "08a-toysad8k-ds2-confirmation-release.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/toysad8k-full-private-eda",
+    "esreekarreddy/vpi-toysad-selection-private"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

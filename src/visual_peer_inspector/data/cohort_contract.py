@@ -61,4 +61,20 @@ DS1_SCREEN_CONTRACT = CohortContract(
 )
 
 
-__all__ = ["CohortContract", "DS1_SCREEN_CONTRACT"]
+DS2_CONFIRM_CONTRACT = CohortContract(
+    cohort_id="toysad8k-development-confirm-300-v1",
+    release_id="toysad8k-train-2000-v2",
+    role="development",
+    pilot_stage="confirm_300",
+    membership_sha256=(
+        "bc00e95781a6d52c25c9e40364f8dfa"
+        "36ad7874cccd759488ac87ce55dec2eac"
+    ),
+    scene_count=300,
+    views_per_scene=20,
+    image_count=6_000,
+    asset_group_count=82,
+)
+
+
+__all__ = ["CohortContract", "DS1_SCREEN_CONTRACT", "DS2_CONFIRM_CONTRACT"]

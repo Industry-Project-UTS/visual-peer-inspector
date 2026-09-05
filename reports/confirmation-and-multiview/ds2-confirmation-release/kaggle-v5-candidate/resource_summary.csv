@@ -1,0 +1,4 @@
+resource,items,model_facing
+RGB model input,6000,True
+supplied object masks,23100,True
+protected scene labels,300,False

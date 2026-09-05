@@ -1,0 +1,2 @@
+stage,scene_count,candidate_count,encoded_candidate_count,invalid_mask_candidate_count,encoder_call_count,resumed_scene_count,runtime_seconds_this_session
+dino_and_peer_scores,300,69380,69379,1,2314,0,717.2728505989999

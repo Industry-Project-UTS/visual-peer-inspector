@@ -1,0 +1,19 @@
+{
+  "accuracy_acceptance_gate_applied": false,
+  "application_mask_route": "automatic_box",
+  "claim_boundary": "Development confirmation only. Calibration and locked evaluation remain unopened.",
+  "ds2_used_for_tuning": false,
+  "encoder": "dinov2_small",
+  "fusion_method": "mean_rank",
+  "primary_view_count": 3,
+  "primary_view_ids": [
+    "V00",
+    "V06",
+    "V13"
+  ],
+  "reference_diagnostic_route": "reference_box",
+  "schema_version": 1,
+  "scientific_anchor_route": "supplied_mask",
+  "scorer": "P1",
+  "status": "confirmation_measured"
+}

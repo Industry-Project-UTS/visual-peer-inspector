@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import sys
 import tempfile
+import time
 import unittest
 from unittest.mock import patch
 
@@ -23,8 +24,12 @@ from visual_peer_inspector.models.locateanything import (
     ProposalContractWorker,
     ProposalJob,
     ProposalResultStore,
+    bounded_locateanything_execution_policy,
     build_proposal_jobs,
     collect_proposal_evidence,
+    execution_policy_sha256,
+    generation_wall_time_limit,
+    locateanything_execution_policy,
     resolve_generation_policy,
     repeat_agreement,
     run_proposal_jobs,
@@ -211,6 +216,148 @@ class LocateAnythingTests(unittest.TestCase):
             agreement = repeat_agreement([first], [second])
 
             self.assertEqual(agreement["box_agreement_rate"], 1.0)
+
+    def test_bounded_policy_keeps_the_legacy_policy_identity_unchanged(self) -> None:
+        legacy_digest = execution_policy_sha256(locateanything_execution_policy())
+        configuration = LocateAnythingConfiguration(max_new_tokens=4096)
+        bounded = bounded_locateanything_execution_policy(
+            configuration,
+            maximum_attempts_per_job=2,
+            terminal_failure_disposition="carry_as_zero_proposal",
+        )
+
+        self.assertEqual(
+            legacy_digest,
+            "1477c554722790d78df5979555bb78e22e87eb60a4c75d03e9eb885bba2d6f9e",
+        )
+        self.assertEqual(legacy_digest, EXECUTION_POLICY_SHA256)
+        self.assertNotEqual(execution_policy_sha256(bounded), EXECUTION_POLICY_SHA256)
+        self.assertEqual(bounded["primary"]["attempts"], [1, 2])
+        self.assertEqual(bounded["primary"]["max_new_tokens"], 4096)
+
+    def test_generation_wall_time_limit_interrupts_a_slow_attempt(self) -> None:
+        with self.assertRaises(TimeoutError):
+            with generation_wall_time_limit(0.02) as active:
+                self.assertTrue(active)
+                time.sleep(0.20)
+
+    def test_bounded_policy_rows_validate_and_resume_only_with_that_policy(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            image_path = root / "V00.png"
+            Image.new("RGB", (64, 64), "white").save(image_path)
+            configuration = LocateAnythingConfiguration(max_new_tokens=4096)
+            policy = bounded_locateanything_execution_policy(
+                configuration,
+                maximum_attempts_per_job=2,
+                terminal_failure_disposition="carry_as_zero_proposal",
+            )
+            job = ProposalJob(
+                cohort_id="confirm_300",
+                input_manifest_sha256="b" * 64,
+                opaque_scene_id="S000001",
+                view_id="V00",
+                image_path=image_path,
+                image_sha256="a" * 64,
+            )
+            worker = ProposalContractWorker(
+                configuration,
+                execution_policy=policy,
+            )
+            row = worker.run_job(job)
+            store_path = root / "results.jsonl"
+            store = ProposalResultStore(
+                store_path,
+                configuration.sha256,
+                CONTRACT_PRODUCER_KIND,
+                policy,
+            )
+            store.append(row)
+
+            self.assertEqual(row["effective_max_new_tokens"], 4096)
+            self.assertEqual(
+                row["execution_policy_sha256"], execution_policy_sha256(policy)
+            )
+            ProposalResultStore(
+                store_path,
+                configuration.sha256,
+                CONTRACT_PRODUCER_KIND,
+                policy,
+            )
+            with self.assertRaisesRegex(ValueError, "execution policy"):
+                ProposalResultStore(
+                    store_path,
+                    configuration.sha256,
+                    CONTRACT_PRODUCER_KIND,
+                )
+            with self.assertRaisesRegex(ValueError, "active execution policy"):
+                worker.run_job(job, attempt=3)
+
+    def test_terminal_failures_can_be_kept_without_a_consecutive_abort(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            configuration = LocateAnythingConfiguration(max_new_tokens=4096)
+            policy = bounded_locateanything_execution_policy(
+                configuration,
+                maximum_attempts_per_job=2,
+                terminal_failure_disposition="carry_as_zero_proposal",
+            )
+            jobs = []
+            for index in range(2):
+                image_path = root / f"V{index:02d}.png"
+                Image.new("RGB", (64, 64), "white").save(image_path)
+                jobs.append(
+                    ProposalJob(
+                        cohort_id="confirm_300",
+                        input_manifest_sha256="b" * 64,
+                        opaque_scene_id="S000001",
+                        view_id=f"V{index:02d}",
+                        image_path=image_path,
+                        image_sha256=chr(ord("a") + index) * 64,
+                    )
+                )
+
+            class FailingWorker:
+                producer_kind = CONTRACT_PRODUCER_KIND
+
+                def __init__(self) -> None:
+                    self.configuration = configuration
+                    self.execution_policy = policy
+
+                def run_job(self, job: ProposalJob, *, attempt: int = 1) -> dict:
+                    row = ProposalContractWorker(
+                        configuration,
+                        execution_policy=policy,
+                    ).run_job(job, attempt=attempt)
+                    row.update(
+                        {
+                            "proposal_count": 0,
+                            "boxes_xyxy": [],
+                            "raw_response": "",
+                            "status": "error",
+                            "error_type": "NoValidBoxes",
+                            "error_message": "No valid boxes",
+                        }
+                    )
+                    return row
+
+            store = ProposalResultStore(
+                root / "failures.jsonl",
+                configuration.sha256,
+                CONTRACT_PRODUCER_KIND,
+                policy,
+            )
+            session = run_proposal_jobs(
+                worker=FailingWorker(),
+                jobs=jobs,
+                result_store=store,
+                maximum_attempts_per_job=2,
+                maximum_consecutive_failed_jobs=None,
+            )
+
+            self.assertEqual(session["latest_row_count"], 2)
+            self.assertEqual(session["successful_job_count"], 0)
+            self.assertEqual([row["attempt"] for row in store.rows], [2, 2])
 
     def test_one_image_evidence_keeps_geometry_and_overlay(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:

@@ -1,0 +1,42 @@
+{
+  "artifact_count": 7,
+  "artifacts": [
+    {
+      "path": "completion_gates.csv",
+      "sha256": "ac1a52febd94314cd19b9d67791b7d0713c3a3a0cf3867e1f5569156a213c229",
+      "size_bytes": 167
+    },
+    {
+      "path": "mean_p1_by_route.png",
+      "sha256": "6872ee01727cc1a5dcb932d19b13e638bb5e926972cbc9531b5ee6bb9f73088a",
+      "size_bytes": 22917
+    },
+    {
+      "path": "p1_route_summary.csv",
+      "sha256": "4295a6405b2dcf0f404b354a5c62f7aebeb7088ff0938eabec375adb5b105623",
+      "size_bytes": 413
+    },
+    {
+      "path": "p1_score_distribution.png",
+      "sha256": "f8d804fbe87913d99024a76e22dce568a06af29cf0bdab02852c79d832f86b47",
+      "size_bytes": 21953
+    },
+    {
+      "path": "resolved_configuration.json",
+      "sha256": "db9d27c293fd9464f200c64ce959a1ea40b4e535a826a5938db8931d48f82363",
+      "size_bytes": 1017
+    },
+    {
+      "path": "run_record.json",
+      "sha256": "7c940ae7ac7e85a0841efc38f8f7b8368f7a1e87f85f7bc5124a66d52bf12301",
+      "size_bytes": 586
+    },
+    {
+      "path": "runtime_summary.csv",
+      "sha256": "64b4bf12adf232a59947c1115de12bcdaa6c3353977317fe9976fb4d6ced6360",
+      "size_bytes": 221
+    }
+  ],
+  "manifest_content_sha256": "614d3c2d8789636942268aca2579bad921269388baf5ca498b6d2b5e3f07c82a",
+  "schema_version": 1
+}

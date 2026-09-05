@@ -1,0 +1,6 @@
+check,passed
+all DS2 images completed,True
+all terminal failures carried as zero proposals,True
+"DS1 prompt, model and post-processing kept",True
+bounded DS2 operational policy recorded,True
+evaluator remained closed,True

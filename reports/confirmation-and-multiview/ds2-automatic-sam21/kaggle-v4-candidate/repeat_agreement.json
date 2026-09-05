@@ -1,0 +1,10 @@
+{
+  "mask_digest_agreement_rate": 1.0,
+  "matching_mask_digest_count": 84,
+  "matching_score_count": 84,
+  "pilot_image_count": 20,
+  "prompt_count": 84,
+  "repeat_image_count": 20,
+  "score_agreement_rate": 1.0,
+  "score_tolerance": 1e-05
+}

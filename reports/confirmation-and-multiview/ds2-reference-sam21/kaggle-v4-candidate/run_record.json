@@ -1,0 +1,18 @@
+{
+  "all_completion_checks_passed": true,
+  "cohort_id": "toysad8k-development-confirm-300-v1",
+  "configuration_sha256": "39690d431d70c2192a6ba0c4530785c9208e07b035842d05022a67fb700a850b",
+  "image_count": 6000,
+  "mask_count": 23100,
+  "producer_kind": "sam2.1_model",
+  "prompt_package_sha256": "7c59366cd82e598ccebb03c245980effa24741b8ca88d277c7b2155563054a16",
+  "resumed_image_count": 0,
+  "route": "reference_box",
+  "run_mode": "model_inference",
+  "runtime_seconds_this_session": 1884.194710527,
+  "sam_results_sha256": "34529093e5e973d3003e46178b5a505c259c41ec12b4ed26cfa363fde1d545a8",
+  "schema_version": 1,
+  "stage": "ds2_reference_box_sam21",
+  "status": "completed",
+  "zero_prompt_image_count": 0
+}

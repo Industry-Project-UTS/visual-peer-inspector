@@ -312,6 +312,8 @@ def save_image_grid(
         canvas.paste(fitted, (paste_x, paste_y))
         scale_x = fitted.width / original_width
         scale_y = fitted.height / original_height
+        # Draw proposals first. A thinner reference outline is drawn over them so
+        # close matches still show both colours instead of hiding the reference.
         for box in item.get("boxes", []):
             x1, y1, x2, y2 = [int(value) for value in box]
             draw.rectangle(
@@ -322,7 +324,19 @@ def save_image_grid(
                     paste_y + round(y2 * scale_y),
                 ),
                 outline="#d73a49",
-                width=4,
+                width=5,
+            )
+        for box in item.get("reference_boxes", []):
+            x1, y1, x2, y2 = [int(value) for value in box]
+            draw.rectangle(
+                (
+                    paste_x + round(x1 * scale_x),
+                    paste_y + round(y1 * scale_y),
+                    paste_x + round(x2 * scale_x),
+                    paste_y + round(y2 * scale_y),
+                ),
+                outline="#238636",
+                width=2,
             )
         draw.rectangle((x, y, x + cell_size - 1, y + cell_size - 1), outline=GRID)
         draw.text(
