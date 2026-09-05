@@ -1,0 +1,289 @@
+Stage: 08A DS2 confirmation release
+Status: completed
+Clean notebook: notebooks/confirmation-and-multiview/08a-toysad8k-ds2-confirmation-release.ipynb
+Clean notebook SHA-256: ab184d201a0a2d717af5e897004f2e7b21adaf463323f9bc769a777c5c3c952a
+Downloaded saved-output SHA-256: bb476e1ab5af5579d13f4a789cfa6298e332819fae5353ea65d6792c3d20da2f
+Executed code cells: 7
+Retained output blocks: 12
+Retained safe visuals: 1
+Removed private visuals: 0
+
+Sanitised execution transcript
+==============================
+
+[cell 5]
+{'cohort': 'toysad8k-development-confirm-300-v1',
+ 'scenes': 300,
+ 'views per scene': 20,
+ 'images': 6000,
+ 'asset groups': 82}
+
+[cell 7]
+{"attributes_package": {"all_checks_passed": true, "asset_group_count": 82, "cohort_id": "toysad8k-development-confirm-300-v1", "content_checksums_sha256": "f431f13fbf849748540484d9e0b1db79a0abac25acacdfcada4b23b4358cbc8b", "image_count": 6000, "membership_sha256": "bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac", "package_kind": "ds2-evaluator-attributes", "protected_attributes_sha256": "784a27d25ed81a7f14ac3e0e97e6706bc12950ba85232ffdc498f664b6a8659f", "release_id": "toysad8k-train-2000-v2", "scene_count": 300, "schema_version": 1, "views_per_scene": 20}, "boundary": {"evaluator_attributes_model_facing": false, "geometry_contains_anomaly_labels": false, "model_input_contains_labels": false}, "cohort": {"asset_group_count": 82, "cohort_id": "toysad8k-development-confirm-300-v1", "image_count": 6000, "membership_sha256": "bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac", "pilot_stage": "confirm_300", "release_id": "toysad8k-train-2000-v2", "role": "development", "scene_count": 300, "views_per_scene": 20}, "geometry_package": {"all_checks_passed": true, "archive_index_sha256": "c502d779f9b9e78ed7e2766402b7ba10337b1ee43fa467da03b6f997d6bc7e36", "asset_group_count": 82, "cohort_id": "toysad8k-development-confirm-300-v1", "content_checksums_sha256": "a06b6f46741dd33b640ffcc494b9a2d2cffb8e436f156ea5d4cd984044621ee5", "empty_object_view_count": 0, "image_count": 6000, "mask_threshold": 128, "membership_sha256": "bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac", "object_view_count": 23100, "package_kind": "ds2-oracle-geometry", "reference_manifest_sha256": "c88cb1f3f52c8c2ff29f564661e41781713b6f074e6aceb6e8d2d7cabbcf9e08", "release_id": "toysad8k-train-2000-v2", "scene_count": 300, "schema_version": 1, "source_access_mode": "kaggle_extracted_members", "source_archive_sha256": "e49c30857b96fdede3f374c773ce0758174f225958ba29c9ad5ca5b075dfc733", "source_archive_size_bytes": 52993751003, "views_per_scene": 20, "visible_object_view_count": 23100}, "rgb_build": {"all_checks_passed": true, "asset_group_count": 82, "category_count": 39, "cohort_id": "toysad8k-development-confirm-300-v1", "files_reused_this_run": 0, "files_written_this_run": 6000, "membership_sha256": "bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac", "prefix_coverage_count": 8, "scene_count": 300, "stratum_coverage_count": 5, "trusted_input_audit": {"administrative_checksum_manifest_sha256": "bde49d0a0121965bf9d33a3c2473ee0574196d207fa206824ba61648c6b4cc56", "all_checks_passed": true, "development_checksum_manifest_sha256": "f8896d3ff4bc7d0329a5d3442ca215534bf777548e9fb3e6b102217f62577d47", "release_id": "toysad8k-train-2000-v2", "selected_source_members_verified": 6000, "selection_checksum_manifest_sha256": "06645dd4dca16dab234983a306592eb78f1d6520fe9d18104693bdb6b06eabaf", "source_access_mode": "kaggle_extracted_members", "source_archive_bytes_verified": false, "source_archive_sha256": "e49c30857b96fdede3f374c773ce0758174f225958ba29c9ad5ca5b075dfc733", "source_archive_size_bytes": 52993751003, "source_checksum_manifest_sha256": "0630cc7c011bbea0b80036c9ea4d71f6abd6fc178ff105c84ef3543ad9a0b6fa", "source_identity_file_count_verified": 3}}, "rgb_package": {"all_checks_passed": true, "cohort_id": "toysad8k-development-confirm-300-v1", "content_checksums_sha256": "e4b86ca6de63e29526ffc35b80480df656c8fe3fac30067ae342ece9cb9e594d", "decoded_image_failure_count": 0, "duplicate_archive_member_count": 0, "duplicate_package_path_count": 0, "height": 256, "image_count": 6000, "manifest_sha256": "97da5e4dc115c18160b47bf7bad835aba80eeb0b29333ef7e8d0db89adbe76df", "media_mode": "RGBA", "membership_sha256": "bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac", "release_id": "toysad8k-train-2000-v2", "scene_count": 300, "total_media_bytes": 761313799, "verified_image_count": 6000, "view_count": 20, "width": 256}, "schema_version": 1, "stage": "ds2_confirmation_input_release", "status": "completed"}
+{"attributes_package": {"all_checks_passed": true, "asset_group_count": 82, "cohort_id": "toysad8k-development-confirm-300-v1", "content_checksums_sha256": "f431f13fbf849748540484d9e0b1db79a0abac25acacdfcada4b23b4358cbc8b", "image_count": 6000, "membership_sha256": "bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac", "package_kind": "ds2-evaluator-attributes", "protected_attributes_sha256": "784a27d25ed81a7f14ac3e0e97e6706bc12950ba85232ffdc498f664b6a8659f", "release_id": "toysad8k-train-2000-v2", "scene_count": 300, "schema_version": 1, "views_per_scene": 20}, "boundary": {"evaluator_attributes_model_facing": false, "geometry_contains_anomaly_labels": false, "model_input_contains_labels": false}, "cohort": {"asset_group_count": 82, "cohort_id": "toysad8k-development-confirm-300-v1", "image_count": 6000, "membership_sha256": "bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac", "pilot_stage": "confirm_300", "release_id": "toysad8k-train-2000-v2", "role": "development", "scene_count": 300, "views_per_scene": 20}, "geometry_package": {"all_checks_passed": true, "archive_index_sha256": "c502d779f9b9e78ed7e2766402b7ba10337b1ee43fa467da03b6f997d6bc7e36", "asset_group_count": 82, "cohort_id": "toysad8k-development-confirm-300-v1", "content_checksums_sha256": "a06b6f46741dd33b640ffcc494b9a2d2cffb8e436f156ea5d4cd984044621ee5", "empty_object_view_count": 0, "image_count": 6000, "mask_threshold": 128, "membership_sha256": "bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac", "object_view_count": 23100, "package_kind": "ds2-oracle-geometry", "reference_manifest_sha256": "c88cb1f3f52c8c2ff29f564661e41781713b6f074e6aceb6e8d2d7cabbcf9e08", "release_id": "toysad8k-train-2000-v2", "scene_count": 300, "schema_version": 1, "source_access_mode": "kaggle_extracted_members", "source_archive_sha256": "e49c30857b96fdede3f374c773ce0758174f225958ba29c9ad5ca5b075dfc733", "source_archive_size_bytes": 52993751003, "views_per_scene": 20, "visible_object_view_count": 23100}, "rgb_build": {"all_checks_passed": true, "asset_group_count": 82, "category_count": 39, "cohort_id": "toysad8k-development-confirm-300-v1", "files_reused_this_run": 6000, "files_written_this_run": 0, "membership_sha256": "bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac", "prefix_coverage_count": 8, "scene_count": 300, "stratum_coverage_count": 5, "trusted_input_audit": {"administrative_checksum_manifest_sha256": "bde49d0a0121965bf9d33a3c2473ee0574196d207fa206824ba61648c6b4cc56", "all_checks_passed": true, "development_checksum_manifest_sha256": "f8896d3ff4bc7d0329a5d3442ca215534bf777548e9fb3e6b102217f62577d47", "release_id": "toysad8k-train-2000-v2", "selected_source_members_verified": 6000, "selection_checksum_manifest_sha256": "06645dd4dca16dab234983a306592eb78f1d6520fe9d18104693bdb6b06eabaf", "source_access_mode": "kaggle_extracted_members", "source_archive_bytes_verified": false, "source_archive_sha256": "e49c30857b96fdede3f374c773ce0758174f225958ba29c9ad5ca5b075dfc733", "source_archive_size_bytes": 52993751003, "source_checksum_manifest_sha256": "0630cc7c011bbea0b80036c9ea4d71f6abd6fc178ff105c84ef3543ad9a0b6fa", "source_identity_file_count_verified": 3}}, "rgb_package": {"all_checks_passed": true, "cohort_id": "toysad8k-development-confirm-300-v1", "content_checksums_sha256": "e4b86ca6de63e29526ffc35b80480df656c8fe3fac30067ae342ece9cb9e594d", "decoded_image_failure_count": 0, "duplicate_archive_member_count": 0, "duplicate_package_path_count": 0, "height": 256, "image_count": 6000, "manifest_sha256": "97da5e4dc115c18160b47bf7bad835aba80eeb0b29333ef7e8d0db89adbe76df", "media_mode": "RGBA", "membership_sha256": "bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac", "release_id": "toysad8k-train-2000-v2", "scene_count": 300, "total_media_bytes": 761313799, "verified_image_count": 6000, "view_count": 20, "width": 256}, "schema_version": 1, "stage": "ds2_confirmation_input_release", "status": "completed"}
+
+[cell 7]
+{'status': 'completed',
+ 'RGB images verified': 6000,
+ 'first pass images written': 6000,
+ 'second pass images reused': 6000,
+ 'package identity stable': True,
+ 'visible object masks': 23100,
+ 'protected scenes': 300}
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gate</th>
+      <th>passed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>frozen membership</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>RGB coverage</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>RGB integrity</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>repeat build reused all RGB files</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>repeat build kept package identity</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>model input labels absent</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>evaluator separated</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                 gate  passed
+0                   frozen membership    True
+1                        RGB coverage    True
+2                       RGB integrity    True
+3   repeat build reused all RGB files    True
+4  repeat build kept package identity    True
+5           model input labels absent    True
+6                 evaluator separated    True
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>resource</th>
+      <th>items</th>
+      <th>model_facing</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>RGB model input</td>
+      <td>6000</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>supplied object masks</td>
+      <td>23100</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>protected scene labels</td>
+      <td>300</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>                 resource  items  model_facing
+0         RGB model input   6000          True
+1   supplied object masks  23100          True
+2  protected scene labels    300         False
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>resource</th>
+      <th>expected_kaggle_dataset</th>
+      <th>package_sha256</th>
+      <th>items</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>RGB model input</td>
+      <td>vpi-toysad-ds2-confirmation-rgb</td>
+      <td>e4b86ca6de63e29526ffc35b80480df656c8fe3fac3006...</td>
+      <td>6000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>supplied geometry</td>
+      <td>vpi-toysad-ds2-confirmation-geometry</td>
+      <td>a06b6f46741dd33b640ffcc494b9a2d2cffb8e436f156e...</td>
+      <td>23100</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>protected evaluator attributes</td>
+      <td>vpi-toysad-ds2-confirmation-evaluator</td>
+      <td>f431f13fbf849748540484d9e0b1db79a0abac25acacdf...</td>
+      <td>300</td>
+    </tr>
+  </tbody>
+</table>
+</div>                         resource                expected_kaggle_dataset  \
+0                 RGB model input        vpi-toysad-ds2-confirmation-rgb
+1               supplied geometry   vpi-toysad-ds2-confirmation-geometry
+2  protected evaluator attributes  vpi-toysad-ds2-confirmation-evaluator
+
+                                      package_sha256  items
+0  e4b86ca6de63e29526ffc35b80480df656c8fe3fac3006...   6000
+1  a06b6f46741dd33b640ffcc494b9a2d2cffb8e436f156e...  23100
+2  f431f13fbf849748540484d9e0b1db79a0abac25acacdf...    300
+
+[cell 9]
+<IPython.core.display.Image object>
+
+[cell 11]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 34.2 MB/s eta 0:00:00
+
+[cell 11]
+{'mode': 'disabled',
+ 'run_status': 'completed',
+ 'safe_manifest_sha256': '3ba92adc302c7d0609778697dc82a49607cab722b55b3489c08047659dfe69e2',
+ 'schema_version': 1,
+ 'stage': 'ds2_confirmation_input_release_clearml_finalisation',
+ 'status': 'disabled',
+ 'task_id': None,
+ 'tracking_attempt_count': 0,
+ 'tracking_retry_count': 0,
+ 'tracking_transient_failure_count': 0}
+
+[cell 13]
+{"archives": [{"path": "ds2-confirmation-release-repository-evidence.zip", "sha256": "27d1c8e43c22deb25207cc51b962c5886e060944d203eaca66548dea40b20ae5", "size_bytes": 18767, "source_file_count": 6}, {"path": "ds2-confirmation-release-review-evidence.zip", "sha256": "9d2d1c729dfbb1fdf51911b33888e1decc81a0b7e24b92f2509df224038d220b", "size_bytes": 386, "source_file_count": 1}], "downstream_file_count": 0, "review_file_count": 1, "safe_file_count": 6, "safe_manifest_sha256": "3ba92adc302c7d0609778697dc82a49607cab722b55b3489c08047659dfe69e2", "schema_version": 1, "stage": "ds2-confirmation-release", "status": "completed"}
+
+[cell 13]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>path</th>
+      <th>sha256</th>
+      <th>size_bytes</th>
+      <th>source_file_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ds2-confirmation-release-repository-evidence.zip</td>
+      <td>27d1c8e43c22deb25207cc51b962c5886e060944d203ea...</td>
+      <td>18767</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ds2-confirmation-release-review-evidence.zip</td>
+      <td>9d2d1c729dfbb1fdf51911b33888e1decc81a0b7e24b92...</td>
+      <td>386</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                               path  \
+0  ds2-confirmation-release-repository-evidence.zip
+1      ds2-confirmation-release-review-evidence.zip
+
+                                              sha256  size_bytes  \
+0  27d1c8e43c22deb25207cc51b962c5886e060944d203ea...       18767
+1  9d2d1c729dfbb1fdf51911b33888e1decc81a0b7e24b92...         386
+
+   source_file_count
+0                  6
+1                  1
+
+[cell 13]
+Verified downloads: /kaggle/working/notebook08a_bundles

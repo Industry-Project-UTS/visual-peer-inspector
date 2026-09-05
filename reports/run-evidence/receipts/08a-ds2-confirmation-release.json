@@ -1,0 +1,13 @@
+{
+  "clean_notebook_sha256": "ab184d201a0a2d717af5e897004f2e7b21adaf463323f9bc769a777c5c3c952a",
+  "downloaded_saved_output_sha256": "bb476e1ab5af5579d13f4a789cfa6298e332819fae5353ea65d6792c3d20da2f",
+  "executed_code_cells": 7,
+  "label": "08A DS2 confirmation release",
+  "published_log_sha256": "bed749bdf28b3a1c5a3e9f7c550ddbd518820ba3026df91b4331b46a112486e6",
+  "published_notebook_sha256": "d4f6ce4c1c7d7b421f0d5a15000e042665b60f2aad412a5df2eb18688b966e7d",
+  "removed_private_visuals": 0,
+  "retained_output_blocks": 12,
+  "retained_safe_visuals": 1,
+  "schema_version": 1,
+  "status": "completed"
+}

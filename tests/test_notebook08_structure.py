@@ -15,7 +15,11 @@ def _source(path: Path) -> tuple[dict, str]:
 
 
 def test_notebook08_sources_are_clean_and_executable() -> None:
-    notebooks = sorted(NOTEBOOK_ROOT.glob("08*.ipynb"))
+    notebooks = sorted(
+        path
+        for path in NOTEBOOK_ROOT.glob("08*.ipynb")
+        if not path.name.endswith("-executed.ipynb")
+    )
     assert len(notebooks) == 3
     for path in notebooks:
         notebook, source = _source(path)

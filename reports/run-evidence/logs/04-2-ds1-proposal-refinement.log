@@ -1,0 +1,1046 @@
+Stage: 04.2 DS1 proposal refinement
+Status: completed
+Clean notebook: notebooks/detection-and-segmentation/toysad8k-ds1-proposal-refinement/04.2-toysad8k-ds1-proposal-refinement.ipynb
+Clean notebook SHA-256: 965886d5747e9956d3004ad482be11396f3778bef91d683aa2bc8c880415d3fa
+Downloaded saved-output SHA-256: f6a678137bcba44745b0cfbc337c9cc8a86b49148d9ec5db3897bee13fccf2d9
+Executed code cells: 11
+Retained output blocks: 17
+Retained safe visuals: 3
+Removed private visuals: 1
+
+Sanitised execution transcript
+==============================
+
+[cell 2]
+Environment: kaggle
+Notebook: 04.2-toysad8k-ds1-proposal-refinement.ipynb
+Code snapshot folder: vpi-code-snapshot
+
+[cell 4]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>input</th>
+      <th>folder</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>DS1 RGB package</td>
+      <td>vpi-toysad-ds1-screen100-model-input</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>DS1 evaluator package</td>
+      <td>vpi-toysad-ds1-mask-evaluator</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Notebook 04.1 output</td>
+      <td>toysad8k_ds1_locateanything_screen</td>
+    </tr>
+  </tbody>
+</table>
+</div>                   input                                folder
+0        DS1 RGB package  vpi-toysad-ds1-screen100-model-input
+1  DS1 evaluator package         vpi-toysad-ds1-mask-evaluator
+2   Notebook 04.1 output    toysad8k_ds1_locateanything_screen
+
+[cell 6]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>policy</th>
+      <th>minimum area fraction</th>
+      <th>maximum area fraction</th>
+      <th>overlap threshold</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>baseline</td>
+      <td>0.0000</td>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>area_only</td>
+      <td>0.0015</td>
+      <td>0.7</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>nms_090</td>
+      <td>0.0000</td>
+      <td>1.0</td>
+      <td>0.90</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>nms_075</td>
+      <td>0.0000</td>
+      <td>1.0</td>
+      <td>0.75</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>area_nms_075</td>
+      <td>0.0015</td>
+      <td>0.7</td>
+      <td>0.75</td>
+    </tr>
+  </tbody>
+</table>
+</div>         policy  minimum area fraction  maximum area fraction  \
+0      baseline                 0.0000                    1.0
+1     area_only                 0.0015                    0.7
+2       nms_090                 0.0000                    1.0
+3       nms_075                 0.0000                    1.0
+4  area_nms_075                 0.0015                    0.7
+
+   overlap threshold
+0                NaN
+1                NaN
+2               0.90
+3               0.75
+4               0.75
+
+[cell 8]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>schema_version</th>
+      <th>stage</th>
+      <th>status</th>
+      <th>tracking_status</th>
+      <th>cohort_id</th>
+      <th>scene_count</th>
+      <th>image_count</th>
+      <th>policy_count</th>
+      <th>all_completion_gates_passed</th>
+      <th>decision</th>
+      <th>selected_diagnostic_policy</th>
+      <th>automatic_proposal_route_accepted</th>
+      <th>model_input_package_sha256</th>
+      <th>upstream_configuration_sha256</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>ds1_proposal_refinement</td>
+      <td>completed</td>
+      <td>pending</td>
+      <td>toysad8k-development-screen-100-v1</td>
+      <td>100</td>
+      <td>2000</td>
+      <td>5</td>
+      <td>True</td>
+      <td>retain_refinement_as_diagnostic_and_replace_or...</td>
+      <td>area_nms_075</td>
+      <td>False</td>
+      <td>12d584a48784ec45f7a796664df390a2b09f63b3dcdd2f...</td>
+      <td>97d08548683794ad781ac7885efb34de9be68b9b2cf9f2...</td>
+    </tr>
+  </tbody>
+</table>
+</div>   schema_version                    stage     status tracking_status  \
+0               1  ds1_proposal_refinement  completed         pending
+
+                            cohort_id  scene_count  image_count  policy_count  \
+0  toysad8k-development-screen-100-v1          100         2000             5
+
+   all_completion_gates_passed  \
+0                         True
+
+                                            decision  \
+0  retain_refinement_as_diagnostic_and_replace_or...
+
+  selected_diagnostic_policy  automatic_proposal_route_accepted  \
+0               area_nms_075                              False
+
+                          model_input_package_sha256  \
+0  12d584a48784ec45f7a796664df390a2b09f63b3dcdd2f...
+
+                       upstream_configuration_sha256
+0  97d08548683794ad781ac7885efb34de9be68b9b2cf9f2...
+
+[cell 10]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>policy</th>
+      <th>proposal_count</th>
+      <th>precision_at_0_50</th>
+      <th>recall_at_0_50</th>
+      <th>f1_at_0_50</th>
+      <th>recall_at_0_75</th>
+      <th>exact_count_rate</th>
+      <th>full_image_success_rate</th>
+      <th>miss_count</th>
+      <th>extra_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>baseline</td>
+      <td>9249</td>
+      <td>0.786680</td>
+      <td>0.944935</td>
+      <td>0.858576</td>
+      <td>0.903896</td>
+      <td>0.9005</td>
+      <td>0.8825</td>
+      <td>424</td>
+      <td>1973</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>area_only</td>
+      <td>8692</td>
+      <td>0.837092</td>
+      <td>0.944935</td>
+      <td>0.887750</td>
+      <td>0.903896</td>
+      <td>0.9005</td>
+      <td>0.8825</td>
+      <td>424</td>
+      <td>1416</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>nms_090</td>
+      <td>8708</td>
+      <td>0.835554</td>
+      <td>0.944935</td>
+      <td>0.886884</td>
+      <td>0.903896</td>
+      <td>0.9005</td>
+      <td>0.8825</td>
+      <td>424</td>
+      <td>1432</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>nms_075</td>
+      <td>8386</td>
+      <td>0.867637</td>
+      <td>0.944935</td>
+      <td>0.904638</td>
+      <td>0.903896</td>
+      <td>0.9005</td>
+      <td>0.8825</td>
+      <td>424</td>
+      <td>1110</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>area_nms_075</td>
+      <td>7996</td>
+      <td>0.909955</td>
+      <td>0.944935</td>
+      <td>0.927115</td>
+      <td>0.903896</td>
+      <td>0.9005</td>
+      <td>0.8825</td>
+      <td>424</td>
+      <td>720</td>
+    </tr>
+  </tbody>
+</table>
+</div>         policy  proposal_count  precision_at_0_50  recall_at_0_50  \
+0      baseline            9249           0.786680        0.944935
+1     area_only            8692           0.837092        0.944935
+2       nms_090            8708           0.835554        0.944935
+3       nms_075            8386           0.867637        0.944935
+4  area_nms_075            7996           0.909955        0.944935
+
+   f1_at_0_50  recall_at_0_75  exact_count_rate  full_image_success_rate  \
+0    0.858576        0.903896            0.9005                   0.8825
+1    0.887750        0.903896            0.9005                   0.8825
+2    0.886884        0.903896            0.9005                   0.8825
+3    0.904638        0.903896            0.9005                   0.8825
+4    0.927115        0.903896            0.9005                   0.8825
+
+   miss_count  extra_count
+0         424         1973
+1         424         1416
+2         424         1432
+3         424         1110
+4         424          720
+
+[cell 10]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>policy</th>
+      <th>f1_difference</th>
+      <th>ci_lower_95</th>
+      <th>ci_upper_95</th>
+      <th>asset_cluster_count</th>
+      <th>repetitions</th>
+      <th>seed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>baseline</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>27</td>
+      <td>5000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>area_only</td>
+      <td>0.029174</td>
+      <td>0.001702</td>
+      <td>0.062643</td>
+      <td>27</td>
+      <td>5000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>nms_090</td>
+      <td>0.028309</td>
+      <td>0.002819</td>
+      <td>0.050974</td>
+      <td>27</td>
+      <td>5000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>nms_075</td>
+      <td>0.046062</td>
+      <td>0.008222</td>
+      <td>0.081246</td>
+      <td>27</td>
+      <td>5000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>area_nms_075</td>
+      <td>0.068539</td>
+      <td>0.016105</td>
+      <td>0.119766</td>
+      <td>27</td>
+      <td>5000</td>
+      <td>32040</td>
+    </tr>
+  </tbody>
+</table>
+</div>         policy  f1_difference  ci_lower_95  ci_upper_95  asset_cluster_count  \
+0      baseline       0.000000     0.000000     0.000000                   27
+1     area_only       0.029174     0.001702     0.062643                   27
+2       nms_090       0.028309     0.002819     0.050974                   27
+3       nms_075       0.046062     0.008222     0.081246                   27
+4  area_nms_075       0.068539     0.016105     0.119766                   27
+
+   repetitions   seed
+0         5000  32040
+1         5000  32040
+2         5000  32040
+3         5000  32040
+4         5000  32040
+
+[cell 10]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>policy</th>
+      <th>precision_gate_passed</th>
+      <th>recall_gate_passed</th>
+      <th>recall_loss_vs_baseline</th>
+      <th>paired_f1_ci_lower</th>
+      <th>diagnostic_selection_eligible</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>baseline</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>area_only</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>0.001702</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>nms_090</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>0.002819</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>nms_075</td>
+      <td>False</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>0.008222</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>area_nms_075</td>
+      <td>True</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>0.016105</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>         policy  precision_gate_passed  recall_gate_passed  \
+0      baseline                  False               False
+1     area_only                  False               False
+2       nms_090                  False               False
+3       nms_075                  False               False
+4  area_nms_075                   True               False
+
+   recall_loss_vs_baseline  paired_f1_ci_lower  diagnostic_selection_eligible
+0                      0.0            0.000000                           True
+1                      0.0            0.001702                           True
+2                      0.0            0.002819                           True
+3                      0.0            0.008222                           True
+4                      0.0            0.016105                           True
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 12]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>policy</th>
+      <th>reason</th>
+      <th>removed_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>area_only</td>
+      <td>below_area_floor</td>
+      <td>540</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>area_only</td>
+      <td>above_area_ceiling</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>nms_090</td>
+      <td>overlap_suppression</td>
+      <td>541</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>nms_075</td>
+      <td>overlap_suppression</td>
+      <td>863</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>area_nms_075</td>
+      <td>below_area_floor</td>
+      <td>540</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>area_nms_075</td>
+      <td>above_area_ceiling</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>area_nms_075</td>
+      <td>overlap_suppression</td>
+      <td>696</td>
+    </tr>
+  </tbody>
+</table>
+</div>          policy               reason  removed_count
+3      area_only     below_area_floor            540
+4      area_only   above_area_ceiling             17
+8        nms_090  overlap_suppression            541
+11       nms_075  overlap_suppression            863
+12  area_nms_075     below_area_floor            540
+13  area_nms_075   above_area_ceiling             17
+14  area_nms_075  overlap_suppression            696
+
+[cell 12]
+<IPython.core.display.Image object>
+
+[cell 14]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>policy</th>
+      <th>dimension</th>
+      <th>value</th>
+      <th>image_count</th>
+      <th>reference_count</th>
+      <th>precision_at_0_50</th>
+      <th>recall_at_0_50</th>
+      <th>f1_at_0_50</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>182</th>
+      <td>area_nms_075</td>
+      <td>anomaly_families</td>
+      <td>bump</td>
+      <td>220</td>
+      <td>880</td>
+      <td>0.742202</td>
+      <td>0.919318</td>
+      <td>0.821320</td>
+    </tr>
+    <tr>
+      <th>188</th>
+      <td>area_nms_075</td>
+      <td>anomaly_families</td>
+      <td>rota</td>
+      <td>60</td>
+      <td>260</td>
+      <td>0.991837</td>
+      <td>0.934615</td>
+      <td>0.962376</td>
+    </tr>
+    <tr>
+      <th>184</th>
+      <td>area_nms_075</td>
+      <td>anomaly_families</td>
+      <td>defr</td>
+      <td>60</td>
+      <td>220</td>
+      <td>0.990385</td>
+      <td>0.936364</td>
+      <td>0.962617</td>
+    </tr>
+    <tr>
+      <th>185</th>
+      <td>area_nms_075</td>
+      <td>anomaly_families</td>
+      <td>disc</td>
+      <td>540</td>
+      <td>2120</td>
+      <td>0.963628</td>
+      <td>0.937264</td>
+      <td>0.950263</td>
+    </tr>
+    <tr>
+      <th>186</th>
+      <td>area_nms_075</td>
+      <td>anomaly_families</td>
+      <td>frac</td>
+      <td>540</td>
+      <td>2160</td>
+      <td>0.897923</td>
+      <td>0.940741</td>
+      <td>0.918833</td>
+    </tr>
+    <tr>
+      <th>160</th>
+      <td>area_nms_075</td>
+      <td>category</td>
+      <td>cookie</td>
+      <td>80</td>
+      <td>280</td>
+      <td>0.673591</td>
+      <td>0.810714</td>
+      <td>0.735818</td>
+    </tr>
+    <tr>
+      <th>159</th>
+      <td>area_nms_075</td>
+      <td>category</td>
+      <td>chicken</td>
+      <td>80</td>
+      <td>280</td>
+      <td>0.890625</td>
+      <td>0.814286</td>
+      <td>0.850746</td>
+    </tr>
+    <tr>
+      <th>174</th>
+      <td>area_nms_075</td>
+      <td>category</td>
+      <td>monkey</td>
+      <td>60</td>
+      <td>280</td>
+      <td>0.932000</td>
+      <td>0.832143</td>
+      <td>0.879245</td>
+    </tr>
+    <tr>
+      <th>158</th>
+      <td>area_nms_075</td>
+      <td>category</td>
+      <td>chess_piece</td>
+      <td>80</td>
+      <td>320</td>
+      <td>0.552124</td>
+      <td>0.893750</td>
+      <td>0.682578</td>
+    </tr>
+    <tr>
+      <th>175</th>
+      <td>area_nms_075</td>
+      <td>category</td>
+      <td>mouse</td>
+      <td>60</td>
+      <td>240</td>
+      <td>0.951542</td>
+      <td>0.900000</td>
+      <td>0.925054</td>
+    </tr>
+    <tr>
+      <th>179</th>
+      <td>area_nms_075</td>
+      <td>object_count</td>
+      <td>3</td>
+      <td>800</td>
+      <td>2400</td>
+      <td>0.889952</td>
+      <td>0.930000</td>
+      <td>0.909535</td>
+    </tr>
+    <tr>
+      <th>181</th>
+      <td>area_nms_075</td>
+      <td>object_count</td>
+      <td>5</td>
+      <td>500</td>
+      <td>2500</td>
+      <td>0.936306</td>
+      <td>0.940800</td>
+      <td>0.938547</td>
+    </tr>
+    <tr>
+      <th>180</th>
+      <td>area_nms_075</td>
+      <td>object_count</td>
+      <td>4</td>
+      <td>700</td>
+      <td>2800</td>
+      <td>0.904570</td>
+      <td>0.961429</td>
+      <td>0.932133</td>
+    </tr>
+  </tbody>
+</table>
+</div>           policy         dimension        value  image_count  \
+182  area_nms_075  anomaly_families         bump          220
+188  area_nms_075  anomaly_families         rota           60
+184  area_nms_075  anomaly_families         defr           60
+185  area_nms_075  anomaly_families         disc          540
+186  area_nms_075  anomaly_families         frac          540
+160  area_nms_075          category       cookie           80
+159  area_nms_075          category      chicken           80
+174  area_nms_075          category       monkey           60
+158  area_nms_075          category  chess_piece           80
+175  area_nms_075          category        mouse           60
+179  area_nms_075      object_count            3          800
+181  area_nms_075      object_count            5          500
+180  area_nms_075      object_count            4          700
+
+     reference_count  precision_at_0_50  recall_at_0_50  f1_at_0_50
+182              880           0.742202        0.919318    0.821320
+188              260           0.991837        0.934615    0.962376
+184              220           0.990385        0.936364    0.962617
+185             2120           0.963628        0.937264    0.950263
+186             2160           0.897923        0.940741    0.918833
+160              280           0.673591        0.810714    0.735818
+159              280           0.890625        0.814286    0.850746
+174              280           0.932000        0.832143    0.879245
+158              320           0.552124        0.893750    0.682578
+175              240           0.951542        0.900000    0.925054
+179             2400           0.889952        0.930000    0.909535
+181             2500           0.936306        0.940800    0.938547
+180             2800           0.904570        0.961429    0.932133
+
+[cell 16]
+<IPython.core.display.Image object>
+
+[cell 18]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gate</th>
+      <th>passed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>all_2000_images_evaluated</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>policy_manifest_locked_before_evaluator</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>filters_use_geometry_only</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>baseline_preserved</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>paired_asset_bootstrap_completed</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>acceptance_matches_declared_precision_and_reca...</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>no_final_acceptance_claim</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                                gate  passed
+0                          all_2000_images_evaluated    True
+1            policy_manifest_locked_before_evaluator    True
+2                          filters_use_geometry_only    True
+3                                 baseline_preserved    True
+4                   paired_asset_bootstrap_completed    True
+5  acceptance_matches_declared_precision_and_reca...    True
+6                          no_final_acceptance_claim    True
+
+[cell 18]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>automatic_proposal_route_accepted</th>
+      <th>decision</th>
+      <th>final_acceptance</th>
+      <th>precision_gate</th>
+      <th>reason</th>
+      <th>recall_gate</th>
+      <th>selected_diagnostic_policy</th>
+      <th>selected_f1</th>
+      <th>selected_precision</th>
+      <th>selected_recall</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>retain_refinement_as_diagnostic_and_replace_or...</td>
+      <td>False</td>
+      <td>0.9</td>
+      <td>The selected label-free filter reduces duplica...</td>
+      <td>0.95</td>
+      <td>area_nms_075</td>
+      <td>0.927115</td>
+      <td>0.909955</td>
+      <td>0.944935</td>
+    </tr>
+  </tbody>
+</table>
+</div>   automatic_proposal_route_accepted  \
+0                              False
+
+                                            decision  final_acceptance  \
+0  retain_refinement_as_diagnostic_and_replace_or...             False
+
+   precision_gate                                             reason  \
+0             0.9  The selected label-free filter reduces duplica...
+
+   recall_gate selected_diagnostic_policy  selected_f1  selected_precision  \
+0         0.95               area_nms_075     0.927115            0.909955
+
+   selected_recall
+0         0.944935
+
+[cell 20]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mode</th>
+      <th>run_status</th>
+      <th>safe_manifest_sha256</th>
+      <th>schema_version</th>
+      <th>stage</th>
+      <th>status</th>
+      <th>task_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>disabled</td>
+      <td>completed</td>
+      <td>77effce5997d5e230c5d414347e789cb99d9ff90096259...</td>
+      <td>1</td>
+      <td>notebook_04_2_clearml_finalisation</td>
+      <td>disabled</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div>       mode run_status                               safe_manifest_sha256  \
+0  disabled  completed  77effce5997d5e230c5d414347e789cb99d9ff90096259...
+
+   schema_version                               stage    status task_id
+0               1  notebook_04_2_clearml_finalisation  disabled    None
+
+[cell 22]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>artifact_counts</th>
+      <th>automatic_proposal_route_accepted</th>
+      <th>image_count</th>
+      <th>policy_count</th>
+      <th>safe_chart_count</th>
+      <th>scene_count</th>
+      <th>selected_diagnostic_policy</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>{'model_input': 2, 'private': 6, 'safe': 13}</td>
+      <td>False</td>
+      <td>2000</td>
+      <td>5</td>
+      <td>3</td>
+      <td>100</td>
+      <td>area_nms_075</td>
+      <td>verified</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                artifact_counts  \
+0  {'model_input': 2, 'private': 6, 'safe': 13}
+
+   automatic_proposal_route_accepted  image_count  policy_count  \
+0                              False         2000             5
+
+   safe_chart_count  scene_count selected_diagnostic_policy    status
+0                 3          100               area_nms_075  verified

@@ -1,0 +1,13 @@
+{
+  "clean_notebook_sha256": "253c1b412b4c9df023f4c2536e421c2125705171a8110726a16ab6d1891b52f3",
+  "downloaded_saved_output_sha256": "8779f759c4dc59532932ea5708e6d8144089fbf82cfac85ccad99a3b9939f41f",
+  "executed_code_cells": 9,
+  "label": "05.1 DS1 SAM 2.1 segmentation",
+  "published_log_sha256": "799e9f87513eba5c6259567a3e4f3ea54408be737c1554fe2a17fe90dcb8e0c2",
+  "published_notebook_sha256": "7a43e1918a4d327db819632db6c8925f44110864bf2f8b5e646fdba6f4ffac74",
+  "removed_private_visuals": 1,
+  "retained_output_blocks": 23,
+  "retained_safe_visuals": 1,
+  "schema_version": 1,
+  "status": "completed"
+}

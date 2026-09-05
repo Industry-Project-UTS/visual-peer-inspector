@@ -1,0 +1,1605 @@
+Stage: 08C DS2 confirmation and multiview
+Status: completed
+Clean notebook: notebooks/confirmation-and-multiview/08c-toysad8k-ds2-confirmation-and-multiview.ipynb
+Clean notebook SHA-256: 0e00b4a173effa185070300b4ed356013a6ba1ec10482f7734d95e7e2a8864d4
+Downloaded saved-output SHA-256: 625e9f7feadd7e5628df63fdfb096be0d00603831702002458df2416383c7f17
+Executed code cells: 10
+Retained output blocks: 32
+Retained safe visuals: 7
+Removed private visuals: 3
+
+Sanitised execution transcript
+==============================
+
+[cell 5]
+{'score package status': True,
+ 'score rows': 138760,
+ 'model': 'dinov2_small',
+ 'methods': ['B0', 'P1'],
+ 'evaluator opened during inference': False,
+ 'reference SAM results': 'sam_results.jsonl',
+ 'automatic SAM results': 'sam_results.jsonl'}
+
+[cell 7]
+{"all_completion_gates_passed": true, "cohort_id": "toysad8k-development-confirm-300-v1", "decision": {"accuracy_acceptance_gate_applied": false, "application_mask_route": "automatic_box", "claim_boundary": "Development confirmation only. Calibration and locked evaluation remain unopened.", "ds2_used_for_tuning": false, "encoder": "dinov2_small", "fusion_method": "mean_rank", "primary_view_count": 3, "primary_view_ids": ["V00", "V06", "V13"], "reference_diagnostic_route": "reference_box", "schema_version": 1, "scientific_anchor_route": "supplied_mask", "scorer": "P1", "status": "confirmation_measured"}, "evaluator_opened_after_prediction_lock": true, "frozen_predictions": {"automatic_sam_results_sha256": "3c9a14d6ad7a10b25966770405848af2117b7bca9e570cc10b88fc144c4a9d78", "sam_results_sha256": "34529093e5e973d3003e46178b5a505c259c41ec12b4ed26cfa363fde1d545a8", "score_manifest_sha256": "7ec12d99432d2be0aac56835c77e543f32c824f3f1489d7706aa25664d14faf9", "score_package_sha256": "3510904e0f06f45889fed34639da4400de235370920c17967e04e2f4d7e4545e"}, "fused_object_row_count": 95332, "fusion_methods": ["mean_rank", "visibility_weighted_rank"], "invalid_mask_candidate_view_count": 2, "scene_count": 300, "scene_metric_row_count": 21600, "schema_version": 1, "stage": "ds2_confirmation_and_multiview", "status": "completed", "unscoreable_candidate_view_count": 3382, "view_counts": [1, 2, 3, 5, 10, 20]}
+
+[cell 7]
+{'status': 'completed',
+ 'scenes': 300,
+ 'metric rows': 21600,
+ 'unscoreable candidate-view rows': 3382,
+ 'invalid-mask candidate-view rows': 2,
+ 'prediction lock verified': True}
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>image_count</th>
+      <th>reference_object_count</th>
+      <th>proposal_count</th>
+      <th>matched_count_at_iou_0_50</th>
+      <th>missed_object_count</th>
+      <th>extra_proposal_count</th>
+      <th>precision_at_iou_0_50</th>
+      <th>recall_at_iou_0_50</th>
+      <th>f1_at_iou_0_50</th>
+      <th>complete_detection_image_count</th>
+      <th>complete_detection_rate</th>
+      <th>terminal_failed_image_count</th>
+      <th>terminal_failure_zero_proposal_image_count</th>
+      <th>genuine_zero_proposal_image_count</th>
+      <th>discarded_untrusted_box_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic_box</td>
+      <td>6000</td>
+      <td>23100</td>
+      <td>23180</td>
+      <td>21674</td>
+      <td>1426</td>
+      <td>1506</td>
+      <td>0.93503</td>
+      <td>0.938268</td>
+      <td>0.936646</td>
+      <td>5275</td>
+      <td>0.879167</td>
+      <td>2</td>
+      <td>2</td>
+      <td>36</td>
+      <td>227</td>
+    </tr>
+  </tbody>
+</table>
+</div>           route  image_count  reference_object_count  proposal_count  \
+0  automatic_box         6000                   23100           23180
+
+   matched_count_at_iou_0_50  missed_object_count  extra_proposal_count  \
+0                      21674                 1426                  1506
+
+   precision_at_iou_0_50  recall_at_iou_0_50  f1_at_iou_0_50  \
+0                0.93503            0.938268        0.936646
+
+   complete_detection_image_count  complete_detection_rate  \
+0                            5275                 0.879167
+
+   terminal_failed_image_count  terminal_failure_zero_proposal_image_count  \
+0                            2                                           2
+
+   genuine_zero_proposal_image_count  discarded_untrusted_box_count
+0                                 36                            227
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>object_view_count</th>
+      <th>proposal_count</th>
+      <th>matched_count_at_box_iou_0_50</th>
+      <th>mean_iou</th>
+      <th>median_iou</th>
+      <th>recall_at_0_75</th>
+      <th>mean_dice</th>
+      <th>mean_boundary_f1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>reference_box</td>
+      <td>23100</td>
+      <td>23100</td>
+      <td>23100</td>
+      <td>0.947776</td>
+      <td>0.964848</td>
+      <td>0.983636</td>
+      <td>0.970378</td>
+      <td>0.981368</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>automatic_box</td>
+      <td>23100</td>
+      <td>23180</td>
+      <td>21674</td>
+      <td>0.883351</td>
+      <td>0.962219</td>
+      <td>0.903074</td>
+      <td>0.908014</td>
+      <td>0.913642</td>
+    </tr>
+  </tbody>
+</table>
+</div>           route  object_view_count  proposal_count  \
+0  reference_box              23100           23100
+1  automatic_box              23100           23180
+
+   matched_count_at_box_iou_0_50  mean_iou  median_iou  recall_at_0_75  \
+0                          23100  0.947776    0.964848        0.983636
+1                          21674  0.883351    0.962219        0.903074
+
+   mean_dice  mean_boundary_f1
+0   0.970378          0.981368
+1   0.908014          0.913642
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>method</th>
+      <th>candidate_view_count</th>
+      <th>scored_candidate_view_count</th>
+      <th>unscoreable_candidate_view_count</th>
+      <th>invalid_mask_candidate_view_count</th>
+      <th>insufficient_peer_candidate_view_count</th>
+      <th>missing_proposal_candidate_view_count</th>
+      <th>other_unscoreable_candidate_view_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>23100</td>
+      <td>23100</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>23100</td>
+      <td>23100</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>reference_box</td>
+      <td>B0</td>
+      <td>23100</td>
+      <td>23100</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>reference_box</td>
+      <td>P1</td>
+      <td>23100</td>
+      <td>23100</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>automatic_box</td>
+      <td>B0</td>
+      <td>24606</td>
+      <td>22915</td>
+      <td>1691</td>
+      <td>1</td>
+      <td>264</td>
+      <td>1426</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>24606</td>
+      <td>22915</td>
+      <td>1691</td>
+      <td>1</td>
+      <td>264</td>
+      <td>1426</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>           route method  candidate_view_count  scored_candidate_view_count  \
+0  supplied_mask     B0                 23100                        23100
+1  supplied_mask     P1                 23100                        23100
+2  reference_box     B0                 23100                        23100
+3  reference_box     P1                 23100                        23100
+4  automatic_box     B0                 24606                        22915
+5  automatic_box     P1                 24606                        22915
+
+   unscoreable_candidate_view_count  invalid_mask_candidate_view_count  \
+0                                 0                                  0
+1                                 0                                  0
+2                                 0                                  0
+3                                 0                                  0
+4                              1691                                  1
+5                              1691                                  1
+
+   insufficient_peer_candidate_view_count  \
+0                                       0
+1                                       0
+2                                       0
+3                                       0
+4                                     264
+5                                     264
+
+   missing_proposal_candidate_view_count  \
+0                                      0
+1                                      0
+2                                      0
+3                                      0
+4                                   1426
+5                                   1426
+
+   other_unscoreable_candidate_view_count
+0                                       0
+1                                       0
+2                                       0
+3                                       0
+4                                       0
+5                                       0
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gate</th>
+      <th>passed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>frozen predictions evaluated</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>all three routes reported</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>no DS2 tuning or accuracy cutoff applied</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                       gate  passed
+0              frozen predictions evaluated    True
+1                 all three routes reported    True
+2  no DS2 tuning or accuracy cutoff applied    True
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>comparison</th>
+      <th>baseline</th>
+      <th>candidate</th>
+      <th>metric</th>
+      <th>mean_difference</th>
+      <th>ci_lower</th>
+      <th>ci_upper</th>
+      <th>paired_scene_count</th>
+      <th>cluster_count</th>
+      <th>repetitions</th>
+      <th>seed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>p1_vs_b0</td>
+      <td>supplied_mask|B0|20|mean_rank</td>
+      <td>supplied_mask|P1|20|mean_rank</td>
+      <td>average_precision</td>
+      <td>0.050528</td>
+      <td>0.024944</td>
+      <td>0.077721</td>
+      <td>300</td>
+      <td>82</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>reference_vs_supplied</td>
+      <td>supplied_mask|P1|20|mean_rank</td>
+      <td>reference_box|P1|20|mean_rank</td>
+      <td>average_precision</td>
+      <td>-0.016778</td>
+      <td>-0.037255</td>
+      <td>0.003290</td>
+      <td>300</td>
+      <td>82</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>automatic_vs_reference</td>
+      <td>reference_box|P1|20|mean_rank</td>
+      <td>automatic_box|P1|20|mean_rank</td>
+      <td>average_precision</td>
+      <td>-0.016665</td>
+      <td>-0.043077</td>
+      <td>0.007423</td>
+      <td>300</td>
+      <td>82</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>three_vs_twenty_views</td>
+      <td>reference_box|P1|20|mean_rank</td>
+      <td>reference_box|P1|3|mean_rank</td>
+      <td>average_precision</td>
+      <td>-0.041417</td>
+      <td>-0.076306</td>
+      <td>-0.007668</td>
+      <td>300</td>
+      <td>82</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>visibility_vs_mean</td>
+      <td>reference_box|P1|3|mean_rank</td>
+      <td>reference_box|P1|3|visibility_weighted_rank</td>
+      <td>average_precision</td>
+      <td>0.006917</td>
+      <td>-0.007365</td>
+      <td>0.021678</td>
+      <td>300</td>
+      <td>82</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+  </tbody>
+</table>
+</div>               comparison                       baseline  \
+0                p1_vs_b0  supplied_mask|B0|20|mean_rank
+1   reference_vs_supplied  supplied_mask|P1|20|mean_rank
+2  automatic_vs_reference  reference_box|P1|20|mean_rank
+3   three_vs_twenty_views  reference_box|P1|20|mean_rank
+4      visibility_vs_mean   reference_box|P1|3|mean_rank
+
+                                     candidate             metric  \
+0                supplied_mask|P1|20|mean_rank  average_precision
+1                reference_box|P1|20|mean_rank  average_precision
+2                automatic_box|P1|20|mean_rank  average_precision
+3                 reference_box|P1|3|mean_rank  average_precision
+4  reference_box|P1|3|visibility_weighted_rank  average_precision
+
+   mean_difference  ci_lower  ci_upper  paired_scene_count  cluster_count  \
+0         0.050528  0.024944  0.077721                 300             82
+1        -0.016778 -0.037255  0.003290                 300             82
+2        -0.016665 -0.043077  0.007423                 300             82
+3        -0.041417 -0.076306 -0.007668                 300             82
+4         0.006917 -0.007365  0.021678                 300             82
+
+   repetitions   seed
+0        10000  32040
+1        10000  32040
+2        10000  32040
+3        10000  32040
+4        10000  32040
+
+[cell 9]
+<IPython.core.display.Image object>
+
+[cell 9]
+<IPython.core.display.Image object>
+
+[cell 9]
+<IPython.core.display.Image object>
+
+[cell 9]
+<IPython.core.display.Image object>
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>method</th>
+      <th>view_count</th>
+      <th>fusion_method</th>
+      <th>scene_count</th>
+      <th>top1</th>
+      <th>reciprocal_rank</th>
+      <th>average_precision</th>
+      <th>recall_at_2</th>
+      <th>exact_set</th>
+      <th>rank_disagreement</th>
+      <th>confidence_margin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>12</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>1</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.463333</td>
+      <td>0.671452</td>
+      <td>0.651992</td>
+      <td>0.636667</td>
+      <td>0.350000</td>
+      <td>0.000000</td>
+      <td>0.351897</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>1</td>
+      <td>visibility_weighted_rank</td>
+      <td>300</td>
+      <td>0.463333</td>
+      <td>0.671452</td>
+      <td>0.651992</td>
+      <td>0.636667</td>
+      <td>0.350000</td>
+      <td>0.000000</td>
+      <td>0.351897</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>2</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.516667</td>
+      <td>0.697904</td>
+      <td>0.680342</td>
+      <td>0.646667</td>
+      <td>0.413333</td>
+      <td>0.160263</td>
+      <td>0.237909</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>2</td>
+      <td>visibility_weighted_rank</td>
+      <td>300</td>
+      <td>0.513333</td>
+      <td>0.693737</td>
+      <td>0.676731</td>
+      <td>0.640000</td>
+      <td>0.406667</td>
+      <td>0.160263</td>
+      <td>0.248055</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>3</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.463333</td>
+      <td>0.667499</td>
+      <td>0.653077</td>
+      <td>0.653333</td>
+      <td>0.383333</td>
+      <td>0.229898</td>
+      <td>0.207320</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>3</td>
+      <td>visibility_weighted_rank</td>
+      <td>300</td>
+      <td>0.466667</td>
+      <td>0.670777</td>
+      <td>0.659493</td>
+      <td>0.666667</td>
+      <td>0.396667</td>
+      <td>0.229898</td>
+      <td>0.206818</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>5</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.516667</td>
+      <td>0.705556</td>
+      <td>0.685164</td>
+      <td>0.673333</td>
+      <td>0.406667</td>
+      <td>0.266181</td>
+      <td>0.180805</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>5</td>
+      <td>visibility_weighted_rank</td>
+      <td>300</td>
+      <td>0.506667</td>
+      <td>0.700612</td>
+      <td>0.684995</td>
+      <td>0.671667</td>
+      <td>0.413333</td>
+      <td>0.266181</td>
+      <td>0.181586</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>10</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.540000</td>
+      <td>0.723033</td>
+      <td>0.702148</td>
+      <td>0.693333</td>
+      <td>0.426667</td>
+      <td>0.270822</td>
+      <td>0.169661</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>10</td>
+      <td>visibility_weighted_rank</td>
+      <td>300</td>
+      <td>0.553333</td>
+      <td>0.727366</td>
+      <td>0.708981</td>
+      <td>0.690000</td>
+      <td>0.450000</td>
+      <td>0.270822</td>
+      <td>0.173184</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>20</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.526667</td>
+      <td>0.713550</td>
+      <td>0.695418</td>
+      <td>0.678333</td>
+      <td>0.413333</td>
+      <td>0.257014</td>
+      <td>0.165817</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>20</td>
+      <td>visibility_weighted_rank</td>
+      <td>300</td>
+      <td>0.526667</td>
+      <td>0.717439</td>
+      <td>0.703057</td>
+      <td>0.705000</td>
+      <td>0.433333</td>
+      <td>0.257014</td>
+      <td>0.166042</td>
+    </tr>
+  </tbody>
+</table>
+</div>            route method  view_count             fusion_method  scene_count  \
+12  automatic_box     P1           1                 mean_rank          300
+13  automatic_box     P1           1  visibility_weighted_rank          300
+16  automatic_box     P1           2                 mean_rank          300
+17  automatic_box     P1           2  visibility_weighted_rank          300
+20  automatic_box     P1           3                 mean_rank          300
+21  automatic_box     P1           3  visibility_weighted_rank          300
+22  automatic_box     P1           5                 mean_rank          300
+23  automatic_box     P1           5  visibility_weighted_rank          300
+14  automatic_box     P1          10                 mean_rank          300
+15  automatic_box     P1          10  visibility_weighted_rank          300
+18  automatic_box     P1          20                 mean_rank          300
+19  automatic_box     P1          20  visibility_weighted_rank          300
+
+        top1  reciprocal_rank  average_precision  recall_at_2  exact_set  \
+12  0.463333         0.671452           0.651992     0.636667   0.350000
+13  0.463333         0.671452           0.651992     0.636667   0.350000
+16  0.516667         0.697904           0.680342     0.646667   0.413333
+17  0.513333         0.693737           0.676731     0.640000   0.406667
+20  0.463333         0.667499           0.653077     0.653333   0.383333
+21  0.466667         0.670777           0.659493     0.666667   0.396667
+22  0.516667         0.705556           0.685164     0.673333   0.406667
+23  0.506667         0.700612           0.684995     0.671667   0.413333
+14  0.540000         0.723033           0.702148     0.693333   0.426667
+15  0.553333         0.727366           0.708981     0.690000   0.450000
+18  0.526667         0.713550           0.695418     0.678333   0.413333
+19  0.526667         0.717439           0.703057     0.705000   0.433333
+
+    rank_disagreement  confidence_margin
+12           0.000000           0.351897
+13           0.000000           0.351897
+16           0.160263           0.237909
+17           0.160263           0.248055
+20           0.229898           0.207320
+21           0.229898           0.206818
+22           0.266181           0.180805
+23           0.266181           0.181586
+14           0.270822           0.169661
+15           0.270822           0.173184
+18           0.257014           0.165817
+19           0.257014           0.166042
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>method</th>
+      <th>view_count</th>
+      <th>fusion_method</th>
+      <th>scene_count</th>
+      <th>top1</th>
+      <th>reciprocal_rank</th>
+      <th>average_precision</th>
+      <th>recall_at_2</th>
+      <th>exact_set</th>
+      <th>rank_disagreement</th>
+      <th>confidence_margin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>automatic_box</td>
+      <td>B0</td>
+      <td>20</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.476667</td>
+      <td>0.679383</td>
+      <td>0.658029</td>
+      <td>0.635000</td>
+      <td>0.356667</td>
+      <td>0.255102</td>
+      <td>0.161930</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>20</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.526667</td>
+      <td>0.713550</td>
+      <td>0.695418</td>
+      <td>0.678333</td>
+      <td>0.413333</td>
+      <td>0.257014</td>
+      <td>0.165817</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>reference_box</td>
+      <td>B0</td>
+      <td>20</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.503333</td>
+      <td>0.702278</td>
+      <td>0.680667</td>
+      <td>0.671667</td>
+      <td>0.383333</td>
+      <td>0.335412</td>
+      <td>0.174736</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>reference_box</td>
+      <td>P1</td>
+      <td>20</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.560000</td>
+      <td>0.734111</td>
+      <td>0.712083</td>
+      <td>0.686667</td>
+      <td>0.440000</td>
+      <td>0.336694</td>
+      <td>0.185389</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>20</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.500000</td>
+      <td>0.699333</td>
+      <td>0.678333</td>
+      <td>0.676667</td>
+      <td>0.393333</td>
+      <td>0.332072</td>
+      <td>0.176819</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>20</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.580000</td>
+      <td>0.748833</td>
+      <td>0.728861</td>
+      <td>0.715000</td>
+      <td>0.466667</td>
+      <td>0.335356</td>
+      <td>0.192736</td>
+    </tr>
+  </tbody>
+</table>
+</div>            route method  view_count fusion_method  scene_count      top1  \
+6   automatic_box     B0          20     mean_rank          300  0.476667
+18  automatic_box     P1          20     mean_rank          300  0.526667
+30  reference_box     B0          20     mean_rank          300  0.503333
+42  reference_box     P1          20     mean_rank          300  0.560000
+54  supplied_mask     B0          20     mean_rank          300  0.500000
+66  supplied_mask     P1          20     mean_rank          300  0.580000
+
+    reciprocal_rank  average_precision  recall_at_2  exact_set  \
+6          0.679383           0.658029     0.635000   0.356667
+18         0.713550           0.695418     0.678333   0.413333
+30         0.702278           0.680667     0.671667   0.383333
+42         0.734111           0.712083     0.686667   0.440000
+54         0.699333           0.678333     0.676667   0.393333
+66         0.748833           0.728861     0.715000   0.466667
+
+    rank_disagreement  confidence_margin
+6            0.255102           0.161930
+18           0.257014           0.165817
+30           0.335412           0.174736
+42           0.336694           0.185389
+54           0.332072           0.176819
+66           0.335356           0.192736
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>method</th>
+      <th>view_count</th>
+      <th>fusion_method</th>
+      <th>scene_count</th>
+      <th>top1</th>
+      <th>reciprocal_rank</th>
+      <th>average_precision</th>
+      <th>recall_at_2</th>
+      <th>exact_set</th>
+      <th>rank_disagreement</th>
+      <th>confidence_margin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>3</td>
+      <td>mean_rank</td>
+      <td>300</td>
+      <td>0.463333</td>
+      <td>0.667499</td>
+      <td>0.653077</td>
+      <td>0.653333</td>
+      <td>0.383333</td>
+      <td>0.229898</td>
+      <td>0.207320</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>3</td>
+      <td>visibility_weighted_rank</td>
+      <td>300</td>
+      <td>0.466667</td>
+      <td>0.670777</td>
+      <td>0.659493</td>
+      <td>0.666667</td>
+      <td>0.396667</td>
+      <td>0.229898</td>
+      <td>0.206818</td>
+    </tr>
+  </tbody>
+</table>
+</div>           route method  view_count             fusion_method  scene_count  \
+0  automatic_box     P1           3                 mean_rank          300
+1  automatic_box     P1           3  visibility_weighted_rank          300
+
+       top1  reciprocal_rank  average_precision  recall_at_2  exact_set  \
+0  0.463333         0.667499           0.653077     0.653333   0.383333
+1  0.466667         0.670777           0.659493     0.666667   0.396667
+
+   rank_disagreement  confidence_margin
+0           0.229898           0.207320
+1           0.229898           0.206818
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+Fusion uses only scored ranks and applies scored-view support once. Detected support remains a separate coverage measure.
+
+[cell 13]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dimension</th>
+      <th>value</th>
+      <th>fusion_method</th>
+      <th>scene_count</th>
+      <th>average_precision</th>
+      <th>top1</th>
+      <th>exact_set</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>128</th>
+      <td>anomaly_count</td>
+      <td>1</td>
+      <td>mean_rank</td>
+      <td>225</td>
+      <td>0.632326</td>
+      <td>0.413333</td>
+      <td>0.413333</td>
+    </tr>
+    <tr>
+      <th>129</th>
+      <td>anomaly_count</td>
+      <td>1</td>
+      <td>visibility_weighted_rank</td>
+      <td>225</td>
+      <td>0.640771</td>
+      <td>0.422222</td>
+      <td>0.422222</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>anomaly_count</td>
+      <td>2</td>
+      <td>mean_rank</td>
+      <td>75</td>
+      <td>0.715327</td>
+      <td>0.613333</td>
+      <td>0.293333</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>anomaly_count</td>
+      <td>2</td>
+      <td>visibility_weighted_rank</td>
+      <td>75</td>
+      <td>0.715661</td>
+      <td>0.600000</td>
+      <td>0.320000</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>anomaly_families</td>
+      <td>bump+frac</td>
+      <td>visibility_weighted_rank</td>
+      <td>1</td>
+      <td>0.325000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>anomaly_families</td>
+      <td>bump+frac</td>
+      <td>mean_rank</td>
+      <td>1</td>
+      <td>0.366667</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>anomaly_families</td>
+      <td>tran</td>
+      <td>mean_rank</td>
+      <td>3</td>
+      <td>0.380952</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>anomaly_families</td>
+      <td>tran</td>
+      <td>visibility_weighted_rank</td>
+      <td>3</td>
+      <td>0.380952</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>103</th>
+      <td>anomaly_families</td>
+      <td>defr+miss</td>
+      <td>visibility_weighted_rank</td>
+      <td>1</td>
+      <td>0.500000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>anomaly_families</td>
+      <td>frac+rota</td>
+      <td>visibility_weighted_rank</td>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>78</th>
+      <td>anomaly_families</td>
+      <td>bump</td>
+      <td>mean_rank</td>
+      <td>28</td>
+      <td>0.578713</td>
+      <td>0.357143</td>
+      <td>0.321429</td>
+    </tr>
+    <tr>
+      <th>79</th>
+      <td>anomaly_families</td>
+      <td>bump</td>
+      <td>visibility_weighted_rank</td>
+      <td>28</td>
+      <td>0.578713</td>
+      <td>0.357143</td>
+      <td>0.321429</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>category</td>
+      <td>bread</td>
+      <td>visibility_weighted_rank</td>
+      <td>4</td>
+      <td>0.312500</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>category</td>
+      <td>light_bulb</td>
+      <td>mean_rank</td>
+      <td>3</td>
+      <td>0.353175</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>category</td>
+      <td>monkey</td>
+      <td>mean_rank</td>
+      <td>3</td>
+      <td>0.361111</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>category</td>
+      <td>monkey</td>
+      <td>visibility_weighted_rank</td>
+      <td>3</td>
+      <td>0.361111</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>category</td>
+      <td>light_bulb</td>
+      <td>visibility_weighted_rank</td>
+      <td>3</td>
+      <td>0.364286</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>category</td>
+      <td>horse</td>
+      <td>visibility_weighted_rank</td>
+      <td>4</td>
+      <td>0.364394</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>category</td>
+      <td>car</td>
+      <td>visibility_weighted_rank</td>
+      <td>4</td>
+      <td>0.372917</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>category</td>
+      <td>horse</td>
+      <td>mean_rank</td>
+      <td>4</td>
+      <td>0.376894</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>126</th>
+      <td>object_count</td>
+      <td>5</td>
+      <td>mean_rank</td>
+      <td>75</td>
+      <td>0.531767</td>
+      <td>0.373333</td>
+      <td>0.213333</td>
+    </tr>
+    <tr>
+      <th>127</th>
+      <td>object_count</td>
+      <td>5</td>
+      <td>visibility_weighted_rank</td>
+      <td>75</td>
+      <td>0.544878</td>
+      <td>0.386667</td>
+      <td>0.253333</td>
+    </tr>
+    <tr>
+      <th>125</th>
+      <td>object_count</td>
+      <td>4</td>
+      <td>visibility_weighted_rank</td>
+      <td>105</td>
+      <td>0.660215</td>
+      <td>0.466667</td>
+      <td>0.361905</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>object_count</td>
+      <td>4</td>
+      <td>mean_rank</td>
+      <td>105</td>
+      <td>0.673469</td>
+      <td>0.495238</td>
+      <td>0.380952</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>object_count</td>
+      <td>3</td>
+      <td>mean_rank</td>
+      <td>120</td>
+      <td>0.711052</td>
+      <td>0.491667</td>
+      <td>0.491667</td>
+    </tr>
+    <tr>
+      <th>123</th>
+      <td>object_count</td>
+      <td>3</td>
+      <td>visibility_weighted_rank</td>
+      <td>120</td>
+      <td>0.730496</td>
+      <td>0.516667</td>
+      <td>0.516667</td>
+    </tr>
+  </tbody>
+</table>
+</div>            dimension       value             fusion_method  scene_count  \
+128     anomaly_count           1                 mean_rank          225
+129     anomaly_count           1  visibility_weighted_rank          225
+130     anomaly_count           2                 mean_rank           75
+131     anomaly_count           2  visibility_weighted_rank           75
+85   anomaly_families   bump+frac  visibility_weighted_rank            1
+84   anomaly_families   bump+frac                 mean_rank            1
+120  anomaly_families        tran                 mean_rank            3
+121  anomaly_families        tran  visibility_weighted_rank            3
+103  anomaly_families   defr+miss  visibility_weighted_rank            1
+113  anomaly_families   frac+rota  visibility_weighted_rank            2
+78   anomaly_families        bump                 mean_rank           28
+79   anomaly_families        bump  visibility_weighted_rank           28
+11           category       bread  visibility_weighted_rank            4
+60           category  light_bulb                 mean_rank            3
+64           category      monkey                 mean_rank            3
+65           category      monkey  visibility_weighted_rank            3
+61           category  light_bulb  visibility_weighted_rank            3
+57           category       horse  visibility_weighted_rank            4
+21           category         car  visibility_weighted_rank            4
+56           category       horse                 mean_rank            4
+126      object_count           5                 mean_rank           75
+127      object_count           5  visibility_weighted_rank           75
+125      object_count           4  visibility_weighted_rank          105
+124      object_count           4                 mean_rank          105
+122      object_count           3                 mean_rank          120
+123      object_count           3  visibility_weighted_rank          120
+
+     average_precision      top1  exact_set
+128           0.632326  0.413333   0.413333
+129           0.640771  0.422222   0.422222
+130           0.715327  0.613333   0.293333
+131           0.715661  0.600000   0.320000
+85            0.325000  0.000000   0.000000
+84            0.366667  0.000000   0.000000
+120           0.380952  0.000000   0.000000
+121           0.380952  0.000000   0.000000
+103           0.500000  0.000000   0.000000
+113           0.500000  0.000000   0.000000
+78            0.578713  0.357143   0.321429
+79            0.578713  0.357143   0.321429
+11            0.312500  0.000000   0.000000
+60            0.353175  0.000000   0.000000
+64            0.361111  0.000000   0.000000
+65            0.361111  0.000000   0.000000
+61            0.364286  0.000000   0.000000
+57            0.364394  0.000000   0.000000
+21            0.372917  0.000000   0.000000
+56            0.376894  0.000000   0.000000
+126           0.531767  0.373333   0.213333
+127           0.544878  0.386667   0.253333
+125           0.660215  0.466667   0.361905
+124           0.673469  0.495238   0.380952
+122           0.711052  0.491667   0.491667
+123           0.730496  0.516667   0.516667
+
+[cell 13]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>anomaly_count</th>
+      <th>fusion_method</th>
+      <th>scene_count</th>
+      <th>top1</th>
+      <th>average_precision</th>
+      <th>recall_at_2</th>
+      <th>exact_set</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>mean_rank</td>
+      <td>225</td>
+      <td>0.413333</td>
+      <td>0.632326</td>
+      <td>0.684444</td>
+      <td>0.413333</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>visibility_weighted_rank</td>
+      <td>225</td>
+      <td>0.422222</td>
+      <td>0.640771</td>
+      <td>0.702222</td>
+      <td>0.422222</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>mean_rank</td>
+      <td>75</td>
+      <td>0.613333</td>
+      <td>0.715327</td>
+      <td>0.560000</td>
+      <td>0.293333</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>visibility_weighted_rank</td>
+      <td>75</td>
+      <td>0.600000</td>
+      <td>0.715661</td>
+      <td>0.560000</td>
+      <td>0.320000</td>
+    </tr>
+  </tbody>
+</table>
+</div>   anomaly_count             fusion_method  scene_count      top1  \
+0              1                 mean_rank          225  0.413333
+1              1  visibility_weighted_rank          225  0.422222
+2              2                 mean_rank           75  0.613333
+3              2  visibility_weighted_rank           75  0.600000
+
+   average_precision  recall_at_2  exact_set
+0           0.632326     0.684444   0.413333
+1           0.640771     0.702222   0.422222
+2           0.715327     0.560000   0.293333
+3           0.715661     0.560000   0.320000
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+The private panel labels each example by route and score. Box and mask outlines show the evidence used for each prediction, and missed references are marked explicitly.
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 15]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>accuracy_acceptance_gate_applied</th>
+      <th>application_mask_route</th>
+      <th>claim_boundary</th>
+      <th>ds2_used_for_tuning</th>
+      <th>encoder</th>
+      <th>fusion_method</th>
+      <th>primary_view_count</th>
+      <th>primary_view_ids</th>
+      <th>reference_diagnostic_route</th>
+      <th>schema_version</th>
+      <th>scientific_anchor_route</th>
+      <th>scorer</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>automatic_box</td>
+      <td>Development confirmation only. Calibration and...</td>
+      <td>False</td>
+      <td>dinov2_small</td>
+      <td>mean_rank</td>
+      <td>3</td>
+      <td>[V00, V06, V13]</td>
+      <td>reference_box</td>
+      <td>1</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>confirmation_measured</td>
+    </tr>
+  </tbody>
+</table>
+</div>   accuracy_acceptance_gate_applied application_mask_route  \
+0                             False          automatic_box
+
+                                      claim_boundary  ds2_used_for_tuning  \
+0  Development confirmation only. Calibration and...                False
+
+        encoder fusion_method  primary_view_count primary_view_ids  \
+0  dinov2_small     mean_rank                   3  [V00, V06, V13]
+
+  reference_diagnostic_route  schema_version scientific_anchor_route scorer  \
+0              reference_box               1           supplied_mask     P1
+
+                  status
+0  confirmation_measured
+
+[cell 15]
+Encoder: dinov2_small
+Scorer: P1
+Application mask route: automatic_box
+Primary views: ['V00', 'V06', 'V13']
+Fusion: mean_rank
+Decision status: confirmation_measured
+
+[cell 17]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 40.3 MB/s eta 0:00:00
+
+[cell 17]
+{'mode': 'disabled',
+ 'run_status': 'completed',
+ 'safe_manifest_sha256': 'cb67f1869cba05e56f5fd9cd0d4f89286916e7397432a48e9938dd9241fe599c',
+ 'schema_version': 1,
+ 'stage': 'ds2_confirmation_and_multiview_clearml_finalisation',
+ 'status': 'disabled',
+ 'task_id': None,
+ 'tracking_attempt_count': 0,
+ 'tracking_retry_count': 0,
+ 'tracking_transient_failure_count': 0}
+
+[cell 19]
+{"archives": [{"path": "ds2-confirmation-and-multiview-repository-evidence.zip", "sha256": "3b0a38cbdcd4c0d63a00a48ad17d89f0e7fd86a75d2d1311e11c6e0b725b2260", "size_bytes": 328996, "source_file_count": 22}, {"path": "ds2-confirmation-and-multiview-review-evidence.zip", "sha256": "e7e99d5447fb915073fa4ce953e9ebe2b32f3e7b63a5361bc7185de11ccc7ea5", "size_bytes": 705887, "source_file_count": 2}], "downstream_file_count": 0, "review_file_count": 2, "safe_file_count": 22, "safe_manifest_sha256": "cb67f1869cba05e56f5fd9cd0d4f89286916e7397432a48e9938dd9241fe599c", "schema_version": 1, "stage": "ds2-confirmation-and-multiview", "status": "completed"}
+
+[cell 19]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>path</th>
+      <th>sha256</th>
+      <th>size_bytes</th>
+      <th>source_file_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ds2-confirmation-and-multiview-repository-evid...</td>
+      <td>3b0a38cbdcd4c0d63a00a48ad17d89f0e7fd86a75d2d13...</td>
+      <td>328996</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ds2-confirmation-and-multiview-review-evidence...</td>
+      <td>e7e99d5447fb915073fa4ce953e9ebe2b32f3e7b63a536...</td>
+      <td>705887</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                                path  \
+0  ds2-confirmation-and-multiview-repository-evid...
+1  ds2-confirmation-and-multiview-review-evidence...
+
+                                              sha256  size_bytes  \
+0  3b0a38cbdcd4c0d63a00a48ad17d89f0e7fd86a75d2d13...      328996
+1  e7e99d5447fb915073fa4ce953e9ebe2b32f3e7b63a536...      705887
+
+   source_file_count
+0                 22
+1                  2
+
+[cell 19]
+Verified downloads: /kaggle/working/notebook08c_bundles

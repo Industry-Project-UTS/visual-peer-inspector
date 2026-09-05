@@ -1,0 +1,12 @@
+{
+  "mode": "online",
+  "run_status": "completed",
+  "safe_manifest_sha256": "94344ee44ace22e16bdb6b1bd752761f09596e4a5d411bfd0ee10ace37f6a34f",
+  "schema_version": 1,
+  "stage": "ds2_reference_box_sam21_clearml_finalisation",
+  "status": "completed",
+  "task_id": "961d126a698245409ad90f1d1796e165",
+  "tracking_attempt_count": 1,
+  "tracking_retry_count": 0,
+  "tracking_transient_failure_count": 0
+}

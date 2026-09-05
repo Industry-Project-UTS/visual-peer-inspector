@@ -1,0 +1,12 @@
+{
+  "mode": "online",
+  "run_status": "completed",
+  "safe_manifest_sha256": "20eea074a5980cb98e50b3cc61ded57960610c5bfebd332029cedc6dfff04612",
+  "schema_version": 1,
+  "stage": "ds2_frozen_representation_and_peer_scores_clearml_finalisation",
+  "status": "completed",
+  "task_id": "30aaa95dcdb2413783e72abaa78c148b",
+  "tracking_attempt_count": 1,
+  "tracking_retry_count": 0,
+  "tracking_transient_failure_count": 0
+}

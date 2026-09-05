@@ -1,0 +1,3945 @@
+Stage: 07.1 DS1 representation and peer scores
+Status: completed
+Clean notebook: notebooks/representation-and-scoring/toysad8k-ds1-peer-scores/07.1-toysad8k-ds1-representation-and-peer-scores.ipynb
+Clean notebook SHA-256: 8a7d3ff9e1cbd057abc4ceb1e03c873105e1e5d3ae7b7a2d1ea0bd4ddcae76c0
+Downloaded saved-output SHA-256: cbf9755b08123f58b034a3e830a1169ddf3ff25a6ec8daef37add7581184ef84
+Executed code cells: 19
+Retained output blocks: 60
+Retained safe visuals: 8
+Removed private visuals: 4
+
+Sanitised execution transcript
+==============================
+
+[cell 3]
+Environment: kaggle
+Notebook: 07.1-toysad8k-ds1-representation-and-peer-scores.ipynb
+Code snapshot folder: vpi-code-snapshot
+
+[cell 5]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 20.3 MB/s eta 0:00:00
+
+[cell 5]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>package</th>
+      <th>version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>python</td>
+      <td>3.12.13</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>numpy</td>
+      <td>2.0.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>torch</td>
+      <td>2.10.0+cu128</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>transformers</td>
+      <td>5.0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>matplotlib</td>
+      <td>3.10.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>        package       version
+0        python       3.12.13
+1         numpy         2.0.2
+2         torch  2.10.0+cu128
+3  transformers         5.0.0
+4    matplotlib        3.10.0
+
+[cell 7]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>setting</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>run mode</td>
+      <td>model_evidence</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>device</td>
+      <td>cuda</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>encoder batch size</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>encoders</td>
+      <td>dinov2_small, dinov2_small_registers, dinov3_s...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>DINOv3 token available</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>                  setting                                              value
+0                run mode                                     model_evidence
+1                  device                                               cuda
+2      encoder batch size                                                 32
+3                encoders  dinov2_small, dinov2_small_registers, dinov3_s...
+4  DINOv3 token available                                              False
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>scene_count</th>
+      <th>image_count</th>
+      <th>route_counts</th>
+      <th>usable_route_counts</th>
+      <th>rejected_mask_counts</th>
+      <th>insufficient_peer_images</th>
+      <th>membership_sha256</th>
+      <th>rgb_manifest_sha256</th>
+      <th>route_manifest_sha256</th>
+      <th>join_sha256</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>2000</td>
+      <td>{'automatic_box': 9249, 'reference_box': 7700,...</td>
+      <td>{'automatic_box': 9193, 'reference_box': 7700,...</td>
+      <td>{'automatic_box': 56}</td>
+      <td>{'automatic_box': 83}</td>
+      <td>308e2e104448612dc60b5392a5258d97f6d93f52ca553a...</td>
+      <td>37e2143ae097077f9fa35ffc8a1a281d2e1dfb8a9802dc...</td>
+      <td>97b0ee754ff92f4482aabed0e2cda39a57561bfd1fe880...</td>
+      <td>9cf74671887ed60855a0e0304da8745dda6e29bd77488c...</td>
+    </tr>
+  </tbody>
+</table>
+</div>   scene_count  image_count  \
+0          100         2000
+
+                                        route_counts  \
+0  {'automatic_box': 9249, 'reference_box': 7700,...
+
+                                 usable_route_counts   rejected_mask_counts  \
+0  {'automatic_box': 9193, 'reference_box': 7700,...  {'automatic_box': 56}
+
+  insufficient_peer_images                                  membership_sha256  \
+0    {'automatic_box': 83}  308e2e104448612dc60b5392a5258d97f6d93f52ca553a...
+
+                                 rgb_manifest_sha256  \
+0  37e2143ae097077f9fa35ffc8a1a281d2e1dfb8a9802dc...
+
+                               route_manifest_sha256  \
+0  97b0ee754ff92f4482aabed0e2cda39a57561bfd1fe880...
+
+                                         join_sha256
+0  9cf74671887ed60855a0e0304da8745dda6e29bd77488c...
+
+[cell 9]
+RGB package folder: vpi-toysad-ds1-screen100-model-input
+Mask-route package folder: model_input
+Evaluator package folder: vpi-toysad-ds1-mask-evaluator
+Output folder: /kaggle/working/toysad8k_ds1_representation_peer_scores
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>images</th>
+      <th>candidates</th>
+      <th>minimum candidates</th>
+      <th>maximum candidates</th>
+      <th>rankable images</th>
+      <th>insufficient-peer images</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>supplied_mask</td>
+      <td>2000</td>
+      <td>7700</td>
+      <td>3</td>
+      <td>5</td>
+      <td>2000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>reference_box</td>
+      <td>2000</td>
+      <td>7700</td>
+      <td>3</td>
+      <td>5</td>
+      <td>2000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>automatic_box</td>
+      <td>2000</td>
+      <td>9193</td>
+      <td>1</td>
+      <td>294</td>
+      <td>1917</td>
+      <td>83</td>
+    </tr>
+  </tbody>
+</table>
+</div>           route  images  candidates  minimum candidates  maximum candidates  \
+0  supplied_mask    2000        7700                   3                   5
+1  reference_box    2000        7700                   3                   5
+2  automatic_box    2000        9193                   1                 294
+
+   rankable images  insufficient-peer images
+0             2000                         0
+1             2000                         0
+2             1917                        83
+
+[cell 13]
+<Figure size 800x800 with 9 Axes>
+
+[cell 15]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>family</th>
+      <th>model_id</th>
+      <th>screen_stage</th>
+      <th>parameters_millions</th>
+      <th>supports_patches</th>
+      <th>gated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dinov2_small</td>
+      <td>DINOv2</td>
+      <td>facebook/dinov2-small</td>
+      <td>core</td>
+      <td>21</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>dinov2_small_registers</td>
+      <td>DINOv2</td>
+      <td>facebook/dinov2-with-registers-small</td>
+      <td>core</td>
+      <td>21</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>dinov3_small</td>
+      <td>DINOv3</td>
+      <td>facebook/dinov3-vits16-pretrain-lvd1689m</td>
+      <td>core</td>
+      <td>21</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>dinov3_small_plus</td>
+      <td>DINOv3</td>
+      <td>facebook/dinov3-vits16plus-pretrain-lvd1689m</td>
+      <td>core</td>
+      <td>29</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>dinov2_base</td>
+      <td>DINOv2</td>
+      <td>facebook/dinov2-base</td>
+      <td>confirmation</td>
+      <td>86</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>dinov3_base</td>
+      <td>DINOv3</td>
+      <td>facebook/dinov3-vitb16-pretrain-lvd1689m</td>
+      <td>confirmation</td>
+      <td>86</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>resnet50_control</td>
+      <td>ResNet</td>
+      <td>microsoft/resnet-50</td>
+      <td>control</td>
+      <td>26</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>                      key  family  \
+0            dinov2_small  DINOv2
+1  dinov2_small_registers  DINOv2
+2            dinov3_small  DINOv3
+3       dinov3_small_plus  DINOv3
+4             dinov2_base  DINOv2
+5             dinov3_base  DINOv3
+6        resnet50_control  ResNet
+
+                                       model_id  screen_stage  \
+0                         facebook/dinov2-small          core
+1          facebook/dinov2-with-registers-small          core
+2      facebook/dinov3-vits16-pretrain-lvd1689m          core
+3  facebook/dinov3-vits16plus-pretrain-lvd1689m          core
+4                          facebook/dinov2-base  confirmation
+5      facebook/dinov3-vitb16-pretrain-lvd1689m  confirmation
+6                           microsoft/resnet-50       control
+
+   parameters_millions  supports_patches  gated
+0                   21              True  False
+1                   21              True  False
+2                   21              True   True
+3                   29              True   True
+4                   86              True  False
+5                   86              True   True
+6                   26             False  False
+
+[cell 18]
+config.json:   0%|          | 0.00/547 [00:00<?, ?B/s]
+
+[cell 18]
+model.safetensors:   0%|          | 0.00/88.2M [00:00<?, ?B/s]
+
+[cell 18]
+Loading weights:   0%|          | 0/223 [00:00<?, ?it/s]
+
+[cell 18]
+dinov2_small: completed 1/100 scenes
+dinov2_small: completed 10/100 scenes
+dinov2_small: completed 20/100 scenes
+dinov2_small: completed 30/100 scenes
+dinov2_small: completed 40/100 scenes
+dinov2_small: completed 50/100 scenes
+dinov2_small: completed 60/100 scenes
+dinov2_small: completed 70/100 scenes
+dinov2_small: completed 80/100 scenes
+dinov2_small: completed 90/100 scenes
+dinov2_small: completed 100/100 scenes
+
+[cell 18]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+[cell 18]
+config.json: 0.00B [00:00, ?B/s]
+
+[cell 18]
+model.safetensors:   0%|          | 0.00/88.3M [00:00<?, ?B/s]
+
+[cell 18]
+Loading weights:   0%|          | 0/224 [00:00<?, ?it/s]
+
+[cell 18]
+dinov2_small_registers: completed 1/100 scenes
+dinov2_small_registers: completed 10/100 scenes
+dinov2_small_registers: completed 20/100 scenes
+dinov2_small_registers: completed 30/100 scenes
+dinov2_small_registers: completed 40/100 scenes
+dinov2_small_registers: completed 50/100 scenes
+dinov2_small_registers: completed 60/100 scenes
+dinov2_small_registers: completed 70/100 scenes
+dinov2_small_registers: completed 80/100 scenes
+dinov2_small_registers: completed 90/100 scenes
+dinov2_small_registers: completed 100/100 scenes
+
+[cell 18]
+config.json:   0%|          | 0.00/548 [00:00<?, ?B/s]
+
+[cell 18]
+model.safetensors:   0%|          | 0.00/346M [00:00<?, ?B/s]
+
+[cell 18]
+Loading weights:   0%|          | 0/223 [00:00<?, ?it/s]
+
+[cell 18]
+dinov2_base: completed 1/100 scenes
+dinov2_base: completed 10/100 scenes
+dinov2_base: completed 20/100 scenes
+dinov2_base: completed 30/100 scenes
+dinov2_base: completed 40/100 scenes
+dinov2_base: completed 50/100 scenes
+dinov2_base: completed 60/100 scenes
+dinov2_base: completed 70/100 scenes
+dinov2_base: completed 80/100 scenes
+dinov2_base: completed 90/100 scenes
+dinov2_base: completed 100/100 scenes
+
+[cell 18]
+config.json: 0.00B [00:00, ?B/s]
+
+[cell 18]
+model.safetensors:   0%|          | 0.00/102M [00:00<?, ?B/s]
+
+[cell 18]
+Loading weights:   0%|          | 0/318 [00:00<?, ?it/s]
+
+[cell 18]
+ResNetModel LOAD REPORT from: microsoft/resnet-50
+Key                 | Status     |  |
+--------------------+------------+--+-
+classifier.1.weight | UNEXPECTED |  |
+classifier.1.bias   | UNEXPECTED |  |
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+
+[cell 18]
+resnet50_control: completed 1/100 scenes
+resnet50_control: completed 10/100 scenes
+resnet50_control: completed 20/100 scenes
+resnet50_control: completed 30/100 scenes
+resnet50_control: completed 40/100 scenes
+resnet50_control: completed 50/100 scenes
+resnet50_control: completed 60/100 scenes
+resnet50_control: completed 70/100 scenes
+resnet50_control: completed 80/100 scenes
+resnet50_control: completed 90/100 scenes
+resnet50_control: completed 100/100 scenes
+
+[cell 18]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>schema_version</th>
+      <th>stage</th>
+      <th>status</th>
+      <th>run_mode</th>
+      <th>available_encoder_count</th>
+      <th>requested_encoder_count</th>
+      <th>score_package_sha256</th>
+      <th>configuration_sha256</th>
+      <th>evaluator_opened</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>ds1_representation_and_peer_scores</td>
+      <td>label_free_scores_complete</td>
+      <td>model_evidence</td>
+      <td>4</td>
+      <td>6</td>
+      <td>de8bbecc81409d64d8f629559c21db9645a9493e7106d1...</td>
+      <td>f730cab31f4ed54c23750eeed9e4749246225bb76acf09...</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>   schema_version                               stage  \
+0               1  ds1_representation_and_peer_scores
+
+                       status        run_mode  available_encoder_count  \
+0  label_free_scores_complete  model_evidence                        4
+
+   requested_encoder_count                               score_package_sha256  \
+0                        6  de8bbecc81409d64d8f629559c21db9645a9493e7106d1...
+
+                                configuration_sha256  evaluator_opened
+0  f730cab31f4ed54c23750eeed9e4749246225bb76acf09...             False
+
+[cell 20]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>encoder_key</th>
+      <th>status</th>
+      <th>model_id</th>
+      <th>resolved_revision</th>
+      <th>family</th>
+      <th>screen_stage</th>
+      <th>gated</th>
+      <th>reason</th>
+      <th>feature_dimension</th>
+      <th>patch_grid_size</th>
+      <th>repeat_minimum_cosine</th>
+      <th>repeat_maximum_absolute_delta</th>
+      <th>repeatability_passed</th>
+      <th>peak_gpu_memory_bytes</th>
+      <th>route_scope</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dinov2_small</td>
+      <td>available</td>
+      <td>facebook/dinov2-small</td>
+      <td>ed25f3a31f01632728cabb09d1542f84ab7b0056</td>
+      <td>DINOv2</td>
+      <td>core</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>384.0</td>
+      <td>16.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>True</td>
+      <td>293035520</td>
+      <td>supplied_mask+reference_box+automatic_box</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>dinov2_small_registers</td>
+      <td>available</td>
+      <td>facebook/dinov2-with-registers-small</td>
+      <td>0d9846e56b43a21fa46d7f3f5070f0506a5795a9</td>
+      <td>DINOv2</td>
+      <td>core</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>384.0</td>
+      <td>16.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>True</td>
+      <td>293083648</td>
+      <td>supplied_mask</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>dinov3_small</td>
+      <td>unavailable</td>
+      <td>facebook/dinov3-vits16-pretrain-lvd1689m</td>
+      <td>NaN</td>
+      <td>DINOv3</td>
+      <td>core</td>
+      <td>True</td>
+      <td>OSError: gated model access or load failed</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>dinov3_small_plus</td>
+      <td>unavailable</td>
+      <td>facebook/dinov3-vits16plus-pretrain-lvd1689m</td>
+      <td>NaN</td>
+      <td>DINOv3</td>
+      <td>core</td>
+      <td>True</td>
+      <td>OSError: gated model access or load failed</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>dinov2_base</td>
+      <td>available</td>
+      <td>facebook/dinov2-base</td>
+      <td>f9e44c814b77203eaa57a6bdbbd535f21ede1415</td>
+      <td>DINOv2</td>
+      <td>confirmation</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>768.0</td>
+      <td>16.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>True</td>
+      <td>821083136</td>
+      <td>supplied_mask</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>resnet50_control</td>
+      <td>available</td>
+      <td>microsoft/resnet-50</td>
+      <td>34c2154c194f829b11125337b98c8f5f9965ff19</td>
+      <td>ResNet</td>
+      <td>control</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>2048.0</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>True</td>
+      <td>307453952</td>
+      <td>supplied_mask</td>
+    </tr>
+  </tbody>
+</table>
+</div>              encoder_key       status  \
+0            dinov2_small    available
+1  dinov2_small_registers    available
+2            dinov3_small  unavailable
+3       dinov3_small_plus  unavailable
+4             dinov2_base    available
+5        resnet50_control    available
+
+                                       model_id  \
+0                         facebook/dinov2-small
+1          facebook/dinov2-with-registers-small
+2      facebook/dinov3-vits16-pretrain-lvd1689m
+3  facebook/dinov3-vits16plus-pretrain-lvd1689m
+4                          facebook/dinov2-base
+5                           microsoft/resnet-50
+
+                          resolved_revision  family  screen_stage  gated  \
+0  ed25f3a31f01632728cabb09d1542f84ab7b0056  DINOv2          core  False
+1  0d9846e56b43a21fa46d7f3f5070f0506a5795a9  DINOv2          core  False
+2                                       NaN  DINOv3          core   True
+3                                       NaN  DINOv3          core   True
+4  f9e44c814b77203eaa57a6bdbbd535f21ede1415  DINOv2  confirmation  False
+5  34c2154c194f829b11125337b98c8f5f9965ff19  ResNet       control  False
+
+                                       reason  feature_dimension  \
+0                                         NaN              384.0
+1                                         NaN              384.0
+2  OSError: gated model access or load failed                NaN
+3  OSError: gated model access or load failed                NaN
+4                                         NaN              768.0
+5                                         NaN             2048.0
+
+   patch_grid_size  repeat_minimum_cosine  repeat_maximum_absolute_delta  \
+0             16.0                    1.0                            0.0
+1             16.0                    1.0                            0.0
+2              NaN                    NaN                            NaN
+3              NaN                    NaN                            NaN
+4             16.0                    1.0                            0.0
+5              NaN                    1.0                            0.0
+
+   repeatability_passed  peak_gpu_memory_bytes  \
+0                  True              293035520
+1                  True              293083648
+2                 False                      0
+3                 False                      0
+4                  True              821083136
+5                  True              307453952
+
+                                 route_scope
+0  supplied_mask+reference_box+automatic_box
+1                              supplied_mask
+2                                        NaN
+3                                        NaN
+4                              supplied_mask
+5                              supplied_mask
+
+[cell 20]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>encoder_key</th>
+      <th>scene_count</th>
+      <th>candidate_count</th>
+      <th>runtime_seconds</th>
+      <th>milliseconds_per_candidate</th>
+      <th>resumed_scene_count</th>
+      <th>patch_fallback_candidate_count</th>
+      <th>cache_bytes</th>
+      <th>peak_gpu_memory_bytes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dinov2_small</td>
+      <td>100</td>
+      <td>24593</td>
+      <td>297.030239</td>
+      <td>12.077837</td>
+      <td>0</td>
+      <td>59</td>
+      <td>20092214</td>
+      <td>293035520</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>dinov2_small_registers</td>
+      <td>100</td>
+      <td>7700</td>
+      <td>88.625042</td>
+      <td>11.509746</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7025405</td>
+      <td>293083648</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>dinov2_base</td>
+      <td>100</td>
+      <td>7700</td>
+      <td>116.280859</td>
+      <td>15.101410</td>
+      <td>0</td>
+      <td>0</td>
+      <td>12491414</td>
+      <td>821083136</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>resnet50_control</td>
+      <td>100</td>
+      <td>7700</td>
+      <td>55.719962</td>
+      <td>7.236359</td>
+      <td>0</td>
+      <td>0</td>
+      <td>21719657</td>
+      <td>307453952</td>
+    </tr>
+  </tbody>
+</table>
+</div>              encoder_key  scene_count  candidate_count  runtime_seconds  \
+0            dinov2_small          100            24593       297.030239
+1  dinov2_small_registers          100             7700        88.625042
+2             dinov2_base          100             7700       116.280859
+3        resnet50_control          100             7700        55.719962
+
+   milliseconds_per_candidate  resumed_scene_count  \
+0                   12.077837                    0
+1                   11.509746                    0
+2                   15.101410                    0
+3                    7.236359                    0
+
+   patch_fallback_candidate_count  cache_bytes  peak_gpu_memory_bytes
+0                              59     20092214              293035520
+1                               0      7025405              293083648
+2                               0     12491414              821083136
+3                               0     21719657              307453952
+
+[cell 22]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>measure</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>cache_is_private</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>configuration_sha256</td>
+      <td>f730cab31f4ed54c23750eeed9e4749246225bb76acf09...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>global_features_retained</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>p1_heatmaps_retained</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>patch_features_retained</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>resumed_scene_shard_count</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>scene_shard_count</td>
+      <td>400</td>
+    </tr>
+  </tbody>
+</table>
+</div>                     measure  \
+0           cache_is_private
+1       configuration_sha256
+2   global_features_retained
+3       p1_heatmaps_retained
+4    patch_features_retained
+5  resumed_scene_shard_count
+6          scene_shard_count
+
+                                               value
+0                                               True
+1  f730cab31f4ed54c23750eeed9e4749246225bb76acf09...
+2                                               True
+3                                               True
+4                                              False
+5                                                  0
+6                                                400
+
+[cell 22]
+p1_heatmap_examples_dinov2_base.png
+
+[cell 22]
+<IPython.core.display.Image object>
+
+[cell 22]
+p1_heatmap_examples_dinov2_small.png
+
+[cell 22]
+<IPython.core.display.Image object>
+
+[cell 22]
+p1_heatmap_examples_dinov2_small_registers.png
+
+[cell 22]
+<IPython.core.display.Image object>
+
+[cell 24]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>schema_version</th>
+      <th>stage</th>
+      <th>status</th>
+      <th>run_mode</th>
+      <th>score_package_sha256</th>
+      <th>evaluator_opened_after_score_lock</th>
+      <th>evaluation_row_count</th>
+      <th>scene_metric_row_count</th>
+      <th>all_completion_gates_passed</th>
+      <th>decision</th>
+      <th>selected_encoder</th>
+      <th>selected_scorer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>ds1_representation_and_peer_scores</td>
+      <td>completed</td>
+      <td>model_evidence</td>
+      <td>de8bbecc81409d64d8f629559c21db9645a9493e7106d1...</td>
+      <td>True</td>
+      <td>45585</td>
+      <td>2300</td>
+      <td>True</td>
+      <td>freeze_encoder_and_scorer_on_ds1</td>
+      <td>dinov2_small</td>
+      <td>P1</td>
+    </tr>
+  </tbody>
+</table>
+</div>   schema_version                               stage     status  \
+0               1  ds1_representation_and_peer_scores  completed
+
+         run_mode                               score_package_sha256  \
+0  model_evidence  de8bbecc81409d64d8f629559c21db9645a9493e7106d1...
+
+   evaluator_opened_after_score_lock  evaluation_row_count  \
+0                               True                 45585
+
+   scene_metric_row_count  all_completion_gates_passed  \
+0                    2300                         True
+
+                           decision selected_encoder selected_scorer
+0  freeze_encoder_and_scorer_on_ds1     dinov2_small              P1
+
+[cell 26]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>encoder_key</th>
+      <th>scene_count</th>
+      <th>top1</th>
+      <th>reciprocal_rank</th>
+      <th>average_precision</th>
+      <th>recall_at_2</th>
+      <th>exact_set</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>dinov2_small_registers</td>
+      <td>100</td>
+      <td>0.4270</td>
+      <td>0.657517</td>
+      <td>0.646579</td>
+      <td>0.63600</td>
+      <td>0.3490</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>dinov2_base</td>
+      <td>100</td>
+      <td>0.4170</td>
+      <td>0.651983</td>
+      <td>0.641292</td>
+      <td>0.63250</td>
+      <td>0.3425</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>dinov2_small</td>
+      <td>100</td>
+      <td>0.4175</td>
+      <td>0.651767</td>
+      <td>0.640738</td>
+      <td>0.62725</td>
+      <td>0.3380</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>resnet50_control</td>
+      <td>100</td>
+      <td>0.3950</td>
+      <td>0.632633</td>
+      <td>0.623496</td>
+      <td>0.59325</td>
+      <td>0.3190</td>
+    </tr>
+  </tbody>
+</table>
+</div>              encoder_key  scene_count    top1  reciprocal_rank  \
+2  dinov2_small_registers          100  0.4270         0.657517
+0             dinov2_base          100  0.4170         0.651983
+1            dinov2_small          100  0.4175         0.651767
+3        resnet50_control          100  0.3950         0.632633
+
+   average_precision  recall_at_2  exact_set
+2           0.646579      0.63600     0.3490
+0           0.641292      0.63250     0.3425
+1           0.640738      0.62725     0.3380
+3           0.623496      0.59325     0.3190
+
+[cell 26]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>encoder_key</th>
+      <th>route</th>
+      <th>method</th>
+      <th>metric</th>
+      <th>mean</th>
+      <th>ci_lower</th>
+      <th>ci_upper</th>
+      <th>cluster_count</th>
+      <th>repetitions</th>
+      <th>seed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>average_precision</td>
+      <td>0.641292</td>
+      <td>0.602251</td>
+      <td>0.684040</td>
+      <td>27</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>average_precision</td>
+      <td>0.640738</td>
+      <td>0.599864</td>
+      <td>0.684915</td>
+      <td>27</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>average_precision</td>
+      <td>0.646579</td>
+      <td>0.608172</td>
+      <td>0.690237</td>
+      <td>27</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>resnet50_control</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>average_precision</td>
+      <td>0.623496</td>
+      <td>0.583703</td>
+      <td>0.669567</td>
+      <td>27</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+  </tbody>
+</table>
+</div>               encoder_key          route method             metric      mean  \
+0              dinov2_base  supplied_mask     B0  average_precision  0.641292
+9             dinov2_small  supplied_mask     B0  average_precision  0.640738
+12  dinov2_small_registers  supplied_mask     B0  average_precision  0.646579
+21        resnet50_control  supplied_mask     B0  average_precision  0.623496
+
+    ci_lower  ci_upper  cluster_count  repetitions   seed
+0   0.602251  0.684040             27        10000  32040
+9   0.599864  0.684915             27        10000  32040
+12  0.608172  0.690237             27        10000  32040
+21  0.583703  0.669567             27        10000  32040
+
+[cell 26]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>comparison_family</th>
+      <th>candidate_encoder</th>
+      <th>candidate_route</th>
+      <th>candidate_method</th>
+      <th>baseline_encoder</th>
+      <th>baseline_route</th>
+      <th>baseline_method</th>
+      <th>metric</th>
+      <th>mean_difference</th>
+      <th>ci_lower</th>
+      <th>ci_upper</th>
+      <th>paired_scene_count</th>
+      <th>cluster_count</th>
+      <th>repetitions</th>
+      <th>seed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>encoder_vs_anchor</td>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>average_precision</td>
+      <td>0.000554</td>
+      <td>-0.012096</td>
+      <td>0.014016</td>
+      <td>100</td>
+      <td>27</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>encoder_vs_anchor</td>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>average_precision</td>
+      <td>0.005842</td>
+      <td>-0.003400</td>
+      <td>0.015921</td>
+      <td>100</td>
+      <td>27</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>encoder_vs_anchor</td>
+      <td>resnet50_control</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>average_precision</td>
+      <td>-0.017242</td>
+      <td>-0.030773</td>
+      <td>-0.003605</td>
+      <td>100</td>
+      <td>27</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+  </tbody>
+</table>
+</div>   comparison_family       candidate_encoder candidate_route candidate_method  \
+0  encoder_vs_anchor             dinov2_base   supplied_mask               B0
+1  encoder_vs_anchor  dinov2_small_registers   supplied_mask               B0
+2  encoder_vs_anchor        resnet50_control   supplied_mask               B0
+
+  baseline_encoder baseline_route baseline_method             metric  \
+0     dinov2_small  supplied_mask              B0  average_precision
+1     dinov2_small  supplied_mask              B0  average_precision
+2     dinov2_small  supplied_mask              B0  average_precision
+
+   mean_difference  ci_lower  ci_upper  paired_scene_count  cluster_count  \
+0         0.000554 -0.012096  0.014016                 100             27
+1         0.005842 -0.003400  0.015921                 100             27
+2        -0.017242 -0.030773 -0.003605                 100             27
+
+   repetitions   seed
+0        10000  32040
+1        10000  32040
+2        10000  32040
+
+[cell 26]
+<IPython.core.display.Image object>
+
+[cell 26]
+<IPython.core.display.Image object>
+
+[cell 28]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>encoder_key</th>
+      <th>method</th>
+      <th>scene_count</th>
+      <th>top1</th>
+      <th>reciprocal_rank</th>
+      <th>average_precision</th>
+      <th>recall_at_2</th>
+      <th>exact_set</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>dinov2_base</td>
+      <td>P1</td>
+      <td>100</td>
+      <td>0.4670</td>
+      <td>0.685158</td>
+      <td>0.675004</td>
+      <td>0.67100</td>
+      <td>0.3895</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>dinov2_base</td>
+      <td>B0</td>
+      <td>100</td>
+      <td>0.4170</td>
+      <td>0.651983</td>
+      <td>0.641292</td>
+      <td>0.63250</td>
+      <td>0.3425</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>dinov2_base</td>
+      <td>B1</td>
+      <td>100</td>
+      <td>0.4100</td>
+      <td>0.645692</td>
+      <td>0.633742</td>
+      <td>0.62000</td>
+      <td>0.3265</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>dinov2_small</td>
+      <td>P1</td>
+      <td>100</td>
+      <td>0.4600</td>
+      <td>0.678958</td>
+      <td>0.667208</td>
+      <td>0.66350</td>
+      <td>0.3795</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>dinov2_small</td>
+      <td>B0</td>
+      <td>100</td>
+      <td>0.4175</td>
+      <td>0.651767</td>
+      <td>0.640738</td>
+      <td>0.62725</td>
+      <td>0.3380</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>dinov2_small</td>
+      <td>B1</td>
+      <td>100</td>
+      <td>0.4115</td>
+      <td>0.647642</td>
+      <td>0.637679</td>
+      <td>0.62275</td>
+      <td>0.3380</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>dinov2_small_registers</td>
+      <td>P1</td>
+      <td>100</td>
+      <td>0.4505</td>
+      <td>0.673150</td>
+      <td>0.661800</td>
+      <td>0.65750</td>
+      <td>0.3680</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>dinov2_small_registers</td>
+      <td>B0</td>
+      <td>100</td>
+      <td>0.4270</td>
+      <td>0.657517</td>
+      <td>0.646579</td>
+      <td>0.63600</td>
+      <td>0.3490</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>dinov2_small_registers</td>
+      <td>B1</td>
+      <td>100</td>
+      <td>0.4185</td>
+      <td>0.650592</td>
+      <td>0.638708</td>
+      <td>0.62050</td>
+      <td>0.3345</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>geometry</td>
+      <td>shape_B1</td>
+      <td>100</td>
+      <td>0.3060</td>
+      <td>0.578492</td>
+      <td>0.568946</td>
+      <td>0.54200</td>
+      <td>0.2310</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>geometry</td>
+      <td>layout_B1</td>
+      <td>100</td>
+      <td>0.3020</td>
+      <td>0.566258</td>
+      <td>0.556371</td>
+      <td>0.50150</td>
+      <td>0.2215</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>resnet50_control</td>
+      <td>B0</td>
+      <td>100</td>
+      <td>0.3950</td>
+      <td>0.632633</td>
+      <td>0.623496</td>
+      <td>0.59325</td>
+      <td>0.3190</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>resnet50_control</td>
+      <td>B1</td>
+      <td>100</td>
+      <td>0.3925</td>
+      <td>0.628950</td>
+      <td>0.618242</td>
+      <td>0.58125</td>
+      <td>0.3120</td>
+    </tr>
+  </tbody>
+</table>
+</div>               encoder_key     method  scene_count    top1  reciprocal_rank  \
+2              dinov2_base         P1          100  0.4670         0.685158
+0              dinov2_base         B0          100  0.4170         0.651983
+1              dinov2_base         B1          100  0.4100         0.645692
+5             dinov2_small         P1          100  0.4600         0.678958
+3             dinov2_small         B0          100  0.4175         0.651767
+4             dinov2_small         B1          100  0.4115         0.647642
+8   dinov2_small_registers         P1          100  0.4505         0.673150
+6   dinov2_small_registers         B0          100  0.4270         0.657517
+7   dinov2_small_registers         B1          100  0.4185         0.650592
+10                geometry   shape_B1          100  0.3060         0.578492
+9                 geometry  layout_B1          100  0.3020         0.566258
+11        resnet50_control         B0          100  0.3950         0.632633
+12        resnet50_control         B1          100  0.3925         0.628950
+
+    average_precision  recall_at_2  exact_set
+2            0.675004      0.67100     0.3895
+0            0.641292      0.63250     0.3425
+1            0.633742      0.62000     0.3265
+5            0.667208      0.66350     0.3795
+3            0.640738      0.62725     0.3380
+4            0.637679      0.62275     0.3380
+8            0.661800      0.65750     0.3680
+6            0.646579      0.63600     0.3490
+7            0.638708      0.62050     0.3345
+10           0.568946      0.54200     0.2310
+9            0.556371      0.50150     0.2215
+11           0.623496      0.59325     0.3190
+12           0.618242      0.58125     0.3120
+
+[cell 28]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>encoder_key</th>
+      <th>route</th>
+      <th>method</th>
+      <th>anomaly_count</th>
+      <th>scene_count</th>
+      <th>top1</th>
+      <th>reciprocal_rank</th>
+      <th>average_precision</th>
+      <th>recall_at_2</th>
+      <th>exact_set</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.397333</td>
+      <td>0.634867</td>
+      <td>0.634867</td>
+      <td>0.679333</td>
+      <td>0.397333</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.476000</td>
+      <td>0.703333</td>
+      <td>0.660567</td>
+      <td>0.492000</td>
+      <td>0.178000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.384000</td>
+      <td>0.625700</td>
+      <td>0.625700</td>
+      <td>0.669333</td>
+      <td>0.384000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.488000</td>
+      <td>0.705667</td>
+      <td>0.657867</td>
+      <td>0.472000</td>
+      <td>0.154000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.455333</td>
+      <td>0.673267</td>
+      <td>0.673267</td>
+      <td>0.724000</td>
+      <td>0.455333</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.502000</td>
+      <td>0.720833</td>
+      <td>0.680217</td>
+      <td>0.512000</td>
+      <td>0.192000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>B0</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.381141</td>
+      <td>0.612051</td>
+      <td>0.612051</td>
+      <td>0.652364</td>
+      <td>0.381141</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>B0</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.472936</td>
+      <td>0.693473</td>
+      <td>0.645288</td>
+      <td>0.477246</td>
+      <td>0.167310</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>B1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.375046</td>
+      <td>0.606409</td>
+      <td>0.606409</td>
+      <td>0.638443</td>
+      <td>0.375046</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>B1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.454947</td>
+      <td>0.683766</td>
+      <td>0.638640</td>
+      <td>0.471363</td>
+      <td>0.162058</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.402522</td>
+      <td>0.626326</td>
+      <td>0.626326</td>
+      <td>0.670806</td>
+      <td>0.402522</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.511240</td>
+      <td>0.711414</td>
+      <td>0.657035</td>
+      <td>0.469977</td>
+      <td>0.167836</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>dinov2_small</td>
+      <td>reference_box</td>
+      <td>B0</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.394667</td>
+      <td>0.632256</td>
+      <td>0.632256</td>
+      <td>0.669333</td>
+      <td>0.394667</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>dinov2_small</td>
+      <td>reference_box</td>
+      <td>B0</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.494000</td>
+      <td>0.713167</td>
+      <td>0.667983</td>
+      <td>0.493000</td>
+      <td>0.172000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>dinov2_small</td>
+      <td>reference_box</td>
+      <td>B1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.386000</td>
+      <td>0.625211</td>
+      <td>0.625211</td>
+      <td>0.654667</td>
+      <td>0.386000</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>dinov2_small</td>
+      <td>reference_box</td>
+      <td>B1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.478000</td>
+      <td>0.702667</td>
+      <td>0.657567</td>
+      <td>0.482000</td>
+      <td>0.160000</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>dinov2_small</td>
+      <td>reference_box</td>
+      <td>P1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.422667</td>
+      <td>0.650222</td>
+      <td>0.650222</td>
+      <td>0.695333</td>
+      <td>0.422667</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>dinov2_small</td>
+      <td>reference_box</td>
+      <td>P1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.516000</td>
+      <td>0.722667</td>
+      <td>0.681700</td>
+      <td>0.501000</td>
+      <td>0.202000</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.392000</td>
+      <td>0.631967</td>
+      <td>0.631967</td>
+      <td>0.673333</td>
+      <td>0.392000</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.494000</td>
+      <td>0.711167</td>
+      <td>0.667050</td>
+      <td>0.489000</td>
+      <td>0.176000</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.388000</td>
+      <td>0.628356</td>
+      <td>0.628356</td>
+      <td>0.665333</td>
+      <td>0.388000</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.482000</td>
+      <td>0.705500</td>
+      <td>0.665650</td>
+      <td>0.495000</td>
+      <td>0.188000</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.436000</td>
+      <td>0.661500</td>
+      <td>0.661500</td>
+      <td>0.715333</td>
+      <td>0.436000</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.532000</td>
+      <td>0.731333</td>
+      <td>0.684333</td>
+      <td>0.508000</td>
+      <td>0.210000</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.403333</td>
+      <td>0.638411</td>
+      <td>0.638411</td>
+      <td>0.682000</td>
+      <td>0.403333</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.498000</td>
+      <td>0.714833</td>
+      <td>0.671083</td>
+      <td>0.498000</td>
+      <td>0.186000</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.392667</td>
+      <td>0.630011</td>
+      <td>0.630011</td>
+      <td>0.667333</td>
+      <td>0.392667</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.496000</td>
+      <td>0.712333</td>
+      <td>0.664800</td>
+      <td>0.480000</td>
+      <td>0.160000</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.424000</td>
+      <td>0.654089</td>
+      <td>0.654089</td>
+      <td>0.709333</td>
+      <td>0.424000</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.530000</td>
+      <td>0.730333</td>
+      <td>0.684933</td>
+      <td>0.502000</td>
+      <td>0.200000</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.261066</td>
+      <td>0.519886</td>
+      <td>0.519886</td>
+      <td>0.511194</td>
+      <td>0.261066</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.407193</td>
+      <td>0.649523</td>
+      <td>0.605167</td>
+      <td>0.408211</td>
+      <td>0.091064</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.268235</td>
+      <td>0.536599</td>
+      <td>0.536599</td>
+      <td>0.567097</td>
+      <td>0.268235</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.407006</td>
+      <td>0.653466</td>
+      <td>0.608351</td>
+      <td>0.429047</td>
+      <td>0.117544</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>layout_B1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.263333</td>
+      <td>0.534511</td>
+      <td>0.534511</td>
+      <td>0.527333</td>
+      <td>0.263333</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>layout_B1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.412000</td>
+      <td>0.654167</td>
+      <td>0.621617</td>
+      <td>0.421000</td>
+      <td>0.122000</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>shape_B1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.265333</td>
+      <td>0.546933</td>
+      <td>0.546933</td>
+      <td>0.569333</td>
+      <td>0.265333</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>shape_B1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.428000</td>
+      <td>0.671167</td>
+      <td>0.634983</td>
+      <td>0.450000</td>
+      <td>0.132000</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>layout_B1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.262667</td>
+      <td>0.534400</td>
+      <td>0.534400</td>
+      <td>0.528667</td>
+      <td>0.262667</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>layout_B1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.420000</td>
+      <td>0.661833</td>
+      <td>0.622283</td>
+      <td>0.420000</td>
+      <td>0.098000</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>shape_B1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.266000</td>
+      <td>0.548044</td>
+      <td>0.548044</td>
+      <td>0.574000</td>
+      <td>0.266000</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>shape_B1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.426000</td>
+      <td>0.669833</td>
+      <td>0.631650</td>
+      <td>0.446000</td>
+      <td>0.126000</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>resnet50_control</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.366667</td>
+      <td>0.610456</td>
+      <td>0.610456</td>
+      <td>0.632667</td>
+      <td>0.366667</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>resnet50_control</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.480000</td>
+      <td>0.699167</td>
+      <td>0.662617</td>
+      <td>0.475000</td>
+      <td>0.176000</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>resnet50_control</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>1</td>
+      <td>75</td>
+      <td>0.362667</td>
+      <td>0.605600</td>
+      <td>0.605600</td>
+      <td>0.619333</td>
+      <td>0.362667</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>resnet50_control</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>2</td>
+      <td>25</td>
+      <td>0.482000</td>
+      <td>0.699000</td>
+      <td>0.656167</td>
+      <td>0.467000</td>
+      <td>0.160000</td>
+    </tr>
+  </tbody>
+</table>
+</div>               encoder_key          route     method  anomaly_count  \
+0              dinov2_base  supplied_mask         B0              1
+1              dinov2_base  supplied_mask         B0              2
+2              dinov2_base  supplied_mask         B1              1
+3              dinov2_base  supplied_mask         B1              2
+4              dinov2_base  supplied_mask         P1              1
+5              dinov2_base  supplied_mask         P1              2
+6             dinov2_small  automatic_box         B0              1
+7             dinov2_small  automatic_box         B0              2
+8             dinov2_small  automatic_box         B1              1
+9             dinov2_small  automatic_box         B1              2
+10            dinov2_small  automatic_box         P1              1
+11            dinov2_small  automatic_box         P1              2
+12            dinov2_small  reference_box         B0              1
+13            dinov2_small  reference_box         B0              2
+14            dinov2_small  reference_box         B1              1
+15            dinov2_small  reference_box         B1              2
+16            dinov2_small  reference_box         P1              1
+17            dinov2_small  reference_box         P1              2
+18            dinov2_small  supplied_mask         B0              1
+19            dinov2_small  supplied_mask         B0              2
+20            dinov2_small  supplied_mask         B1              1
+21            dinov2_small  supplied_mask         B1              2
+22            dinov2_small  supplied_mask         P1              1
+23            dinov2_small  supplied_mask         P1              2
+24  dinov2_small_registers  supplied_mask         B0              1
+25  dinov2_small_registers  supplied_mask         B0              2
+26  dinov2_small_registers  supplied_mask         B1              1
+27  dinov2_small_registers  supplied_mask         B1              2
+28  dinov2_small_registers  supplied_mask         P1              1
+29  dinov2_small_registers  supplied_mask         P1              2
+30                geometry  automatic_box  layout_B1              1
+31                geometry  automatic_box  layout_B1              2
+32                geometry  automatic_box   shape_B1              1
+33                geometry  automatic_box   shape_B1              2
+34                geometry  reference_box  layout_B1              1
+35                geometry  reference_box  layout_B1              2
+36                geometry  reference_box   shape_B1              1
+37                geometry  reference_box   shape_B1              2
+38                geometry  supplied_mask  layout_B1              1
+39                geometry  supplied_mask  layout_B1              2
+40                geometry  supplied_mask   shape_B1              1
+41                geometry  supplied_mask   shape_B1              2
+42        resnet50_control  supplied_mask         B0              1
+43        resnet50_control  supplied_mask         B0              2
+44        resnet50_control  supplied_mask         B1              1
+45        resnet50_control  supplied_mask         B1              2
+
+    scene_count      top1  reciprocal_rank  average_precision  recall_at_2  \
+0            75  0.397333         0.634867           0.634867     0.679333
+1            25  0.476000         0.703333           0.660567     0.492000
+2            75  0.384000         0.625700           0.625700     0.669333
+3            25  0.488000         0.705667           0.657867     0.472000
+4            75  0.455333         0.673267           0.673267     0.724000
+5            25  0.502000         0.720833           0.680217     0.512000
+6            75  0.381141         0.612051           0.612051     0.652364
+7            25  0.472936         0.693473           0.645288     0.477246
+8            75  0.375046         0.606409           0.606409     0.638443
+9            25  0.454947         0.683766           0.638640     0.471363
+10           75  0.402522         0.626326           0.626326     0.670806
+11           25  0.511240         0.711414           0.657035     0.469977
+12           75  0.394667         0.632256           0.632256     0.669333
+13           25  0.494000         0.713167           0.667983     0.493000
+14           75  0.386000         0.625211           0.625211     0.654667
+15           25  0.478000         0.702667           0.657567     0.482000
+16           75  0.422667         0.650222           0.650222     0.695333
+17           25  0.516000         0.722667           0.681700     0.501000
+18           75  0.392000         0.631967           0.631967     0.673333
+19           25  0.494000         0.711167           0.667050     0.489000
+20           75  0.388000         0.628356           0.628356     0.665333
+21           25  0.482000         0.705500           0.665650     0.495000
+22           75  0.436000         0.661500           0.661500     0.715333
+23           25  0.532000         0.731333           0.684333     0.508000
+24           75  0.403333         0.638411           0.638411     0.682000
+25           25  0.498000         0.714833           0.671083     0.498000
+26           75  0.392667         0.630011           0.630011     0.667333
+27           25  0.496000         0.712333           0.664800     0.480000
+28           75  0.424000         0.654089           0.654089     0.709333
+29           25  0.530000         0.730333           0.684933     0.502000
+30           75  0.261066         0.519886           0.519886     0.511194
+31           25  0.407193         0.649523           0.605167     0.408211
+32           75  0.268235         0.536599           0.536599     0.567097
+33           25  0.407006         0.653466           0.608351     0.429047
+34           75  0.263333         0.534511           0.534511     0.527333
+35           25  0.412000         0.654167           0.621617     0.421000
+36           75  0.265333         0.546933           0.546933     0.569333
+37           25  0.428000         0.671167           0.634983     0.450000
+38           75  0.262667         0.534400           0.534400     0.528667
+39           25  0.420000         0.661833           0.622283     0.420000
+40           75  0.266000         0.548044           0.548044     0.574000
+41           25  0.426000         0.669833           0.631650     0.446000
+42           75  0.366667         0.610456           0.610456     0.632667
+43           25  0.480000         0.699167           0.662617     0.475000
+44           75  0.362667         0.605600           0.605600     0.619333
+45           25  0.482000         0.699000           0.656167     0.467000
+
+    exact_set
+0    0.397333
+1    0.178000
+2    0.384000
+3    0.154000
+4    0.455333
+5    0.192000
+6    0.381141
+7    0.167310
+8    0.375046
+9    0.162058
+10   0.402522
+11   0.167836
+12   0.394667
+13   0.172000
+14   0.386000
+15   0.160000
+16   0.422667
+17   0.202000
+18   0.392000
+19   0.176000
+20   0.388000
+21   0.188000
+22   0.436000
+23   0.210000
+24   0.403333
+25   0.186000
+26   0.392667
+27   0.160000
+28   0.424000
+29   0.200000
+30   0.261066
+31   0.091064
+32   0.268235
+33   0.117544
+34   0.263333
+35   0.122000
+36   0.265333
+37   0.132000
+38   0.262667
+39   0.098000
+40   0.266000
+41   0.126000
+42   0.366667
+43   0.176000
+44   0.362667
+45   0.160000
+
+[cell 28]
+<IPython.core.display.Image object>
+
+[cell 28]
+<IPython.core.display.Image object>
+
+[cell 30]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>encoder_key</th>
+      <th>route</th>
+      <th>method</th>
+      <th>scene_count</th>
+      <th>top1</th>
+      <th>reciprocal_rank</th>
+      <th>average_precision</th>
+      <th>recall_at_2</th>
+      <th>exact_set</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>100</td>
+      <td>0.417000</td>
+      <td>0.651983</td>
+      <td>0.641292</td>
+      <td>0.632500</td>
+      <td>0.342500</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>100</td>
+      <td>0.410000</td>
+      <td>0.645692</td>
+      <td>0.633742</td>
+      <td>0.620000</td>
+      <td>0.326500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>100</td>
+      <td>0.467000</td>
+      <td>0.685158</td>
+      <td>0.675004</td>
+      <td>0.671000</td>
+      <td>0.389500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>B0</td>
+      <td>100</td>
+      <td>0.404090</td>
+      <td>0.632406</td>
+      <td>0.620360</td>
+      <td>0.608584</td>
+      <td>0.327684</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>B1</td>
+      <td>100</td>
+      <td>0.395021</td>
+      <td>0.625748</td>
+      <td>0.614467</td>
+      <td>0.596673</td>
+      <td>0.321799</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>100</td>
+      <td>0.429702</td>
+      <td>0.647598</td>
+      <td>0.634003</td>
+      <td>0.620599</td>
+      <td>0.343851</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>dinov2_small</td>
+      <td>reference_box</td>
+      <td>B0</td>
+      <td>100</td>
+      <td>0.419500</td>
+      <td>0.652483</td>
+      <td>0.641187</td>
+      <td>0.625250</td>
+      <td>0.339000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>dinov2_small</td>
+      <td>reference_box</td>
+      <td>B1</td>
+      <td>100</td>
+      <td>0.409000</td>
+      <td>0.644575</td>
+      <td>0.633300</td>
+      <td>0.611500</td>
+      <td>0.329500</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>dinov2_small</td>
+      <td>reference_box</td>
+      <td>P1</td>
+      <td>100</td>
+      <td>0.446000</td>
+      <td>0.668333</td>
+      <td>0.658092</td>
+      <td>0.646750</td>
+      <td>0.367500</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>100</td>
+      <td>0.417500</td>
+      <td>0.651767</td>
+      <td>0.640738</td>
+      <td>0.627250</td>
+      <td>0.338000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>100</td>
+      <td>0.411500</td>
+      <td>0.647642</td>
+      <td>0.637679</td>
+      <td>0.622750</td>
+      <td>0.338000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>100</td>
+      <td>0.460000</td>
+      <td>0.678958</td>
+      <td>0.667208</td>
+      <td>0.663500</td>
+      <td>0.379500</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>100</td>
+      <td>0.427000</td>
+      <td>0.657517</td>
+      <td>0.646579</td>
+      <td>0.636000</td>
+      <td>0.349000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>100</td>
+      <td>0.418500</td>
+      <td>0.650592</td>
+      <td>0.638708</td>
+      <td>0.620500</td>
+      <td>0.334500</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>100</td>
+      <td>0.450500</td>
+      <td>0.673150</td>
+      <td>0.661800</td>
+      <td>0.657500</td>
+      <td>0.368000</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>100</td>
+      <td>0.297598</td>
+      <td>0.552295</td>
+      <td>0.541206</td>
+      <td>0.485448</td>
+      <td>0.218566</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>100</td>
+      <td>0.302928</td>
+      <td>0.565816</td>
+      <td>0.554537</td>
+      <td>0.532584</td>
+      <td>0.230562</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>layout_B1</td>
+      <td>100</td>
+      <td>0.300500</td>
+      <td>0.564425</td>
+      <td>0.556287</td>
+      <td>0.500750</td>
+      <td>0.228000</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>shape_B1</td>
+      <td>100</td>
+      <td>0.306000</td>
+      <td>0.577992</td>
+      <td>0.568946</td>
+      <td>0.539500</td>
+      <td>0.232000</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>layout_B1</td>
+      <td>100</td>
+      <td>0.302000</td>
+      <td>0.566258</td>
+      <td>0.556371</td>
+      <td>0.501500</td>
+      <td>0.221500</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>shape_B1</td>
+      <td>100</td>
+      <td>0.306000</td>
+      <td>0.578492</td>
+      <td>0.568946</td>
+      <td>0.542000</td>
+      <td>0.231000</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>resnet50_control</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>100</td>
+      <td>0.395000</td>
+      <td>0.632633</td>
+      <td>0.623496</td>
+      <td>0.593250</td>
+      <td>0.319000</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>resnet50_control</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>100</td>
+      <td>0.392500</td>
+      <td>0.628950</td>
+      <td>0.618242</td>
+      <td>0.581250</td>
+      <td>0.312000</td>
+    </tr>
+  </tbody>
+</table>
+</div>               encoder_key          route     method  scene_count      top1  \
+0              dinov2_base  supplied_mask         B0          100  0.417000
+1              dinov2_base  supplied_mask         B1          100  0.410000
+2              dinov2_base  supplied_mask         P1          100  0.467000
+3             dinov2_small  automatic_box         B0          100  0.404090
+4             dinov2_small  automatic_box         B1          100  0.395021
+5             dinov2_small  automatic_box         P1          100  0.429702
+6             dinov2_small  reference_box         B0          100  0.419500
+7             dinov2_small  reference_box         B1          100  0.409000
+8             dinov2_small  reference_box         P1          100  0.446000
+9             dinov2_small  supplied_mask         B0          100  0.417500
+10            dinov2_small  supplied_mask         B1          100  0.411500
+11            dinov2_small  supplied_mask         P1          100  0.460000
+12  dinov2_small_registers  supplied_mask         B0          100  0.427000
+13  dinov2_small_registers  supplied_mask         B1          100  0.418500
+14  dinov2_small_registers  supplied_mask         P1          100  0.450500
+15                geometry  automatic_box  layout_B1          100  0.297598
+16                geometry  automatic_box   shape_B1          100  0.302928
+17                geometry  reference_box  layout_B1          100  0.300500
+18                geometry  reference_box   shape_B1          100  0.306000
+19                geometry  supplied_mask  layout_B1          100  0.302000
+20                geometry  supplied_mask   shape_B1          100  0.306000
+21        resnet50_control  supplied_mask         B0          100  0.395000
+22        resnet50_control  supplied_mask         B1          100  0.392500
+
+    reciprocal_rank  average_precision  recall_at_2  exact_set
+0          0.651983           0.641292     0.632500   0.342500
+1          0.645692           0.633742     0.620000   0.326500
+2          0.685158           0.675004     0.671000   0.389500
+3          0.632406           0.620360     0.608584   0.327684
+4          0.625748           0.614467     0.596673   0.321799
+5          0.647598           0.634003     0.620599   0.343851
+6          0.652483           0.641187     0.625250   0.339000
+7          0.644575           0.633300     0.611500   0.329500
+8          0.668333           0.658092     0.646750   0.367500
+9          0.651767           0.640738     0.627250   0.338000
+10         0.647642           0.637679     0.622750   0.338000
+11         0.678958           0.667208     0.663500   0.379500
+12         0.657517           0.646579     0.636000   0.349000
+13         0.650592           0.638708     0.620500   0.334500
+14         0.673150           0.661800     0.657500   0.368000
+15         0.552295           0.541206     0.485448   0.218566
+16         0.565816           0.554537     0.532584   0.230562
+17         0.564425           0.556287     0.500750   0.228000
+18         0.577992           0.568946     0.539500   0.232000
+19         0.566258           0.556371     0.501500   0.221500
+20         0.578492           0.568946     0.542000   0.231000
+21         0.632633           0.623496     0.593250   0.319000
+22         0.628950           0.618242     0.581250   0.312000
+
+[cell 30]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>encoder_key</th>
+      <th>route</th>
+      <th>method</th>
+      <th>status</th>
+      <th>view_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>dinov2_base</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>B0</td>
+      <td>insufficient_peers</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>B0</td>
+      <td>scored</td>
+      <td>1917</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>B1</td>
+      <td>insufficient_peers</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>B1</td>
+      <td>scored</td>
+      <td>1917</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>insufficient_peers</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>dinov2_small</td>
+      <td>automatic_box</td>
+      <td>P1</td>
+      <td>scored</td>
+      <td>1917</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>dinov2_small</td>
+      <td>reference_box</td>
+      <td>B0</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>dinov2_small</td>
+      <td>reference_box</td>
+      <td>B1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>dinov2_small</td>
+      <td>reference_box</td>
+      <td>P1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>dinov2_small</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>dinov2_small_registers</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>insufficient_peers</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>scored</td>
+      <td>1917</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>insufficient_peers</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>scored</td>
+      <td>1917</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>layout_B1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>shape_B1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>layout_B1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>shape_B1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>resnet50_control</td>
+      <td>supplied_mask</td>
+      <td>B0</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>resnet50_control</td>
+      <td>supplied_mask</td>
+      <td>B1</td>
+      <td>scored</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>resnet50_control</td>
+      <td>supplied_mask</td>
+      <td>P1</td>
+      <td>not_supported</td>
+      <td>2000</td>
+    </tr>
+  </tbody>
+</table>
+</div>               encoder_key          route     method              status  \
+0              dinov2_base  supplied_mask         B0              scored
+1              dinov2_base  supplied_mask         B1              scored
+2              dinov2_base  supplied_mask         P1              scored
+3             dinov2_small  automatic_box         B0  insufficient_peers
+4             dinov2_small  automatic_box         B0              scored
+5             dinov2_small  automatic_box         B1  insufficient_peers
+6             dinov2_small  automatic_box         B1              scored
+7             dinov2_small  automatic_box         P1  insufficient_peers
+8             dinov2_small  automatic_box         P1              scored
+9             dinov2_small  reference_box         B0              scored
+10            dinov2_small  reference_box         B1              scored
+11            dinov2_small  reference_box         P1              scored
+12            dinov2_small  supplied_mask         B0              scored
+13            dinov2_small  supplied_mask         B1              scored
+14            dinov2_small  supplied_mask         P1              scored
+15  dinov2_small_registers  supplied_mask         B0              scored
+16  dinov2_small_registers  supplied_mask         B1              scored
+17  dinov2_small_registers  supplied_mask         P1              scored
+18                geometry  automatic_box  layout_B1  insufficient_peers
+19                geometry  automatic_box  layout_B1              scored
+20                geometry  automatic_box   shape_B1  insufficient_peers
+21                geometry  automatic_box   shape_B1              scored
+22                geometry  reference_box  layout_B1              scored
+23                geometry  reference_box   shape_B1              scored
+24                geometry  supplied_mask  layout_B1              scored
+25                geometry  supplied_mask   shape_B1              scored
+26        resnet50_control  supplied_mask         B0              scored
+27        resnet50_control  supplied_mask         B1              scored
+28        resnet50_control  supplied_mask         P1       not_supported
+
+    view_count
+0         2000
+1         2000
+2         2000
+3           83
+4         1917
+5           83
+6         1917
+7           83
+8         1917
+9         2000
+10        2000
+11        2000
+12        2000
+13        2000
+14        2000
+15        2000
+16        2000
+17        2000
+18          83
+19        1917
+20          83
+21        1917
+22        2000
+23        2000
+24        2000
+25        2000
+26        2000
+27        2000
+28        2000
+
+[cell 30]
+<IPython.core.display.Image object>
+
+[cell 30]
+<IPython.core.display.Image object>
+
+[cell 32]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>method</th>
+      <th>scene_count</th>
+      <th>top1</th>
+      <th>reciprocal_rank</th>
+      <th>average_precision</th>
+      <th>recall_at_2</th>
+      <th>exact_set</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>100</td>
+      <td>0.297598</td>
+      <td>0.552295</td>
+      <td>0.541206</td>
+      <td>0.485448</td>
+      <td>0.218566</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>100</td>
+      <td>0.302928</td>
+      <td>0.565816</td>
+      <td>0.554537</td>
+      <td>0.532584</td>
+      <td>0.230562</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>reference_box</td>
+      <td>layout_B1</td>
+      <td>100</td>
+      <td>0.300500</td>
+      <td>0.564425</td>
+      <td>0.556287</td>
+      <td>0.500750</td>
+      <td>0.228000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>reference_box</td>
+      <td>shape_B1</td>
+      <td>100</td>
+      <td>0.306000</td>
+      <td>0.577992</td>
+      <td>0.568946</td>
+      <td>0.539500</td>
+      <td>0.232000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>supplied_mask</td>
+      <td>layout_B1</td>
+      <td>100</td>
+      <td>0.302000</td>
+      <td>0.566258</td>
+      <td>0.556371</td>
+      <td>0.501500</td>
+      <td>0.221500</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>supplied_mask</td>
+      <td>shape_B1</td>
+      <td>100</td>
+      <td>0.306000</td>
+      <td>0.578492</td>
+      <td>0.568946</td>
+      <td>0.542000</td>
+      <td>0.231000</td>
+    </tr>
+  </tbody>
+</table>
+</div>           route     method  scene_count      top1  reciprocal_rank  \
+0  automatic_box  layout_B1          100  0.297598         0.552295
+1  automatic_box   shape_B1          100  0.302928         0.565816
+2  reference_box  layout_B1          100  0.300500         0.564425
+3  reference_box   shape_B1          100  0.306000         0.577992
+4  supplied_mask  layout_B1          100  0.302000         0.566258
+5  supplied_mask   shape_B1          100  0.306000         0.578492
+
+   average_precision  recall_at_2  exact_set
+0           0.541206     0.485448   0.218566
+1           0.554537     0.532584   0.230562
+2           0.556287     0.500750   0.228000
+3           0.568946     0.539500   0.232000
+4           0.556371     0.501500   0.221500
+5           0.568946     0.542000   0.231000
+
+[cell 32]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>encoder_a</th>
+      <th>encoder_b</th>
+      <th>comparable_view_count</th>
+      <th>top_candidate_agreement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dinov2_base</td>
+      <td>dinov2_base</td>
+      <td>2000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>dinov2_base</td>
+      <td>dinov2_small</td>
+      <td>2000</td>
+      <td>0.7450</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>dinov2_base</td>
+      <td>dinov2_small_registers</td>
+      <td>2000</td>
+      <td>0.7365</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>dinov2_base</td>
+      <td>resnet50_control</td>
+      <td>2000</td>
+      <td>0.6375</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>dinov2_small</td>
+      <td>dinov2_base</td>
+      <td>2000</td>
+      <td>0.7450</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>dinov2_small</td>
+      <td>dinov2_small</td>
+      <td>2000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>dinov2_small</td>
+      <td>dinov2_small_registers</td>
+      <td>2000</td>
+      <td>0.7940</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>dinov2_small</td>
+      <td>resnet50_control</td>
+      <td>2000</td>
+      <td>0.6555</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>dinov2_small_registers</td>
+      <td>dinov2_base</td>
+      <td>2000</td>
+      <td>0.7365</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>dinov2_small_registers</td>
+      <td>dinov2_small</td>
+      <td>2000</td>
+      <td>0.7940</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>dinov2_small_registers</td>
+      <td>dinov2_small_registers</td>
+      <td>2000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>dinov2_small_registers</td>
+      <td>resnet50_control</td>
+      <td>2000</td>
+      <td>0.6515</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>resnet50_control</td>
+      <td>dinov2_base</td>
+      <td>2000</td>
+      <td>0.6375</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>resnet50_control</td>
+      <td>dinov2_small</td>
+      <td>2000</td>
+      <td>0.6555</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>resnet50_control</td>
+      <td>dinov2_small_registers</td>
+      <td>2000</td>
+      <td>0.6515</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>resnet50_control</td>
+      <td>resnet50_control</td>
+      <td>2000</td>
+      <td>1.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div>                 encoder_a               encoder_b  comparable_view_count  \
+0              dinov2_base             dinov2_base                   2000
+1              dinov2_base            dinov2_small                   2000
+2              dinov2_base  dinov2_small_registers                   2000
+3              dinov2_base        resnet50_control                   2000
+4             dinov2_small             dinov2_base                   2000
+5             dinov2_small            dinov2_small                   2000
+6             dinov2_small  dinov2_small_registers                   2000
+7             dinov2_small        resnet50_control                   2000
+8   dinov2_small_registers             dinov2_base                   2000
+9   dinov2_small_registers            dinov2_small                   2000
+10  dinov2_small_registers  dinov2_small_registers                   2000
+11  dinov2_small_registers        resnet50_control                   2000
+12        resnet50_control             dinov2_base                   2000
+13        resnet50_control            dinov2_small                   2000
+14        resnet50_control  dinov2_small_registers                   2000
+15        resnet50_control        resnet50_control                   2000
+
+    top_candidate_agreement
+0                    1.0000
+1                    0.7450
+2                    0.7365
+3                    0.6375
+4                    0.7450
+5                    1.0000
+6                    0.7940
+7                    0.6555
+8                    0.7365
+9                    0.7940
+10                   1.0000
+11                   0.6515
+12                   0.6375
+13                   0.6555
+14                   0.6515
+15                   1.0000
+
+[cell 32]
+<IPython.core.display.Image object>
+
+[cell 32]
+<IPython.core.display.Image object>
+
+[cell 34]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>encoder_key</th>
+      <th>route</th>
+      <th>method</th>
+      <th>view_id</th>
+      <th>scene_count</th>
+      <th>average_precision</th>
+      <th>top1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>367</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>shape_B1</td>
+      <td>V07</td>
+      <td>100</td>
+      <td>0.487333</td>
+      <td>0.150000</td>
+    </tr>
+    <tr>
+      <th>407</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>shape_B1</td>
+      <td>V07</td>
+      <td>100</td>
+      <td>0.496500</td>
+      <td>0.160000</td>
+    </tr>
+    <tr>
+      <th>327</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>V07</td>
+      <td>96</td>
+      <td>0.503877</td>
+      <td>0.187500</td>
+    </tr>
+    <tr>
+      <th>314</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>V14</td>
+      <td>95</td>
+      <td>0.504123</td>
+      <td>0.242105</td>
+    </tr>
+    <tr>
+      <th>329</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>V09</td>
+      <td>93</td>
+      <td>0.506183</td>
+      <td>0.247312</td>
+    </tr>
+    <tr>
+      <th>326</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>V06</td>
+      <td>98</td>
+      <td>0.509439</td>
+      <td>0.214286</td>
+    </tr>
+    <tr>
+      <th>304</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>V04</td>
+      <td>97</td>
+      <td>0.509708</td>
+      <td>0.226804</td>
+    </tr>
+    <tr>
+      <th>323</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>V03</td>
+      <td>98</td>
+      <td>0.511224</td>
+      <td>0.214286</td>
+    </tr>
+    <tr>
+      <th>303</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>V03</td>
+      <td>98</td>
+      <td>0.511310</td>
+      <td>0.265306</td>
+    </tr>
+    <tr>
+      <th>401</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>shape_B1</td>
+      <td>V01</td>
+      <td>100</td>
+      <td>0.519083</td>
+      <td>0.230000</td>
+    </tr>
+    <tr>
+      <th>325</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>V05</td>
+      <td>99</td>
+      <td>0.520623</td>
+      <td>0.282828</td>
+    </tr>
+    <tr>
+      <th>361</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>shape_B1</td>
+      <td>V01</td>
+      <td>100</td>
+      <td>0.520750</td>
+      <td>0.230000</td>
+    </tr>
+    <tr>
+      <th>344</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>layout_B1</td>
+      <td>V04</td>
+      <td>100</td>
+      <td>0.520917</td>
+      <td>0.240000</td>
+    </tr>
+    <tr>
+      <th>383</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>layout_B1</td>
+      <td>V03</td>
+      <td>100</td>
+      <td>0.521417</td>
+      <td>0.270000</td>
+    </tr>
+    <tr>
+      <th>302</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>V02</td>
+      <td>96</td>
+      <td>0.522396</td>
+      <td>0.281250</td>
+    </tr>
+    <tr>
+      <th>343</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>layout_B1</td>
+      <td>V03</td>
+      <td>100</td>
+      <td>0.523083</td>
+      <td>0.260000</td>
+    </tr>
+    <tr>
+      <th>313</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>V13</td>
+      <td>97</td>
+      <td>0.523368</td>
+      <td>0.278351</td>
+    </tr>
+    <tr>
+      <th>384</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>layout_B1</td>
+      <td>V04</td>
+      <td>100</td>
+      <td>0.523417</td>
+      <td>0.240000</td>
+    </tr>
+    <tr>
+      <th>300</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>V00</td>
+      <td>95</td>
+      <td>0.523947</td>
+      <td>0.252632</td>
+    </tr>
+    <tr>
+      <th>328</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>V08</td>
+      <td>95</td>
+      <td>0.524825</td>
+      <td>0.284211</td>
+    </tr>
+    <tr>
+      <th>342</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>layout_B1</td>
+      <td>V02</td>
+      <td>100</td>
+      <td>0.525833</td>
+      <td>0.270000</td>
+    </tr>
+    <tr>
+      <th>366</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>shape_B1</td>
+      <td>V06</td>
+      <td>100</td>
+      <td>0.527667</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>408</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>shape_B1</td>
+      <td>V08</td>
+      <td>100</td>
+      <td>0.529250</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>368</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>shape_B1</td>
+      <td>V08</td>
+      <td>100</td>
+      <td>0.529250</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>394</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>layout_B1</td>
+      <td>V14</td>
+      <td>100</td>
+      <td>0.530250</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>382</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>layout_B1</td>
+      <td>V02</td>
+      <td>100</td>
+      <td>0.530833</td>
+      <td>0.270000</td>
+    </tr>
+    <tr>
+      <th>305</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>layout_B1</td>
+      <td>V05</td>
+      <td>99</td>
+      <td>0.530976</td>
+      <td>0.303030</td>
+    </tr>
+    <tr>
+      <th>406</th>
+      <td>geometry</td>
+      <td>supplied_mask</td>
+      <td>shape_B1</td>
+      <td>V06</td>
+      <td>100</td>
+      <td>0.532667</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>340</th>
+      <td>geometry</td>
+      <td>reference_box</td>
+      <td>layout_B1</td>
+      <td>V00</td>
+      <td>100</td>
+      <td>0.533417</td>
+      <td>0.270000</td>
+    </tr>
+    <tr>
+      <th>330</th>
+      <td>geometry</td>
+      <td>automatic_box</td>
+      <td>shape_B1</td>
+      <td>V10</td>
+      <td>95</td>
+      <td>0.536404</td>
+      <td>0.305263</td>
+    </tr>
+  </tbody>
+</table>
+</div>    encoder_key          route     method view_id  scene_count  \
+367    geometry  reference_box   shape_B1     V07          100
+407    geometry  supplied_mask   shape_B1     V07          100
+327    geometry  automatic_box   shape_B1     V07           96
+314    geometry  automatic_box  layout_B1     V14           95
+329    geometry  automatic_box   shape_B1     V09           93
+326    geometry  automatic_box   shape_B1     V06           98
+304    geometry  automatic_box  layout_B1     V04           97
+323    geometry  automatic_box   shape_B1     V03           98
+303    geometry  automatic_box  layout_B1     V03           98
+401    geometry  supplied_mask   shape_B1     V01          100
+325    geometry  automatic_box   shape_B1     V05           99
+361    geometry  reference_box   shape_B1     V01          100
+344    geometry  reference_box  layout_B1     V04          100
+383    geometry  supplied_mask  layout_B1     V03          100
+302    geometry  automatic_box  layout_B1     V02           96
+343    geometry  reference_box  layout_B1     V03          100
+313    geometry  automatic_box  layout_B1     V13           97
+384    geometry  supplied_mask  layout_B1     V04          100
+300    geometry  automatic_box  layout_B1     V00           95
+328    geometry  automatic_box   shape_B1     V08           95
+342    geometry  reference_box  layout_B1     V02          100
+366    geometry  reference_box   shape_B1     V06          100
+408    geometry  supplied_mask   shape_B1     V08          100
+368    geometry  reference_box   shape_B1     V08          100
+394    geometry  supplied_mask  layout_B1     V14          100
+382    geometry  supplied_mask  layout_B1     V02          100
+305    geometry  automatic_box  layout_B1     V05           99
+406    geometry  supplied_mask   shape_B1     V06          100
+340    geometry  reference_box  layout_B1     V00          100
+330    geometry  automatic_box   shape_B1     V10           95
+
+     average_precision      top1
+367           0.487333  0.150000
+407           0.496500  0.160000
+327           0.503877  0.187500
+314           0.504123  0.242105
+329           0.506183  0.247312
+326           0.509439  0.214286
+304           0.509708  0.226804
+323           0.511224  0.214286
+303           0.511310  0.265306
+401           0.519083  0.230000
+325           0.520623  0.282828
+361           0.520750  0.230000
+344           0.520917  0.240000
+383           0.521417  0.270000
+302           0.522396  0.281250
+343           0.523083  0.260000
+313           0.523368  0.278351
+384           0.523417  0.240000
+300           0.523947  0.252632
+328           0.524825  0.284211
+342           0.525833  0.270000
+366           0.527667  0.250000
+408           0.529250  0.250000
+368           0.529250  0.250000
+394           0.530250  0.250000
+382           0.530833  0.270000
+305           0.530976  0.303030
+406           0.532667  0.250000
+340           0.533417  0.270000
+330           0.536404  0.305263
+
+[cell 36]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gate</th>
+      <th>passed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>score_package_locked_before_evaluator</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>labels_absent_from_feature_and_score_generation</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>required_ungated_encoder_screen_succeeded</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>gated_encoder_access_outcome_recorded</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>automatic_route_coverage_reported</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>one_and_two_anomaly_metrics_separated</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>encoder_and_scorer_selected_for_confirmation</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                              gate  passed
+0            score_package_locked_before_evaluator    True
+1  labels_absent_from_feature_and_score_generation    True
+2        required_ungated_encoder_screen_succeeded    True
+3            gated_encoder_access_outcome_recorded    True
+4                automatic_route_coverage_reported    True
+5            one_and_two_anomaly_metrics_separated    True
+6     encoder_and_scorer_selected_for_confirmation    True
+
+[cell 36]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>anchor_encoder</th>
+      <th>anchor_scorer</th>
+      <th>available_encoders</th>
+      <th>claim_boundary</th>
+      <th>decision</th>
+      <th>dino3_access_result_recorded</th>
+      <th>encoder_candidates</th>
+      <th>final_encoder_selected</th>
+      <th>promotion_rule</th>
+      <th>route_for_selection</th>
+      <th>scorer_candidates</th>
+      <th>selected_encoder</th>
+      <th>selected_scorer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dinov2_small</td>
+      <td>B0</td>
+      <td>[dinov2_small, dinov2_small_registers, dinov2_...</td>
+      <td>This freezes the representation configuration ...</td>
+      <td>freeze_encoder_and_scorer_on_ds1</td>
+      <td>True</td>
+      <td>[{'encoder_key': 'dinov2_base', 'gain_over_anc...</td>
+      <td>True</td>
+      <td>{'maximum_anomaly_count_subgroup_loss': 0.03, ...</td>
+      <td>supplied_mask</td>
+      <td>[{'gain_over_b0': 0.0, 'mean_scene_ap': 0.6407...</td>
+      <td>dinov2_small</td>
+      <td>P1</td>
+    </tr>
+  </tbody>
+</table>
+</div>  anchor_encoder anchor_scorer  \
+0   dinov2_small            B0
+
+                                  available_encoders  \
+0  [dinov2_small, dinov2_small_registers, dinov2_...
+
+                                      claim_boundary  \
+0  This freezes the representation configuration ...
+
+                           decision  dino3_access_result_recorded  \
+0  freeze_encoder_and_scorer_on_ds1                          True
+
+                                  encoder_candidates  final_encoder_selected  \
+0  [{'encoder_key': 'dinov2_base', 'gain_over_anc...                    True
+
+                                      promotion_rule route_for_selection  \
+0  {'maximum_anomaly_count_subgroup_loss': 0.03, ...       supplied_mask
+
+                                   scorer_candidates selected_encoder  \
+0  [{'gain_over_b0': 0.0, 'mean_scene_ap': 0.6407...     dinov2_small
+
+  selected_scorer
+0              P1
+
+[cell 38]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mode</th>
+      <th>run_status</th>
+      <th>safe_manifest_sha256</th>
+      <th>schema_version</th>
+      <th>stage</th>
+      <th>status</th>
+      <th>task_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>disabled</td>
+      <td>completed</td>
+      <td>eb1bbc251651e3edc97a4661fe8d66f7476d75d87b739f...</td>
+      <td>1</td>
+      <td>notebook_07_1_clearml_finalisation</td>
+      <td>disabled</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div>       mode run_status                               safe_manifest_sha256  \
+0  disabled  completed  eb1bbc251651e3edc97a4661fe8d66f7476d75d87b739f...
+
+   schema_version                               stage    status task_id
+0               1  notebook_07_1_clearml_finalisation  disabled    None
+
+[cell 40]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>artifact_counts</th>
+      <th>available_encoders</th>
+      <th>evaluation_row_count</th>
+      <th>run_mode</th>
+      <th>safe_chart_count</th>
+      <th>score_row_count</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>{'cache': 800, 'model_input': 3, 'private': 41...</td>
+      <td>[dinov2_small, dinov2_small_registers, dinov2_...</td>
+      <td>45585</td>
+      <td>model_evidence</td>
+      <td>8</td>
+      <td>192265</td>
+      <td>verified</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                     artifact_counts  \
+0  {'cache': 800, 'model_input': 3, 'private': 41...
+
+                                  available_encoders  evaluation_row_count  \
+0  [dinov2_small, dinov2_small_registers, dinov2_...                 45585
+
+         run_mode  safe_chart_count  score_row_count    status
+0  model_evidence                 8           192265  verified

@@ -1,0 +1,50 @@
+Stage: 03.1 DS1 opaque-package validation
+Status: completed
+Clean notebook: notebooks/data-preparation/toysad8k-ds1-opaque-package/03.1-toysad8k-ds1-opaque-package.ipynb
+Clean notebook SHA-256: 8693421b1c0ded2d15016b4ee09000ad6a7ee0dfef064c41aa1c490ab3aec7e5
+Downloaded saved-output SHA-256: 4fa4be2d89d6d36df2efe834e51c052a1fe6133384d57583d509571d5ba2d3c8
+Executed code cells: 6
+Retained output blocks: 9
+Retained safe visuals: 0
+Removed private visuals: 4
+
+Sanitised execution transcript
+==============================
+
+[cell 5]
+Execution environment: kaggle
+Package operation: verify_published_package
+Cohort: toysad8k-development-screen-100-v1
+Expected images: 2000
+Output folder: /kaggle/working/toysad8k_ds1_opaque_package
+Notebook SHA-256: 8693421b1c0ded2d15016b4ee09000ad6a7ee0dfef064c41aa1c490ab3aec7e5
+
+[cell 7]
+<table><thead><tr><th>check</th><th>value</th></tr></thead><tbody><tr><td>first_files_written</td><td>2000</td></tr><tr><td>first_files_reused</td><td>0</td></tr><tr><td>second_files_written</td><td>0</td></tr><tr><td>second_files_reused</td><td>2000</td></tr><tr><td>first_elapsed_seconds</td><td>23.3362</td></tr><tr><td>second_elapsed_seconds</td><td>8.0192</td></tr><tr><td>hashes_identical</td><td>True</td></tr><tr><td>package_operation</td><td>verify_published_package</td></tr></tbody></table><IPython.core.display.HTML object>
+
+[cell 9]
+<table><thead><tr><th>gate</th><th>status</th><th>observed</th><th>expected</th></tr></thead><tbody><tr><td>scene count</td><td>pass</td><td>100</td><td>100</td></tr><tr><td>view count per scene</td><td>pass</td><td>20</td><td>20</td></tr><tr><td>image count</td><td>pass</td><td>2000</td><td>2000</td></tr><tr><td>verified images</td><td>pass</td><td>2000</td><td>2000</td></tr><tr><td>duplicate package paths</td><td>pass</td><td>0</td><td>0</td></tr><tr><td>duplicate archive members</td><td>pass</td><td>0</td><td>0</td></tr><tr><td>decode failures</td><td>pass</td><td>0</td><td>0</td></tr><tr><td>exact file allowlist</td><td>pass</td><td>2003</td><td>2003</td></tr></tbody></table><IPython.core.display.HTML object>
+
+[cell 9]
+<table><thead><tr><th>view_id</th><th>scene_count</th><th>expected_scene_count</th><th>complete</th></tr></thead><tbody><tr><td>V00</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V01</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V02</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V03</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V04</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V05</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V06</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V07</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V08</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V09</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V10</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V11</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V12</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V13</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V14</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V15</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V16</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V17</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V18</td><td>100</td><td>100</td><td>True</td></tr><tr><td>V19</td><td>100</td><td>100</td><td>True</td></tr></tbody></table><IPython.core.display.HTML object>
+
+[cell 9]
+<table><thead><tr><th>measure</th><th>value</th></tr></thead><tbody><tr><td>image_count</td><td>2000</td></tr><tr><td>total_media_mib</td><td>246.017</td></tr><tr><td>minimum_image_kib</td><td>98.193</td></tr><tr><td>median_image_kib</td><td>124.63</td></tr><tr><td>mean_image_kib</td><td>125.96</td></tr><tr><td>maximum_image_kib</td><td>168.514</td></tr><tr><td>media_mode</td><td>RGBA</td></tr><tr><td>width</td><td>256</td></tr><tr><td>height</td><td>256</td></tr></tbody></table><IPython.core.display.HTML object>
+
+[cell 9]
+<PIL.PngImagePlugin.PngImageFile image mode=RGB size=1400x760>
+
+[cell 9]
+<PIL.PngImagePlugin.PngImageFile image mode=RGB size=1400x760>
+
+[cell 9]
+Private image examples were written to the private run folder.
+
+[cell 11]
+Model input: /kaggle/working/toysad8k_ds1_opaque_package/model-input
+GitHub-safe evidence: /kaggle/working/toysad8k_ds1_opaque_package/safe
+Private review evidence: /kaggle/working/toysad8k_ds1_opaque_package/private
+Safe artifacts: 6
+Private artifacts: 3
+ClearML finalisation: failed
+ClearML finalisation did not complete. The package remains downloadable, but this run must not be promoted until tracking succeeds.

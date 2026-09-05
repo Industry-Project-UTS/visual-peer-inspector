@@ -1,0 +1,13 @@
+{
+  "clean_notebook_sha256": "8693421b1c0ded2d15016b4ee09000ad6a7ee0dfef064c41aa1c490ab3aec7e5",
+  "downloaded_saved_output_sha256": "4fa4be2d89d6d36df2efe834e51c052a1fe6133384d57583d509571d5ba2d3c8",
+  "executed_code_cells": 6,
+  "label": "03.1 DS1 opaque-package validation",
+  "published_log_sha256": "bb1866a316e4008d198fa6a87afec497e2f3713ccfba57fd1bebc947100a33a4",
+  "published_notebook_sha256": "e428da7b22361a4b0bd0fae20b40c5f875d8bb762615422be9a482ecf2d7dae4",
+  "removed_private_visuals": 4,
+  "retained_output_blocks": 9,
+  "retained_safe_visuals": 0,
+  "schema_version": 1,
+  "status": "completed"
+}

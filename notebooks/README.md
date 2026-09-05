@@ -116,7 +116,8 @@ An accepted notebook stage must:
    model-facing resources;
 3. support deterministic restart or resume behaviour where applicable;
 4. produce a clean notebook source with no saved execution outputs;
-5. store large or private outputs outside GitHub;
+5. store large or private outputs outside GitHub, with a separate sanitised
+   saved-output copy allowed for repository evidence;
 6. retain a sanitized run record, aggregate tables, figures, and checksums;
 7. record approved aggregate evidence in ClearML or preserve a synchronized
    offline record when ClearML is unavailable;

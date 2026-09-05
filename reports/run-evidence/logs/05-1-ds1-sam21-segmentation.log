@@ -1,0 +1,899 @@
+Stage: 05.1 DS1 SAM 2.1 segmentation
+Status: completed
+Clean notebook: notebooks/detection-and-segmentation/toysad8k-ds1-sam21/05.1-toysad8k-ds1-sam21-segmentation.ipynb
+Clean notebook SHA-256: 253c1b412b4c9df023f4c2536e421c2125705171a8110726a16ab6d1891b52f3
+Downloaded saved-output SHA-256: 8779f759c4dc59532932ea5708e6d8144089fbf82cfac85ccad99a3b9939f41f
+Executed code cells: 9
+Retained output blocks: 23
+Retained safe visuals: 1
+Removed private visuals: 1
+
+Sanitised execution transcript
+==============================
+
+[cell 4]
+{'cohort': 'toysad8k-development-screen-100-v1',
+ 'scenes': 100,
+ 'images': 2000,
+ 'reference prompts': 7700,
+ 'automatic prompts': 9249,
+ 'model input checks passed': True,
+ 'resume': {'used': False,
+  'copied_result_files': 0,
+  'reused_result_files': 0,
+  'attempt_history_copied': False,
+  'attempt_history_policy': 'not_imported_without_bound_run_identity'},
+ 'snapshot': 'f57c535d0b7a8273c89d25a2dd9973e9ef8fa4aa646af16f25c51e0a371331b9'}
+
+[cell 6]
+{"elapsed_seconds": 0.0, "stage": "dependency_install_started"}
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.2/42.2 kB 674.8 kB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.7/57.7 kB 2.3 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.1/566.1 kB 5.0 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 154.5/154.5 kB 10.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.5/78.5 kB 5.9 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 128.0/128.0 kB 8.7 MB/s eta 0:00:00
+{"elapsed_seconds": 8.89, "stage": "dependency_install_completed"}
+{"elapsed_seconds": 8.891, "stage": "sam_repo_install_started"}
+
+[cell 6]
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+dopamine-rl 4.1.2 requires gym<=0.25.2, but you have gym 0.26.2 which is incompatible.
+moviepy 1.0.3 requires decorator<5.0,>=4.0.2, but you have decorator 5.3.1 which is incompatible.
+transformers 5.0.0 requires huggingface-hub<2.0,>=1.3.0, but you have huggingface-hub 0.36.0 which is incompatible.
+
+[cell 6]
+{"elapsed_seconds": 145.913, "stage": "sam_repo_install_completed"}
+
+[cell 6]
+{'package': 'SAM-2',
+ 'version': '1.0',
+ 'revision': '2b90b9f5ceec907a1c18123530e92e794ad901a4'}
+
+[cell 8]
+{"elapsed_seconds": 150.476, "stage": "checkpoint_download_started"}
+
+[cell 8]
+sam2.1_hiera_large.pt:   0%|          | 0.00/898M [00:00<?, ?B/s]
+
+[cell 8]
+{"checkpoint_sha256": "2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318", "checkpoint_size_bytes": 898083611, "download_seconds": 13.481, "elapsed_seconds": 163.958, "stage": "checkpoint_download_completed"}
+
+[cell 8]
+{'cuda_available': True,
+ 'device_count': 2,
+ 'device_name': 'Tesla T4',
+ 'compute_capability': '7.5',
+ 'total_memory_gib': 14.562,
+ 'torch_architecture': 'sm_75',
+ 'torch_architecture_supported': True,
+ 'checkpoint_sha256': '2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318'}
+
+[cell 10]
+{"stage": "sam_import_started"}
+{"stage": "sam_model_build_started"}
+{"stage": "sam_worker_ready"}
+{"already_completed": false, "image_count": 1, "stage": "one_image_preflight_started"}
+
+[cell 10]
+/usr/local/lib/python3.12/dist-packages/torchvision/transforms/functional.py:154: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  img = torch.from_numpy(pic.transpose((2, 0, 1))).contiguous()
+
+[cell 10]
+{"completed": 1, "latest_status": "ok", "stage": "inference_progress", "total": 1}
+{"completed": true, "error_type": null, "stage": "one_image_preflight_completed"}
+{"completed_before": 1, "image_count": 20, "stage": "pilot_started"}
+{"completed": 1, "latest_status": "ok", "stage": "inference_progress", "total": 19}
+{"completed": 19, "latest_status": "ok", "stage": "inference_progress", "total": 19}
+{"completed": 20, "error_type": null, "expected": 20, "stage": "pilot_completed"}
+{"completed_before": 0, "image_count": 20, "stage": "repeatability_started"}
+{"completed": 1, "latest_status": "ok", "stage": "inference_progress", "total": 20}
+{"completed": 20, "latest_status": "ok", "stage": "inference_progress", "total": 20}
+{"completed": 20, "error_type": null, "expected": 20, "stage": "repeatability_completed"}
+{"completed_before": 20, "image_count": 2000, "stage": "full_inference_started"}
+{"completed": 1, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 100, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 200, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 300, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 400, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 500, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 600, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 700, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 800, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 900, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 1000, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 1100, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 1200, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 1300, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 1400, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 1500, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 1600, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 1700, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 1800, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 1900, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 1980, "latest_status": "ok", "stage": "inference_progress", "total": 1980}
+{"completed": 2000, "error_type": null, "expected": 2000, "stage": "full_inference_completed"}
+{"failed_gate_count": 0, "passed": true, "stage": "acceptance_gates_completed"}
+
+[cell 10]
+{'schema_version': 1,
+ 'stage': 'ds1_sam21_prompted_masks',
+ 'status': 'completed',
+ 'tracking_status': 'pending',
+ 'cohort': {'cohort_id': 'toysad8k-development-screen-100-v1',
+  'release_id': 'toysad8k-train-2000-v2',
+  'role': 'development',
+  'pilot_stage': 'screen_100',
+  'membership_sha256': '308e2e104448612dc60b5392a5258d97f6d93f52ca553aa68fa1b447500f4f2f',
+  'scene_count': 100,
+  'views_per_scene': 20,
+  'image_count': 2000,
+  'asset_group_count': 27},
+ 'run_mode': 'model_inference',
+ 'inference_stage': 'full',
+ 'producer_kind': 'sam2.1_model',
+ 'python_version': '3.12.13',
+ 'configuration': {'code_repository': 'https://github.com/facebookresearch/sam2',
+  'code_revision': '2b90b9f5ceec907a1c18123530e92e794ad901a4',
+  'model_repository': 'facebook/sam2.1-hiera-large',
+  'model_revision': '665f8e2ad61cf5f53d65644ff27c8ee525124610',
+  'checkpoint_filename': 'sam2.1_hiera_large.pt',
+  'checkpoint_sha256': '2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318',
+  'checkpoint_size_bytes': 898083611,
+  'model_config': 'configs/sam2.1/sam2.1_hiera_l.yaml',
+  'device': 'cuda',
+  'precision': 'float16',
+  'multimask_output': False,
+  'mask_threshold': 0.0,
+  'max_hole_area': 0.0,
+  'max_sprinkle_area': 0.0,
+  'seed': 20260824,
+  'image_height': 256,
+  'image_width': 256},
+ 'configuration_sha256': '39690d431d70c2192a6ba0c4530785c9208e07b035842d05022a67fb700a850b',
+ 'prompt_package_sha256': 'e96e661861f9697bdd23dead911e0bb226fe1fdb36bdeb01ec6d932ca7022152',
+ 'input_identity': {'prompt_package_record_sha256': 'e96e661861f9697bdd23dead911e0bb226fe1fdb36bdeb01ec6d932ca7022152',
+  'prompt_manifest_sha256': '6f01fe23e72ccb83b6bebb690cdeacb370b31bb0113a156e51a01c730d612080'},
+ 'output_identity': {'mask_results_filename': 'mask_results.jsonl',
+  'mask_results_sha256': '6e804f00e8a00bf409b0508e2e9f4734fda8aad23c7956568fc6c235e6bc3ad8',
+  'mask_result_count': 2000,
+  'repeat_mask_results_filename': 'repeat_mask_results.jsonl',
+  'repeat_mask_results_sha256': '5781367d6f4fe9d9421f22280bb08e15c31171a72e406f2f76f65f31849a1640',
+  'repeat_mask_result_count': 20},
+ 'checkpoint_sha256': '2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318',
+ 'provenance': {'git_commit': '1ccf8c5fc4aa6be7192ea6d72d6f20a4102326b1',
+  'git_dirty': False,
+  'snapshot_sha256': 'f57c535d0b7a8273c89d25a2dd9973e9ef8fa4aa646af16f25c51e0a371331b9',
+  'precommit_candidate': False,
+  'notebook_sha256': '253c1b412b4c9df023f4c2536e421c2125705171a8110726a16ab6d1891b52f3',
+  'kaggle_notebook_slug': 'esreekarreddy/toysad-8k-ds1-sam-2-1-segmentation',
+  'prompt_package_record_sha256': 'e96e661861f9697bdd23dead911e0bb226fe1fdb36bdeb01ec6d932ca7022152',
+  'prompt_manifest_sha256': '6f01fe23e72ccb83b6bebb690cdeacb370b31bb0113a156e51a01c730d612080',
+  'model_input_package_record_sha256': '39797e720e5043e2af52d154d68745138a2273480715d358b2bc3af58e8af0d8',
+  'model_input_manifest_sha256': '37e2143ae097077f9fa35ffc8a1a281d2e1dfb8a9802dc88865fce54daa123b3',
+  'resume_import': {'used': False,
+   'copied_result_files': 0,
+   'reused_result_files': 0,
+   'attempt_history_copied': False,
+   'attempt_history_policy': 'not_imported_without_bound_run_identity'},
+  'kaggle_notebook_version_05_1': '2',
+  'code_dataset_version': '38'},
+ 'platform_versions': {'python': '3.12.13',
+  'numpy': '2.0.2',
+  'pillow': '11.3.0',
+  'torch': '2.10.0+cu128',
+  'torchvision': '0.25.0+cu128',
+  'kaggle_notebook_version_05_1': '2',
+  'code_dataset_version': '38'},
+ 'gpu': {'cuda_available': True,
+  'device_count': 2,
+  'device_name': 'Tesla T4',
+  'compute_capability': '7.5',
+  'total_memory_gib': 14.562,
+  'torch_architecture': 'sm_75',
+  'torch_architecture_supported': True,
+  'peak_allocated_gib': 8.106,
+  'peak_reserved_gib': 9.3848},
+ 'model_load_checkpoints': [{'stage': 'dependency_install_started',
+   'elapsed_seconds': 0.0},
+  {'stage': 'dependency_install_completed', 'elapsed_seconds': 8.89},
+  {'stage': 'sam_repo_install_started', 'elapsed_seconds': 8.891},
+  {'stage': 'sam_repo_install_completed', 'elapsed_seconds': 145.913},
+  {'stage': 'checkpoint_download_started', 'elapsed_seconds': 150.476},
+  {'stage': 'checkpoint_download_completed',
+   'elapsed_seconds': 163.958,
+   'download_seconds': 13.481,
+   'checkpoint_size_bytes': 898083611,
+   'checkpoint_sha256': '2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318'},
+  {'stage': 'sam_import_started', 'elapsed_seconds': 170.239},
+  {'stage': 'sam_model_build_started', 'elapsed_seconds': 175.514},
+  {'stage': 'sam_worker_ready', 'elapsed_seconds': 178.779}],
+ 'summary': {'image_count': 2000,
+  'scene_count': 100,
+  'mask_count': 16949,
+  'empty_mask_count': 45,
+  'median_image_runtime_seconds': 0.2514825,
+  'p95_image_runtime_seconds': 0.2602399},
+ 'reference_prompt_count': 7700,
+ 'automatic_prompt_count': 9249,
+ 'repeat_agreement': {'prompt_count': 460,
+  'matching_mask_digest_count': 460,
+  'mask_digest_agreement_rate': 1.0,
+  'matching_score_count': 460,
+  'score_agreement_rate': 1.0,
+  'score_tolerance': 1e-05},
+ 'completion_gate_passed': True,
+ 'error_type': None,
+ 'failure_phase': None}
+
+[cell 12]
+<h4>Completion gates</h4><IPython.core.display.HTML object>
+
+[cell 12]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gate</th>
+      <th>observed</th>
+      <th>expected</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>image coverage</td>
+      <td>2000.0</td>
+      <td>2000.0</td>
+      <td>pass</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>reference-route masks</td>
+      <td>7700.0</td>
+      <td>7700.0</td>
+      <td>pass</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>automatic-route masks</td>
+      <td>9249.0</td>
+      <td>9249.0</td>
+      <td>pass</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>unresolved failures</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>pass</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>repeat mask digest agreement</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>pass</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>repeat score agreement</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>pass</td>
+    </tr>
+  </tbody>
+</table>
+</div>                           gate  observed  expected status
+0                image coverage    2000.0    2000.0   pass
+1         reference-route masks    7700.0    7700.0   pass
+2         automatic-route masks    9249.0    9249.0   pass
+3           unresolved failures       0.0       0.0   pass
+4  repeat mask digest agreement       1.0       1.0   pass
+5        repeat score agreement       1.0       1.0   pass
+
+[cell 12]
+<h4>Route summary</h4><IPython.core.display.HTML object>
+
+[cell 12]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>mask_count</th>
+      <th>empty_mask_count</th>
+      <th>empty_mask_rate</th>
+      <th>mean_area_fraction</th>
+      <th>median_area_fraction</th>
+      <th>p95_area_fraction</th>
+      <th>mean_predicted_quality_score</th>
+      <th>p10_predicted_quality_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic_box</td>
+      <td>9249</td>
+      <td>45</td>
+      <td>0.004865</td>
+      <td>0.047561</td>
+      <td>0.034027</td>
+      <td>0.141180</td>
+      <td>0.90811</td>
+      <td>0.66748</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>reference_box</td>
+      <td>7700</td>
+      <td>0</td>
+      <td>0.000000</td>
+      <td>0.053774</td>
+      <td>0.039665</td>
+      <td>0.143925</td>
+      <td>0.97926</td>
+      <td>0.95752</td>
+    </tr>
+  </tbody>
+</table>
+</div>           route  mask_count  empty_mask_count  empty_mask_rate  \
+0  automatic_box        9249                45         0.004865
+1  reference_box        7700                 0         0.000000
+
+   mean_area_fraction  median_area_fraction  p95_area_fraction  \
+0            0.047561              0.034027           0.141180
+1            0.053774              0.039665           0.143925
+
+   mean_predicted_quality_score  p10_predicted_quality_score
+0                       0.90811                      0.66748
+1                       0.97926                      0.95752
+
+[cell 12]
+<h4>View summary</h4><IPython.core.display.HTML object>
+
+[cell 12]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>view_id</th>
+      <th>route</th>
+      <th>mask_count</th>
+      <th>empty_mask_count</th>
+      <th>mean_area_fraction</th>
+      <th>mean_predicted_quality_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>V00</td>
+      <td>automatic_box</td>
+      <td>377</td>
+      <td>0</td>
+      <td>0.049907</td>
+      <td>0.976099</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>V00</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.047903</td>
+      <td>0.977635</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>V01</td>
+      <td>automatic_box</td>
+      <td>380</td>
+      <td>0</td>
+      <td>0.049962</td>
+      <td>0.977806</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>V01</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.048833</td>
+      <td>0.978623</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>V02</td>
+      <td>automatic_box</td>
+      <td>380</td>
+      <td>0</td>
+      <td>0.051583</td>
+      <td>0.978179</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>V02</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.050706</td>
+      <td>0.978257</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>V03</td>
+      <td>automatic_box</td>
+      <td>444</td>
+      <td>0</td>
+      <td>0.045425</td>
+      <td>0.927400</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>V03</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.052644</td>
+      <td>0.979507</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>V04</td>
+      <td>automatic_box</td>
+      <td>460</td>
+      <td>0</td>
+      <td>0.043249</td>
+      <td>0.924608</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>V04</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.053096</td>
+      <td>0.978519</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>V05</td>
+      <td>automatic_box</td>
+      <td>531</td>
+      <td>0</td>
+      <td>0.038937</td>
+      <td>0.888395</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>V05</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.053668</td>
+      <td>0.979488</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>V06</td>
+      <td>automatic_box</td>
+      <td>381</td>
+      <td>0</td>
+      <td>0.058733</td>
+      <td>0.980878</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>V06</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.055781</td>
+      <td>0.980559</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>V07</td>
+      <td>automatic_box</td>
+      <td>599</td>
+      <td>1</td>
+      <td>0.046606</td>
+      <td>0.835857</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>V07</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.056810</td>
+      <td>0.979826</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>V08</td>
+      <td>automatic_box</td>
+      <td>378</td>
+      <td>0</td>
+      <td>0.056402</td>
+      <td>0.973208</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>V08</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.056481</td>
+      <td>0.979031</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>V09</td>
+      <td>automatic_box</td>
+      <td>878</td>
+      <td>0</td>
+      <td>0.024538</td>
+      <td>0.794049</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>V09</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.055809</td>
+      <td>0.978830</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>V10</td>
+      <td>automatic_box</td>
+      <td>600</td>
+      <td>0</td>
+      <td>0.050569</td>
+      <td>0.811666</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>V10</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.055836</td>
+      <td>0.979909</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>V11</td>
+      <td>automatic_box</td>
+      <td>382</td>
+      <td>0</td>
+      <td>0.055617</td>
+      <td>0.978563</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>V11</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.056696</td>
+      <td>0.980394</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>V12</td>
+      <td>automatic_box</td>
+      <td>376</td>
+      <td>0</td>
+      <td>0.059475</td>
+      <td>0.977331</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>V12</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.057404</td>
+      <td>0.978577</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>V13</td>
+      <td>automatic_box</td>
+      <td>501</td>
+      <td>0</td>
+      <td>0.043317</td>
+      <td>0.914822</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>V13</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.056180</td>
+      <td>0.978921</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>V14</td>
+      <td>automatic_box</td>
+      <td>668</td>
+      <td>44</td>
+      <td>0.046228</td>
+      <td>0.727529</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>V14</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.053991</td>
+      <td>0.979623</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>V15</td>
+      <td>automatic_box</td>
+      <td>387</td>
+      <td>0</td>
+      <td>0.054638</td>
+      <td>0.977278</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>V15</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.054308</td>
+      <td>0.980294</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>V16</td>
+      <td>automatic_box</td>
+      <td>403</td>
+      <td>0</td>
+      <td>0.050385</td>
+      <td>0.968129</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>V16</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.054937</td>
+      <td>0.980101</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>V17</td>
+      <td>automatic_box</td>
+      <td>375</td>
+      <td>0</td>
+      <td>0.055865</td>
+      <td>0.977214</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>V17</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.053862</td>
+      <td>0.978857</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>V18</td>
+      <td>automatic_box</td>
+      <td>379</td>
+      <td>0</td>
+      <td>0.053768</td>
+      <td>0.977976</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>V18</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.051453</td>
+      <td>0.979738</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>V19</td>
+      <td>automatic_box</td>
+      <td>370</td>
+      <td>0</td>
+      <td>0.052112</td>
+      <td>0.977055</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>V19</td>
+      <td>reference_box</td>
+      <td>385</td>
+      <td>0</td>
+      <td>0.049084</td>
+      <td>0.978509</td>
+    </tr>
+  </tbody>
+</table>
+</div>   view_id          route  mask_count  empty_mask_count  mean_area_fraction  \
+0      V00  automatic_box         377                 0            0.049907
+1      V00  reference_box         385                 0            0.047903
+2      V01  automatic_box         380                 0            0.049962
+3      V01  reference_box         385                 0            0.048833
+4      V02  automatic_box         380                 0            0.051583
+5      V02  reference_box         385                 0            0.050706
+6      V03  automatic_box         444                 0            0.045425
+7      V03  reference_box         385                 0            0.052644
+8      V04  automatic_box         460                 0            0.043249
+9      V04  reference_box         385                 0            0.053096
+10     V05  automatic_box         531                 0            0.038937
+11     V05  reference_box         385                 0            0.053668
+12     V06  automatic_box         381                 0            0.058733
+13     V06  reference_box         385                 0            0.055781
+14     V07  automatic_box         599                 1            0.046606
+15     V07  reference_box         385                 0            0.056810
+16     V08  automatic_box         378                 0            0.056402
+17     V08  reference_box         385                 0            0.056481
+18     V09  automatic_box         878                 0            0.024538
+19     V09  reference_box         385                 0            0.055809
+20     V10  automatic_box         600                 0            0.050569
+21     V10  reference_box         385                 0            0.055836
+22     V11  automatic_box         382                 0            0.055617
+23     V11  reference_box         385                 0            0.056696
+24     V12  automatic_box         376                 0            0.059475
+25     V12  reference_box         385                 0            0.057404
+26     V13  automatic_box         501                 0            0.043317
+27     V13  reference_box         385                 0            0.056180
+28     V14  automatic_box         668                44            0.046228
+29     V14  reference_box         385                 0            0.053991
+30     V15  automatic_box         387                 0            0.054638
+31     V15  reference_box         385                 0            0.054308
+32     V16  automatic_box         403                 0            0.050385
+33     V16  reference_box         385                 0            0.054937
+34     V17  automatic_box         375                 0            0.055865
+35     V17  reference_box         385                 0            0.053862
+36     V18  automatic_box         379                 0            0.053768
+37     V18  reference_box         385                 0            0.051453
+38     V19  automatic_box         370                 0            0.052112
+39     V19  reference_box         385                 0            0.049084
+
+    mean_predicted_quality_score
+0                       0.976099
+1                       0.977635
+2                       0.977806
+3                       0.978623
+4                       0.978179
+5                       0.978257
+6                       0.927400
+7                       0.979507
+8                       0.924608
+9                       0.978519
+10                      0.888395
+11                      0.979488
+12                      0.980878
+13                      0.980559
+14                      0.835857
+15                      0.979826
+16                      0.973208
+17                      0.979031
+18                      0.794049
+19                      0.978830
+20                      0.811666
+21                      0.979909
+22                      0.978563
+23                      0.980394
+24                      0.977331
+25                      0.978577
+26                      0.914822
+27                      0.978921
+28                      0.727529
+29                      0.979623
+30                      0.977278
+31                      0.980294
+32                      0.968129
+33                      0.980101
+34                      0.977214
+35                      0.978857
+36                      0.977976
+37                      0.979738
+38                      0.977055
+39                      0.978509
+
+[cell 12]
+<Figure size 1800x840 with 8 Axes>
+
+[cell 14]
+<IPython.core.display.Image object>
+
+[cell 16]
+{'clearml_hosts': {'CLEARML_API_HOST': 'https://api.clear.ml',
+  'CLEARML_FILES_HOST': 'https://files.clear.ml',
+  'CLEARML_WEB_HOST': 'https://app.clear.ml'},
+ 'clearml_task_id': None,
+ 'credentials_source': 'kaggle',
+ 'offline_session_folder': None,
+ 'project': 'Visual Peer Inspector/02 Detection and Segmentation',
+ 'run_status': 'completed',
+ 'safe_manifest_sha256': '0750a36c9b2b9320c1e440cec82f1566a57a48ad8eb5a227df0e5908247e4af7',
+ 'schema_version': 1,
+ 'stage': 'notebook_05_1_clearml_finalisation',
+ 'status': 'failed',
+ 'task_name': 'ds1-sam21-kaggle-candidate',
+ 'tracking_attempt_count': 0,
+ 'tracking_error_category': 'internal_error',
+ 'tracking_error_type': 'ConnectionError',
+ 'tracking_mode': 'online',
+ 'tracking_retry_count': 0,
+ 'tracking_transient_failure_count': 0}
+
+[cell 18]
+{'status': 'completed',
+ 'completion_gate_passed': True,
+ 'scenes': 100,
+ 'images': 2000,
+ 'masks': 16949,
+ 'empty_masks': 45,
+ 'repeat_mask_agreement': 1.0,
+ 'repeat_score_agreement': 1.0,
+ 'median_seconds_per_image': 0.2514825,
+ 'p95_seconds_per_image': 0.2602399,
+ 'peak_gpu_memory_gib': 8.106,
+ 'tracking_status': 'failed',
+ 'clearml_task_id': None}
