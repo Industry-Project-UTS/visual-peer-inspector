@@ -1,0 +1,13 @@
+{
+  "clean_notebook_sha256": "8a7d3ff9e1cbd057abc4ceb1e03c873105e1e5d3ae7b7a2d1ea0bd4ddcae76c0",
+  "downloaded_saved_output_sha256": "cbf9755b08123f58b034a3e830a1169ddf3ff25a6ec8daef37add7581184ef84",
+  "executed_code_cells": 19,
+  "label": "07.1 DS1 representation and peer scores",
+  "published_log_sha256": "c2a36551ddc1902edf1e32b875ca380b3b7ff5d637d86bd7b1915789fd867f5e",
+  "published_notebook_sha256": "d762c0c3db4861086c074602bd949d0d2a91cc01d56accebb80b1265409a7c34",
+  "removed_private_visuals": 4,
+  "retained_output_blocks": 60,
+  "retained_safe_visuals": 8,
+  "schema_version": 1,
+  "status": "completed"
+}

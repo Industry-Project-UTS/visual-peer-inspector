@@ -1,0 +1,15 @@
+{
+  "all_completion_gates_passed": true,
+  "configuration_sha256": "5efbf5da629bb9a96fc0d8d7d92a849ffbe40d9539a62f2ae17739982354bb0b",
+  "evaluator_opened": false,
+  "invalid_mask_row_count": 2,
+  "model_key": "dinov2_small",
+  "resolved_revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "run_mode": "model_inference",
+  "schema_version": 1,
+  "score_package_sha256": "3510904e0f06f45889fed34639da4400de235370920c17967e04e2f4d7e4545e",
+  "score_row_count": 138760,
+  "stage": "ds2_frozen_representation_and_peer_scores",
+  "status": "completed",
+  "unscoreable_row_count": 530
+}

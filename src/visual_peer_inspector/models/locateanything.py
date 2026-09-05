@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 from collections import Counter
+from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 from hashlib import sha256
 import json
 from pathlib import Path
 import re
+import signal
 from statistics import mean, median
 import time
 from typing import Any, Callable, Iterable, Mapping, Sequence
@@ -92,6 +94,90 @@ def locateanything_execution_policy() -> dict[str, Any]:
     }
 
 
+def bounded_locateanything_execution_policy(
+    configuration: LocateAnythingConfiguration,
+    *,
+    maximum_attempts_per_job: int,
+    terminal_failure_disposition: str,
+    attempt_timeout_seconds: float | None = None,
+) -> dict[str, Any]:
+    """Describe a bounded run without changing the historical default policy."""
+
+    if maximum_attempts_per_job < 1:
+        raise ValueError("At least one proposal attempt is required")
+    if maximum_attempts_per_job > PRIMARY_GENERATION_ATTEMPTS:
+        raise ValueError("Bounded policies cannot enter the slow fallback phase")
+    if terminal_failure_disposition not in {"abort", "carry_as_zero_proposal"}:
+        raise ValueError("Unsupported terminal proposal failure disposition")
+    if attempt_timeout_seconds is not None and attempt_timeout_seconds <= 0:
+        raise ValueError("Proposal attempt timeout must be positive")
+    return {
+        "schema_version": 1,
+        "policy_kind": "locateanything_bounded_generation",
+        "maximum_attempts_per_job": maximum_attempts_per_job,
+        "primary": {
+            "attempts": list(range(1, maximum_attempts_per_job + 1)),
+            "generation_mode": configuration.generation_mode,
+            "max_new_tokens": configuration.max_new_tokens,
+        },
+        "truncation_fallback": {
+            "attempts": [],
+            "generation_mode": FALLBACK_GENERATION_MODE,
+            "max_new_tokens": configuration.max_new_tokens,
+            "trigger": "not_enabled",
+        },
+        "terminal_failure_disposition": terminal_failure_disposition,
+        "attempt_timeout_seconds": attempt_timeout_seconds,
+    }
+
+
+def execution_policy_sha256(policy: Mapping[str, Any]) -> str:
+    """Return the stable identity of one fully resolved execution policy."""
+
+    return sha256(canonical_json_bytes(dict(policy))).hexdigest()
+
+
+@contextmanager
+def generation_wall_time_limit(seconds: float | None) -> Iterable[bool]:
+    """Bound main-thread generation on platforms that provide interval timers."""
+
+    supported = (
+        seconds is not None
+        and hasattr(signal, "SIGALRM")
+        and hasattr(signal, "ITIMER_REAL")
+    )
+    if not supported:
+        yield False
+        return
+    try:
+        previous_handler = signal.getsignal(signal.SIGALRM)
+        previous_timer = signal.getitimer(signal.ITIMER_REAL)
+    except (AttributeError, ValueError):
+        yield False
+        return
+
+    def raise_timeout(_signum: int, _frame: Any) -> None:
+        raise TimeoutError(f"LocateAnything generation exceeded {seconds:g} seconds")
+
+    try:
+        signal.signal(signal.SIGALRM, raise_timeout)
+        signal.setitimer(signal.ITIMER_REAL, float(seconds))
+    except (OSError, ValueError):
+        try:
+            signal.signal(signal.SIGALRM, previous_handler)
+        except (OSError, ValueError):
+            pass
+        yield False
+        return
+    try:
+        yield True
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0.0)
+        signal.signal(signal.SIGALRM, previous_handler)
+        if previous_timer[0] > 0.0 or previous_timer[1] > 0.0:
+            signal.setitimer(signal.ITIMER_REAL, *previous_timer)
+
+
 EXECUTION_POLICY_SHA256 = sha256(
     canonical_json_bytes(locateanything_execution_policy())
 ).hexdigest()
@@ -131,11 +217,31 @@ class LocateAnythingGenerationPolicy:
 def resolve_generation_policy(
     configuration: LocateAnythingConfiguration,
     attempt: int,
+    execution_policy: Mapping[str, Any] | None = None,
 ) -> LocateAnythingGenerationPolicy:
     """Use the documented slow mode only after four pinned hybrid attempts."""
 
     if attempt < 1:
         raise ValueError("Proposal attempt must be positive")
+    if execution_policy is not None:
+        maximum_attempts = int(execution_policy["maximum_attempts_per_job"])
+        if attempt > maximum_attempts:
+            raise ValueError("Proposal attempt exceeds the active execution policy")
+        primary = execution_policy["primary"]
+        fallback = execution_policy["truncation_fallback"]
+        if attempt in primary["attempts"]:
+            return LocateAnythingGenerationPolicy(
+                generation_mode=str(primary["generation_mode"]),
+                max_new_tokens=int(primary["max_new_tokens"]),
+                phase="primary",
+            )
+        if attempt in fallback["attempts"]:
+            return LocateAnythingGenerationPolicy(
+                generation_mode=str(fallback["generation_mode"]),
+                max_new_tokens=int(fallback["max_new_tokens"]),
+                phase="slow_fallback",
+            )
+        raise ValueError("Proposal attempt is not declared by the execution policy")
     if attempt <= PRIMARY_GENERATION_ATTEMPTS:
         return LocateAnythingGenerationPolicy(
             generation_mode=configuration.generation_mode,
@@ -298,7 +404,10 @@ def build_proposal_jobs(model_input_root: Path, cohort_id: str) -> list[Proposal
     return jobs
 
 
-def validate_proposal_result(row: Mapping[str, Any]) -> None:
+def validate_proposal_result(
+    row: Mapping[str, Any],
+    execution_policy: Mapping[str, Any] | None = None,
+) -> None:
     """Reject malformed or non-opaque proposal rows."""
 
     if set(row) != set(_RESULT_FIELDS):
@@ -339,10 +448,23 @@ def validate_proposal_result(row: Mapping[str, Any]) -> None:
     if not isinstance(row["generation_stats"], dict):
         raise ValueError("Generation statistics must be a JSON object")
     attempt = int(row["attempt"])
-    if attempt > MAXIMUM_GENERATION_ATTEMPTS:
-        raise ValueError("Proposal attempt exceeds the canonical retry policy")
-    expected_policy = resolve_generation_policy(LocateAnythingConfiguration(), attempt)
-    if row["execution_policy_sha256"] != EXECUTION_POLICY_SHA256:
+    active_policy = (
+        locateanything_execution_policy()
+        if execution_policy is None
+        else dict(execution_policy)
+    )
+    maximum_attempts = int(active_policy["maximum_attempts_per_job"])
+    if attempt > maximum_attempts:
+        raise ValueError("Proposal attempt exceeds the active retry policy")
+    expected_policy = resolve_generation_policy(
+        LocateAnythingConfiguration(
+            max_new_tokens=int(row["effective_max_new_tokens"]),
+            generation_mode=str(active_policy["primary"]["generation_mode"]),
+        ),
+        attempt,
+        active_policy,
+    )
+    if row["execution_policy_sha256"] != execution_policy_sha256(active_policy):
         raise ValueError("Proposal result uses another execution policy")
     if row["effective_generation_mode"] != expected_policy.generation_mode:
         raise ValueError("Proposal result has an invalid effective generation mode")
@@ -377,6 +499,7 @@ class ProposalResultStore:
         path: Path,
         configuration_sha256: str,
         producer_kind: str,
+        execution_policy: Mapping[str, Any] | None = None,
     ) -> None:
         if producer_kind not in PRODUCER_KINDS:
             raise ValueError("Proposal result store has an invalid producer kind")
@@ -384,12 +507,17 @@ class ProposalResultStore:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.configuration_sha256 = configuration_sha256
         self.producer_kind = producer_kind
+        self.execution_policy = (
+            locateanything_execution_policy()
+            if execution_policy is None
+            else dict(execution_policy)
+        )
         self._rows: dict[tuple[str, str], dict[str, Any]] = {}
         self._history: list[dict[str, Any]] = []
         self._attempts: set[tuple[str, str, int]] = set()
         if self.path.exists():
             for row in read_jsonl(self.path):
-                validate_proposal_result(row)
+                validate_proposal_result(row, self.execution_policy)
                 if row["configuration_sha256"] != configuration_sha256:
                     raise ValueError("Existing proposal results use another configuration")
                 if row["producer_kind"] != producer_kind:
@@ -445,7 +573,7 @@ class ProposalResultStore:
 
     def append(self, row: Mapping[str, Any]) -> None:
         value = dict(row)
-        validate_proposal_result(value)
+        validate_proposal_result(value, self.execution_policy)
         if value["configuration_sha256"] != self.configuration_sha256:
             raise ValueError("Proposal row uses another configuration")
         if value["producer_kind"] != self.producer_kind:
@@ -495,12 +623,19 @@ class LocateAnythingWorker:
         dtype: Any | None = None,
         model_source: str | Path | None = None,
         progress_callback: Callable[[str, Mapping[str, Any]], None] | None = None,
+        execution_policy: Mapping[str, Any] | None = None,
     ) -> None:
         import torch
         from transformers import AutoModel, AutoProcessor, AutoTokenizer
 
         self.configuration = configuration
+        self.execution_policy = (
+            locateanything_execution_policy()
+            if execution_policy is None
+            else dict(execution_policy)
+        )
         self.device = device
+        self.producer_kind = MODEL_PRODUCER_KIND
         source = str(model_source or configuration.model_id)
         self.dtype = dtype or (
             torch.bfloat16
@@ -539,6 +674,30 @@ class LocateAnythingWorker:
         self.model = model.to(device).eval()
         report("model_ready", device=device)
 
+    def use_configuration(self, configuration: LocateAnythingConfiguration) -> None:
+        """Change only inference settings while keeping the loaded model fixed."""
+
+        if (
+            configuration.model_id != self.configuration.model_id
+            or configuration.model_revision != self.configuration.model_revision
+            or configuration.upscale_factor != self.configuration.upscale_factor
+        ):
+            raise ValueError(
+                "A loaded LocateAnything worker cannot change model identity or image scale"
+            )
+        execution_policy = getattr(
+            self, "execution_policy", locateanything_execution_policy()
+        )
+        primary = execution_policy["primary"]
+        if (
+            configuration.max_new_tokens != int(primary["max_new_tokens"])
+            or configuration.generation_mode != str(primary["generation_mode"])
+        ):
+            raise ValueError(
+                "A loaded LocateAnything worker cannot leave its execution policy"
+            )
+        self.configuration = configuration
+
     def _job_seed(self, scene_id: str, view_id: str, attempt: int = 1) -> int:
         if attempt < 1:
             raise ValueError("Proposal attempt must be positive")
@@ -559,7 +718,12 @@ class LocateAnythingWorker:
 
         import torch
 
-        generation_policy = resolve_generation_policy(self.configuration, attempt)
+        execution_policy = getattr(
+            self, "execution_policy", locateanything_execution_policy()
+        )
+        generation_policy = resolve_generation_policy(
+            self.configuration, attempt, execution_policy
+        )
 
         prompt = (
             "Locate all the instances that match the following description: "
@@ -588,7 +752,12 @@ class LocateAnythingWorker:
         torch.manual_seed(seed)
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(seed)
-        with torch.inference_mode():
+        attempt_timeout_seconds = execution_policy.get(
+            "attempt_timeout_seconds"
+        )
+        with torch.inference_mode(), generation_wall_time_limit(
+            attempt_timeout_seconds
+        ) as timeout_guard_active:
             response = self.model.generate(
                 pixel_values=inputs["pixel_values"].to(self.dtype),
                 input_ids=inputs["input_ids"],
@@ -611,6 +780,8 @@ class LocateAnythingWorker:
             )
         result: dict[str, Any] = {
             "answer": response[0] if isinstance(response, tuple) else response,
+            "attempt_timeout_seconds": attempt_timeout_seconds,
+            "attempt_timeout_guard_active": timeout_guard_active,
         }
         if isinstance(response, tuple) and len(response) >= 3:
             result["stats"] = response[2]
@@ -620,7 +791,12 @@ class LocateAnythingWorker:
         """Run one job and return a schema-checked result row."""
 
         started = time.perf_counter()
-        generation_policy = resolve_generation_policy(self.configuration, attempt)
+        execution_policy = getattr(
+            self, "execution_policy", locateanything_execution_policy()
+        )
+        generation_policy = resolve_generation_policy(
+            self.configuration, attempt, execution_policy
+        )
         try:
             with Image.open(job.image_path) as opened:
                 image = opened.convert("RGB")
@@ -646,6 +822,12 @@ class LocateAnythingWorker:
                     stats_value
                     if isinstance(stats_value, dict)
                     else {"value": stats_value}
+                )
+                generation_stats["attempt_timeout_seconds"] = prediction.get(
+                    "attempt_timeout_seconds"
+                )
+                generation_stats["attempt_timeout_guard_active"] = bool(
+                    prediction.get("attempt_timeout_guard_active", False)
                 )
             else:
                 raw_response = str(prediction)
@@ -688,6 +870,9 @@ class LocateAnythingWorker:
                 "effective_generation_mode": generation_policy.generation_mode,
                 "effective_max_new_tokens": generation_policy.max_new_tokens,
                 "retry_policy_phase": generation_policy.phase,
+                "attempt_timeout_seconds": execution_policy.get(
+                    "attempt_timeout_seconds"
+                ),
             }
         )
         row = {
@@ -699,7 +884,7 @@ class LocateAnythingWorker:
             "attempt": attempt,
             "image_sha256": job.image_sha256,
             "configuration_sha256": self.configuration.sha256,
-            "execution_policy_sha256": EXECUTION_POLICY_SHA256,
+            "execution_policy_sha256": execution_policy_sha256(execution_policy),
             "effective_generation_mode": generation_policy.generation_mode,
             "effective_max_new_tokens": generation_policy.max_new_tokens,
             "producer_kind": MODEL_PRODUCER_KIND,
@@ -718,19 +903,32 @@ class LocateAnythingWorker:
             "error_type": error_type,
             "error_message": error_message,
         }
-        validate_proposal_result(row)
+        validate_proposal_result(row, execution_policy)
         return row
 
 
 class ProposalContractWorker:
     """Deterministic non-model worker for local pipeline contract tests."""
 
-    def __init__(self, configuration: LocateAnythingConfiguration) -> None:
+    def __init__(
+        self,
+        configuration: LocateAnythingConfiguration,
+        *,
+        execution_policy: Mapping[str, Any] | None = None,
+    ) -> None:
         self.configuration = configuration
+        self.producer_kind = CONTRACT_PRODUCER_KIND
+        self.execution_policy = (
+            locateanything_execution_policy()
+            if execution_policy is None
+            else dict(execution_policy)
+        )
 
     def run_job(self, job: ProposalJob, *, attempt: int = 1) -> dict[str, Any]:
         started = time.perf_counter()
-        generation_policy = resolve_generation_policy(self.configuration, attempt)
+        generation_policy = resolve_generation_policy(
+            self.configuration, attempt, self.execution_policy
+        )
         with Image.open(job.image_path) as opened:
             width, height = opened.size
         digest = sha256(
@@ -761,7 +959,7 @@ class ProposalContractWorker:
             "attempt": attempt,
             "image_sha256": job.image_sha256,
             "configuration_sha256": self.configuration.sha256,
-            "execution_policy_sha256": EXECUTION_POLICY_SHA256,
+            "execution_policy_sha256": execution_policy_sha256(self.execution_policy),
             "effective_generation_mode": generation_policy.generation_mode,
             "effective_max_new_tokens": generation_policy.max_new_tokens,
             "producer_kind": CONTRACT_PRODUCER_KIND,
@@ -775,6 +973,9 @@ class ProposalContractWorker:
                 "effective_generation_mode": generation_policy.generation_mode,
                 "effective_max_new_tokens": generation_policy.max_new_tokens,
                 "retry_policy_phase": generation_policy.phase,
+                "attempt_timeout_seconds": self.execution_policy.get(
+                    "attempt_timeout_seconds"
+                ),
             },
             "response_token_count": len(normalized_boxes) * 6,
             "possibly_truncated": False,
@@ -784,7 +985,7 @@ class ProposalContractWorker:
             "error_type": None,
             "error_message": None,
         }
-        validate_proposal_result(row)
+        validate_proposal_result(row, self.execution_policy)
         return row
 
 
@@ -794,13 +995,18 @@ def run_proposal_jobs(
     jobs: Sequence[ProposalJob],
     result_store: ProposalResultStore,
     maximum_attempts_per_job: int = 2,
-    maximum_consecutive_failed_jobs: int = 3,
+    maximum_consecutive_failed_jobs: int | None = 3,
     progress_callback: Callable[[int, int, Mapping[str, Any]], None] | None = None,
 ) -> dict[str, Any]:
     """Run resumable jobs with bounded retries and checkpoint callbacks."""
 
     if maximum_attempts_per_job < 1:
         raise ValueError("At least one proposal attempt is required")
+    if (
+        maximum_consecutive_failed_jobs is not None
+        and maximum_consecutive_failed_jobs < 1
+    ):
+        raise ValueError("Consecutive proposal failure limit must be positive")
     result_store.reconcile_jobs(jobs)
     pending = [job for job in jobs if job.key not in result_store.completed_keys]
     consecutive_failed_jobs = 0
@@ -840,7 +1046,10 @@ def run_proposal_jobs(
         )
         if progress_callback is not None:
             progress_callback(completed_index, len(pending), final_row)
-        if consecutive_failed_jobs >= maximum_consecutive_failed_jobs:
+        if (
+            maximum_consecutive_failed_jobs is not None
+            and consecutive_failed_jobs >= maximum_consecutive_failed_jobs
+        ):
             raise RuntimeError(
                 f"{maximum_consecutive_failed_jobs} consecutive proposal jobs failed"
             )
@@ -882,12 +1091,15 @@ def repeat_agreement(
     }
 
 
-def summarize_proposal_rows(rows: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
+def summarize_proposal_rows(
+    rows: Iterable[Mapping[str, Any]],
+    execution_policy: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     """Return aggregate operational evidence without evaluator labels."""
 
     values = [dict(row) for row in rows]
     for row in values:
-        validate_proposal_result(row)
+        validate_proposal_result(row, execution_policy)
     successful = [row for row in values if row["status"] == "ok"]
     runtimes = [float(row["runtime_seconds"]) for row in values]
     proposal_counts = [int(row["proposal_count"]) for row in successful]
@@ -1241,8 +1453,11 @@ __all__ = [
     "ProposalContractWorker",
     "ProposalJob",
     "ProposalResultStore",
+    "bounded_locateanything_execution_policy",
     "build_proposal_jobs",
     "collect_proposal_evidence",
+    "execution_policy_sha256",
+    "generation_wall_time_limit",
     "locateanything_execution_policy",
     "parse_locateanything_boxes",
     "repeat_agreement",

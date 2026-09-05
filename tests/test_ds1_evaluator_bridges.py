@@ -181,6 +181,27 @@ def test_ds1_reference_builder_extracts_and_verifies_private_inputs(tmp_path, mo
     assert proposal_reference_ds1.verify_ds1_attributes_package(attributes)["all_checks_passed"]
     assert "labels_by_object_id" in (attributes / "protected_scene_attributes.jsonl").read_text()
 
+    extracted_source = tmp_path / "extracted-source"
+    extracted_root = extracted_source / "toysAD8K"
+    with zipfile.ZipFile(archive) as handle:
+        handle.extractall(extracted_root)
+    (extracted_root / "toysad8k").mkdir()
+    extracted_geometry = tmp_path / "extracted-geometry"
+    extracted_attributes = tmp_path / "extracted-attributes"
+    extracted_record = proposal_reference_ds1.build_ds1_reference_packages(
+        model_manifest_path=paths[0],
+        development_source_map_path=paths[1],
+        development_labels_path=paths[2],
+        required_source_members_path=paths[3],
+        source_archive_path=extracted_source / "toysAD8K.zip",
+        archive_index_path=index,
+        geometry_output_root=extracted_geometry,
+        attributes_output_root=extracted_attributes,
+    )
+    assert extracted_record["geometry"]["source_access_mode"] == "kaggle_extracted_members"
+    assert proposal_reference_ds1.verify_ds1_geometry_package(extracted_geometry)["all_checks_passed"]
+    assert proposal_reference_ds1.verify_ds1_attributes_package(extracted_attributes)["all_checks_passed"]
+
 
 def test_ds1_crosswalk_uses_exact_prompt_inputs_and_deterministic_matches(tmp_path, monkeypatch):
     contract = _contract()

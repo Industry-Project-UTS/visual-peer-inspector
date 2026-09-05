@@ -16,7 +16,11 @@ import zipfile
 
 from PIL import Image
 
-from .cohort_contract import CohortContract, DS1_SCREEN_CONTRACT
+from .cohort_contract import (
+    CohortContract,
+    DS1_SCREEN_CONTRACT,
+    DS2_CONFIRM_CONTRACT,
+)
 from .toysad_selection import RELEASE_ID, validate_model_facing_media_record
 
 
@@ -59,7 +63,7 @@ SMOKE20_CONTRACT = CohortContract(
 
 _COHORT_CONTRACTS = {
     contract.cohort_id: contract
-    for contract in (SMOKE20_CONTRACT, DS1_SCREEN_CONTRACT)
+    for contract in (SMOKE20_CONTRACT, DS1_SCREEN_CONTRACT, DS2_CONFIRM_CONTRACT)
 }
 
 _FORBIDDEN_MODEL_FIELD_PARTS = (

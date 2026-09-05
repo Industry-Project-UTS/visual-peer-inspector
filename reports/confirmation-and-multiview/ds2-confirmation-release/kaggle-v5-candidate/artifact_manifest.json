@@ -1,0 +1,32 @@
+{
+  "artifact_count": 5,
+  "artifacts": [
+    {
+      "path": "resource_counts.png",
+      "sha256": "a570c63617ecd058e847c9455e93aaaeae956680a92c4a8a298b9fb19ff3cf5f",
+      "size_bytes": 21883
+    },
+    {
+      "path": "resource_publication.csv",
+      "sha256": "ab9ff4873bd9b02c39d47c5e9f8ef1cc7be18781aa04d5d1f7598dac40b8f7ce",
+      "size_bytes": 436
+    },
+    {
+      "path": "resource_summary.csv",
+      "sha256": "dfa357b6bd7dffa223eb2a317ab503d92c9516cd37df48b534346cc1da16b88d",
+      "size_bytes": 120
+    },
+    {
+      "path": "run_record.json",
+      "sha256": "83cc5a0d447261b0532c4778e7e630722a446c633f749014e9be52d44203e985",
+      "size_bytes": 352
+    },
+    {
+      "path": "validation_gates.csv",
+      "sha256": "fbaea582047b78a87bf029b46471c5b7e304df0266a4de3ae02276fd67b2a097",
+      "size_bytes": 207
+    }
+  ],
+  "manifest_content_sha256": "39fdf86f4d0a88eb7a7935204c983c80c02df1d61a6dec9241a14f99a12be8e8",
+  "schema_version": 1
+}

@@ -1,0 +1,9 @@
+check,passed
+all prompt candidates completed,True
+candidate files locked before evaluation,True
+all candidate policies evaluated,True
+selected configuration reserved for unchanged DS2 confirmation,True
+Notebook 04.1 object baseline reused,True
+LocateAnything model loaded at most once,True
+"one-image, pilot, repeat and full gates completed",True
+aggregate-only ClearML evidence prepared,True

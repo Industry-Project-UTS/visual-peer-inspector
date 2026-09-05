@@ -1,0 +1,12 @@
+{
+  "mode": "online",
+  "run_status": "completed",
+  "safe_manifest_sha256": "81db9a38ddddc6f0d46aeb5a16e9a56a2671c1dbb825a889e726738f278072b6",
+  "schema_version": 1,
+  "stage": "ds2_frozen_locateanything_clearml_finalisation",
+  "status": "completed",
+  "task_id": "18f9687457a74fb09a15569cbcc4403b",
+  "tracking_attempt_count": 1,
+  "tracking_retry_count": 0,
+  "tracking_transient_failure_count": 0
+}

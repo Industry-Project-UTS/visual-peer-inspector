@@ -1,0 +1,4 @@
+resource,expected_kaggle_dataset,package_sha256,items
+RGB model input,vpi-toysad-ds2-confirmation-rgb,e4b86ca6de63e29526ffc35b80480df656c8fe3fac30067ae342ece9cb9e594d,6000
+supplied geometry,vpi-toysad-ds2-confirmation-geometry,a06b6f46741dd33b640ffcc494b9a2d2cffb8e436f156ea5d4cd984044621ee5,23100
+protected evaluator attributes,vpi-toysad-ds2-confirmation-evaluator,f431f13fbf849748540484d9e0b1db79a0abac25acacdfcada4b23b4358cbc8b,300

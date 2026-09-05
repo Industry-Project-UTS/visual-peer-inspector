@@ -1,0 +1,6 @@
+comparison,baseline,candidate,metric,mean_difference,ci_lower,ci_upper,paired_scene_count,cluster_count,repetitions,seed
+p1_vs_b0,supplied_mask|B0|20|mean_rank,supplied_mask|P1|20|mean_rank,average_precision,0.05052777777777778,0.024944444444444446,0.07772135592647655,300,82,10000,32040
+reference_vs_supplied,supplied_mask|P1|20|mean_rank,reference_box|P1|20|mean_rank,average_precision,-0.016777777777777777,-0.037255321649207626,0.0032895782175357356,300,82,10000,32040
+automatic_vs_reference,reference_box|P1|20|mean_rank,automatic_box|P1|20|mean_rank,average_precision,-0.01666519443053668,-0.04307650179374626,0.007423427152317869,300,82,10000,32040
+three_vs_twenty_views,reference_box|P1|20|mean_rank,reference_box|P1|3|mean_rank,average_precision,-0.041416666666666664,-0.07630577460850112,-0.0076683035828499935,300,82,10000,32040
+visibility_vs_mean,reference_box|P1|3|mean_rank,reference_box|P1|3|visibility_weighted_rank,average_precision,0.006916666666666667,-0.00736455459203784,0.02167807156646442,300,82,10000,32040

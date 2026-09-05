@@ -1,0 +1,13 @@
+{
+  "clean_notebook_sha256": "965886d5747e9956d3004ad482be11396f3778bef91d683aa2bc8c880415d3fa",
+  "downloaded_saved_output_sha256": "f6a678137bcba44745b0cfbc337c9cc8a86b49148d9ec5db3897bee13fccf2d9",
+  "executed_code_cells": 11,
+  "label": "04.2 DS1 proposal refinement",
+  "published_log_sha256": "2356d839510babd00e9e75f481084818562fe1d69440e3d950efe4c5e0f0453c",
+  "published_notebook_sha256": "1dd40a4759704b1a5138ce9990aacc00571f138537f6cd730132011785c416f4",
+  "removed_private_visuals": 1,
+  "retained_output_blocks": 17,
+  "retained_safe_visuals": 3,
+  "schema_version": 1,
+  "status": "completed"
+}

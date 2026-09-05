@@ -1,0 +1,792 @@
+Stage: 04.1 DS1 LocateAnything screen
+Status: completed
+Clean notebook: notebooks/detection-and-segmentation/toysad8k-ds1-locateanything/04.1-toysad8k-ds1-locateanything-screen.ipynb
+Clean notebook SHA-256: 5c78ff7e44a5f4c2c13214bc1444e112778e1f86a5536821d4767024db06b8cd
+Downloaded saved-output SHA-256: 48d0b16d6749c5c43c26aa028a9d1976c3748070672ca52b83c3ce2608f32791
+Executed code cells: 11
+Retained output blocks: 43
+Retained safe visuals: 6
+Removed private visuals: 2
+
+Sanitised execution transcript
+==============================
+
+[cell 4]
+{'code_root': 'vpi-code-snapshot', 'model_input_root': 'vpi-toysad-ds1-screen100-model-input', 'cohort': 'toysad8k-development-screen-100-v1', 'images': 2000}
+
+[cell 6]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.0/44.0 kB 2.1 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.6/13.6 MB 24.1 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 299.4/299.4 kB 23.0 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.0/50.0 MB 40.6 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 775.8/775.8 kB 52.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 107.8 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 37.3 MB/s eta 0:00:00
+
+[cell 6]
+{'model': 'nvidia/LocateAnything-3B',
+ 'revision': 'c32291ca5e996f5a7a485845b4f57a233936bba0',
+ 'prompt': 'object',
+ 'configuration_sha256': '97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636',
+ 'run_mode': 'model_inference',
+ 'inference_stage': 'full'}
+
+[cell 8]
+{"elapsed_seconds": 0.0, "stage": "disposable_preflight"}
+{"elapsed_seconds": 15.0, "stage": "disposable_preflight"}
+{"elapsed_seconds": 27.278, "images": 2000, "stage": "input_verified"}
+{"elapsed_seconds": 30.0, "stage": "disposable_preflight"}
+{"elapsed_seconds": 45.0, "stage": "disposable_preflight"}
+{"device": "cuda", "dtype": "torch.float16", "elapsed_seconds": 57.76, "stage": "dependencies_ready"}
+{"elapsed_seconds": 57.76, "source_kind": "hub", "stage": "tokenizer_load_started"}
+{"elapsed_seconds": 59.123, "stage": "tokenizer_ready"}
+{"elapsed_seconds": 59.123, "source_kind": "hub", "stage": "processor_load_started"}
+{"elapsed_seconds": 60.0, "stage": "disposable_preflight"}
+
+[cell 8]
+/usr/local/lib/python3.12/dist-packages/transformers/models/auto/image_processing_auto.py:647: FutureWarning: The image_processor_class argument is deprecated and will be removed in v4.42. Please use `slow_image_processor_class`, or `fast_image_processor_class` instead
+  warnings.warn(
+
+[cell 8]
+{"elapsed_seconds": 60.879, "stage": "processor_ready"}
+{"elapsed_seconds": 60.879, "source_kind": "hub", "stage": "model_weights_load_started"}
+
+[cell 8]
+`torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]
+
+[cell 8]
+{"elapsed_seconds": 75.0, "stage": "disposable_preflight"}
+{"elapsed_seconds": 90.0, "stage": "disposable_preflight"}
+
+[cell 8]
+Fetching 2 files: 100%|██████████| 2/2 [00:36<00:00, 18.41s/it]
+WARNING:transformers_modules.nvidia.LocateAnything_hyphen_3B.c32291ca5e996f5a7a485845b4f57a233936bba0.modeling_locateanything:flash_attn is not available for MoonViT inference; falling back to sdpa.
+Qwen2ForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly defined. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+WARNING:transformers_modules.nvidia.LocateAnything_hyphen_3B.c32291ca5e996f5a7a485845b4f57a233936bba0.modeling_qwen2:magi_attention not available, falling back to sdpa
+Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.08s/it]
+
+[cell 8]
+{"elapsed_seconds": 105.0, "stage": "disposable_preflight"}
+
+[cell 8]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.48s/it]
+
+[cell 8]
+{"elapsed_seconds": 106.127, "stage": "model_weights_loaded"}
+{"device": "cuda", "elapsed_seconds": 106.127, "stage": "model_device_move_started"}
+{"device": "cuda", "elapsed_seconds": 108.593, "stage": "model_ready"}
+
+[cell 8]
+/root/.cache/huggingface/modules/transformers_modules/nvidia/LocateAnything_hyphen_3B/c32291ca5e996f5a7a485845b4f57a233936bba0/generate_utils.py:186: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  box_avg.append(torch.tensor(out_ref, dtype=x0.dtype, device=x0.device))
+
+[cell 8]
+{'checkpoints': [{'elapsed_seconds': 27.278,
+   'images': 2000,
+   'stage': 'input_verified'},
+  {'device': 'cuda',
+   'dtype': 'torch.float16',
+   'elapsed_seconds': 57.76,
+   'stage': 'dependencies_ready'},
+  {'elapsed_seconds': 57.76,
+   'source_kind': 'hub',
+   'stage': 'tokenizer_load_started'},
+  {'elapsed_seconds': 59.123, 'stage': 'tokenizer_ready'},
+  {'elapsed_seconds': 59.123,
+   'source_kind': 'hub',
+   'stage': 'processor_load_started'},
+  {'elapsed_seconds': 60.879, 'stage': 'processor_ready'},
+  {'elapsed_seconds': 60.879,
+   'source_kind': 'hub',
+   'stage': 'model_weights_load_started'},
+  {'elapsed_seconds': 106.127, 'stage': 'model_weights_loaded'},
+  {'device': 'cuda',
+   'elapsed_seconds': 106.127,
+   'stage': 'model_device_move_started'},
+  {'device': 'cuda', 'elapsed_seconds': 108.593, 'stage': 'model_ready'}],
+ 'configuration_sha256': '97d08548683794ad781ac7885efb34de9be68b9b2cf9f2cd905cbd20c77a9636',
+ 'cuda_version': '12.8',
+ 'cudnn_version': '91002',
+ 'device_name': 'Tesla T4',
+ 'elapsed_seconds': 110.932,
+ 'error_type': None,
+ 'load_seconds': 81.315,
+ 'model_id': 'nvidia/LocateAnything-3B',
+ 'model_revision': 'c32291ca5e996f5a7a485845b4f57a233936bba0',
+ 'peak_gpu_allocated_gib': 7.4433,
+ 'peak_gpu_reserved_gib': 7.8809,
+ 'proposal_count': 5,
+ 'python_version': '3.12.13',
+ 'runtime_seconds': 2.3345,
+ 'schema_version': 1,
+ 'stage': 'ds1_locateanything_disposable_preflight',
+ 'status': 'passed',
+ 'torch_version': '2.10.0+cu128',
+ 'transformers_version': '4.57.1'}
+
+[cell 10]
+{"device": "cuda", "dtype": "torch.float16", "elapsed_seconds": 9.1, "stage": "dependencies_ready"}
+{"elapsed_seconds": 9.101, "source_kind": "hub", "stage": "tokenizer_load_started"}
+{"elapsed_seconds": 9.729, "stage": "tokenizer_ready"}
+{"elapsed_seconds": 9.73, "source_kind": "hub", "stage": "processor_load_started"}
+
+[cell 10]
+/usr/local/lib/python3.12/dist-packages/transformers/models/auto/image_processing_auto.py:647: FutureWarning: The image_processor_class argument is deprecated and will be removed in v4.42. Please use `slow_image_processor_class`, or `fast_image_processor_class` instead
+  warnings.warn(
+
+[cell 10]
+{"elapsed_seconds": 11.056, "stage": "processor_ready"}
+{"elapsed_seconds": 11.057, "source_kind": "hub", "stage": "model_weights_load_started"}
+
+[cell 10]
+`torch_dtype` is deprecated! Use `dtype` instead!
+WARNING:transformers_modules.nvidia.LocateAnything_hyphen_3B.c32291ca5e996f5a7a485845b4f57a233936bba0.modeling_locateanything:flash_attn is not available for MoonViT inference; falling back to sdpa.
+Qwen2ForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly defined. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+WARNING:transformers_modules.nvidia.LocateAnything_hyphen_3B.c32291ca5e996f5a7a485845b4f57a233936bba0.modeling_qwen2:magi_attention not available, falling back to sdpa
+
+[cell 10]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+
+[cell 10]
+{"elapsed_seconds": 17.756, "stage": "model_weights_loaded"}
+{"device": "cuda", "elapsed_seconds": 17.756, "stage": "model_device_move_started"}
+{"device": "cuda", "elapsed_seconds": 20.048, "stage": "model_ready"}
+
+[cell 10]
+{'model_load_seconds': 20.049,
+ 'cuda_available': True,
+ 'device_count': 2,
+ 'device_name': 'Tesla T4',
+ 'compute_capability': '7.5',
+ 'total_memory_gib': 14.562}
+
+[cell 12]
+/root/.cache/huggingface/modules/transformers_modules/nvidia/LocateAnything_hyphen_3B/c32291ca5e996f5a7a485845b4f57a233936bba0/generate_utils.py:186: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  box_avg.append(torch.tensor(out_ref, dtype=x0.dtype, device=x0.device))
+
+[cell 12]
+{"completed": 1, "elapsed_seconds": 19.329, "failed": 0, "stage": "proposal_progress", "successful": 1, "total": 2000}
+{"completed": 100, "elapsed_seconds": 62.562, "failed": 0, "stage": "proposal_progress", "successful": 100, "total": 2000}
+{"completed": 200, "elapsed_seconds": 102.589, "failed": 0, "stage": "proposal_progress", "successful": 200, "total": 2000}
+{"completed": 300, "elapsed_seconds": 144.875, "failed": 0, "stage": "proposal_progress", "successful": 300, "total": 2000}
+{"completed": 400, "elapsed_seconds": 185.221, "failed": 0, "stage": "proposal_progress", "successful": 400, "total": 2000}
+{"completed": 500, "elapsed_seconds": 225.902, "failed": 0, "stage": "proposal_progress", "successful": 500, "total": 2000}
+{"completed": 600, "elapsed_seconds": 391.364, "failed": 0, "stage": "proposal_progress", "successful": 600, "total": 2000}
+{"completed": 700, "elapsed_seconds": 437.22, "failed": 0, "stage": "proposal_progress", "successful": 700, "total": 2000}
+{"completed": 800, "elapsed_seconds": 483.01, "failed": 0, "stage": "proposal_progress", "successful": 800, "total": 2000}
+{"completed": 900, "elapsed_seconds": 522.762, "failed": 0, "stage": "proposal_progress", "successful": 900, "total": 2000}
+{"completed": 1000, "elapsed_seconds": 566.429, "failed": 0, "stage": "proposal_progress", "successful": 1000, "total": 2000}
+{"completed": 1100, "elapsed_seconds": 1051.496, "failed": 0, "stage": "proposal_progress", "successful": 1100, "total": 2000}
+{"completed": 1200, "elapsed_seconds": 1095.129, "failed": 0, "stage": "proposal_progress", "successful": 1200, "total": 2000}
+{"completed": 1300, "elapsed_seconds": 1238.081, "failed": 0, "stage": "proposal_progress", "successful": 1300, "total": 2000}
+{"completed": 1400, "elapsed_seconds": 1445.596, "failed": 0, "stage": "proposal_progress", "successful": 1400, "total": 2000}
+{"completed": 1500, "elapsed_seconds": 1491.024, "failed": 0, "stage": "proposal_progress", "successful": 1500, "total": 2000}
+{"completed": 1600, "elapsed_seconds": 1538.096, "failed": 0, "stage": "proposal_progress", "successful": 1600, "total": 2000}
+{"completed": 1700, "elapsed_seconds": 1581.626, "failed": 0, "stage": "proposal_progress", "successful": 1700, "total": 2000}
+{"completed": 1800, "elapsed_seconds": 1781.391, "failed": 0, "stage": "proposal_progress", "successful": 1800, "total": 2000}
+{"completed": 1900, "elapsed_seconds": 1823.421, "failed": 0, "stage": "proposal_progress", "successful": 1900, "total": 2000}
+{"completed": 2000, "elapsed_seconds": 1864.538, "failed": 0, "stage": "proposal_progress", "successful": 2000, "total": 2000}
+
+[cell 12]
+{'status': 'completed',
+ 'images': 2000,
+ 'successful': 2000,
+ 'repeat_agreement': 1.0}
+
+[cell 14]
+<h4>Completion gates</h4><IPython.core.display.HTML object>
+
+[cell 14]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gate</th>
+      <th>status</th>
+      <th>observed</th>
+      <th>expected</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>preflight images</td>
+      <td>pass</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>preflight successes</td>
+      <td>pass</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>preflight failures</td>
+      <td>pass</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>preflight truncated responses</td>
+      <td>pass</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>preflight zero-proposal successes</td>
+      <td>pass</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>pilot images</td>
+      <td>pass</td>
+      <td>20.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>pilot successes</td>
+      <td>pass</td>
+      <td>20.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>pilot failures</td>
+      <td>pass</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>pilot scene coverage</td>
+      <td>pass</td>
+      <td>20.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>pilot truncated responses</td>
+      <td>pass</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>pilot zero-proposal successes</td>
+      <td>pass</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>repeat images</td>
+      <td>pass</td>
+      <td>20.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>repeat matching images</td>
+      <td>pass</td>
+      <td>20.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>repeat box agreement</td>
+      <td>pass</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>unique jobs</td>
+      <td>pass</td>
+      <td>2000.0</td>
+      <td>2000.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>successful jobs</td>
+      <td>pass</td>
+      <td>2000.0</td>
+      <td>2000.0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>failed jobs</td>
+      <td>pass</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>truncated responses</td>
+      <td>pass</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>scene coverage</td>
+      <td>pass</td>
+      <td>100.0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>view coverage</td>
+      <td>pass</td>
+      <td>20.0</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>zero-proposal successes</td>
+      <td>pass</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>invalid boxes</td>
+      <td>pass</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>duplicate boxes</td>
+      <td>pass</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                 gate status  observed  expected
+0                    preflight images   pass       1.0       1.0
+1                 preflight successes   pass       1.0       1.0
+2                  preflight failures   pass       0.0       0.0
+3       preflight truncated responses   pass       0.0       0.0
+4   preflight zero-proposal successes   pass       0.0       0.0
+5                        pilot images   pass      20.0      20.0
+6                     pilot successes   pass      20.0      20.0
+7                      pilot failures   pass       0.0       0.0
+8                pilot scene coverage   pass      20.0      20.0
+9           pilot truncated responses   pass       0.0       0.0
+10      pilot zero-proposal successes   pass       0.0       0.0
+11                      repeat images   pass      20.0      20.0
+12             repeat matching images   pass      20.0      20.0
+13               repeat box agreement   pass       1.0       1.0
+14                        unique jobs   pass    2000.0    2000.0
+15                    successful jobs   pass    2000.0    2000.0
+16                        failed jobs   pass       0.0       0.0
+17                truncated responses   pass       0.0       0.0
+18                     scene coverage   pass     100.0     100.0
+19                      view coverage   pass      20.0      20.0
+20            zero-proposal successes   pass       0.0       0.0
+21                      invalid boxes   pass       0.0       0.0
+22                    duplicate boxes   pass       0.0       0.0
+
+[cell 14]
+<h4>Proposal summary by view</h4><IPython.core.display.HTML object>
+
+[cell 14]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>view_id</th>
+      <th>image_count</th>
+      <th>successful_count</th>
+      <th>failed_count</th>
+      <th>mean_proposal_count</th>
+      <th>mean_runtime_seconds</th>
+      <th>truncated_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>V00</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>3.77</td>
+      <td>0.4236</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>V01</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>3.80</td>
+      <td>0.4234</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>V02</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>3.80</td>
+      <td>0.4232</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>V03</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>4.44</td>
+      <td>0.5843</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>V04</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>4.60</td>
+      <td>0.6683</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>V05</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>5.31</td>
+      <td>0.5679</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>V06</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>3.81</td>
+      <td>0.4329</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>V07</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>5.99</td>
+      <td>0.6373</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>V08</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>3.78</td>
+      <td>0.4463</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>V09</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>8.78</td>
+      <td>0.8651</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>V10</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>6.00</td>
+      <td>0.6584</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>V11</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>3.82</td>
+      <td>0.4497</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>V12</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>3.76</td>
+      <td>0.4308</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>V13</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>5.01</td>
+      <td>0.7626</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>V14</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>6.68</td>
+      <td>0.6558</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>V15</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>3.87</td>
+      <td>0.4303</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>V16</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>4.03</td>
+      <td>0.4589</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>V17</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>3.75</td>
+      <td>0.4133</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>V18</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>3.79</td>
+      <td>0.4436</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>V19</td>
+      <td>100</td>
+      <td>100</td>
+      <td>0</td>
+      <td>3.70</td>
+      <td>0.4194</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>   view_id  image_count  successful_count  failed_count  mean_proposal_count  \
+0      V00          100               100             0                 3.77
+1      V01          100               100             0                 3.80
+2      V02          100               100             0                 3.80
+3      V03          100               100             0                 4.44
+4      V04          100               100             0                 4.60
+5      V05          100               100             0                 5.31
+6      V06          100               100             0                 3.81
+7      V07          100               100             0                 5.99
+8      V08          100               100             0                 3.78
+9      V09          100               100             0                 8.78
+10     V10          100               100             0                 6.00
+11     V11          100               100             0                 3.82
+12     V12          100               100             0                 3.76
+13     V13          100               100             0                 5.01
+14     V14          100               100             0                 6.68
+15     V15          100               100             0                 3.87
+16     V16          100               100             0                 4.03
+17     V17          100               100             0                 3.75
+18     V18          100               100             0                 3.79
+19     V19          100               100             0                 3.70
+
+    mean_runtime_seconds  truncated_count
+0                 0.4236                0
+1                 0.4234                0
+2                 0.4232                0
+3                 0.5843                0
+4                 0.6683                0
+5                 0.5679                0
+6                 0.4329                0
+7                 0.6373                0
+8                 0.4463                0
+9                 0.8651                0
+10                0.6584                0
+11                0.4497                0
+12                0.4308                0
+13                0.7626                0
+14                0.6558                0
+15                0.4303                0
+16                0.4589                0
+17                0.4133                0
+18                0.4436                0
+19                0.4194                0
+
+[cell 14]
+<h4>Failure summary</h4><IPython.core.display.HTML object>
+
+[cell 14]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>error_type</th>
+      <th>count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PossibleTruncation</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+</div>           error_type  count
+0  PossibleTruncation      8
+
+[cell 14]
+<IPython.core.display.Image object>
+
+[cell 14]
+<IPython.core.display.Image object>
+
+[cell 14]
+<IPython.core.display.Image object>
+
+[cell 14]
+<IPython.core.display.Image object>
+
+[cell 14]
+<IPython.core.display.Image object>
+
+[cell 14]
+<IPython.core.display.Image object>
+
+[cell 16]
+<IPython.core.display.Image object>
+
+[cell 16]
+<IPython.core.display.Image object>
+
+[cell 18]
+{'checkpoint_file_count': 4,
+ 'checkpoint_archive_sha256': '86790430c95a612e5c33df9d284ff8e36d064f9d69fff534368ed45b6bb5d777'}
+
+[cell 20]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 22.3 MB/s eta 0:00:00
+
+[cell 20]
+{'clearml_hosts': {'CLEARML_API_HOST': 'https://api.clear.ml',
+  'CLEARML_FILES_HOST': 'https://files.clear.ml',
+  'CLEARML_WEB_HOST': 'https://app.clear.ml'},
+ 'mode': 'online',
+ 'run_status': 'completed',
+ 'safe_manifest_sha256': '2304e4b81ed5ae1e4423e9f784a42c9aad482e6d09c2c29d1465ed7f6c50b461',
+ 'schema_version': 1,
+ 'stage': 'notebook_04_1_clearml_finalisation',
+ 'status': 'failed',
+ 'task_id': None,
+ 'tracking_attempt_count': 0,
+ 'tracking_error_category': 'internal_error',
+ 'tracking_error_type': 'ConnectionError',
+ 'tracking_retry_count': 0,
+ 'tracking_transient_failure_count': 0}
+
+[cell 20]
+ClearML finalisation failed after compute. Model outputs remain complete.
+
+[cell 22]
+{'run_status': 'completed',
+ 'completion_gate_passed': True,
+ 'safe_artifact_count': 24,
+ 'tracking_status': 'failed',
+ 'clearml_task_id': None,
+ 'private_results': '/kaggle/working/toysad8k_ds1_locateanything_screen/private/proposal_results.jsonl'}

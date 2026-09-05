@@ -1,0 +1,39 @@
+{
+  "attempt_timeout_seconds": 75.0,
+  "carried_zero_proposal_count": 2,
+  "cohort_id": "toysad8k-development-confirm-300-v1",
+  "configuration_sha256": "6167320c6cc3c7233385494b3e54f793eb4acaa6f21d8af196154ac6d23cfde6",
+  "discarded_untrusted_box_count": 227,
+  "ds1_freeze_sha256": "13e3f9b659ec7b96efd99fcbe3f20507a54c174ac2fccbe7bf89c127e456bedb",
+  "ds1_generation_configuration_sha256": "a1a634eb1bf9e679234ae4427601a656fb52c63e382246a975926c8d8c8738d5",
+  "effective_generation_configuration_sha256": "6167320c6cc3c7233385494b3e54f793eb4acaa6f21d8af196154ac6d23cfde6",
+  "effective_max_new_tokens": 4096,
+  "effective_operational_policy_sha256": "bd94b9a8182bd92e17b4ca273adc05bec6415aff18ef4f8f486c4c39161ce06d",
+  "evaluator_opened": false,
+  "failure_type_counts": {
+    "PossibleTruncation": 2
+  },
+  "image_count": 6000,
+  "maximum_attempts_per_job": 2,
+  "one_image_gate_passed": true,
+  "one_image_status": "ok",
+  "pilot_box_agreement_rate": 1.0,
+  "proposal_count": 23180,
+  "proposal_package_sha256": "670d008dd30c190dd951fbabc0701ddd47af5ba374f396eee95f9ef60f3bf01e",
+  "run_mode": "model_inference",
+  "runtime_seconds_this_session": 3648.3419780120003,
+  "schema_version": 1,
+  "session": {
+    "attempted_rows_this_session": 6007,
+    "elapsed_seconds": 3646.7158,
+    "history_row_count": 6007,
+    "latest_row_count": 6000,
+    "pending_job_count_at_start": 6000,
+    "successful_job_count": 5998
+  },
+  "stage": "ds2_frozen_locateanything",
+  "status": "completed",
+  "terminal_failed_image_count": 2,
+  "terminal_failure_disposition": "carry_as_zero_proposal",
+  "zero_proposal_image_count": 38
+}

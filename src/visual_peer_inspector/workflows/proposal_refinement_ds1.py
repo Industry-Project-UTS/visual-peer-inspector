@@ -47,6 +47,7 @@ class ProposalPolicy:
     minimum_area_fraction: float
     maximum_area_fraction: float
     nms_iou: float | None
+    maximum_proposals: int | None = None
 
 
 POLICIES = (
@@ -162,6 +163,18 @@ def apply_proposal_policy(
             continue
         kept.append(box)
         kept_indices.append(index)
+    if policy.maximum_proposals is not None and len(kept) > policy.maximum_proposals:
+        selected = sorted(
+            range(len(kept)),
+            key=lambda index: (_area_fraction(kept[index]), -index),
+            reverse=True,
+        )[: policy.maximum_proposals]
+        selected_set = set(selected)
+        removed["proposal_cap"] += len(kept) - len(selected_set)
+        kept = [box for index, box in enumerate(kept) if index in selected_set]
+        kept_indices = [
+            original for index, original in enumerate(kept_indices) if index in selected_set
+        ]
     return kept, kept_indices, removed
 
 

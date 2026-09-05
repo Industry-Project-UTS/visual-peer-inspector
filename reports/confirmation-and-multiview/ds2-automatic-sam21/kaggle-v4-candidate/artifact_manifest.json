@@ -1,0 +1,47 @@
+{
+  "artifact_count": 8,
+  "artifacts": [
+    {
+      "path": "completion_checks.csv",
+      "sha256": "450928faa6ae63aaf7dd079f3c77618f8b9f971a061cd403a926420bc6082788",
+      "size_bytes": 173
+    },
+    {
+      "path": "completion_summary.png",
+      "sha256": "f7a0383812b8496fdf34b05049fc0ab4ae305195ad9bf48e4c2e5317b7d7ab53",
+      "size_bytes": 18602
+    },
+    {
+      "path": "prompt_count_distribution.png",
+      "sha256": "27cb8844dd6a23a3d3a6dbbafb7f2167f797bbff66e58f09495521c235235676",
+      "size_bytes": 20773
+    },
+    {
+      "path": "repeat_agreement.json",
+      "sha256": "dc01f6b0339ec6f52d74a80579dacaba207048b6663487626a973665e7ba2909",
+      "size_bytes": 242
+    },
+    {
+      "path": "resolved_configuration.json",
+      "sha256": "1700838df108864b75100447a133ac394470a7c42f122a835bec1f474b622b3c",
+      "size_bytes": 700
+    },
+    {
+      "path": "route_summary.csv",
+      "sha256": "83874833165dbee745b624791855b7950fea6c8a0525345aa2cee5f7f2977658",
+      "size_bytes": 325
+    },
+    {
+      "path": "run_record.json",
+      "sha256": "e481cbdc9ff6b2ac30c68083455570ce6ffdaaa1124b9d9432933fa484a8ae1c",
+      "size_bytes": 891
+    },
+    {
+      "path": "runtime_distribution.png",
+      "sha256": "32a04d671d092f8934f986f5537cc913b4adc18c814321ab9e267bb96acae1a6",
+      "size_bytes": 21558
+    }
+  ],
+  "manifest_content_sha256": "12177670ea9ab1f2dae23e406c2a4780df9ac67892a95990bf6ac6f5ad470cde",
+  "schema_version": 1
+}

@@ -1,0 +1,3 @@
+prompt_key,prompt,source,image_count,successful_image_count,failed_image_count,mean_proposals_per_image,median_runtime_seconds,p95_runtime_seconds,total_inference_seconds
+object,object,reused_baseline,2000,2000,0,4.6245,0.4119,0.6277,1059.5058
+individual_object,individual object,new_model_run,2000,2000,0,4.6995,0.4064,0.6216,1027.8051

@@ -1,0 +1,44 @@
+{
+  "batch_size": 32,
+  "crop_configuration": {
+    "background_rgb": [
+      238,
+      241,
+      245
+    ],
+    "input_size": 224,
+    "minimum_foreground_pixels": 4,
+    "padding_fraction": 0.15
+  },
+  "invalid_mask_policy": {
+    "ranking_evidence": 0.0,
+    "reason": "foreground_pixels_below_minimum",
+    "retain_candidate": true,
+    "status": "invalid_mask"
+  },
+  "methods": [
+    "B0",
+    "P1"
+  ],
+  "model_key": "dinov2_small",
+  "model_specification": {
+    "backend": "transformers_dino",
+    "family": "DINOv2",
+    "gated": false,
+    "key": "dinov2_small",
+    "model_id": "facebook/dinov2-small",
+    "parameters_millions": 21,
+    "screen_stage": "core",
+    "supports_patches": true
+  },
+  "p1_top_fraction": 0.1,
+  "patch_validity_minimum_fraction": 0.5,
+  "resolved_revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "routes": [
+    "supplied_mask",
+    "reference_box",
+    "automatic_box"
+  ],
+  "run_mode": "model_inference",
+  "stage": "ds2_frozen_representation_and_peer_scores"
+}

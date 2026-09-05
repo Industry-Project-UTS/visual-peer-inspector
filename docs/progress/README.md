@@ -14,16 +14,25 @@ describe a next step that has since been completed. Use the current
 | Week 5 | [Proposal and mask evaluation](week-05-proposal-mask-evaluation.md) | Eight evaluation gates passed; DS1 supported |
 | Week 6 | [Representation and peer scores](week-06-representation-peer-scores.md) | B0, B1, P1 and bounded encoder screen completed on DS0 |
 | Week 6 | [DS1 detection and segmentation](week-06-ds1-detection-and-segmentation.md) | Reference-box SAM passed; the automatic proposal route needs refinement |
+| Week 7 | [DS1 proposal refinement](week-07-proposal-refinement.md) | Duplicate proposals reduced; missed objects remained |
+| Week 7 | [DS1 representation screen](week-07-ds1-representation-screen.md) | DINOv2-small and P1 selected for confirmation |
+| Week 8 | [DS2 confirmation](week-08-ds2-confirmation-preparation.md) | Frozen 300-scene model run and protected multi-view evaluation completed |
 
 ## Current position
 
-Notebooks 01 to 07 are complete on DS0. Notebooks 03.1 to 06.1 are also
-complete on the 100-scene DS1 development screen using clean source snapshots.
-The next experiment is the DS1 representation and encoder screen. Notebook 08
-begins after the encoder and scorer are frozen.
+Notebooks 01 to 08C are complete as development evidence. The DS1 screen
+selected DINOv2-small with P1 for confirmation, with B0 retained as the
+baseline. The bounded LocateAnything prompt comparison was verified on Kaggle
+Version 4. The 300-scene DS2 release, frozen model run, and protected
+multi-view evaluation have now completed.
 
-The automatic deployment route is not frozen. The DS1 evaluator supports the
-reference-box SAM 2.1 route but requires LocateAnything to be refined or
-replaced. The supplied-mask and reference-box routes can continue into
-representation testing while the automatic proposal route remains
-experimental.
+On DS2, LocateAnything reached 0.9383 recall and 0.9350 precision at box IoU
+0.50. It achieved complete object detection in 87.9 percent of images. SAM 2.1
+reached 0.9478 mean mask IoU with reference boxes and 0.8834 with automatic
+boxes. P1 improved the supplied-mask 20-view scene AP over B0 by 0.0505. The
+declared three-view automatic route reached 0.6531 scene AP.
+
+The automatic deployment route remains a candidate, not a perfect detector.
+The assisted route keeps user box confirmation before SAM 2.1. The next work
+is calibration of review behaviour, label-free identity matching, and one
+locked evaluation after the settings are saved.

@@ -1,0 +1,192 @@
+{
+  "description": "Publication-safe notebook execution evidence added to PR 12",
+  "file_count": 37,
+  "files": [
+    {
+      "path": "notebooks/confirmation-and-multiview/08a-toysad8k-ds2-confirmation-release-executed.ipynb",
+      "sha256": "d4f6ce4c1c7d7b421f0d5a15000e042665b60f2aad412a5df2eb18688b966e7d",
+      "size_bytes": 78913
+    },
+    {
+      "path": "notebooks/confirmation-and-multiview/08b-toysad8k-ds2-frozen-pipeline-executed.ipynb",
+      "sha256": "998abe15b50a6ff15895682bc7da6be4396487d6c5b3e61f1e1b986fad251435",
+      "size_bytes": 438256
+    },
+    {
+      "path": "notebooks/confirmation-and-multiview/08c-toysad8k-ds2-confirmation-and-multiview-executed.ipynb",
+      "sha256": "9c2e8543987d9dd47e6754ed0671b94eeadb2510ca6660dc4b30ab43405497d7",
+      "size_bytes": 442670
+    },
+    {
+      "path": "notebooks/data-preparation/toysad8k-ds1-opaque-package/03.1-toysad8k-ds1-opaque-package-executed.ipynb",
+      "sha256": "e428da7b22361a4b0bd0fae20b40c5f875d8bb762615422be9a482ecf2d7dae4",
+      "size_bytes": 43016
+    },
+    {
+      "path": "notebooks/detection-and-segmentation/toysad8k-ds1-locateanything/04.1-toysad8k-ds1-locateanything-screen-executed.ipynb",
+      "sha256": "c5ea5089814fea82f0db07320ae978b8a20b90805d662c6ae69a51d3026514d2",
+      "size_bytes": 266129
+    },
+    {
+      "path": "notebooks/detection-and-segmentation/toysad8k-ds1-locateanything-prompt-freeze/04.3-toysad8k-ds1-locateanything-prompt-freeze-executed.ipynb",
+      "sha256": "bf3e01c555b5cf454b224cf863c86f79528ca3a063be7a73733e182cbb6a87db",
+      "size_bytes": 311437
+    },
+    {
+      "path": "notebooks/detection-and-segmentation/toysad8k-ds1-mask-evaluation/06.1-toysad8k-ds1-proposal-and-mask-evaluation-executed.ipynb",
+      "sha256": "39312451673fb865023f37aa99c2b0cc2cc678b08bfb3cf206b6b2866640626b",
+      "size_bytes": 253375
+    },
+    {
+      "path": "notebooks/detection-and-segmentation/toysad8k-ds1-proposal-refinement/04.2-toysad8k-ds1-proposal-refinement-executed.ipynb",
+      "sha256": "1dd40a4759704b1a5138ce9990aacc00571f138537f6cd730132011785c416f4",
+      "size_bytes": 315391
+    },
+    {
+      "path": "notebooks/detection-and-segmentation/toysad8k-ds1-sam21/05.1-toysad8k-ds1-sam21-segmentation-executed.ipynb",
+      "sha256": "7a43e1918a4d327db819632db6c8925f44110864bf2f8b5e646fdba6f4ffac74",
+      "size_bytes": 208772
+    },
+    {
+      "path": "notebooks/representation-and-scoring/toysad8k-ds1-peer-scores/07.1-toysad8k-ds1-representation-and-peer-scores-executed.ipynb",
+      "sha256": "d762c0c3db4861086c074602bd949d0d2a91cc01d56accebb80b1265409a7c34",
+      "size_bytes": 982576
+    },
+    {
+      "path": "reports/run-evidence/clearml/ds1-locateanything-prompt-freeze.json",
+      "sha256": "6b21071a273628de6df36cf71def2f580ff06f21594dc5f91a7cec14eb1e8011",
+      "size_bytes": 263
+    },
+    {
+      "path": "reports/run-evidence/clearml/ds2-automatic-sam21.json",
+      "sha256": "d32d2a8d51b42fde13cd641a515909566f180667f24e106182b0028898b32008",
+      "size_bytes": 403
+    },
+    {
+      "path": "reports/run-evidence/clearml/ds2-confirmation-and-multiview.json",
+      "sha256": "18e3a2ea38aa72ace7afc0d507b51f5f490201f9146fd75fcf878828b0ff3f8f",
+      "size_bytes": 410
+    },
+    {
+      "path": "reports/run-evidence/clearml/ds2-confirmation-release.json",
+      "sha256": "a1cee4a47db52b2a75a24e7a57df6a91eacb7ee39ece215e2e164267fba9603a",
+      "size_bytes": 410
+    },
+    {
+      "path": "reports/run-evidence/clearml/ds2-dinov2-p1.json",
+      "sha256": "4b0c33ca2b30c98ee1e2d66c81c02800ff23673e608c45ac66cea0aa9f21795a",
+      "size_bytes": 421
+    },
+    {
+      "path": "reports/run-evidence/clearml/ds2-locateanything.json",
+      "sha256": "20713a6d53efb2c475bad11888ea6d426c5976c9da8176820f505abd6d7e30d6",
+      "size_bytes": 405
+    },
+    {
+      "path": "reports/run-evidence/clearml/ds2-reference-sam21.json",
+      "sha256": "1ea8c6118cf1796030758d0e2ebea281ae626ef431084fad848441913f984212",
+      "size_bytes": 403
+    },
+    {
+      "path": "reports/run-evidence/logs/03-1-ds1-opaque-package.log",
+      "sha256": "bb1866a316e4008d198fa6a87afec497e2f3713ccfba57fd1bebc947100a33a4",
+      "size_bytes": 4608
+    },
+    {
+      "path": "reports/run-evidence/logs/04-1-ds1-locateanything-screen.log",
+      "sha256": "b9c6af141bd29e7babe65a81402ca93f0fb77f8371e222007de0fc1056812550",
+      "size_bytes": 26938
+    },
+    {
+      "path": "reports/run-evidence/logs/04-2-ds1-proposal-refinement.log",
+      "sha256": "2356d839510babd00e9e75f481084818562fe1d69440e3d950efe4c5e0f0453c",
+      "size_bytes": 25903
+    },
+    {
+      "path": "reports/run-evidence/logs/04-3-ds1-locateanything-prompt-freeze.log",
+      "sha256": "96d49782e21908850872750b2abcda574ee8e572a1b8e0c641d7f04c7ed62ef5",
+      "size_bytes": 32748
+    },
+    {
+      "path": "reports/run-evidence/logs/05-1-ds1-sam21-segmentation.log",
+      "sha256": "799e9f87513eba5c6259567a3e4f3ea54408be737c1554fe2a17fe90dcb8e0c2",
+      "size_bytes": 29077
+    },
+    {
+      "path": "reports/run-evidence/logs/06-1-ds1-proposal-and-mask-evaluation.log",
+      "sha256": "6779998e602181c1ca4ebcf0dc029b039e12956ce893bf58b0a7b14c585f2e7d",
+      "size_bytes": 34963
+    },
+    {
+      "path": "reports/run-evidence/logs/07-1-ds1-representation-and-peer-scores.log",
+      "sha256": "c2a36551ddc1902edf1e32b875ca380b3b7ff5d637d86bd7b1915789fd867f5e",
+      "size_bytes": 102238
+    },
+    {
+      "path": "reports/run-evidence/logs/08a-ds2-confirmation-release.log",
+      "sha256": "bed749bdf28b3a1c5a3e9f7c550ddbd518820ba3026df91b4331b46a112486e6",
+      "size_bytes": 15621
+    },
+    {
+      "path": "reports/run-evidence/logs/08b-ds2-frozen-pipeline.log",
+      "sha256": "acd53ef5fe02495a0122248bd19fc0448c4f01d49ceb65059818fea664d7b96b",
+      "size_bytes": 47339
+    },
+    {
+      "path": "reports/run-evidence/logs/08c-ds2-confirmation-and-multiview.log",
+      "sha256": "a997c16574e26153d6b01de3ca43dc2619c479c31f3992f1054f134a32fe053b",
+      "size_bytes": 44324
+    },
+    {
+      "path": "reports/run-evidence/receipts/03-1-ds1-opaque-package.json",
+      "sha256": "d388679b1fae9a0d752789e5ae4a7f677f5038e8b6218bc06184eb4b0b77d5a6",
+      "size_bytes": 613
+    },
+    {
+      "path": "reports/run-evidence/receipts/04-1-ds1-locateanything-screen.json",
+      "sha256": "046268964189904fdb750c38d29533068f64b49ffa4d76f892ed78c4df63a4dc",
+      "size_bytes": 611
+    },
+    {
+      "path": "reports/run-evidence/receipts/04-2-ds1-proposal-refinement.json",
+      "sha256": "6078eb7ec9322a382da9c9b231664ef5848ed4158e8182801eeb0f255fe8b494",
+      "size_bytes": 609
+    },
+    {
+      "path": "reports/run-evidence/receipts/04-3-ds1-locateanything-prompt-freeze.json",
+      "sha256": "dc8828514743deaba336987537d0ee28e8d0d56f75a126ef1c9803a37324adf7",
+      "size_bytes": 618
+    },
+    {
+      "path": "reports/run-evidence/receipts/05-1-ds1-sam21-segmentation.json",
+      "sha256": "3a17e4c02b0edeb40fa9525ab4638eb098db9d86770533f6b55baf3495583928",
+      "size_bytes": 609
+    },
+    {
+      "path": "reports/run-evidence/receipts/06-1-ds1-proposal-and-mask-evaluation.json",
+      "sha256": "e86b045ce9ebef17b72b502281e930d948ddffd06b13082aedd4d0c44630d9e5",
+      "size_bytes": 617
+    },
+    {
+      "path": "reports/run-evidence/receipts/07-1-ds1-representation-and-peer-scores.json",
+      "sha256": "6fa063febf1346f5049f3954d0d788aca877226e77f52e92ea9260d189e801e7",
+      "size_bytes": 620
+    },
+    {
+      "path": "reports/run-evidence/receipts/08a-ds2-confirmation-release.json",
+      "sha256": "1e772978bc1ef2ff2ebda94e1ca4d175cd57e6395268629db15562b5729d7dd1",
+      "size_bytes": 608
+    },
+    {
+      "path": "reports/run-evidence/receipts/08b-ds2-frozen-pipeline.json",
+      "sha256": "fd31e9586577bab9847d6569c62e5d5eb4a522ae47cd585baa0b1cc0bdeb4115",
+      "size_bytes": 604
+    },
+    {
+      "path": "reports/run-evidence/receipts/08c-ds2-confirmation-and-multiview.json",
+      "sha256": "4eba0ecb125e1680dad6c602bc46a9df0838984190e0ffc1d6cbb23ba13bf041",
+      "size_bytes": 615
+    }
+  ],
+  "schema_version": 1
+}

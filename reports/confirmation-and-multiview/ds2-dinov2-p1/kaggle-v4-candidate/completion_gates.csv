@@ -1,0 +1,5 @@
+gate,expected,observed,passed
+scene_coverage,300,300,True
+score_coverage,138760,138760,True
+finite_scored_values,True,True,True
+evaluator_closed,False,False,True

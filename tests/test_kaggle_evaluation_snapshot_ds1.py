@@ -29,6 +29,10 @@ def test_clean_snapshot_contains_complete_ds1_execution_source(tmp_path, monkeyp
         notebook_version_04_1="1",
         notebook_version_05_1="1",
         notebook_version_06_1="1",
+        notebook_version_04_3="candidate",
+        notebook_version_08a="candidate",
+        notebook_version_08b="candidate",
+        notebook_version_08c="candidate",
     )
     code_root = output / "code"
     record = snapshot_builder.verify_snapshot_record(code_root)
@@ -41,6 +45,13 @@ def test_clean_snapshot_contains_complete_ds1_execution_source(tmp_path, monkeyp
     expected_ds1 = {path.as_posix() for path in snapshot_builder.DS1_NOTEBOOK_PATHS}
     assert expected_ds1.issubset(recorded)
     for relative in expected_ds1:
+        assert (code_root / relative).is_file()
+    assert record["platform_versions"]["kaggle_notebook_version_04_3"] == "candidate"
+
+    expected_ds2 = {path.as_posix() for path in snapshot_builder.DS2_NOTEBOOK_PATHS}
+    assert expected_ds2.issubset(recorded)
+    assert record["platform_versions"]["kaggle_notebook_version_08c"] == "candidate"
+    for relative in expected_ds2:
         assert (code_root / relative).is_file()
 
     expected_source = set()

@@ -1,0 +1,1019 @@
+Stage: 04.3 DS1 LocateAnything prompt freeze
+Status: completed
+Clean notebook: notebooks/detection-and-segmentation/toysad8k-ds1-locateanything-prompt-freeze/04.3-toysad8k-ds1-locateanything-prompt-freeze.ipynb
+Clean notebook SHA-256: ae36318efe1c8d0023405ab6cbe477dba26061f4380de0b3c3ebf6be6a3621bc
+Downloaded saved-output SHA-256: 25be57fae598c1182f0138829bb766357736f227cd6d3956e17d27629d67400c
+Executed code cells: 10
+Retained output blocks: 33
+Retained safe visuals: 7
+Removed private visuals: 8
+
+Sanitised execution transcript
+==============================
+
+[cell 2]
+Environment: kaggle
+Notebook: 04.3-toysad8k-ds1-locateanything-prompt-freeze.ipynb
+Output folder: /kaggle/temp/toysad8k_ds1_locateanything_prompt_freeze
+
+[cell 4]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>input</th>
+      <th>folder</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Code snapshot</td>
+      <td>vpi-code-snapshot</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>DS1 RGB package</td>
+      <td>vpi-toysad-ds1-screen100-model-input</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>DS1 evaluator package</td>
+      <td>vpi-toysad-ds1-mask-evaluator</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Notebook 04.1 baseline</td>
+      <td>vpi-toysad-ds1-locateanything-output</td>
+    </tr>
+  </tbody>
+</table>
+</div>                    input                                folder
+0           Code snapshot                     vpi-code-snapshot
+1         DS1 RGB package  vpi-toysad-ds1-screen100-model-input
+2   DS1 evaluator package         vpi-toysad-ds1-mask-evaluator
+3  Notebook 04.1 baseline  vpi-toysad-ds1-locateanything-output
+
+[cell 6]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.0/44.0 kB 1.1 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.6/13.6 MB 55.1 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 299.4/299.4 kB 21.8 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.0/50.0 MB 28.5 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 775.8/775.8 kB 48.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 49.4 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 30.5 MB/s eta 0:00:00
+
+[cell 6]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prompt key</th>
+      <th>prompt</th>
+      <th>source</th>
+      <th>model revision</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>object</td>
+      <td>object</td>
+      <td>Notebook 04.1 baseline</td>
+      <td>c32291ca5e996f5a7a485845b4f57a233936bba0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>individual_object</td>
+      <td>individual object</td>
+      <td>new model run</td>
+      <td>c32291ca5e996f5a7a485845b4f57a233936bba0</td>
+    </tr>
+  </tbody>
+</table>
+</div>          prompt key             prompt                  source  \
+0             object             object  Notebook 04.1 baseline
+1  individual_object  individual object           new model run
+
+                             model revision
+0  c32291ca5e996f5a7a485845b4f57a233936bba0
+1  c32291ca5e996f5a7a485845b4f57a233936bba0
+
+[cell 6]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>postprocessing policy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>raw</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>area_nms_075</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>area_nms_075_cap8</td>
+    </tr>
+  </tbody>
+</table>
+</div>  postprocessing policy
+0                   raw
+1          area_nms_075
+2     area_nms_075_cap8
+
+[cell 8]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GPU count</th>
+      <th>active GPU</th>
+      <th>CUDA runtime</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>Tesla T4</td>
+      <td>12.8</td>
+    </tr>
+  </tbody>
+</table>
+</div>   GPU count active GPU CUDA runtime
+0          2   Tesla T4         12.8
+
+[cell 8]
+{"device": "cuda", "dtype": "torch.float16", "elapsed_seconds": 23.436, "stage": "dependencies_ready"}
+{"elapsed_seconds": 23.436, "source_kind": "hub", "stage": "tokenizer_load_started"}
+{"elapsed_seconds": 25.688, "stage": "tokenizer_ready"}
+{"elapsed_seconds": 25.688, "source_kind": "hub", "stage": "processor_load_started"}
+/usr/local/lib/python3.12/dist-packages/transformers/models/auto/image_processing_auto.py:647: FutureWarning: The image_processor_class argument is deprecated and will be removed in v4.42. Please use `slow_image_processor_class`, or `fast_image_processor_class` instead
+  warnings.warn(
+{"elapsed_seconds": 28.973, "stage": "processor_ready"}
+{"elapsed_seconds": 28.973, "source_kind": "hub", "stage": "model_weights_load_started"}
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]
+Fetching 2 files:  50%|█████     | 1/2 [00:35<00:35, 35.60s/it]
+Fetching 2 files: 100%|██████████| 2/2 [00:35<00:00, 17.80s/it]
+WARNING:transformers_modules.nvidia.LocateAnything_hyphen_3B.c32291ca5e996f5a7a485845b4f57a233936bba0.modeling_locateanything:flash_attn is not available for MoonViT inference; falling back to sdpa.
+Qwen2ForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly defined. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+WARNING:transformers_modules.nvidia.LocateAnything_hyphen_3B.c32291ca5e996f5a7a485845b4f57a233936bba0.modeling_qwen2:magi_attention not available, falling back to sdpa
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.28s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.42s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.55s/it]
+{"elapsed_seconds": 75.101, "stage": "model_weights_loaded"}
+{"device": "cuda", "elapsed_seconds": 75.101, "stage": "model_device_move_started"}
+{"device": "cuda", "elapsed_seconds": 77.553, "stage": "model_ready"}
+/root/.cache/huggingface/modules/transformers_modules/nvidia/LocateAnything_hyphen_3B/c32291ca5e996f5a7a485845b4f57a233936bba0/generate_utils.py:186: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  box_avg.append(torch.tensor(out_ref, dtype=x0.dtype, device=x0.device))
+{"completed": 1, "elapsed_seconds": 1.889, "failed": 0, "stage": "prompt_progress", "successful": 1, "total": 1}
+{"completed": 1, "elapsed_seconds": 0.606, "failed": 0, "stage": "prompt_progress", "successful": 1, "total": 20}
+{"completed": 20, "elapsed_seconds": 8.487, "failed": 0, "stage": "prompt_progress", "successful": 20, "total": 20}
+{"completed": 1, "elapsed_seconds": 0.614, "failed": 0, "stage": "prompt_progress", "successful": 1, "total": 20}
+{"completed": 20, "elapsed_seconds": 8.54, "failed": 0, "stage": "prompt_progress", "successful": 20, "total": 20}
+{"completed": 1, "elapsed_seconds": 0.612, "failed": 0, "stage": "prompt_progress", "successful": 1, "total": 2000}
+{"completed": 100, "elapsed_seconds": 45.759, "failed": 0, "stage": "prompt_progress", "successful": 100, "total": 2000}
+{"completed": 200, "elapsed_seconds": 87.844, "failed": 0, "stage": "prompt_progress", "successful": 200, "total": 2000}
+{"completed": 300, "elapsed_seconds": 129.528, "failed": 0, "stage": "prompt_progress", "successful": 300, "total": 2000}
+{"completed": 400, "elapsed_seconds": 171.413, "failed": 0, "stage": "prompt_progress", "successful": 400, "total": 2000}
+{"completed": 500, "elapsed_seconds": 213.927, "failed": 0, "stage": "prompt_progress", "successful": 500, "total": 2000}
+{"completed": 600, "elapsed_seconds": 258.825, "failed": 0, "stage": "prompt_progress", "successful": 600, "total": 2000}
+{"completed": 700, "elapsed_seconds": 302.438, "failed": 0, "stage": "prompt_progress", "successful": 700, "total": 2000}
+{"completed": 800, "elapsed_seconds": 344.908, "failed": 0, "stage": "prompt_progress", "successful": 800, "total": 2000}
+{"completed": 900, "elapsed_seconds": 383.991, "failed": 0, "stage": "prompt_progress", "successful": 900, "total": 2000}
+{"completed": 1000, "elapsed_seconds": 426.701, "failed": 0, "stage": "prompt_progress", "successful": 1000, "total": 2000}
+{"completed": 1100, "elapsed_seconds": 465.468, "failed": 0, "stage": "prompt_progress", "successful": 1100, "total": 2000}
+{"completed": 1200, "elapsed_seconds": 507.909, "failed": 0, "stage": "prompt_progress", "successful": 1200, "total": 2000}
+{"completed": 1300, "elapsed_seconds": 552.351, "failed": 0, "stage": "prompt_progress", "successful": 1300, "total": 2000}
+{"completed": 1400, "elapsed_seconds": 1097.069, "failed": 0, "stage": "prompt_progress", "successful": 1400, "total": 2000}
+{"completed": 1500, "elapsed_seconds": 1142.45, "failed": 0, "stage": "prompt_progress", "successful": 1500, "total": 2000}
+{"completed": 1600, "elapsed_seconds": 1188.298, "failed": 0, "stage": "prompt_progress", "successful": 1600, "total": 2000}
+{"completed": 1700, "elapsed_seconds": 1230.864, "failed": 0, "stage": "prompt_progress", "successful": 1700, "total": 2000}
+{"completed": 1800, "elapsed_seconds": 1532.573, "failed": 0, "stage": "prompt_progress", "successful": 1800, "total": 2000}
+{"completed": 1900, "elapsed_seconds": 1573.171, "failed": 0, "stage": "prompt_progress", "successful": 1900, "total": 2000}
+{"completed": 2000, "elapsed_seconds": 1613.838, "failed": 0, "stage": "prompt_progress", "successful": 2000, "total": 2000}
+{
+  "evaluation": {
+    "all_completion_checks_passed": true,
+    "candidate_count": 6,
+    "cohort_id": "toysad8k-development-screen-100-v1",
+    "image_count": 2000,
+    "scene_count": 100,
+    "schema_version": 1,
+    "selected_candidate": "individual_object__area_nms_075_cap8",
+    "selected_postprocessing_policy": "area_nms_075_cap8",
+    "selected_prompt": "individual object",
+    "stage": "ds1_locateanything_prompt_freeze",
+    "status": "completed"
+  },
+  "final": {
+    "all_completion_checks_passed": true,
+    "baseline_reused": true,
+    "candidate_count": 6,
+    "cohort_id": "toysad8k-development-screen-100-v1",
+    "image_count": 2000,
+    "model_load_count": 1,
+    "new_model_prompt_count": 1,
+    "scene_count": 100,
+    "schema_version": 1,
+    "selected_candidate": "individual_object__area_nms_075_cap8",
+    "selected_postprocessing_policy": "area_nms_075_cap8",
+    "selected_prompt": "individual object",
+    "stage": "ds1_locateanything_prompt_freeze",
+    "status": "completed"
+  }
+}
+
+[cell 10]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>candidate_key</th>
+      <th>prompt_key</th>
+      <th>prompt</th>
+      <th>postprocessing_policy</th>
+      <th>image_count</th>
+      <th>reference_count</th>
+      <th>proposal_count</th>
+      <th>matched_count_at_0_50</th>
+      <th>precision_at_0_50</th>
+      <th>recall_at_0_50</th>
+      <th>...</th>
+      <th>full_image_success_rate</th>
+      <th>count_mean_absolute_error</th>
+      <th>count_signed_bias</th>
+      <th>miss_count</th>
+      <th>extra_count</th>
+      <th>images_with_misses</th>
+      <th>images_with_extras</th>
+      <th>merge_candidate_count</th>
+      <th>split_or_duplicate_candidate_count</th>
+      <th>mean_proposals_per_image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5</th>
+      <td>individual_object__area_nms_075_cap8</td>
+      <td>individual_object</td>
+      <td>individual object</td>
+      <td>area_nms_075_cap8</td>
+      <td>2000</td>
+      <td>7700</td>
+      <td>7610</td>
+      <td>7407</td>
+      <td>0.973325</td>
+      <td>0.961948</td>
+      <td>...</td>
+      <td>0.9060</td>
+      <td>0.1300</td>
+      <td>-0.0450</td>
+      <td>293</td>
+      <td>203</td>
+      <td>164</td>
+      <td>106</td>
+      <td>82</td>
+      <td>42</td>
+      <td>3.8050</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>individual_object__area_nms_075</td>
+      <td>individual_object</td>
+      <td>individual object</td>
+      <td>area_nms_075</td>
+      <td>2000</td>
+      <td>7700</td>
+      <td>8035</td>
+      <td>7412</td>
+      <td>0.922464</td>
+      <td>0.962597</td>
+      <td>...</td>
+      <td>0.9060</td>
+      <td>0.3425</td>
+      <td>0.1675</td>
+      <td>288</td>
+      <td>623</td>
+      <td>164</td>
+      <td>106</td>
+      <td>82</td>
+      <td>98</td>
+      <td>4.0175</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>object__area_nms_075_cap8</td>
+      <td>object</td>
+      <td>object</td>
+      <td>area_nms_075_cap8</td>
+      <td>2000</td>
+      <td>7700</td>
+      <td>7572</td>
+      <td>7275</td>
+      <td>0.960777</td>
+      <td>0.944805</td>
+      <td>...</td>
+      <td>0.8825</td>
+      <td>0.1770</td>
+      <td>-0.0640</td>
+      <td>425</td>
+      <td>297</td>
+      <td>205</td>
+      <td>147</td>
+      <td>93</td>
+      <td>44</td>
+      <td>3.7860</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>object__area_nms_075</td>
+      <td>object</td>
+      <td>object</td>
+      <td>area_nms_075</td>
+      <td>2000</td>
+      <td>7700</td>
+      <td>7996</td>
+      <td>7276</td>
+      <td>0.909955</td>
+      <td>0.944935</td>
+      <td>...</td>
+      <td>0.8825</td>
+      <td>0.3890</td>
+      <td>0.1480</td>
+      <td>424</td>
+      <td>720</td>
+      <td>204</td>
+      <td>147</td>
+      <td>93</td>
+      <td>67</td>
+      <td>3.9980</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>individual_object__raw</td>
+      <td>individual_object</td>
+      <td>individual object</td>
+      <td>raw</td>
+      <td>2000</td>
+      <td>7700</td>
+      <td>9399</td>
+      <td>7412</td>
+      <td>0.788595</td>
+      <td>0.962597</td>
+      <td>...</td>
+      <td>0.9060</td>
+      <td>1.0055</td>
+      <td>0.8495</td>
+      <td>288</td>
+      <td>1987</td>
+      <td>164</td>
+      <td>121</td>
+      <td>82</td>
+      <td>205</td>
+      <td>4.6995</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>object__raw</td>
+      <td>object</td>
+      <td>object</td>
+      <td>raw</td>
+      <td>2000</td>
+      <td>7700</td>
+      <td>9249</td>
+      <td>7276</td>
+      <td>0.786680</td>
+      <td>0.944935</td>
+      <td>...</td>
+      <td>0.8825</td>
+      <td>0.9925</td>
+      <td>0.7745</td>
+      <td>424</td>
+      <td>1973</td>
+      <td>204</td>
+      <td>164</td>
+      <td>93</td>
+      <td>81</td>
+      <td>4.6245</td>
+    </tr>
+  </tbody>
+</table>
+<p>6 rows × 29 columns</p>
+</div>                          candidate_key         prompt_key             prompt  \
+5  individual_object__area_nms_075_cap8  individual_object  individual object
+4       individual_object__area_nms_075  individual_object  individual object
+2             object__area_nms_075_cap8             object             object
+1                  object__area_nms_075             object             object
+3                individual_object__raw  individual_object  individual object
+0                           object__raw             object             object
+
+  postprocessing_policy  image_count  reference_count  proposal_count  \
+5     area_nms_075_cap8         2000             7700            7610
+4          area_nms_075         2000             7700            8035
+2     area_nms_075_cap8         2000             7700            7572
+1          area_nms_075         2000             7700            7996
+3                   raw         2000             7700            9399
+0                   raw         2000             7700            9249
+
+   matched_count_at_0_50  precision_at_0_50  recall_at_0_50  ...  \
+5                   7407           0.973325        0.961948  ...
+4                   7412           0.922464        0.962597  ...
+2                   7275           0.960777        0.944805  ...
+1                   7276           0.909955        0.944935  ...
+3                   7412           0.788595        0.962597  ...
+0                   7276           0.786680        0.944935  ...
+
+   full_image_success_rate  count_mean_absolute_error  count_signed_bias  \
+5                   0.9060                     0.1300            -0.0450
+4                   0.9060                     0.3425             0.1675
+2                   0.8825                     0.1770            -0.0640
+1                   0.8825                     0.3890             0.1480
+3                   0.9060                     1.0055             0.8495
+0                   0.8825                     0.9925             0.7745
+
+   miss_count  extra_count  images_with_misses  images_with_extras  \
+5         293          203                 164                 106
+4         288          623                 164                 106
+2         425          297                 205                 147
+1         424          720                 204                 147
+3         288         1987                 164                 121
+0         424         1973                 204                 164
+
+   merge_candidate_count  split_or_duplicate_candidate_count  \
+5                     82                                  42
+4                     82                                  98
+2                     93                                  44
+1                     93                                  67
+3                     82                                 205
+0                     93                                  81
+
+   mean_proposals_per_image
+5                    3.8050
+4                    4.0175
+2                    3.7860
+1                    3.9980
+3                    4.6995
+0                    4.6245
+
+[6 rows x 29 columns]
+
+[cell 10]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prompt_key</th>
+      <th>prompt</th>
+      <th>source</th>
+      <th>image_count</th>
+      <th>successful_image_count</th>
+      <th>failed_image_count</th>
+      <th>mean_proposals_per_image</th>
+      <th>median_runtime_seconds</th>
+      <th>p95_runtime_seconds</th>
+      <th>total_inference_seconds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>object</td>
+      <td>object</td>
+      <td>reused_baseline</td>
+      <td>2000</td>
+      <td>2000</td>
+      <td>0</td>
+      <td>4.6245</td>
+      <td>0.4119</td>
+      <td>0.6277</td>
+      <td>1059.5058</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>individual_object</td>
+      <td>individual object</td>
+      <td>new_model_run</td>
+      <td>2000</td>
+      <td>2000</td>
+      <td>0</td>
+      <td>4.6995</td>
+      <td>0.4064</td>
+      <td>0.6216</td>
+      <td>1027.8051</td>
+    </tr>
+  </tbody>
+</table>
+</div>          prompt_key             prompt           source  image_count  \
+0             object             object  reused_baseline         2000
+1  individual_object  individual object    new_model_run         2000
+
+   successful_image_count  failed_image_count  mean_proposals_per_image  \
+0                    2000                   0                    4.6245
+1                    2000                   0                    4.6995
+
+   median_runtime_seconds  p95_runtime_seconds  total_inference_seconds
+0                  0.4119               0.6277                1059.5058
+1                  0.4064               0.6216                1027.8051
+
+[cell 10]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prompt_key</th>
+      <th>prompt</th>
+      <th>pilot_image_count</th>
+      <th>exact_box_agreement_rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>object</td>
+      <td>object</td>
+      <td>20</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>individual_object</td>
+      <td>individual object</td>
+      <td>20</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>          prompt_key             prompt  pilot_image_count  \
+0             object             object                 20
+1  individual_object  individual object                 20
+
+   exact_box_agreement_rate
+0                       1.0
+1                       1.0
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 12]
+<IPython.core.display.Image object>
+
+[cell 12]
+<IPython.core.display.Image object>
+
+[cell 12]
+<IPython.core.display.Image object>
+
+[cell 12]
+<IPython.core.display.Image object>
+
+[cell 12]
+<IPython.core.display.Image object>
+
+[cell 12]
+<IPython.core.display.Image object>
+
+[cell 12]
+<IPython.core.display.Image object>
+
+[cell 12]
+<IPython.core.display.Image object>
+
+[cell 14]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>candidate_key</th>
+      <th>complete_detection_rate</th>
+      <th>detection_aware_mean_iou</th>
+      <th>f1_at_0_50</th>
+      <th>f2_at_0_50</th>
+      <th>mean_matched_iou</th>
+      <th>postprocessing_policy</th>
+      <th>precision_at_0_50</th>
+      <th>prompt</th>
+      <th>prompt_key</th>
+      <th>proposal_count</th>
+      <th>recall_at_0_50</th>
+      <th>recall_at_0_75</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>individual_object__area_nms_075_cap8</td>
+      <td>0.918</td>
+      <td>0.900626</td>
+      <td>0.967603</td>
+      <td>0.964202</td>
+      <td>0.936252</td>
+      <td>area_nms_075_cap8</td>
+      <td>0.973325</td>
+      <td>individual object</td>
+      <td>individual_object</td>
+      <td>7610</td>
+      <td>0.961948</td>
+      <td>0.922338</td>
+    </tr>
+  </tbody>
+</table>
+</div>                          candidate_key  complete_detection_rate  \
+0  individual_object__area_nms_075_cap8                    0.918
+
+   detection_aware_mean_iou  f1_at_0_50  f2_at_0_50  mean_matched_iou  \
+0                  0.900626    0.967603    0.964202          0.936252
+
+  postprocessing_policy  precision_at_0_50             prompt  \
+0     area_nms_075_cap8           0.973325  individual object
+
+          prompt_key  proposal_count  recall_at_0_50  recall_at_0_75
+0  individual_object            7610        0.961948        0.922338
+
+[cell 14]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>check</th>
+      <th>passed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>all prompt candidates completed</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>candidate files locked before evaluation</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>all candidate policies evaluated</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>selected configuration reserved for unchanged ...</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Notebook 04.1 object baseline reused</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>LocateAnything model loaded at most once</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>one-image, pilot, repeat and full gates completed</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>aggregate-only ClearML evidence prepared</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                               check  passed
+0                    all prompt candidates completed    True
+1           candidate files locked before evaluation    True
+2                   all candidate policies evaluated    True
+3  selected configuration reserved for unchanged ...    True
+4               Notebook 04.1 object baseline reused    True
+5           LocateAnything model loaded at most once    True
+6  one-image, pilot, repeat and full gates completed    True
+7           aggregate-only ClearML evidence prepared    True
+
+[cell 14]
+Maximise F2 at box IoU 0.50, then recall at IoU 0.75, detection-aware mean IoU, complete-detection rate, F1, precision, and lower proposal count.
+This DS1 choice must be confirmed unchanged on DS2 before it is treated as frozen.
+
+[cell 16]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mode</th>
+      <th>safe_manifest_sha256</th>
+      <th>schema_version</th>
+      <th>stage</th>
+      <th>status</th>
+      <th>task_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>disabled</td>
+      <td>6b005fc814f320d0f658f9281dce28225be220b68dce8e...</td>
+      <td>1</td>
+      <td>notebook_04_3_clearml_finalisation</td>
+      <td>disabled</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div>       mode                               safe_manifest_sha256  \
+0  disabled  6b005fc814f320d0f658f9281dce28225be220b68dce8e...
+
+   schema_version                               stage    status task_id
+0               1  notebook_04_3_clearml_finalisation  disabled    None
+
+[cell 18]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>status</th>
+      <th>selected candidate</th>
+      <th>evaluated images per prompt</th>
+      <th>candidate and policy combinations</th>
+      <th>safe artifact count</th>
+      <th>baseline reused</th>
+      <th>model loads in this run</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>completed</td>
+      <td>individual_object__area_nms_075_cap8</td>
+      <td>2000</td>
+      <td>6</td>
+      <td>15</td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>      status                    selected candidate  \
+0  completed  individual_object__area_nms_075_cap8
+
+   evaluated images per prompt  candidate and policy combinations  \
+0                         2000                                  6
+
+   safe artifact count  baseline reused  model loads in this run
+0                   15             True                        1
+
+[cell 20]
+{"archives": [{"path": "ds1-locateanything-prompt-freeze-repository-evidence.zip", "sha256": "9552945386bb577289ef3d00da14e71b1deeaeb9384d660c5d3bd20059a5c6e0", "size_bytes": 145547, "source_file_count": 16}, {"path": "ds1-locateanything-prompt-freeze-review-evidence.zip", "sha256": "a794ee49419e140c3ca9db3dcf32450ad03d67f7ff12ed39c053a8dcd1701b52", "size_bytes": 10135594, "source_file_count": 10}, {"path": "ds1-locateanything-prompt-freeze-downstream-input.zip", "sha256": "d504c37c9c8552362c68a583071ee2ba936f5fe284d24727ffc77f29c1db685f", "size_bytes": 292048, "source_file_count": 3}], "downstream_file_count": 3, "review_file_count": 10, "safe_file_count": 16, "safe_manifest_sha256": "6b005fc814f320d0f658f9281dce28225be220b68dce8ed1025a50b4c70a2c4a", "schema_version": 1, "stage": "ds1-locateanything-prompt-freeze", "status": "completed"}
+
+[cell 20]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>path</th>
+      <th>sha256</th>
+      <th>size_bytes</th>
+      <th>source_file_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ds1-locateanything-prompt-freeze-repository-ev...</td>
+      <td>9552945386bb577289ef3d00da14e71b1deeaeb9384d66...</td>
+      <td>145547</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ds1-locateanything-prompt-freeze-review-eviden...</td>
+      <td>a794ee49419e140c3ca9db3dcf32450ad03d67f7ff12ed...</td>
+      <td>10135594</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ds1-locateanything-prompt-freeze-downstream-in...</td>
+      <td>d504c37c9c8552362c68a583071ee2ba936f5fe284d247...</td>
+      <td>292048</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                                path  \
+0  ds1-locateanything-prompt-freeze-repository-ev...
+1  ds1-locateanything-prompt-freeze-review-eviden...
+2  ds1-locateanything-prompt-freeze-downstream-in...
+
+                                              sha256  size_bytes  \
+0  9552945386bb577289ef3d00da14e71b1deeaeb9384d66...      145547
+1  a794ee49419e140c3ca9db3dcf32450ad03d67f7ff12ed...    10135594
+2  d504c37c9c8552362c68a583071ee2ba936f5fe284d247...      292048
+
+   source_file_count
+0                 16
+1                 10
+2                  3
+
+[cell 20]
+Compact downloads: /kaggle/working/notebook04_3_bundles

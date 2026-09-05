@@ -1,0 +1,1392 @@
+Stage: 06.1 DS1 proposal and mask evaluation
+Status: completed
+Clean notebook: notebooks/detection-and-segmentation/toysad8k-ds1-mask-evaluation/06.1-toysad8k-ds1-proposal-and-mask-evaluation.ipynb
+Clean notebook SHA-256: c99ea280caf24faeda03c61f3a96ce274fe6bffc89bf0162daa8473d576fee15
+Downloaded saved-output SHA-256: 142deac2d8d587de708b5a5b4b5930d399eb92bebf18885afd575616422b26c0
+Executed code cells: 9
+Retained output blocks: 26
+Retained safe visuals: 6
+Removed private visuals: 3
+
+Sanitised execution transcript
+==============================
+
+[cell 2]
+Environment: kaggle
+Notebook: 06.1-toysad8k-ds1-proposal-and-mask-evaluation.ipynb
+Code snapshot: cfb8559faba4745dd1d29c0148ed26ec985500009c0f69f127b4d771bfaa45ca
+
+[cell 4]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>input</th>
+      <th>folder</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>private evaluator package</td>
+      <td>vpi-toysad-ds1-mask-evaluator</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LocateAnything output</td>
+      <td>vpi-toysad-ds1-locateanything-output</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SAM 2.1 output</td>
+      <td>toysad8k_ds1_sam21_segmentation</td>
+    </tr>
+  </tbody>
+</table>
+</div>                       input                                folder
+0  private evaluator package         vpi-toysad-ds1-mask-evaluator
+1      LocateAnything output  vpi-toysad-ds1-locateanything-output
+2             SAM 2.1 output       toysad8k_ds1_sam21_segmentation
+
+[cell 6]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>reference_rows</th>
+      <th>decoded_sam_masks</th>
+      <th>proposal_images</th>
+      <th>sam_images</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7700</td>
+      <td>16949</td>
+      <td>2000</td>
+      <td>2000</td>
+    </tr>
+  </tbody>
+</table>
+</div>   reference_rows  decoded_sam_masks  proposal_images  sam_images
+0            7700              16949             2000        2000
+
+[cell 8]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>metric</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>image_count</td>
+      <td>2000.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>scene_count</td>
+      <td>100.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>reference_count</td>
+      <td>7700.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>proposal_count</td>
+      <td>9249.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>matched_count_at_0_25</td>
+      <td>7362.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>matched_count_at_0_50</td>
+      <td>7276.000000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>matched_count_at_0_75</td>
+      <td>6960.000000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>exact_count_rate</td>
+      <td>0.900500</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>count_mean_absolute_error</td>
+      <td>0.992500</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>count_signed_bias</td>
+      <td>0.774500</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>full_image_success_rate</td>
+      <td>0.882500</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>micro_precision_at_0_50</td>
+      <td>0.786680</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>micro_recall_at_0_50</td>
+      <td>0.944935</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>micro_f1_at_0_50</td>
+      <td>0.858576</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>micro_recall_at_0_75</td>
+      <td>0.903896</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>mean_matched_iou</td>
+      <td>0.935728</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>median_matched_iou</td>
+      <td>0.960784</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>p10_matched_iou</td>
+      <td>0.855653</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>detection_aware_mean_iou</td>
+      <td>0.884202</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>miss_count</td>
+      <td>424.000000</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>extra_count</td>
+      <td>1973.000000</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>images_with_misses</td>
+      <td>204.000000</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>images_with_extras</td>
+      <td>164.000000</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>merge_candidate_count</td>
+      <td>93.000000</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>split_candidate_count</td>
+      <td>81.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>                       metric        value
+0                 image_count  2000.000000
+1                 scene_count   100.000000
+2             reference_count  7700.000000
+3              proposal_count  9249.000000
+4       matched_count_at_0_25  7362.000000
+5       matched_count_at_0_50  7276.000000
+6       matched_count_at_0_75  6960.000000
+7            exact_count_rate     0.900500
+8   count_mean_absolute_error     0.992500
+9           count_signed_bias     0.774500
+10    full_image_success_rate     0.882500
+11    micro_precision_at_0_50     0.786680
+12       micro_recall_at_0_50     0.944935
+13           micro_f1_at_0_50     0.858576
+14       micro_recall_at_0_75     0.903896
+15           mean_matched_iou     0.935728
+16         median_matched_iou     0.960784
+17            p10_matched_iou     0.855653
+18   detection_aware_mean_iou     0.884202
+19                 miss_count   424.000000
+20                extra_count  1973.000000
+21         images_with_misses   204.000000
+22         images_with_extras   164.000000
+23      merge_candidate_count    93.000000
+24      split_candidate_count    81.000000
+
+[cell 8]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>metric</th>
+      <th>point_estimate</th>
+      <th>ci_lower_95</th>
+      <th>ci_upper_95</th>
+      <th>bootstrap_repetitions</th>
+      <th>asset_cluster_count</th>
+      <th>seed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>exact_count_rate</td>
+      <td>0.900500</td>
+      <td>0.863861</td>
+      <td>0.935149</td>
+      <td>10000</td>
+      <td>27</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>micro_precision_at_0_50</td>
+      <td>0.786680</td>
+      <td>0.657874</td>
+      <td>0.929500</td>
+      <td>10000</td>
+      <td>27</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>micro_recall_at_0_50</td>
+      <td>0.944935</td>
+      <td>0.922800</td>
+      <td>0.965658</td>
+      <td>10000</td>
+      <td>27</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>micro_recall_at_0_75</td>
+      <td>0.903896</td>
+      <td>0.869693</td>
+      <td>0.936352</td>
+      <td>10000</td>
+      <td>27</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>mean_matched_iou</td>
+      <td>0.935728</td>
+      <td>0.922658</td>
+      <td>0.947455</td>
+      <td>10000</td>
+      <td>27</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>detection_aware_mean_iou</td>
+      <td>0.884202</td>
+      <td>0.857530</td>
+      <td>0.910169</td>
+      <td>10000</td>
+      <td>27</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>full_image_success_rate</td>
+      <td>0.882500</td>
+      <td>0.838835</td>
+      <td>0.923980</td>
+      <td>10000</td>
+      <td>27</td>
+      <td>32040</td>
+    </tr>
+  </tbody>
+</table>
+</div>                     metric  point_estimate  ci_lower_95  ci_upper_95  \
+0          exact_count_rate        0.900500     0.863861     0.935149
+1   micro_precision_at_0_50        0.786680     0.657874     0.929500
+2      micro_recall_at_0_50        0.944935     0.922800     0.965658
+3      micro_recall_at_0_75        0.903896     0.869693     0.936352
+4          mean_matched_iou        0.935728     0.922658     0.947455
+5  detection_aware_mean_iou        0.884202     0.857530     0.910169
+6   full_image_success_rate        0.882500     0.838835     0.923980
+
+   bootstrap_repetitions  asset_cluster_count   seed
+0                  10000                   27  32040
+1                  10000                   27  32040
+2                  10000                   27  32040
+3                  10000                   27  32040
+4                  10000                   27  32040
+5                  10000                   27  32040
+6                  10000                   27  32040
+
+[cell 8]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dimension</th>
+      <th>subgroup_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>anomaly_family</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>category</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>object_count</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>view_id</td>
+      <td>20</td>
+    </tr>
+  </tbody>
+</table>
+</div>        dimension  subgroup_count
+0  anomaly_family               8
+1        category              27
+2    object_count               3
+3         view_id              20
+
+[cell 8]
+<IPython.core.display.Image object>
+
+[cell 8]
+<IPython.core.display.Image object>
+
+[cell 10]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>reference_count</th>
+      <th>prediction_count</th>
+      <th>matched_reference_count</th>
+      <th>missed_reference_count</th>
+      <th>unmatched_prediction_count</th>
+      <th>detection_aware_recall_at_0_75</th>
+      <th>mean_matched_iou</th>
+      <th>detection_aware_mean_iou</th>
+      <th>mean_matched_dice</th>
+      <th>...</th>
+      <th>mean_matched_boundary_f1</th>
+      <th>mean_matched_boundary_precision</th>
+      <th>mean_matched_boundary_recall</th>
+      <th>detection_aware_mean_boundary_f1</th>
+      <th>detection_aware_mean_boundary_precision</th>
+      <th>detection_aware_mean_boundary_recall</th>
+      <th>mean_prediction_spill_fraction</th>
+      <th>prediction_spill_rate</th>
+      <th>mask_iou_threshold</th>
+      <th>boundary_tolerance_pixels</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic_box</td>
+      <td>7700</td>
+      <td>9249</td>
+      <td>7276</td>
+      <td>424</td>
+      <td>1973</td>
+      <td>0.924805</td>
+      <td>0.945971</td>
+      <td>0.893881</td>
+      <td>0.970747</td>
+      <td>...</td>
+      <td>0.976651</td>
+      <td>0.976403</td>
+      <td>0.980912</td>
+      <td>0.922871</td>
+      <td>0.922638</td>
+      <td>0.926899</td>
+      <td>0.041193</td>
+      <td>0.488161</td>
+      <td>0.75</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>reference_box</td>
+      <td>7700</td>
+      <td>7700</td>
+      <td>7700</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.992338</td>
+      <td>0.952675</td>
+      <td>0.952675</td>
+      <td>0.975121</td>
+      <td>...</td>
+      <td>0.985153</td>
+      <td>0.982166</td>
+      <td>0.990643</td>
+      <td>0.985153</td>
+      <td>0.982166</td>
+      <td>0.990643</td>
+      <td>0.000639</td>
+      <td>0.242987</td>
+      <td>0.75</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+<p>2 rows × 21 columns</p>
+</div>           route  reference_count  prediction_count  matched_reference_count  \
+0  automatic_box             7700              9249                     7276
+1  reference_box             7700              7700                     7700
+
+   missed_reference_count  unmatched_prediction_count  \
+0                     424                        1973
+1                       0                           0
+
+   detection_aware_recall_at_0_75  mean_matched_iou  detection_aware_mean_iou  \
+0                        0.924805          0.945971                  0.893881
+1                        0.992338          0.952675                  0.952675
+
+   mean_matched_dice  ...  mean_matched_boundary_f1  \
+0           0.970747  ...                  0.976651
+1           0.975121  ...                  0.985153
+
+   mean_matched_boundary_precision  mean_matched_boundary_recall  \
+0                         0.976403                      0.980912
+1                         0.982166                      0.990643
+
+   detection_aware_mean_boundary_f1  detection_aware_mean_boundary_precision  \
+0                          0.922871                                 0.922638
+1                          0.985153                                 0.982166
+
+   detection_aware_mean_boundary_recall  mean_prediction_spill_fraction  \
+0                              0.926899                        0.041193
+1                              0.990643                        0.000639
+
+   prediction_spill_rate  mask_iou_threshold  boundary_tolerance_pixels
+0               0.488161                0.75                          3
+1               0.242987                0.75                          3
+
+[2 rows x 21 columns]
+
+[cell 10]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>metric</th>
+      <th>direction</th>
+      <th>scene_count</th>
+      <th>cluster_count</th>
+      <th>baseline_mean</th>
+      <th>candidate_mean</th>
+      <th>mean_difference</th>
+      <th>confidence_level</th>
+      <th>ci_lower</th>
+      <th>ci_upper</th>
+      <th>repetitions</th>
+      <th>seed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>reference_minus_automatic_iou</td>
+      <td>baseline_minus_candidate</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.953458</td>
+      <td>0.893841</td>
+      <td>0.059617</td>
+      <td>0.95</td>
+      <td>0.037023</td>
+      <td>0.085088</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>reference_minus_automatic_dice</td>
+      <td>baseline_minus_candidate</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.975503</td>
+      <td>0.916748</td>
+      <td>0.058754</td>
+      <td>0.95</td>
+      <td>0.035991</td>
+      <td>0.084096</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>reference_minus_automatic_boundary_f1</td>
+      <td>baseline_minus_candidate</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.983571</td>
+      <td>0.920450</td>
+      <td>0.063121</td>
+      <td>0.95</td>
+      <td>0.039983</td>
+      <td>0.088323</td>
+      <td>10000</td>
+      <td>32040</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                  metric                 direction  \
+0          reference_minus_automatic_iou  baseline_minus_candidate
+1         reference_minus_automatic_dice  baseline_minus_candidate
+2  reference_minus_automatic_boundary_f1  baseline_minus_candidate
+
+   scene_count  cluster_count  baseline_mean  candidate_mean  mean_difference  \
+0          100             27       0.953458        0.893841         0.059617
+1          100             27       0.975503        0.916748         0.058754
+2          100             27       0.983571        0.920450         0.063121
+
+   confidence_level  ci_lower  ci_upper  repetitions   seed
+0              0.95  0.037023  0.085088        10000  32040
+1              0.95  0.035991  0.084096        10000  32040
+2              0.95  0.039983  0.088323        10000  32040
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 10]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>component</th>
+      <th>metric</th>
+      <th>dimension</th>
+      <th>value</th>
+      <th>point_estimate</th>
+      <th>ci_lower_95</th>
+      <th>cluster_count</th>
+      <th>scene_count</th>
+      <th>support_count</th>
+      <th>support_unit</th>
+      <th>gate_statistic</th>
+      <th>gate_observed</th>
+      <th>threshold</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic_box</td>
+      <td>detection_aware_mean_iou</td>
+      <td>view_id</td>
+      <td>V09</td>
+      <td>0.841555</td>
+      <td>0.763455</td>
+      <td>27</td>
+      <td>100</td>
+      <td>385</td>
+      <td>references</td>
+      <td>ci_lower_95</td>
+      <td>0.763455</td>
+      <td>0.80</td>
+      <td>fail</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>automatic_box</td>
+      <td>detection_aware_recall_at_0_75</td>
+      <td>view_id</td>
+      <td>V09</td>
+      <td>0.872727</td>
+      <td>0.791207</td>
+      <td>27</td>
+      <td>100</td>
+      <td>385</td>
+      <td>references</td>
+      <td>ci_lower_95</td>
+      <td>0.791207</td>
+      <td>0.80</td>
+      <td>fail</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>proposal</td>
+      <td>precision_at_0_50</td>
+      <td>view_id</td>
+      <td>V09</td>
+      <td>0.390661</td>
+      <td>0.200121</td>
+      <td>27</td>
+      <td>100</td>
+      <td>878</td>
+      <td>proposals</td>
+      <td>ci_lower_95</td>
+      <td>0.200121</td>
+      <td>0.80</td>
+      <td>fail</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>proposal</td>
+      <td>recall_at_0_50</td>
+      <td>view_id</td>
+      <td>V09</td>
+      <td>0.890909</td>
+      <td>0.807975</td>
+      <td>27</td>
+      <td>100</td>
+      <td>385</td>
+      <td>references</td>
+      <td>ci_lower_95</td>
+      <td>0.807975</td>
+      <td>0.85</td>
+      <td>fail</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>reference_box</td>
+      <td>detection_aware_mean_iou</td>
+      <td>anomaly_family</td>
+      <td>disc</td>
+      <td>0.941048</td>
+      <td>0.918245</td>
+      <td>9</td>
+      <td>27</td>
+      <td>2120</td>
+      <td>references</td>
+      <td>ci_lower_95</td>
+      <td>0.918245</td>
+      <td>0.80</td>
+      <td>pass</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>reference_box</td>
+      <td>detection_aware_recall_at_0_75</td>
+      <td>anomaly_family</td>
+      <td>crack</td>
+      <td>0.983945</td>
+      <td>0.957851</td>
+      <td>10</td>
+      <td>29</td>
+      <td>2180</td>
+      <td>references</td>
+      <td>ci_lower_95</td>
+      <td>0.957851</td>
+      <td>0.80</td>
+      <td>pass</td>
+    </tr>
+  </tbody>
+</table>
+</div>       component                          metric       dimension  value  \
+0  automatic_box        detection_aware_mean_iou         view_id    V09
+1  automatic_box  detection_aware_recall_at_0_75         view_id    V09
+2       proposal               precision_at_0_50         view_id    V09
+3       proposal                  recall_at_0_50         view_id    V09
+4  reference_box        detection_aware_mean_iou  anomaly_family   disc
+5  reference_box  detection_aware_recall_at_0_75  anomaly_family  crack
+
+   point_estimate  ci_lower_95  cluster_count  scene_count  support_count  \
+0        0.841555     0.763455             27          100            385
+1        0.872727     0.791207             27          100            385
+2        0.390661     0.200121             27          100            878
+3        0.890909     0.807975             27          100            385
+4        0.941048     0.918245              9           27           2120
+5        0.983945     0.957851             10           29           2180
+
+  support_unit gate_statistic  gate_observed  threshold status
+0   references    ci_lower_95       0.763455       0.80   fail
+1   references    ci_lower_95       0.791207       0.80   fail
+2    proposals    ci_lower_95       0.200121       0.80   fail
+3   references    ci_lower_95       0.807975       0.85   fail
+4   references    ci_lower_95       0.918245       0.80   pass
+5   references    ci_lower_95       0.957851       0.80   pass
+
+[cell 10]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>component</th>
+      <th>metric</th>
+      <th>eligible</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic_box</td>
+      <td>detection_aware_mean_iou</td>
+      <td>no</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>automatic_box</td>
+      <td>detection_aware_mean_iou</td>
+      <td>yes</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>automatic_box</td>
+      <td>detection_aware_recall_at_0_75</td>
+      <td>no</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>automatic_box</td>
+      <td>detection_aware_recall_at_0_75</td>
+      <td>yes</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>proposal</td>
+      <td>precision_at_0_50</td>
+      <td>no</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>proposal</td>
+      <td>precision_at_0_50</td>
+      <td>yes</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>proposal</td>
+      <td>recall_at_0_50</td>
+      <td>no</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>proposal</td>
+      <td>recall_at_0_50</td>
+      <td>yes</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>reference_box</td>
+      <td>detection_aware_mean_iou</td>
+      <td>no</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>reference_box</td>
+      <td>detection_aware_mean_iou</td>
+      <td>yes</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>reference_box</td>
+      <td>detection_aware_recall_at_0_75</td>
+      <td>no</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>reference_box</td>
+      <td>detection_aware_recall_at_0_75</td>
+      <td>yes</td>
+      <td>26</td>
+    </tr>
+  </tbody>
+</table>
+</div>        component                          metric eligible  size
+0   automatic_box        detection_aware_mean_iou       no    32
+1   automatic_box        detection_aware_mean_iou      yes    26
+2   automatic_box  detection_aware_recall_at_0_75       no    32
+3   automatic_box  detection_aware_recall_at_0_75      yes    26
+4        proposal               precision_at_0_50       no    32
+5        proposal               precision_at_0_50      yes    26
+6        proposal                  recall_at_0_50       no    32
+7        proposal                  recall_at_0_50      yes    26
+8   reference_box        detection_aware_mean_iou       no    32
+9   reference_box        detection_aware_mean_iou      yes    26
+10  reference_box  detection_aware_recall_at_0_75       no    32
+11  reference_box  detection_aware_recall_at_0_75      yes    26
+
+[cell 12]
+<IPython.core.display.Image object>
+
+[cell 12]
+<IPython.core.display.Image object>
+
+[cell 12]
+<IPython.core.display.Image object>
+
+[cell 14]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gate</th>
+      <th>observed</th>
+      <th>threshold</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>proposal precision at 0.50</td>
+      <td>0.786680</td>
+      <td>0.90</td>
+      <td>fail</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>proposal recall at 0.50</td>
+      <td>0.944935</td>
+      <td>0.95</td>
+      <td>fail</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>reference mask recall at 0.75</td>
+      <td>0.992338</td>
+      <td>0.90</td>
+      <td>pass</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>reference detection-aware mean mask IoU</td>
+      <td>0.952675</td>
+      <td>0.90</td>
+      <td>pass</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>automatic mask recall at 0.75</td>
+      <td>0.924805</td>
+      <td>0.90</td>
+      <td>pass</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>automatic detection-aware mean mask IoU</td>
+      <td>0.893881</td>
+      <td>0.90</td>
+      <td>fail</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>automatic_box worst supported subgroup detecti...</td>
+      <td>0.763455</td>
+      <td>0.80</td>
+      <td>fail</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>automatic_box worst supported subgroup detecti...</td>
+      <td>0.791207</td>
+      <td>0.80</td>
+      <td>fail</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>proposal worst supported subgroup precision_at...</td>
+      <td>0.200121</td>
+      <td>0.80</td>
+      <td>fail</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>proposal worst supported subgroup recall_at_0_...</td>
+      <td>0.807975</td>
+      <td>0.85</td>
+      <td>fail</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>reference_box worst supported subgroup detecti...</td>
+      <td>0.918245</td>
+      <td>0.80</td>
+      <td>pass</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>reference_box worst supported subgroup detecti...</td>
+      <td>0.957851</td>
+      <td>0.80</td>
+      <td>pass</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                                 gate  observed  threshold  \
+0                          proposal precision at 0.50  0.786680       0.90
+1                             proposal recall at 0.50  0.944935       0.95
+2                       reference mask recall at 0.75  0.992338       0.90
+3             reference detection-aware mean mask IoU  0.952675       0.90
+4                       automatic mask recall at 0.75  0.924805       0.90
+5             automatic detection-aware mean mask IoU  0.893881       0.90
+6   automatic_box worst supported subgroup detecti...  0.763455       0.80
+7   automatic_box worst supported subgroup detecti...  0.791207       0.80
+8   proposal worst supported subgroup precision_at...  0.200121       0.80
+9   proposal worst supported subgroup recall_at_0_...  0.807975       0.85
+10  reference_box worst supported subgroup detecti...  0.918245       0.80
+11  reference_box worst supported subgroup detecti...  0.957851       0.80
+
+   status
+0    fail
+1    fail
+2    pass
+3    pass
+4    pass
+5    fail
+6    fail
+7    fail
+8    fail
+9    fail
+10   pass
+11   pass
+
+[cell 14]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>failure_type</th>
+      <th>count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>background_extra</td>
+      <td>1660</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>complete_miss</td>
+      <td>243</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>merge_candidate</td>
+      <td>93</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>split_or_duplicate_candidate</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>weak_localisation_extra</td>
+      <td>232</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>weak_localisation_miss</td>
+      <td>88</td>
+    </tr>
+  </tbody>
+</table>
+</div>                   failure_type  count
+0              background_extra   1660
+1                 complete_miss    243
+2               merge_candidate     93
+3  split_or_duplicate_candidate     81
+4       weak_localisation_extra    232
+5        weak_localisation_miss     88
+
+[cell 14]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>evaluator_seconds</th>
+      <th>proposal_median_seconds_per_image</th>
+      <th>proposal_p95_seconds_per_image</th>
+      <th>proposal_total_seconds</th>
+      <th>sam_median_seconds_per_image</th>
+      <th>sam_p95_seconds_per_image</th>
+      <th>sam_total_seconds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>396.918742</td>
+      <td>0.4119</td>
+      <td>0.62776</td>
+      <td>1059.5058</td>
+      <td>0.251482</td>
+      <td>0.26024</td>
+      <td>508.779031</td>
+    </tr>
+  </tbody>
+</table>
+</div>   evaluator_seconds  proposal_median_seconds_per_image  \
+0         396.918742                             0.4119
+
+   proposal_p95_seconds_per_image  proposal_total_seconds  \
+0                         0.62776               1059.5058
+
+   sam_median_seconds_per_image  sam_p95_seconds_per_image  sam_total_seconds
+0                      0.251482                    0.26024         508.779031
+
+[cell 14]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>diagnostic_kind</th>
+      <th>route</th>
+      <th>reference_count</th>
+      <th>prediction_count</th>
+      <th>miss_count</th>
+      <th>extra_count</th>
+      <th>detection_aware_mean_iou</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>representative</td>
+      <td>reference_box</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.962120</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>representative</td>
+      <td>automatic_box</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.959647</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>worst</td>
+      <td>reference_box</td>
+      <td>4</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.972623</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>worst</td>
+      <td>automatic_box</td>
+      <td>4</td>
+      <td>1</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>outlier</td>
+      <td>reference_box</td>
+      <td>3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.989607</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>outlier</td>
+      <td>automatic_box</td>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>  diagnostic_kind          route  reference_count  prediction_count  \
+0  representative  reference_box                4                 4
+1  representative  automatic_box                4                 4
+2           worst  reference_box                4                 4
+3           worst  automatic_box                4                 1
+4         outlier  reference_box                3                 3
+5         outlier  automatic_box                3                 1
+
+   miss_count  extra_count  detection_aware_mean_iou
+0           0            0                  0.962120
+1           0            0                  0.959647
+2           0            0                  0.972623
+3           4            1                  0.000000
+4           0            0                  0.989607
+5           3            1                  0.000000
+
+[cell 14]
+{
+  "status": "refine_or_replace_locateanything",
+  "all_gates_passed": false,
+  "final_acceptance": false,
+  "reason": "DS1 is a development screen. The component result must be confirmed on the locked internal and official evaluation roles."
+}
+
+[cell 16]
+{'clearml_hosts': {'CLEARML_API_HOST': 'https://api.clear.ml',
+  'CLEARML_FILES_HOST': 'https://files.clear.ml',
+  'CLEARML_WEB_HOST': 'https://app.clear.ml'},
+ 'clearml_task_id': None,
+ 'component_decision': 'refine_or_replace_locateanything',
+ 'offline_session_folder': None,
+ 'project': 'Visual Peer Inspector/02 Detection and Segmentation',
+ 'run_status': 'completed',
+ 'safe_manifest_sha256': '498303d29229466a60d740c4c30e2f14922836fafe30ef033883849e1c4c5365',
+ 'schema_version': 1,
+ 'snapshot_sha256': 'cfb8559faba4745dd1d29c0148ed26ec985500009c0f69f127b4d771bfaa45ca',
+ 'stage': 'notebook_06_1_clearml_finalisation',
+ 'status': 'failed',
+ 'task_name': 'ds1-proposal-mask-evaluation-kaggle-candidate',
+ 'tracking_attempt_count': 0,
+ 'tracking_error_category': 'internal_error',
+ 'tracking_error_type': 'ConnectionError',
+ 'tracking_mode': 'online',
+ 'tracking_retry_count': 0,
+ 'tracking_transient_failure_count': 0}
+
+[cell 18]
+{'status': 'completed',
+ 'scenes': 100,
+ 'images': 2000,
+ 'component_decision': 'refine_or_replace_locateanything',
+ 'all_component_gates_passed': False,
+ 'tracking_status': 'failed',
+ 'clearml_task_id': None,
+ 'snapshot_sha256': 'cfb8559faba4745dd1d29c0148ed26ec985500009c0f69f127b4d771bfaa45ca'}

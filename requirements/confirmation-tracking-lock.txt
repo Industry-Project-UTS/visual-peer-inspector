@@ -1,0 +1,2 @@
+# Optional tracking dependency installed only after scientific outputs exist.
+clearml==2.1.10

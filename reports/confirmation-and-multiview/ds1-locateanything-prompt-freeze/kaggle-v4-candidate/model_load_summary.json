@@ -1,0 +1,55 @@
+{
+  "device": "cuda",
+  "load_checkpoints": [
+    {
+      "device": "cuda",
+      "dtype": "torch.float16",
+      "elapsed_seconds": 23.436,
+      "stage": "dependencies_ready"
+    },
+    {
+      "elapsed_seconds": 23.436,
+      "source_kind": "hub",
+      "stage": "tokenizer_load_started"
+    },
+    {
+      "elapsed_seconds": 25.688,
+      "stage": "tokenizer_ready"
+    },
+    {
+      "elapsed_seconds": 25.688,
+      "source_kind": "hub",
+      "stage": "processor_load_started"
+    },
+    {
+      "elapsed_seconds": 28.973,
+      "stage": "processor_ready"
+    },
+    {
+      "elapsed_seconds": 28.973,
+      "source_kind": "hub",
+      "stage": "model_weights_load_started"
+    },
+    {
+      "elapsed_seconds": 75.101,
+      "stage": "model_weights_loaded"
+    },
+    {
+      "device": "cuda",
+      "elapsed_seconds": 75.101,
+      "stage": "model_device_move_started"
+    },
+    {
+      "device": "cuda",
+      "elapsed_seconds": 77.553,
+      "stage": "model_ready"
+    }
+  ],
+  "model_id": "nvidia/LocateAnything-3B",
+  "model_load_count": 1,
+  "model_load_seconds": 77.553,
+  "model_revision": "c32291ca5e996f5a7a485845b4f57a233936bba0",
+  "python_version": "3.12.13",
+  "schema_version": 1,
+  "worker_configuration_switch_count": 1
+}

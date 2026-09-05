@@ -1,0 +1,13 @@
+{
+  "clean_notebook_sha256": "c99ea280caf24faeda03c61f3a96ce274fe6bffc89bf0162daa8473d576fee15",
+  "downloaded_saved_output_sha256": "142deac2d8d587de708b5a5b4b5930d399eb92bebf18885afd575616422b26c0",
+  "executed_code_cells": 9,
+  "label": "06.1 DS1 proposal and mask evaluation",
+  "published_log_sha256": "6779998e602181c1ca4ebcf0dc029b039e12956ce893bf58b0a7b14c585f2e7d",
+  "published_notebook_sha256": "39312451673fb865023f37aa99c2b0cc2cc678b08bfb3cf206b6b2866640626b",
+  "removed_private_visuals": 3,
+  "retained_output_blocks": 26,
+  "retained_safe_visuals": 6,
+  "schema_version": 1,
+  "status": "completed"
+}

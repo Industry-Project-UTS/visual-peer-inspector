@@ -1,0 +1,40 @@
+{
+  "candidate_lock_sha256": "6047fba873217a67fb3136ce3b4b0382c3efd7d31edbd7ab48bc37310d4de859",
+  "development_only": true,
+  "generation_configuration": {
+    "do_sample": true,
+    "generation_mode": "hybrid",
+    "max_new_tokens": 8192,
+    "model_id": "nvidia/LocateAnything-3B",
+    "model_revision": "c32291ca5e996f5a7a485845b4f57a233936bba0",
+    "prompt": "individual object",
+    "repetition_penalty": 1.1,
+    "seed": 32040,
+    "temperature": 0.7,
+    "top_k": 0,
+    "top_p": 0.9,
+    "upscale_factor": 1
+  },
+  "generation_configuration_sha256": "a1a634eb1bf9e679234ae4427601a656fb52c63e382246a975926c8d8c8738d5",
+  "model_id": "nvidia/LocateAnything-3B",
+  "model_revision": "c32291ca5e996f5a7a485845b4f57a233936bba0",
+  "requires_unchanged_ds2_confirmation": true,
+  "schema_version": 1,
+  "selected": {
+    "candidate_key": "individual_object__area_nms_075_cap8",
+    "complete_detection_rate": 0.918,
+    "detection_aware_mean_iou": 0.9006257416584165,
+    "f1_at_0_50": 0.9676028739386022,
+    "f2_at_0_50": 0.9642020307211664,
+    "mean_matched_iou": 0.936251952311301,
+    "postprocessing_policy": "area_nms_075_cap8",
+    "precision_at_0_50": 0.9733245729303548,
+    "prompt": "individual object",
+    "prompt_key": "individual_object",
+    "proposal_count": 7610,
+    "recall_at_0_50": 0.961948051948052,
+    "recall_at_0_75": 0.9223376623376623
+  },
+  "selection_rule": "Maximise F2 at box IoU 0.50, then recall at IoU 0.75, detection-aware mean IoU, complete-detection rate, F1, precision, and lower proposal count.",
+  "stage": "ds1_locateanything_prompt_freeze"
+}

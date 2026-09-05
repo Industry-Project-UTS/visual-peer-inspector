@@ -1,0 +1,8 @@
+gate,passed
+frozen membership,True
+RGB coverage,True
+RGB integrity,True
+repeat build reused all RGB files,True
+repeat build kept package identity,True
+model input labels absent,True
+evaluator separated,True

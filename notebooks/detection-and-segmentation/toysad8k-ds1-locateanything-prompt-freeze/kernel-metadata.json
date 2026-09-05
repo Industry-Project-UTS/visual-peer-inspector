@@ -1,0 +1,22 @@
+{
+  "id": "esreekarreddy/toysad-8k-ds1-locateanything-prompt-freeze",
+  "title": "ToysAD-8K DS1 LocateAnything Prompt Freeze",
+  "code_file": "04.3-toysad8k-ds1-locateanything-prompt-freeze.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-ds1-screen100-model-input",
+    "esreekarreddy/vpi-toysad-ds1-mask-evaluator",
+    "esreekarreddy/vpi-toysad-ds1-locateanything-output"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

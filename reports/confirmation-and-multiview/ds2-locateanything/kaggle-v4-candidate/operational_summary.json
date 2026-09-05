@@ -1,0 +1,32 @@
+{
+  "attempt_timeout_seconds": 75.0,
+  "configuration_sha256": "6167320c6cc3c7233385494b3e54f793eb4acaa6f21d8af196154ac6d23cfde6",
+  "discarded_untrusted_box_count": 227,
+  "effective_max_new_tokens": 4096,
+  "effective_operational_policy_sha256": "bd94b9a8182bd92e17b4ca273adc05bec6415aff18ef4f8f486c4c39161ce06d",
+  "failed_job_count": 2,
+  "failure_type_counts": {
+    "PossibleTruncation": 2
+  },
+  "images_per_second": 1.8005716274745744,
+  "job_count": 6000,
+  "maximum_attempts_per_job": 2,
+  "maximum_proposals_per_successful_image": 340,
+  "mean_proposals_per_successful_image": 4.532510836945648,
+  "mean_runtime_seconds": 0.5553791833333334,
+  "median_proposals_per_successful_image": 4.0,
+  "median_runtime_seconds": 0.4411,
+  "minimum_proposals_per_successful_image": 1,
+  "p95_runtime_seconds": 0.693,
+  "possibly_truncated_count": 2,
+  "scene_count": 300,
+  "successful_job_count": 5998,
+  "terminal_failure_disposition": "carry_as_zero_proposal",
+  "terminal_row_count": 6000,
+  "terminal_zero_proposal_image_count": 0,
+  "total_runtime_seconds": 3332.2751,
+  "truncation_check_counts": {
+    "token_count_heuristic": 6000
+  },
+  "zero_proposal_image_count": 0
+}

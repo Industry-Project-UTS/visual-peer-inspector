@@ -1,0 +1,23 @@
+{
+  "id": "esreekarreddy/toysad-8k-ds2-frozen-pipeline",
+  "title": "ToysAD-8K DS2 Frozen Pipeline",
+  "code_file": "08b-toysad8k-ds2-frozen-pipeline.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-ds2-confirmation-rgb",
+    "esreekarreddy/vpi-toysad-ds2-confirmation-geometry"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [
+    "esreekarreddy/toysad-8k-ds1-locateanything-prompt-freeze"
+  ],
+  "model_sources": []
+}

@@ -1,0 +1,19 @@
+{
+  "checkpoint_filename": "sam2.1_hiera_large.pt",
+  "checkpoint_sha256": "2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318",
+  "checkpoint_size_bytes": 898083611,
+  "code_repository": "https://github.com/facebookresearch/sam2",
+  "code_revision": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+  "device": "cuda",
+  "image_height": 256,
+  "image_width": 256,
+  "mask_threshold": 0.0,
+  "max_hole_area": 0.0,
+  "max_sprinkle_area": 0.0,
+  "model_config": "configs/sam2.1/sam2.1_hiera_l.yaml",
+  "model_repository": "facebook/sam2.1-hiera-large",
+  "model_revision": "665f8e2ad61cf5f53d65644ff27c8ee525124610",
+  "multimask_output": false,
+  "precision": "float16",
+  "seed": 20260824
+}

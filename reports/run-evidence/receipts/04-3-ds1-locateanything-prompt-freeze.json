@@ -1,0 +1,13 @@
+{
+  "clean_notebook_sha256": "ae36318efe1c8d0023405ab6cbe477dba26061f4380de0b3c3ebf6be6a3621bc",
+  "downloaded_saved_output_sha256": "25be57fae598c1182f0138829bb766357736f227cd6d3956e17d27629d67400c",
+  "executed_code_cells": 10,
+  "label": "04.3 DS1 LocateAnything prompt freeze",
+  "published_log_sha256": "96d49782e21908850872750b2abcda574ee8e572a1b8e0c641d7f04c7ed62ef5",
+  "published_notebook_sha256": "bf3e01c555b5cf454b224cf863c86f79528ca3a063be7a73733e182cbb6a87db",
+  "removed_private_visuals": 8,
+  "retained_output_blocks": 33,
+  "retained_safe_visuals": 7,
+  "schema_version": 1,
+  "status": "completed"
+}

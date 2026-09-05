@@ -1,0 +1,13 @@
+{
+  "clean_notebook_sha256": "0e00b4a173effa185070300b4ed356013a6ba1ec10482f7734d95e7e2a8864d4",
+  "downloaded_saved_output_sha256": "625e9f7feadd7e5628df63fdfb096be0d00603831702002458df2416383c7f17",
+  "executed_code_cells": 10,
+  "label": "08C DS2 confirmation and multiview",
+  "published_log_sha256": "a997c16574e26153d6b01de3ca43dc2619c479c31f3992f1054f134a32fe053b",
+  "published_notebook_sha256": "9c2e8543987d9dd47e6754ed0671b94eeadb2510ca6660dc4b30ab43405497d7",
+  "removed_private_visuals": 3,
+  "retained_output_blocks": 32,
+  "retained_safe_visuals": 7,
+  "schema_version": 1,
+  "status": "completed"
+}

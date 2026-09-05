@@ -1,0 +1,1279 @@
+Stage: 08B DS2 frozen pipeline
+Status: completed
+Clean notebook: notebooks/confirmation-and-multiview/08b-toysad8k-ds2-frozen-pipeline.ipynb
+Clean notebook SHA-256: 8277ce5de28773b6004a7dfbf8671d27bf80729f8608c97ab97800286cdf693d
+Downloaded saved-output SHA-256: 25e16e0108b23b78267f84e8eba5de5e1b2c79a8f59025aa48921cf87dbb176f
+Executed code cells: 9
+Retained output blocks: 53
+Retained safe visuals: 11
+Removed private visuals: 4
+
+Sanitised execution transcript
+==============================
+
+[cell 5]
+{'cohort': 'toysad8k-development-confirm-300-v1',
+ 'scenes': 300,
+ 'images': 6000,
+ 'visible object prompts': 23100,
+ 'LocateAnything prompt': 'individual object',
+ 'proposal post-processing': 'area_nms_075_cap8',
+ 'maximum new tokens': 4096,
+ 'maximum attempts per image': 2,
+ 'attempt timeout seconds': 75.0,
+ 'terminal failure handling': 'carry_as_zero_proposal',
+ 'recovery input': False,
+ 'labels mounted': False}
+
+[cell 7]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.2/42.2 kB 1.4 MB/s eta 0:00:00
+
+[cell 7]
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))': /packages/28/79/13bcabb8048126422d5c4b880575d40886c726f354db88cfeed4325525bb/peft-0.20.0-py3-none-any.whl.metadata
+
+[cell 7]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.7/57.7 kB 2.1 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.0/44.0 kB 2.8 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.6/13.6 MB 84.4 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.1/566.1 kB 23.3 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 154.5/154.5 kB 10.8 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 299.4/299.4 kB 17.5 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.0/50.0 MB 36.9 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 775.8/775.8 kB 38.5 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.5/78.5 kB 5.0 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 92.8 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.6/129.6 kB 8.6 MB/s eta 0:00:00
+
+[cell 7]
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+dopamine-rl 4.1.2 requires gym<=0.25.2, but you have gym 0.26.2 which is incompatible.
+moviepy 1.0.3 requires decorator<5.0,>=4.0.2, but you have decorator 5.3.1 which is incompatible.
+
+[cell 7]
+sam2.1_hiera_large.pt:   0%|          | 0.00/898M [00:00<?, ?B/s]
+
+[cell 7]
+{'execution environment': 'kaggle',
+ 'run mode': 'model_inference',
+ 'LocateAnything model': 'nvidia/LocateAnything-3B',
+ 'LocateAnything revision': 'c32291ca5e996f5a7a485845b4f57a233936bba0',
+ 'DINO model': 'facebook/dinov2-small',
+ 'DINO revision': 'ed25f3a31f01632728cabb09d1542f84ab7b0056',
+ 'GPU': 'Tesla T4',
+ 'GPU count': 2,
+ 'SAM checkpoint SHA-256': '2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318'}
+
+[cell 9]
+{"component": "LocateAnything", "device": "cuda", "dtype": "torch.float16", "stage": "dependencies_ready"}
+{"component": "LocateAnything", "source_kind": "hub", "stage": "tokenizer_load_started"}
+{"component": "LocateAnything", "stage": "tokenizer_ready"}
+{"component": "LocateAnything", "source_kind": "hub", "stage": "processor_load_started"}
+
+[cell 9]
+/usr/local/lib/python3.12/dist-packages/transformers/models/auto/image_processing_auto.py:647: FutureWarning: The image_processor_class argument is deprecated and will be removed in v4.42. Please use `slow_image_processor_class`, or `fast_image_processor_class` instead
+  warnings.warn(
+
+[cell 9]
+{"component": "LocateAnything", "stage": "processor_ready"}
+{"component": "LocateAnything", "source_kind": "hub", "stage": "model_weights_load_started"}
+
+[cell 9]
+`torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 2 files: 100%|██████████| 2/2 [00:30<00:00, 15.10s/it]
+WARNING:transformers_modules.nvidia.LocateAnything_hyphen_3B.c32291ca5e996f5a7a485845b4f57a233936bba0.modeling_locateanything:flash_attn is not available for MoonViT inference; falling back to sdpa.
+Qwen2ForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly defined. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+WARNING:transformers_modules.nvidia.LocateAnything_hyphen_3B.c32291ca5e996f5a7a485845b4f57a233936bba0.modeling_qwen2:magi_attention not available, falling back to sdpa
+Loading checkpoint shards: 100%|██████████| 2/2 [00:06<00:00,  3.07s/it]
+
+[cell 9]
+{"component": "LocateAnything", "stage": "model_weights_loaded"}
+{"component": "LocateAnything", "device": "cuda", "stage": "model_device_move_started"}
+{"component": "LocateAnything", "device": "cuda", "stage": "model_ready"}
+
+[cell 9]
+/root/.cache/huggingface/modules/transformers_modules/nvidia/LocateAnything_hyphen_3B/c32291ca5e996f5a7a485845b4f57a233936bba0/generate_utils.py:186: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  box_avg.append(torch.tensor(out_ref, dtype=x0.dtype, device=x0.device))
+
+[cell 9]
+DS2 LocateAnything images: 1/6000
+DS2 LocateAnything images: 250/6000
+DS2 LocateAnything images: 500/6000
+DS2 LocateAnything images: 750/6000
+DS2 LocateAnything images: 1000/6000
+Saved DS2 recovery files: 1
+DS2 LocateAnything images: 1250/6000
+DS2 LocateAnything images: 1500/6000
+DS2 LocateAnything images: 1750/6000
+DS2 LocateAnything images: 2000/6000
+Saved DS2 recovery files: 1
+DS2 LocateAnything images: 2250/6000
+DS2 LocateAnything images: 2500/6000
+DS2 LocateAnything images: 2750/6000
+DS2 LocateAnything images: 3000/6000
+Saved DS2 recovery files: 1
+DS2 LocateAnything images: 3250/6000
+DS2 LocateAnything images: 3500/6000
+DS2 LocateAnything images: 3750/6000
+DS2 LocateAnything images: 4000/6000
+Saved DS2 recovery files: 1
+DS2 LocateAnything images: 4250/6000
+DS2 LocateAnything images: 4500/6000
+DS2 LocateAnything images: 4750/6000
+DS2 LocateAnything images: 5000/6000
+Saved DS2 recovery files: 1
+DS2 LocateAnything images: 5250/6000
+DS2 LocateAnything images: 5500/6000
+DS2 LocateAnything images: 5750/6000
+DS2 LocateAnything images: 6000/6000
+Saved DS2 recovery files: 1
+Saved DS2 recovery files: 1
+
+[cell 9]
+/usr/local/lib/python3.12/dist-packages/torchvision/transforms/functional.py:154: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  img = torch.from_numpy(pic.transpose((2, 0, 1))).contiguous()
+
+[cell 9]
+DS2 SAM images: 1/6000
+DS2 SAM images: 250/6000
+DS2 SAM images: 500/6000
+DS2 SAM images: 750/6000
+DS2 SAM images: 1000/6000
+Saved DS2 recovery files: 1001
+DS2 SAM images: 1250/6000
+DS2 SAM images: 1500/6000
+DS2 SAM images: 1750/6000
+DS2 SAM images: 2000/6000
+Saved DS2 recovery files: 2001
+DS2 SAM images: 2250/6000
+DS2 SAM images: 2500/6000
+DS2 SAM images: 2750/6000
+DS2 SAM images: 3000/6000
+Saved DS2 recovery files: 3001
+DS2 SAM images: 3250/6000
+DS2 SAM images: 3500/6000
+DS2 SAM images: 3750/6000
+DS2 SAM images: 4000/6000
+Saved DS2 recovery files: 4001
+DS2 SAM images: 4250/6000
+DS2 SAM images: 4500/6000
+DS2 SAM images: 4750/6000
+DS2 SAM images: 5000/6000
+Saved DS2 recovery files: 5001
+DS2 SAM images: 5250/6000
+DS2 SAM images: 5500/6000
+DS2 SAM images: 5750/6000
+DS2 SAM images: 6000/6000
+Saved DS2 recovery files: 6001
+Saved DS2 recovery files: 6001
+DS2 automatic-box SAM images: 1/5962
+DS2 automatic-box SAM images: 250/5962
+DS2 automatic-box SAM images: 500/5962
+DS2 automatic-box SAM images: 750/5962
+DS2 automatic-box SAM images: 1000/5962
+Saved DS2 recovery files: 7039
+DS2 automatic-box SAM images: 1250/5962
+DS2 automatic-box SAM images: 1500/5962
+DS2 automatic-box SAM images: 1750/5962
+DS2 automatic-box SAM images: 2000/5962
+Saved DS2 recovery files: 8039
+DS2 automatic-box SAM images: 2250/5962
+DS2 automatic-box SAM images: 2500/5962
+DS2 automatic-box SAM images: 2750/5962
+DS2 automatic-box SAM images: 3000/5962
+Saved DS2 recovery files: 9039
+DS2 automatic-box SAM images: 3250/5962
+DS2 automatic-box SAM images: 3500/5962
+DS2 automatic-box SAM images: 3750/5962
+DS2 automatic-box SAM images: 4000/5962
+Saved DS2 recovery files: 10039
+DS2 automatic-box SAM images: 4250/5962
+DS2 automatic-box SAM images: 4500/5962
+DS2 automatic-box SAM images: 4750/5962
+DS2 automatic-box SAM images: 5000/5962
+Saved DS2 recovery files: 11039
+DS2 automatic-box SAM images: 5250/5962
+DS2 automatic-box SAM images: 5500/5962
+DS2 automatic-box SAM images: 5750/5962
+DS2 automatic-box SAM images: 5962/5962
+Saved DS2 recovery files: 12001
+Saved DS2 recovery files: 12001
+DS2 representation scenes: 1/300
+Saved DS2 recovery files: 12076
+Saved DS2 recovery files: 12151
+Saved DS2 recovery files: 12226
+Saved DS2 recovery files: 12301
+Saved DS2 recovery files: 12376
+Saved DS2 recovery files: 12451
+Saved DS2 recovery files: 12526
+Saved DS2 recovery files: 12601
+Saved DS2 recovery files: 12676
+DS2 representation scenes: 250/300
+Saved DS2 recovery files: 12751
+Saved DS2 recovery files: 12826
+DS2 representation scenes: 300/300
+Saved DS2 recovery files: 12901
+Saved DS2 recovery files: 12902
+{"automatic_sam": {"all_completion_checks_passed": true, "cohort_id": "toysad8k-development-confirm-300-v1", "configuration_sha256": "39690d431d70c2192a6ba0c4530785c9208e07b035842d05022a67fb700a850b", "discarded_untrusted_box_count": 227, "genuine_zero_proposal_image_count": 36, "image_count": 6000, "mask_count": 23180, "per_image_proposal_provenance_included": true, "producer_kind": "sam2.1_model", "prompt_package_sha256": "670d008dd30c190dd951fbabc0701ddd47af5ba374f396eee95f9ef60f3bf01e", "resumed_image_count": 38, "route": "automatic_box", "run_mode": "model_inference", "runtime_seconds_this_session": 1874.1614065230006, "sam_results_sha256": "3c9a14d6ad7a10b25966770405848af2117b7bca9e570cc10b88fc144c4a9d78", "schema_version": 1, "stage": "ds2_automatic_box_sam21", "status": "completed", "terminal_failed_image_count": 2, "zero_prompt_image_count": 38}, "locateanything": {"attempt_timeout_seconds": 75.0, "carried_zero_proposal_count": 2, "cohort_id": "toysad8k-development-confirm-300-v1", "configuration_sha256": "6167320c6cc3c7233385494b3e54f793eb4acaa6f21d8af196154ac6d23cfde6", "discarded_untrusted_box_count": 227, "ds1_freeze_sha256": "13e3f9b659ec7b96efd99fcbe3f20507a54c174ac2fccbe7bf89c127e456bedb", "ds1_generation_configuration_sha256": "a1a634eb1bf9e679234ae4427601a656fb52c63e382246a975926c8d8c8738d5", "effective_generation_configuration_sha256": "6167320c6cc3c7233385494b3e54f793eb4acaa6f21d8af196154ac6d23cfde6", "effective_max_new_tokens": 4096, "effective_operational_policy_sha256": "bd94b9a8182bd92e17b4ca273adc05bec6415aff18ef4f8f486c4c39161ce06d", "evaluator_opened": false, "failure_type_counts": {"PossibleTruncation": 2}, "image_count": 6000, "maximum_attempts_per_job": 2, "one_image_gate_passed": true, "one_image_status": "ok", "pilot_box_agreement_rate": 1.0, "proposal_count": 23180, "proposal_package_sha256": "670d008dd30c190dd951fbabc0701ddd47af5ba374f396eee95f9ef60f3bf01e", "run_mode": "model_inference", "runtime_seconds_this_session": 3648.3419780120003, "schema_version": 1, "session": {"attempted_rows_this_session": 6007, "elapsed_seconds": 3646.7158, "history_row_count": 6007, "latest_row_count": 6000, "pending_job_count_at_start": 6000, "successful_job_count": 5998}, "stage": "ds2_frozen_locateanything", "status": "completed", "terminal_failed_image_count": 2, "terminal_failure_disposition": "carry_as_zero_proposal", "zero_proposal_image_count": 38}, "mask_routes": {"all_checks_passed": true, "asset_group_count": 82, "automatic_sam_results_sha256": "3c9a14d6ad7a10b25966770405848af2117b7bca9e570cc10b88fc144c4a9d78", "cohort_id": "toysad8k-development-confirm-300-v1", "content_checksums_sha256": "d3895673fc67cd03579cc922a575290ef2b9fc5c6ffacbc78f83a26a50cc2dac", "geometry_manifest_sha256": "c88cb1f3f52c8c2ff29f564661e41781713b6f074e6aceb6e8d2d7cabbcf9e08", "image_count": 6000, "mask_routes_sha256": "0a2cc3018436b406e564464e608509ecae21f6554b4ad58411bb9f2deb0b0dc8", "membership_sha256": "bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac", "package_kind": "ds2-confirmation-mask-routes", "provenance": {"automatic_proposal_record_sha256": "670d008dd30c190dd951fbabc0701ddd47af5ba374f396eee95f9ef60f3bf01e", "automatic_sam_results_sha256": "3c9a14d6ad7a10b25966770405848af2117b7bca9e570cc10b88fc144c4a9d78", "automatic_sam_run_record_sha256": "e481cbdc9ff6b2ac30c68083455570ce6ffdaaa1124b9d9432933fa484a8ae1c", "geometry_record_sha256": "7c59366cd82e598ccebb03c245980effa24741b8ca88d277c7b2155563054a16", "reference_sam_results_sha256": "34529093e5e973d3003e46178b5a505c259c41ec12b4ed26cfa363fde1d545a8", "reference_sam_run_record_sha256": "e9156518f734a07d3f5ab0711bfe3f632d1969207f3de73ccc4c887847e75012"}, "reference_sam_results_sha256": "34529093e5e973d3003e46178b5a505c259c41ec12b4ed26cfa363fde1d545a8", "release_id": "toysad8k-train-2000-v2", "rgb_manifest_sha256": "97da5e4dc115c18160b47bf7bad835aba80eeb0b29333ef7e8d0db89adbe76df", "route_counts": {"automatic_box": 23180, "reference_box": 23100, "supplied_mask": 23100}, "sam_results_sha256": "34529093e5e973d3003e46178b5a505c259c41ec12b4ed26cfa363fde1d545a8", "scene_count": 300, "schema_version": 1, "views_per_scene": 20}, "reference_sam": {"all_completion_checks_passed": true, "cohort_id": "toysad8k-development-confirm-300-v1", "configuration_sha256": "39690d431d70c2192a6ba0c4530785c9208e07b035842d05022a67fb700a850b", "image_count": 6000, "mask_count": 23100, "producer_kind": "sam2.1_model", "prompt_package_sha256": "7c59366cd82e598ccebb03c245980effa24741b8ca88d277c7b2155563054a16", "resumed_image_count": 0, "route": "reference_box", "run_mode": "model_inference", "runtime_seconds_this_session": 1884.194710527, "sam_results_sha256": "34529093e5e973d3003e46178b5a505c259c41ec12b4ed26cfa363fde1d545a8", "schema_version": 1, "stage": "ds2_reference_box_sam21", "status": "completed", "zero_prompt_image_count": 0}, "representation": {"all_completion_gates_passed": true, "configuration_sha256": "5efbf5da629bb9a96fc0d8d7d92a849ffbe40d9539a62f2ae17739982354bb0b", "evaluator_opened": false, "invalid_mask_row_count": 2, "model_key": "dinov2_small", "resolved_revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056", "run_mode": "model_inference", "schema_version": 1, "score_package_sha256": "3510904e0f06f45889fed34639da4400de235370920c17967e04e2f4d7e4545e", "score_row_count": 138760, "stage": "ds2_frozen_representation_and_peer_scores", "status": "completed", "unscoreable_row_count": 530}}
+
+[cell 9]
+{'run mode': 'model_inference',
+ 'LocateAnything status': 'completed',
+ 'proposal images': 6000,
+ 'proposal generation failures': 2,
+ 'discarded untrusted boxes': 227,
+ 'zero-proposal images': 38,
+ 'LocateAnything policy SHA-256': 'bd94b9a8182bd92e17b4ca273adc05bec6415aff18ef4f8f486c4c39161ce06d',
+ 'reference-box SAM status': 'completed',
+ 'automatic-box SAM status': 'completed',
+ 'SAM images per route': 6000,
+ 'DINO status': 'completed',
+ 'score rows': 138760,
+ 'unscoreable score rows': 530,
+ 'invalid-mask score rows': 2,
+ 'evaluator opened': False}
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>check</th>
+      <th>passed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>all DS2 images completed</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>all terminal failures carried as zero proposals</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>DS1 prompt, model and post-processing kept</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>bounded DS2 operational policy recorded</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>evaluator remained closed</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                             check  passed
+0                         all DS2 images completed    True
+1  all terminal failures carried as zero proposals    True
+2       DS1 prompt, model and post-processing kept    True
+3          bounded DS2 operational policy recorded    True
+4                        evaluator remained closed    True
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>attempt_timeout_seconds</th>
+      <th>configuration_sha256</th>
+      <th>discarded_untrusted_box_count</th>
+      <th>effective_max_new_tokens</th>
+      <th>effective_operational_policy_sha256</th>
+      <th>failed_job_count</th>
+      <th>failure_type_counts</th>
+      <th>images_per_second</th>
+      <th>job_count</th>
+      <th>maximum_attempts_per_job</th>
+      <th>...</th>
+      <th>p95_runtime_seconds</th>
+      <th>possibly_truncated_count</th>
+      <th>scene_count</th>
+      <th>successful_job_count</th>
+      <th>terminal_failure_disposition</th>
+      <th>terminal_row_count</th>
+      <th>terminal_zero_proposal_image_count</th>
+      <th>total_runtime_seconds</th>
+      <th>truncation_check_counts</th>
+      <th>zero_proposal_image_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>75.0</td>
+      <td>6167320c6cc3c7233385494b3e54f793eb4acaa6f21d8a...</td>
+      <td>227</td>
+      <td>4096</td>
+      <td>bd94b9a8182bd92e17b4ca273adc05bec6415aff18ef4f...</td>
+      <td>2</td>
+      <td>{'PossibleTruncation': 2}</td>
+      <td>1.800572</td>
+      <td>6000</td>
+      <td>2</td>
+      <td>...</td>
+      <td>0.693</td>
+      <td>2</td>
+      <td>300</td>
+      <td>5998</td>
+      <td>carry_as_zero_proposal</td>
+      <td>6000</td>
+      <td>0</td>
+      <td>3332.2751</td>
+      <td>{'token_count_heuristic': 6000}</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 26 columns</p>
+</div>   attempt_timeout_seconds                               configuration_sha256  \
+0                     75.0  6167320c6cc3c7233385494b3e54f793eb4acaa6f21d8a...
+
+   discarded_untrusted_box_count  effective_max_new_tokens  \
+0                            227                      4096
+
+                 effective_operational_policy_sha256  failed_job_count  \
+0  bd94b9a8182bd92e17b4ca273adc05bec6415aff18ef4f...                 2
+
+         failure_type_counts  images_per_second  job_count  \
+0  {'PossibleTruncation': 2}           1.800572       6000
+
+   maximum_attempts_per_job  ...  p95_runtime_seconds  \
+0                         2  ...                0.693
+
+   possibly_truncated_count  scene_count  successful_job_count  \
+0                         2          300                  5998
+
+   terminal_failure_disposition  terminal_row_count  \
+0        carry_as_zero_proposal                6000
+
+   terminal_zero_proposal_image_count  total_runtime_seconds  \
+0                                   0              3332.2751
+
+           truncation_check_counts  zero_proposal_image_count
+0  {'token_count_heuristic': 6000}                          0
+
+[1 rows x 26 columns]
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>box_agreement_rate</th>
+      <th>job_count</th>
+      <th>matching_job_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>20</td>
+      <td>20</td>
+    </tr>
+  </tbody>
+</table>
+</div>   box_agreement_rate  job_count  matching_job_count
+0                 1.0         20                  20
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+SAM route: reference-box
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>check</th>
+      <th>passed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>all DS2 images recorded</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>stored prompts match the frozen input</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pilot repeat completed and was measured</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>no unresolved SAM image failures</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                     check  passed
+0                  all DS2 images recorded    True
+1    stored prompts match the frozen input    True
+2  pilot repeat completed and was measured    True
+3         no unresolved SAM image failures    True
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>image_count</th>
+      <th>mask_count</th>
+      <th>zero_prompt_image_count</th>
+      <th>empty_mask_count</th>
+      <th>mean_predicted_quality_score</th>
+      <th>median_runtime_seconds</th>
+      <th>p95_runtime_seconds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>reference_box</td>
+      <td>6000</td>
+      <td>23100</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.978649</td>
+      <td>0.268637</td>
+      <td>0.274002</td>
+    </tr>
+  </tbody>
+</table>
+</div>           route  image_count  mask_count  zero_prompt_image_count  \
+0  reference_box         6000       23100                        0
+
+   empty_mask_count  mean_predicted_quality_score  median_runtime_seconds  \
+0                 0                      0.978649                0.268637
+
+   p95_runtime_seconds
+0             0.274002
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mask_digest_agreement_rate</th>
+      <th>matching_mask_digest_count</th>
+      <th>matching_score_count</th>
+      <th>pilot_image_count</th>
+      <th>prompt_count</th>
+      <th>repeat_image_count</th>
+      <th>score_agreement_rate</th>
+      <th>score_tolerance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>81</td>
+      <td>81</td>
+      <td>20</td>
+      <td>81</td>
+      <td>20</td>
+      <td>1.0</td>
+      <td>0.00001</td>
+    </tr>
+  </tbody>
+</table>
+</div>   mask_digest_agreement_rate  matching_mask_digest_count  \
+0                         1.0                          81
+
+   matching_score_count  pilot_image_count  prompt_count  repeat_image_count  \
+0                    81                 20            81                  20
+
+   score_agreement_rate  score_tolerance
+0                   1.0          0.00001
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+SAM route: automatic-box
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>check</th>
+      <th>passed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>all DS2 images recorded</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>stored prompts match the frozen input</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pilot repeat completed and was measured</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>no unresolved SAM image failures</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                     check  passed
+0                  all DS2 images recorded    True
+1    stored prompts match the frozen input    True
+2  pilot repeat completed and was measured    True
+3         no unresolved SAM image failures    True
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>image_count</th>
+      <th>mask_count</th>
+      <th>zero_prompt_image_count</th>
+      <th>empty_mask_count</th>
+      <th>mean_predicted_quality_score</th>
+      <th>median_runtime_seconds</th>
+      <th>p95_runtime_seconds</th>
+      <th>terminal_failed_image_count</th>
+      <th>genuine_zero_proposal_image_count</th>
+      <th>discarded_untrusted_box_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic_box</td>
+      <td>6000</td>
+      <td>23180</td>
+      <td>38</td>
+      <td>1</td>
+      <td>0.976971</td>
+      <td>0.267283</td>
+      <td>0.274368</td>
+      <td>2</td>
+      <td>36</td>
+      <td>227</td>
+    </tr>
+  </tbody>
+</table>
+</div>           route  image_count  mask_count  zero_prompt_image_count  \
+0  automatic_box         6000       23180                       38
+
+   empty_mask_count  mean_predicted_quality_score  median_runtime_seconds  \
+0                 1                      0.976971                0.267283
+
+   p95_runtime_seconds  terminal_failed_image_count  \
+0             0.274368                            2
+
+   genuine_zero_proposal_image_count  discarded_untrusted_box_count
+0                                 36                            227
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mask_digest_agreement_rate</th>
+      <th>matching_mask_digest_count</th>
+      <th>matching_score_count</th>
+      <th>pilot_image_count</th>
+      <th>prompt_count</th>
+      <th>repeat_image_count</th>
+      <th>score_agreement_rate</th>
+      <th>score_tolerance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>84</td>
+      <td>84</td>
+      <td>20</td>
+      <td>84</td>
+      <td>20</td>
+      <td>1.0</td>
+      <td>0.00001</td>
+    </tr>
+  </tbody>
+</table>
+</div>   mask_digest_agreement_rate  matching_mask_digest_count  \
+0                         1.0                          84
+
+   matching_score_count  pilot_image_count  prompt_count  repeat_image_count  \
+0                    84                 20            84                  20
+
+   score_agreement_rate  score_tolerance
+0                   1.0          0.00001
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gate</th>
+      <th>expected</th>
+      <th>observed</th>
+      <th>passed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>scene_coverage</td>
+      <td>300</td>
+      <td>300</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>score_coverage</td>
+      <td>138760</td>
+      <td>138760</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>finite_scored_values</td>
+      <td>True</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>evaluator_closed</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>                   gate expected observed  passed
+0        scene_coverage      300      300    True
+1        score_coverage   138760   138760    True
+2  finite_scored_values     True     True    True
+3      evaluator_closed    False    False    True
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stage</th>
+      <th>scene_count</th>
+      <th>candidate_count</th>
+      <th>encoded_candidate_count</th>
+      <th>invalid_mask_candidate_count</th>
+      <th>encoder_call_count</th>
+      <th>resumed_scene_count</th>
+      <th>runtime_seconds_this_session</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>dino_and_peer_scores</td>
+      <td>300</td>
+      <td>69380</td>
+      <td>69379</td>
+      <td>1</td>
+      <td>2314</td>
+      <td>0</td>
+      <td>717.272851</td>
+    </tr>
+  </tbody>
+</table>
+</div>                  stage  scene_count  candidate_count  \
+0  dino_and_peer_scores          300            69380
+
+   encoded_candidate_count  invalid_mask_candidate_count  encoder_call_count  \
+0                    69379                             1                2314
+
+   resumed_scene_count  runtime_seconds_this_session
+0                    0                    717.272851
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>candidate_count</th>
+      <th>scored_candidate_count</th>
+      <th>mean_p1_score</th>
+      <th>median_p1_score</th>
+      <th>p95_p1_score</th>
+      <th>unscoreable_candidate_count</th>
+      <th>invalid_mask_candidate_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>supplied_mask</td>
+      <td>23100</td>
+      <td>23100</td>
+      <td>0.429930</td>
+      <td>0.430538</td>
+      <td>0.601706</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>reference_box</td>
+      <td>23100</td>
+      <td>23100</td>
+      <td>0.439777</td>
+      <td>0.441660</td>
+      <td>0.613820</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>automatic_box</td>
+      <td>23180</td>
+      <td>22915</td>
+      <td>0.444847</td>
+      <td>0.446168</td>
+      <td>0.629337</td>
+      <td>265</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>           route  candidate_count  scored_candidate_count  mean_p1_score  \
+0  supplied_mask            23100                   23100       0.429930
+1  reference_box            23100                   23100       0.439777
+2  automatic_box            23180                   22915       0.444847
+
+   median_p1_score  p95_p1_score  unscoreable_candidate_count  \
+0         0.430538      0.601706                            0
+1         0.441660      0.613820                            0
+2         0.446168      0.629337                          265
+
+   invalid_mask_candidate_count
+0                             0
+1                             0
+2                             1
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>batch_size</th>
+      <th>crop_configuration</th>
+      <th>invalid_mask_policy</th>
+      <th>methods</th>
+      <th>model_key</th>
+      <th>model_specification</th>
+      <th>p1_top_fraction</th>
+      <th>patch_validity_minimum_fraction</th>
+      <th>resolved_revision</th>
+      <th>routes</th>
+      <th>run_mode</th>
+      <th>stage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>32</td>
+      <td>{'background_rgb': [238, 241, 245], 'input_siz...</td>
+      <td>{'ranking_evidence': 0.0, 'reason': 'foregroun...</td>
+      <td>[B0, P1]</td>
+      <td>dinov2_small</td>
+      <td>{'backend': 'transformers_dino', 'family': 'DI...</td>
+      <td>0.1</td>
+      <td>0.5</td>
+      <td>ed25f3a31f01632728cabb09d1542f84ab7b0056</td>
+      <td>[supplied_mask, reference_box, automatic_box]</td>
+      <td>model_inference</td>
+      <td>ds2_frozen_representation_and_peer_scores</td>
+    </tr>
+  </tbody>
+</table>
+</div>   batch_size                                 crop_configuration  \
+0          32  {'background_rgb': [238, 241, 245], 'input_siz...
+
+                                 invalid_mask_policy   methods     model_key  \
+0  {'ranking_evidence': 0.0, 'reason': 'foregroun...  [B0, P1]  dinov2_small
+
+                                 model_specification  p1_top_fraction  \
+0  {'backend': 'transformers_dino', 'family': 'DI...              0.1
+
+   patch_validity_minimum_fraction                         resolved_revision  \
+0                              0.5  ed25f3a31f01632728cabb09d1542f84ab7b0056
+
+                                          routes         run_mode  \
+0  [supplied_mask, reference_box, automatic_box]  model_inference
+
+                                       stage
+0  ds2_frozen_representation_and_peer_scores
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+Every proposal remains in the score manifest. A mask with too little foreground is marked invalid_mask with no invented DINO score or rank.
+B0 and P1 accuracy is reported only after Notebook 08C opens the protected evaluator.
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 15]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 20.1 MB/s eta 0:00:00
+
+[cell 15]
+{'LocateAnything tracking': {'mode': 'disabled',
+  'run_status': 'completed',
+  'safe_manifest_sha256': '81db9a38ddddc6f0d46aeb5a16e9a56a2671c1dbb825a889e726738f278072b6',
+  'schema_version': 1,
+  'stage': 'ds2_frozen_locateanything_clearml_finalisation',
+  'status': 'disabled',
+  'task_id': None,
+  'tracking_attempt_count': 0,
+  'tracking_retry_count': 0,
+  'tracking_transient_failure_count': 0},
+ 'reference-box SAM tracking': {'mode': 'disabled',
+  'run_status': 'completed',
+  'safe_manifest_sha256': '94344ee44ace22e16bdb6b1bd752761f09596e4a5d411bfd0ee10ace37f6a34f',
+  'schema_version': 1,
+  'stage': 'ds2_reference_box_sam21_clearml_finalisation',
+  'status': 'disabled',
+  'task_id': None,
+  'tracking_attempt_count': 0,
+  'tracking_retry_count': 0,
+  'tracking_transient_failure_count': 0},
+ 'automatic-box SAM tracking': {'mode': 'disabled',
+  'run_status': 'completed',
+  'safe_manifest_sha256': 'd12c235ff14c304b20b0c24a9fe0b911a029b2d908ad95778884da6e0f9635d0',
+  'schema_version': 1,
+  'stage': 'ds2_automatic_box_sam21_clearml_finalisation',
+  'status': 'disabled',
+  'task_id': None,
+  'tracking_attempt_count': 0,
+  'tracking_retry_count': 0,
+  'tracking_transient_failure_count': 0},
+ 'representation tracking': {'mode': 'disabled',
+  'run_status': 'completed',
+  'safe_manifest_sha256': '20eea074a5980cb98e50b3cc61ded57960610c5bfebd332029cedc6dfff04612',
+  'schema_version': 1,
+  'stage': 'ds2_frozen_representation_and_peer_scores_clearml_finalisation',
+  'status': 'disabled',
+  'task_id': None,
+  'tracking_attempt_count': 0,
+  'tracking_retry_count': 0,
+  'tracking_transient_failure_count': 0}}
+
+[cell 17]
+{"archives": [{"path": "ds2-locateanything-repository-evidence.zip", "sha256": "bb5f3793f38d0231d7812d33b9ec6fcd9ce8539c2dea50d4ae7e54515ca80d09", "size_bytes": 59997, "source_file_count": 8}, {"path": "ds2-locateanything-review-evidence.zip", "sha256": "68852cb455c878984dd1fa4f91bb56730164dbdf5469ff9067614e921913c25e", "size_bytes": 1232701, "source_file_count": 2}], "downstream_file_count": 0, "review_file_count": 2, "safe_file_count": 8, "safe_manifest_sha256": "81db9a38ddddc6f0d46aeb5a16e9a56a2671c1dbb825a889e726738f278072b6", "schema_version": 1, "stage": "ds2-locateanything", "status": "completed"}
+{"archives": [{"path": "ds2-reference-sam21-repository-evidence.zip", "sha256": "940b2066f9533b0b522f8fdfa1c566a1d216f015fbd9e1305f733595e6a7fce8", "size_bytes": 48381, "source_file_count": 9}, {"path": "ds2-reference-sam21-review-evidence.zip", "sha256": "0b558a65b69acddb9a536c8ceddcf63b5d543fefc5492c8b27d2b8a0e6f7e1ab", "size_bytes": 664887, "source_file_count": 2}, {"path": "ds2-reference-sam21-downstream-input.zip", "sha256": "2a9b8b0c562da8ddbc170fe2d7217b6168f5915ee95b3afb7f50a0f1eefb8b78", "size_bytes": 5349047, "source_file_count": 1}], "downstream_file_count": 1, "review_file_count": 2, "safe_file_count": 9, "safe_manifest_sha256": "94344ee44ace22e16bdb6b1bd752761f09596e4a5d411bfd0ee10ace37f6a34f", "schema_version": 1, "stage": "ds2-reference-sam21", "status": "completed"}
+{"archives": [{"path": "ds2-automatic-sam21-repository-evidence.zip", "sha256": "71f15e20fae96fb34987107b9ebe79eb205426ecc600ea675f6f003379b9903a", "size_bytes": 49713, "source_file_count": 9}, {"path": "ds2-automatic-sam21-review-evidence.zip", "sha256": "063c2239cf1f8d8f822722807cab4fd854ba1ea2bfa859c461715505dfb9dde2", "size_bytes": 664896, "source_file_count": 2}, {"path": "ds2-automatic-sam21-downstream-input.zip", "sha256": "36a1f534cfbbc4786c7dd1a7c7ae6905db89d2a5f7e6db2f2b66bcbc89c1e9cd", "size_bytes": 5701830, "source_file_count": 1}], "downstream_file_count": 1, "review_file_count": 2, "safe_file_count": 9, "safe_manifest_sha256": "d12c235ff14c304b20b0c24a9fe0b911a029b2d908ad95778884da6e0f9635d0", "schema_version": 1, "stage": "ds2-automatic-sam21", "status": "completed"}
+{"archives": [{"path": "ds2-dinov2-p1-repository-evidence.zip", "sha256": "f5adccb0496d6e1f83df56b21760548cc395b408263cd5da433500057f5cf232", "size_bytes": 38365, "source_file_count": 8}, {"path": "ds2-dinov2-p1-review-evidence.zip", "sha256": "b6b7091b847d75cbcd74eda8ca5120f20c6e237b29b03b5b7ce0a83ba470c88d", "size_bytes": 69817, "source_file_count": 2}, {"path": "ds2-dinov2-p1-downstream-input.zip", "sha256": "f0e941b7e50748bbeb95a3936dae48ef0f9d8efea9da4c9536d6d0f8fb257090", "size_bytes": 4651444, "source_file_count": 4}], "downstream_file_count": 4, "review_file_count": 2, "safe_file_count": 8, "safe_manifest_sha256": "20eea074a5980cb98e50b3cc61ded57960610c5bfebd332029cedc6dfff04612", "schema_version": 1, "stage": "ds2-dinov2-p1", "status": "completed"}
+
+[cell 17]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stage</th>
+      <th>path</th>
+      <th>sha256</th>
+      <th>size_bytes</th>
+      <th>source_file_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ds2-locateanything</td>
+      <td>ds2-locateanything-repository-evidence.zip</td>
+      <td>bb5f3793f38d0231d7812d33b9ec6fcd9ce8539c2dea50...</td>
+      <td>59997</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ds2-locateanything</td>
+      <td>ds2-locateanything-review-evidence.zip</td>
+      <td>68852cb455c878984dd1fa4f91bb56730164dbdf5469ff...</td>
+      <td>1232701</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ds2-reference-sam21</td>
+      <td>ds2-reference-sam21-repository-evidence.zip</td>
+      <td>940b2066f9533b0b522f8fdfa1c566a1d216f015fbd9e1...</td>
+      <td>48381</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ds2-reference-sam21</td>
+      <td>ds2-reference-sam21-review-evidence.zip</td>
+      <td>0b558a65b69acddb9a536c8ceddcf63b5d543fefc5492c...</td>
+      <td>664887</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ds2-reference-sam21</td>
+      <td>ds2-reference-sam21-downstream-input.zip</td>
+      <td>2a9b8b0c562da8ddbc170fe2d7217b6168f5915ee95b3a...</td>
+      <td>5349047</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ds2-automatic-sam21</td>
+      <td>ds2-automatic-sam21-repository-evidence.zip</td>
+      <td>71f15e20fae96fb34987107b9ebe79eb205426ecc600ea...</td>
+      <td>49713</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>ds2-automatic-sam21</td>
+      <td>ds2-automatic-sam21-review-evidence.zip</td>
+      <td>063c2239cf1f8d8f822722807cab4fd854ba1ea2bfa859...</td>
+      <td>664896</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>ds2-automatic-sam21</td>
+      <td>ds2-automatic-sam21-downstream-input.zip</td>
+      <td>36a1f534cfbbc4786c7dd1a7c7ae6905db89d2a5f7e6db...</td>
+      <td>5701830</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>ds2-dinov2-p1</td>
+      <td>ds2-dinov2-p1-repository-evidence.zip</td>
+      <td>f5adccb0496d6e1f83df56b21760548cc395b408263cd5...</td>
+      <td>38365</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>ds2-dinov2-p1</td>
+      <td>ds2-dinov2-p1-review-evidence.zip</td>
+      <td>b6b7091b847d75cbcd74eda8ca5120f20c6e237b29b03b...</td>
+      <td>69817</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>ds2-dinov2-p1</td>
+      <td>ds2-dinov2-p1-downstream-input.zip</td>
+      <td>f0e941b7e50748bbeb95a3936dae48ef0f9d8efea9da4c...</td>
+      <td>4651444</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>                  stage                                         path  \
+0    ds2-locateanything   ds2-locateanything-repository-evidence.zip
+1    ds2-locateanything       ds2-locateanything-review-evidence.zip
+2   ds2-reference-sam21  ds2-reference-sam21-repository-evidence.zip
+3   ds2-reference-sam21      ds2-reference-sam21-review-evidence.zip
+4   ds2-reference-sam21     ds2-reference-sam21-downstream-input.zip
+5   ds2-automatic-sam21  ds2-automatic-sam21-repository-evidence.zip
+6   ds2-automatic-sam21      ds2-automatic-sam21-review-evidence.zip
+7   ds2-automatic-sam21     ds2-automatic-sam21-downstream-input.zip
+8         ds2-dinov2-p1        ds2-dinov2-p1-repository-evidence.zip
+9         ds2-dinov2-p1            ds2-dinov2-p1-review-evidence.zip
+10        ds2-dinov2-p1           ds2-dinov2-p1-downstream-input.zip
+
+                                               sha256  size_bytes  \
+0   bb5f3793f38d0231d7812d33b9ec6fcd9ce8539c2dea50...       59997
+1   68852cb455c878984dd1fa4f91bb56730164dbdf5469ff...     1232701
+2   940b2066f9533b0b522f8fdfa1c566a1d216f015fbd9e1...       48381
+3   0b558a65b69acddb9a536c8ceddcf63b5d543fefc5492c...      664887
+4   2a9b8b0c562da8ddbc170fe2d7217b6168f5915ee95b3a...     5349047
+5   71f15e20fae96fb34987107b9ebe79eb205426ecc600ea...       49713
+6   063c2239cf1f8d8f822722807cab4fd854ba1ea2bfa859...      664896
+7   36a1f534cfbbc4786c7dd1a7c7ae6905db89d2a5f7e6db...     5701830
+8   f5adccb0496d6e1f83df56b21760548cc395b408263cd5...       38365
+9   b6b7091b847d75cbcd74eda8ca5120f20c6e237b29b03b...       69817
+10  f0e941b7e50748bbeb95a3936dae48ef0f9d8efea9da4c...     4651444
+
+    source_file_count
+0                   8
+1                   2
+2                   9
+3                   2
+4                   1
+5                   9
+6                   2
+7                   1
+8                   8
+9                   2
+10                  4
+
+[cell 17]
+Verified downloads: /kaggle/working/notebook08b_bundles
+Temporary recovery checkpoints removed after verified bundle creation

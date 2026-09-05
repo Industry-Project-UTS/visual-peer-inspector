@@ -1,0 +1,13 @@
+{
+  "clean_notebook_sha256": "5c78ff7e44a5f4c2c13214bc1444e112778e1f86a5536821d4767024db06b8cd",
+  "downloaded_saved_output_sha256": "48d0b16d6749c5c43c26aa028a9d1976c3748070672ca52b83c3ce2608f32791",
+  "executed_code_cells": 11,
+  "label": "04.1 DS1 LocateAnything screen",
+  "published_log_sha256": "b9c6af141bd29e7babe65a81402ca93f0fb77f8371e222007de0fc1056812550",
+  "published_notebook_sha256": "c5ea5089814fea82f0db07320ae978b8a20b90805d662c6ae69a51d3026514d2",
+  "removed_private_visuals": 2,
+  "retained_output_blocks": 43,
+  "retained_safe_visuals": 6,
+  "schema_version": 1,
+  "status": "completed"
+}
