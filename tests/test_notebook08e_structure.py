@@ -51,6 +51,9 @@ class Notebook08EStructureTests(unittest.TestCase):
         self.assertIn('"--run-mode", DS2_BACKFILL_PHASE', source)
         self.assertIn('recovery_safe = OUTPUT_ROOT / "tracking-safe"', source)
         self.assertNotIn("recovery_summary.json", source)
+        self.assertIn('"datasets/*/*/versions/*"', source)
+        self.assertIn('"notebooks/*/*/versions/*"', source)
+        self.assertIn("Mounted inputs", source)
         self.assertIn('OUTPUT_ROOT / "tracking/clearml_recovery_receipt.json"', source)
         self.assertNotIn("write_safe_artifact_manifest(recovery_safe)", source)
         self.assertIn("timeout=1800", source)
@@ -83,6 +86,10 @@ class Notebook08EStructureTests(unittest.TestCase):
         self.assertIn(
             "esreekarreddy/toysad-8k-ds2-frozen-pipeline",
             metadata["kernel_sources"],
+        )
+        self.assertNotIn(
+            "esreekarreddy/vpi-toysad-ds1-locateanything-prompt-freeze",
+            metadata["dataset_sources"],
         )
 
     def test_runner_and_workflow_compile(self) -> None:

@@ -105,11 +105,21 @@ DS2_RECOVERY_OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
     code(
         r'''
 def kaggle_roots() -> list[Path]:
+    """Return bounded roots for both Kaggle input mount layouts."""
+
     input_root = Path("/kaggle/input")
     if not input_root.is_dir():
         return []
-    roots = [path for path in input_root.iterdir() if path.is_dir()]
-    return sorted(roots, key=lambda path: path.as_posix())
+    roots: list[Path] = []
+    for pattern in (
+        "*",
+        "datasets/*/*",
+        "datasets/*/*/versions/*",
+        "notebooks/*/*",
+        "notebooks/*/*/versions/*",
+    ):
+        roots.extend(path for path in input_root.glob(pattern) if path.is_dir())
+    return sorted(set(roots), key=lambda path: path.as_posix())
 
 
 def find_code_root() -> Path:
@@ -121,7 +131,10 @@ def find_code_root() -> Path:
             return candidate.resolve()
         if (candidate / "code/scripts/run_frozen_development_pipeline.py").is_file():
             return (candidate / "code").resolve()
-    raise FileNotFoundError("Could not locate the Visual Peer Inspector code snapshot")
+    mounted_names = [path.as_posix() for path in kaggle_roots()]
+    raise FileNotFoundError(
+        f"Could not locate the Visual Peer Inspector code snapshot. Mounted inputs: {mounted_names}"
+    )
 
 
 def find_model_input(cohort_id: str, variable: str) -> Path:
@@ -671,7 +684,6 @@ def build() -> None:
             "esreekarreddy/vpi-toysad-ds1-screen100-model-input",
             "esreekarreddy/vpi-toysad-development-remainder-model-input",
             "esreekarreddy/vpi-toysad-ds2-confirmation-rgb",
-            "esreekarreddy/vpi-toysad-ds1-locateanything-prompt-freeze",
         ],
         "competition_sources": [],
         "kernel_sources": ["esreekarreddy/toysad-8k-ds2-frozen-pipeline"],
