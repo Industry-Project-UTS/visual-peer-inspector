@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-from hashlib import sha256
 import importlib.util
 import json
+from hashlib import sha256
 from pathlib import Path
 
 import pytest
-
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "finalize_ds2_clearml.py"
@@ -19,11 +18,19 @@ SPEC.loader.exec_module(finalizer)
 def _safe_root(tmp_path: Path) -> Path:
     root = tmp_path / "safe"
     root.mkdir()
-    (root / "summary.csv").write_text("metric,value\nmean_ap,0.75\n", encoding="utf-8")
-    (root / "chart.png").write_bytes(b"aggregate chart")
+    (root / "view_contract_summary.csv").write_text(
+        "metric,value\nmean_ap,0.75\n", encoding="utf-8"
+    )
+    (root / "review_signal_summary.csv").write_text(
+        "state,count\nautomatic,10\n", encoding="utf-8"
+    )
+    (root / "runtime_receipt.json").write_text(
+        json.dumps({"runtime_seconds": 10.0}), encoding="utf-8"
+    )
+    (root / "multiview_completion.png").write_bytes(b"aggregate chart")
     (root / "run_record.json").write_text(json.dumps({
         "schema_version": 1,
-        "stage": "ds2_confirmation_and_multiview",
+        "stage": "protected_calibration_inference",
         "status": "completed",
         "scene_count": 300,
     }), encoding="utf-8")
@@ -45,14 +52,16 @@ def _safe_root(tmp_path: Path) -> Path:
 def test_ds2_clearml_accepts_aggregate_evidence(tmp_path: Path) -> None:
     record = finalizer.validate_safe_root(
         _safe_root(tmp_path),
-        expected_stage="ds2_confirmation_and_multiview",
+        expected_stage="protected_calibration_inference",
     )
     assert record["scene_count"] == 300
 
 
 def test_ds2_clearml_rejects_scene_identifiers(tmp_path: Path) -> None:
     root = _safe_root(tmp_path)
-    (root / "summary.csv").write_text("opaque_scene_id,value\nS000001,0.5\n", encoding="utf-8")
+    (root / "view_contract_summary.csv").write_text(
+        "opaque_scene_id,value\nS000001,0.5\n", encoding="utf-8"
+    )
     rows = []
     for path in sorted(item for item in root.iterdir() if item.name != "artifact_manifest.json"):
         rows.append({
@@ -68,7 +77,7 @@ def test_ds2_clearml_rejects_scene_identifiers(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="Protected detail"):
         finalizer.validate_safe_root(
             root,
-            expected_stage="ds2_confirmation_and_multiview",
+            expected_stage="protected_calibration_inference",
         )
 
 

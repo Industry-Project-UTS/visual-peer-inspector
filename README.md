@@ -10,8 +10,10 @@ evidence, and documentation for the UTS 32040 Industry Project.
 
 ## Current status
 
-The controlled 2,000-scene experiment is fixed and leakage checked. The first
-20-scene gate, called DS0, has completed across all 20 views per scene.
+The controlled 2,000-scene experiment is fixed and leakage checked. Verified
+development evidence is complete through Notebook 08C. The remaining protected
+and official notebook sequence is built and locally checked, but has not yet
+been run on Kaggle.
 
 | Stage | Result |
 | --- | --- |
@@ -21,11 +23,16 @@ The controlled 2,000-scene experiment is fixed and leakage checked. The first
 | 04 LocateAnything Proposals | Complete for all 400 DS0 images |
 | 05 SAM 2.1 Segmentation | Complete for reference-box and automatic-box routes |
 | 06 Proposal and Mask Evaluation | Complete; all eight declared DS0 gates passed |
-| 07 Representation and Peer Scores | Next: B0, B1, P1, encoder screening, geometry, and heatmaps |
+| 07 to 07.1 Representation and Peer Scores | Complete candidate evidence; DINOv2-small with P1 selected for the development freeze |
+| 08A to 08C DS2 Confirmation | Complete development confirmation evidence |
+| 08D to 10B Frozen Evaluation | Fifteen ordered core stages built and locally checked; Kaggle scientific evidence pending |
+| 11R to 11B Full-pool Sensitivity | Three optional post-official stages built and locally checked; execution remains optional |
 
-The DS0 results support progression to the 100-scene DS1 screen. They do not
-freeze the final encoder, automatic mask route, view-fusion method, or web
-application behaviour.
+The working route is LocateAnything-3B with the `individual object` prompt and
+`area_nms_075_cap8` cleanup, SAM 2.1 Hiera-large, DINOv2-small, P1, label-free
+cross-view identity, and mean normalized-rank fusion. This is a development
+freeze for the protected evaluation sequence. It is not final official
+performance or a production deployment claim.
 
 ## Pipeline
 

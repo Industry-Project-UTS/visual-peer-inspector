@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from collections import defaultdict
-from dataclasses import dataclass
 import random
+from collections import defaultdict
+from collections.abc import Iterable, Mapping, Sequence
+from dataclasses import dataclass
 from statistics import mean
-from typing import Iterable, Mapping, Sequence
 
 import numpy as np
 
@@ -56,7 +56,7 @@ def ranking_metrics(
             hits += 1
             precision_sum += hits / rank
     average_precision = precision_sum / positive_total
-    recall_at_2 = sum(labels[:2]) / positive_total
+    recall_at_2 = sum(labels[:2]) / min(2, positive_total)
     exact_set = 0.0
     if ranked_object_ids is not None or positive_object_ids is not None:
         if ranked_object_ids is None or positive_object_ids is None:

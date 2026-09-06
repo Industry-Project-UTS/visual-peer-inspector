@@ -2,27 +2,33 @@
 
 from __future__ import annotations
 
-from collections import Counter
-from dataclasses import asdict, dataclass
-from hashlib import sha256
-from io import BytesIO
 import binascii
 import json
 import os
+import zipfile
+from collections import Counter
+from collections.abc import Iterable, Mapping, Sequence
+from dataclasses import asdict, dataclass
+from hashlib import sha256
+from io import BytesIO
 from pathlib import Path
 from statistics import mean, median
-from typing import Any, Iterable, Mapping, Sequence
-import zipfile
+from typing import Any
 
 from PIL import Image
 
 from .cohort_contract import (
-    CohortContract,
+    CALIBRATION_CONTRACT,
+    DEVELOPMENT_FULL_CONTRACT,
+    DEVELOPMENT_REMAINDER_CONTRACT,
     DS1_SCREEN_CONTRACT,
     DS2_CONFIRM_CONTRACT,
+    INTERNAL_LOCK_CONTRACT,
+    OFFICIAL_SEEN_TEST_CONTRACT,
+    OFFICIAL_UNSEEN_TEST_CONTRACT,
+    CohortContract,
 )
 from .toysad_selection import RELEASE_ID, validate_model_facing_media_record
-
 
 SMOKE20_COHORT_ID = "toysad8k-development-smoke-20-v1"
 SMOKE20_SELECTION_SEED = "toysad8k-smoke-20-v1"
@@ -63,7 +69,17 @@ SMOKE20_CONTRACT = CohortContract(
 
 _COHORT_CONTRACTS = {
     contract.cohort_id: contract
-    for contract in (SMOKE20_CONTRACT, DS1_SCREEN_CONTRACT, DS2_CONFIRM_CONTRACT)
+    for contract in (
+        SMOKE20_CONTRACT,
+        DS1_SCREEN_CONTRACT,
+        DS2_CONFIRM_CONTRACT,
+        DEVELOPMENT_REMAINDER_CONTRACT,
+        DEVELOPMENT_FULL_CONTRACT,
+        CALIBRATION_CONTRACT,
+        INTERNAL_LOCK_CONTRACT,
+        OFFICIAL_SEEN_TEST_CONTRACT,
+        OFFICIAL_UNSEEN_TEST_CONTRACT,
+    )
 }
 
 _FORBIDDEN_MODEL_FIELD_PARTS = (
@@ -136,7 +152,7 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
                 continue
             value = json.loads(line)
             if not isinstance(value, dict):
-                raise ValueError(f"JSONL row {line_number} is not an object: {path}")
+                raise TypeError(f"JSONL row {line_number} is not an object: {path}")
             rows.append(value)
     return rows
 
@@ -149,7 +165,7 @@ def membership_sha256(opaque_scene_ids: Iterable[str]) -> str:
 
 
 def _stable_tie_break(opaque_scene_id: str) -> str:
-    payload = f"{SMOKE20_SELECTION_SEED}|{opaque_scene_id}".encode("utf-8")
+    payload = f"{SMOKE20_SELECTION_SEED}|{opaque_scene_id}".encode()
     return sha256(payload).hexdigest()
 
 
@@ -261,7 +277,10 @@ def select_contract_rows(
         dict(row)
         for row in development_source_rows
         if row.get("role") == contract.role
-        and row.get("pilot_stage") == contract.pilot_stage
+        and (
+            contract.pilot_stage == "all_development"
+            or row.get("pilot_stage") == contract.pilot_stage
+        )
     ]
     required_fields = {
         "opaque_scene_id",
@@ -607,7 +626,10 @@ def _build_selected_rgb_package(
         if opaque_scene_id not in neutral_by_id:
             raise ValueError("A cohort scene is missing from the neutral manifest")
         row = dict(neutral_by_id[opaque_scene_id])
-        validate_model_facing_media_record(row)
+        validate_model_facing_media_record(
+            row,
+            expected_release_id=contract.release_id,
+        )
         _assert_no_forbidden_fields(row)
         selected_neutral.append(row)
 
@@ -825,7 +847,10 @@ def verify_model_input_package(
     scene_ids: list[str] = []
     expected_media: list[Path] = []
     for row in rows:
-        validate_model_facing_media_record(row)
+        validate_model_facing_media_record(
+            row,
+            expected_release_id=resolved_contract.release_id,
+        )
         _assert_no_forbidden_fields(row)
         scene_id = str(row["opaque_scene_id"])
         scene_ids.append(scene_id)
@@ -841,7 +866,11 @@ def verify_model_input_package(
             expected_media.append(Path(f"media/{scene_id}/rgb/{view_id}.png"))
     if len(scene_ids) != len(set(scene_ids)):
         raise ValueError("Model input manifest contains duplicate scenes")
-    if membership_sha256(scene_ids) != resolved_contract.membership_sha256:
+    expected_model_membership = (
+        resolved_contract.model_membership_sha256
+        or resolved_contract.membership_sha256
+    )
+    if membership_sha256(scene_ids) != expected_model_membership:
         raise ValueError("Model input manifest has the wrong cohort membership")
 
     actual_media = sorted(
@@ -1046,26 +1075,26 @@ def collect_model_input_evidence(
 
 
 __all__ = [
-    "EXPECTED_RGB_SIZE",
     "EXPECTED_ARCHIVE_SHA256",
     "EXPECTED_ARCHIVE_SIZE_BYTES",
+    "EXPECTED_RGB_SIZE",
     "EXPECTED_SCENE_COUNT",
     "EXPECTED_VIEWS_PER_SCENE",
-    "PackageAudit",
     "SMOKE20_COHORT_ID",
     "SMOKE20_CONTRACT",
     "SMOKE20_MEMBERSHIP_SHA256",
+    "PackageAudit",
     "build_cohort_rgb_package",
     "build_smoke20_rgb_package",
     "canonical_json_bytes",
-    "cohort_contract_for",
     "choose_smoke20_rows",
+    "cohort_contract_for",
     "collect_model_input_evidence",
     "file_sha256",
     "membership_sha256",
     "read_jsonl",
     "select_contract_rows",
-    "verify_model_input_package",
     "verify_checksum_manifest",
+    "verify_model_input_package",
     "verify_trusted_package_inputs",
 ]

@@ -32,7 +32,7 @@ flowchart LR
     I --> J["Frozen visual encoder"]
     J --> K["B0 and P1 peer scores"]
     K --> M["Per-view object ranking"]
-    M --> N["Evaluator-only identity association and fusion"]
+    M --> N["Model-facing label-free identity association and normalized-rank fusion"]
     N --> O["Ranked unusual objects and review state"]
     O --> P["Evaluator-only metrics and failure analysis"]
     Q["Protected references and labels"] --> P
@@ -52,8 +52,9 @@ flowchart LR
     D --> E["SAM 2.1 produces whole-object masks"]
     E --> F["Object crops and frozen visual features"]
     F --> G["B0 and P1 peer comparison"]
-    G --> H["Future identity matching or user confirmation"]
+    G --> H["Label-free identity matching and normalized-rank fusion"]
     H --> I["Ranked unusual object and relative score"]
+    I --> K["Optional user correction when review is required"]
     I --> J["Highlighted views, coarse heatmap, and inspection report"]
 ```
 
@@ -74,8 +75,8 @@ uncertain result into a confident anomaly claim.
 | B1 | Retains the tested median pairwise baseline for comparison | Part of the promoted application method |
 | P1 | Compares local patch features and produces a coarse mismatch map | Pixel-accurate defect segmentation |
 | Geometry branch | Planned future scoring for pose and arrangement changes | Part of the current DS2 B0 or P1 result |
-| Identity and fusion | Evaluator-supported correspondence measures fusion; the application still needs label-free matching or user confirmation | Inventing correspondence when evidence is weak |
-| Evaluator | Joins frozen predictions with protected references and labels | Supplying information to model execution |
+| Identity and fusion | Uses model-facing appearance and geometry evidence for label-free one-to-one matching, permits explicit unmatched objects, and applies mean normalized-rank fusion | Inventing correspondence when evidence is weak |
+| Evaluator | Joins already frozen predictions with protected references for metrics and failure analysis | Supplying information to model execution or application fusion |
 
 ## Route names
 
@@ -142,17 +143,21 @@ to the model path.
 | DS0 | 20 scenes, 20 views, 400 images | Validate packaging, proposals, segmentation, repeatability, and evaluator separation | Complete; candidate evidence supports progression |
 | DS1 | 100 scenes, all 20 views | Screen proposal settings, mask routes, encoders, and scoring | Complete; prompt freeze verified on Kaggle Version 4 |
 | DS2 | Separate 300 scenes, all 20 views | Confirm the selected component settings without retuning | Frozen model run and protected evaluation complete |
-| Development scale | Remaining development scenes | Build the selected feature cache and evaluate view policies | Planned |
-| Calibration | 600 scenes | Freeze thresholds and review behaviour | Planned |
-| Internal lock | 400 scenes | One evaluation after predictions and configuration are saved | Planned |
+| Development scale | Full 1,000-scene development role | Run the frozen pipeline, freeze label-free identity and lock the output contract | Notebooks 08D to 08F built and locally checked; Kaggle evidence pending |
+| Calibration | 600 scenes | Create prediction-only outputs, then freeze review behaviour | Notebooks 09A and 09B built and locally checked; Kaggle evidence pending |
+| Internal lock | 400 scenes | Lock predictions, then evaluate once without retuning | Notebooks 09C and 09D built and locally checked; Kaggle evidence pending |
+| Official test | 715 seen and 2,437 unseen scenes | Run separate frozen inference and one sealed evaluation | Notebooks 10R to 10B built and locally checked; Kaggle evidence pending |
+| Optional full pool | 4,107 eligible training scenes | Describe the unchanged frozen route after official results are fixed | Notebooks 11R to 11B built and locally checked; execution remains optional |
 
 The optional 4,107-scene analysis is a post-freeze sensitivity check. It must
 not be used to retune the primary 2,000-scene experiment.
 
 ## Current implementation status
 
-Notebooks 01 to 07.1 are complete and merged. DINOv2-small with P1 is the
-working freeze, B0 remains the baseline, and B1 is not promoted. The DS2
+Notebooks 01 to 08C are complete and merged. Fifteen ordered core notebook
+sources from 08D through 10B and three optional Notebook 11 sources are built
+and locally checked, but they do not yet have real Kaggle evidence. DINOv2-small with P1 is the working freeze, B0
+remains the baseline, and B1 is not promoted. The DS2
 release contains 300 untouched scenes and 6,000 views. The Notebook 04.3
 development evaluation selects `individual object` with area filtering, NMS at
 0.75, and an eight-proposal outlier safeguard. Kaggle Version 4 verified this
@@ -187,8 +192,9 @@ when boxes are missing, loose, duplicated, or attached to the background.
   independent samples.
 - The automatic route is the current application candidate, with an assisted
   fallback. It is not a fully automatic production claim.
-- DINOv2-small and P1 are frozen for DS2. Label-free cross-view identity and the
-  user-review threshold are not yet frozen.
+- DINOv2-small and P1 are frozen for DS2. The label-free identity method and
+  review-policy procedures are implemented, but their final immutable records
+  exist only after Notebooks 08F and 09B complete on Kaggle.
 
 ## Evidence and reproducibility
 

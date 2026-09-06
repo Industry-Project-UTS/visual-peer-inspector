@@ -25,18 +25,36 @@ model, scoring, evaluation, and tracking logic belongs in tested modules under
 | 08A DS2 Confirmation Release | Builds the untouched 300-scene RGB, geometry, and protected evaluator resources | Kaggle Version 5 verified; three private resources published and checked |
 | 08B DS2 Frozen Pipeline | Runs LocateAnything, reference-box and automatic-box SAM 2.1, and frozen DINOv2-small with B0 and P1 on all 6,000 views | Kaggle Version 4 complete; compact bundles verified |
 | 08C DS2 Confirmation and Multi-view | Measures proposals, masks, B0/P1 rankings, view counts, fusion, subgroups, and confirmation status | Kaggle Version 1 complete; development confirmation measured |
-| 09 Frozen Evaluation | Opens internal-lock and official evaluation only after settings and predictions are frozen | Planned |
-| 10 Full-Pool Sensitivity | Runs the optional role-preserving 4,107-scene analysis after the primary method freezes | Optional |
+| 08D Primary Protocol Release | Verifies the 1,000/600/400 primary roles and releases only the remaining 600 development scenes | Built and locally checked; Kaggle evidence pending |
+| 08E Frozen Development Pipeline | Runs the fixed automatic pipeline on the 1,000 development scenes and locks complete predictions | Built and locally checked; Kaggle evidence pending |
+| 08E.1 Development Identity Evaluator Release | Opens raw reference masks only after the 1,000-scene prediction lock and publishes `vpi-toysad-development-identity-evaluator` | Built and locally checked; Kaggle evidence pending |
+| 08F Cross-View Identity Freeze | Selects label-free identity matching and freezes the application output contract | Built and locally checked; Kaggle evidence pending |
+| 08F.1 Calibration Resource Release | Publishes the physically separate `vpi-toysad-calibration600-model-input` and `vpi-toysad-calibration600-evaluator` resources after the method freeze | Built and locally checked; Kaggle evidence pending |
+| 09A Calibration Inference | Produces locked, prediction-only output for all 600 calibration scenes | Built and locally checked; Kaggle evidence pending |
+| 09B Calibration Review Policy | Opens calibration references after the prediction lock and freezes only the optional review policy | Built and locally checked; Kaggle evidence pending |
+| 09B.1 Internal-Lock Resource Release | Publishes the physically separate `vpi-toysad-internal-lock400-model-input` and `vpi-toysad-internal-lock400-evaluator` resources after the method and policy freezes | Built and locally checked; Kaggle evidence pending |
+| 09C Internal-Lock Inference | Produces locked, prediction-only output for all 400 internal-lock scenes | Built and locally checked; Kaggle evidence pending |
+| 09D Internal-Lock Evaluation | Performs the one-shot internal evaluation without retuning | Built and locally checked; Kaggle evidence pending |
+| 10R Official Release | Builds separate model-facing and evaluator-only resources for the official seen and unseen roles | Built and locally checked; Kaggle evidence pending |
+| 10A Seen Inference | Runs the unchanged frozen route on official seen inputs | Built and locally checked; Kaggle evidence pending |
+| 10A.1 Unseen Inference | Runs the unchanged frozen route on official unseen inputs | Built and locally checked; Kaggle evidence pending |
+| 10A Finalize | Verifies both prediction resources and publishes an aggregate-only cross-split lock summary | Built and locally checked; Kaggle evidence pending |
+| 10B Official Evaluation | Performs the final one-shot seen and unseen evaluation without retuning | Built and locally checked; Kaggle evidence pending |
+| 11R Full-Pool Release | Creates separate model-facing and evaluator-only resources after Notebook 10B | Built and locally checked; optional execution |
+| 11A Full-Pool Frozen Inference | Runs the unchanged frozen route on 4,107 eligible scenes with sharded recovery | Built and locally checked; optional execution |
+| 11B Full-Pool Sensitivity Evaluation | Reports descriptive role-preserving results without retuning | Built and locally checked; optional execution |
 
 Candidate evidence is valid implementation evidence from a verified
 pre-commit source snapshot that recorded `git_dirty: true`. The original run
 record must remain unchanged. A clean-snapshot rerun may later replace a
 candidate result.
 
-The current DS2 decision keeps LocateAnything with an assisted correction
-route, SAM 2.1 Hiera-large, DINOv2-small, P1, three declared views, and
-mean-rank fusion. B0 remains the baseline. This is a development freeze for
-the next calibration stage, not a final production claim.
+The current DS2 decision keeps LocateAnything, SAM 2.1 Hiera-large,
+DINOv2-small, P1, two to five declared views, and normalized-rank fusion. B0
+remains the baseline. The automatic result is the normal route. Human box or
+identity correction is an optional rerun when the evidence is incomplete or
+uncertain. This is a development freeze for the next calibration stage, not a
+final production claim.
 
 ## Dependency flow
 
@@ -53,8 +71,25 @@ flowchart LR
     N7 --> N8A["08A DS2 confirmation release"]
     N8A --> N8B["08B Frozen pipeline"]
     N8B --> N8C["08C Confirmation and multi-view"]
-    N8C --> N9["09 Frozen evaluation"]
-    N9 --> N10["10 Optional sensitivity"]
+    N8C --> N8D["08D Primary protocol release"]
+    N8D --> N8E["08E Development pipeline"]
+    N8E --> N8E1["08E.1 Development identity evaluator release"]
+    N8E1 --> N8F["08F Identity and method freeze"]
+    N8F --> N8F1["08F.1 Calibration resource release"]
+    N8F1 --> N9A["09A Calibration inference"]
+    N9A --> N9B["09B Review-policy freeze"]
+    N9B --> N9B1["09B.1 Internal-lock resource release"]
+    N9B1 --> N9C["09C Internal-lock inference"]
+    N9C --> N9D["09D One-shot internal evaluation"]
+    N9D --> N10R["10R Official release"]
+    N10R --> N10A["10A Seen inference"]
+    N10R --> N10A1["10A.1 Unseen inference"]
+    N10A --> N10AF["10A Finalize prediction summary"]
+    N10A1 --> N10AF
+    N10AF --> N10B["10B Seen and unseen evaluation"]
+    N10B --> N11R["11R Optional full-pool release"]
+    N11R --> N11A["11A Frozen full-pool inference"]
+    N11A --> N11B["11B Descriptive sensitivity evaluation"]
     N2 --> N31["03.1 DS1 opaque package"]
     N31 --> N41["04.1 DS1 LocateAnything"]
     N31 --> N51["05.1 DS1 SAM"]
@@ -103,9 +138,46 @@ flowchart LR
   `confirmation-and-multiview/08b-toysad8k-ds2-frozen-pipeline.ipynb`
 - Notebook 08C:
   `confirmation-and-multiview/08c-toysad8k-ds2-confirmation-and-multiview.ipynb`
+- Notebook 08D:
+  `development-freeze/08d-toysad8k-primary-protocol-release.ipynb`
+- Notebook 08E:
+  `development-freeze/08e-toysad8k-frozen-development-pipeline.ipynb`
+- Notebook 08E.1:
+  `development-freeze/08e1-toysad8k-development-identity-evaluator-release.ipynb`
+- Notebook 08F:
+  `development-freeze/08f-toysad8k-cross-view-identity-freeze.ipynb`
+- Notebook 08F.1:
+  `protected-evaluation/08f1-toysad8k-calibration-resource-release.ipynb`
+- Notebook 09A:
+  `protected-evaluation/09a-toysad8k-protected-calibration-inference.ipynb`
+- Notebook 09B:
+  `protected-evaluation/09b-toysad8k-calibration-review-policy.ipynb`
+- Notebook 09B.1:
+  `protected-evaluation/09b1-toysad8k-internal-lock-resource-release.ipynb`
+- Notebook 09C:
+  `protected-evaluation/09c-toysad8k-protected-internal-lock-inference.ipynb`
+- Notebook 09D:
+  `protected-evaluation/09d-toysad8k-internal-lock-one-shot-evaluation.ipynb`
+- Notebook 10R:
+  `official-evaluation/10r-toysad8k-official-release.ipynb`
+- Notebook 10A:
+  `official-evaluation/10a-toysad8k-official-seen-frozen-inference.ipynb`
+- Notebook 10A.1:
+  `official-evaluation/10a1-toysad8k-official-unseen-frozen-inference.ipynb`
+- Notebook 10A Finalize:
+  `official-evaluation/10a-finalize-toysad8k-official-prediction-summary.ipynb`
+- Notebook 10B:
+  `official-evaluation/10b-toysad8k-official-seen-unseen-evaluation.ipynb`
+- Notebook 11R:
+  `post-freeze-sensitivity/11r-toysad8k-full-pool-release.ipynb`
+- Notebook 11A:
+  `post-freeze-sensitivity/11a-toysad8k-full-pool-frozen-inference.ipynb`
+- Notebook 11B:
+  `post-freeze-sensitivity/11b-toysad8k-full-pool-sensitivity-evaluation.ipynb`
 
-Planned notebook directories are created only when their design and required
-inputs are ready.
+Notebook 11 source is ready, but execution remains optional. Start it only
+after Notebook 10B is complete and the official result is fixed. It cannot be
+used to revise the frozen method or policy.
 
 ## Acceptance rules
 

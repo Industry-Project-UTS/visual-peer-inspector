@@ -34,6 +34,17 @@ class RankingMetricTests(unittest.TestCase):
         self.assertEqual(metrics.reciprocal_rank, 0.5)
         self.assertEqual(metrics.average_precision, 0.5)
 
+    def test_recall_at_two_uses_the_retrievable_positive_count(self):
+        metrics = ranking_metrics(
+            [True, True, True],
+            positive_total=3,
+            ranked_object_ids=["O1", "O2", "O3"],
+            positive_object_ids=["O1", "O2", "O3"],
+        )
+
+        self.assertEqual(metrics.recall_at_2, 1.0)
+        self.assertEqual(metrics.exact_set, 1.0)
+
     def test_views_are_averaged_before_dataset_summary(self):
         base = {
             "opaque_scene_id": "S1",

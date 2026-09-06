@@ -1,0 +1,25 @@
+{
+  "id": "esreekarreddy/toysad-8k-frozen-development-pipeline",
+  "title": "ToysAD-8K Frozen Development Pipeline",
+  "code_file": "08e-toysad8k-frozen-development-pipeline.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-ds1-screen100-model-input",
+    "esreekarreddy/vpi-toysad-development-remainder-model-input",
+    "esreekarreddy/vpi-toysad-ds2-confirmation-rgb",
+    "esreekarreddy/vpi-toysad-ds1-locateanything-prompt-freeze"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [
+    "esreekarreddy/toysad-8k-ds2-frozen-pipeline"
+  ],
+  "model_sources": []
+}
