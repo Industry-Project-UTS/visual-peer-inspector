@@ -508,7 +508,10 @@ def run_primary_protocol_release(
         "internal_lock_scene_count": 400,
         "released_scene_count": verified.scene_count,
         "released_image_count": verified.image_count,
-        "released_asset_group_count": verified.asset_group_count,
+        # Asset-group identity is deliberately excluded from the model-facing
+        # package audit. Its verified aggregate count comes from the frozen
+        # cohort contract instead.
+        "released_asset_group_count": DEVELOPMENT_REMAINDER_CONTRACT.asset_group_count,
         "released_membership_sha256": verified.membership_sha256,
         "released_manifest_sha256": verified.manifest_sha256,
         "released_content_checksums_sha256": verified.content_checksums_sha256,

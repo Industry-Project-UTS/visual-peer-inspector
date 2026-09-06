@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 import json
 import sys
 from pathlib import Path
@@ -15,6 +16,7 @@ from visual_peer_inspector.workflows.primary_protocol_release import (
     _contract_rows,
     _development_contact_sheet,
     _protocol_diagram,
+    run_primary_protocol_release,
 )
 
 
@@ -125,3 +127,10 @@ def test_protocol_figures_are_deterministic_development_evidence(tmp_path: Path)
     with Image.open(contact_sheet) as image:
         assert image.width > 800
         assert image.height > 500
+
+
+def test_run_record_does_not_read_private_identity_from_package_audit() -> None:
+    source = inspect.getsource(run_primary_protocol_release)
+
+    assert "verified.asset_group_count" not in source
+    assert "DEVELOPMENT_REMAINDER_CONTRACT.asset_group_count" in source
