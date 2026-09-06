@@ -14,8 +14,7 @@
     "esreekarreddy/vpi-code-snapshot",
     "esreekarreddy/vpi-toysad-ds1-screen100-model-input",
     "esreekarreddy/vpi-toysad-development-remainder-model-input",
-    "esreekarreddy/vpi-toysad-ds2-confirmation-rgb",
-    "esreekarreddy/vpi-toysad-ds1-locateanything-prompt-freeze"
+    "esreekarreddy/vpi-toysad-ds2-confirmation-rgb"
   ],
   "competition_sources": [],
   "kernel_sources": [
