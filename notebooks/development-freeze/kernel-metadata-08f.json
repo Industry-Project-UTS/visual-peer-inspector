@@ -1,0 +1,24 @@
+{
+  "id": "esreekarreddy/toysad-8k-cross-view-identity-freeze",
+  "title": "ToysAD-8K Cross-View Identity Freeze",
+  "code_file": "08f-toysad8k-cross-view-identity-freeze.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-ds1-screen100-model-input",
+    "esreekarreddy/vpi-toysad-development-remainder-model-input",
+    "esreekarreddy/vpi-toysad-ds2-confirmation-rgb",
+    "esreekarreddy/vpi-toysad-development-identity-evaluator"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [
+    "esreekarreddy/toysad-8k-frozen-development-pipeline"
+  ],
+  "model_sources": []
+}

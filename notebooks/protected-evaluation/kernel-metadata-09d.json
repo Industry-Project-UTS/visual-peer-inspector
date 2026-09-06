@@ -1,0 +1,24 @@
+{
+  "id": "esreekarreddy/09d-toysad8k-internal-lock-one-shot-evaluation",
+  "title": "ToysAD-8K Internal-Lock One-Shot Evaluation",
+  "code_file": "09d-toysad8k-internal-lock-one-shot-evaluation.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-internal-lock400-evaluator",
+    "esreekarreddy/vpi-toysad-internal-lock400-model-input",
+    "esreekarreddy/vpi-toysad-development-method-freeze",
+    "esreekarreddy/vpi-toysad-calibration-review-policy"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [
+    "esreekarreddy/09c-toysad8k-protected-internal-lock-inference"
+  ],
+  "model_sources": []
+}

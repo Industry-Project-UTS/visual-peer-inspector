@@ -4,22 +4,110 @@
 from __future__ import annotations
 
 import argparse
-from hashlib import sha256
 import json
 import os
-from pathlib import Path
-import re
 import signal
+import sys
+from hashlib import sha256
+from pathlib import Path
 from typing import Any
 
+CODE_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(CODE_ROOT / "src"))
 
-ALLOWED_SUFFIXES = {".csv", ".json", ".png"}
-FORBIDDEN_TEXT = re.compile(
-    r"S\d{6}|O\d{2}|opaque_scene_id|labels_by_object|mask_rle|box_xyxy|"
-    r"/kaggle/input/|/(?:Users|home)/|CLEARML_API_(ACCESS|SECRET)_KEY|HF_TOKEN|source_scene_id",
-    re.IGNORECASE,
+from visual_peer_inspector.notebook_provenance import PROVENANCE_FIELDS
+from visual_peer_inspector.tracking_safe_artifacts import (
+    validate_tracking_safe_root,
 )
+
 DEFAULT_PROJECT = "Visual Peer Inspector/04 Confirmation and Multi-view"
+
+# Every externally tracked stage has a code-owned aggregate artifact contract.
+# The manifest and run record are added by the shared validator.
+STAGE_ALLOWLISTS: dict[str, tuple[frozenset[str], ...]] = {
+    "primary_protocol_release": (
+        frozenset(
+            {
+                "cohort_membership.csv",
+                "development_stage_membership.csv",
+                "role_overlap_audit.csv",
+                "resource_release_status.csv",
+                "primary_role_counts.png",
+                "protocol_release_boundary.png",
+            }
+        ),
+    ),
+    "frozen_development_pipeline": (frozenset(),),
+    "development_identity_evaluator_release": (frozenset(),),
+    "calibration_resource_release": (frozenset(),),
+    "internal_lock_resource_release": (frozenset(),),
+    "protected_calibration_inference": (
+        frozenset(),
+        frozenset(
+            {
+                "runtime_receipt.json",
+                "view_contract_summary.csv",
+                "review_signal_summary.csv",
+                "multiview_completion.png",
+            }
+        ),
+    ),
+    "protected_internal_lock_inference": (
+        frozenset(),
+        frozenset(
+            {
+                "runtime_receipt.json",
+                "view_contract_summary.csv",
+                "review_signal_summary.csv",
+                "multiview_completion.png",
+            }
+        ),
+    ),
+    "official_seen_frozen_inference": (
+        frozenset(),
+        frozenset(
+            {
+                "runtime_receipt.json",
+                "view_contract_summary.csv",
+                "review_signal_summary.csv",
+                "multiview_completion.png",
+            }
+        ),
+    ),
+    "official_unseen_frozen_inference": (
+        frozenset(),
+        frozenset(
+            {
+                "runtime_receipt.json",
+                "view_contract_summary.csv",
+                "review_signal_summary.csv",
+                "multiview_completion.png",
+            }
+        ),
+    ),
+    "official_release": (
+        frozenset(),
+        frozenset(
+            {
+                "official_release_receipt.json",
+                "official_cohort_summary.csv",
+                "official_cohort_summary.png",
+            }
+        ),
+    ),
+    "official_frozen_inference": (
+        frozenset(
+            {
+                "official_inference_summary.json",
+                "official_prediction_lock_summary.csv",
+                "official_prediction_lock_summary.png",
+            }
+        ),
+    ),
+    "official_inference_recovery": (
+        frozenset({"recovery_run_summary.json"}),
+    ),
+}
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -41,40 +129,24 @@ def _write_receipt(path: Path, value: dict[str, Any]) -> None:
 
 
 def validate_safe_root(root: Path, *, expected_stage: str) -> dict[str, Any]:
-    """Verify the aggregate manifest and reject protected identifiers or paths."""
+    """Verify the aggregate manifest against the exact stage contract."""
 
-    root = root.expanduser().resolve(strict=True)
-    if root.is_symlink() or any(path.is_symlink() for path in root.rglob("*")):
-        raise ValueError("ClearML safe root cannot contain symbolic links")
-    files = sorted(path for path in root.rglob("*") if path.is_file())
-    relative_files = {path.relative_to(root).as_posix() for path in files}
-    if "artifact_manifest.json" not in relative_files or "run_record.json" not in relative_files:
-        raise ValueError("ClearML safe root is missing its manifest or run record")
-    if any(path.suffix.lower() not in ALLOWED_SUFFIXES for path in files):
-        raise ValueError("ClearML safe root contains an unsupported file type")
-    for path in files:
-        relative = path.relative_to(root).as_posix().lower()
-        if any(part in relative for part in ("private", "cache", "crosswalk", "credential", "secret")):
-            raise ValueError("ClearML safe root contains a protected path")
-        if path.suffix.lower() in {".csv", ".json"} and path.name != "artifact_manifest.json":
-            if FORBIDDEN_TEXT.search(path.read_text(encoding="utf-8")):
-                raise ValueError(f"Protected detail found in ClearML artifact: {relative}")
-
-    manifest = json.loads((root / "artifact_manifest.json").read_text(encoding="utf-8"))
-    rows = manifest.get("artifacts")
-    if not isinstance(rows, list) or int(manifest.get("artifact_count", -1)) != len(rows):
-        raise ValueError("ClearML artifact manifest is invalid")
-    declared = {str(row.get("path")) for row in rows}
-    if declared != relative_files - {"artifact_manifest.json"}:
-        raise ValueError("ClearML artifact manifest coverage differs")
-    for row in rows:
-        path = root / str(row["path"])
-        if sha256(path.read_bytes()).hexdigest() != str(row["sha256"]) or path.stat().st_size != int(row["size_bytes"]):
-            raise ValueError("ClearML artifact digest differs")
-    run_record = json.loads((root / "run_record.json").read_text(encoding="utf-8"))
-    if run_record.get("status") != "completed" or run_record.get("stage") != expected_stage:
-        raise ValueError("ClearML run record is not a completed expected stage")
-    return run_record
+    variants = STAGE_ALLOWLISTS.get(expected_stage)
+    if variants is None:
+        raise ValueError("ClearML stage has no code-owned artifact allowlist")
+    last_error: ValueError | None = None
+    for allowed in variants:
+        try:
+            record, _manifest = validate_tracking_safe_root(
+                root,
+                expected_stage=expected_stage,
+                allowed_relative_paths=allowed,
+            )
+            return record
+        except ValueError as error:
+            last_error = error
+    assert last_error is not None
+    raise last_error
 
 
 def _alarm(_signum: int, _frame: Any) -> None:
@@ -89,9 +161,7 @@ def _numeric_scalars(value: Any, prefix: str = "run", limit: int = 100) -> list[
     def visit(item: Any, name: str) -> None:
         if len(rows) >= limit:
             return
-        if isinstance(item, bool):
-            rows.append((name, float(item)))
-        elif isinstance(item, (int, float)):
+        if isinstance(item, (bool, int, float)):
             rows.append((name, float(item)))
         elif isinstance(item, dict):
             for key, child in sorted(item.items(), key=lambda pair: str(pair[0])):
@@ -111,6 +181,7 @@ def _log_online(
     online: bool,
 ) -> tuple[str, dict[str, int]]:
     from clearml import Task
+
     from visual_peer_inspector.tracking import (
         _configure_clearml_request_timeouts,
         configure_official_clearml_hosts,
@@ -134,6 +205,13 @@ def _log_online(
     )
     if tags:
         task.add_tags(tags)
+    provenance = {
+        name: record[name]
+        for name in PROVENANCE_FIELDS
+        if name in record
+    }
+    if provenance:
+        task.set_user_properties(**provenance)
     logger = task.get_logger()
     for series, value in _numeric_scalars(record):
         logger.report_scalar(
@@ -176,12 +254,19 @@ def main() -> None:
         "stage": f"{args.stage}_clearml_finalisation",
         "mode": args.mode,
         "status": "pending",
-        "safe_manifest_sha256": sha256((root / "artifact_manifest.json").read_bytes()).hexdigest(),
+        "safe_manifest_sha256": sha256(
+            (root / "artifact_manifest.json").read_bytes()
+        ).hexdigest(),
         "task_id": None,
         "run_status": record["status"],
         "tracking_attempt_count": 0,
         "tracking_retry_count": 0,
         "tracking_transient_failure_count": 0,
+        **{
+            name: record[name]
+            for name in PROVENANCE_FIELDS
+            if name in record
+        },
     }
     if args.mode == "disabled":
         receipt["status"] = "disabled"
@@ -202,7 +287,7 @@ def main() -> None:
         )
         receipt.update(retry_fields)
         receipt["status"] = "completed" if args.mode == "online" else "offline_completed"
-    except Exception as error:
+    except Exception as error:  # noqa: BLE001 - tracking failure must not erase local evidence
         receipt["status"] = "failed"
         receipt["error_type"] = type(error).__name__
     finally:

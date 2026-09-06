@@ -1,0 +1,23 @@
+{
+  "code_file": "10a-toysad8k-official-seen-frozen-inference.ipynb",
+  "competition_sources": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-official-seen-model-input",
+    "esreekarreddy/vpi-toysad-ds1-locateanything-prompt-freeze",
+    "esreekarreddy/vpi-toysad-development-method-freeze",
+    "esreekarreddy/vpi-toysad-calibration-review-policy",
+    "esreekarreddy/vpi-toysad-internal-lock-decision"
+  ],
+  "enable_gpu": true,
+  "enable_internet": true,
+  "enable_tpu": false,
+  "id": "esreekarreddy/toysad-8k-official-frozen-inference",
+  "is_private": true,
+  "kernel_sources": [],
+  "kernel_type": "notebook",
+  "language": "python",
+  "machine_shape": "NvidiaTeslaT4",
+  "model_sources": [],
+  "title": "ToysAD-8K Official Frozen Inference"
+}

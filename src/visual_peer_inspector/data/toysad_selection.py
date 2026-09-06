@@ -7,17 +7,17 @@ by their base asset before development, calibration and lock roles are formed.
 
 from __future__ import annotations
 
-from collections import Counter, defaultdict
-from dataclasses import dataclass
-from hashlib import sha256
 import json
-from pathlib import Path, PurePosixPath
 import platform
 import sqlite3
-from typing import Any, Iterable, Iterator, Mapping, Sequence
+from collections import Counter, defaultdict
+from collections.abc import Iterable, Iterator, Mapping, Sequence
+from dataclasses import dataclass
+from hashlib import sha256
+from pathlib import Path, PurePosixPath
+from typing import Any
 
 from .archive_members import IndexedMember, read_indexed_member
-
 
 RELEASE_ID = "toysad8k-train-2000-v2"
 SELECTION_SEED = "toysad8k-train-2000-v2|20260812-lock-reset"
@@ -125,7 +125,7 @@ def _load_json_object(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
         value = json.load(handle)
     if not isinstance(value, dict):
-        raise ValueError(f"Expected a JSON object: {path}")
+        raise TypeError(f"Expected a JSON object: {path}")
     return value
 
 
@@ -193,7 +193,7 @@ def verify_pinned_sources(paths: SourcePaths) -> tuple[dict[str, Any], dict[str,
     master = _load_json_object(paths.master_json)
     scenes = master.get("scenes")
     if not isinstance(scenes, list):
-        raise ValueError("Master JSON is missing its scenes array")
+        raise TypeError("Master JSON is missing its scenes array")
     canonical_hash = sha256(_canonical_json_bytes(scenes)).hexdigest()
     if canonical_hash != EXPECTED_CANONICAL_SCENES_HASH:
         raise ValueError(
@@ -204,7 +204,7 @@ def verify_pinned_sources(paths: SourcePaths) -> tuple[dict[str, Any], dict[str,
     archive_manifest = _load_json_object(paths.archive_manifest)
     reconstruction = archive_manifest.get("reconstruction", {})
     if not isinstance(reconstruction, dict):
-        raise ValueError("Archive manifest has no reconstruction record")
+        raise TypeError("Archive manifest has no reconstruction record")
     archive_size = paths.archive_zip.stat().st_size
     if archive_size != EXPECTED_ARCHIVE_SIZE_BYTES:
         raise ValueError(
@@ -239,7 +239,7 @@ def _official_split_mapping(path: Path) -> dict[str, str]:
     mapping: dict[str, str] = {}
     for split, scene_ids in raw.items():
         if not isinstance(scene_ids, list):
-            raise ValueError(f"Official split {split!r} is not a list")
+            raise TypeError(f"Official split {split!r} is not a list")
         for value in scene_ids:
             scene_id = str(value)
             if scene_id in mapping:
@@ -258,7 +258,7 @@ def assemble_eligible_scene_pool(
 
     scenes_value = master.get("scenes")
     if not isinstance(scenes_value, list):
-        raise ValueError("Master JSON is missing its scenes array")
+        raise TypeError("Master JSON is missing its scenes array")
     scenes = [dict(scene) for scene in scenes_value]
     official_mapping = _official_split_mapping(official_split_path)
     by_id = {str(scene["scene_id"]): scene for scene in scenes}
@@ -422,7 +422,7 @@ def audit_eligible_media(
             metadata = json.loads(content)
             objects = metadata.get("objects")
             if not isinstance(objects, list):
-                raise ValueError(f"scene3d metadata has no objects list: {member.name}")
+                raise TypeError(f"scene3d metadata has no objects list: {member.name}")
             scene = scenes_by_metadata[member.name]
             expected_paths = [str(value) for value in scene["blend_paths"]]
             actual_paths = [str(item.get("path")) for item in objects]
@@ -476,9 +476,9 @@ def _solver_modules() -> tuple[Any, Any, Any, Any, Any, dict[str, str]]:
     try:
         import numpy as np
         import scipy
+        import scipy.optimize._highspy._core as highs_core
         from scipy.optimize import Bounds, LinearConstraint, milp
         from scipy.sparse import coo_array
-        import scipy.optimize._highspy._core as highs_core
     except ImportError as error:
         raise RuntimeError(
             "Selection requires the pinned NumPy and SciPy environment. "
@@ -1054,14 +1054,21 @@ def _write_directory_checksums(directory: Path) -> None:
         handle.writelines(lines)
 
 
-def validate_model_facing_media_record(row: Mapping[str, Any]) -> None:
+def validate_model_facing_media_record(
+    row: Mapping[str, Any],
+    *,
+    expected_release_id: str = RELEASE_ID,
+) -> None:
     """Reject labels, groups, protocol fields and malformed media identifiers."""
 
     if set(row) != set(MODEL_FACING_MEDIA_FIELDS):
         raise ValueError(
             f"Model-facing media fields are not exact: {sorted(row)}"
         )
-    if row.get("schema_version") != 1 or row.get("release_id") != RELEASE_ID:
+    if (
+        row.get("schema_version") != 1
+        or row.get("release_id") != expected_release_id
+    ):
         raise ValueError("Model-facing record has the wrong schema or release")
     opaque_scene_id = str(row["opaque_scene_id"])
     if not opaque_scene_id.startswith("S") or not opaque_scene_id[1:].isdigit():

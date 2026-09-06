@@ -1,0 +1,23 @@
+{
+  "code_file": "11b-toysad8k-full-pool-sensitivity-evaluation.ipynb",
+  "competition_sources": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-full-pool-predictions",
+    "esreekarreddy/vpi-toysad-full-pool-evaluator-only",
+    "esreekarreddy/vpi-toysad-full-pool-release-receipt",
+    "esreekarreddy/vpi-toysad-full-pool-inference-receipt",
+    "esreekarreddy/vpi-toysad-development-method-freeze",
+    "esreekarreddy/vpi-toysad-calibration-review-policy"
+  ],
+  "enable_gpu": false,
+  "enable_internet": true,
+  "enable_tpu": false,
+  "id": "esreekarreddy/toysad-8k-post-freeze-full-pool-evaluation",
+  "is_private": true,
+  "kernel_sources": [],
+  "kernel_type": "notebook",
+  "language": "python",
+  "model_sources": [],
+  "title": "ToysAD-8K Post-freeze Full-pool Sensitivity Evaluation"
+}

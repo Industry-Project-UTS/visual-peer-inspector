@@ -1,20 +1,23 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 import sys
 import tempfile
 import unittest
+from pathlib import Path
 
 from PIL import Image
-
 
 CODE_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(CODE_ROOT / "src"))
 
 from visual_peer_inspector.data.cohort_contract import (
-    CohortContract,
+    CALIBRATION_CONTRACT,
+    DEVELOPMENT_FULL_CONTRACT,
+    DEVELOPMENT_REMAINDER_CONTRACT,
     DS1_SCREEN_CONTRACT,
+    INTERNAL_LOCK_CONTRACT,
+    CohortContract,
 )
 from visual_peer_inspector.data.model_safe_package import (
     PackageAudit,
@@ -94,6 +97,65 @@ class CohortContractTests(unittest.TestCase):
         self.assertEqual(audit["scene_count"], 3)
         self.assertEqual(audit["asset_group_count"], 2)
         self.assertTrue(audit["all_checks_passed"])
+
+    def test_primary_role_contracts_are_frozen(self) -> None:
+        self.assertEqual(DEVELOPMENT_REMAINDER_CONTRACT.scene_count, 600)
+        self.assertEqual(DEVELOPMENT_REMAINDER_CONTRACT.image_count, 12_000)
+        self.assertEqual(DEVELOPMENT_FULL_CONTRACT.scene_count, 1_000)
+        self.assertEqual(DEVELOPMENT_FULL_CONTRACT.pilot_stage, "all_development")
+        self.assertEqual(CALIBRATION_CONTRACT.scene_count, 600)
+        self.assertIsNone(CALIBRATION_CONTRACT.pilot_stage)
+        self.assertEqual(INTERNAL_LOCK_CONTRACT.scene_count, 400)
+        self.assertIsNone(INTERNAL_LOCK_CONTRACT.pilot_stage)
+
+    def test_all_development_contract_selects_every_development_stage(self) -> None:
+        scene_ids = ["S000001", "S000002", "S000003"]
+        contract = CohortContract(
+            cohort_id="all-development-test",
+            release_id=RELEASE_ID,
+            role="development",
+            pilot_stage="all_development",
+            membership_sha256=membership_sha256(scene_ids),
+            scene_count=3,
+            views_per_scene=20,
+            image_count=60,
+            asset_group_count=3,
+        )
+        rows = [
+            {
+                "role": "development",
+                "pilot_stage": stage,
+                "opaque_scene_id": scene_id,
+                "opaque_asset_group_id": f"A{index:02d}",
+                "category": f"category-{index}",
+                "object_count": 3,
+                "anomaly_count": 1,
+                "raw_anomaly_prefixes": ["bump"],
+            }
+            for index, (scene_id, stage) in enumerate(
+                zip(scene_ids, ("screen_100", "confirm_300", "remainder_600"))
+            )
+        ]
+        rows.append({**rows[0], "role": "calibration", "opaque_scene_id": "S999999"})
+
+        selected, audit = select_contract_rows(rows, contract)
+
+        self.assertEqual([row["opaque_scene_id"] for row in selected], scene_ids)
+        self.assertEqual(audit["scene_count"], 3)
+
+    def test_non_development_contract_rejects_a_pilot_stage(self) -> None:
+        with self.assertRaisesRegex(ValueError, "Non-development"):
+            CohortContract(
+                cohort_id="invalid-calibration",
+                release_id=RELEASE_ID,
+                role="calibration",
+                pilot_stage="calibration_600",
+                membership_sha256="0" * 64,
+                scene_count=1,
+                views_per_scene=20,
+                image_count=20,
+                asset_group_count=1,
+            )
 
     def test_generic_package_verifier_uses_supplied_contract(self) -> None:
         scene_ids = ["S000001", "S000002", "S000003"]

@@ -1,0 +1,23 @@
+{
+  "id": "esreekarreddy/toysad-8k-calibration-review-policy",
+  "title": "ToysAD-8K Calibration Review Policy",
+  "code_file": "09b-toysad8k-calibration-review-policy.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/vpi-toysad-calibration600-model-input",
+    "esreekarreddy/vpi-toysad-calibration600-evaluator",
+    "esreekarreddy/vpi-toysad-development-method-freeze"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [
+    "esreekarreddy/09a-toysad8k-protected-calibration-inference"
+  ],
+  "model_sources": []
+}

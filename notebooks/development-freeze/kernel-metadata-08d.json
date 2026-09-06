@@ -1,0 +1,20 @@
+{
+  "id": "esreekarreddy/toysad-8k-primary-protocol-release",
+  "title": "ToysAD-8K Primary Protocol Release",
+  "code_file": "08d-toysad8k-primary-protocol-release.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [
+    "esreekarreddy/vpi-code-snapshot",
+    "esreekarreddy/toysad8k-full-private-eda",
+    "esreekarreddy/vpi-toysad-selection-private"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
