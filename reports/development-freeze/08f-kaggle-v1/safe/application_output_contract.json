@@ -1,0 +1,44 @@
+{
+  "camera_metadata_scope": "evaluator_diagnostic_only",
+  "forbidden_model_inputs": [
+    "source identifiers",
+    "evaluator correspondence",
+    "labels",
+    "roles",
+    "categories",
+    "file paths",
+    "object order",
+    "camera metadata"
+  ],
+  "frozen_model_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+  "human_correction_scope": "optional_review_after_automatic_result",
+  "identity_configuration": {
+    "ambiguity_margin": 0.05,
+    "geometry_weight": 0.0,
+    "unmatched_cost": 0.35
+  },
+  "identity_configuration_sha256": "79182083960a9b115780c71f321e58beb282aa2b452d32f470c538da512af07f",
+  "identity_method": "embedding_only",
+  "identity_prediction_lock_sha256": "1d25b46577fd9bf9cab12da83061cc6807c2d1ec29902942b8359dc191df8191",
+  "identity_result_schema": "visual-peer-identity-result/v1",
+  "model_facing_inputs": [
+    "uploaded RGB pixels",
+    "automatic boxes",
+    "automatic masks",
+    "DINO global embeddings",
+    "normalized upload geometry",
+    "P1 scores"
+  ],
+  "required_application_outputs": {
+    "evidence": "per-view highlights, masks, and coarse P1 heatmaps",
+    "fused_prediction": "ranked odd-one-out identity and relative score",
+    "review_state": "result_ready, review_recommended, or insufficient_evidence",
+    "view_predictions": "boxes, masks, P1 scores, and stable identity tokens"
+  },
+  "schema_version": "visual-peer-application-output/v1",
+  "status": "frozen",
+  "supported_view_count": {
+    "maximum": 5,
+    "minimum": 2
+  }
+}

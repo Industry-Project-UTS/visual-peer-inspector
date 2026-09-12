@@ -12,7 +12,6 @@ from io import BytesIO
 from pathlib import Path
 from typing import Any
 
-import numpy as np
 from PIL import Image
 
 from visual_peer_inspector.data.cohort_contract import (
@@ -29,10 +28,16 @@ from visual_peer_inspector.data.model_safe_package import (
     read_jsonl,
     verify_model_input_package,
 )
+from visual_peer_inspector.data.source_storage import verify_archive_storage
 from visual_peer_inspector.data.toysad_selection import (
     MODEL_FACING_MEDIA_FIELDS,
     anomaly_prefixes,
     validate_model_facing_media_record,
+)
+from visual_peer_inspector.evaluation.proposal_reference import (
+    DEFAULT_MASK_THRESHOLD,
+    REFERENCE_GEOMETRY_POLICY,
+    _mask_geometry,
 )
 from visual_peer_inspector.evaluation.proposals import match_boxes
 from visual_peer_inspector.workflows.cross_view_identity_freeze import (
@@ -73,7 +78,6 @@ def verify_release_source(source_root: Path) -> dict[str, Any]:
         digest, relative = line.split("  ", 1)
         declared[relative] = digest
     master = root / "toysad8k_scene_master.json"
-    archive = root / "toysAD8K.zip"
     index = root / "archive_index.sqlite3"
     actual = {
         "toysad8k_scene_master.json": file_sha256(master),
@@ -82,15 +86,12 @@ def verify_release_source(source_root: Path) -> dict[str, Any]:
     for relative, digest in actual.items():
         if declared.get(relative) != digest:
             raise ValueError(f"Source package checksum differs: {relative}")
-    archive_digest = declared.get("toysAD8K.zip")
-    if not isinstance(archive_digest, str) or len(archive_digest) != 64:
-        raise ValueError("Source package does not declare the complete archive SHA-256")
+    storage = verify_archive_storage(root, declared)
     return {
         "package_checksums_sha256": file_sha256(checksum_path),
         "source_master_sha256": actual["toysad8k_scene_master.json"],
         "archive_index_sha256": actual["archive_index.sqlite3"],
-        "archive_sha256": archive_digest,
-        "archive_size_bytes": archive.stat().st_size,
+        **storage,
     }
 
 
@@ -118,14 +119,9 @@ def _jsonl_bytes(rows: Iterable[Mapping[str, Any]]) -> bytes:
 
 
 def _mask_box(content: bytes) -> list[int]:
-    with Image.open(BytesIO(content)) as opened:
-        mask = np.asarray(opened.convert("L")) > 0
-    coordinates = np.argwhere(mask)
-    if not len(coordinates):
-        return [0, 0, 0, 0]
-    y1, x1 = coordinates.min(axis=0)
-    y2, x2 = coordinates.max(axis=0) + 1
-    return [int(x1), int(y1), int(x2), int(y2)]
+    """Use the same foreground definition as the earlier mask evaluations."""
+    box, _area = _mask_geometry(content, DEFAULT_MASK_THRESHOLD)
+    return [0, 0, 0, 0] if box is None else box
 
 
 def _role_rows(
@@ -205,8 +201,6 @@ def _evaluator_records(
         if view_id not in boxes or object_id not in object_ids:
             raise ValueError("Protected mask row has an unexpected opaque key")
         content = archive.read(str(row["source_member"]))
-        if sha256(content).hexdigest() == "":
-            raise AssertionError("Unreachable digest state")
         boxes[view_id][object_id] = _mask_box(content)
     if any(set(values) != set(object_ids) for values in boxes.values()):
         raise ValueError("Protected evaluator geometry is incomplete")
@@ -371,6 +365,7 @@ def build_protected_role_resources(
             "administrative_sha256": file_sha256(Path(administrative_root) / "checksums.sha256"),
             "label_vault_sha256": file_sha256(Path(label_root) / "checksums.sha256"),
             "source_identity": source_identity,
+            "reference_geometry_policy": REFERENCE_GEOMETRY_POLICY,
             "method_record_sha256": method_sha256,
             "method_application_contract_sha256": file_sha256(
                 method_path.parent / "application_output_contract.json"
@@ -400,7 +395,11 @@ def build_protected_role_resources(
         Path(source_root) / "toysAD8K.zip",
         Path(source_root) / "archive_index.sqlite3",
     ) as archive:
-        for neutral in neutral_rows:
+        for index, neutral in enumerate(neutral_rows):
+            if index % 25 == 0:
+                print(json.dumps({"event": "resource_progress", "checked_scenes": index,
+                                  "total_scenes": len(neutral_rows), "resumed_scenes": resumed,
+                                  "new_scenes": processed}), flush=True)
             scene_id = str(neutral["opaque_scene_id"])
             state_path = state_root / f"{scene_id}.json"
             if state_path.is_file():
@@ -581,6 +580,7 @@ def build_development_identity_evaluator(
         "administrative_sha256": file_sha256(Path(administrative_root) / "checksums.sha256"),
         "source_identity": source_identity,
         "minimum_iou": minimum_iou,
+        "reference_geometry_policy": REFERENCE_GEOMETRY_POLICY,
     }
     signature = _digest(binding)
     output_root = Path(output_root).resolve()
@@ -592,7 +592,11 @@ def build_development_identity_evaluator(
         Path(source_root) / "toysAD8K.zip",
         Path(source_root) / "archive_index.sqlite3",
     ) as archive:
-        for scene_id in scene_ids:
+        for index, scene_id in enumerate(scene_ids):
+            if index % 25 == 0:
+                print(json.dumps({"event": "identity_release_progress", "checked_scenes": index,
+                                  "total_scenes": len(scene_ids), "resumed_scenes": resumed,
+                                  "new_scenes": processed}), flush=True)
             state_path = state_root / f"{scene_id}.json"
             if state_path.is_file():
                 value = json.loads(state_path.read_text(encoding="utf-8"))
@@ -611,7 +615,11 @@ def build_development_identity_evaluator(
             correspondence = []
             for view in verified.views_by_scene[scene_id]:
                 reference = by_view.get(view.view_id, {})
-                reference_ids = sorted(reference)
+                # Invisible reference objects have no valid box to match.
+                reference_ids = sorted(
+                    key for key, box in reference.items()
+                    if box[0] < box[2] and box[1] < box[3]
+                )
                 matches = match_boxes(
                     [reference[key] for key in reference_ids],
                     [list(item.box_xyxy) for item in view.objects],
@@ -663,6 +671,12 @@ def build_development_identity_evaluator(
         }
     states = [json.loads(path.read_text(encoding="utf-8")) for path in state_paths]
     rows = [row for state in states for row in state["correspondence"]]
+    mapped_count = sum(row["reference_identity_id"] is not None for row in rows)
+    coverage = {
+        "reference_mapped_observation_count": mapped_count,
+        "reference_unmapped_observation_count": len(rows) - mapped_count,
+        "reference_mapping_fraction": mapped_count / len(rows) if rows else 0.0,
+    }
     _atomic_bytes(
         evaluator_root / "evaluator_correspondence.jsonl", _jsonl_bytes(rows)
     )
@@ -674,6 +688,8 @@ def build_development_identity_evaluator(
         "image_count": DEVELOPMENT_FULL_CONTRACT.image_count,
         "membership_sha256": DEVELOPMENT_FULL_CONTRACT.membership_sha256,
         "input_binding_sha256": signature,
+        "reference_geometry_policy": REFERENCE_GEOMETRY_POLICY,
+        **coverage,
         "correspondence_row_count": len(rows),
         "correspondence_sha256": file_sha256(
             evaluator_root / "evaluator_correspondence.jsonl"
@@ -690,6 +706,7 @@ def build_development_identity_evaluator(
         "correspondence_row_count": len(rows),
         "evaluator_manifest_sha256": file_sha256(evaluator_root / "evaluator_manifest.json"),
         "evaluator_resource_published": True,
+        **coverage,
     }
 
 

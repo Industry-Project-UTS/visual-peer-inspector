@@ -11,7 +11,7 @@ evidence, and documentation for the UTS 32040 Industry Project.
 ## Current status
 
 The controlled 2,000-scene experiment is fixed and leakage checked. Verified
-development evidence is complete through Notebook 08C. The remaining protected
+development evidence is complete through Notebook 08F. The remaining protected
 and official notebook sequence is built and locally checked, but has not yet
 been run on Kaggle.
 
@@ -25,14 +25,19 @@ been run on Kaggle.
 | 06 Proposal and Mask Evaluation | Complete; all eight declared DS0 gates passed |
 | 07 to 07.1 Representation and Peer Scores | Complete candidate evidence; DINOv2-small with P1 selected for the development freeze |
 | 08A to 08C DS2 Confirmation | Complete development confirmation evidence |
-| 08D to 10B Frozen Evaluation | Fifteen ordered core stages built and locally checked; Kaggle scientific evidence pending |
+| 08D to 08F Development Freeze | Four stages complete; 20,000 views locked and 3,000 application results verified; cross-view identity remains weak |
+| 08F.1 to 10B Protected and Official Evaluation | Built and locally checked; Kaggle scientific evidence pending |
 | 11R to 11B Full-pool Sensitivity | Three optional post-official stages built and locally checked; execution remains optional |
 
 The working route is LocateAnything-3B with the `individual object` prompt and
 `area_nms_075_cap8` cleanup, SAM 2.1 Hiera-large, DINOv2-small, P1, label-free
 cross-view identity, and mean normalized-rank fusion. This is a development
 freeze for the protected evaluation sequence. It is not final official
-performance or a production deployment claim.
+performance or a production deployment claim. Notebook 08F retained
+embedding-only matching, but its five-view mean pairwise identity accuracy is
+33.04%. This measures object linking, not odd-one-out accuracy. See the
+[development results](docs/progress/development-freeze-completion.md) before
+starting protected calibration or making a web-app readiness claim.
 
 ## Pipeline
 

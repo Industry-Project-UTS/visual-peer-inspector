@@ -1,0 +1,24 @@
+{
+  "absolute_performance_threshold_used": false,
+  "camera_metadata_used_by_chosen_method": false,
+  "chosen_configuration": {
+    "ambiguity_margin": 0.05,
+    "geometry_weight": 0.0,
+    "unmatched_cost": 0.35
+  },
+  "chosen_configuration_sha256": "79182083960a9b115780c71f321e58beb282aa2b452d32f470c538da512af07f",
+  "chosen_variant": "embedding_only",
+  "decision_rule": "Use normalized geometry only when the five-view asset-clustered paired interval shows at least one favorable change, shows no adverse change, and all structural stability checks pass. Otherwise retain the simpler embedding-only method.",
+  "favorable_metrics": [
+    "ambiguity_rate"
+  ],
+  "frozen_model_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+  "harmful_metrics": [
+    "observation_coverage",
+    "unmatched_rate"
+  ],
+  "human_correction_position": "optional_review_after_automatic_result",
+  "schema_version": "visual-peer-08f-workflow/v1",
+  "status": "frozen",
+  "structural_stability_passed": true
+}

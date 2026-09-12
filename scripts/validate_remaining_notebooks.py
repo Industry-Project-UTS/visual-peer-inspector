@@ -33,25 +33,25 @@ EXPECTED = {
 }
 EXPECTED_KERNEL_SOURCES = {
     "08d": (),
-    "08e": ("esreekarreddy/toysad-8k-ds2-frozen-pipeline",),
+    "08e": (),
     "08e1": ("esreekarreddy/toysad-8k-frozen-development-pipeline",),
     "08f": ("esreekarreddy/toysad-8k-frozen-development-pipeline",),
     "08f1": (),
     "09a": (),
     "09b": (
-        "esreekarreddy/09a-toysad8k-protected-calibration-inference",
+        "esreekarreddy/toysad-8k-protected-calibration-inference",
     ),
     "09b1": (),
     "09c": (),
     "09d": (
-        "esreekarreddy/09c-toysad8k-protected-internal-lock-inference",
+        "esreekarreddy/toysad-8k-protected-internal-lock-inference",
     ),
     "10r": (),
     "10a": (),
     "10a1": (),
     "10af": (),
     "10b": (),
-    "11r": ("esreekarreddy/10b-toysad8k-official-seen-unseen-evaluation",),
+    "11r": ("esreekarreddy/toysad-8k-official-seen-and-unseen-test-evaluation",),
     "11a": (),
     "11b": (),
 }
@@ -66,6 +66,7 @@ EXPECTED_DATASET_SOURCES = {
         "esreekarreddy/vpi-toysad-ds1-screen100-model-input",
         "esreekarreddy/vpi-toysad-development-remainder-model-input",
         "esreekarreddy/vpi-toysad-ds2-confirmation-rgb",
+        "esreekarreddy/vpi-ds2-frozen-route-reuse",
     ),
     "08e1": (
         "esreekarreddy/vpi-code-snapshot",
@@ -222,7 +223,9 @@ def notebook_paths(root: Path) -> dict[str, Path]:
 
     found: dict[str, Path] = {}
     for path in sorted((root / "notebooks").rglob("*.ipynb")):
-        if "executed" in path.stem.lower():
+        # Evidence pairs include an exact clean source as well as saved outputs.
+        # Neither file is the current runnable notebook for that stage.
+        if "executed" in path.stem.lower() or "executed" in path.relative_to(root / "notebooks").parts:
             continue
         if path.name.startswith("08e1-"):
             stage = "08e1"

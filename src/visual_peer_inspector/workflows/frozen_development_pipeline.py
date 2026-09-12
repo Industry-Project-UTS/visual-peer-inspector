@@ -28,6 +28,9 @@ from visual_peer_inspector.qualitative_reporting import (
     render_prediction_panel,
     save_panel_png,
 )
+from visual_peer_inspector.workflows.runtime_failures import (
+    raise_if_infrastructure_failure,
+)
 
 SCHEMA_VERSION = 1
 STAGE_ORDER = ("locateanything", "sam21", "dinov2_small", "peer_scoring")
@@ -41,7 +44,9 @@ DEFAULT_AUDIT_COUNT = 15
 
 
 def _is_sha256(value: str) -> bool:
-    return len(value) == 64 and all(character in "0123456789abcdef" for character in value)
+    return len(value) == 64 and all(
+        character in "0123456789abcdef" for character in value
+    )
 
 
 def _json_sha256(value: Any) -> str:
@@ -235,7 +240,9 @@ def run_sharded_stage(
         ):
             resumed += len(shard)
             if progress_callback is not None:
-                progress_callback("shard_resumed", {"stage": stage, "shard": shard_index})
+                progress_callback(
+                    "shard_resumed", {"stage": stage, "shard": shard_index}
+                )
             continue
         if maximum_new_shards is not None and new_shards >= maximum_new_shards:
             break
@@ -266,15 +273,23 @@ def run_sharded_stage(
                 failure_name = result.get("terminal_failure")
                 if failure_name is not None:
                     if failure_name not in TERMINAL_FAILURES:
-                        raise ValueError("Stage returned an unsupported terminal failure")
+                        raise ValueError(
+                            "Stage returned an unsupported terminal failure"
+                        )
                     failure_counts[str(failure_name)] += 1
                     failed += 1
                 if outcome.global_embeddings is not None:
                     block = np.asarray(outcome.global_embeddings)
                     if block.ndim == 1:
                         block = block.reshape(1, -1)
-                    if block.ndim != 2 or block.shape[1] < 1 or not np.all(np.isfinite(block)):
-                        raise FeatureFailure("Global embeddings are not a finite matrix")
+                    if (
+                        block.ndim != 2
+                        or block.shape[1] < 1
+                        or not np.all(np.isfinite(block))
+                    ):
+                        raise FeatureFailure(
+                            "Global embeddings are not a finite matrix"
+                        )
                     block16 = np.ascontiguousarray(block.astype(np.float16))
                     block_digest = sha256(block16.tobytes(order="C")).hexdigest()
                     result["global_embedding_start"] = embedding_offset
@@ -294,6 +309,7 @@ def run_sharded_stage(
                     embedding_blocks.append(block16)
                     embedding_offset += int(block16.shape[0])
             except Exception as error:  # noqa: BLE001 - retain every terminal stage failure
+                raise_if_infrastructure_failure(error)
                 failure_name = _failure_name(error)
                 failure_counts[failure_name] += 1
                 failed += 1
@@ -396,7 +412,9 @@ def read_completed_stage(stage_root: Path) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for receipt_path in sorted(Path(stage_root).glob("shard-*.receipt.json")):
         receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
-        output_path = receipt_path.with_name(receipt_path.name.replace(".receipt.json", ".jsonl"))
+        output_path = receipt_path.with_name(
+            receipt_path.name.replace(".receipt.json", ".jsonl")
+        )
         if (
             receipt.get("status") != "complete"
             or not output_path.is_file()
@@ -409,7 +427,51 @@ def read_completed_stage(stage_root: Path) -> list[dict[str, Any]]:
     return sorted(rows, key=_record_key)
 
 
-def stage_global_embeddings(stage_root: Path) -> tuple[np.ndarray, list[dict[str, Any]]]:
+def validate_recovery_stage_chain(
+    cohort_root: Path,
+    input_records: Sequence[Mapping[str, Any]],
+    identity: FrozenPipelineIdentity,
+    shard_size: int,
+) -> int:
+    """Reject incompatible saved inputs before loading any model weights."""
+
+    ordered = sorted((dict(row) for row in input_records), key=_record_key)
+    checked = 0
+    for stage in STAGE_ORDER:
+        stage_root = Path(cohort_root) / stage
+        receipts = sorted(stage_root.glob("shard-*.receipt.json"))
+        if not receipts:
+            ordered = []
+            continue
+        for path in receipts:
+            receipt = json.loads(path.read_text(encoding="utf-8"))
+            index = int(receipt["shard_index"])
+            shard = ordered[index * shard_size : (index + 1) * shard_size]
+            paths = _receipt_paths(stage_root, index)
+            if (
+                not shard
+                or path != paths[3]
+                or not _valid_receipt(
+                    path,
+                    paths[0],
+                    paths[1],
+                    paths[2],
+                    stage=stage,
+                    identity=identity,
+                    input_sha256=_json_sha256(shard),
+                )
+            ):
+                raise ValueError(
+                    f"Saved {stage} shard {index} does not match current inputs"
+                )
+            checked += 1
+        ordered = read_completed_stage(stage_root)
+    return checked
+
+
+def stage_global_embeddings(
+    stage_root: Path,
+) -> tuple[np.ndarray, list[dict[str, Any]]]:
     """Load verified float16 embedding shards in deterministic order."""
 
     blocks: list[np.ndarray] = []
@@ -462,8 +524,7 @@ def publish_prediction_bundle(
     score_by_key = {_record_key(row): row for row in score_rows}
     representation_by_key = {_record_key(row): row for row in representation_rows}
     block_by_key = {
-        (str(row["opaque_scene_id"]), str(row["view_id"])): row
-        for row in block_index
+        (str(row["opaque_scene_id"]), str(row["view_id"])): row for row in block_index
     }
     if set(score_by_key) != set(representation_by_key):
         raise ValueError("Scoring and representation image coverage differs")
@@ -480,7 +541,9 @@ def publish_prediction_bundle(
             if block is None or int(block["count"]) != len(objects):
                 raise ValueError("Object count differs from the embedding index")
             start = int(block["start"])
-            vectors = np.asarray(embeddings[start : start + len(objects)], dtype=np.float16)
+            vectors = np.asarray(
+                embeddings[start : start + len(objects)], dtype=np.float16
+            )
             if len(vectors) != len(objects):
                 raise ValueError("Global embedding slice is incomplete")
             ordered_blocks.append(vectors)
@@ -632,7 +695,10 @@ def verify_prediction_lock(lock_path: Path) -> dict[str, Any]:
     path = Path(lock_path).resolve()
     record = json.loads(path.read_text(encoding="utf-8"))
     identity = FrozenPipelineIdentity(**record["identity"])
-    if record.get("status") != "locked" or record.get("identity_sha256") != identity.sha256:
+    if (
+        record.get("status") != "locked"
+        or record.get("identity_sha256") != identity.sha256
+    ):
         raise ValueError("Prediction lock identity is invalid")
     root = path.parent
     artifacts = record.get("artifacts", [])
@@ -642,7 +708,10 @@ def verify_prediction_lock(lock_path: Path) -> dict[str, Any]:
         raise ValueError("Prediction artifact inventory digest differs")
     for item in artifacts:
         artifact_path = (root / str(item["path"])).resolve()
-        if root not in artifact_path.parents or file_sha256(artifact_path) != item["sha256"]:
+        if (
+            root not in artifact_path.parents
+            or file_sha256(artifact_path) != item["sha256"]
+        ):
             raise ValueError("Prediction artifact differs from its lock")
     return record
 
@@ -656,13 +725,17 @@ def combine_development_locks(
 ) -> dict[str, Any]:
     """Combine 100 + 600 + verified 300 scenes only under one identity."""
 
-    records = [verify_prediction_lock(path) for path in (ds1_lock, remainder_lock, ds2_lock)]
+    records = [
+        verify_prediction_lock(path) for path in (ds1_lock, remainder_lock, ds2_lock)
+    ]
     expected = {
         "toysad8k-development-screen-100-v1": 100,
         "toysad8k-development-remainder-600-v1": 600,
         "toysad8k-development-confirm-300-v1": 300,
     }
-    observed = {str(record["cohort_id"]): int(record["scene_count"]) for record in records}
+    observed = {
+        str(record["cohort_id"]): int(record["scene_count"]) for record in records
+    }
     if observed != expected:
         raise ValueError("Development locks do not match the 100 + 600 + 300 protocol")
     identity_digests = {str(record["identity_sha256"]) for record in records}
@@ -684,7 +757,9 @@ def combine_development_locks(
                 "cohort_id": record["cohort_id"],
                 "lock_sha256": file_sha256(path),
             }
-            for record, path in zip(records, (ds1_lock, remainder_lock, ds2_lock), strict=True)
+            for record, path in zip(
+                records, (ds1_lock, remainder_lock, ds2_lock), strict=True
+            )
         ],
         "ds2_reused_only_after_full_identity_check": True,
     }
@@ -722,9 +797,10 @@ def reference_only_fusion(
 
 def validate_ds2_backfill_inputs(
     *,
-    proposal_record_path: Path,
+    locate_run_record_path: Path,
     automatic_sam_record_path: Path,
     mask_route_record_path: Path,
+    selected_prompt_path: Path,
     expected_locate_model_id: str,
     expected_locate_revision: str,
     expected_locate_configuration_sha256: str,
@@ -734,22 +810,34 @@ def validate_ds2_backfill_inputs(
 ) -> dict[str, Any]:
     """Fail closed before reusing DS2 LocateAnything and SAM predictions."""
 
-    proposal_path = Path(proposal_record_path).resolve()
+    locate_path = Path(locate_run_record_path).resolve()
     sam_path = Path(automatic_sam_record_path).resolve()
     routes_path = Path(mask_route_record_path).resolve()
-    proposal = json.loads(proposal_path.read_text(encoding="utf-8"))
+    selected_prompt_path = Path(selected_prompt_path).resolve()
+    locate = json.loads(locate_path.read_text(encoding="utf-8"))
     sam = json.loads(sam_path.read_text(encoding="utf-8"))
     routes = json.loads(routes_path.read_text(encoding="utf-8"))
-    required_proposal = {
+    selected_prompt = json.loads(selected_prompt_path.read_text(encoding="utf-8"))
+    required_locate = {
         "schema_version",
-        "package_kind",
+        "stage",
+        "status",
         "cohort_id",
+        "image_count",
+        "ds1_freeze_sha256",
+        "ds1_generation_configuration_sha256",
+        "effective_generation_configuration_sha256",
+        "proposal_package_sha256",
+    }
+    required_prompt = {
+        "schema_version",
+        "stage",
+        "development_only",
+        "requires_unchanged_ds2_confirmation",
         "model_id",
         "model_revision",
-        "prompt",
-        "postprocessing_policy",
-        "effective_generation_configuration_sha256",
-        "proposal_manifest_sha256",
+        "generation_configuration_sha256",
+        "selected",
     }
     required_sam = {
         "schema_version",
@@ -757,56 +845,82 @@ def validate_ds2_backfill_inputs(
         "status",
         "route",
         "cohort_id",
+        "image_count",
         "configuration_sha256",
         "prompt_package_sha256",
         "sam_results_sha256",
+        "all_completion_checks_passed",
     }
     required_routes = {
         "schema_version",
         "package_kind",
         "cohort_id",
+        "image_count",
         "mask_routes_sha256",
         "automatic_sam_results_sha256",
+        "all_checks_passed",
     }
-    if required_proposal.difference(proposal):
-        raise ValueError("DS2 proposal record lacks required frozen identity fields")
+    if required_locate.difference(locate):
+        raise ValueError("DS2 LocateAnything run record lacks required identity fields")
+    if required_prompt.difference(selected_prompt):
+        raise ValueError("Frozen prompt record lacks required identity fields")
     if required_sam.difference(sam):
-        raise ValueError("DS2 automatic SAM record lacks required frozen identity fields")
+        raise ValueError(
+            "DS2 automatic SAM record lacks required frozen identity fields"
+        )
     if required_routes.difference(routes):
         raise ValueError("DS2 mask-route record lacks required schema fields")
+    selected = selected_prompt.get("selected", {})
     if (
-        proposal["schema_version"] != 1
-        or proposal["package_kind"] != "ds2-frozen-automatic-proposals"
-        or proposal["cohort_id"] != "toysad8k-development-confirm-300-v1"
-        or proposal["model_id"] != expected_locate_model_id
-        or proposal["model_revision"] != expected_locate_revision
-        or proposal["effective_generation_configuration_sha256"]
+        locate["schema_version"] != 1
+        or locate["stage"] != "ds2_frozen_locateanything"
+        or locate["status"] != "completed"
+        or locate["cohort_id"] != "toysad8k-development-confirm-300-v1"
+        or int(locate["image_count"]) != 6_000
+        or locate["ds1_freeze_sha256"] != file_sha256(selected_prompt_path)
+        or locate["ds1_generation_configuration_sha256"]
+        != selected_prompt["generation_configuration_sha256"]
+        or locate["effective_generation_configuration_sha256"]
         != expected_locate_configuration_sha256
-        or proposal["prompt"] != expected_prompt
-        or proposal["postprocessing_policy"] != expected_proposal_policy
     ):
         raise ValueError("DS2 LocateAnything identity differs from the frozen route")
+    if (
+        selected_prompt["schema_version"] != 1
+        or selected_prompt["stage"] != "ds1_locateanything_prompt_freeze"
+        or selected_prompt["development_only"] is not True
+        or selected_prompt["requires_unchanged_ds2_confirmation"] is not True
+        or selected_prompt["model_id"] != expected_locate_model_id
+        or selected_prompt["model_revision"] != expected_locate_revision
+        or selected.get("prompt") != expected_prompt
+        or selected.get("postprocessing_policy") != expected_proposal_policy
+    ):
+        raise ValueError("Frozen prompt identity differs from the expected route")
     if (
         sam["schema_version"] != 1
         or sam["status"] != "completed"
         or sam["route"] != "automatic_box"
         or sam["cohort_id"] != "toysad8k-development-confirm-300-v1"
+        or int(sam["image_count"]) != 6_000
+        or sam["all_completion_checks_passed"] is not True
         or sam["configuration_sha256"] != expected_sam_configuration_sha256
-        or sam["prompt_package_sha256"] != proposal["proposal_manifest_sha256"]
+        or sam["prompt_package_sha256"] != locate["proposal_package_sha256"]
     ):
         raise ValueError("DS2 automatic SAM identity differs from the frozen route")
     if (
         routes["schema_version"] != 1
         or routes["package_kind"] != "ds2-confirmation-mask-routes"
         or routes["cohort_id"] != "toysad8k-development-confirm-300-v1"
+        or int(routes["image_count"]) != 6_000
+        or routes["all_checks_passed"] is not True
         or routes["automatic_sam_results_sha256"] != sam["sam_results_sha256"]
     ):
         raise ValueError("DS2 mask-route schema differs from the frozen route")
     return {
         "schema_version": SCHEMA_VERSION,
         "status": "verified",
-        "cohort_id": proposal["cohort_id"],
-        "locate_record_sha256": file_sha256(proposal_path),
+        "cohort_id": locate["cohort_id"],
+        "locate_record_sha256": file_sha256(locate_path),
+        "selected_prompt_sha256": file_sha256(selected_prompt_path),
         "automatic_sam_record_sha256": file_sha256(sam_path),
         "mask_route_record_sha256": file_sha256(routes_path),
         "locate_configuration_sha256": expected_locate_configuration_sha256,
@@ -814,7 +928,8 @@ def validate_ds2_backfill_inputs(
         "proposal_policy": expected_proposal_policy,
         "schema_identity_sha256": _json_sha256(
             {
-                "proposal_schema_version": proposal["schema_version"],
+                "locate_schema_version": locate["schema_version"],
+                "prompt_schema_version": selected_prompt["schema_version"],
                 "sam_schema_version": sam["schema_version"],
                 "mask_route_schema_version": routes["schema_version"],
                 "mask_routes_sha256": routes["mask_routes_sha256"],
@@ -850,7 +965,13 @@ def select_development_audit(
     )
     selected = ranked[: min(base_count, len(ranked))]
     selected_keys = {_record_key(row) for row in selected}
-    for failure in sorted({str(row.get("terminal_failure")) for row in ranked if row.get("terminal_failure")}):
+    for failure in sorted(
+        {
+            str(row.get("terminal_failure"))
+            for row in ranked
+            if row.get("terminal_failure")
+        }
+    ):
         if failure not in TERMINAL_FAILURES:
             raise ValueError("Audit candidate contains an unsupported terminal failure")
         exemplar = next(row for row in ranked if row.get("terminal_failure") == failure)
@@ -898,16 +1019,26 @@ def _mask_array(value: Any, size: tuple[int, int]) -> np.ndarray:
     else:
         array = np.asarray(value)
     if array.shape != (size[1], size[0]):
-        array = np.asarray(
-            Image.fromarray(array.astype(np.uint8) * 255).resize(size, Image.Resampling.NEAREST)
-        ) > 0
+        array = (
+            np.asarray(
+                Image.fromarray(array.astype(np.uint8) * 255).resize(
+                    size, Image.Resampling.NEAREST
+                )
+            )
+            > 0
+        )
     return array.astype(bool)
 
 
-def render_mask_evidence_panel(result: QualitativeResult, *, panel_size: int = 256) -> Image.Image:
+def render_mask_evidence_panel(
+    result: QualitativeResult, *, panel_size: int = 256
+) -> Image.Image:
     """Render SAM outlines, binary masks, and masked-on-black evidence."""
 
-    views = sorted((view for view in result.views if view.rgb is not None), key=lambda view: view.view_id)
+    views = sorted(
+        (view for view in result.views if view.rgb is not None),
+        key=lambda view: view.view_id,
+    )
     if not views:
         raise ValueError("Mask evidence requires at least one present view")
     margin, gap, label_height = 16, 12, 30
@@ -916,28 +1047,51 @@ def render_mask_evidence_panel(result: QualitativeResult, *, panel_size: int = 2
     canvas = Image.new("RGB", (width, height), "white")
     draw = ImageDraw.Draw(canvas)
     font = ImageFont.load_default()
-    draw.text((margin, 16), f"SAM evidence: {result.result_id}", fill=(30, 39, 49), font=font)
+    draw.text(
+        (margin, 16), f"SAM evidence: {result.result_id}", fill=(30, 39, 49), font=font
+    )
     headings = ("Mask outline", "Binary mask", "Masked on black")
     for column, heading in enumerate(headings):
-        draw.text((margin + column * (panel_size + gap), 42), heading, fill=(30, 39, 49), font=font)
+        draw.text(
+            (margin + column * (panel_size + gap), 42),
+            heading,
+            fill=(30, 39, 49),
+            font=font,
+        )
     for row_index, view in enumerate(views):
-        source = view.rgb if isinstance(view.rgb, Image.Image) else Image.open(view.rgb) if isinstance(view.rgb, (str, Path)) else Image.fromarray(np.asarray(view.rgb, dtype=np.uint8))
-        rgb = source.convert("RGB").resize((panel_size, panel_size), Image.Resampling.BILINEAR)
+        source = (
+            view.rgb
+            if isinstance(view.rgb, Image.Image)
+            else Image.open(view.rgb)
+            if isinstance(view.rgb, (str, Path))
+            else Image.fromarray(np.asarray(view.rgb, dtype=np.uint8))
+        )
+        rgb = source.convert("RGB").resize(
+            (panel_size, panel_size), Image.Resampling.BILINEAR
+        )
         combined = np.zeros((panel_size, panel_size), dtype=bool)
         for item in view.objects:
             combined |= _mask_array(item.sam_mask, (panel_size, panel_size))
         binary = Image.fromarray(combined.astype(np.uint8) * 255, mode="L")
-        edge = binary.filter(ImageFilter.FIND_EDGES).point(lambda value: 255 if value else 0)
+        edge = binary.filter(ImageFilter.FIND_EDGES).point(
+            lambda value: 255 if value else 0
+        )
         outline = rgb.copy()
         outline.paste(Image.new("RGB", outline.size, (230, 45, 70)), mask=edge)
         rgb_array = np.asarray(rgb)
-        masked = Image.fromarray(np.where(combined[:, :, None], rgb_array, 0).astype(np.uint8))
+        masked = Image.fromarray(
+            np.where(combined[:, :, None], rgb_array, 0).astype(np.uint8)
+        )
         y = 70 + row_index * (panel_size + label_height + gap)
         for column, panel in enumerate((outline, binary.convert("RGB"), masked)):
             x = margin + column * (panel_size + gap)
             canvas.paste(panel, (x, y))
-            draw.rectangle((x, y, x + panel_size - 1, y + panel_size - 1), outline=(170, 178, 188))
-        draw.text((margin, y + panel_size + 6), view.view_id, fill=(30, 39, 49), font=font)
+            draw.rectangle(
+                (x, y, x + panel_size - 1, y + panel_size - 1), outline=(170, 178, 188)
+            )
+        draw.text(
+            (margin, y + panel_size + 6), view.view_id, fill=(30, 39, 49), font=font
+        )
     return canvas
 
 
@@ -952,7 +1106,8 @@ def save_development_audit_bundle(
         render_prediction_panel(result), root / f"{result.result_id}-prediction.png"
     )
     mask_path = save_panel_png(
-        render_mask_evidence_panel(result), root / f"{result.result_id}-sam-evidence.png"
+        render_mask_evidence_panel(result),
+        root / f"{result.result_id}-sam-evidence.png",
     )
     return {
         "prediction_panel": prediction_path.as_posix(),

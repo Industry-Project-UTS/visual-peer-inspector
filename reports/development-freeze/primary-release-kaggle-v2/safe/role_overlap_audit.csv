@@ -1,0 +1,4 @@
+left_role,right_role,scene_overlap,asset_group_overlap,passed
+development,calibration,0,0,True
+development,internal_lock,0,0,True
+calibration,internal_lock,0,0,True

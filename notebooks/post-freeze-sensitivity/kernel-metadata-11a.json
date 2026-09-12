@@ -12,7 +12,7 @@
   "enable_gpu": true,
   "enable_internet": true,
   "enable_tpu": false,
-  "id": "esreekarreddy/toysad-8k-post-freeze-full-pool-inference",
+  "id": "esreekarreddy/toysad-8k-post-freeze-full-pool-frozen-inference",
   "is_private": true,
   "kernel_sources": [],
   "kernel_type": "notebook",

@@ -1,0 +1,4 @@
+role,scene_count,image_count,media_state,label_state,next_notebook
+development_remaining,600,12000,released,not_in_model_package,08E
+calibration,600,12000,sealed,sealed,09A_after_method_freeze
+internal_lock,400,8000,sealed,sealed,09C_after_policy_freeze

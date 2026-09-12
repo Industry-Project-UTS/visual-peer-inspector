@@ -1,0 +1,1 @@
+{"artifact_count":2,"artifacts":[{"path":"backfill_attestation.json","sha256":"ccdfe2615b7315908789aa67b3daa26e49c0a4513b26e7d50ec1651514c75218","size_bytes":925},{"path":"run_record.json","sha256":"d134e5dd3d90cba6bc715e31efc6d08ec70dfa2d36549032ea6bf6a9b7823e96","size_bytes":3004}],"schema_version":1}

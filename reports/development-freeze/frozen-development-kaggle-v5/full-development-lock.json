@@ -1,0 +1,32 @@
+{
+  "cohort_id": "toysad8k-development-full-1000-v1",
+  "component_locks": [
+    {
+      "cohort_id": "toysad8k-development-screen-100-v1",
+      "lock_sha256": "d035bfb59af2e4a296361283ee5f263d5ad2a8682efa93f70b5e9707f0b00404"
+    },
+    {
+      "cohort_id": "toysad8k-development-remainder-600-v1",
+      "lock_sha256": "f5c88d87836c2b1a82c2499edf71af753fb125a74e3ea1354d1bb077fa8d337f"
+    },
+    {
+      "cohort_id": "toysad8k-development-confirm-300-v1",
+      "lock_sha256": "7d7b683e3edfe2c8ebd2b6623d16e292870cdb70bed84586a14aae950739d7bb"
+    }
+  ],
+  "ds2_reused_only_after_full_identity_check": true,
+  "identity": {
+    "configuration_sha256": "6af6710e2b4cf6908ff2ac2a567a9fec848b8a9414b1f8fe0e9dfe3a6c8a090a",
+    "dinov2_sha256": "35a7fb09a5edf3f93ddd221029bfcda351e860e1797f5cb8efe2f718219aed91",
+    "locateanything_sha256": "dac3f379588afca42d1070ad8c1010975e1e231b323e48a782f49ad66b7ca4af",
+    "preprocessing_sha256": "31a77a0b4e6acd5801502e8acd2852c4f84ab8577a4f4cc65d0208947300c14c",
+    "sam21_sha256": "39690d431d70c2192a6ba0c4530785c9208e07b035842d05022a67fb700a850b",
+    "schema_sha256": "2bd78b4f031ad04bdbf754782c78320fdfeb65cef82b03dd6501e606f0f6f868",
+    "split_sha256": "00e400350a056631778bd9c4dace1667d95e52bf58c0a29ea7c48d190c41de0c"
+  },
+  "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+  "image_count": 20000,
+  "scene_count": 1000,
+  "schema_version": 1,
+  "status": "verified"
+}

@@ -1,0 +1,11 @@
+cohort,stage,complete,views_covered,processed_in_v5,resumed,terminal_outcomes,zero_proposal,stage_failure
+toysad8k-development-screen-100-v1,dinov2_small,True,2000,0,2000,17,17,0
+toysad8k-development-screen-100-v1,locateanything,True,2000,0,2000,17,17,0
+toysad8k-development-screen-100-v1,peer_scoring,True,2000,0,2000,17,17,0
+toysad8k-development-screen-100-v1,sam21,True,2000,0,2000,17,17,0
+toysad8k-development-remainder-600-v1,dinov2_small,True,12000,10000,2000,71,69,2
+toysad8k-development-remainder-600-v1,locateanything,True,12000,10000,2000,69,69,0
+toysad8k-development-remainder-600-v1,peer_scoring,True,12000,12000,0,69,69,0
+toysad8k-development-remainder-600-v1,sam21,True,12000,10000,2000,69,69,0
+toysad8k-development-confirm-300-v1,dinov2_small,True,6000,6000,0,38,38,0
+toysad8k-development-confirm-300-v1,peer_scoring,True,6000,6000,0,38,38,0

@@ -7,17 +7,22 @@ inference has finished.
 
 from __future__ import annotations
 
-from collections import Counter
-from hashlib import sha256
-from io import BytesIO
 import json
 import os
-from pathlib import Path
 import sqlite3
-from typing import Any, Iterable, Mapping
+from collections import Counter
+from collections.abc import Iterable, Mapping
+from hashlib import sha256
+from io import BytesIO
+from pathlib import Path
+from typing import Any
 
 from PIL import Image
 
+from visual_peer_inspector.data.archive_members import (
+    IndexedMember,
+    read_indexed_member,
+)
 from visual_peer_inspector.data.model_safe_package import (
     EXPECTED_ARCHIVE_SIZE_BYTES,
     SMOKE20_COHORT_ID,
@@ -27,11 +32,15 @@ from visual_peer_inspector.data.model_safe_package import (
     membership_sha256,
     read_jsonl,
 )
-from visual_peer_inspector.data.archive_members import IndexedMember, read_indexed_member
-
 
 DS0_REFERENCE_SCHEMA_VERSION = 1
 DEFAULT_MASK_THRESHOLD = 128
+REFERENCE_GEOMETRY_POLICY = {
+    "decoder": "toysad-grayscale-threshold-v1",
+    "mask_threshold": DEFAULT_MASK_THRESHOLD,
+    "image_size": [256, 256],
+    "box_format": "half-open-xyxy",
+}
 EXPECTED_DS0_SCENES = 20
 EXPECTED_DS0_VIEWS = 20
 

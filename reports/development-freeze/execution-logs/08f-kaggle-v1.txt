@@ -1,0 +1,1988 @@
+Stage: 08F Kaggle Version 1
+Status: completed
+Clean notebook: 08f-kaggle-v1.ipynb
+Clean notebook SHA-256: fb2f9b3d69874d7ad252ee2f338f19c94499ed162c9445bf25c84a18452e1f8f
+Downloaded saved-output SHA-256: 7a489422c88a3c8f22e4b6921cfced1ecabd205051e747980e7f49abd2dfdef8
+Executed code cells: 9
+Retained output blocks: 24
+Retained safe visuals: 11
+Removed private visuals: 0
+
+Sanitised execution transcript
+==============================
+
+[cell 5]
+{'environment': 'kaggle',
+ 'input cohorts': ['toysad8k-development-confirm-300-v1',
+  'toysad8k-development-remainder-600-v1',
+  'toysad8k-development-screen-100-v1'],
+ 'scene count': 1000,
+ 'embedding dimension': 384,
+ 'verified Notebook 08E locks': 3}
+
+[cell 7]
+{"event": "identity_inputs_verified", "scene_count": 1000}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 25, "total_scenes": 1000, "processed_cases": 200, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 50, "total_scenes": 1000, "processed_cases": 400, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 75, "total_scenes": 1000, "processed_cases": 600, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 100, "total_scenes": 1000, "processed_cases": 800, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 125, "total_scenes": 1000, "processed_cases": 1000, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 150, "total_scenes": 1000, "processed_cases": 1200, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 175, "total_scenes": 1000, "processed_cases": 1400, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 200, "total_scenes": 1000, "processed_cases": 1600, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 225, "total_scenes": 1000, "processed_cases": 1800, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 250, "total_scenes": 1000, "processed_cases": 2000, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 275, "total_scenes": 1000, "processed_cases": 2200, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 300, "total_scenes": 1000, "processed_cases": 2400, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 325, "total_scenes": 1000, "processed_cases": 2600, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 350, "total_scenes": 1000, "processed_cases": 2800, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 375, "total_scenes": 1000, "processed_cases": 3000, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 400, "total_scenes": 1000, "processed_cases": 3200, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 425, "total_scenes": 1000, "processed_cases": 3400, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 450, "total_scenes": 1000, "processed_cases": 3600, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 475, "total_scenes": 1000, "processed_cases": 3800, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 500, "total_scenes": 1000, "processed_cases": 4000, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 525, "total_scenes": 1000, "processed_cases": 4200, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 550, "total_scenes": 1000, "processed_cases": 4400, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 575, "total_scenes": 1000, "processed_cases": 4600, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 600, "total_scenes": 1000, "processed_cases": 4800, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 625, "total_scenes": 1000, "processed_cases": 5000, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 650, "total_scenes": 1000, "processed_cases": 5200, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 675, "total_scenes": 1000, "processed_cases": 5400, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 700, "total_scenes": 1000, "processed_cases": 5600, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 725, "total_scenes": 1000, "processed_cases": 5800, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 750, "total_scenes": 1000, "processed_cases": 6000, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 775, "total_scenes": 1000, "processed_cases": 6200, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 800, "total_scenes": 1000, "processed_cases": 6400, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 825, "total_scenes": 1000, "processed_cases": 6600, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 850, "total_scenes": 1000, "processed_cases": 6800, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 875, "total_scenes": 1000, "processed_cases": 7000, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 900, "total_scenes": 1000, "processed_cases": 7200, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 925, "total_scenes": 1000, "processed_cases": 7400, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 950, "total_scenes": 1000, "processed_cases": 7600, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 975, "total_scenes": 1000, "processed_cases": 7800, "resumed_cases": 0, "failed_cases": 0}
+{"event": "identity_predictions_checkpointed", "completed_scenes": 1000, "total_scenes": 1000, "processed_cases": 8000, "resumed_cases": 0, "failed_cases": 0}
+Identity predictions locked; evaluating correspondence
+Clustered intervals complete; calculating paired comparisons
+{
+  "clearml": {
+    "reason": "tracking disabled by configuration",
+    "schema_version": "visual-peer-clearml-receipt/v1",
+    "status": "disabled",
+    "task_id": null
+  },
+  "download_bundle": {
+    "artifact_count": 16056,
+    "binding_sha256": "4c103639642bd52340a2d9b7eaa7f1f60d3786ca6ad739fe44cb0ba413cc5005",
+    "bundle_sha256": "0eb12e8524369256635e4b0f18f72e5b5977198a67f22a05130ea11bc861615f",
+    "bundle_size_bytes": 64747889
+  },
+  "run": {
+    "absolute_performance_threshold_used": false,
+    "all_acceptance_gates_passed": true,
+    "chosen_variant": "embedding_only",
+    "cohort_ids": [
+      "toysad8k-development-confirm-300-v1",
+      "toysad8k-development-remainder-600-v1",
+      "toysad8k-development-screen-100-v1"
+    ],
+    "embedding_dimension": 384,
+    "evaluator_correspondence_sha256": "bf7665a215d0d64c0d922bc203c3c1624fa8db9682e8eb8964f407139f533a3f",
+    "failure_count": 0,
+    "frozen_model_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+    "identity_prediction_lock_sha256": "1d25b46577fd9bf9cab12da83061cc6807c2d1ec29902942b8359dc191df8191",
+    "input_08e_lock_sha256s": [
+      "7d7b683e3edfe2c8ebd2b6623d16e292870cdb70bed84586a14aae950739d7bb",
+      "d035bfb59af2e4a296361283ee5f263d5ad2a8682efa93f70b5e9707f0b00404",
+      "f5c88d87836c2b1a82c2499edf71af753fb125a74e3ea1354d1bb077fa8d337f"
+    ],
+    "method_resource_manifest_sha256": "85f3e4ace9a47c0623cfe4bf3bfe4e22d14e146c4390b64cc404a441c4b7ba53",
+    "prediction_count": 6000,
+    "processed_this_run": 8000,
+    "qualitative_panel_count": 15,
+    "resumed_from_verified_receipts": 0,
+    "safe_artifact_manifest_path": "artifact_manifest.json",
+    "scene_count": 1000,
+    "schema_version": "visual-peer-08f-workflow/v1",
+    "stage": "cross_view_identity_freeze",
+    "status": "complete"
+  }
+}
+
+[cell 7]
+{'status': 'complete',
+ 'scenes': 1000,
+ 'identity predictions': 6000,
+ 'resumed predictions': 0,
+ 'chosen method': 'embedding_only',
+ 'odd-one-out panels': 15}
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gate</th>
+      <th>passed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>08e_prediction_locks_verified</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>identity_predictions_locked_before_evaluator</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>two_three_five_view_cases_complete</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>input_order_invariance</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>duplicate_view_rejection</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>missing_view_execution</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>no_model_or_render_failures</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>method_and_application_contract_frozen</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>versioned_application_results_written</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>deployment_valid_odd_one_out_evidence</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>camera_metadata_excluded_from_model</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>no_absolute_accuracy_gate</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                            gate  passed
+0                  08e_prediction_locks_verified    True
+1   identity_predictions_locked_before_evaluator    True
+2             two_three_five_view_cases_complete    True
+3                         input_order_invariance    True
+4                       duplicate_view_rejection    True
+5                         missing_view_execution    True
+6                    no_model_or_render_failures    True
+7         method_and_application_contract_frozen    True
+8          versioned_application_results_written    True
+9          deployment_valid_odd_one_out_evidence    True
+10           camera_metadata_excluded_from_model    True
+11                     no_absolute_accuracy_gate    True
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variant</th>
+      <th>scene_count</th>
+      <th>order_invariance_rate</th>
+      <th>duplicate_rejection_rate</th>
+      <th>missing_view_completion_rate</th>
+      <th>mean_retained_link_stability</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>embedding_only</td>
+      <td>1000</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>normalized_geometry</td>
+      <td>1000</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>               variant  scene_count  order_invariance_rate  \
+0       embedding_only         1000                    1.0
+1  normalized_geometry         1000                    1.0
+
+   duplicate_rejection_rate  missing_view_completion_rate  \
+0                       1.0                           1.0
+1                       1.0                           1.0
+
+   mean_retained_link_stability
+0                           1.0
+1                           1.0
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variant</th>
+      <th>view_count</th>
+      <th>metric</th>
+      <th>mean</th>
+      <th>scene_count</th>
+      <th>eligible_scene_count</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>embedding_only</td>
+      <td>2</td>
+      <td>observation_coverage</td>
+      <td>0.816230</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>embedding_only</td>
+      <td>2</td>
+      <td>unmatched_rate</td>
+      <td>0.183862</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>embedding_only</td>
+      <td>2</td>
+      <td>ambiguity_rate</td>
+      <td>0.505665</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>embedding_only</td>
+      <td>2</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>0.364413</td>
+      <td>1000</td>
+      <td>932</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>embedding_only</td>
+      <td>2</td>
+      <td>switch_rate</td>
+      <td>0.635587</td>
+      <td>1000</td>
+      <td>932</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>embedding_only</td>
+      <td>2</td>
+      <td>cycle_consistency_rate</td>
+      <td>NaN</td>
+      <td>1000</td>
+      <td>0</td>
+      <td>not_applicable</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>embedding_only</td>
+      <td>3</td>
+      <td>observation_coverage</td>
+      <td>0.887921</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>embedding_only</td>
+      <td>3</td>
+      <td>unmatched_rate</td>
+      <td>0.118873</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>embedding_only</td>
+      <td>3</td>
+      <td>ambiguity_rate</td>
+      <td>0.745223</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>embedding_only</td>
+      <td>3</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>0.336025</td>
+      <td>1000</td>
+      <td>974</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>embedding_only</td>
+      <td>3</td>
+      <td>switch_rate</td>
+      <td>0.663975</td>
+      <td>1000</td>
+      <td>974</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>embedding_only</td>
+      <td>3</td>
+      <td>cycle_consistency_rate</td>
+      <td>0.513882</td>
+      <td>1000</td>
+      <td>937</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>embedding_only</td>
+      <td>5</td>
+      <td>observation_coverage</td>
+      <td>0.932879</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>embedding_only</td>
+      <td>5</td>
+      <td>unmatched_rate</td>
+      <td>0.075984</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>embedding_only</td>
+      <td>5</td>
+      <td>ambiguity_rate</td>
+      <td>0.876773</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>embedding_only</td>
+      <td>5</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>0.330439</td>
+      <td>1000</td>
+      <td>989</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>embedding_only</td>
+      <td>5</td>
+      <td>switch_rate</td>
+      <td>0.669561</td>
+      <td>1000</td>
+      <td>989</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>embedding_only</td>
+      <td>5</td>
+      <td>cycle_consistency_rate</td>
+      <td>0.406174</td>
+      <td>1000</td>
+      <td>989</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>normalized_geometry</td>
+      <td>2</td>
+      <td>observation_coverage</td>
+      <td>0.797549</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>normalized_geometry</td>
+      <td>2</td>
+      <td>unmatched_rate</td>
+      <td>0.202451</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>normalized_geometry</td>
+      <td>2</td>
+      <td>ambiguity_rate</td>
+      <td>0.462624</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>normalized_geometry</td>
+      <td>2</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>0.362985</td>
+      <td>1000</td>
+      <td>928</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>normalized_geometry</td>
+      <td>2</td>
+      <td>switch_rate</td>
+      <td>0.637015</td>
+      <td>1000</td>
+      <td>928</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>normalized_geometry</td>
+      <td>2</td>
+      <td>cycle_consistency_rate</td>
+      <td>NaN</td>
+      <td>1000</td>
+      <td>0</td>
+      <td>not_applicable</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>normalized_geometry</td>
+      <td>3</td>
+      <td>observation_coverage</td>
+      <td>0.873025</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>normalized_geometry</td>
+      <td>3</td>
+      <td>unmatched_rate</td>
+      <td>0.134376</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>normalized_geometry</td>
+      <td>3</td>
+      <td>ambiguity_rate</td>
+      <td>0.714497</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>normalized_geometry</td>
+      <td>3</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>0.334829</td>
+      <td>1000</td>
+      <td>974</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>normalized_geometry</td>
+      <td>3</td>
+      <td>switch_rate</td>
+      <td>0.665171</td>
+      <td>1000</td>
+      <td>974</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>normalized_geometry</td>
+      <td>3</td>
+      <td>cycle_consistency_rate</td>
+      <td>0.538000</td>
+      <td>1000</td>
+      <td>928</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>normalized_geometry</td>
+      <td>5</td>
+      <td>observation_coverage</td>
+      <td>0.923725</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>normalized_geometry</td>
+      <td>5</td>
+      <td>unmatched_rate</td>
+      <td>0.085873</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>normalized_geometry</td>
+      <td>5</td>
+      <td>ambiguity_rate</td>
+      <td>0.856385</td>
+      <td>1000</td>
+      <td>1000</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>normalized_geometry</td>
+      <td>5</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>0.327974</td>
+      <td>1000</td>
+      <td>989</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>normalized_geometry</td>
+      <td>5</td>
+      <td>switch_rate</td>
+      <td>0.672026</td>
+      <td>1000</td>
+      <td>989</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>normalized_geometry</td>
+      <td>5</td>
+      <td>cycle_consistency_rate</td>
+      <td>0.411064</td>
+      <td>1000</td>
+      <td>988</td>
+      <td>reported</td>
+    </tr>
+  </tbody>
+</table>
+</div>                variant  view_count                      metric      mean  \
+0        embedding_only           2        observation_coverage  0.816230
+1        embedding_only           2              unmatched_rate  0.183862
+2        embedding_only           2              ambiguity_rate  0.505665
+3        embedding_only           2  pairwise_identity_accuracy  0.364413
+4        embedding_only           2                 switch_rate  0.635587
+5        embedding_only           2      cycle_consistency_rate       NaN
+6        embedding_only           3        observation_coverage  0.887921
+7        embedding_only           3              unmatched_rate  0.118873
+8        embedding_only           3              ambiguity_rate  0.745223
+9        embedding_only           3  pairwise_identity_accuracy  0.336025
+10       embedding_only           3                 switch_rate  0.663975
+11       embedding_only           3      cycle_consistency_rate  0.513882
+12       embedding_only           5        observation_coverage  0.932879
+13       embedding_only           5              unmatched_rate  0.075984
+14       embedding_only           5              ambiguity_rate  0.876773
+15       embedding_only           5  pairwise_identity_accuracy  0.330439
+16       embedding_only           5                 switch_rate  0.669561
+17       embedding_only           5      cycle_consistency_rate  0.406174
+18  normalized_geometry           2        observation_coverage  0.797549
+19  normalized_geometry           2              unmatched_rate  0.202451
+20  normalized_geometry           2              ambiguity_rate  0.462624
+21  normalized_geometry           2  pairwise_identity_accuracy  0.362985
+22  normalized_geometry           2                 switch_rate  0.637015
+23  normalized_geometry           2      cycle_consistency_rate       NaN
+24  normalized_geometry           3        observation_coverage  0.873025
+25  normalized_geometry           3              unmatched_rate  0.134376
+26  normalized_geometry           3              ambiguity_rate  0.714497
+27  normalized_geometry           3  pairwise_identity_accuracy  0.334829
+28  normalized_geometry           3                 switch_rate  0.665171
+29  normalized_geometry           3      cycle_consistency_rate  0.538000
+30  normalized_geometry           5        observation_coverage  0.923725
+31  normalized_geometry           5              unmatched_rate  0.085873
+32  normalized_geometry           5              ambiguity_rate  0.856385
+33  normalized_geometry           5  pairwise_identity_accuracy  0.327974
+34  normalized_geometry           5                 switch_rate  0.672026
+35  normalized_geometry           5      cycle_consistency_rate  0.411064
+
+    scene_count  eligible_scene_count          status
+0          1000                  1000        reported
+1          1000                  1000        reported
+2          1000                  1000        reported
+3          1000                   932        reported
+4          1000                   932        reported
+5          1000                     0  not_applicable
+6          1000                  1000        reported
+7          1000                  1000        reported
+8          1000                  1000        reported
+9          1000                   974        reported
+10         1000                   974        reported
+11         1000                   937        reported
+12         1000                  1000        reported
+13         1000                  1000        reported
+14         1000                  1000        reported
+15         1000                   989        reported
+16         1000                   989        reported
+17         1000                   989        reported
+18         1000                  1000        reported
+19         1000                  1000        reported
+20         1000                  1000        reported
+21         1000                   928        reported
+22         1000                   928        reported
+23         1000                     0  not_applicable
+24         1000                  1000        reported
+25         1000                  1000        reported
+26         1000                  1000        reported
+27         1000                   974        reported
+28         1000                   974        reported
+29         1000                   928        reported
+30         1000                  1000        reported
+31         1000                  1000        reported
+32         1000                  1000        reported
+33         1000                   989        reported
+34         1000                   989        reported
+35         1000                   988        reported
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variant</th>
+      <th>view_count</th>
+      <th>metric</th>
+      <th>mean</th>
+      <th>ci_lower</th>
+      <th>ci_upper</th>
+      <th>scene_count</th>
+      <th>cluster_count</th>
+      <th>repetitions</th>
+      <th>seed</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>embedding_only</td>
+      <td>2</td>
+      <td>observation_coverage</td>
+      <td>0.816230</td>
+      <td>0.795587</td>
+      <td>0.836054</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32240</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>embedding_only</td>
+      <td>2</td>
+      <td>unmatched_rate</td>
+      <td>0.183862</td>
+      <td>0.165657</td>
+      <td>0.202630</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32241</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>embedding_only</td>
+      <td>2</td>
+      <td>ambiguity_rate</td>
+      <td>0.505665</td>
+      <td>0.485917</td>
+      <td>0.525808</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32242</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>embedding_only</td>
+      <td>2</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>0.364413</td>
+      <td>0.340241</td>
+      <td>0.389800</td>
+      <td>932</td>
+      <td>269</td>
+      <td>10000</td>
+      <td>32243</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>embedding_only</td>
+      <td>2</td>
+      <td>switch_rate</td>
+      <td>0.635587</td>
+      <td>0.610657</td>
+      <td>0.660300</td>
+      <td>932</td>
+      <td>269</td>
+      <td>10000</td>
+      <td>32244</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>embedding_only</td>
+      <td>2</td>
+      <td>cycle_consistency_rate</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>32040</td>
+      <td>not_applicable</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>embedding_only</td>
+      <td>3</td>
+      <td>observation_coverage</td>
+      <td>0.887921</td>
+      <td>0.872888</td>
+      <td>0.901659</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32340</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>embedding_only</td>
+      <td>3</td>
+      <td>unmatched_rate</td>
+      <td>0.118873</td>
+      <td>0.107050</td>
+      <td>0.131314</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32341</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>embedding_only</td>
+      <td>3</td>
+      <td>ambiguity_rate</td>
+      <td>0.745223</td>
+      <td>0.727415</td>
+      <td>0.762983</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32342</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>embedding_only</td>
+      <td>3</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>0.336025</td>
+      <td>0.321061</td>
+      <td>0.350875</td>
+      <td>974</td>
+      <td>271</td>
+      <td>10000</td>
+      <td>32343</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>embedding_only</td>
+      <td>3</td>
+      <td>switch_rate</td>
+      <td>0.663975</td>
+      <td>0.648688</td>
+      <td>0.678786</td>
+      <td>974</td>
+      <td>271</td>
+      <td>10000</td>
+      <td>32344</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>embedding_only</td>
+      <td>3</td>
+      <td>cycle_consistency_rate</td>
+      <td>0.513882</td>
+      <td>0.488683</td>
+      <td>0.539151</td>
+      <td>937</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32345</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>embedding_only</td>
+      <td>5</td>
+      <td>observation_coverage</td>
+      <td>0.932879</td>
+      <td>0.922539</td>
+      <td>0.941703</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32540</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>embedding_only</td>
+      <td>5</td>
+      <td>unmatched_rate</td>
+      <td>0.075984</td>
+      <td>0.068586</td>
+      <td>0.083401</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32541</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>embedding_only</td>
+      <td>5</td>
+      <td>ambiguity_rate</td>
+      <td>0.876773</td>
+      <td>0.864527</td>
+      <td>0.888462</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32542</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>embedding_only</td>
+      <td>5</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>0.330439</td>
+      <td>0.319249</td>
+      <td>0.341626</td>
+      <td>989</td>
+      <td>272</td>
+      <td>10000</td>
+      <td>32543</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>embedding_only</td>
+      <td>5</td>
+      <td>switch_rate</td>
+      <td>0.669561</td>
+      <td>0.658045</td>
+      <td>0.680772</td>
+      <td>989</td>
+      <td>272</td>
+      <td>10000</td>
+      <td>32544</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>embedding_only</td>
+      <td>5</td>
+      <td>cycle_consistency_rate</td>
+      <td>0.406174</td>
+      <td>0.392935</td>
+      <td>0.419909</td>
+      <td>989</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32545</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>normalized_geometry</td>
+      <td>2</td>
+      <td>observation_coverage</td>
+      <td>0.797549</td>
+      <td>0.775596</td>
+      <td>0.818297</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32240</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>normalized_geometry</td>
+      <td>2</td>
+      <td>unmatched_rate</td>
+      <td>0.202451</td>
+      <td>0.182741</td>
+      <td>0.222565</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32241</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>normalized_geometry</td>
+      <td>2</td>
+      <td>ambiguity_rate</td>
+      <td>0.462624</td>
+      <td>0.443338</td>
+      <td>0.482129</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32242</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>normalized_geometry</td>
+      <td>2</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>0.362985</td>
+      <td>0.337760</td>
+      <td>0.388872</td>
+      <td>928</td>
+      <td>269</td>
+      <td>10000</td>
+      <td>32243</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>normalized_geometry</td>
+      <td>2</td>
+      <td>switch_rate</td>
+      <td>0.637015</td>
+      <td>0.611406</td>
+      <td>0.662675</td>
+      <td>928</td>
+      <td>269</td>
+      <td>10000</td>
+      <td>32244</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>normalized_geometry</td>
+      <td>2</td>
+      <td>cycle_consistency_rate</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>32040</td>
+      <td>not_applicable</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>normalized_geometry</td>
+      <td>3</td>
+      <td>observation_coverage</td>
+      <td>0.873025</td>
+      <td>0.857219</td>
+      <td>0.887883</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32340</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>normalized_geometry</td>
+      <td>3</td>
+      <td>unmatched_rate</td>
+      <td>0.134376</td>
+      <td>0.121658</td>
+      <td>0.147777</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32341</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>normalized_geometry</td>
+      <td>3</td>
+      <td>ambiguity_rate</td>
+      <td>0.714497</td>
+      <td>0.695911</td>
+      <td>0.732872</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32342</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>normalized_geometry</td>
+      <td>3</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>0.334829</td>
+      <td>0.319695</td>
+      <td>0.349927</td>
+      <td>974</td>
+      <td>271</td>
+      <td>10000</td>
+      <td>32343</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>normalized_geometry</td>
+      <td>3</td>
+      <td>switch_rate</td>
+      <td>0.665171</td>
+      <td>0.650087</td>
+      <td>0.680384</td>
+      <td>974</td>
+      <td>271</td>
+      <td>10000</td>
+      <td>32344</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>normalized_geometry</td>
+      <td>3</td>
+      <td>cycle_consistency_rate</td>
+      <td>0.538000</td>
+      <td>0.512692</td>
+      <td>0.562749</td>
+      <td>928</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32345</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>normalized_geometry</td>
+      <td>5</td>
+      <td>observation_coverage</td>
+      <td>0.923725</td>
+      <td>0.912763</td>
+      <td>0.933191</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32540</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>normalized_geometry</td>
+      <td>5</td>
+      <td>unmatched_rate</td>
+      <td>0.085873</td>
+      <td>0.077690</td>
+      <td>0.094013</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32541</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>normalized_geometry</td>
+      <td>5</td>
+      <td>ambiguity_rate</td>
+      <td>0.856385</td>
+      <td>0.843386</td>
+      <td>0.868942</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32542</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>normalized_geometry</td>
+      <td>5</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>0.327974</td>
+      <td>0.316764</td>
+      <td>0.339436</td>
+      <td>989</td>
+      <td>272</td>
+      <td>10000</td>
+      <td>32543</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>normalized_geometry</td>
+      <td>5</td>
+      <td>switch_rate</td>
+      <td>0.672026</td>
+      <td>0.660448</td>
+      <td>0.683241</td>
+      <td>989</td>
+      <td>272</td>
+      <td>10000</td>
+      <td>32544</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>normalized_geometry</td>
+      <td>5</td>
+      <td>cycle_consistency_rate</td>
+      <td>0.411064</td>
+      <td>0.396708</td>
+      <td>0.425294</td>
+      <td>988</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32545</td>
+      <td>reported</td>
+    </tr>
+  </tbody>
+</table>
+</div>                variant  view_count                      metric      mean  \
+0        embedding_only           2        observation_coverage  0.816230
+1        embedding_only           2              unmatched_rate  0.183862
+2        embedding_only           2              ambiguity_rate  0.505665
+3        embedding_only           2  pairwise_identity_accuracy  0.364413
+4        embedding_only           2                 switch_rate  0.635587
+5        embedding_only           2      cycle_consistency_rate       NaN
+6        embedding_only           3        observation_coverage  0.887921
+7        embedding_only           3              unmatched_rate  0.118873
+8        embedding_only           3              ambiguity_rate  0.745223
+9        embedding_only           3  pairwise_identity_accuracy  0.336025
+10       embedding_only           3                 switch_rate  0.663975
+11       embedding_only           3      cycle_consistency_rate  0.513882
+12       embedding_only           5        observation_coverage  0.932879
+13       embedding_only           5              unmatched_rate  0.075984
+14       embedding_only           5              ambiguity_rate  0.876773
+15       embedding_only           5  pairwise_identity_accuracy  0.330439
+16       embedding_only           5                 switch_rate  0.669561
+17       embedding_only           5      cycle_consistency_rate  0.406174
+18  normalized_geometry           2        observation_coverage  0.797549
+19  normalized_geometry           2              unmatched_rate  0.202451
+20  normalized_geometry           2              ambiguity_rate  0.462624
+21  normalized_geometry           2  pairwise_identity_accuracy  0.362985
+22  normalized_geometry           2                 switch_rate  0.637015
+23  normalized_geometry           2      cycle_consistency_rate       NaN
+24  normalized_geometry           3        observation_coverage  0.873025
+25  normalized_geometry           3              unmatched_rate  0.134376
+26  normalized_geometry           3              ambiguity_rate  0.714497
+27  normalized_geometry           3  pairwise_identity_accuracy  0.334829
+28  normalized_geometry           3                 switch_rate  0.665171
+29  normalized_geometry           3      cycle_consistency_rate  0.538000
+30  normalized_geometry           5        observation_coverage  0.923725
+31  normalized_geometry           5              unmatched_rate  0.085873
+32  normalized_geometry           5              ambiguity_rate  0.856385
+33  normalized_geometry           5  pairwise_identity_accuracy  0.327974
+34  normalized_geometry           5                 switch_rate  0.672026
+35  normalized_geometry           5      cycle_consistency_rate  0.411064
+
+    ci_lower  ci_upper  scene_count  cluster_count  repetitions   seed  \
+0   0.795587  0.836054         1000            273        10000  32240
+1   0.165657  0.202630         1000            273        10000  32241
+2   0.485917  0.525808         1000            273        10000  32242
+3   0.340241  0.389800          932            269        10000  32243
+4   0.610657  0.660300          932            269        10000  32244
+5        NaN       NaN            0              0            0  32040
+6   0.872888  0.901659         1000            273        10000  32340
+7   0.107050  0.131314         1000            273        10000  32341
+8   0.727415  0.762983         1000            273        10000  32342
+9   0.321061  0.350875          974            271        10000  32343
+10  0.648688  0.678786          974            271        10000  32344
+11  0.488683  0.539151          937            273        10000  32345
+12  0.922539  0.941703         1000            273        10000  32540
+13  0.068586  0.083401         1000            273        10000  32541
+14  0.864527  0.888462         1000            273        10000  32542
+15  0.319249  0.341626          989            272        10000  32543
+16  0.658045  0.680772          989            272        10000  32544
+17  0.392935  0.419909          989            273        10000  32545
+18  0.775596  0.818297         1000            273        10000  32240
+19  0.182741  0.222565         1000            273        10000  32241
+20  0.443338  0.482129         1000            273        10000  32242
+21  0.337760  0.388872          928            269        10000  32243
+22  0.611406  0.662675          928            269        10000  32244
+23       NaN       NaN            0              0            0  32040
+24  0.857219  0.887883         1000            273        10000  32340
+25  0.121658  0.147777         1000            273        10000  32341
+26  0.695911  0.732872         1000            273        10000  32342
+27  0.319695  0.349927          974            271        10000  32343
+28  0.650087  0.680384          974            271        10000  32344
+29  0.512692  0.562749          928            273        10000  32345
+30  0.912763  0.933191         1000            273        10000  32540
+31  0.077690  0.094013         1000            273        10000  32541
+32  0.843386  0.868942         1000            273        10000  32542
+33  0.316764  0.339436          989            272        10000  32543
+34  0.660448  0.683241          989            272        10000  32544
+35  0.396708  0.425294          988            273        10000  32545
+
+            status
+0         reported
+1         reported
+2         reported
+3         reported
+4         reported
+5   not_applicable
+6         reported
+7         reported
+8         reported
+9         reported
+10        reported
+11        reported
+12        reported
+13        reported
+14        reported
+15        reported
+16        reported
+17        reported
+18        reported
+19        reported
+20        reported
+21        reported
+22        reported
+23  not_applicable
+24        reported
+25        reported
+26        reported
+27        reported
+28        reported
+29        reported
+30        reported
+31        reported
+32        reported
+33        reported
+34        reported
+35        reported
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>view_count</th>
+      <th>metric</th>
+      <th>mean_difference_geometry_minus_embedding</th>
+      <th>ci_lower</th>
+      <th>ci_upper</th>
+      <th>paired_scene_count</th>
+      <th>cluster_count</th>
+      <th>repetitions</th>
+      <th>seed</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>observation_coverage</td>
+      <td>-0.018681</td>
+      <td>-0.023511</td>
+      <td>-0.013989</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32240</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>unmatched_rate</td>
+      <td>0.018590</td>
+      <td>0.014077</td>
+      <td>0.023323</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32241</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>ambiguity_rate</td>
+      <td>-0.043041</td>
+      <td>-0.051607</td>
+      <td>-0.034289</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32242</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>-0.000844</td>
+      <td>-0.010291</td>
+      <td>0.008379</td>
+      <td>928</td>
+      <td>269</td>
+      <td>10000</td>
+      <td>32243</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>switch_rate</td>
+      <td>0.000844</td>
+      <td>-0.008564</td>
+      <td>0.010148</td>
+      <td>928</td>
+      <td>269</td>
+      <td>10000</td>
+      <td>32244</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2</td>
+      <td>cycle_consistency_rate</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>32040</td>
+      <td>not_applicable</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>3</td>
+      <td>observation_coverage</td>
+      <td>-0.014895</td>
+      <td>-0.018073</td>
+      <td>-0.011748</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32340</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>3</td>
+      <td>unmatched_rate</td>
+      <td>0.015503</td>
+      <td>0.012428</td>
+      <td>0.018655</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32341</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>3</td>
+      <td>ambiguity_rate</td>
+      <td>-0.030727</td>
+      <td>-0.037911</td>
+      <td>-0.023687</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32342</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>3</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>-0.001196</td>
+      <td>-0.009171</td>
+      <td>0.006705</td>
+      <td>974</td>
+      <td>271</td>
+      <td>10000</td>
+      <td>32343</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>3</td>
+      <td>switch_rate</td>
+      <td>0.001196</td>
+      <td>-0.006852</td>
+      <td>0.009283</td>
+      <td>974</td>
+      <td>271</td>
+      <td>10000</td>
+      <td>32344</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>3</td>
+      <td>cycle_consistency_rate</td>
+      <td>0.021290</td>
+      <td>0.000601</td>
+      <td>0.041546</td>
+      <td>928</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32345</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>5</td>
+      <td>observation_coverage</td>
+      <td>-0.009154</td>
+      <td>-0.011810</td>
+      <td>-0.006569</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32540</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>5</td>
+      <td>unmatched_rate</td>
+      <td>0.009888</td>
+      <td>0.007475</td>
+      <td>0.012396</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32541</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>5</td>
+      <td>ambiguity_rate</td>
+      <td>-0.020389</td>
+      <td>-0.025165</td>
+      <td>-0.015805</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32542</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>5</td>
+      <td>pairwise_identity_accuracy</td>
+      <td>-0.002465</td>
+      <td>-0.007606</td>
+      <td>0.002712</td>
+      <td>989</td>
+      <td>272</td>
+      <td>10000</td>
+      <td>32543</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>5</td>
+      <td>switch_rate</td>
+      <td>0.002465</td>
+      <td>-0.002877</td>
+      <td>0.007677</td>
+      <td>989</td>
+      <td>272</td>
+      <td>10000</td>
+      <td>32544</td>
+      <td>reported</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>5</td>
+      <td>cycle_consistency_rate</td>
+      <td>0.005491</td>
+      <td>-0.003535</td>
+      <td>0.014396</td>
+      <td>988</td>
+      <td>273</td>
+      <td>10000</td>
+      <td>32545</td>
+      <td>reported</td>
+    </tr>
+  </tbody>
+</table>
+</div>    view_count                      metric  \
+0            2        observation_coverage
+1            2              unmatched_rate
+2            2              ambiguity_rate
+3            2  pairwise_identity_accuracy
+4            2                 switch_rate
+5            2      cycle_consistency_rate
+6            3        observation_coverage
+7            3              unmatched_rate
+8            3              ambiguity_rate
+9            3  pairwise_identity_accuracy
+10           3                 switch_rate
+11           3      cycle_consistency_rate
+12           5        observation_coverage
+13           5              unmatched_rate
+14           5              ambiguity_rate
+15           5  pairwise_identity_accuracy
+16           5                 switch_rate
+17           5      cycle_consistency_rate
+
+    mean_difference_geometry_minus_embedding  ci_lower  ci_upper  \
+0                                  -0.018681 -0.023511 -0.013989
+1                                   0.018590  0.014077  0.023323
+2                                  -0.043041 -0.051607 -0.034289
+3                                  -0.000844 -0.010291  0.008379
+4                                   0.000844 -0.008564  0.010148
+5                                        NaN       NaN       NaN
+6                                  -0.014895 -0.018073 -0.011748
+7                                   0.015503  0.012428  0.018655
+8                                  -0.030727 -0.037911 -0.023687
+9                                  -0.001196 -0.009171  0.006705
+10                                  0.001196 -0.006852  0.009283
+11                                  0.021290  0.000601  0.041546
+12                                 -0.009154 -0.011810 -0.006569
+13                                  0.009888  0.007475  0.012396
+14                                 -0.020389 -0.025165 -0.015805
+15                                 -0.002465 -0.007606  0.002712
+16                                  0.002465 -0.002877  0.007677
+17                                  0.005491 -0.003535  0.014396
+
+    paired_scene_count  cluster_count  repetitions   seed          status
+0                 1000            273        10000  32240        reported
+1                 1000            273        10000  32241        reported
+2                 1000            273        10000  32242        reported
+3                  928            269        10000  32243        reported
+4                  928            269        10000  32244        reported
+5                    0              0            0  32040  not_applicable
+6                 1000            273        10000  32340        reported
+7                 1000            273        10000  32341        reported
+8                 1000            273        10000  32342        reported
+9                  974            271        10000  32343        reported
+10                 974            271        10000  32344        reported
+11                 928            273        10000  32345        reported
+12                1000            273        10000  32540        reported
+13                1000            273        10000  32541        reported
+14                1000            273        10000  32542        reported
+15                 989            272        10000  32543        reported
+16                 989            272        10000  32544        reported
+17                 988            273        10000  32545        reported
+
+[cell 13]
+{'absolute_performance_threshold_used': False,
+ 'camera_metadata_used_by_chosen_method': False,
+ 'chosen_configuration': {'ambiguity_margin': 0.05,
+  'geometry_weight': 0.0,
+  'unmatched_cost': 0.35},
+ 'chosen_configuration_sha256': '79182083960a9b115780c71f321e58beb282aa2b452d32f470c538da512af07f',
+ 'chosen_variant': 'embedding_only',
+ 'decision_rule': 'Use normalized geometry only when the five-view asset-clustered paired interval shows at least one favorable change, shows no adverse change, and all structural stability checks pass. Otherwise retain the simpler embedding-only method.',
+ 'favorable_metrics': ['ambiguity_rate'],
+ 'frozen_model_identity_sha256': 'c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7',
+ 'harmful_metrics': ['observation_coverage', 'unmatched_rate'],
+ 'human_correction_position': 'optional_review_after_automatic_result',
+ 'schema_version': 'visual-peer-08f-workflow/v1',
+ 'status': 'frozen',
+ 'structural_stability_passed': True}
+
+[cell 13]
+{'camera_metadata_scope': 'evaluator_diagnostic_only',
+ 'forbidden_model_inputs': ['source identifiers',
+  'evaluator correspondence',
+  'labels',
+  'roles',
+  'categories',
+  'file paths',
+  'object order',
+  'camera metadata'],
+ 'frozen_model_identity_sha256': 'c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7',
+ 'human_correction_scope': 'optional_review_after_automatic_result',
+ 'identity_configuration': {'ambiguity_margin': 0.05,
+  'geometry_weight': 0.0,
+  'unmatched_cost': 0.35},
+ 'identity_configuration_sha256': '79182083960a9b115780c71f321e58beb282aa2b452d32f470c538da512af07f',
+ 'identity_method': 'embedding_only',
+ 'identity_prediction_lock_sha256': '1d25b46577fd9bf9cab12da83061cc6807c2d1ec29902942b8359dc191df8191',
+ 'identity_result_schema': 'visual-peer-identity-result/v1',
+ 'model_facing_inputs': ['uploaded RGB pixels',
+  'automatic boxes',
+  'automatic masks',
+  'DINO global embeddings',
+  'normalized upload geometry',
+  'P1 scores'],
+ 'required_application_outputs': {'evidence': 'per-view highlights, masks, and coarse P1 heatmaps',
+  'fused_prediction': 'ranked odd-one-out identity and relative score',
+  'review_state': 'result_ready, review_recommended, or insufficient_evidence',
+  'view_predictions': 'boxes, masks, P1 scores, and stable identity tokens'},
+ 'schema_version': 'visual-peer-application-output/v1',
+ 'status': 'frozen',
+ 'supported_view_count': {'maximum': 5, 'minimum': 2}}
+
+[cell 13]
+{'versioned application results': 3000,
+ 'supported view counts observed': [2, 3, 5],
+ 'example result hash': '1615d744957cd200f891d88352adf96c365f8ee1313de0423e62dbe74edbf49d'}
+
+[cell 15]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>result_id</th>
+      <th>fused_odd_one_out</th>
+      <th>agreement</th>
+      <th>margin</th>
+      <th>review_state</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[protected identifier removed]</td>
+      <td>I005</td>
+      <td>1.000000</td>
+      <td>0.025667</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[protected identifier removed]</td>
+      <td>I000</td>
+      <td>1.000000</td>
+      <td>0.071230</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[protected identifier removed]</td>
+      <td>I004</td>
+      <td>1.000000</td>
+      <td>0.054997</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[protected identifier removed]</td>
+      <td>I003</td>
+      <td>0.600000</td>
+      <td>0.020541</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[protected identifier removed]</td>
+      <td>I005</td>
+      <td>1.000000</td>
+      <td>0.125070</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>[protected identifier removed]</td>
+      <td>I000</td>
+      <td>0.800000</td>
+      <td>0.021557</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>[protected identifier removed]</td>
+      <td>I005</td>
+      <td>1.000000</td>
+      <td>0.083086</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>[protected identifier removed]</td>
+      <td>I003</td>
+      <td>1.000000</td>
+      <td>0.096572</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>[protected identifier removed]</td>
+      <td>I006</td>
+      <td>1.000000</td>
+      <td>0.174856</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>[protected identifier removed]</td>
+      <td>I004</td>
+      <td>1.000000</td>
+      <td>0.082119</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>[protected identifier removed]</td>
+      <td>I000</td>
+      <td>0.500000</td>
+      <td>0.033191</td>
+      <td>result_ready</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>[protected identifier removed]</td>
+      <td>I007</td>
+      <td>0.000000</td>
+      <td>0.012621</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>[protected identifier removed]</td>
+      <td>I001</td>
+      <td>0.333333</td>
+      <td>0.026595</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>[protected identifier removed]</td>
+      <td>I004</td>
+      <td>1.000000</td>
+      <td>0.069165</td>
+      <td>review_recommended</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>[protected identifier removed]</td>
+      <td>I001</td>
+      <td>0.600000</td>
+      <td>0.024693</td>
+      <td>review_recommended</td>
+    </tr>
+  </tbody>
+</table>
+</div>   result_id fused_odd_one_out  agreement    margin        review_state
+0    [protected identifier removed]              I005   1.000000  0.025667  review_recommended
+1    [protected identifier removed]              I000   1.000000  0.071230  review_recommended
+2    [protected identifier removed]              I004   1.000000  0.054997  review_recommended
+3    [protected identifier removed]              I003   0.600000  0.020541  review_recommended
+4    [protected identifier removed]              I005   1.000000  0.125070  review_recommended
+5    [protected identifier removed]              I000   0.800000  0.021557  review_recommended
+6    [protected identifier removed]              I005   1.000000  0.083086  review_recommended
+7    [protected identifier removed]              I003   1.000000  0.096572  review_recommended
+8    [protected identifier removed]              I006   1.000000  0.174856  review_recommended
+9    [protected identifier removed]              I004   1.000000  0.082119  review_recommended
+10   [protected identifier removed]              I000   0.500000  0.033191        result_ready
+11   [protected identifier removed]              I007   0.000000  0.012621  review_recommended
+12   [protected identifier removed]              I001   0.333333  0.026595  review_recommended
+13   [protected identifier removed]              I004   1.000000  0.069165  review_recommended
+14   [protected identifier removed]              I001   0.600000  0.024693  review_recommended
+
+[cell 15]
+<IPython.core.display.Image object>
+
+[cell 15]
+<IPython.core.display.Image object>
+
+[cell 15]
+<IPython.core.display.Image object>
+
+[cell 15]
+<IPython.core.display.Image object>
+
+[cell 15]
+<IPython.core.display.Image object>
+
+[cell 15]
+<IPython.core.display.Image object>
+
+[cell 15]
+<IPython.core.display.Image object>
+
+[cell 15]
+<IPython.core.display.Image object>
+
+[cell 15]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+{'safe artifact count': 11,
+ 'safe artifact inventory SHA-256': 'fc4bea2884fbac1b9ca26b5a55a97ac86da60441ffc69e64f4d6b54167e70d79',
+ 'ClearML status': 'disabled',
+ 'ClearML task ID': None,
+ 'download root': '/kaggle/working/toysad8k_cross_view_identity_freeze',
+ 'minimal method resource': '/kaggle/working/toysad8k_cross_view_identity_freeze/publish/method-freeze'}

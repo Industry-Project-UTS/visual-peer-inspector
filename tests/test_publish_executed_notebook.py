@@ -51,6 +51,11 @@ def _notebook(*, executed: bool, private_visual: bool = False) -> dict[str, obje
 
 
 class PublishExecutedNotebookTests(unittest.TestCase):
+    def test_review_only_panels_are_not_public_visuals(self) -> None:
+        self.assertTrue(publisher._private_visual_cell('root / "review-only/figures/example.png"'))
+        self.assertTrue(publisher._private_visual_cell('display(contact_sheet)'))
+        self.assertFalse(publisher._private_visual_cell('root / "safe/figures/coverage.png"'))
+
     def test_private_visuals_and_protected_text_are_removed(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

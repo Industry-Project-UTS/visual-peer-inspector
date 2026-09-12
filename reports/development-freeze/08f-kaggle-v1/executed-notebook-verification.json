@@ -1,0 +1,15 @@
+{
+  "status": "verified_complete",
+  "kaggle_version": 1,
+  "source_snapshot_version": 65,
+  "original_download_name": "toysad-8k-cross-view-identity-freeze.ipynb",
+  "preserved_name": "executed-notebook.ipynb",
+  "sha256": "7a489422c88a3c8f22e4b6921cfced1ecabd205051e747980e7f49abd2dfdef8",
+  "cell_source_matches_snapshot": true,
+  "cell_count": 19,
+  "executed_code_cells": 9,
+  "output_count": 24,
+  "png_output_count": 11,
+  "error_output_count": 0,
+  "identity_prediction_lock_sha256": "1d25b46577fd9bf9cab12da83061cc6807c2d1ec29902942b8359dc191df8191"
+}

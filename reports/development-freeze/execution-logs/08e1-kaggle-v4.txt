@@ -1,0 +1,127 @@
+Stage: 08E1 Kaggle Version 4
+Status: completed
+Clean notebook: 08e1-kaggle-v4.ipynb
+Clean notebook SHA-256: c57b604a4de5f0d80d6aa3b16dd3a1797b881ab19abab3f53582ac50d61b25fe
+Downloaded saved-output SHA-256: d393a473ec1955dc70d3fc05b2132548504d14bf7ca313dc65656d02244df9eb
+Executed code cells: 5
+Retained output blocks: 6
+Retained safe visuals: 0
+Removed private visuals: 0
+
+Sanitised execution transcript
+==============================
+
+[cell 5]
+Code snapshot verified
+Source and selection mounts found
+Release inputs located; starting verified resource build
+{"event": "identity_release_progress", "checked_scenes": 0, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 0}
+{"event": "identity_release_progress", "checked_scenes": 25, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 25}
+{"event": "identity_release_progress", "checked_scenes": 50, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 50}
+{"event": "identity_release_progress", "checked_scenes": 75, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 75}
+{"event": "identity_release_progress", "checked_scenes": 100, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 100}
+{"event": "identity_release_progress", "checked_scenes": 125, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 125}
+{"event": "identity_release_progress", "checked_scenes": 150, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 150}
+{"event": "identity_release_progress", "checked_scenes": 175, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 175}
+{"event": "identity_release_progress", "checked_scenes": 200, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 200}
+{"event": "identity_release_progress", "checked_scenes": 225, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 225}
+{"event": "identity_release_progress", "checked_scenes": 250, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 250}
+{"event": "identity_release_progress", "checked_scenes": 275, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 275}
+{"event": "identity_release_progress", "checked_scenes": 300, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 300}
+{"event": "identity_release_progress", "checked_scenes": 325, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 325}
+{"event": "identity_release_progress", "checked_scenes": 350, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 350}
+{"event": "identity_release_progress", "checked_scenes": 375, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 375}
+{"event": "identity_release_progress", "checked_scenes": 400, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 400}
+{"event": "identity_release_progress", "checked_scenes": 425, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 425}
+{"event": "identity_release_progress", "checked_scenes": 450, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 450}
+{"event": "identity_release_progress", "checked_scenes": 475, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 475}
+{"event": "identity_release_progress", "checked_scenes": 500, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 500}
+{"event": "identity_release_progress", "checked_scenes": 525, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 525}
+{"event": "identity_release_progress", "checked_scenes": 550, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 550}
+{"event": "identity_release_progress", "checked_scenes": 575, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 575}
+{"event": "identity_release_progress", "checked_scenes": 600, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 600}
+{"event": "identity_release_progress", "checked_scenes": 625, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 625}
+{"event": "identity_release_progress", "checked_scenes": 650, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 650}
+{"event": "identity_release_progress", "checked_scenes": 675, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 675}
+{"event": "identity_release_progress", "checked_scenes": 700, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 700}
+{"event": "identity_release_progress", "checked_scenes": 725, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 725}
+{"event": "identity_release_progress", "checked_scenes": 750, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 750}
+{"event": "identity_release_progress", "checked_scenes": 775, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 775}
+{"event": "identity_release_progress", "checked_scenes": 800, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 800}
+{"event": "identity_release_progress", "checked_scenes": 825, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 825}
+{"event": "identity_release_progress", "checked_scenes": 850, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 850}
+{"event": "identity_release_progress", "checked_scenes": 875, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 875}
+{"event": "identity_release_progress", "checked_scenes": 900, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 900}
+{"event": "identity_release_progress", "checked_scenes": 925, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 925}
+{"event": "identity_release_progress", "checked_scenes": 950, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 950}
+{"event": "identity_release_progress", "checked_scenes": 975, "total_scenes": 1000, "resumed_scenes": 0, "new_scenes": 975}
+{"administrative_sha256": "bde49d0a0121965bf9d33a3c2473ee0574196d207fa206824ba61648c6b4cc56", "cohort_id": "toysad8k-development-full-1000-v1", "completed_scene_count": 1000, "correspondence_row_count": 80954, "evaluator_manifest_sha256": "96189e95353570c8c5c8a7e04dd60e170d644b8ef213c9989f5fba3a4bb830aa", "evaluator_resource_published": true, "exact_resume": true, "input_signature": "91820e2d0ab963e0f3f3d8b66e6bdb28a9e5065f131d51ffaf825f714e9f2b95", "membership_sha256": "00e400350a056631778bd9c4dace1667d95e52bf58c0a29ea7c48d190c41de0c", "minimum_iou": 0.5, "pipeline_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "prediction_lock_sha256s": ["7d7b683e3edfe2c8ebd2b6623d16e292870cdb70bed84586a14aae950739d7bb", "d035bfb59af2e4a296361283ee5f263d5ad2a8682efa93f70b5e9707f0b00404", "f5c88d87836c2b1a82c2499edf71af753fb125a74e3ea1354d1bb077fa8d337f"], "processed_scene_count": 1000, "recovery": {"bundle": "/kaggle/working/08e1_toysad8k_development_identity_evaluator_release_recovery/development-identity-resource-recovery.zip", "bundle_sha256": "704ea26e769ff27eb6bca59c10d0dd7078d74785465bebb3c9d7c2a84bf9508a", "manifest": "/kaggle/working/08e1_toysad8k_development_identity_evaluator_release_recovery/development-identity-resource-recovery-manifest.json"}, "reference_geometry_policy": {"box_format": "half-open-xyxy", "decoder": "toysad-grayscale-threshold-v1", "image_size": [256, 256], "mask_threshold": 128}, "reference_mapped_observation_count": 74483, "reference_mapping_fraction": 0.9200657163327322, "reference_unmapped_observation_count": 6471, "remaining_scene_count": 0, "resumed_scene_count": 0, "schema_version": "visual-peer-primary-resource-release/v1", "source_identity": {"archive_bytes_verified": false, "archive_index_sha256": "c502d779f9b9e78ed7e2766402b7ba10337b1ee43fa467da03b6f997d6bc7e36", "archive_sha256": "e49c30857b96fdede3f374c773ce0758174f225958ba29c9ad5ca5b075dfc733", "archive_size_bytes": 52993751003, "member_bytes_verification": "indexed_size_and_crc32", "package_checksums_sha256": "0630cc7c011bbea0b80036c9ea4d71f6abd6fc178ff105c84ef3543ad9a0b6fa", "source_access_mode": "kaggle_extracted_members", "source_master_sha256": "6a2cbc575365208d72a4509d25fde9565e24a3f68341d38535ce67e13d9b9f24"}, "status": "complete"}
+
+[cell 5]
+{'status': 'complete',
+ 'completed scenes': 1000,
+ 'remaining scenes': 0,
+ 'processed this version': 1000,
+ 'resumed scenes': 0,
+ 'exact resume': True}
+
+[cell 7]
+{'administrative_sha256': 'bde49d0a0121965bf9d33a3c2473ee0574196d207fa206824ba61648c6b4cc56',
+ 'cohort_id': 'toysad8k-development-full-1000-v1',
+ 'completed_scene_count': 1000,
+ 'correspondence_row_count': 80954,
+ 'evaluator_manifest_sha256': '96189e95353570c8c5c8a7e04dd60e170d644b8ef213c9989f5fba3a4bb830aa',
+ 'evaluator_resource_published': True,
+ 'exact_resume': True,
+ 'input_signature': '91820e2d0ab963e0f3f3d8b66e6bdb28a9e5065f131d51ffaf825f714e9f2b95',
+ 'membership_sha256': '00e400350a056631778bd9c4dace1667d95e52bf58c0a29ea7c48d190c41de0c',
+ 'minimum_iou': 0.5,
+ 'pipeline_identity_sha256': 'c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7',
+ 'prediction_lock_sha256s': ['7d7b683e3edfe2c8ebd2b6623d16e292870cdb70bed84586a14aae950739d7bb',
+  'd035bfb59af2e4a296361283ee5f263d5ad2a8682efa93f70b5e9707f0b00404',
+  'f5c88d87836c2b1a82c2499edf71af753fb125a74e3ea1354d1bb077fa8d337f'],
+ 'processed_scene_count': 1000,
+ 'reference_geometry_policy': {'box_format': 'half-open-xyxy',
+  'decoder': 'toysad-grayscale-threshold-v1',
+  'image_size': [256, 256],
+  'mask_threshold': 128},
+ 'reference_mapped_observation_count': 74483,
+ 'reference_mapping_fraction': 0.9200657163327322,
+ 'reference_unmapped_observation_count': 6471,
+ 'remaining_scene_count': 0,
+ 'resumed_scene_count': 0,
+ 'schema_version': 'visual-peer-primary-resource-release/v1',
+ 'source_identity': {'archive_bytes_verified': False,
+  'archive_index_sha256': 'c502d779f9b9e78ed7e2766402b7ba10337b1ee43fa467da03b6f997d6bc7e36',
+  'archive_sha256': 'e49c30857b96fdede3f374c773ce0758174f225958ba29c9ad5ca5b075dfc733',
+  'archive_size_bytes': 52993751003,
+  'member_bytes_verification': 'indexed_size_and_crc32',
+  'package_checksums_sha256': '0630cc7c011bbea0b80036c9ea4d71f6abd6fc178ff105c84ef3543ad9a0b6fa',
+  'source_access_mode': 'kaggle_extracted_members',
+  'source_master_sha256': '6a2cbc575365208d72a4509d25fde9565e24a3f68341d38535ce67e13d9b9f24'},
+ 'status': 'complete'}
+
+[cell 7]
+{'bundle': '/kaggle/working/08e1_toysad8k_development_identity_evaluator_release_recovery/development-identity-resource-recovery.zip',
+ 'bundle_sha256': '704ea26e769ff27eb6bca59c10d0dd7078d74785465bebb3c9d7c2a84bf9508a',
+ 'manifest': '/kaggle/working/08e1_toysad8k_development_identity_evaluator_release_recovery/development-identity-resource-recovery-manifest.json'}
+
+[cell 9]
+{'ClearML mode': 'disabled',
+ 'receipt': '/kaggle/working/08e1_toysad8k_development_identity_evaluator_release/tracking/clearml_receipt.json'}
+
+[cell 9]
+{'git_commit': '94b606211287482b41d880eac17ebeffb6a40b74',
+ 'git_dirty': False,
+ 'mode': 'disabled',
+ 'notebook_sha256': 'c57b604a4de5f0d80d6aa3b16dd3a1797b881ab19abab3f53582ac50d61b25fe',
+ 'run_status': 'completed',
+ 'safe_manifest_sha256': 'ba77819a049f041ad8646a71788b7ecb1b31d6919d06204404d4c1e213a82f81',
+ 'schema_version': 1,
+ 'snapshot_sha256': '8b6f8827f7eb0f020ec683782bfe0a8dfe42e879dba40255ae251394442ade80',
+ 'stage': 'development_identity_evaluator_release_clearml_finalisation',
+ 'status': 'disabled',
+ 'task_id': None,
+ 'tracking_attempt_count': 0,
+ 'tracking_retry_count': 0,
+ 'tracking_transient_failure_count': 0}

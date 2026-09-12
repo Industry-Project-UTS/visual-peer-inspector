@@ -81,7 +81,7 @@ def test_notebook09b_metadata_consumes_09a_and_private_evaluator() -> None:
     assert metadata["enable_tpu"] is False
     assert metadata["enable_internet"] is True
     assert metadata["kernel_sources"] == [
-        "esreekarreddy/09a-toysad8k-protected-calibration-inference"
+        "esreekarreddy/toysad-8k-protected-calibration-inference"
     ]
     assert "esreekarreddy/vpi-toysad-development-method-freeze" in metadata[
         "dataset_sources"

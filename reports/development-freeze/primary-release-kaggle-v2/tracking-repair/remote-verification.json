@@ -1,0 +1,21 @@
+{
+  "inference_repeated_for_tracking": false,
+  "remote_artifact_hashes_matched": {
+    "cohort_membership.csv": "7ab3144db92003e8851c40871d13fabe35cdb9eb973f5d33c39a3b06fe9bf174",
+    "development_stage_membership.csv": "bb2e8fde7ebef40ec39e649f713302a6a5bc4d6c4b73d14b13685bae7760f35b",
+    "resource_release_status.csv": "d153b9865c3907473ad9249ba55ca5e28acb4cd1288cf8352b9b80b029fa6a4f",
+    "role_overlap_audit.csv": "a4717f7db0cfbf16f9be5ea867d1cc5c0b17bae1e932d3c7c78eccdda31d7f38",
+    "run_record.json": "3dd170195e6685fe22760b299580c8d4818cfe55cf24144aed510646823d9016"
+  },
+  "remote_image_sample_counts": {
+    "primary_role_counts.png": 1,
+    "protocol_release_boundary.png": 1
+  },
+  "remote_scalar_series_count": 19,
+  "remote_single_values": {},
+  "remote_status": "completed",
+  "remote_table_plot_count": 4,
+  "stage": "primary_protocol_release",
+  "status": "verified_complete",
+  "task_id": "46584b517c354514a643589701cacec0"
+}

@@ -1,0 +1,392 @@
+{
+  "files": [
+    {
+      "bytes": 551,
+      "path": "reports/development-freeze/08e1-kaggle-v4/executed-notebook-verification.json",
+      "sha256": "8d1b57efa320cc8d1dca0030d0a6c0f7cab7b31e0b69a7041bf26927448e95b0"
+    },
+    {
+      "bytes": 175,
+      "path": "reports/development-freeze/08e1-kaggle-v4/safe/artifact_manifest.json",
+      "sha256": "ba77819a049f041ad8646a71788b7ecb1b31d6919d06204404d4c1e213a82f81"
+    },
+    {
+      "bytes": 1022,
+      "path": "reports/development-freeze/08e1-kaggle-v4/safe/run_record.json",
+      "sha256": "50019f9a9fb30fe72463a5ce230090caa23abc148b9ebbb1c9e825dfa355c4e6"
+    },
+    {
+      "bytes": 678,
+      "path": "reports/development-freeze/08e1-kaggle-v4/tracking-repair/08e1-clearml-receipt.json",
+      "sha256": "ea687cd24cf5b881d73236b2d914ac7a5d0abede3b0917370b2d91940327041f"
+    },
+    {
+      "bytes": 626,
+      "path": "reports/development-freeze/08e1-kaggle-v4/tracking-repair/remote-verification.json",
+      "sha256": "f482e6cb064fe8cb25e495a9ce07bae0532fb42b7da1b322d67653121cb0ca16"
+    },
+    {
+      "bytes": 705,
+      "path": "reports/development-freeze/08e1-kaggle-v4/verification.json",
+      "sha256": "59f4739db355fb2dc911b54e559ee929072e70446aaada7a7d9a63bf0f36d011"
+    },
+    {
+      "bytes": 561,
+      "path": "reports/development-freeze/08f-kaggle-v1/executed-notebook-verification.json",
+      "sha256": "848284f31a3e28cb8b6962e33658e4b52bedd123c07ca037552f1b84442e5019"
+    },
+    {
+      "bytes": 589,
+      "path": "reports/development-freeze/08f-kaggle-v1/review-summary/README.md",
+      "sha256": "f137c9749aaca6051a966f03b9c41cc6a69fcc8e7c523bc4808e49d08cea741e"
+    },
+    {
+      "bytes": 393,
+      "path": "reports/development-freeze/08f-kaggle-v1/review-summary/derivation_record.json",
+      "sha256": "71bf912bdf13e01109f8e4a8084b6e42516136aadfdac57015674389008237d1"
+    },
+    {
+      "bytes": 910,
+      "path": "reports/development-freeze/08f-kaggle-v1/review-summary/identity_accuracy.csv",
+      "sha256": "50b7eaba5e8da86d6b7310be58422689b97a9c233219ff3fc49e64f578eaacce"
+    },
+    {
+      "bytes": 54308,
+      "path": "reports/development-freeze/08f-kaggle-v1/review-summary/identity_accuracy.png",
+      "sha256": "d44e702d57e85da77c7bd0e37cd313f76bce3a5168e642b05b48a6ec2d3ab783"
+    },
+    {
+      "bytes": 39175,
+      "path": "reports/development-freeze/08f-kaggle-v1/review-summary/single_view_winners.png",
+      "sha256": "53c58b97ce7e790a6326a3d0711cdb3504861d833bb968e6492a3115a2db5e5b"
+    },
+    {
+      "bytes": 377,
+      "path": "reports/development-freeze/08f-kaggle-v1/review-summary/winner_view_support.csv",
+      "sha256": "e7795883fb62f42af896ed01f6c56ffe859fbf92b15c5d61d71959ee513ca064"
+    },
+    {
+      "bytes": 471,
+      "path": "reports/development-freeze/08f-kaggle-v1/safe/acceptance_gates.csv",
+      "sha256": "c4720b352830f26d8b6089b543e9f49b086f50405ce8483f9bb78e0a6fbea5c9"
+    },
+    {
+      "bytes": 1535,
+      "path": "reports/development-freeze/08f-kaggle-v1/safe/application_output_contract.json",
+      "sha256": "faa17a164f440259e13b3efd0768d2752444e57c6df4d160c8d3fccc9150bbcc"
+    },
+    {
+      "bytes": 2007,
+      "path": "reports/development-freeze/08f-kaggle-v1/safe/artifact_manifest.json",
+      "sha256": "474b40703744be22b7e98afc20cc4021b5ffdce04357cef6c9742cd9fdaa0ab3"
+    },
+    {
+      "bytes": 4534,
+      "path": "reports/development-freeze/08f-kaggle-v1/safe/clustered_intervals.csv",
+      "sha256": "f001d70e4c91044764a1f2668a4d74da0c6077533842bd09507677de2f4e0e99"
+    },
+    {
+      "bytes": 36,
+      "path": "reports/development-freeze/08f-kaggle-v1/safe/failure_summary.csv",
+      "sha256": "c10b9209afbb64251feaf395858f12f637b9f9b0aaf4dd5d3cacc9842ae9ec91"
+    },
+    {
+      "bytes": 18671,
+      "path": "reports/development-freeze/08f-kaggle-v1/safe/figures/five_view_identity_accuracy.png",
+      "sha256": "34b22d190f3cfd64a0dfca874d76d5495a94d90a739e8a5b5020f67c7da56c97"
+    },
+    {
+      "bytes": 19962,
+      "path": "reports/development-freeze/08f-kaggle-v1/safe/figures/missing_view_link_stability.png",
+      "sha256": "66ce17161d592b43fa349467fe6de9406d677aff7e109e060206fc0cb8bfc645"
+    },
+    {
+      "bytes": 1031,
+      "path": "reports/development-freeze/08f-kaggle-v1/safe/method_freeze.json",
+      "sha256": "cd43ab1f8cdb6ab392097118f28c0d20357989da89620efb9c4dafdb7cdf1d1c"
+    },
+    {
+      "bytes": 2820,
+      "path": "reports/development-freeze/08f-kaggle-v1/safe/method_summary.csv",
+      "sha256": "886a358994751be108412b19e28b36ef5c30d7c2f3f5a6b7f3e33e63357503f2"
+    },
+    {
+      "bytes": 2156,
+      "path": "reports/development-freeze/08f-kaggle-v1/safe/paired_method_intervals.csv",
+      "sha256": "5a1bfb55598ada70b7f5cc2a8208293abf2a49c95e65be7dfdbfb4f08324b311"
+    },
+    {
+      "bytes": 1587,
+      "path": "reports/development-freeze/08f-kaggle-v1/safe/run_record.json",
+      "sha256": "69a18ab927086d008da4a0a7bbbdabddc0fa07e735c954f1851010d1a0ec758f"
+    },
+    {
+      "bytes": 205,
+      "path": "reports/development-freeze/08f-kaggle-v1/safe/stability_summary.csv",
+      "sha256": "026e33581654635e46e0f4d8781c75d049b03ffe3e29040d4c1ef2b52337e2b4"
+    },
+    {
+      "bytes": 1978,
+      "path": "reports/development-freeze/08f-kaggle-v1/tracking-repair/08f-clearml-receipt.json",
+      "sha256": "c72445348f26754fcdff13bbd5dcbbec74c7bfc306fd73b7ab542b04dc7c6e6d"
+    },
+    {
+      "bytes": 1710,
+      "path": "reports/development-freeze/08f-kaggle-v1/tracking-repair/remote-verification.json",
+      "sha256": "1e46858dcb9c376a8780c16a4985c4dcf60e97196cfda6ededd00e17fe18580d"
+    },
+    {
+      "bytes": 642,
+      "path": "reports/development-freeze/08f-kaggle-v1/verification.json",
+      "sha256": "e72d874b666450ee08771787f1ed71da78f156e95501fdd9a1b4300784965d99"
+    },
+    {
+      "bytes": 12688,
+      "path": "reports/development-freeze/execution-logs/08d-kaggle-v2.txt",
+      "sha256": "e69ec0af478525598438028ac1f7efa985ce87179322765a285f2fb3784d13ae"
+    },
+    {
+      "bytes": 65336,
+      "path": "reports/development-freeze/execution-logs/08e-kaggle-v5.txt",
+      "sha256": "9cfda40296ad96c55ee529049dea16cbce9579c83865dcf79d5252da99b8c2ec"
+    },
+    {
+      "bytes": 11112,
+      "path": "reports/development-freeze/execution-logs/08e1-kaggle-v4.txt",
+      "sha256": "c194a518c29c285884526310801d78cc31d1e6924e3a117cef803d8ae75cb252"
+    },
+    {
+      "bytes": 60438,
+      "path": "reports/development-freeze/execution-logs/08f-kaggle-v1.txt",
+      "sha256": "363a0afbc62f27bcd9a148214c19250cfd3a09842e439f6507d4832bd51c7b9c"
+    },
+    {
+      "bytes": 634,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/README.md",
+      "sha256": "45cdd1147e21da46d198a55b015b22cb59832a252191232847c5b10e734fc2aa"
+    },
+    {
+      "bytes": 250,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/cohort_coverage.csv",
+      "sha256": "8776a16925952e0359ea0262f4cffe8071ad938ae006e252cb60ff9c108f8a3c"
+    },
+    {
+      "bytes": 305,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/cohorts/toysad8k-development-confirm-300-v1/safe/artifact_manifest.json",
+      "sha256": "6c35690ce5f6d711dc2055974566cd413b566e86eb1a792eea1199ce05e0adf8"
+    },
+    {
+      "bytes": 925,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/cohorts/toysad8k-development-confirm-300-v1/safe/backfill_attestation.json",
+      "sha256": "ccdfe2615b7315908789aa67b3daa26e49c0a4513b26e7d50ec1651514c75218"
+    },
+    {
+      "bytes": 3004,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/cohorts/toysad8k-development-confirm-300-v1/safe/run_record.json",
+      "sha256": "d134e5dd3d90cba6bc715e31efc6d08ec70dfa2d36549032ea6bf6a9b7823e96"
+    },
+    {
+      "bytes": 175,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/cohorts/toysad8k-development-remainder-600-v1/safe/artifact_manifest.json",
+      "sha256": "af7b45effe2c9d3c7c17e3c89c5a3a30c23c43530b100c976ba1ccb08f29e9d8"
+    },
+    {
+      "bytes": 5390,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/cohorts/toysad8k-development-remainder-600-v1/safe/run_record.json",
+      "sha256": "c144a95a6e657ee5f909a81d5f2eb9e8031bbd62a840b136dedfa8a26cdc182a"
+    },
+    {
+      "bytes": 175,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/cohorts/toysad8k-development-screen-100-v1/safe/artifact_manifest.json",
+      "sha256": "2f52ec844bf1e366dde622f6c84bc653cc898ae8bfcc9c78707646c1f48a0816"
+    },
+    {
+      "bytes": 5351,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/cohorts/toysad8k-development-screen-100-v1/safe/run_record.json",
+      "sha256": "74e43c334068d4dbfd29bf00921e8d457c4c961dfbb9bb0bc8d2695311bc88bf"
+    },
+    {
+      "bytes": 35415,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/development_coverage.png",
+      "sha256": "9466debd699fec4260c06536f21955e53203fd6df128fab9993af122b4146989"
+    },
+    {
+      "bytes": 1459,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/full-development-lock.json",
+      "sha256": "9d8505d2bccdcf9d6e59ebf39c52676278517ff6564c391aa88cb4fb113c050c"
+    },
+    {
+      "bytes": 594,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/prediction_locks.csv",
+      "sha256": "e571c9931a43cdbd9b2622a182c16e50a0283773df9bbf4a04cae68633452a91"
+    },
+    {
+      "bytes": 538,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/run_record.json",
+      "sha256": "c59b48c7f46b5d0a452d1f758532a964d6c5adeafce825a6e6ab6dadc6efb3c8"
+    },
+    {
+      "bytes": 868,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/stage_processing.csv",
+      "sha256": "c5b294a48474cc828b02640f7678a783b9f372b09e876889808df7e7679c3302"
+    },
+    {
+      "bytes": 39657,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/terminal_outcomes.png",
+      "sha256": "67a9e8fcdc60b142a25b4f0afa4a30e29266fabf3e6219fa9e70aaa65d6ffc1d"
+    },
+    {
+      "bytes": 666,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/tracking-repair/confirmation-clearml-receipt.json",
+      "sha256": "eb85b2681fee41122ea0bad86473c2721ee1c0b77f23a877d209c4f66b076109"
+    },
+    {
+      "bytes": 666,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/tracking-repair/remainder-600-clearml-receipt.json",
+      "sha256": "25c19fbf9a26a063194d83200d821d5f3f37819c20e7a7c3e05127e1d8e5a3ea"
+    },
+    {
+      "bytes": 666,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/tracking-repair/screen-100-clearml-receipt.json",
+      "sha256": "a5a06092a6217c1e1aa79156f5f8b713ab68ae8a883b035ab1ef8cbb62a2ee48"
+    },
+    {
+      "bytes": 3818,
+      "path": "reports/development-freeze/frozen-development-kaggle-v5/verification_summary.json",
+      "sha256": "db04fcc51168a00193b0f8177c415c8c055bd80184a3d5e93422bd78960219ea"
+    },
+    {
+      "bytes": 1314,
+      "path": "reports/development-freeze/primary-release-kaggle-v2/safe/artifact_manifest.json",
+      "sha256": "805098125612d14d0d7490724124bdbbe50e8cbf3f6950ff7a215c9615ff5e58"
+    },
+    {
+      "bytes": 523,
+      "path": "reports/development-freeze/primary-release-kaggle-v2/safe/cohort_membership.csv",
+      "sha256": "7ab3144db92003e8851c40871d13fabe35cdb9eb973f5d33c39a3b06fe9bf174"
+    },
+    {
+      "bytes": 475,
+      "path": "reports/development-freeze/primary-release-kaggle-v2/safe/development_stage_membership.csv",
+      "sha256": "bb2e8fde7ebef40ec39e649f713302a6a5bc4d6c4b73d14b13685bae7760f35b"
+    },
+    {
+      "bytes": 19915,
+      "path": "reports/development-freeze/primary-release-kaggle-v2/safe/primary_role_counts.png",
+      "sha256": "3a95b24b6964257aa7784ccbd14f5ad508702c2700ca62e231a1f3962ea9f254"
+    },
+    {
+      "bytes": 40985,
+      "path": "reports/development-freeze/primary-release-kaggle-v2/safe/protocol_release_boundary.png",
+      "sha256": "10858737636229c5e3cfaec9f8b0325f65604e499b3ae6ba64ad4497d02ce8e4"
+    },
+    {
+      "bytes": 258,
+      "path": "reports/development-freeze/primary-release-kaggle-v2/safe/resource_release_status.csv",
+      "sha256": "d153b9865c3907473ad9249ba55ca5e28acb4cd1288cf8352b9b80b029fa6a4f"
+    },
+    {
+      "bytes": 169,
+      "path": "reports/development-freeze/primary-release-kaggle-v2/safe/role_overlap_audit.csv",
+      "sha256": "a4717f7db0cfbf16f9be5ea867d1cc5c0b17bae1e932d3c7c78eccdda31d7f38"
+    },
+    {
+      "bytes": 1404,
+      "path": "reports/development-freeze/primary-release-kaggle-v2/safe/run_record.json",
+      "sha256": "3dd170195e6685fe22760b299580c8d4818cfe55cf24144aed510646823d9016"
+    },
+    {
+      "bytes": 664,
+      "path": "reports/development-freeze/primary-release-kaggle-v2/tracking-repair/08d-clearml-receipt.json",
+      "sha256": "9fff35a1f81d2f86e8afbb4cbb1988a0caedd5b3f2b9c762d69bcc53fc85d1be"
+    },
+    {
+      "bytes": 949,
+      "path": "reports/development-freeze/primary-release-kaggle-v2/tracking-repair/remote-verification.json",
+      "sha256": "3f4c334702f68dba3b238ca1a5f63cdd13c00b68406e1a2dad05ca3c245cd4c2"
+    },
+    {
+      "bytes": 125639,
+      "path": "notebooks/executed/development-freeze/08d-kaggle-v2-executed.ipynb",
+      "sha256": "c8381255a0d7ca42517e0a3180dd580976c6d526ff43ac43a623722a9083c3f3"
+    },
+    {
+      "bytes": 17545,
+      "path": "notebooks/executed/development-freeze/08d-kaggle-v2.ipynb",
+      "sha256": "95a4916261f230a6c4d360f53dfd7618a747ae6ced25c1cf166b401ebd377a73"
+    },
+    {
+      "bytes": 143105,
+      "path": "notebooks/executed/development-freeze/08e-kaggle-v5-executed.ipynb",
+      "sha256": "e400a5ffa9c4ad916635740e45c2b87f7d5a1e74d6b7d06c591d965f862f7d39"
+    },
+    {
+      "bytes": 34851,
+      "path": "notebooks/executed/development-freeze/08e-kaggle-v5.ipynb",
+      "sha256": "878bca2c5baae0b26507a9e58ace64400d5aa7e68fd833aa24f0a7a6f1e4e015"
+    },
+    {
+      "bytes": 35109,
+      "path": "notebooks/executed/development-freeze/08e1-kaggle-v4-executed.ipynb",
+      "sha256": "37cf3abc07cfbd926e0a2389e00ebc717bb615d1914ce5279c1abac5496efc39"
+    },
+    {
+      "bytes": 16083,
+      "path": "notebooks/executed/development-freeze/08e1-kaggle-v4.ipynb",
+      "sha256": "c57b604a4de5f0d80d6aa3b16dd3a1797b881ab19abab3f53582ac50d61b25fe"
+    },
+    {
+      "bytes": 15062699,
+      "path": "notebooks/executed/development-freeze/08f-kaggle-v1-executed.ipynb",
+      "sha256": "45b89fdc5f1635541638d4f91a5f22027e6cd18c29e2759101b0e3ffd506adb9"
+    },
+    {
+      "bytes": 19707,
+      "path": "notebooks/executed/development-freeze/08f-kaggle-v1.ipynb",
+      "sha256": "fb2f9b3d69874d7ad252ee2f338f19c94499ed162c9445bf25c84a18452e1f8f"
+    }
+  ],
+  "runs": [
+    {
+      "clean_notebook": "notebooks/executed/development-freeze/08d-kaggle-v2.ipynb",
+      "executed_notebook": "notebooks/executed/development-freeze/08d-kaggle-v2-executed.ipynb",
+      "execution_log": "reports/development-freeze/execution-logs/08d-kaggle-v2.txt",
+      "original_clean_sha256": "95a4916261f230a6c4d360f53dfd7618a747ae6ced25c1cf166b401ebd377a73",
+      "original_executed_sha256": "12de58c2f78c0cc587a87cac076101c50534c9b3a7152ba9fbe077912cf5e860",
+      "removed_private_visuals": 1,
+      "stage": "08d",
+      "version": "2"
+    },
+    {
+      "clean_notebook": "notebooks/executed/development-freeze/08e-kaggle-v5.ipynb",
+      "executed_notebook": "notebooks/executed/development-freeze/08e-kaggle-v5-executed.ipynb",
+      "execution_log": "reports/development-freeze/execution-logs/08e-kaggle-v5.txt",
+      "original_clean_sha256": "878bca2c5baae0b26507a9e58ace64400d5aa7e68fd833aa24f0a7a6f1e4e015",
+      "original_executed_sha256": "f0713957e2db7da18e77468b4d9bab060f806803f966e6933cf85fa02d0a9540",
+      "removed_private_visuals": 12,
+      "stage": "08e",
+      "version": "5"
+    },
+    {
+      "clean_notebook": "notebooks/executed/development-freeze/08e1-kaggle-v4.ipynb",
+      "executed_notebook": "notebooks/executed/development-freeze/08e1-kaggle-v4-executed.ipynb",
+      "execution_log": "reports/development-freeze/execution-logs/08e1-kaggle-v4.txt",
+      "original_clean_sha256": "c57b604a4de5f0d80d6aa3b16dd3a1797b881ab19abab3f53582ac50d61b25fe",
+      "original_executed_sha256": "d393a473ec1955dc70d3fc05b2132548504d14bf7ca313dc65656d02244df9eb",
+      "removed_private_visuals": 0,
+      "stage": "08e1",
+      "version": "4"
+    },
+    {
+      "clean_notebook": "notebooks/executed/development-freeze/08f-kaggle-v1.ipynb",
+      "executed_notebook": "notebooks/executed/development-freeze/08f-kaggle-v1-executed.ipynb",
+      "execution_log": "reports/development-freeze/execution-logs/08f-kaggle-v1.txt",
+      "original_clean_sha256": "fb2f9b3d69874d7ad252ee2f338f19c94499ed162c9445bf25c84a18452e1f8f",
+      "original_executed_sha256": "7a489422c88a3c8f22e4b6921cfced1ecabd205051e747980e7f49abd2dfdef8",
+      "removed_private_visuals": 0,
+      "stage": "08f",
+      "version": "1"
+    }
+  ],
+  "status": "verified_complete"
+}

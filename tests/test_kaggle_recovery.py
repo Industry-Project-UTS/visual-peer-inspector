@@ -4,6 +4,7 @@ import importlib.util
 import json
 import stat
 from pathlib import Path
+from types import SimpleNamespace
 from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 import numpy as np
@@ -47,11 +48,83 @@ BINDING = {
 ALLOWED = ("pipeline_identity.json", "locateanything", "sam21")
 
 
+def test_reporting_failure_preserves_shards_and_does_not_claim_completion(
+    tmp_path, monkeypatch
+):
+    args = SimpleNamespace(
+        selected_prompt=tmp_path / "prompt.json",
+        output_root=tmp_path / "run",
+        recovery_output_directory=tmp_path / "recovery",
+    )
+    cohort = FROZEN_RUNNER.DEVELOPMENT_RECOVERY_TOP_LEVELS[0]
+    stage = args.output_root / cohort / "peer_scoring"
+    stage.mkdir(parents=True)
+    (stage / "shard-00000.receipt.json").write_text('{"status":"complete"}')
+    (stage / "shard-00000.jsonl").write_text('{"status":"ok"}\n')
+    safe = args.output_root / cohort / "safe"
+    safe.mkdir()
+    (safe / "run_record.json").write_text('{"status":"complete"}')
+    monkeypatch.setattr(
+        FROZEN_RUNNER, "build_identity", lambda _path: (None, None, None)
+    )
+    monkeypatch.setattr(
+        FROZEN_RUNNER, "_development_recovery_binding", lambda *_args: BINDING
+    )
+
+    def failed_render(_args):
+        raise ValueError("injected report failure")
+
+    monkeypatch.setattr(FROZEN_RUNNER, "_run_development", failed_render)
+    with pytest.raises(ValueError, match="injected report failure"):
+        FROZEN_RUNNER.run_development(args)
+    record = verify_recovery_bundle(
+        bundle_path=args.recovery_output_directory / "notebook08e-recovery.zip",
+        manifest_path=args.recovery_output_directory
+        / "notebook08e-recovery-manifest.json",
+        expected_binding=BINDING,
+        allowed_top_levels=FROZEN_RUNNER.DEVELOPMENT_RECOVERY_TOP_LEVELS,
+    )
+    assert record["artifact_count"] == 3
+    assert json.loads((safe / "run_record.json").read_text())["status"] == "interrupted"
+
+
+def test_recovery_export_failure_keeps_the_original_error(tmp_path, monkeypatch):
+    args = SimpleNamespace(
+        selected_prompt=tmp_path / "prompt.json",
+        output_root=tmp_path / "run",
+        recovery_output_directory=tmp_path / "recovery",
+    )
+    stage = args.output_root / "cohort/peer_scoring"
+    stage.mkdir(parents=True)
+    (stage / "shard-00000.receipt.json").write_text("{}")
+    monkeypatch.setattr(
+        FROZEN_RUNNER, "build_identity", lambda _path: (None, None, None)
+    )
+    monkeypatch.setattr(
+        FROZEN_RUNNER, "_development_recovery_binding", lambda *_args: BINDING
+    )
+
+    def fail_run(_args):
+        raise ValueError("original error")
+
+    def fail_export(**_kwargs):
+        raise OSError("storage error")
+
+    monkeypatch.setattr(FROZEN_RUNNER, "_run_development", fail_run)
+    monkeypatch.setattr(FROZEN_RUNNER, "create_recovery_bundle", fail_export)
+    with pytest.raises(ValueError, match="original error"):
+        FROZEN_RUNNER.run_development(args)
+
+
 def _state(root: Path) -> None:
     (root / "locateanything").mkdir(parents=True)
     (root / "sam21").mkdir(parents=True)
-    (root / "pipeline_identity.json").write_text('{"identity":"one"}\n', encoding="utf-8")
-    (root / "locateanything/shard-00000.jsonl").write_text('{"row":1}\n', encoding="utf-8")
+    (root / "pipeline_identity.json").write_text(
+        '{"identity":"one"}\n', encoding="utf-8"
+    )
+    (root / "locateanything/shard-00000.jsonl").write_text(
+        '{"row":1}\n', encoding="utf-8"
+    )
     (root / "sam21/shard-00000.npy").write_bytes(b"feature-bytes")
     (root / "ignored.txt").write_text("not recoverable\n", encoding="utf-8")
 
@@ -129,7 +202,9 @@ def test_recovery_identity_includes_notebook_code_provenance(
         )
 
 
-def test_recovery_rejects_wrong_identity_and_changed_existing_file(tmp_path: Path) -> None:
+def test_recovery_rejects_wrong_identity_and_changed_existing_file(
+    tmp_path: Path,
+) -> None:
     _state_root, bundle, manifest, _record = _bundle(tmp_path)
     with pytest.raises(ValueError, match="identity differs"):
         verify_recovery_bundle(
@@ -175,7 +250,11 @@ def test_recovery_rejects_corrupt_archive_before_restore(tmp_path: Path) -> None
 def test_recovery_rejects_unsafe_or_symbolic_members(tmp_path: Path) -> None:
     _state_root, _bundle_path, manifest, record = _bundle(tmp_path)
     unsafe_bundle = tmp_path / "out/unsafe.zip"
-    internal = {key: value for key, value in record.items() if key not in {"bundle_sha256", "bundle_size_bytes"}}
+    internal = {
+        key: value
+        for key, value in record.items()
+        if key not in {"bundle_sha256", "bundle_size_bytes"}
+    }
     with ZipFile(unsafe_bundle, "w", compression=ZIP_DEFLATED) as archive:
         archive.writestr("recovery_manifest.json", json.dumps(internal))
         info = ZipInfo("state/../outside.txt")
@@ -316,10 +395,10 @@ def test_frozen_development_visuals_stay_outside_the_clearml_contract(
     image_paths = []
     for index in range(2):
         path = tmp_path / f"rgb-{index}.png"
-        Image.new("RGB", (16, 16), (40 + index, 80, 120)).save(path)
+        Image.new("RGB", (256, 256), (40 + index, 80, 120)).save(path)
         image_paths.append(path)
-    mask = np.zeros((16, 16), dtype=np.uint8)
-    mask[2:10, 3:11] = 1
+    mask = np.zeros((256, 256), dtype=np.uint8)
+    mask[50:110, 80:140] = 1
     encoded = encode_binary_mask(mask)
     rows = [
         {
@@ -330,10 +409,11 @@ def test_frozen_development_visuals_stay_outside_the_clearml_contract(
             "objects": [
                 {
                     "object_id": "P01",
-                    "box_xyxy": [3, 2, 11, 10],
+                    "box_xyxy": [80, 50, 140, 110],
                     "mask_rle": encoded,
                     "p1_score": 0.8,
                     "p1_rank": 1,
+                    "p1_heatmap": np.ones((16, 16)).tolist(),
                 }
             ],
         }

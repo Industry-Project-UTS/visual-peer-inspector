@@ -5,6 +5,7 @@ import numpy as np
 from visual_peer_inspector.representation.crops import (
     CropConfiguration,
     prepare_masked_crop,
+    project_crop_heatmap,
 )
 
 
@@ -57,6 +58,46 @@ class RepresentationCropTests(unittest.TestCase):
         second = CropConfiguration(padding_fraction=0.20)
 
         self.assertNotEqual(first.sha256, second.sha256)
+
+    def test_patch_heatmap_stays_inside_the_offset_object(self):
+        image, mask = self._fixture()
+        crop = prepare_masked_crop(image, mask)
+        projected = project_crop_heatmap(np.full((16, 16), 0.7), crop, mask)
+        self.assertEqual(projected.shape, mask.shape)
+        self.assertTrue(np.isnan(projected[~mask]).all())
+        np.testing.assert_allclose(projected[mask], 0.7, atol=1e-6)
+
+    def test_patch_heatmap_preserves_direction_and_clips_padded_edges(self):
+        image = np.zeros((40, 60, 3), dtype=np.uint8)
+        mask = np.zeros((40, 60), dtype=bool)
+        mask[:20, :20] = True
+        crop = prepare_masked_crop(image, mask)
+        self.assertLess(crop.padded_box_xyxy[0], 0)
+        heatmap = np.tile(np.linspace(0, 1, 16), (16, 1))
+        projected = project_crop_heatmap(heatmap, crop, mask)
+        self.assertLess(projected[10, 3], projected[10, 16])
+        self.assertTrue(np.isfinite(projected[mask]).all())
+        self.assertTrue(np.isnan(projected[~mask]).all())
+
+    def test_invalid_patches_are_not_presented_as_measured_evidence(self):
+        image, mask = self._fixture()
+        crop = prepare_masked_crop(image, mask)
+        heatmap = np.full((16, 16), np.nan)
+        heatmap[:, 8:] = 0.9
+        projected = project_crop_heatmap(heatmap, crop, mask)
+        self.assertTrue(np.isnan(projected[18, 12]))
+        self.assertAlmostEqual(float(projected[18, 26]), 0.9, places=5)
+        self.assertTrue(
+            np.isnan(project_crop_heatmap(np.full((16, 16), np.nan), crop, mask)).all()
+        )
+
+    def test_projection_rejects_invalid_geometry_and_mask(self):
+        image, mask = self._fixture()
+        crop = prepare_masked_crop(image, mask)
+        with self.assertRaisesRegex(ValueError, "two-dimensional"):
+            project_crop_heatmap(np.zeros((2, 2, 3)), crop, mask)
+        with self.assertRaisesRegex(ValueError, "binary"):
+            project_crop_heatmap(np.zeros((16, 16)), crop, mask.astype(float) + 0.5)
 
 
 if __name__ == "__main__":

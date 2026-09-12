@@ -1,14 +1,13 @@
-#!/usr/bin/env python3
 """Verify publication-safe executed notebooks and their evidence records."""
 
 from __future__ import annotations
 
-from hashlib import sha256
 import json
-from pathlib import Path
 import re
-from typing import Any, Mapping
-
+from collections.abc import Mapping
+from hashlib import sha256
+from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE_ROOT = ROOT / "reports" / "run-evidence"
@@ -129,14 +128,27 @@ def _verify_manifest() -> int:
     return len(files)
 
 
-def verify() -> dict[str, int]:
-    publication_notebooks = sorted(ROOT.glob("notebooks/**/*-executed.ipynb"))
-    publication_notebooks = [
-        path
-        for path in publication_notebooks
-        if "visual_peer_inspector_publication"
-        in json.loads(path.read_text(encoding="utf-8")).get("metadata", {})
+def _registered_publications() -> list[Path]:
+    # Later experiment sets have their own inventories and verification commands.
+    # Keep this check tied to its original evidence set, not a repository-wide count.
+    manifest = json.loads((EVIDENCE_ROOT / "evidence_manifest.json").read_text())
+    relative_paths = [
+        row["path"] for row in manifest["files"]
+        if row["path"].endswith("-executed.ipynb")
     ]
+    if len(relative_paths) != len(set(relative_paths)):
+        raise EvidenceVerificationError("Publication notebook inventory contains duplicates")
+    paths = []
+    for relative in relative_paths:
+        path = ROOT / relative
+        if not path.resolve().is_relative_to((ROOT / "notebooks").resolve()):
+            raise EvidenceVerificationError("Publication notebook is outside the notebook directory")
+        paths.append(path)
+    return sorted(paths)
+
+
+def verify() -> dict[str, int]:
+    publication_notebooks = _registered_publications()
     if len(publication_notebooks) != EXPECTED_PUBLICATION_NOTEBOOKS:
         raise EvidenceVerificationError(
             "Publication notebook count differs: "

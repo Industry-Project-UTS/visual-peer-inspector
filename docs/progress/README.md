@@ -17,10 +17,11 @@ describe a next step that has since been completed. Use the current
 | Week 7 | [DS1 proposal refinement](week-07-proposal-refinement.md) | Duplicate proposals reduced; missed objects remained |
 | Week 7 | [DS1 representation screen](week-07-ds1-representation-screen.md) | DINOv2-small and P1 selected for confirmation |
 | Week 8 | [DS2 confirmation](week-08-ds2-confirmation-preparation.md) | Frozen 300-scene model run and protected multi-view evaluation completed |
+| Development freeze | [Full development results](development-freeze-completion.md) | 1,000 scenes and 20,000 views locked; cross-view comparison complete, with low identity accuracy |
 
 ## Current position
 
-Notebooks 01 to 08C are complete as development evidence. The DS1 screen
+Notebooks 01 to 08F are complete as development evidence. The DS1 screen
 selected DINOv2-small with P1 for confirmation, with B0 retained as the
 baseline. The bounded LocateAnything prompt comparison was verified on Kaggle
 Version 4. The 300-scene DS2 release, frozen model run, and protected
@@ -33,6 +34,12 @@ boxes. P1 improved the supplied-mask 20-view scene AP over B0 by 0.0505. The
 declared three-view automatic route reached 0.6531 scene AP.
 
 The automatic deployment route remains a candidate, not a perfect detector.
-The assisted route keeps user box confirmation before SAM 2.1. The next work
-is calibration of review behaviour, label-free identity matching, and one
-locked evaluation after the settings are saved.
+User box correction remains an optional assisted feature; it does not replace
+the automatic route's results. The corrected 08E.1 V4 reference release and
+08F V1 comparison are complete. Embedding-only matching was retained, but
+five-view pairwise identity accuracy is only 33.04%. This is not odd-one-out
+accuracy. In 413 of 1,000 five-view results, the chosen identity appears in
+one view only. The code and output contract are reproducible, but reliable
+cross-view identity is not solved. Review these development limitations
+before starting protected calibration. Any method change needs a new
+development-only comparison and method lock.

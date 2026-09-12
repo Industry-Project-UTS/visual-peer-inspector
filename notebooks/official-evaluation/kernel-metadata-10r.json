@@ -9,7 +9,7 @@
   "enable_gpu": false,
   "enable_internet": true,
   "enable_tpu": false,
-  "id": "esreekarreddy/toysad-8k-official-release",
+  "id": "esreekarreddy/toysad-8k-official-evaluation-release",
   "is_private": true,
   "kernel_sources": [],
   "kernel_type": "notebook",

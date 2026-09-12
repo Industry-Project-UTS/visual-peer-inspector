@@ -1,0 +1,18 @@
+{
+  "checked_date": "2026-09-08",
+  "task_id": "5b15fe00642841c8ae7b98f717a9f50c",
+  "remote_status": "completed",
+  "remote_artifact_sha256": {
+    "run_record.json": "50019f9a9fb30fe72463a5ce230090caa23abc148b9ebbb1c9e825dfa355c4e6"
+  },
+  "local_artifact_hash_matches": true,
+  "verified_remote_scalar_values": {
+    "completed_scene_count": 1000,
+    "reference_mapped_observation_count": 74483,
+    "reference_unmapped_observation_count": 6471,
+    "remaining_scene_count": 0,
+    "mask_threshold": 128
+  },
+  "publication_scope": "aggregate counts and safe run record only",
+  "inference_repeated_for_tracking": false
+}

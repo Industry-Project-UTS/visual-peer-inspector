@@ -37,7 +37,10 @@ STAGE_ALLOWLISTS: dict[str, tuple[frozenset[str], ...]] = {
             }
         ),
     ),
-    "frozen_development_pipeline": (frozenset(),),
+    "frozen_development_pipeline": (
+        frozenset(),
+        frozenset({"backfill_attestation.json"}),
+    ),
     "development_identity_evaluator_release": (frozenset(),),
     "calibration_resource_release": (frozenset(),),
     "internal_lock_resource_release": (frozenset(),),
@@ -248,7 +251,15 @@ def _log_online(
 def main() -> None:
     args = parse_arguments()
     root = args.safe_root.expanduser().resolve()
-    record = validate_safe_root(root, expected_stage=args.stage)
+    try:
+        record = validate_safe_root(root, expected_stage=args.stage)
+    except (ValueError, OSError, KeyError) as error:
+        _write_receipt(args.receipt, {
+            "schema_version": 1, "stage": f"{args.stage}_clearml_finalisation",
+            "status": "failed", "mode": args.mode, "task_id": None,
+            "failure_phase": "artifact_validation", "error_type": type(error).__name__,
+        })
+        return
     receipt = {
         "schema_version": 1,
         "stage": f"{args.stage}_clearml_finalisation",

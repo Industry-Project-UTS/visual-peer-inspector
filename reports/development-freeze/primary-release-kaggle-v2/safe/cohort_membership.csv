@@ -1,0 +1,4 @@
+cohort,role,scenes,views,asset_groups,membership_sha256,membership_verified,rgb_release
+toysad8k-development-full-1000-v1,development,1000,20000,273,00e400350a056631778bd9c4dace1667d95e52bf58c0a29ea7c48d190c41de0c,True,complete_across_development_stages
+toysad8k-calibration-600-v1,calibration,600,12000,163,6700bb065210bfd45188babd2b3d45973d6b4f57e5066d7c3dec4b9471baa137,True,sealed
+toysad8k-internal-lock-400-v1,internal_lock,400,8000,109,819f21f49705f9398c809002905abe52b8305ad41e4cab349cbbf3a4bd54afe6,True,sealed

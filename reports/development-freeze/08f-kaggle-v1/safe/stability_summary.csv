@@ -1,0 +1,3 @@
+variant,scene_count,order_invariance_rate,duplicate_rejection_rate,missing_view_completion_rate,mean_retained_link_stability
+embedding_only,1000,1.0,1.0,1.0,1.0
+normalized_geometry,1000,1.0,1.0,1.0,1.0

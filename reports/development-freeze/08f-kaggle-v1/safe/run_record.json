@@ -1,0 +1,34 @@
+{
+  "absolute_performance_threshold_used": false,
+  "all_acceptance_gates_passed": true,
+  "chosen_variant": "embedding_only",
+  "cohort_ids": [
+    "toysad8k-development-confirm-300-v1",
+    "toysad8k-development-remainder-600-v1",
+    "toysad8k-development-screen-100-v1"
+  ],
+  "embedding_dimension": 384,
+  "evaluator_correspondence_sha256": "bf7665a215d0d64c0d922bc203c3c1624fa8db9682e8eb8964f407139f533a3f",
+  "failure_count": 0,
+  "frozen_model_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+  "git_commit": "94b606211287482b41d880eac17ebeffb6a40b74",
+  "git_dirty": false,
+  "identity_prediction_lock_sha256": "1d25b46577fd9bf9cab12da83061cc6807c2d1ec29902942b8359dc191df8191",
+  "input_08e_lock_sha256s": [
+    "7d7b683e3edfe2c8ebd2b6623d16e292870cdb70bed84586a14aae950739d7bb",
+    "d035bfb59af2e4a296361283ee5f263d5ad2a8682efa93f70b5e9707f0b00404",
+    "f5c88d87836c2b1a82c2499edf71af753fb125a74e3ea1354d1bb077fa8d337f"
+  ],
+  "method_resource_manifest_sha256": "85f3e4ace9a47c0623cfe4bf3bfe4e22d14e146c4390b64cc404a441c4b7ba53",
+  "notebook_sha256": "fb2f9b3d69874d7ad252ee2f338f19c94499ed162c9445bf25c84a18452e1f8f",
+  "prediction_count": 6000,
+  "processed_this_run": 8000,
+  "qualitative_panel_count": 15,
+  "resumed_from_verified_receipts": 0,
+  "safe_artifact_manifest_path": "artifact_manifest.json",
+  "scene_count": 1000,
+  "schema_version": "visual-peer-08f-workflow/v1",
+  "snapshot_sha256": "8b6f8827f7eb0f020ec683782bfe0a8dfe42e879dba40255ae251394442ade80",
+  "stage": "cross_view_identity_freeze",
+  "status": "complete"
+}

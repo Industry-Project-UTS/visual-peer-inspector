@@ -1,0 +1,29 @@
+{
+  "aggregate_only": true,
+  "cohort_id": "toysad8k-development-full-1000-v1",
+  "completed_scene_count": 1000,
+  "exact_resume": true,
+  "git_commit": "94b606211287482b41d880eac17ebeffb6a40b74",
+  "git_dirty": false,
+  "input_signature": "91820e2d0ab963e0f3f3d8b66e6bdb28a9e5065f131d51ffaf825f714e9f2b95",
+  "notebook_sha256": "c57b604a4de5f0d80d6aa3b16dd3a1797b881ab19abab3f53582ac50d61b25fe",
+  "processed_scene_count": 1000,
+  "reference_geometry_policy": {
+    "box_format": "half-open-xyxy",
+    "decoder": "toysad-grayscale-threshold-v1",
+    "image_size": [
+      256,
+      256
+    ],
+    "mask_threshold": 128
+  },
+  "reference_mapped_observation_count": 74483,
+  "reference_mapping_fraction": 0.9200657163327322,
+  "reference_unmapped_observation_count": 6471,
+  "remaining_scene_count": 0,
+  "resumed_scene_count": 0,
+  "schema_version": 1,
+  "snapshot_sha256": "8b6f8827f7eb0f020ec683782bfe0a8dfe42e879dba40255ae251394442ade80",
+  "stage": "development_identity_evaluator_release",
+  "status": "completed"
+}

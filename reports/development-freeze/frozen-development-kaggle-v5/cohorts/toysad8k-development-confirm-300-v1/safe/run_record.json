@@ -1,0 +1,75 @@
+{
+  "audit_panel_count": 16,
+  "backfill_attestation_sha256": "a3af17dcb326487b4601f3a4892fc4536f946b2c5b9b116f756654589565e27d",
+  "cohort_id": "toysad8k-development-confirm-300-v1",
+  "evaluator_opened": false,
+  "git_commit": "81d601d25fb683a0ba76a2cda8ae209ca277ad5d",
+  "git_dirty": false,
+  "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+  "image_count": 6000,
+  "notebook_sha256": "878bca2c5baae0b26507a9e58ace64400d5aa7e68fd833aa24f0a7a6f1e4e015",
+  "prediction_bundle": {
+    "embedding_count": 23179,
+    "embedding_index": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-confirm-300-v1/model-safe/embedding_index.jsonl",
+    "embedding_index_sha256": "c8837e8852be32b7c58276a637a1545b1904797e1ca881ce794d4b06cbf9f159",
+    "global_embeddings": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-confirm-300-v1/model-safe/global_embeddings.npy",
+    "global_embeddings_sha256": "7c00085f71dd04644b4c6a1fe44676ff5a8ac5b0876b3e127424cfe4e0900fbe",
+    "prediction_count": 6000,
+    "prediction_lock": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-confirm-300-v1/model-safe/prediction_lock.json",
+    "prediction_lock_sha256": "7d7b683e3edfe2c8ebd2b6623d16e292870cdb70bed84586a14aae950739d7bb",
+    "prediction_manifest": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-confirm-300-v1/model-safe/prediction_manifest.jsonl",
+    "prediction_manifest_sha256": "b59039dff30f5a44875538f09db749b877483d6cec7e9da722c84effc5c62ce8"
+  },
+  "prediction_only": true,
+  "rebuilt_stages": [
+    "dinov2_small",
+    "peer_scoring"
+  ],
+  "reused_stages": [
+    "locateanything",
+    "sam21"
+  ],
+  "scene_count": 300,
+  "schema_version": 1,
+  "snapshot_sha256": "898847224661c75990ea159f641a2149b3e1553f2c72dd1a0b77a01fbc679c73",
+  "stage": "frozen_development_pipeline",
+  "stages": {
+    "dinov2_small": {
+      "complete": true,
+      "completed_shards": 30,
+      "covered_input_count": 6000,
+      "failure_counts": {
+        "empty_mask": 0,
+        "feature_failure": 0,
+        "stage_failure": 0,
+        "zero_proposal": 38
+      },
+      "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+      "input_count": 6000,
+      "processed_this_run": 6000,
+      "resumed": 0,
+      "shard_count": 30,
+      "stage": "dinov2_small",
+      "terminal_failures": 38
+    },
+    "peer_scoring": {
+      "complete": true,
+      "completed_shards": 30,
+      "covered_input_count": 6000,
+      "failure_counts": {
+        "empty_mask": 0,
+        "feature_failure": 0,
+        "stage_failure": 0,
+        "zero_proposal": 38
+      },
+      "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+      "input_count": 6000,
+      "processed_this_run": 6000,
+      "resumed": 0,
+      "shard_count": 30,
+      "stage": "peer_scoring",
+      "terminal_failures": 38
+    }
+  },
+  "status": "complete"
+}

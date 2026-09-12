@@ -8,6 +8,7 @@ from hashlib import sha256
 from pathlib import Path
 
 import nbformat
+from notebook_runtime_cells import harden_notebook
 
 ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOK_ROOT = ROOT / "notebooks" / "protected-evaluation"
@@ -536,7 +537,7 @@ This notebook estimates calibration risk and automatic coverage for relative unu
 
 def main() -> int:
     NOTEBOOK_ROOT.mkdir(parents=True, exist_ok=True)
-    nbformat.write(build_notebook(), NOTEBOOK_PATH)
+    nbformat.write(harden_notebook(build_notebook()), NOTEBOOK_PATH)
     metadata = {
         "id": "esreekarreddy/toysad-8k-calibration-review-policy",
         "title": "ToysAD-8K Calibration Review Policy",
@@ -556,7 +557,7 @@ def main() -> int:
         ],
         "competition_sources": [],
         "kernel_sources": [
-            "esreekarreddy/09a-toysad8k-protected-calibration-inference",
+            "esreekarreddy/toysad-8k-protected-calibration-inference",
         ],
         "model_sources": [],
     }

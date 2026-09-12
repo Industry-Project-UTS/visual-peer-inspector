@@ -1,0 +1,15 @@
+{
+  "status": "verified_complete",
+  "kaggle_version": 4,
+  "scene_count": 1000,
+  "view_count": 20000,
+  "correspondence_count": 80954,
+  "reference_mapped_observations": 74483,
+  "unmapped_observations": 6471,
+  "interpretation": "reference correspondence coverage, not object recall or anomaly accuracy",
+  "correspondences_checked_against_prior_geometry": 23179,
+  "restored_checkpoint_artifacts": 1003,
+  "frozen_model_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+  "correspondence_sha256": "bf7665a215d0d64c0d922bc203c3c1624fa8db9682e8eb8964f407139f533a3f",
+  "evaluator_manifest_sha256": "96189e95353570c8c5c8a7e04dd60e170d644b8ef213c9989f5fba3a4bb830aa"
+}

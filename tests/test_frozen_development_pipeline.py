@@ -21,7 +21,9 @@ MODULE_PATH = (
     Path(__file__).resolve().parents[1]
     / "src/visual_peer_inspector/workflows/frozen_development_pipeline.py"
 )
-SPEC = importlib.util.spec_from_file_location("vpi_frozen_development_pipeline", MODULE_PATH)
+SPEC = importlib.util.spec_from_file_location(
+    "vpi_frozen_development_pipeline", MODULE_PATH
+)
 assert SPEC is not None and SPEC.loader is not None
 MODULE = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = MODULE
@@ -45,6 +47,7 @@ select_development_audit = MODULE.select_development_audit
 stage_global_embeddings = MODULE.stage_global_embeddings
 verify_prediction_lock = MODULE.verify_prediction_lock
 validate_ds2_backfill_inputs = MODULE.validate_ds2_backfill_inputs
+validate_recovery_stage_chain = MODULE.validate_recovery_stage_chain
 
 
 def identity(seed: str = "a") -> FrozenPipelineIdentity:
@@ -54,12 +57,68 @@ def identity(seed: str = "a") -> FrozenPipelineIdentity:
 
 def records(count: int = 4) -> list[dict]:
     return [
-        {"opaque_scene_id": f"S{index // 2:04d}", "view_id": f"V{index % 2:02d}", "value": index}
+        {
+            "opaque_scene_id": f"S{index // 2:04d}",
+            "view_id": f"V{index % 2:02d}",
+            "value": index,
+        }
         for index in range(count)
     ]
 
 
 class FrozenDevelopmentPipelineTests(unittest.TestCase):
+    def test_gpu_failure_stops_and_resumes_after_completed_shard(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            def worker(row):
+                if row["value"] == 2:
+                    raise RuntimeError("CUDA out of memory")
+                return {"status": "ok"}
+            with self.assertRaisesRegex(RuntimeError, "CUDA out of memory"):
+                run_sharded_stage(stage="locateanything", input_records=records(),
+                    output_root=root, identity=identity(), worker=worker, shard_size=2)
+            retried = []
+            result = run_sharded_stage(stage="locateanything", input_records=records(),
+                output_root=root, identity=identity(),
+                worker=lambda row: retried.append(row["value"]) or {"status": "ok"},
+                shard_size=2)
+            self.assertEqual(retried, [2, 3])
+            self.assertEqual(result["resumed"], 2)
+
+    def test_restored_stage_chain_rejects_input_changes_before_inference(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            run_sharded_stage(
+                stage="locateanything",
+                input_records=records(),
+                output_root=root,
+                identity=identity(),
+                worker=lambda row: {"status": "ok"},
+                shard_size=2,
+            )
+            self.assertEqual(
+                validate_recovery_stage_chain(root, records(), identity(), 2), 2
+            )
+            changed = records()
+            changed[0]["value"] = 999
+            with self.assertRaisesRegex(ValueError, "does not match current inputs"):
+                validate_recovery_stage_chain(root, changed, identity(), 2)
+
+    def test_restored_stage_chain_rejects_tampered_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            run_sharded_stage(
+                stage="locateanything",
+                input_records=records(),
+                output_root=root,
+                identity=identity(),
+                worker=lambda row: {"status": "ok"},
+                shard_size=2,
+            )
+            (root / "locateanything/shard-00000.jsonl").write_text("{}\n")
+            with self.assertRaisesRegex(ValueError, "does not match current inputs"):
+                validate_recovery_stage_chain(root, records(), identity(), 2)
+
     def test_stage_resumes_only_verified_shards(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -90,7 +149,9 @@ class FrozenDevelopmentPipelineTests(unittest.TestCase):
             self.assertEqual(len(calls), 4)
 
             output = root / "locateanything/shard-00000.jsonl"
-            output.write_text(output.read_text(encoding="utf-8") + "{}\n", encoding="utf-8")
+            output.write_text(
+                output.read_text(encoding="utf-8") + "{}\n", encoding="utf-8"
+            )
             third = run_sharded_stage(
                 stage="locateanything",
                 input_records=records(),
@@ -150,6 +211,7 @@ class FrozenDevelopmentPipelineTests(unittest.TestCase):
     def test_terminal_failures_are_explicit(self) -> None:
         errors = (ZeroProposalFailure("x"), EmptyMaskFailure("x"), FeatureFailure("x"))
         with tempfile.TemporaryDirectory() as directory:
+
             def worker(row):
                 raise errors[int(row["value"])]
 
@@ -226,7 +288,12 @@ class FrozenDevelopmentPipelineTests(unittest.TestCase):
                 scene_count=1,
                 image_count=20,
             )
-            self.assertEqual(load_development_evaluator(evaluator, root / "prediction_lock.json")["reference"], 1)
+            self.assertEqual(
+                load_development_evaluator(evaluator, root / "prediction_lock.json")[
+                    "reference"
+                ],
+                1,
+            )
             artifact.write_text('{"changed": true}\n', encoding="utf-8")
             with self.assertRaises(ValueError):
                 verify_prediction_lock(root / "prediction_lock.json")
@@ -282,17 +349,25 @@ class FrozenDevelopmentPipelineTests(unittest.TestCase):
 
     def test_audit_selection_is_deterministic_and_keeps_failures(self) -> None:
         values = [
-            {"opaque_scene_id": f"S{index:04d}", "view_id": "V00", "terminal_failure": None}
+            {
+                "opaque_scene_id": f"S{index:04d}",
+                "view_id": "V00",
+                "terminal_failure": None,
+            }
             for index in range(25)
         ]
-        for index, failure in enumerate(("zero_proposal", "empty_mask", "feature_failure")):
+        for index, failure in enumerate(
+            ("zero_proposal", "empty_mask", "feature_failure")
+        ):
             values[index]["terminal_failure"] = failure
         first = select_development_audit(values, base_count=15)
         second = select_development_audit(list(reversed(values)), base_count=15)
         self.assertEqual(first, second)
-        self.assertTrue({"zero_proposal", "empty_mask", "feature_failure"}.issubset(
-            {row.get("terminal_failure") for row in first}
-        ))
+        self.assertTrue(
+            {"zero_proposal", "empty_mask", "feature_failure"}.issubset(
+                {row.get("terminal_failure") for row in first}
+            )
+        )
         self.assertGreaterEqual(len(first), 15)
 
     def test_tracking_timeout_cannot_block_the_caller(self) -> None:
@@ -317,20 +392,22 @@ class FrozenDevelopmentPipelineTests(unittest.TestCase):
                     {
                         "status": "insufficient_peers",
                         "image_sha256": "1" * 64,
-                        "objects": [{
-                            "object_id": object_id,
-                            "box_xyxy": [1, 2, 8, 9],
-                            "mask_rle": {"size": [10, 10], "counts": [21, 4, 75]},
-                            "mask_sha256": "2" * 64,
-                            "foreground_pixels": 4,
-                            "predicted_quality_score": 0.8,
-                            "b0_status": "insufficient_peers",
-                            "b0_score": None,
-                            "p1_status": "insufficient_peers",
-                            "p1_score": None,
-                            "p1_rank": None,
-                            "p1_heatmap": None,
-                        }],
+                        "objects": [
+                            {
+                                "object_id": object_id,
+                                "box_xyxy": [1, 2, 8, 9],
+                                "mask_rle": {"size": [10, 10], "counts": [21, 4, 75]},
+                                "mask_sha256": "2" * 64,
+                                "foreground_pixels": 4,
+                                "predicted_quality_score": 0.8,
+                                "b0_status": "insufficient_peers",
+                                "b0_score": None,
+                                "p1_status": "insufficient_peers",
+                                "p1_score": None,
+                                "p1_rank": None,
+                                "p1_heatmap": None,
+                            }
+                        ],
                     },
                     np.asarray([[1.0, 0.0]], dtype=np.float32),
                 )
@@ -361,8 +438,14 @@ class FrozenDevelopmentPipelineTests(unittest.TestCase):
                 image_count=2,
             )
             self.assertTrue(Path(bundle["prediction_manifest"]).is_file())
-            self.assertEqual(np.load(bundle["global_embeddings"], allow_pickle=False).dtype, np.float16)
-            index = [json.loads(line) for line in Path(bundle["embedding_index"]).read_text().splitlines()]
+            self.assertEqual(
+                np.load(bundle["global_embeddings"], allow_pickle=False).dtype,
+                np.float16,
+            )
+            index = [
+                json.loads(line)
+                for line in Path(bundle["embedding_index"]).read_text().splitlines()
+            ]
             self.assertEqual([row["row_index"] for row in index], [0, 1])
             verify_prediction_lock(Path(bundle["prediction_lock"]))
 
@@ -374,27 +457,50 @@ class FrozenDevelopmentPipelineTests(unittest.TestCase):
             QualitativeView(
                 view_id=f"V{index:02d}",
                 rgb=rgb,
-                objects=(PredictedObject(f"V{index:02d}-P01", (8, 8, 24, 24), mask, 0.5, 1),),
+                objects=(
+                    PredictedObject(f"V{index:02d}-P01", (8, 8, 24, 24), mask, 0.5, 1),
+                ),
             )
             for index in range(3)
         )
-        result = QualitativeResult("S0001", views, "V00-P01", 0.8, 0.1, "prediction_only")
+        result = QualitativeResult(
+            "S0001", views, "V00-P01", 0.8, 0.1, "prediction_only"
+        )
         panel = render_mask_evidence_panel(result, panel_size=128)
         self.assertGreater(panel.width, panel.height // 2)
 
     def test_ds2_backfill_fails_closed_on_identity_or_schema_drift(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            proposal = {
+            selected_prompt = {
                 "schema_version": 1,
-                "package_kind": "ds2-frozen-automatic-proposals",
-                "cohort_id": "toysad8k-development-confirm-300-v1",
+                "stage": "ds1_locateanything_prompt_freeze",
+                "development_only": True,
+                "requires_unchanged_ds2_confirmation": True,
                 "model_id": "nvidia/LocateAnything-3B",
                 "model_revision": "a" * 40,
-                "prompt": "individual object",
-                "postprocessing_policy": "area_nms_075_cap8",
+                "generation_configuration_sha256": "g" * 64,
+                "selected": {
+                    "prompt": "individual object",
+                    "postprocessing_policy": "area_nms_075_cap8",
+                },
+            }
+            selected_prompt_path = root / "selected_prompt.json"
+            selected_prompt_path.write_text(
+                json.dumps(selected_prompt), encoding="utf-8"
+            )
+            locate = {
+                "schema_version": 1,
+                "stage": "ds2_frozen_locateanything",
+                "status": "completed",
+                "cohort_id": "toysad8k-development-confirm-300-v1",
+                "image_count": 6_000,
+                "ds1_freeze_sha256": sha256(
+                    selected_prompt_path.read_bytes()
+                ).hexdigest(),
+                "ds1_generation_configuration_sha256": "g" * 64,
                 "effective_generation_configuration_sha256": "b" * 64,
-                "proposal_manifest_sha256": "c" * 64,
+                "proposal_package_sha256": "c" * 64,
             }
             sam = {
                 "schema_version": 1,
@@ -402,41 +508,55 @@ class FrozenDevelopmentPipelineTests(unittest.TestCase):
                 "status": "completed",
                 "route": "automatic_box",
                 "cohort_id": "toysad8k-development-confirm-300-v1",
+                "image_count": 6_000,
                 "configuration_sha256": "d" * 64,
                 "prompt_package_sha256": "c" * 64,
                 "sam_results_sha256": "e" * 64,
+                "all_completion_checks_passed": True,
             }
             routes = {
                 "schema_version": 1,
                 "package_kind": "ds2-confirmation-mask-routes",
                 "cohort_id": "toysad8k-development-confirm-300-v1",
+                "image_count": 6_000,
                 "mask_routes_sha256": "f" * 64,
                 "automatic_sam_results_sha256": "e" * 64,
+                "all_checks_passed": True,
             }
             paths = []
-            for name, value in (("proposal.json", proposal), ("sam.json", sam), ("routes.json", routes)):
+            for name, value in (
+                ("locate.json", locate),
+                ("sam.json", sam),
+                ("routes.json", routes),
+            ):
                 path = root / name
                 path.write_text(json.dumps(value), encoding="utf-8")
                 paths.append(path)
             verified = validate_ds2_backfill_inputs(
-                proposal_record_path=paths[0],
+                locate_run_record_path=paths[0],
                 automatic_sam_record_path=paths[1],
                 mask_route_record_path=paths[2],
-                expected_locate_model_id=proposal["model_id"],
-                expected_locate_revision=proposal["model_revision"],
-                expected_locate_configuration_sha256=proposal["effective_generation_configuration_sha256"],
-                expected_prompt=proposal["prompt"],
-                expected_proposal_policy=proposal["postprocessing_policy"],
+                selected_prompt_path=selected_prompt_path,
+                expected_locate_model_id=selected_prompt["model_id"],
+                expected_locate_revision=selected_prompt["model_revision"],
+                expected_locate_configuration_sha256=locate[
+                    "effective_generation_configuration_sha256"
+                ],
+                expected_prompt=selected_prompt["selected"]["prompt"],
+                expected_proposal_policy=selected_prompt["selected"][
+                    "postprocessing_policy"
+                ],
                 expected_sam_configuration_sha256=sam["configuration_sha256"],
             )
             self.assertTrue(verified["requires_dinov2_and_scoring_rebuild"])
-            proposal.pop("model_revision")
-            paths[0].write_text(json.dumps(proposal), encoding="utf-8")
+            locate.pop("ds1_freeze_sha256")
+            paths[0].write_text(json.dumps(locate), encoding="utf-8")
             with self.assertRaises(ValueError):
                 validate_ds2_backfill_inputs(
-                    proposal_record_path=paths[0],
+                    locate_run_record_path=paths[0],
                     automatic_sam_record_path=paths[1],
                     mask_route_record_path=paths[2],
+                    selected_prompt_path=selected_prompt_path,
                     expected_locate_model_id="nvidia/LocateAnything-3B",
                     expected_locate_revision="a" * 40,
                     expected_locate_configuration_sha256="b" * 64,

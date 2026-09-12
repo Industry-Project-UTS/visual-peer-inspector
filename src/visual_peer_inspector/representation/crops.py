@@ -58,7 +58,9 @@ class PreparedCrop:
         digest.update(self.configuration_sha256.encode("ascii"))
         return digest.hexdigest()
 
-    def patch_validity(self, grid_size: int, *, minimum_fraction: float = 0.05) -> np.ndarray:
+    def patch_validity(
+        self, grid_size: int, *, minimum_fraction: float = 0.05
+    ) -> np.ndarray:
         """Return the foreground coverage of each spatial patch."""
 
         if grid_size <= 0 or self.foreground.shape[0] % grid_size:
@@ -66,9 +68,9 @@ class PreparedCrop:
         if not 0.0 <= minimum_fraction <= 1.0:
             raise ValueError("minimum_fraction must be between zero and one")
         patch = self.foreground.shape[0] // grid_size
-        coverage = self.foreground.reshape(
-            grid_size, patch, grid_size, patch
-        ).mean(axis=(1, 3))
+        coverage = self.foreground.reshape(grid_size, patch, grid_size, patch).mean(
+            axis=(1, 3)
+        )
         return coverage >= minimum_fraction
 
 
@@ -181,12 +183,15 @@ def prepare_masked_crop(
         Image.fromarray(square_rgb, mode="RGB").resize(size, Image.Resampling.BICUBIC),
         dtype=np.uint8,
     )
-    prepared_mask = np.asarray(
-        Image.fromarray(square_mask.astype(np.uint8) * 255, mode="L").resize(
-            size, Image.Resampling.NEAREST
-        ),
-        dtype=np.uint8,
-    ) > 0
+    prepared_mask = (
+        np.asarray(
+            Image.fromarray(square_mask.astype(np.uint8) * 255, mode="L").resize(
+                size, Image.Resampling.NEAREST
+            ),
+            dtype=np.uint8,
+        )
+        > 0
+    )
     return PreparedCrop(
         rgb=np.ascontiguousarray(prepared_rgb),
         foreground=np.ascontiguousarray(prepared_mask),
@@ -196,4 +201,55 @@ def prepare_masked_crop(
     )
 
 
-__all__ = ["CropConfiguration", "PreparedCrop", "prepare_masked_crop"]
+def project_crop_heatmap(
+    heatmap: Any, crop: PreparedCrop, source_mask: Any
+) -> np.ndarray:
+    """Map patch evidence back through the padded crop into scene coordinates."""
+
+    values = np.asarray(heatmap, dtype=np.float32)
+    mask = np.asarray(source_mask)
+    if values.ndim != 2 or not values.size:
+        raise ValueError("Patch heatmap must be a non-empty two-dimensional array")
+    if mask.ndim != 2 or not np.all((mask == 0) | (mask == 1)):
+        raise ValueError("Source mask must be a two-dimensional binary array")
+    mask = mask.astype(bool)
+    x1, y1, x2, y2 = crop.padded_box_xyxy
+    side = x2 - x1
+    if side <= 0 or y2 - y1 != side:
+        raise ValueError("Padded crop box must be a positive square")
+    finite = np.isfinite(values)
+    # Interpolate values and their support separately, without filling missing patches.
+    weights = np.asarray(
+        Image.fromarray(finite.astype(np.float32)).resize(
+            (side, side), Image.Resampling.BILINEAR
+        )
+    )
+    numerator = np.asarray(
+        Image.fromarray(np.where(finite, values, 0)).resize(
+            (side, side), Image.Resampling.BILINEAR
+        )
+    )
+    support = np.asarray(
+        Image.fromarray(finite.astype(np.uint8)).resize(
+            (side, side), Image.Resampling.NEAREST
+        )
+    ).astype(bool)
+    restored = np.full((side, side), np.nan, dtype=np.float32)
+    np.divide(numerator, weights, out=restored, where=support & (weights > 0))
+    output = np.full(mask.shape, np.nan, dtype=np.float32)
+    left, top = max(0, x1), max(0, y1)
+    right, bottom = min(mask.shape[1], x2), min(mask.shape[0], y2)
+    if right > left and bottom > top:
+        output[top:bottom, left:right] = restored[
+            top - y1 : bottom - y1, left - x1 : right - x1
+        ]
+    output[~mask] = np.nan
+    return output
+
+
+__all__ = [
+    "CropConfiguration",
+    "PreparedCrop",
+    "prepare_masked_crop",
+    "project_crop_heatmap",
+]

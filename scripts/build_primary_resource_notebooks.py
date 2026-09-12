@@ -8,6 +8,7 @@ from hashlib import sha256
 from pathlib import Path
 
 import nbformat
+from notebook_runtime_cells import canonical_kernel_id, harden_notebook
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -110,10 +111,12 @@ MAXIMUM_NEW_SCENES = int(os.getenv("VPI_MAXIMUM_NEW_SCENES", "100"))
 HELPERS = r'''
 def kaggle_roots() -> list[Path]:
     root = Path("/kaggle/input")
-    return [] if not root.is_dir() else sorted(
-        (path for path in root.iterdir() if path.is_dir()),
-        key=lambda path: path.as_posix(),
-    )
+    if not root.is_dir():
+        return []
+    roots = []
+    for pattern in ("*", "datasets/*/*", "datasets/*/*/versions/*", "notebooks/*/*", "notebooks/*/*/versions/*"):
+        roots.extend(path for path in root.glob(pattern) if path.is_dir())
+    return sorted(set(roots), key=lambda path: path.as_posix())
 
 
 def find_code_root() -> Path:
@@ -143,16 +146,36 @@ def find_directory(marker: str, environment_name: str) -> Path:
     return unique[0]
 
 
+def mounted_files(name: str) -> list[Path]:
+    """Find small release files without entering raw images or saved checkpoints."""
+    matches = set()
+    excluded = {"media", "toysAD8K", "toysad8k", "trusted-release-state", "checkpoints", ".git"}
+    for root in kaggle_roots():
+        # The full source mount has over a million files and no prediction locks.
+        if (root / "archive_index.sqlite3").is_file():
+            continue
+        pending = [(root, 0)]
+        while pending:
+            directory, depth = pending.pop()
+            candidate = directory / name
+            if candidate.is_file() and not candidate.is_symlink():
+                matches.add(candidate.resolve())
+            if depth == 5:
+                continue
+            for child in directory.iterdir():
+                if child.name in excluded or child.is_symlink() or not child.is_dir():
+                    continue
+                if (child / "archive_index.sqlite3").is_file():
+                    continue
+                pending.append((child, depth + 1))
+    return sorted(matches, key=lambda path: path.as_posix())
+
+
 def find_named_file(name: str, environment_name: str) -> Path:
     configured = os.getenv(environment_name)
     if configured and Path(configured).expanduser().is_file():
         return Path(configured).expanduser().resolve()
-    files = sorted({
-        path.resolve()
-        for root in kaggle_roots()
-        for path in root.rglob(name)
-        if path.is_file()
-    })
+    files = mounted_files(name)
     if len(files) != 1:
         raise FileNotFoundError(f"Expected one mounted {name}; found {len(files)}")
     return files[0]
@@ -168,14 +191,10 @@ def find_prediction_roots() -> list[Path]:
         "toysad8k-development-remainder-600-v1",
     }
     roots = []
-    for root in kaggle_roots():
-        for lock_path in root.rglob("prediction_lock.json"):
-            try:
-                value = json.loads(lock_path.read_text(encoding="utf-8"))
-            except Exception:
-                continue
-            if value.get("cohort_id") in expected:
-                roots.append(lock_path.parent.resolve())
+    for lock_path in mounted_files("prediction_lock.json"):
+        value = json.loads(lock_path.read_text(encoding="utf-8"))
+        if value.get("cohort_id") in expected:
+            roots.append(lock_path.parent.resolve())
     if {json.loads((root / "prediction_lock.json").read_text())["cohort_id"] for root in roots} != expected:
         raise FileNotFoundError("The three completed Notebook 08E prediction roots were not found")
     return sorted(set(roots), key=lambda path: path.as_posix())
@@ -183,8 +202,8 @@ def find_prediction_roots() -> list[Path]:
 
 def find_recovery_pair(mode: str) -> tuple[Path, Path] | None:
     stem = f"{mode}-resource-recovery"
-    bundles = [path for root in kaggle_roots() for path in root.rglob(f"{stem}.zip")]
-    manifests = [path for root in kaggle_roots() for path in root.rglob(f"{stem}-manifest.json")]
+    bundles = mounted_files(f"{stem}.zip") + mounted_files(f"{stem}.zip.bin")
+    manifests = mounted_files(f"{stem}-manifest.json")
     if not bundles and not manifests:
         return None
     if len(bundles) != 1 or len(manifests) != 1:
@@ -234,8 +253,10 @@ CODE_PROVENANCE = verify_notebook_code_snapshot(
     CODE_ROOT,
     "notebooks/__NOTEBOOK_FOLDER__/__NOTEBOOK_FILE__",
 )
-SOURCE_ROOT = find_directory("toysAD8K.zip", "VPI_SOURCE_ROOT")
+print("Code snapshot verified", flush=True)
+SOURCE_ROOT = find_directory("archive_index.sqlite3", "VPI_SOURCE_ROOT")
 ADMINISTRATIVE_ROOT = find_directory("restricted_source_map.jsonl", "VPI_ADMINISTRATIVE_ROOT")
+print("Source and selection mounts found", flush=True)
 RECOVERY_DIRECTORY = OUTPUT_ROOT.parent / (OUTPUT_ROOT.name + "_recovery")
 command = [
     sys.executable,
@@ -276,10 +297,11 @@ command.extend(("--method-lock", str(METHOD_LOCK)))
 '''
     tail = r'''
 recovery = find_recovery_pair("__MODE__")
+print("Release inputs located; starting verified resource build", flush=True)
 if recovery is not None:
     command.extend(("--recovery-bundle", str(recovery[0]), "--recovery-manifest", str(recovery[1])))
-completed = subprocess.run(command, check=True, capture_output=True, text=True, env=code_environment())
-result = json.loads(completed.stdout.strip().splitlines()[-1])
+subprocess.run(command, check=True, env=code_environment())
+result = json.loads((OUTPUT_ROOT / "resource_run_result.json").read_text(encoding="utf-8"))
 display({
     "status": result["status"],
     "completed scenes": result["completed_scene_count"],
@@ -302,6 +324,17 @@ def _tracking_cell(configuration: dict) -> str:
 SAFE_ROOT = OUTPUT_ROOT / ("safe" if result["status"] == "complete" else "tracking-safe")
 mode = clearml_mode()
 receipt = OUTPUT_ROOT / "tracking" / "clearml_receipt.json"
+if mode == "online":
+    try:
+        subprocess.run(
+            [sys.executable, "-m", "pip", "install", "-q", "--disable-pip-version-check",
+             "--retries", "2", "--timeout", "30",
+             "-r", str(CODE_ROOT / "requirements/confirmation-tracking-lock.txt")],
+            check=True, timeout=180, env=code_environment(),
+        )
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
+        mode = "disabled"
+        display("Tracking dependencies were unavailable. The saved release can be published separately.")
 try:
     subprocess.run(
         [
@@ -324,6 +357,8 @@ try:
 except subprocess.TimeoutExpired:
     display("ClearML timed out after the scientific output was saved")
 display({"ClearML mode": mode, "receipt": str(receipt)})
+if receipt.is_file():
+    display(json.loads(receipt.read_text(encoding="utf-8")))
 '''.replace("__STAGE__", stage).replace(
         "__PROJECT__", configuration["project"]
     ).replace("__CODE__", configuration["code"])
@@ -370,6 +405,7 @@ def build_notebook(configuration: dict) -> nbformat.NotebookNode:
             "- Cohort membership and prerequisite hashes must match before source bytes are read.\n"
             "- Bounded incremental runs save deterministic per-scene state and a verified recovery ZIP.\n"
             "- A final resource manifest is written only after exact full coverage.\n"
+            "- Reference boxes use the established grayscale mask threshold of 128 and half-open XYXY coordinates.\n"
             "- ClearML receives aggregate recovery or final evidence only."
         ),
         code(
@@ -424,9 +460,9 @@ def main() -> None:
         folder = ROOT / "notebooks" / configuration["folder"]
         folder.mkdir(parents=True, exist_ok=True)
         notebook_path = folder / configuration["filename"]
-        nbformat.write(build_notebook(configuration), notebook_path)
+        nbformat.write(harden_notebook(build_notebook(configuration), preserve_ids=True), notebook_path)
         metadata = {
-            "id": f"esreekarreddy/{configuration['filename'].removesuffix('.ipynb')}",
+            "id": canonical_kernel_id(configuration["title"]),
             "title": configuration["title"],
             "code_file": configuration["filename"],
             "language": "python",

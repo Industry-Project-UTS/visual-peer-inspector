@@ -1,0 +1,14 @@
+{
+  "status": "verified_complete",
+  "kaggle_version": 4,
+  "source_snapshot_version": 65,
+  "original_download_name": "toysad-8k-development-identity-evaluator-release (1).ipynb",
+  "preserved_name": "executed-notebook.ipynb",
+  "sha256": "d393a473ec1955dc70d3fc05b2132548504d14bf7ca313dc65656d02244df9eb",
+  "cell_source_matches_snapshot": true,
+  "cell_count": 11,
+  "executed_code_cells": 5,
+  "output_count": 6,
+  "error_output_count": 0,
+  "output_evaluator_manifest_sha256": "96189e95353570c8c5c8a7e04dd60e170d644b8ef213c9989f5fba3a4bb830aa"
+}

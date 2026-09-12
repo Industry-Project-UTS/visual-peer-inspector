@@ -1,0 +1,42 @@
+{
+  "artifact_count": 7,
+  "artifacts": [
+    {
+      "path": "cohort_membership.csv",
+      "sha256": "7ab3144db92003e8851c40871d13fabe35cdb9eb973f5d33c39a3b06fe9bf174",
+      "size_bytes": 523
+    },
+    {
+      "path": "development_stage_membership.csv",
+      "sha256": "bb2e8fde7ebef40ec39e649f713302a6a5bc4d6c4b73d14b13685bae7760f35b",
+      "size_bytes": 475
+    },
+    {
+      "path": "primary_role_counts.png",
+      "sha256": "3a95b24b6964257aa7784ccbd14f5ad508702c2700ca62e231a1f3962ea9f254",
+      "size_bytes": 19915
+    },
+    {
+      "path": "protocol_release_boundary.png",
+      "sha256": "10858737636229c5e3cfaec9f8b0325f65604e499b3ae6ba64ad4497d02ce8e4",
+      "size_bytes": 40985
+    },
+    {
+      "path": "resource_release_status.csv",
+      "sha256": "d153b9865c3907473ad9249ba55ca5e28acb4cd1288cf8352b9b80b029fa6a4f",
+      "size_bytes": 258
+    },
+    {
+      "path": "role_overlap_audit.csv",
+      "sha256": "a4717f7db0cfbf16f9be5ea867d1cc5c0b17bae1e932d3c7c78eccdda31d7f38",
+      "size_bytes": 169
+    },
+    {
+      "path": "run_record.json",
+      "sha256": "3dd170195e6685fe22760b299580c8d4818cfe55cf24144aed510646823d9016",
+      "size_bytes": 1404
+    }
+  ],
+  "manifest_content_sha256": "b458783eb88d0d33b746b9d5c31b73ddd29c125a87558cda0fc4c4ed3d23994d",
+  "schema_version": 1
+}

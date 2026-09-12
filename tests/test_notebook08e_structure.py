@@ -7,7 +7,9 @@ from pathlib import Path
 import nbformat
 
 ROOT = Path(__file__).resolve().parents[1]
-NOTEBOOK = ROOT / "notebooks/development-freeze/08e-toysad8k-frozen-development-pipeline.ipynb"
+NOTEBOOK = (
+    ROOT / "notebooks/development-freeze/08e-toysad8k-frozen-development-pipeline.ipynb"
+)
 METADATA = ROOT / "notebooks/development-freeze/kernel-metadata-08e.json"
 
 
@@ -56,10 +58,15 @@ class Notebook08EStructureTests(unittest.TestCase):
         self.assertIn("Mounted inputs", source)
         self.assertIn('OUTPUT_ROOT / "tracking/clearml_recovery_receipt.json"', source)
         self.assertNotIn("write_safe_artifact_manifest(recovery_safe)", source)
+        self.assertIn("verify_ds2_reuse_input", source)
+        self.assertIn('"--locate-run-record"', source)
+        self.assertNotIn("DS2_RUN_ROOT", source)
         self.assertIn("timeout=1800", source)
         self.assertLess(
             source.index("subprocess.run(preflight_command"),
-            source.index("subprocess.run(command, check=True, env=inference_environment)"),
+            source.index(
+                "subprocess.run(command, check=True, env=inference_environment)"
+            ),
         )
 
     def test_notebook_has_professional_cell_structure(self) -> None:
@@ -74,7 +81,13 @@ class Notebook08EStructureTests(unittest.TestCase):
         self.assertGreaterEqual(len(headings), 9)
         self.assertGreaterEqual(len(notebook.cells), 16)
         self.assertEqual(notebook.cells[0].cell_type, "markdown")
-        self.assertTrue(all(cell.execution_count is None for cell in notebook.cells if cell.cell_type == "code"))
+        self.assertTrue(
+            all(
+                cell.execution_count is None
+                for cell in notebook.cells
+                if cell.cell_type == "code"
+            )
+        )
 
     def test_kaggle_metadata_enables_one_t4_gpu(self) -> None:
         metadata = json.loads(METADATA.read_text(encoding="utf-8"))
@@ -84,22 +97,24 @@ class Notebook08EStructureTests(unittest.TestCase):
         self.assertEqual(metadata["machine_shape"], "NvidiaTeslaT4")
         self.assertTrue(metadata["enable_internet"])
         self.assertIn(
-            "esreekarreddy/toysad-8k-ds2-frozen-pipeline",
-            metadata["kernel_sources"],
-        )
-        self.assertNotIn(
-            "esreekarreddy/vpi-toysad-ds1-locateanything-prompt-freeze",
+            "esreekarreddy/vpi-ds2-frozen-route-reuse",
             metadata["dataset_sources"],
         )
+        self.assertEqual(metadata["kernel_sources"], [])
 
     def test_runner_and_workflow_compile(self) -> None:
         compile(
-            (ROOT / "scripts/run_frozen_development_pipeline.py").read_text(encoding="utf-8"),
+            (ROOT / "scripts/run_frozen_development_pipeline.py").read_text(
+                encoding="utf-8"
+            ),
             "run_frozen_development_pipeline.py",
             "exec",
         )
         compile(
-            (ROOT / "src/visual_peer_inspector/workflows/frozen_development_pipeline.py").read_text(encoding="utf-8"),
+            (
+                ROOT
+                / "src/visual_peer_inspector/workflows/frozen_development_pipeline.py"
+            ).read_text(encoding="utf-8"),
             "frozen_development_pipeline.py",
             "exec",
         )

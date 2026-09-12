@@ -61,6 +61,7 @@ from visual_peer_inspector.qualitative_reporting import (
 from visual_peer_inspector.representation.crops import (
     CropConfiguration,
     prepare_masked_crop,
+    project_crop_heatmap,
 )
 from visual_peer_inspector.scoring.peer import (
     b0_scores,
@@ -82,6 +83,7 @@ from visual_peer_inspector.workflows.frozen_development_pipeline import (
     save_development_audit_bundle,
     select_development_audit,
     validate_ds2_backfill_inputs,
+    validate_recovery_stage_chain,
 )
 from visual_peer_inspector.workflows.kaggle_recovery import (
     create_recovery_bundle,
@@ -131,7 +133,9 @@ def _digest(value: Any) -> str:
 def _write_json(path: Path, value: Mapping[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".incomplete")
-    temporary.write_text(json.dumps(dict(value), indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    temporary.write_text(
+        json.dumps(dict(value), indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     temporary.replace(path)
 
 
@@ -193,7 +197,9 @@ def _ensure_cohort_identity(
     path = root / "pipeline_identity.json"
     if path.is_file():
         if json.loads(path.read_text(encoding="utf-8")) != record:
-            raise ValueError("Existing output belongs to another frozen pipeline identity")
+            raise ValueError(
+                "Existing output belongs to another frozen pipeline identity"
+            )
     else:
         _write_json(path, record)
 
@@ -212,7 +218,7 @@ def _ds2_recovery_binding(
         "rgb_manifest_sha256": file_sha256(
             args.rgb_root / "neutral_corpus_manifest.jsonl"
         ),
-        "proposal_record_sha256": file_sha256(args.proposal_record),
+        "locate_run_record_sha256": file_sha256(args.locate_run_record),
         "automatic_sam_record_sha256": file_sha256(args.automatic_sam_record),
         "mask_route_record_sha256": file_sha256(
             args.mask_route_root / "package_record.json"
@@ -220,7 +226,9 @@ def _ds2_recovery_binding(
     }
 
 
-def build_identity(selected_prompt: Path) -> tuple[FrozenPipelineIdentity, Any, Mapping[str, Any]]:
+def build_identity(
+    selected_prompt: Path,
+) -> tuple[FrozenPipelineIdentity, Any, Mapping[str, Any]]:
     """Resolve and hash every part of the frozen automatic route."""
 
     locate_configuration, policy_key, _freeze_sha256 = load_frozen_ds1_configuration(
@@ -251,12 +259,13 @@ def build_identity(selected_prompt: Path) -> tuple[FrozenPipelineIdentity, Any, 
         split_sha256=DEVELOPMENT_FULL_CONTRACT.membership_sha256,
         configuration_sha256=_digest(route_configuration),
         locateanything_sha256=_digest(
-            {"model_id": effective_locate.model_id, "revision": effective_locate.model_revision}
+            {
+                "model_id": effective_locate.model_id,
+                "revision": effective_locate.model_revision,
+            }
         ),
         sam21_sha256=_digest(sam_configuration.to_dict()),
-        dinov2_sha256=_digest(
-            {"model_key": DINO_MODEL_KEY, "revision": DINO_REVISION}
-        ),
+        dinov2_sha256=_digest({"model_key": DINO_MODEL_KEY, "revision": DINO_REVISION}),
         preprocessing_sha256=crop_configuration.sha256,
         schema_sha256=_digest(
             {
@@ -325,7 +334,9 @@ def _sam_worker(model: Sam2ImageWorker, identity: FrozenPipelineIdentity):
     def run(record: Mapping[str, Any]) -> Mapping[str, Any]:
         if record.get("terminal_failure") == "zero_proposal":
             raise ZeroProposalFailure("No proposal was available for SAM")
-        boxes = [tuple(int(value) for value in box) for box in record.get("boxes_xyxy", [])]
+        boxes = [
+            tuple(int(value) for value in box) for box in record.get("boxes_xyxy", [])
+        ]
         if not boxes:
             raise ZeroProposalFailure("No proposal was available for SAM")
         prompts = tuple(
@@ -377,7 +388,9 @@ def _valid_patch_mask(crop: Any, grid_size: int) -> np.ndarray:
     if valid.any():
         return valid
     patch_size = crop.foreground.shape[0] // grid_size
-    coverage = crop.foreground.reshape(grid_size, patch_size, grid_size, patch_size).mean(axis=(1, 3))
+    coverage = crop.foreground.reshape(
+        grid_size, patch_size, grid_size, patch_size
+    ).mean(axis=(1, 3))
     valid.flat[int(np.argmax(coverage))] = True
     return valid
 
@@ -395,7 +408,9 @@ def _dino_worker(encoder: FrozenVisualEncoder, crop_configuration: CropConfigura
         with Image.open(str(record["image_path"])) as opened:
             rgb = opened.convert("RGB")
             crops = [
-                prepare_masked_crop(rgb, item["mask_rle"], configuration=crop_configuration)
+                prepare_masked_crop(
+                    rgb, item["mask_rle"], configuration=crop_configuration
+                )
                 for item in objects
             ]
         try:
@@ -407,12 +422,16 @@ def _dino_worker(encoder: FrozenVisualEncoder, crop_configuration: CropConfigura
             raise FeatureFailure("DINOv2-small returned invalid global features")
         if not encoded.patch_features or encoded.patch_grid_size is None:
             raise FeatureFailure("DINOv2-small returned no patch features")
-        valid_masks = [_valid_patch_mask(crop, int(encoded.patch_grid_size)) for crop in crops]
+        valid_masks = [
+            _valid_patch_mask(crop, int(encoded.patch_grid_size)) for crop in crops
+        ]
         b0 = b0_scores(globals_)
         p1 = p1_scores(encoded.patch_features, valid_masks, top_fraction=0.10)
         ranks: dict[int, int] = {}
         if p1.status == "scored":
-            order = deterministic_ranking(p1.scores, [str(item["object_id"]) for item in objects])
+            order = deterministic_ranking(
+                p1.scores, [str(item["object_id"]) for item in objects]
+            )
             ranks = {index: rank for rank, index in enumerate(order, 1)}
         result_objects = []
         for index, item in enumerate(objects):
@@ -420,11 +439,17 @@ def _dino_worker(encoder: FrozenVisualEncoder, crop_configuration: CropConfigura
                 {
                     **item,
                     "b0_status": b0.status,
-                    "b0_score": None if b0.status != "scored" else float(b0.scores[index]),
+                    "b0_score": None
+                    if b0.status != "scored"
+                    else float(b0.scores[index]),
                     "p1_status": p1.status,
-                    "p1_score": None if p1.status != "scored" else float(p1.scores[index]),
+                    "p1_score": None
+                    if p1.status != "scored"
+                    else float(p1.scores[index]),
                     "p1_rank": None if p1.status != "scored" else int(ranks[index]),
-                    "p1_heatmap": None if p1.status != "scored" else np.asarray(p1.heatmaps[index]).tolist(),
+                    "p1_heatmap": None
+                    if p1.status != "scored"
+                    else np.asarray(p1.heatmaps[index]).tolist(),
                 }
             )
         return StageOutcome(
@@ -454,7 +479,11 @@ def _score_worker(record: Mapping[str, Any]) -> Mapping[str, Any]:
         raise FeatureFailure("DINOv2-small produced no usable feature")
     objects = list(record.get("objects", []))
     scored = [item for item in objects if item.get("p1_score") is not None]
-    strongest = max(scored, key=lambda item: (float(item["p1_score"]), str(item["object_id"]))) if scored else None
+    strongest = (
+        max(scored, key=lambda item: (float(item["p1_score"]), str(item["object_id"])))
+        if scored
+        else None
+    )
     return {
         "status": "ok" if scored else "insufficient_peers",
         "cohort_id": record["cohort_id"],
@@ -510,9 +539,7 @@ def run_preflight(args: argparse.Namespace) -> dict[str, Any]:
         Sam2Configuration(device=args.device, precision="float16"),
         args.sam_checkpoint,
     )
-    sam_result = _sam_worker(sam, identity)(
-        {**selected_record, **dict(locate_result)}
-    )
+    sam_result = _sam_worker(sam, identity)({**selected_record, **dict(locate_result)})
     del sam
     _clear_gpu()
 
@@ -545,7 +572,9 @@ def run_preflight(args: argparse.Namespace) -> dict[str, Any]:
     return result
 
 
-def _scene_audit_panels(score_rows: list[dict[str, Any]], output_root: Path) -> list[dict[str, Any]]:
+def _scene_audit_panels(
+    score_rows: list[dict[str, Any]], output_root: Path
+) -> list[dict[str, Any]]:
     audit_rows = select_development_audit(score_rows, base_count=15)
     scene_ids = []
     for row in audit_rows:
@@ -566,6 +595,8 @@ def _scene_audit_panels(score_rows: list[dict[str, Any]], output_root: Path) -> 
         for row in chosen:
             predicted = []
             heatmap = None
+            with Image.open(str(row["image_path"])) as opened:
+                rgb = opened.convert("RGB")
             for item in row.get("objects", []):
                 predicted.append(
                     PredictedObject(
@@ -577,13 +608,22 @@ def _scene_audit_panels(score_rows: list[dict[str, Any]], output_root: Path) -> 
                     )
                 )
                 if item.get("p1_rank") == 1:
-                    heatmap = item.get("p1_heatmap")
+                    patch_heatmap = item.get("p1_heatmap")
+                    if patch_heatmap is not None:
+                        mask = decode_binary_mask(item["mask_rle"])
+                        crop = prepare_masked_crop(
+                            rgb, mask, configuration=CropConfiguration()
+                        )
+                        projected = project_crop_heatmap(patch_heatmap, crop, mask)
+                        heatmap = projected if np.isfinite(projected).any() else None
             views.append(
                 QualitativeView(
                     view_id=str(row["view_id"]),
                     rgb=str(row["image_path"]),
                     objects=tuple(predicted),
-                    heatmap=None if heatmap is None else np.asarray(heatmap, dtype=np.float32),
+                    heatmap=None
+                    if heatmap is None
+                    else np.asarray(heatmap, dtype=np.float32),
                 )
             )
         panel_id = f"panel-{len(evidence) + 1:03d}"
@@ -594,7 +634,10 @@ def _scene_audit_panels(score_rows: list[dict[str, Any]], output_root: Path) -> 
             agreement=None,
             margin=None,
             review_state="prediction_only",
-            publication_metadata={"route": "frozen_automatic", "view_count": len(views)},
+            publication_metadata={
+                "route": "frozen_automatic",
+                "view_count": len(views),
+            },
         )
         files = save_development_audit_bundle(result, output_root)
         evidence.append(
@@ -617,7 +660,9 @@ def _scene_audit_panels(score_rows: list[dict[str, Any]], output_root: Path) -> 
 
 def run_cohort(args: argparse.Namespace) -> dict[str, Any]:
     contract = COHORTS[args.cohort]
-    identity, locate_configuration, execution_policy = build_identity(args.selected_prompt)
+    identity, locate_configuration, execution_policy = build_identity(
+        args.selected_prompt
+    )
     input_rows = _input_records(args.model_input_root, contract)
     cohort_root = args.output_root.expanduser().resolve() / contract.cohort_id
 
@@ -727,10 +772,67 @@ def run_cohort(args: argparse.Namespace) -> dict[str, Any]:
     return run_record
 
 
+def _preserve_failed_run(
+    args: argparse.Namespace,
+    binding: Mapping[str, Any],
+    top_levels: tuple[str, ...],
+    stem: str,
+    error: Exception,
+) -> None:
+    """Keep completed shards recoverable when a later stage or report raises."""
+
+    if args.recovery_output_directory is None:
+        return
+    if not any(args.output_root.glob("*/**/shard-*.receipt.json")):
+        return
+    directory = args.recovery_output_directory.expanduser().resolve()
+    try:
+        for cohort_id in top_levels:
+            record_path = args.output_root / cohort_id / "safe/run_record.json"
+            if record_path.is_file():
+                record = json.loads(record_path.read_text(encoding="utf-8"))
+                record.update(status="interrupted", error_type=type(error).__name__)
+                _write_json(record_path, record)
+        recovery = create_recovery_bundle(
+            source_root=args.output_root,
+            bundle_path=directory / f"{stem}-recovery.zip",
+            manifest_path=directory / f"{stem}-recovery-manifest.json",
+            binding=binding,
+            allowed_top_levels=top_levels,
+        )
+        _progress(
+            "failure_recovery_saved",
+            {
+                "artifact_count": recovery["artifact_count"],
+                "bundle_sha256": recovery["bundle_sha256"],
+                "error_type": type(error).__name__,
+            },
+        )
+    except Exception as recovery_error:
+        # Preserve the original exception; loose atomic shards remain on disk.
+        _progress(
+            "failure_recovery_error", {"error_type": type(recovery_error).__name__}
+        )
+
+
 def run_development(args: argparse.Namespace) -> dict[str, Any]:
+    identity, _configuration, _policy = build_identity(args.selected_prompt)
+    binding = _development_recovery_binding(args, identity)
+    try:
+        return _run_development(args)
+    except Exception as error:
+        _preserve_failed_run(
+            args, binding, DEVELOPMENT_RECOVERY_TOP_LEVELS, "notebook08e", error
+        )
+        raise
+
+
+def _run_development(args: argparse.Namespace) -> dict[str, Any]:
     """Process the 100-scene screen and 600-scene remainder with one model load."""
 
-    identity, locate_configuration, execution_policy = build_identity(args.selected_prompt)
+    identity, locate_configuration, execution_policy = build_identity(
+        args.selected_prompt
+    )
     sources = (
         (DS1_SCREEN_CONTRACT, args.ds1_model_input_root),
         (DEVELOPMENT_REMAINDER_CONTRACT, args.remainder_model_input_root),
@@ -761,7 +863,22 @@ def run_development(args: argparse.Namespace) -> dict[str, Any]:
             identity=identity,
             cohort_id=contract.cohort_id,
         )
-    stage_records: dict[str, dict[str, Any]] = {contract.cohort_id: {} for contract, _ in sources}
+        verified_shards = validate_recovery_stage_chain(
+            cohort_roots[contract.cohort_id],
+            cohort_rows[contract.cohort_id],
+            identity,
+            args.shard_size,
+        )
+        _progress(
+            "recovery_inputs_verified",
+            {
+                "cohort_id": contract.cohort_id,
+                "verified_shards": verified_shards,
+            },
+        )
+    stage_records: dict[str, dict[str, Any]] = {
+        contract.cohort_id: {} for contract, _ in sources
+    }
     maximum_new_shards = (
         args.maximum_new_shards if args.run_mode == "incremental" else None
     )
@@ -840,13 +957,17 @@ def run_development(args: argparse.Namespace) -> dict[str, Any]:
             maximum_new_shards=maximum_new_shards,
             progress_callback=_progress,
         )
-        complete = all(
-            stage.get("complete") is True
-            for stage in stage_records[contract.cohort_id].values()
-        ) and stage_records[contract.cohort_id]["peer_scoring"]["covered_input_count"] == contract.image_count
+        complete = (
+            all(
+                stage.get("complete") is True
+                for stage in stage_records[contract.cohort_id].values()
+            )
+            and stage_records[contract.cohort_id]["peer_scoring"]["covered_input_count"]
+            == contract.image_count
+        )
         record = {
             "schema_version": 1,
-            "status": "complete" if complete else "checkpointed",
+            "status": "reporting" if complete else "checkpointed",
             "stage": "frozen_development_pipeline",
             "cohort_id": contract.cohort_id,
             "scene_count": contract.scene_count,
@@ -860,9 +981,7 @@ def run_development(args: argparse.Namespace) -> dict[str, Any]:
         _write_json(root / "safe" / "run_record.json", record)
         if complete:
             score_rows = read_completed_stage(root / "peer_scoring")
-            evidence = _scene_audit_panels(
-                score_rows, root / "review-only" / "figures"
-            )
+            evidence = _scene_audit_panels(score_rows, root / "review-only" / "figures")
             _write_json(
                 root / "review-only" / "audit_evidence.json",
                 {"items": evidence},
@@ -879,6 +998,12 @@ def run_development(args: argparse.Namespace) -> dict[str, Any]:
             record["prediction_bundle"] = {
                 key: value for key, value in bundle.items() if key != "lock"
             }
+            record["status"] = "complete"
+        origin_path = root / "recovery_origin.json"
+        if origin_path.is_file():
+            record["recovery_origin"] = json.loads(
+                origin_path.read_text(encoding="utf-8")
+            )
         _write_json(root / "safe" / "run_record.json", record)
         write_safe_artifact_manifest(root / "safe")
         records[contract.cohort_id] = record
@@ -944,14 +1069,33 @@ def run_development(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def backfill_ds2(args: argparse.Namespace) -> dict[str, Any]:
+    identity, _configuration, _policy = build_identity(args.selected_prompt)
+    binding = _ds2_recovery_binding(args, identity)
+    try:
+        return _backfill_ds2(args)
+    except Exception as error:
+        _preserve_failed_run(
+            args,
+            binding,
+            (DS2_CONFIRM_CONTRACT.cohort_id,),
+            "notebook08e-ds2-backfill",
+            error,
+        )
+        raise
+
+
+def _backfill_ds2(args: argparse.Namespace) -> dict[str, Any]:
     """Repackage verified DS2 predictions under the 08E identity and schema."""
 
-    identity, locate_configuration, _execution_policy = build_identity(args.selected_prompt)
+    identity, locate_configuration, _execution_policy = build_identity(
+        args.selected_prompt
+    )
     sam_configuration = Sam2Configuration(device="cuda", precision="float16")
     attestation = validate_ds2_backfill_inputs(
-        proposal_record_path=args.proposal_record,
+        locate_run_record_path=args.locate_run_record,
         automatic_sam_record_path=args.automatic_sam_record,
         mask_route_record_path=args.mask_route_root / "package_record.json",
+        selected_prompt_path=args.selected_prompt,
         expected_locate_model_id=locate_configuration.model_id,
         expected_locate_revision=locate_configuration.model_revision,
         expected_locate_configuration_sha256=locate_configuration.sha256,
@@ -1066,9 +1210,7 @@ def backfill_ds2(args: argparse.Namespace) -> dict[str, Any]:
     evidence: list[dict[str, Any]] = []
     if complete:
         score_rows = read_completed_stage(root / "peer_scoring")
-        evidence = _scene_audit_panels(
-            score_rows, root / "review-only" / "figures"
-        )
+        evidence = _scene_audit_panels(score_rows, root / "review-only" / "figures")
         _write_json(
             root / "review-only" / "audit_evidence.json",
             {"items": evidence},
@@ -1109,7 +1251,9 @@ def backfill_ds2(args: argparse.Namespace) -> dict[str, Any]:
         recovery_directory = args.recovery_output_directory.expanduser().resolve()
         recovery_directory.mkdir(parents=True, exist_ok=True)
         bundle_path = recovery_directory / "notebook08e-ds2-backfill-recovery.zip"
-        manifest_path = recovery_directory / "notebook08e-ds2-backfill-recovery-manifest.json"
+        manifest_path = (
+            recovery_directory / "notebook08e-ds2-backfill-recovery-manifest.json"
+        )
         recovery = create_recovery_bundle(
             source_root=args.output_root,
             bundle_path=bundle_path,
@@ -1130,9 +1274,7 @@ def backfill_ds2(args: argparse.Namespace) -> dict[str, Any]:
             metrics={
                 "cohort_count": 1,
                 "complete_cohort_count": int(complete),
-                "covered_image_count": int(
-                    scoring_record["covered_input_count"]
-                ),
+                "covered_image_count": int(scoring_record["covered_input_count"]),
                 "target_image_count": DS2_CONFIRM_CONTRACT.image_count,
                 "recovery_artifact_count": recovery["artifact_count"],
             },
@@ -1160,7 +1302,9 @@ def combine(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def evaluate_reference(args: argparse.Namespace) -> dict[str, Any]:
-    predictions = read_completed_stage(args.prediction_lock.parent.parent / "peer_scoring")
+    predictions = read_completed_stage(
+        args.prediction_lock.parent.parent / "peer_scoring"
+    )
     evaluator = load_development_evaluator(args.evaluator_path, args.prediction_lock)
     return reference_only_fusion(predictions, {"rows": evaluator})
 
@@ -1191,7 +1335,9 @@ def parse_arguments() -> argparse.Namespace:
 
     development_parser = subparsers.add_parser("run-development")
     development_parser.add_argument("--ds1-model-input-root", type=Path, required=True)
-    development_parser.add_argument("--remainder-model-input-root", type=Path, required=True)
+    development_parser.add_argument(
+        "--remainder-model-input-root", type=Path, required=True
+    )
     development_parser.add_argument("--selected-prompt", type=Path, required=True)
     development_parser.add_argument("--sam-checkpoint", type=Path, required=True)
     development_parser.add_argument("--output-root", type=Path, required=True)
@@ -1210,7 +1356,7 @@ def parse_arguments() -> argparse.Namespace:
     backfill_parser = subparsers.add_parser("backfill-ds2")
     backfill_parser.add_argument("--rgb-root", type=Path, required=True)
     backfill_parser.add_argument("--mask-route-root", type=Path, required=True)
-    backfill_parser.add_argument("--proposal-record", type=Path, required=True)
+    backfill_parser.add_argument("--locate-run-record", type=Path, required=True)
     backfill_parser.add_argument("--automatic-sam-record", type=Path, required=True)
     backfill_parser.add_argument("--selected-prompt", type=Path, required=True)
     backfill_parser.add_argument("--output-root", type=Path, required=True)
