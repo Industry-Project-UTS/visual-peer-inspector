@@ -91,7 +91,7 @@ def test_official_metadata_uses_exact_upstreams_and_no_evaluator_on_10a() -> Non
     metadata_finalize = json.loads(
         (NOTEBOOK_ROOT / "kernel-metadata-10a-finalize.json").read_text()
     )
-    assert metadata10r["id"] == "esreekarreddy/toysad-8k-official-release"
+    assert metadata10r["id"] == "esreekarreddy/toysad-8k-official-evaluation-release"
     assert metadata10r["enable_gpu"] is False
     assert "esreekarreddy/vpi-toysad-internal-lock-decision" in metadata10r[
         "dataset_sources"

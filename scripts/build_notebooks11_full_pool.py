@@ -8,6 +8,7 @@ from hashlib import sha256
 from pathlib import Path
 
 import nbformat
+from notebook_runtime_cells import harden_notebook
 
 ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOK_ROOT = ROOT / "notebooks/post-freeze-sensitivity"
@@ -624,7 +625,7 @@ def write_notebook(path: Path, cells: list) -> None:
     for index, cell in enumerate(notebook.cells):
         cell["id"] = sha256(f"{path.name}:{index}".encode()).hexdigest()[:8]
     path.parent.mkdir(parents=True, exist_ok=True)
-    nbformat.write(notebook, path)
+    nbformat.write(harden_notebook(notebook), path)
 
 
 def write_metadata(path: Path, value: dict) -> None:
@@ -659,7 +660,7 @@ def main() -> None:
         ],
         "enable_gpu": False,
         "id": "esreekarreddy/toysad-8k-post-freeze-full-pool-release",
-        "kernel_sources": ["esreekarreddy/10b-toysad8k-official-seen-unseen-evaluation"],
+        "kernel_sources": ["esreekarreddy/toysad-8k-official-seen-and-unseen-test-evaluation"],
         "title": "ToysAD-8K Post-freeze Full-pool Release",
     })
     write_metadata(NOTEBOOK_ROOT / "kernel-metadata-11a.json", {
@@ -674,7 +675,7 @@ def main() -> None:
             "esreekarreddy/vpi-toysad-calibration-review-policy",
         ],
         "enable_gpu": True,
-        "id": "esreekarreddy/toysad-8k-post-freeze-full-pool-inference",
+        "id": "esreekarreddy/toysad-8k-post-freeze-full-pool-frozen-inference",
         "kernel_sources": [],
         "machine_shape": "NvidiaTeslaT4",
         "title": "ToysAD-8K Post-freeze Full-pool Frozen Inference",
@@ -692,7 +693,7 @@ def main() -> None:
             "esreekarreddy/vpi-toysad-calibration-review-policy",
         ],
         "enable_gpu": False,
-        "id": "esreekarreddy/toysad-8k-post-freeze-full-pool-evaluation",
+        "id": "esreekarreddy/toysad-8k-post-freeze-full-pool-sensitivity-evaluation",
         "kernel_sources": [],
         "title": "ToysAD-8K Post-freeze Full-pool Sensitivity Evaluation",
     })

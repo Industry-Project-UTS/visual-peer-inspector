@@ -1,0 +1,15 @@
+{
+  "automatic_sam_record_sha256": "e481cbdc9ff6b2ac30c68083455570ce6ffdaaa1124b9d9432933fa484a8ae1c",
+  "cohort_id": "toysad8k-development-confirm-300-v1",
+  "locate_configuration_sha256": "6167320c6cc3c7233385494b3e54f793eb4acaa6f21d8af196154ac6d23cfde6",
+  "locate_record_sha256": "55449a4ab239234000563ff3aa4de6293bea5a9b4ae69f84f77324bd1d24d748",
+  "mask_route_record_sha256": "84535430b65621ba118c0d2e6e62b0376ef14d39ffc67c91e21c82ede0d89920",
+  "proposal_policy": "area_nms_075_cap8",
+  "requires_dinov2_and_scoring_rebuild": true,
+  "reuse_scope": "locateanything_and_sam_only",
+  "sam_configuration_sha256": "39690d431d70c2192a6ba0c4530785c9208e07b035842d05022a67fb700a850b",
+  "schema_identity_sha256": "ebfbe665f1fea50c73ac819f021cf06e17ed1dccbe0b5f2474f90b1f556376b5",
+  "schema_version": 1,
+  "selected_prompt_sha256": "13e3f9b659ec7b96efd99fcbe3f20507a54c174ac2fccbe7bf89c127e456bedb",
+  "status": "verified"
+}

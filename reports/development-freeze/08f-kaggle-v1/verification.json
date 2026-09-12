@@ -1,0 +1,16 @@
+{
+  "status": "verified_complete",
+  "kaggle_version": 1,
+  "source_commit": "94b606211287482b41d880eac17ebeffb6a40b74",
+  "scene_count": 1000,
+  "prediction_count": 6000,
+  "application_result_count": 3000,
+  "application_masks_decoded_and_hashed": 40416,
+  "chosen_variant": "embedding_only",
+  "acceptance_gates_passed": 12,
+  "safe_artifacts_verified": 11,
+  "private_figures_decoded": 30,
+  "recovery_artifacts_verified": 16056,
+  "evaluator_correspondence_sha256": "bf7665a215d0d64c0d922bc203c3c1624fa8db9682e8eb8964f407139f533a3f",
+  "frozen_model_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7"
+}

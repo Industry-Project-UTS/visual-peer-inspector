@@ -25,10 +25,10 @@ model, scoring, evaluation, and tracking logic belongs in tested modules under
 | 08A DS2 Confirmation Release | Builds the untouched 300-scene RGB, geometry, and protected evaluator resources | Kaggle Version 5 verified; three private resources published and checked |
 | 08B DS2 Frozen Pipeline | Runs LocateAnything, reference-box and automatic-box SAM 2.1, and frozen DINOv2-small with B0 and P1 on all 6,000 views | Kaggle Version 4 complete; compact bundles verified |
 | 08C DS2 Confirmation and Multi-view | Measures proposals, masks, B0/P1 rankings, view counts, fusion, subgroups, and confirmation status | Kaggle Version 1 complete; development confirmation measured |
-| 08D Primary Protocol Release | Verifies the 1,000/600/400 primary roles and releases only the remaining 600 development scenes | Built and locally checked; Kaggle evidence pending |
-| 08E Frozen Development Pipeline | Runs the fixed automatic pipeline on the 1,000 development scenes and locks complete predictions | Built and locally checked; Kaggle evidence pending |
-| 08E.1 Development Identity Evaluator Release | Opens raw reference masks only after the 1,000-scene prediction lock and publishes `vpi-toysad-development-identity-evaluator` | Built and locally checked; Kaggle evidence pending |
-| 08F Cross-View Identity Freeze | Selects label-free identity matching and freezes the application output contract | Built and locally checked; Kaggle evidence pending |
+| 08D Primary Protocol Release | Verifies the 1,000/600/400 primary roles and releases only the remaining 600 development scenes | Kaggle V2 complete; executed notebook and output bundles verified |
+| 08E Frozen Development Pipeline | Runs the fixed automatic pipeline on the 1,000 development scenes and locks complete predictions | Kaggle V5 complete; 20,000 views locked, 1,007 files verified and 90 review figures saved |
+| 08E.1 Development Identity Evaluator Release | Opens raw reference masks only after the 1,000-scene prediction lock and publishes `vpi-toysad-development-identity-evaluator` | V4 complete and verified; 80,954 correspondence records; V3 rejected for reference decoding |
+| 08F Cross-View Identity Freeze | Selects label-free identity matching and freezes the application output contract | V1 complete; embedding-only retained, 3,000 application results; five-view identity accuracy 33.04% |
 | 08F.1 Calibration Resource Release | Publishes the physically separate `vpi-toysad-calibration600-model-input` and `vpi-toysad-calibration600-evaluator` resources after the method freeze | Built and locally checked; Kaggle evidence pending |
 | 09A Calibration Inference | Produces locked, prediction-only output for all 600 calibration scenes | Built and locally checked; Kaggle evidence pending |
 | 09B Calibration Review Policy | Opens calibration references after the prediction lock and freezes only the optional review policy | Built and locally checked; Kaggle evidence pending |
@@ -54,7 +54,10 @@ DINOv2-small, P1, two to five declared views, and normalized-rank fusion. B0
 remains the baseline. The automatic result is the normal route. Human box or
 identity correction is an optional rerun when the evidence is incomplete or
 uncertain. This is a development freeze for the next calibration stage, not a
-final production claim.
+final production claim. The completed 08F comparison shows weak physical-object
+identity matching despite passing its structural checks. Review that limitation
+before the protected stages. If the method changes, produce a new development
+comparison and method lock without using calibration or internal-lock labels.
 
 ## Dependency flow
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Create compact, checksum-verified archives for one Kaggle stage.
 
-Large stage outputs should be written below ``/kaggle/temp``. This script then
-places a small number of deterministic archives in ``/kaggle/working`` so the
-Kaggle CLI does not need to enumerate thousands of individual result files.
+Persistent stage checkpoints belong below ``/kaggle/working``. This script
+also creates a small number of deterministic archives for reliable downloads.
+Temporary files must not be the only copy of completed inference.
 """
 
 from __future__ import annotations

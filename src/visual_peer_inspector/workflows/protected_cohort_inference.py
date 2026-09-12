@@ -55,6 +55,9 @@ from visual_peer_inspector.workflows.frozen_development_pipeline import (
     lock_predictions,
     save_development_audit_bundle,
 )
+from visual_peer_inspector.workflows.runtime_failures import (
+    raise_if_infrastructure_failure,
+)
 
 SCHEMA_VERSION = 1
 STAGES = ("locateanything", "sam21", "dinov2_small", "peer_scoring")
@@ -488,6 +491,7 @@ def run_exact_sharded_stage(
                     embedding_blocks.append(block)
                     offset += len(block)
             except Exception as error:  # noqa: BLE001 - retain every terminal stage failure
+                raise_if_infrastructure_failure(error)
                 if isinstance(error, ZeroProposalFailure):
                     name = "zero_proposal"
                 elif isinstance(error, EmptyMaskFailure):

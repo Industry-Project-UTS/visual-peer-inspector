@@ -8,6 +8,7 @@ from hashlib import sha256
 from pathlib import Path
 
 import nbformat
+from notebook_runtime_cells import canonical_kernel_id, harden_notebook
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIGURATIONS = (
@@ -35,7 +36,7 @@ CONFIGURATIONS = (
             "esreekarreddy/vpi-toysad-calibration-review-policy",
         ],
         "kernel_sources": [
-            "esreekarreddy/09c-toysad8k-protected-internal-lock-inference",
+            "esreekarreddy/toysad-8k-protected-internal-lock-inference",
         ],
         "expected_splits": "internal-lock",
     },
@@ -452,7 +453,7 @@ must preserve separate failure, review, and insufficient-evidence outcomes.
 
 def metadata(configuration: dict) -> dict:
     return {
-        "id": f"esreekarreddy/{configuration['filename'].removesuffix('.ipynb')}",
+        "id": canonical_kernel_id(configuration["title"]),
         "title": configuration["title"],
         "code_file": configuration["filename"],
         "language": "python",
@@ -490,7 +491,7 @@ def build(configuration: dict) -> tuple[Path, Path]:
             "language_info": {"name": "python", "version": "3"},
         },
     )
-    nbformat.write(notebook, notebook_path)
+    nbformat.write(harden_notebook(notebook), notebook_path)
     metadata_path = directory / f"kernel-metadata-{configuration['stage']}.json"
     metadata_path.write_text(
         json.dumps(metadata(configuration), indent=2) + "\n", encoding="utf-8"

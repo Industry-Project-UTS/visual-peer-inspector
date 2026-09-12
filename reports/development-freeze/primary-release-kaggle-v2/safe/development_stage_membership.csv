@@ -1,0 +1,4 @@
+cohort,stage,scenes,views,asset_groups,membership_sha256,membership_verified
+toysad8k-development-screen-100-v1,screen_100,100,2000,27,308e2e104448612dc60b5392a5258d97f6d93f52ca553aa68fa1b447500f4f2f,True
+toysad8k-development-confirm-300-v1,confirm_300,300,6000,82,bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759488ac87ce55dec2eac,True
+toysad8k-development-remainder-600-v1,remainder_600,600,12000,164,e6b4e91dd99de72ddad6e462948c5a4c87b8594be230b3ed7950af841d0a2198,True

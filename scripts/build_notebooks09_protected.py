@@ -8,6 +8,7 @@ from hashlib import sha256
 from pathlib import Path
 
 import nbformat
+from notebook_runtime_cells import canonical_kernel_id, harden_notebook
 
 ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOK_ROOT = ROOT / "notebooks" / "protected-evaluation"
@@ -662,9 +663,9 @@ def build() -> None:
                 "language_info": {"name": "python", "version": "3"},
             },
         )
-        nbformat.write(notebook, NOTEBOOK_ROOT / configuration["filename"])
+        nbformat.write(harden_notebook(notebook), NOTEBOOK_ROOT / configuration["filename"])
         metadata = {
-            "id": f"esreekarreddy/{configuration['filename'].removesuffix('.ipynb').replace('_', '-')}",
+            "id": canonical_kernel_id(configuration["title"]),
             "title": configuration["title"],
             "code_file": configuration["filename"],
             "language": "python",

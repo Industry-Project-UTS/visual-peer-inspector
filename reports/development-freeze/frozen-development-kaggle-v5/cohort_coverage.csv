@@ -1,0 +1,4 @@
+cohort,scenes,views,review_panels,prediction_count,embedding_count
+toysad8k-development-screen-100-v1,100,2000,14,2000,7594
+toysad8k-development-remainder-600-v1,600,12000,15,12000,50181
+toysad8k-development-confirm-300-v1,300,6000,16,6000,23179

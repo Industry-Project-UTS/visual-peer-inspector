@@ -1,0 +1,144 @@
+{
+  "audit_panel_count": 15,
+  "cohort_id": "toysad8k-development-remainder-600-v1",
+  "evaluator_opened": false,
+  "git_commit": "81d601d25fb683a0ba76a2cda8ae209ca277ad5d",
+  "git_dirty": false,
+  "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+  "image_count": 12000,
+  "notebook_sha256": "878bca2c5baae0b26507a9e58ace64400d5aa7e68fd833aa24f0a7a6f1e4e015",
+  "prediction_bundle": {
+    "embedding_count": 50181,
+    "embedding_index": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-remainder-600-v1/model-safe/embedding_index.jsonl",
+    "embedding_index_sha256": "0f9957a15f70e3532f97b69fd8388d165086e40667cdf5d6059fc009c88ffde7",
+    "global_embeddings": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-remainder-600-v1/model-safe/global_embeddings.npy",
+    "global_embeddings_sha256": "63b17e66e4f971d1b8ab37321b25191ee117957a1f92b7d10630e199e3b70b3f",
+    "prediction_count": 12000,
+    "prediction_lock": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-remainder-600-v1/model-safe/prediction_lock.json",
+    "prediction_lock_sha256": "f5c88d87836c2b1a82c2499edf71af753fb125a74e3ea1354d1bb077fa8d337f",
+    "prediction_manifest": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-remainder-600-v1/model-safe/prediction_manifest.jsonl",
+    "prediction_manifest_sha256": "4eddabe90cdb767cc0cb4df40a8a181435ccf71adda984c70d52c9143d1ea97d"
+  },
+  "prediction_only": true,
+  "recovery_origin": {
+    "cohorts": {
+      "toysad8k-development-remainder-600-v1": {
+        "embedding_index_blocks": 1991,
+        "embedding_rows": 8391,
+        "verified_shards": 30,
+        "view_count": 2000
+      },
+      "toysad8k-development-screen-100-v1": {
+        "audit_panels": 14,
+        "embedding_index_blocks": 1983,
+        "embedding_rows": 7594,
+        "verified_shards": 40,
+        "view_count": 2000
+      }
+    },
+    "packaging_code_provenance": {
+      "git_commit": "81d601d25fb683a0ba76a2cda8ae209ca277ad5d",
+      "git_dirty": false,
+      "notebook_sha256": "878bca2c5baae0b26507a9e58ace64400d5aa7e68fd833aa24f0a7a6f1e4e015",
+      "snapshot_sha256": "898847224661c75990ea159f641a2149b3e1553f2c72dd1a0b77a01fbc679c73"
+    },
+    "pipeline_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+    "source_code_provenance": {
+      "git_commit": "dbd14bccd1e757421d1b0d3c33612e098898d3e3",
+      "git_dirty": false,
+      "notebook_sha256": "6bdfaef523c971a6a5632a9597c61865f0297e7e9c19f817d74ea8ac32182750",
+      "snapshot_sha256": "6e5544dbd2b921936e0889ae65368ba87c7d156687e229feb4c95354fb5fd4cc"
+    },
+    "source_run": "esreekarreddy/toysad-8k-frozen-development-pipeline/3",
+    "status": "passed",
+    "unchanged_inference_definitions": [
+      "build_identity",
+      "_input_records",
+      "_locate_worker",
+      "_sam_worker",
+      "_valid_patch_mask",
+      "_dino_worker",
+      "_score_worker"
+    ],
+    "unchanged_source_definitions_checked": 112
+  },
+  "scene_count": 600,
+  "schema_version": 1,
+  "snapshot_sha256": "898847224661c75990ea159f641a2149b3e1553f2c72dd1a0b77a01fbc679c73",
+  "stage": "frozen_development_pipeline",
+  "stages": {
+    "dinov2_small": {
+      "complete": true,
+      "completed_shards": 60,
+      "covered_input_count": 12000,
+      "failure_counts": {
+        "empty_mask": 0,
+        "feature_failure": 0,
+        "stage_failure": 2,
+        "zero_proposal": 69
+      },
+      "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+      "input_count": 12000,
+      "processed_this_run": 10000,
+      "resumed": 2000,
+      "shard_count": 60,
+      "stage": "dinov2_small",
+      "terminal_failures": 71
+    },
+    "locateanything": {
+      "complete": true,
+      "completed_shards": 60,
+      "covered_input_count": 12000,
+      "failure_counts": {
+        "empty_mask": 0,
+        "feature_failure": 0,
+        "stage_failure": 0,
+        "zero_proposal": 69
+      },
+      "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+      "input_count": 12000,
+      "processed_this_run": 10000,
+      "resumed": 2000,
+      "shard_count": 60,
+      "stage": "locateanything",
+      "terminal_failures": 69
+    },
+    "peer_scoring": {
+      "complete": true,
+      "completed_shards": 60,
+      "covered_input_count": 12000,
+      "failure_counts": {
+        "empty_mask": 0,
+        "feature_failure": 0,
+        "stage_failure": 0,
+        "zero_proposal": 69
+      },
+      "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+      "input_count": 12000,
+      "processed_this_run": 12000,
+      "resumed": 0,
+      "shard_count": 60,
+      "stage": "peer_scoring",
+      "terminal_failures": 69
+    },
+    "sam21": {
+      "complete": true,
+      "completed_shards": 60,
+      "covered_input_count": 12000,
+      "failure_counts": {
+        "empty_mask": 0,
+        "feature_failure": 0,
+        "stage_failure": 0,
+        "zero_proposal": 69
+      },
+      "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+      "input_count": 12000,
+      "processed_this_run": 10000,
+      "resumed": 2000,
+      "shard_count": 60,
+      "stage": "sam21",
+      "terminal_failures": 69
+    }
+  },
+  "status": "complete"
+}

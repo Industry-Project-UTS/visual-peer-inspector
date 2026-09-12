@@ -14,11 +14,10 @@
     "esreekarreddy/vpi-code-snapshot",
     "esreekarreddy/vpi-toysad-ds1-screen100-model-input",
     "esreekarreddy/vpi-toysad-development-remainder-model-input",
-    "esreekarreddy/vpi-toysad-ds2-confirmation-rgb"
+    "esreekarreddy/vpi-toysad-ds2-confirmation-rgb",
+    "esreekarreddy/vpi-ds2-frozen-route-reuse"
   ],
   "competition_sources": [],
-  "kernel_sources": [
-    "esreekarreddy/toysad-8k-ds2-frozen-pipeline"
-  ],
+  "kernel_sources": [],
   "model_sources": []
 }

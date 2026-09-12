@@ -22,6 +22,8 @@ PRIVATE_VISUAL_MARKERS = (
     '"private"',
     "'private'",
     "private/",
+    "review-only/",
+    "contact_sheet",
     "first_scene",
     "prepare_masked_crop",
 )
@@ -229,7 +231,7 @@ def publish_notebook(
     log_header = [
         f"Stage: {label}",
         "Status: completed",
-        f"Clean notebook: {clean_path.as_posix()}",
+        f"Clean notebook: {clean_path.name}",
         f"Clean notebook SHA-256: {clean_hash}",
         f"Downloaded saved-output SHA-256: {executed_hash}",
         f"Executed code cells: {len(code_cells)}",

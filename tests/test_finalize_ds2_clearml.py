@@ -115,3 +115,9 @@ def test_unregistered_tracking_stage_fails_closed(tmp_path: Path) -> None:
     root = write_safe_root(tmp_path / "safe", stage="unregistered", extra={})
     with pytest.raises(ValueError, match="no code-owned"):
         finalizer.validate_safe_root(root, expected_stage="unregistered")
+
+
+def test_ds2_backfill_attestation_is_an_allowed_aggregate(tmp_path):
+    root = write_safe_root(tmp_path / "safe", stage="frozen_development_pipeline",
+                           extra={"backfill_attestation.json": b'{"status": "verified"}'})
+    assert finalizer.validate_safe_root(root, expected_stage="frozen_development_pipeline")["status"] == "completed"

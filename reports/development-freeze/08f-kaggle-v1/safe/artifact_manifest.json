@@ -1,0 +1,62 @@
+{
+  "artifact_count": 11,
+  "artifact_inventory_sha256": "fc4bea2884fbac1b9ca26b5a55a97ac86da60441ffc69e64f4d6b54167e70d79",
+  "artifacts": [
+    {
+      "path": "acceptance_gates.csv",
+      "sha256": "c4720b352830f26d8b6089b543e9f49b086f50405ce8483f9bb78e0a6fbea5c9",
+      "size_bytes": 471
+    },
+    {
+      "path": "application_output_contract.json",
+      "sha256": "faa17a164f440259e13b3efd0768d2752444e57c6df4d160c8d3fccc9150bbcc",
+      "size_bytes": 1535
+    },
+    {
+      "path": "clustered_intervals.csv",
+      "sha256": "f001d70e4c91044764a1f2668a4d74da0c6077533842bd09507677de2f4e0e99",
+      "size_bytes": 4534
+    },
+    {
+      "path": "failure_summary.csv",
+      "sha256": "c10b9209afbb64251feaf395858f12f637b9f9b0aaf4dd5d3cacc9842ae9ec91",
+      "size_bytes": 36
+    },
+    {
+      "path": "figures/five_view_identity_accuracy.png",
+      "sha256": "34b22d190f3cfd64a0dfca874d76d5495a94d90a739e8a5b5020f67c7da56c97",
+      "size_bytes": 18671
+    },
+    {
+      "path": "figures/missing_view_link_stability.png",
+      "sha256": "66ce17161d592b43fa349467fe6de9406d677aff7e109e060206fc0cb8bfc645",
+      "size_bytes": 19962
+    },
+    {
+      "path": "method_freeze.json",
+      "sha256": "cd43ab1f8cdb6ab392097118f28c0d20357989da89620efb9c4dafdb7cdf1d1c",
+      "size_bytes": 1031
+    },
+    {
+      "path": "method_summary.csv",
+      "sha256": "886a358994751be108412b19e28b36ef5c30d7c2f3f5a6b7f3e33e63357503f2",
+      "size_bytes": 2820
+    },
+    {
+      "path": "paired_method_intervals.csv",
+      "sha256": "5a1bfb55598ada70b7f5cc2a8208293abf2a49c95e65be7dfdbfb4f08324b311",
+      "size_bytes": 2156
+    },
+    {
+      "path": "run_record.json",
+      "sha256": "69a18ab927086d008da4a0a7bbbdabddc0fa07e735c954f1851010d1a0ec758f",
+      "size_bytes": 1587
+    },
+    {
+      "path": "stability_summary.csv",
+      "sha256": "026e33581654635e46e0f4d8781c75d049b03ffe3e29040d4c1ef2b52337e2b4",
+      "size_bytes": 205
+    }
+  ],
+  "schema_version": "visual-peer-08f-workflow/v1"
+}

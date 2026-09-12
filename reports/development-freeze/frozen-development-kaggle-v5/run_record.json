@@ -1,0 +1,17 @@
+{
+  "evidence_scope": "prediction_processing_and_runtime_not_ground_truth_accuracy",
+  "post_run_derived_outputs": [
+    "cohort_coverage.csv",
+    "stage_processing.csv",
+    "development_coverage.png",
+    "terminal_outcomes.png"
+  ],
+  "runtime_seconds": 11191.4,
+  "scene_count": 1000,
+  "source_commit": "81d601d25fb683a0ba76a2cda8ae209ca277ad5d",
+  "source_run": "esreekarreddy/toysad-8k-frozen-development-pipeline",
+  "source_version": 5,
+  "stage": "frozen_development_evidence",
+  "status": "completed",
+  "view_count": 20000
+}

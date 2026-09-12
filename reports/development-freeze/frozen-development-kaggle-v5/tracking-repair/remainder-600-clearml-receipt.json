@@ -1,0 +1,16 @@
+{
+  "git_commit": "81d601d25fb683a0ba76a2cda8ae209ca277ad5d",
+  "git_dirty": false,
+  "mode": "online",
+  "notebook_sha256": "878bca2c5baae0b26507a9e58ace64400d5aa7e68fd833aa24f0a7a6f1e4e015",
+  "run_status": "complete",
+  "safe_manifest_sha256": "af7b45effe2c9d3c7c17e3c89c5a3a30c23c43530b100c976ba1ccb08f29e9d8",
+  "schema_version": 1,
+  "snapshot_sha256": "898847224661c75990ea159f641a2149b3e1553f2c72dd1a0b77a01fbc679c73",
+  "stage": "frozen_development_pipeline_clearml_finalisation",
+  "status": "completed",
+  "task_id": "e9f41e3dd21e4b7cb35e03842ee4751b",
+  "tracking_attempt_count": 1,
+  "tracking_retry_count": 0,
+  "tracking_transient_failure_count": 0
+}

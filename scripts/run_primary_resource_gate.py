@@ -22,6 +22,7 @@ from visual_peer_inspector.workflows.kaggle_recovery import (
     write_safe_artifact_manifest,
 )
 from visual_peer_inspector.workflows.primary_resource_release import (
+    REFERENCE_GEOMETRY_POLICY,
     ROLE_CONTRACTS,
     SCHEMA_VERSION,
     build_development_identity_evaluator,
@@ -62,6 +63,7 @@ def _binding(args: argparse.Namespace) -> dict[str, object]:
             args.administrative_root / "checksums.sha256"
         ),
         "source_identity": verify_release_source(args.source_root),
+        "reference_geometry_policy": REFERENCE_GEOMETRY_POLICY,
     }
     if args.mode == "development-identity":
         common.update(
@@ -134,8 +136,7 @@ def parse_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def main() -> None:
-    args = parse_arguments()
+def run(args: argparse.Namespace) -> dict[str, object]:
     if args.mode == "development-identity" and not args.prediction_root:
         raise ValueError("Development identity release requires prediction roots")
     if args.mode != "development-identity" and any(
@@ -158,6 +159,46 @@ def main() -> None:
             expected_binding=binding,
             allowed_top_levels=_top_levels(args.mode),
         )
+    try:
+        return _build_and_publish(args, binding)
+    except (Exception, KeyboardInterrupt) as error:
+        # Keep completed scene records even if the release or reporting fails.
+        failure = {"status": "interrupted", "error_type": type(error).__name__}
+        try:
+            _write_json(args.output_root / "resource_run_result.json", failure)
+            if args.recovery_output_directory is not None:
+                failure["recovery"] = _save_recovery(args, binding)
+                _write_json(args.output_root / "resource_run_result.json", failure)
+        except Exception as recovery_error:  # noqa: BLE001 - preserve the original release error
+            print(json.dumps({
+                "event": "recovery_export_failed",
+                "error_type": type(recovery_error).__name__,
+                "loose_scene_checkpoints_retained": True,
+            }), flush=True)
+        raise
+
+
+def _save_recovery(args: argparse.Namespace, binding: dict[str, object]) -> dict[str, object]:
+    directory = args.recovery_output_directory
+    directory.mkdir(parents=True, exist_ok=True)
+    stem = f"{args.mode}-resource-recovery"
+    bundle = directory / f"{stem}.zip"
+    manifest = directory / f"{stem}-manifest.json"
+    record = create_recovery_bundle(
+        source_root=args.output_root,
+        bundle_path=bundle,
+        manifest_path=manifest,
+        binding=binding,
+        allowed_top_levels=_top_levels(args.mode),
+    )
+    return {
+        "bundle": bundle.as_posix(),
+        "manifest": manifest.as_posix(),
+        "bundle_sha256": record["bundle_sha256"],
+    }
+
+
+def _build_and_publish(args: argparse.Namespace, binding: dict[str, object]) -> dict[str, object]:
     limit = args.maximum_new_scenes if args.run_mode == "incremental" else None
     if args.mode == "development-identity":
         result = build_development_identity_evaluator(
@@ -180,22 +221,7 @@ def main() -> None:
             maximum_new_scenes=limit,
         )
     if args.recovery_output_directory is not None:
-        args.recovery_output_directory.mkdir(parents=True, exist_ok=True)
-        stem = f"{args.mode}-resource-recovery"
-        bundle = args.recovery_output_directory / f"{stem}.zip"
-        manifest = args.recovery_output_directory / f"{stem}-manifest.json"
-        recovery_record = create_recovery_bundle(
-            source_root=args.output_root,
-            bundle_path=bundle,
-            manifest_path=manifest,
-            binding=binding,
-            allowed_top_levels=_top_levels(args.mode),
-        )
-        result["recovery"] = {
-            "bundle": bundle.as_posix(),
-            "manifest": manifest.as_posix(),
-            "bundle_sha256": recovery_record["bundle_sha256"],
-        }
+        result["recovery"] = _save_recovery(args, binding)
         write_recovery_tracking_root(
             safe_root=args.output_root / "tracking-safe",
             stage=STAGES[args.mode],
@@ -209,8 +235,8 @@ def main() -> None:
         if args.prune_after_recovery:
             result["pruned_file_count"] = prune_verified_state(
                 source_root=args.output_root,
-                bundle_path=bundle,
-                manifest_path=manifest,
+                bundle_path=Path(result["recovery"]["bundle"]),
+                manifest_path=Path(result["recovery"]["manifest"]),
                 expected_binding=binding,
                 allowed_top_levels=_top_levels(args.mode),
             )
@@ -230,10 +256,25 @@ def main() -> None:
                 "exact_resume": True,
                 "aggregate_only": True,
                 "input_signature": result["input_signature"],
+                "reference_geometry_policy": REFERENCE_GEOMETRY_POLICY,
+                **{
+                    name: result[name]
+                    for name in (
+                        "reference_mapped_observation_count",
+                        "reference_unmapped_observation_count",
+                        "reference_mapping_fraction",
+                    )
+                    if name in result
+                },
             },
         )
         write_safe_artifact_manifest(safe_root)
-    print(json.dumps(result, sort_keys=True), flush=True)
+    _write_json(args.output_root / "resource_run_result.json", result)
+    return result
+
+
+def main() -> None:
+    print(json.dumps(run(parse_arguments()), sort_keys=True), flush=True)
 
 
 if __name__ == "__main__":

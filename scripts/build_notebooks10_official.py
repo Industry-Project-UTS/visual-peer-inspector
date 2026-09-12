@@ -8,6 +8,7 @@ from hashlib import sha256
 from pathlib import Path
 
 import nbformat
+from notebook_runtime_cells import harden_notebook
 
 ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOK_ROOT = ROOT / "notebooks" / "official-evaluation"
@@ -225,7 +226,7 @@ source_candidates = [Path(configured).expanduser()] if configured else kaggle_ro
 SOURCE_ROOT = next(
     candidate.resolve()
     for candidate in source_candidates
-    if (candidate / "toysAD8K.zip").is_file()
+    if (candidate / "archive_index.sqlite3").is_file()
     and (candidate / "archive_index.sqlite3").is_file()
     and (candidate / "toysad8k_scene_master.json").is_file()
     and (candidate / "package-checksums.sha256").is_file()
@@ -738,7 +739,7 @@ def _write_notebook(filename: str, cells: list) -> None:
         if cell.cell_type == "code":
             cell["execution_count"] = None
             cell["outputs"] = []
-    nbformat.write(notebook, NOTEBOOK_ROOT / filename)
+    nbformat.write(harden_notebook(notebook), NOTEBOOK_ROOT / filename)
 
 
 def build() -> None:
@@ -759,7 +760,7 @@ def build() -> None:
     _write_notebook(finalize_name, _finalize_cells())
     metadata = {
         "10r": {
-            "id": "esreekarreddy/toysad-8k-official-release",
+            "id": "esreekarreddy/toysad-8k-official-evaluation-release",
             "title": "ToysAD-8K Official Evaluation Release",
             "code_file": release_name,
             "language": "python",

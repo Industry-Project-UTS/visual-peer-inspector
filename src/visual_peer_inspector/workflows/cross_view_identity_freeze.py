@@ -25,6 +25,10 @@ from PIL import Image
 from visual_peer_inspector.data.model_safe_package import (
     canonical_json_bytes,
     file_sha256,
+    membership_sha256,
+)
+from visual_peer_inspector.evaluation.proposal_reference import (
+    REFERENCE_GEOMETRY_POLICY,
 )
 from visual_peer_inspector.evaluation.ranking import (
     clustered_mean_interval,
@@ -41,6 +45,11 @@ from visual_peer_inspector.qualitative_reporting import (
     QualitativeResult,
     QualitativeView,
     select_publication_results,
+)
+from visual_peer_inspector.representation.crops import (
+    CropConfiguration,
+    prepare_masked_crop,
+    project_crop_heatmap,
 )
 from visual_peer_inspector.representation.cross_view_identity import (
     INPUT_SCHEMA_VERSION,
@@ -610,8 +619,20 @@ def _load_evaluator_rows(
     *,
     prediction_lock_path: Path,
 ) -> tuple[list[dict[str, Any]], str]:
-    verify_identity_prediction_lock(prediction_lock_path)
-    rows = _read_jsonl(evaluator_path.expanduser().resolve())
+    prediction_lock = verify_identity_prediction_lock(prediction_lock_path)
+    evaluator_path = evaluator_path.expanduser().resolve(strict=True)
+    manifest = json.loads((evaluator_path.parent / "evaluator_manifest.json").read_text())
+    if (
+        manifest.get("schema_version") != "visual-peer-primary-resource-release/v1"
+        or manifest.get("status") != "locked"
+        or manifest.get("correspondence_sha256") != file_sha256(evaluator_path)
+        or manifest.get("scene_count") != prediction_lock["scene_count"]
+        or manifest.get("reference_geometry_policy") != REFERENCE_GEOMETRY_POLICY
+    ):
+        raise ValueError("Evaluator resource manifest does not match the locked correspondence")
+    rows = _read_jsonl(evaluator_path)
+    if manifest.get("correspondence_row_count") != len(rows):
+        raise ValueError("Evaluator correspondence row count differs from its manifest")
     allowed_optional = {"camera_diagnostic"}
     seen: set[tuple[str, str, str]] = set()
     for row in rows:
@@ -634,6 +655,9 @@ def _load_evaluator_rows(
         if key in seen:
             raise ValueError("Evaluator correspondence contains a duplicate object")
         seen.add(key)
+    scene_ids = sorted({key[0] for key in seen})
+    if len(scene_ids) != manifest["scene_count"] or membership_sha256(scene_ids) != manifest.get("membership_sha256"):
+        raise ValueError("Evaluator correspondence membership differs from its manifest")
     return rows, file_sha256(evaluator_path)
 
 
@@ -1015,36 +1039,24 @@ def _find_rgb(media_roots: Sequence[Path], view: ViewPrediction) -> Path:
     )
 
 
-def _combined_heatmap(view: ViewPrediction) -> np.ndarray | None:
+def _combined_heatmap(
+    view: ViewPrediction, rgb: Image.Image, object_ids: set[str]
+) -> np.ndarray | None:
+    """Project the selected track's patch evidence through each object crop."""
     arrays = []
     for item in view.objects:
-        if item.p1_heatmap is None:
+        if item.p1_heatmap is None or item.object_id not in object_ids:
             continue
         array = np.asarray(item.p1_heatmap, dtype=np.float32)
-        if array.ndim != 2 or not np.all(np.isfinite(array)):
-            raise ValueError("Notebook 08E P1 heatmap must be a finite 2D array")
-        arrays.append(array)
+        if array.ndim != 2 or not array.size:
+            raise ValueError("Notebook 08E P1 heatmap must be a non-empty 2D array")
+        mask = decode_binary_mask(item.mask_rle)
+        crop = prepare_masked_crop(rgb, mask, configuration=CropConfiguration())
+        arrays.append(project_crop_heatmap(array, crop, mask))
     if not arrays:
         return None
-    if len({array.shape for array in arrays}) != 1:
-        raise ValueError("P1 heatmaps in one view must share a shape")
-    combined = np.maximum.reduce(arrays)
-    mask_size = view.objects[0].mask_rle.get("size")
-    if (
-        not isinstance(mask_size, list)
-        or len(mask_size) != 2
-        or any(int(value) < 1 for value in mask_size)
-    ):
-        raise ValueError("Notebook 08E mask RLE requires a valid image size")
-    target_height, target_width = (int(value) for value in mask_size)
-    if combined.shape != (target_height, target_width):
-        combined = np.asarray(
-            Image.fromarray(combined, mode="F").resize(
-                (target_width, target_height), Image.Resampling.BILINEAR
-            ),
-            dtype=np.float32,
-        )
-    return combined
+    combined = np.fmax.reduce(arrays)
+    return combined if np.isfinite(combined).any() else None
 
 
 def _qualitative_result(
@@ -1076,12 +1088,20 @@ def _qualitative_result(
                     p1_rank=item.p1_rank,
                 )
             )
+        rgb_path = _find_rgb(media_roots, view)
+        selected_ids = {
+            item.object_id for item in view.objects
+            if winner is not None
+            and candidate_to_track.get(f"{view.view_id}|{item.object_id}") == winner
+        }
+        with Image.open(rgb_path) as opened:
+            heatmap = _combined_heatmap(view, opened.convert("RGB"), selected_ids)
         views.append(
             QualitativeView(
                 view_id=view.view_id,
-                rgb=_find_rgb(media_roots, view),
+                rgb=rgb_path,
                 objects=tuple(objects),
-                heatmap=_combined_heatmap(view),
+                heatmap=heatmap,
                 coordinate_space="normalized",
             )
         )
@@ -1253,6 +1273,7 @@ def run_cross_view_identity_freeze(
     failures: list[dict[str, Any]] = []
 
     verified = load_08e_predictions(prediction_roots)
+    print(json.dumps({"event": "identity_inputs_verified", "scene_count": len(verified.views_by_scene)}), flush=True)
     configurations = {
         "embedding_only": IdentityConfiguration(
             unmatched_cost=unmatched_cost,
@@ -1270,7 +1291,7 @@ def run_cross_view_identity_freeze(
     resumed_count = 0
     processed_count = 0
 
-    for scene_id, scene_views in verified.views_by_scene.items():
+    for scene_index, (scene_id, scene_views) in enumerate(verified.views_by_scene.items(), start=1):
         for variant in VARIANTS:
             configuration = configurations[variant]
             five_view_record = None
@@ -1362,6 +1383,15 @@ def run_cross_view_identity_freeze(
                     ),
                 }
             )
+        if scene_index % 25 == 0 or scene_index == len(verified.views_by_scene):
+            print(json.dumps({
+                "event": "identity_predictions_checkpointed",
+                "completed_scenes": scene_index,
+                "total_scenes": len(verified.views_by_scene),
+                "processed_cases": processed_count,
+                "resumed_cases": resumed_count,
+                "failed_cases": len(failures),
+            }), flush=True)
 
     _write_jsonl(
         output_root / "prediction-only" / "identity_predictions.jsonl", prediction_rows
@@ -1397,6 +1427,7 @@ def run_cross_view_identity_freeze(
         evaluator_correspondence_path,
         prediction_lock_path=identity_lock_path,
     )
+    print("Identity predictions locked; evaluating correspondence", flush=True)
 
     evaluator_lookup = {
         (str(row["opaque_scene_id"]), str(row["view_id"]), str(row["object_id"])): row
@@ -1423,6 +1454,7 @@ def run_cross_view_identity_freeze(
     interval_rows = _clustered_intervals(
         scene_rows, repetitions=bootstrap_repetitions, seed=bootstrap_seed
     )
+    print("Clustered intervals complete; calculating paired comparisons", flush=True)
     paired_rows = _paired_intervals(
         scene_rows, repetitions=bootstrap_repetitions, seed=bootstrap_seed
     )

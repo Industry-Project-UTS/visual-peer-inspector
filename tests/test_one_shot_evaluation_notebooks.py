@@ -106,7 +106,7 @@ def test_kernel_metadata_uses_cpu_and_frozen_dependencies() -> None:
             "dataset_sources"
         ]
     assert metadata_09d["kernel_sources"] == [
-        "esreekarreddy/09c-toysad8k-protected-internal-lock-inference"
+        "esreekarreddy/toysad-8k-protected-internal-lock-inference"
     ]
     assert any(
         "internal-lock400-model-input" in source

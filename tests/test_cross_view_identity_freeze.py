@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import sys
+from dataclasses import replace
 from hashlib import sha256
 from pathlib import Path
 
@@ -12,14 +13,18 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from visual_peer_inspector.data.model_safe_package import file_sha256
+from visual_peer_inspector.data.model_safe_package import file_sha256, membership_sha256
 from visual_peer_inspector.frozen_resource import verify_frozen_resource
 from visual_peer_inspector.models.sam2 import (
     binary_mask_sha256,
+    decode_binary_mask,
     encode_binary_mask,
 )
 from visual_peer_inspector.workflows.cross_view_identity_freeze import (
     EVALUATOR_SCHEMA_VERSION,
+    _combined_heatmap,
+    _load_evaluator_rows,
+    _prediction_lock,
     load_08e_predictions,
     run_cross_view_identity_freeze,
     verify_identity_prediction_lock,
@@ -158,6 +163,17 @@ def make_fixture(
         image_count=60,
     )
     write_jsonl(evaluator_path, evaluator_rows)
+    (evaluator_path.parent / "evaluator_manifest.json").write_text(json.dumps({
+        "schema_version": "visual-peer-primary-resource-release/v1",
+        "status": "locked", "scene_count": 12, "image_count": 60,
+        "membership_sha256": membership_sha256(sorted({row["opaque_scene_id"] for row in evaluator_rows})),
+        "correspondence_row_count": len(evaluator_rows),
+        "reference_geometry_policy": {
+            "decoder": "toysad-grayscale-threshold-v1", "mask_threshold": 128,
+            "image_size": [256, 256], "box_format": "half-open-xyxy",
+        },
+        "correspondence_sha256": file_sha256(evaluator_path),
+    }))
     return prediction_root, media_root, evaluator_path
 
 
@@ -176,6 +192,49 @@ def run_fixture(root: Path, *, camera_prefix: str = "camera") -> tuple[dict, Pat
         qualitative_count=12,
     )
     return record, output
+
+
+def test_patch_heatmap_is_projected_only_inside_the_selected_object(tmp_path):
+    prediction_root, media_root, _ = make_fixture(tmp_path)
+    loaded = load_08e_predictions([prediction_root])
+    # Keep invalid background patches, as the real P1 output does.
+    view = loaded.views_by_scene["S000"][0]
+    selected = replace(view.objects[0], p1_heatmap=((float("nan"), 0.9), (0.6, 0.5)))
+    view = replace(view, objects=(selected, *view.objects[1:]))
+    with Image.open(media_root / "media/S000/rgb/V00.png") as rgb:
+        projected = _combined_heatmap(view, rgb, {selected.object_id})
+        assert _combined_heatmap(view, rgb, set()) is None
+    mask = decode_binary_mask(selected.mask_rle)
+    assert projected.shape == mask.shape
+    assert np.isfinite(projected[mask]).any()
+    assert np.isnan(projected[~mask]).all()
+    assert np.nanmax(projected) <= 0.9 + 1e-6
+
+
+@pytest.mark.parametrize("field,value", [
+    ("correspondence_sha256", "0" * 64),
+    ("scene_count", 13),
+    ("correspondence_row_count", 0),
+    ("reference_geometry_policy", None),
+    ("reference_geometry_policy", {"mask_threshold": 0}),
+    ("membership_sha256", "0" * 64),
+])
+def test_evaluator_manifest_rejects_changed_resource(tmp_path, field, value):
+    _, _, evaluator = make_fixture(tmp_path / "inputs")
+    output = tmp_path / "output"
+    prediction_root = output / "prediction-only"
+    prediction_root.mkdir(parents=True)
+    (prediction_root / "fixture.json").write_text('{}')
+    _prediction_lock(output, {"scene_count": 12})
+    manifest_path = evaluator.parent / "evaluator_manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest[field] = value
+    manifest_path.write_text(json.dumps(manifest))
+    with pytest.raises(ValueError, match="Evaluator"):
+        _load_evaluator_rows(
+            evaluator,
+            prediction_lock_path=prediction_root / "identity_prediction_lock.json",
+        )
 
 
 def test_fixture_run_locks_predictions_before_evaluation_and_renders_evidence(

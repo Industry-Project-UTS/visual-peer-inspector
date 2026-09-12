@@ -13,7 +13,7 @@
   "enable_gpu": false,
   "enable_internet": true,
   "enable_tpu": false,
-  "id": "esreekarreddy/toysad-8k-post-freeze-full-pool-evaluation",
+  "id": "esreekarreddy/toysad-8k-post-freeze-full-pool-sensitivity-evaluation",
   "is_private": true,
   "kernel_sources": [],
   "kernel_type": "notebook",

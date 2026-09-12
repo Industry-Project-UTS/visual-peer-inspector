@@ -32,6 +32,11 @@ from visual_peer_inspector.data.model_safe_package import (
     membership_sha256,
     verify_model_input_package,
 )
+from visual_peer_inspector.data.source_storage import (
+    extracted_source_root,
+    read_extracted_source_member,
+    verify_archive_storage,
+)
 from visual_peer_inspector.data.toysad_selection import (
     MODEL_FACING_MEDIA_FIELDS,
     anomaly_prefixes,
@@ -171,16 +176,22 @@ def estimate_official_model_bytes(
 
 
 class IndexedArchive(AbstractContextManager["IndexedArchive"]):
-    """Read indexed ZIP members with one persistent database connection."""
+    """Read verified ZIP or extracted members with one index connection."""
 
     def __init__(self, archive_path: Path, index_path: Path) -> None:
         self.archive_path = Path(archive_path)
         self.index_path = Path(index_path)
         self.stream = None
         self.database = None
+        self.extracted_root = None
 
     def __enter__(self) -> Self:
-        self.stream = self.archive_path.open("rb")
+        if self.archive_path.is_file():
+            self.stream = self.archive_path.open("rb")
+        else:
+            self.extracted_root = extracted_source_root(self.archive_path)
+            if self.extracted_root is None:
+                raise FileNotFoundError("No indexed source archive or extraction was found")
         self.database = sqlite3.connect(
             f"file:{self.index_path.resolve()}?mode=ro", uri=True
         )
@@ -193,7 +204,7 @@ class IndexedArchive(AbstractContextManager["IndexedArchive"]):
             self.stream.close()
 
     def read(self, name: str, maximum_bytes: int = 16 * 1024 * 1024) -> bytes:
-        if self.database is None or self.stream is None:
+        if self.database is None:
             raise RuntimeError("Archive reader is not open")
         rows = self.database.execute(
             "SELECT name, compressed_size, uncompressed_size, crc32, "
@@ -216,6 +227,10 @@ class IndexedArchive(AbstractContextManager["IndexedArchive"]):
             is_symlink=bool(row[8]),
             unsafe_reason=row[9],
         )
+        if self.extracted_root is not None:
+            return read_extracted_source_member(
+                self.extracted_root, member, maximum_bytes=maximum_bytes,
+            )
         return read_indexed_member(
             self.stream,
             member,
@@ -235,20 +250,17 @@ def _verify_source_identity(
     master_relative = master_path.relative_to(source_root).as_posix()
     if declared.get(master_relative) != file_sha256(master_path):
         raise ValueError("The official master file does not match its package checksum")
-    archive_path = source_root / "toysAD8K.zip"
-    if archive_path.stat().st_size != EXPECTED_ARCHIVE_SIZE_BYTES:
-        raise ValueError("The source archive has an unexpected size")
-    if declared.get("toysAD8K.zip") != EXPECTED_ARCHIVE_SHA256:
-        raise ValueError("The source package declares another archive")
-    archive_digest = file_sha256(archive_path) if verify_archive_hash else EXPECTED_ARCHIVE_SHA256
-    if archive_digest != EXPECTED_ARCHIVE_SHA256:
-        raise ValueError("The source archive SHA-256 does not match")
+    index_digest = file_sha256(source_root / "archive_index.sqlite3")
+    if declared.get("archive_index.sqlite3") != index_digest:
+        raise ValueError("The source archive index checksum differs")
+    storage = verify_archive_storage(
+        source_root, declared, expected_sha256=EXPECTED_ARCHIVE_SHA256,
+        expected_size=EXPECTED_ARCHIVE_SIZE_BYTES, verify_archive_hash=verify_archive_hash,
+    )
     return {
         "master_sha256": file_sha256(master_path),
-        "archive_sha256": archive_digest,
-        "archive_bytes_verified": verify_archive_hash,
-        "archive_size_bytes": archive_path.stat().st_size,
-        "archive_index_sha256": file_sha256(source_root / "archive_index.sqlite3"),
+        **storage,
+        "archive_index_sha256": index_digest,
     }
 
 

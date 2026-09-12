@@ -1,0 +1,437 @@
+Stage: 08D Kaggle Version 2
+Status: completed
+Clean notebook: 08d-kaggle-v2.ipynb
+Clean notebook SHA-256: 95a4916261f230a6c4d360f53dfd7618a747ae6ced25c1cf166b401ebd377a73
+Downloaded saved-output SHA-256: 12de58c2f78c0cc587a87cac076101c50534c9b3a7152ba9fbe077912cf5e860
+Executed code cells: 8
+Retained output blocks: 15
+Retained safe visuals: 2
+Removed private visuals: 1
+
+Sanitised execution transcript
+==============================
+
+[cell 5]
+{'environment': 'kaggle',
+ 'release': 'toysad8k-train-2000-v2',
+ 'development remainder scenes': 600,
+ 'development remainder images': 12000,
+ 'calibration scenes verified but sealed': 600,
+ 'internal-lock scenes verified but sealed': 400}
+
+[cell 7]
+{
+  "all_completion_gates_passed": true,
+  "calibration_labels_opened": false,
+  "calibration_media_released": false,
+  "calibration_scene_count": 600,
+  "checkpoint_sha256": "66c89b295a7ed474b206c7ec8a5905b5a02ff93b33b0a0484e97e59a6c524a06",
+  "development_scene_count": 1000,
+  "files_reused_this_run": 0,
+  "files_written_this_run": 12000,
+  "internal_lock_labels_opened": false,
+  "internal_lock_media_released": false,
+  "internal_lock_scene_count": 400,
+  "model_package_contains_held_out_scenes": false,
+  "primary_scene_count": 2000,
+  "release_id": "toysad8k-train-2000-v2",
+  "released_asset_group_count": 164,
+  "released_content_checksums_sha256": "22080f1591b1c8e0a8951548826af76bf51755f1cc04c78d3b4dfb68a0cedc65",
+  "released_image_count": 12000,
+  "released_manifest_sha256": "59506fc22cdad0606c25af770ef51853d965468b99a8e09d2e0cfaa17313a352",
+  "released_membership_sha256": "e6b4e91dd99de72ddad6e462948c5a4c87b8594be230b3ed7950af841d0a2198",
+  "released_scene_count": 600,
+  "schema_version": 1,
+  "stage": "primary_protocol_release",
+  "status": "completed",
+  "zero_asset_group_overlap": true,
+  "zero_scene_overlap": true
+}
+
+[cell 7]
+{'status': 'completed',
+ 'primary scenes verified': 2000,
+ 'released development scenes': 600,
+ 'released RGB images': 12000,
+ 'images written this run': 12000,
+ 'images reused this run': 0,
+ 'held-out scenes in model package': False}
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cohort</th>
+      <th>role</th>
+      <th>scenes</th>
+      <th>views</th>
+      <th>asset_groups</th>
+      <th>membership_sha256</th>
+      <th>membership_verified</th>
+      <th>rgb_release</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>toysad8k-development-full-1000-v1</td>
+      <td>development</td>
+      <td>1000</td>
+      <td>20000</td>
+      <td>273</td>
+      <td>00e400350a056631778bd9c4dace1667d95e52bf58c0a2...</td>
+      <td>True</td>
+      <td>complete_across_development_stages</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>toysad8k-calibration-600-v1</td>
+      <td>calibration</td>
+      <td>600</td>
+      <td>12000</td>
+      <td>163</td>
+      <td>6700bb065210bfd45188babd2b3d45973d6b4f57e5066d...</td>
+      <td>True</td>
+      <td>sealed</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>toysad8k-internal-lock-400-v1</td>
+      <td>internal_lock</td>
+      <td>400</td>
+      <td>8000</td>
+      <td>109</td>
+      <td>819f21f49705f9398c809002905abe52b8305ad41e4cab...</td>
+      <td>True</td>
+      <td>sealed</td>
+    </tr>
+  </tbody>
+</table>
+</div>                              cohort           role  scenes  views  \
+0  toysad8k-development-full-1000-v1    development    1000  20000
+1        toysad8k-calibration-600-v1    calibration     600  12000
+2      toysad8k-internal-lock-400-v1  internal_lock     400   8000
+
+   asset_groups                                  membership_sha256  \
+0           273  00e400350a056631778bd9c4dace1667d95e52bf58c0a2...
+1           163  6700bb065210bfd45188babd2b3d45973d6b4f57e5066d...
+2           109  819f21f49705f9398c809002905abe52b8305ad41e4cab...
+
+   membership_verified                         rgb_release
+0                 True  complete_across_development_stages
+1                 True                              sealed
+2                 True                              sealed
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cohort</th>
+      <th>stage</th>
+      <th>scenes</th>
+      <th>views</th>
+      <th>asset_groups</th>
+      <th>membership_sha256</th>
+      <th>membership_verified</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>toysad8k-development-screen-100-v1</td>
+      <td>screen_100</td>
+      <td>100</td>
+      <td>2000</td>
+      <td>27</td>
+      <td>308e2e104448612dc60b5392a5258d97f6d93f52ca553a...</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>toysad8k-development-confirm-300-v1</td>
+      <td>confirm_300</td>
+      <td>300</td>
+      <td>6000</td>
+      <td>82</td>
+      <td>bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759...</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>toysad8k-development-remainder-600-v1</td>
+      <td>remainder_600</td>
+      <td>600</td>
+      <td>12000</td>
+      <td>164</td>
+      <td>e6b4e91dd99de72ddad6e462948c5a4c87b8594be230b3...</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                  cohort          stage  scenes  views  \
+0     toysad8k-development-screen-100-v1     screen_100     100   2000
+1    toysad8k-development-confirm-300-v1    confirm_300     300   6000
+2  toysad8k-development-remainder-600-v1  remainder_600     600  12000
+
+   asset_groups                                  membership_sha256  \
+0            27  308e2e104448612dc60b5392a5258d97f6d93f52ca553a...
+1            82  bc00e95781a6d52c25c9e40364f8dfa36ad7874cccd759...
+2           164  e6b4e91dd99de72ddad6e462948c5a4c87b8594be230b3...
+
+   membership_verified
+0                 True
+1                 True
+2                 True
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>left_role</th>
+      <th>right_role</th>
+      <th>scene_overlap</th>
+      <th>asset_group_overlap</th>
+      <th>passed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>development</td>
+      <td>calibration</td>
+      <td>0</td>
+      <td>0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>development</td>
+      <td>internal_lock</td>
+      <td>0</td>
+      <td>0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>calibration</td>
+      <td>internal_lock</td>
+      <td>0</td>
+      <td>0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>     left_role     right_role  scene_overlap  asset_group_overlap  passed
+0  development    calibration              0                    0    True
+1  development  internal_lock              0                    0    True
+2  calibration  internal_lock              0                    0    True
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>role</th>
+      <th>scene_count</th>
+      <th>image_count</th>
+      <th>media_state</th>
+      <th>label_state</th>
+      <th>next_notebook</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>development_remaining</td>
+      <td>600</td>
+      <td>12000</td>
+      <td>released</td>
+      <td>not_in_model_package</td>
+      <td>08E</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>calibration</td>
+      <td>600</td>
+      <td>12000</td>
+      <td>sealed</td>
+      <td>sealed</td>
+      <td>09A_after_method_freeze</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>internal_lock</td>
+      <td>400</td>
+      <td>8000</td>
+      <td>sealed</td>
+      <td>sealed</td>
+      <td>09C_after_policy_freeze</td>
+    </tr>
+  </tbody>
+</table>
+</div>                    role  scene_count  image_count media_state  \
+0  development_remaining          600        12000    released
+1            calibration          600        12000      sealed
+2          internal_lock          400         8000      sealed
+
+            label_state            next_notebook
+0  not_in_model_package                      08E
+1                sealed  09A_after_method_freeze
+2                sealed  09C_after_policy_freeze
+
+[cell 9]
+<IPython.core.display.Image object>
+
+[cell 9]
+<IPython.core.display.Image object>
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 13]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 18.4 MB/s eta 0:00:00
+
+[cell 13]
+{'git_commit': 'bf6a576bbaca479c71ee7c58f636089e0997b39e',
+ 'git_dirty': False,
+ 'mode': 'disabled',
+ 'notebook_sha256': '95a4916261f230a6c4d360f53dfd7618a747ae6ced25c1cf166b401ebd377a73',
+ 'run_status': 'completed',
+ 'safe_manifest_sha256': '805098125612d14d0d7490724124bdbbe50e8cbf3f6950ff7a215c9615ff5e58',
+ 'schema_version': 1,
+ 'snapshot_sha256': '5d37b3d0d81bebeb5497234c9755a5501eb23314f117e092115629e26f59126e',
+ 'stage': 'primary_protocol_release_clearml_finalisation',
+ 'status': 'disabled',
+ 'task_id': None,
+ 'tracking_attempt_count': 0,
+ 'tracking_retry_count': 0,
+ 'tracking_transient_failure_count': 0}
+
+[cell 15]
+{"archives": [{"path": "primary-protocol-release-repository-evidence.zip", "sha256": "77e3150047e7e4f4d9fd8a34d1cb0e5b3f87a90225e9c6e3c9b3dc4279b48c4e", "size_bytes": 54777, "source_file_count": 8}, {"path": "primary-protocol-release-review-evidence.zip", "sha256": "320d5fb47aabef31ccc2121aabefa86d495d02bb3fad8ddda647b5632bdc6b64", "size_bytes": 901146, "source_file_count": 2}, {"path": "primary-protocol-release-downstream-input.zip", "sha256": "49e957e534c9baa8957a912b0f1e54037b1f4417181eb4e5c66723e54c89643f", "size_bytes": 1524655144, "source_file_count": 12004}], "downstream_file_count": 12004, "review_file_count": 2, "safe_file_count": 8, "safe_manifest_sha256": "805098125612d14d0d7490724124bdbbe50e8cbf3f6950ff7a215c9615ff5e58", "schema_version": 1, "stage": "primary-protocol-release", "status": "completed"}
+
+[cell 15]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>path</th>
+      <th>sha256</th>
+      <th>size_bytes</th>
+      <th>source_file_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>primary-protocol-release-repository-evidence.zip</td>
+      <td>77e3150047e7e4f4d9fd8a34d1cb0e5b3f87a90225e9c6...</td>
+      <td>54777</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>primary-protocol-release-review-evidence.zip</td>
+      <td>320d5fb47aabef31ccc2121aabefa86d495d02bb3fad8d...</td>
+      <td>901146</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>primary-protocol-release-downstream-input.zip</td>
+      <td>49e957e534c9baa8957a912b0f1e54037b1f4417181eb4...</td>
+      <td>1524655144</td>
+      <td>12004</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                               path  \
+0  primary-protocol-release-repository-evidence.zip
+1      primary-protocol-release-review-evidence.zip
+2     primary-protocol-release-downstream-input.zip
+
+                                              sha256  size_bytes  \
+0  77e3150047e7e4f4d9fd8a34d1cb0e5b3f87a90225e9c6...       54777
+1  320d5fb47aabef31ccc2121aabefa86d495d02bb3fad8d...      901146
+2  49e957e534c9baa8957a912b0f1e54037b1f4417181eb4...  1524655144
+
+   source_file_count
+0                  8
+1                  2
+2              12004
+
+[cell 15]
+Verified downloads: /kaggle/working/notebook08d_bundles

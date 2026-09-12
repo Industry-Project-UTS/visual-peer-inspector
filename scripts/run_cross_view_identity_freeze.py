@@ -23,6 +23,7 @@ from visual_peer_inspector.tracking_safe_artifacts import (
 from visual_peer_inspector.workflows.cross_view_identity_freeze import (
     run_cross_view_identity_freeze,
 )
+from visual_peer_inspector.workflows.kaggle_recovery import create_recovery_bundle
 
 
 def _write_json(path: Path, value: dict[str, Any]) -> None:
@@ -266,8 +267,27 @@ def main() -> None:
         task_name=arguments.clearml_task_name,
         wall_time_seconds=arguments.clearml_wall_time_seconds,
     )
+    # One verified archive avoids downloading thousands of checkpoint files separately.
+    output_root = arguments.output_root.expanduser().resolve()
+    bundle = create_recovery_bundle(
+        source_root=output_root,
+        bundle_path=output_root.parent / "notebook08f-evidence.zip",
+        manifest_path=output_root.parent / "notebook08f-evidence-manifest.json",
+        binding={
+            "stage": "cross_view_identity_freeze",
+            "frozen_model_identity_sha256": record["frozen_model_identity_sha256"],
+            "identity_prediction_lock_sha256": record["identity_prediction_lock_sha256"],
+        },
+        allowed_top_levels=(
+            "safe", "private", "prediction-only", "downstream", "publish", "review-only", "tracking",
+        ),
+    )
+    bundle_summary = {
+        key: bundle[key]
+        for key in ("artifact_count", "bundle_sha256", "bundle_size_bytes", "binding_sha256")
+    }
     print(
-        json.dumps({"run": record, "clearml": tracking}, indent=2, sort_keys=True),
+        json.dumps({"run": record, "clearml": tracking, "download_bundle": bundle_summary}, indent=2, sort_keys=True),
         flush=True,
     )
 

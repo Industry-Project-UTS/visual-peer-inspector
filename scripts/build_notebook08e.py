@@ -70,13 +70,13 @@ sys.dont_write_bytecode = True
 
 NOTEBOOK_NAME = "08e-toysad8k-frozen-development-pipeline.ipynb"
 EXECUTION_ENVIRONMENT = "kaggle" if Path("/kaggle/input").is_dir() else "local"
-RUN_PHASE = os.getenv("VPI_RUN_PHASE", "incremental").strip().lower()
+RUN_PHASE = os.getenv("VPI_RUN_PHASE", "full").strip().lower()
 if RUN_PHASE not in {"incremental", "full"}:
     raise ValueError("VPI_RUN_PHASE must be incremental or full")
 MAXIMUM_NEW_SHARDS = int(os.getenv("VPI_MAXIMUM_NEW_SHARDS", "10"))
 if MAXIMUM_NEW_SHARDS < 1:
     raise ValueError("VPI_MAXIMUM_NEW_SHARDS must be positive")
-DS2_BACKFILL_PHASE = os.getenv("VPI_DS2_BACKFILL_PHASE", "incremental").strip().lower()
+DS2_BACKFILL_PHASE = os.getenv("VPI_DS2_BACKFILL_PHASE", "full").strip().lower()
 if DS2_BACKFILL_PHASE not in {"incremental", "full"}:
     raise ValueError("VPI_DS2_BACKFILL_PHASE must be incremental or full")
 OUTPUT_ROOT = Path(os.getenv(
@@ -160,31 +160,32 @@ def find_model_input(cohort_id: str, variable: str) -> Path:
     raise FileNotFoundError(f"Could not locate model-safe cohort {cohort_id}")
 
 
-def find_named_file(name: str, variable: str) -> Path:
-    configured = os.getenv(variable)
-    if configured and Path(configured).expanduser().is_file():
-        return Path(configured).expanduser().resolve()
-    matches = []
-    for root in kaggle_roots():
-        matches.extend(root.rglob(name))
-    files = sorted({path.resolve() for path in matches if path.is_file()})
-    if not files:
-        raise FileNotFoundError(f"Could not locate {name}")
-    digests = {sha256(path.read_bytes()).hexdigest() for path in files}
-    if len(digests) != 1:
-        raise ValueError(f"Mounted copies of {name} differ")
-    return files[0]
-
-
-def find_directory(marker: str, variable: str) -> Path:
+def find_package_root(package_kind: str, variable: str) -> Path:
     configured = os.getenv(variable)
     candidates = [Path(configured).expanduser()] if configured else []
     for root in kaggle_roots():
-        candidates.extend((root, *(path for path in root.iterdir() if path.is_dir())))
+        candidates.extend(path.parent for path in root.rglob("package_record.json"))
+    matches = []
     for candidate in candidates:
-        if (candidate / marker).is_file():
-            return candidate.resolve()
-    raise FileNotFoundError(f"Could not locate {variable} containing {marker}")
+        record_path = candidate / "package_record.json"
+        if not record_path.is_file():
+            continue
+        try:
+            record = json.loads(record_path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if record.get("package_kind") == package_kind:
+            matches.append(candidate.resolve())
+    unique = sorted(set(matches), key=lambda path: path.as_posix())
+    if not unique:
+        raise FileNotFoundError(f"Could not locate private package {package_kind}")
+    digests = {
+        sha256((path / "package_record.json").read_bytes()).hexdigest()
+        for path in unique
+    }
+    if len(digests) != 1:
+        raise ValueError(f"Mounted copies of {package_kind} differ")
+    return unique[0]
 
 
 def find_recovery_pair(
@@ -196,7 +197,8 @@ def find_recovery_pair(
     bundles = sorted({
         path.resolve()
         for source in sources
-        for path in source.rglob(f"{stem}-recovery.zip")
+        for name in (f"{stem}-recovery.zip", f"{stem}-recovery.zip.bin")
+        for path in source.rglob(name)
         if path.is_file()
     })
     manifests = sorted({
@@ -208,7 +210,11 @@ def find_recovery_pair(
     if not bundles and not manifests:
         return None
     if len(bundles) != 1 or len(manifests) != 1:
-        raise ValueError(f"{environment_name} must contain exactly one {stem} recovery pair")
+        raise ValueError(
+            f"{environment_name}: expected one {stem} recovery pair; "
+            f"found {len(bundles)} bundles and {len(manifests)} manifests. "
+            "Upload the archive as .zip.bin so Kaggle preserves its bytes."
+        )
     return bundles[0], manifests[0]
 
 
@@ -281,6 +287,7 @@ def finish_clearml(safe_root: Path, task_name: str, receipt: Path, result_tag: s
 CODE_ROOT = find_code_root()
 sys.path.insert(0, str(CODE_ROOT / "src"))
 from visual_peer_inspector.notebook_provenance import verify_notebook_code_snapshot
+from visual_peer_inspector.data.ds2_reuse_input import verify_ds2_reuse_input
 
 CODE_PROVENANCE = verify_notebook_code_snapshot(
     CODE_ROOT,
@@ -290,8 +297,9 @@ CODE_PROVENANCE = verify_notebook_code_snapshot(
 DS1_ROOT = find_model_input("toysad8k-development-screen-100-v1", "VPI_DS1_MODEL_INPUT_ROOT")
 REMAINDER_ROOT = find_model_input("toysad8k-development-remainder-600-v1", "VPI_REMAINDER_MODEL_INPUT_ROOT")
 DS2_RGB_ROOT = find_model_input("toysad8k-development-confirm-300-v1", "VPI_DS2_RGB_ROOT")
-DS2_RUN_ROOT = find_directory("mask-routes/package_record.json", "VPI_DS2_RUN_ROOT")
-SELECTED_PROMPT = find_named_file("selected_prompt.json", "VPI_SELECTED_PROMPT")
+DS2_REUSE_ROOT = find_package_root("ds2-frozen-route-reuse", "VPI_DS2_REUSE_ROOT")
+DS2_REUSE_RECORD = verify_ds2_reuse_input(DS2_REUSE_ROOT)
+SELECTED_PROMPT = DS2_REUSE_ROOT / "selected_prompt.json"
 
 display({
     "execution environment": EXECUTION_ENVIRONMENT,
@@ -303,6 +311,8 @@ display({
     "views per scene": 20,
     "confirmation backfill scenes": 300,
     "confirmation reuse boundary": "LocateAnything and SAM identities must verify",
+    "confirmation reuse package": DS2_REUSE_RECORD["package_kind"],
+    "confirmation reuse hash": DS2_REUSE_RECORD["content_checksums_sha256"],
 })
 """
     ),
@@ -462,9 +472,9 @@ if PIPELINE_COMPLETE:
             str(CODE_ROOT / "scripts/run_frozen_development_pipeline.py"),
             "backfill-ds2",
             "--rgb-root", str(DS2_RGB_ROOT),
-            "--mask-route-root", str(DS2_RUN_ROOT / "mask-routes"),
-            "--proposal-record", str(DS2_RUN_ROOT / "locateanything/model-input/package_record.json"),
-            "--automatic-sam-record", str(DS2_RUN_ROOT / "sam21/automatic-box/safe/run_record.json"),
+            "--mask-route-root", str(DS2_REUSE_ROOT / "mask-routes"),
+            "--locate-run-record", str(DS2_REUSE_ROOT / "locateanything_run_record.json"),
+            "--automatic-sam-record", str(DS2_REUSE_ROOT / "automatic_sam_run_record.json"),
             "--selected-prompt", str(SELECTED_PROMPT),
             "--output-root", str(OUTPUT_ROOT),
             "--device", "cuda",
@@ -555,7 +565,10 @@ for root in figure_roots:
     for item in evidence["items"]:
         figure_paths.extend((root / item["prediction_panel"], root / item["sam_evidence_panel"]))
 
-for path in figure_paths[:8]:
+preview_paths = []
+for root in figure_roots:
+    preview_paths.extend([path for path in figure_paths if path.is_relative_to(root)][:4])
+for path in preview_paths:
     display(NotebookImage(filename=str(path)))
 display({"prediction-only audit figures": len(figure_paths)})
 """
@@ -662,7 +675,11 @@ def build() -> None:
     notebook = nbformat.v4.new_notebook(
         cells=cells,
         metadata={
-            "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
+            "kernelspec": {
+                "display_name": "Python 3",
+                "language": "python",
+                "name": "python3",
+            },
             "language_info": {"name": "python", "version": "3.12"},
         },
     )
@@ -684,9 +701,10 @@ def build() -> None:
             "esreekarreddy/vpi-toysad-ds1-screen100-model-input",
             "esreekarreddy/vpi-toysad-development-remainder-model-input",
             "esreekarreddy/vpi-toysad-ds2-confirmation-rgb",
+            "esreekarreddy/vpi-ds2-frozen-route-reuse",
         ],
         "competition_sources": [],
-        "kernel_sources": ["esreekarreddy/toysad-8k-ds2-frozen-pipeline"],
+        "kernel_sources": [],
         "model_sources": [],
     }
     (NOTEBOOK_ROOT / METADATA_NAME).write_text(

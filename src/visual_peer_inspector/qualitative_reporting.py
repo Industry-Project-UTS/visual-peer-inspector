@@ -264,9 +264,7 @@ def render_evaluator_overlay_panel(
     """Render a private panel with prediction and evaluator geometry."""
 
     prediction_view_ids = {view.view_id for view in result.views}
-    unknown = {view.view_id for view in evaluator.views}.difference(
-        prediction_view_ids
-    )
+    unknown = {view.view_id for view in evaluator.views}.difference(prediction_view_ids)
     if unknown:
         raise ValueError(f"Evaluator overlay contains unknown views: {sorted(unknown)}")
     return _render_panel(
@@ -312,9 +310,7 @@ def _render_panel(
     row_gap = 26
     column_width = panel_size
     canvas_width = (
-        2 * margin
-        + len(views) * column_width
-        + (len(views) - 1) * column_gap
+        2 * margin + len(views) * column_width + (len(views) - 1) * column_gap
     )
     row_count = 5
     canvas_height = (
@@ -330,7 +326,9 @@ def _render_panel(
     _draw_text(
         draw,
         (margin, 38),
-        _summary_text(result),
+        "Per-view P1 candidates | Cross-view identity is not evaluated"
+        if result.review_state == "prediction_only" and result.fused_odd_one_out is None
+        else _summary_text(result),
         font,
         _TEXT,
     )
@@ -363,9 +361,7 @@ def _render_panel(
                     "Unusual-region heatmap",
                 )
             ):
-                y = header_height + row_index * (
-                    panel_size + label_height + row_gap
-                )
+                y = header_height + row_index * (panel_size + label_height + row_gap)
                 _draw_missing_panel(
                     canvas,
                     x,
@@ -415,6 +411,13 @@ def _render_panel(
                 offset,
             )
 
+        selected_id = result.fused_odd_one_out
+        per_view_selection = (
+            result.review_state == "prediction_only" and selected_id is None
+        )
+        if per_view_selection:
+            candidates = [item.object_id for item in view.objects if item.p1_rank == 1]
+            selected_id = candidates[0] if len(candidates) == 1 else None
         binary_mask_panel, masked_object_panel, selected_object = (
             _selected_object_mask_panels(
                 fitted,
@@ -422,7 +425,7 @@ def _render_panel(
                 rgb.size,
                 scale,
                 offset,
-                result.fused_odd_one_out,
+                selected_id,
             )
         )
 
@@ -438,11 +441,19 @@ def _render_panel(
             (mask_panel, _mask_caption(view)),
             (
                 binary_mask_panel,
-                _selected_mask_caption(selected_object, "Binary mask"),
+                _selected_mask_caption(
+                    selected_object,
+                    "Per-view top mask" if per_view_selection else "Binary mask",
+                ),
             ),
             (
                 masked_object_panel,
-                _selected_mask_caption(selected_object, "Object on black"),
+                _selected_mask_caption(
+                    selected_object,
+                    "Per-view top on black"
+                    if per_view_selection
+                    else "Object on black",
+                ),
             ),
             (heatmap_panel, _heatmap_caption(view)),
         )
@@ -476,9 +487,7 @@ def _validate_box(box: Sequence[float]) -> None:
 def _natural_key(value: str) -> tuple[tuple[int, int | str], ...]:
     parts = re.split(r"(\d+)", value.casefold())
     return tuple(
-        (0, int(part)) if part.isdigit() else (1, part)
-        for part in parts
-        if part
+        (0, int(part)) if part.isdigit() else (1, part) for part in parts if part
     )
 
 
@@ -800,9 +809,9 @@ def _blend_mask(
     mask_array = np.asarray(full_mask) > 0
     image_array = np.asarray(panel).astype(np.float32)
     colour_array = np.asarray(colour, dtype=np.float32)
-    image_array[mask_array] = (
-        (1.0 - alpha) * image_array[mask_array] + alpha * colour_array
-    )
+    image_array[mask_array] = (1.0 - alpha) * image_array[
+        mask_array
+    ] + alpha * colour_array
     return Image.fromarray(np.clip(image_array, 0, 255).astype(np.uint8), mode="RGB")
 
 

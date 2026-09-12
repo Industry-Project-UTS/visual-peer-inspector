@@ -80,8 +80,8 @@ def test_metadata_separates_model_and_evaluator_resources() -> None:
         for stage in ("11r", "11a", "11b")
     }
     assert metadata["11r"]["id"] == "esreekarreddy/toysad-8k-post-freeze-full-pool-release"
-    assert metadata["11a"]["id"] == "esreekarreddy/toysad-8k-post-freeze-full-pool-inference"
-    assert metadata["11b"]["id"] == "esreekarreddy/toysad-8k-post-freeze-full-pool-evaluation"
+    assert metadata["11a"]["id"] == "esreekarreddy/toysad-8k-post-freeze-full-pool-frozen-inference"
+    assert metadata["11b"]["id"] == "esreekarreddy/toysad-8k-post-freeze-full-pool-sensitivity-evaluation"
     assert metadata["11a"]["kernel_sources"] == []
     assert metadata["11b"]["kernel_sources"] == []
     for stage in ("11a", "11b"):

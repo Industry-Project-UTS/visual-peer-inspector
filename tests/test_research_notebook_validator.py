@@ -63,6 +63,16 @@ def write_metadata(
 
 
 class ResearchNotebookValidatorTests(unittest.TestCase):
+    def test_discovery_ignores_clean_sources_saved_with_executed_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            current = root / "notebooks/development-freeze/08d-current.ipynb"
+            saved = root / "notebooks/executed/development-freeze/08d-kaggle-v2.ipynb"
+            for path in (current, saved, saved.with_name("08d-kaggle-v2-executed.ipynb")):
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("{}")
+            self.assertEqual(validator.notebook_paths(root), {"08d": current})
+
     def test_accepts_clean_stage_notebook(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "08d-example.ipynb"
@@ -181,7 +191,7 @@ class ResearchNotebookValidatorTests(unittest.TestCase):
     def test_optional_full_pool_stages_are_in_the_shared_contract(self) -> None:
         self.assertEqual(
             validator.EXPECTED_KERNEL_SOURCES["11r"],
-            ("esreekarreddy/10b-toysad8k-official-seen-unseen-evaluation",),
+            ("esreekarreddy/toysad-8k-official-seen-and-unseen-test-evaluation",),
         )
         self.assertIn("11a", validator.GPU_STAGES)
         self.assertIn("11r", validator.LONG_STAGE_TOPICS)

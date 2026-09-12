@@ -1,0 +1,13 @@
+gate,passed
+08e_prediction_locks_verified,True
+identity_predictions_locked_before_evaluator,True
+two_three_five_view_cases_complete,True
+input_order_invariance,True
+duplicate_view_rejection,True
+missing_view_execution,True
+no_model_or_render_failures,True
+method_and_application_contract_frozen,True
+versioned_application_results_written,True
+deployment_valid_odd_one_out_evidence,True
+camera_metadata_excluded_from_model,True
+no_absolute_accuracy_gate,True

@@ -1,0 +1,1049 @@
+Stage: 08E Kaggle Version 5
+Status: completed
+Clean notebook: 08e-kaggle-v5.ipynb
+Clean notebook SHA-256: 878bca2c5baae0b26507a9e58ace64400d5aa7e68fd833aa24f0a7a6f1e4e015
+Downloaded saved-output SHA-256: f0713957e2db7da18e77468b4d9bab060f806803f966e6933cf85fa02d0a9540
+Executed code cells: 12
+Retained output blocks: 44
+Retained safe visuals: 0
+Removed private visuals: 12
+
+Sanitised execution transcript
+==============================
+
+[cell 5]
+{'execution environment': 'kaggle',
+ 'run phase': 'full',
+ 'maximum new shards per stage': 10,
+ 'previous recovery attached': True,
+ 'screen scenes': 100,
+ 'development remainder scenes': 600,
+ 'views per scene': 20,
+ 'confirmation backfill scenes': 300,
+ 'confirmation reuse boundary': 'LocateAnything and SAM identities must verify',
+ 'confirmation reuse package': 'ds2-frozen-route-reuse',
+ 'confirmation reuse hash': 'e253fc5bd1d8ff1e9b22dcc9205951e88b9b977b452dcc12eafca4e7248ec43e'}
+
+[cell 7]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.2/42.2 kB 2.6 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.7/57.7 kB 3.6 MB/s eta 0:00:00
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.0/44.0 kB 2.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.6/13.6 MB 78.8 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.1/566.1 kB 27.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 154.5/154.5 kB 11.6 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 299.4/299.4 kB 20.6 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.0/50.0 MB 33.1 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 775.8/775.8 kB 36.0 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.5/78.5 kB 4.5 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 93.5 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.6/129.6 kB 8.9 MB/s eta 0:00:00
+
+[cell 7]
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+dopamine-rl 4.1.2 requires gym<=0.25.2, but you have gym 0.26.2 which is incompatible.
+moviepy 1.0.3 requires decorator<5.0,>=4.0.2, but you have decorator 5.3.1 which is incompatible.
+
+[cell 7]
+sam2.1_hiera_large.pt:   0%|          | 0.00/898M [00:00<?, ?B/s]
+
+[cell 7]
+{'GPU': 'Tesla T4',
+ 'GPU count': 2,
+ 'LocateAnything': 'nvidia/LocateAnything-3B at c32291ca5e996f5a7a485845b4f57a233936bba0',
+ 'SAM': 'facebook/sam2.1-hiera-large at 665f8e2ad61cf5f53d65644ff27c8ee525124610',
+ 'DINO': 'facebook/dinov2-small at ed25f3a31f01632728cabb09d1542f84ab7b0056',
+ 'proposal policy': 'area_nms_075_cap8'}
+
+[cell 9]
+{"device": "cuda", "dtype": "torch.float16", "event": "preflight_locate_dependencies_ready"}
+{"event": "preflight_locate_tokenizer_load_started", "source_kind": "hub"}
+{"event": "preflight_locate_tokenizer_ready"}
+{"event": "preflight_locate_processor_load_started", "source_kind": "hub"}
+
+[cell 9]
+/usr/local/lib/python3.12/dist-packages/transformers/models/auto/image_processing_auto.py:647: FutureWarning: The image_processor_class argument is deprecated and will be removed in v4.42. Please use `slow_image_processor_class`, or `fast_image_processor_class` instead
+  warnings.warn(
+
+[cell 9]
+{"event": "preflight_locate_processor_ready"}
+{"event": "preflight_locate_model_weights_load_started", "source_kind": "hub"}
+
+[cell 9]
+`torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 2 files: 100%|██████████| 2/2 [00:34<00:00, 17.35s/it]
+WARNING:transformers_modules.nvidia.LocateAnything_hyphen_3B.c32291ca5e996f5a7a485845b4f57a233936bba0.modeling_locateanything:flash_attn is not available for MoonViT inference; falling back to sdpa.
+Qwen2ForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly defined. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+WARNING:transformers_modules.nvidia.LocateAnything_hyphen_3B.c32291ca5e996f5a7a485845b4f57a233936bba0.modeling_qwen2:magi_attention not available, falling back to sdpa
+Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.56s/it]
+
+[cell 9]
+{"event": "preflight_locate_model_weights_loaded"}
+{"device": "cuda", "event": "preflight_locate_model_device_move_started"}
+{"device": "cuda", "event": "preflight_locate_model_ready"}
+
+[cell 9]
+/root/.cache/huggingface/modules/transformers_modules/nvidia/LocateAnything_hyphen_3B/c32291ca5e996f5a7a485845b4f57a233936bba0/generate_utils.py:186: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  box_avg.append(torch.tensor(out_ref, dtype=x0.dtype, device=x0.device))
+/usr/local/lib/python3.12/dist-packages/torchvision/transforms/functional.py:154: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  img = torch.from_numpy(pic.transpose((2, 0, 1))).contiguous()
+
+[cell 9]
+{"attempted_image_count": 1, "cohort_id": "toysad8k-development-remainder-600-v1", "dino_object_count": 4, "event": "model_preflight_completed", "locateanything_proposal_count": 4, "models_loaded_sequentially": true, "peer_scoring_status": "ok", "pipeline_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "sam_object_count": 4, "schema_version": 1, "stage": "frozen_pipeline_model_preflight", "status": "passed"}
+{"attempted_image_count": 1, "cohort_id": "toysad8k-development-remainder-600-v1", "dino_object_count": 4, "locateanything_proposal_count": 4, "models_loaded_sequentially": true, "peer_scoring_status": "ok", "pipeline_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "sam_object_count": 4, "schema_version": 1, "stage": "frozen_pipeline_model_preflight", "status": "passed"}
+{"cohort_id": "toysad8k-development-screen-100-v1", "event": "recovery_inputs_verified", "verified_shards": 40}
+{"cohort_id": "toysad8k-development-remainder-600-v1", "event": "recovery_inputs_verified", "verified_shards": 30}
+{"device": "cuda", "dtype": "torch.float16", "event": "locate_dependencies_ready"}
+{"event": "locate_tokenizer_load_started", "source_kind": "hub"}
+{"event": "locate_tokenizer_ready"}
+{"event": "locate_processor_load_started", "source_kind": "hub"}
+
+[cell 9]
+/usr/local/lib/python3.12/dist-packages/transformers/models/auto/image_processing_auto.py:647: FutureWarning: The image_processor_class argument is deprecated and will be removed in v4.42. Please use `slow_image_processor_class`, or `fast_image_processor_class` instead
+  warnings.warn(
+
+[cell 9]
+{"event": "locate_processor_ready"}
+{"event": "locate_model_weights_load_started", "source_kind": "hub"}
+
+[cell 9]
+`torch_dtype` is deprecated! Use `dtype` instead!
+WARNING:transformers_modules.nvidia.LocateAnything_hyphen_3B.c32291ca5e996f5a7a485845b4f57a233936bba0.modeling_locateanything:flash_attn is not available for MoonViT inference; falling back to sdpa.
+Qwen2ForCausalLM has generative capabilities, as `prepare_inputs_for_generation` is explicitly defined. However, it doesn't directly inherit from `GenerationMixin`. From 👉v4.50👈 onwards, `PreTrainedModel` will NOT inherit from `GenerationMixin`, and this model will lose the ability to call `generate` and other related functions.
+  - If you're using `trust_remote_code=True`, you can get rid of this warning by loading the model with an auto class. See https://huggingface.co/docs/transformers/en/model_doc/auto#auto-classes
+  - If you are the owner of the model architecture code, please modify your model class such that it inherits from `GenerationMixin` (after `PreTrainedModel`, otherwise you'll get an exception).
+  - If you are not the owner of the model architecture class, please contact the model code owner to update it.
+WARNING:transformers_modules.nvidia.LocateAnything_hyphen_3B.c32291ca5e996f5a7a485845b4f57a233936bba0.modeling_qwen2:magi_attention not available, falling back to sdpa
+Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.75s/it]
+
+[cell 9]
+{"event": "locate_model_weights_loaded"}
+{"device": "cuda", "event": "locate_model_device_move_started"}
+{"device": "cuda", "event": "locate_model_ready"}
+{"event": "shard_resumed", "shard": 0, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 1, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 2, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 3, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 4, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 5, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 6, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 7, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 8, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 9, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 0, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 1, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 2, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 3, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 4, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 5, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 6, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 7, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 8, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 9, "stage": "locateanything"}
+
+[cell 9]
+/root/.cache/huggingface/modules/transformers_modules/nvidia/LocateAnything_hyphen_3B/c32291ca5e996f5a7a485845b4f57a233936bba0/generate_utils.py:186: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  box_avg.append(torch.tensor(out_ref, dtype=x0.dtype, device=x0.device))
+
+[cell 9]
+{"event": "shard_complete", "shard": 10, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 11, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 12, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 13, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 14, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 15, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 16, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 17, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 18, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 19, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 20, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 21, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 22, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 23, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 24, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 25, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 26, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 27, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 28, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 29, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 30, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 31, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 32, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 33, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 34, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 35, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 36, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 37, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 38, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 39, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 40, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 41, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 42, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 43, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 44, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 45, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 46, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 47, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 48, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 49, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 50, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 51, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 52, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 53, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 54, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 55, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 56, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 57, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 58, "shards": 60, "stage": "locateanything"}
+{"event": "shard_complete", "shard": 59, "shards": 60, "stage": "locateanything"}
+{"event": "shard_resumed", "shard": 0, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 1, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 2, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 3, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 4, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 5, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 6, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 7, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 8, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 9, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 0, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 1, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 2, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 3, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 4, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 5, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 6, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 7, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 8, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 9, "stage": "sam21"}
+
+[cell 9]
+/usr/local/lib/python3.12/dist-packages/torchvision/transforms/functional.py:154: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  img = torch.from_numpy(pic.transpose((2, 0, 1))).contiguous()
+
+[cell 9]
+{"event": "shard_complete", "shard": 10, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 11, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 12, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 13, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 14, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 15, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 16, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 17, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 18, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 19, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 20, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 21, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 22, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 23, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 24, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 25, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 26, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 27, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 28, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 29, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 30, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 31, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 32, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 33, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 34, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 35, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 36, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 37, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 38, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 39, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 40, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 41, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 42, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 43, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 44, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 45, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 46, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 47, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 48, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 49, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 50, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 51, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 52, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 53, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 54, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 55, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 56, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 57, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 58, "shards": 60, "stage": "sam21"}
+{"event": "shard_complete", "shard": 59, "shards": 60, "stage": "sam21"}
+{"event": "shard_resumed", "shard": 0, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 1, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 2, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 3, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 4, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 5, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 6, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 7, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 8, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 9, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 0, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 1, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 2, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 3, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 4, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 5, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 6, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 7, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 8, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 9, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 10, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 11, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 12, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 13, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 14, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 15, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 16, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 17, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 18, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 19, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 20, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 21, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 22, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 23, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 24, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 25, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 26, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 27, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 28, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 29, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 30, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 31, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 32, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 33, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 34, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 35, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 36, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 37, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 38, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 39, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 40, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 41, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 42, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 43, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 44, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 45, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 46, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 47, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 48, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 49, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 50, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 51, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 52, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 53, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 54, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 55, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 56, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 57, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 58, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 59, "shards": 60, "stage": "dinov2_small"}
+{"event": "shard_resumed", "shard": 0, "stage": "peer_scoring"}
+{"event": "shard_resumed", "shard": 1, "stage": "peer_scoring"}
+{"event": "shard_resumed", "shard": 2, "stage": "peer_scoring"}
+{"event": "shard_resumed", "shard": 3, "stage": "peer_scoring"}
+{"event": "shard_resumed", "shard": 4, "stage": "peer_scoring"}
+{"event": "shard_resumed", "shard": 5, "stage": "peer_scoring"}
+{"event": "shard_resumed", "shard": 6, "stage": "peer_scoring"}
+{"event": "shard_resumed", "shard": 7, "stage": "peer_scoring"}
+{"event": "shard_resumed", "shard": 8, "stage": "peer_scoring"}
+{"event": "shard_resumed", "shard": 9, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 0, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 1, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 2, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 3, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 4, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 5, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 6, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 7, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 8, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 9, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 10, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 11, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 12, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 13, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 14, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 15, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 16, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 17, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 18, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 19, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 20, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 21, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 22, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 23, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 24, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 25, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 26, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 27, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 28, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 29, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 30, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 31, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 32, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 33, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 34, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 35, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 36, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 37, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 38, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 39, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 40, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 41, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 42, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 43, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 44, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 45, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 46, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 47, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 48, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 49, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 50, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 51, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 52, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 53, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 54, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 55, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 56, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 57, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 58, "shards": 60, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 59, "shards": 60, "stage": "peer_scoring"}
+{"cohorts": {"toysad8k-development-remainder-600-v1": {"audit_panel_count": 15, "cohort_id": "toysad8k-development-remainder-600-v1", "evaluator_opened": false, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "image_count": 12000, "prediction_bundle": {"embedding_count": 50181, "embedding_index": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-remainder-600-v1/model-safe/embedding_index.jsonl", "embedding_index_sha256": "0f9957a15f70e3532f97b69fd8388d165086e40667cdf5d6059fc009c88ffde7", "global_embeddings": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-remainder-600-v1/model-safe/global_embeddings.npy", "global_embeddings_sha256": "63b17e66e4f971d1b8ab37321b25191ee117957a1f92b7d10630e199e3b70b3f", "prediction_count": 12000, "prediction_lock": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-remainder-600-v1/model-safe/prediction_lock.json", "prediction_lock_sha256": "f5c88d87836c2b1a82c2499edf71af753fb125a74e3ea1354d1bb077fa8d337f", "prediction_manifest": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-remainder-600-v1/model-safe/prediction_manifest.jsonl", "prediction_manifest_sha256": "4eddabe90cdb767cc0cb4df40a8a181435ccf71adda984c70d52c9143d1ea97d"}, "prediction_only": true, "recovery_origin": {"cohorts": {"toysad8k-development-remainder-600-v1": {"embedding_index_blocks": 1991, "embedding_rows": 8391, "verified_shards": 30, "view_count": 2000}, "toysad8k-development-screen-100-v1": {"audit_panels": 14, "embedding_index_blocks": 1983, "embedding_rows": 7594, "verified_shards": 40, "view_count": 2000}}, "packaging_code_provenance": {"git_commit": "81d601d25fb683a0ba76a2cda8ae209ca277ad5d", "git_dirty": false, "notebook_sha256": "878bca2c5baae0b26507a9e58ace64400d5aa7e68fd833aa24f0a7a6f1e4e015", "snapshot_sha256": "898847224661c75990ea159f641a2149b3e1553f2c72dd1a0b77a01fbc679c73"}, "pipeline_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "source_code_provenance": {"git_commit": "dbd14bccd1e757421d1b0d3c33612e098898d3e3", "git_dirty": false, "notebook_sha256": "6bdfaef523c971a6a5632a9597c61865f0297e7e9c19f817d74ea8ac32182750", "snapshot_sha256": "6e5544dbd2b921936e0889ae65368ba87c7d156687e229feb4c95354fb5fd4cc"}, "source_run": "esreekarreddy/toysad-8k-frozen-development-pipeline/3", "status": "passed", "unchanged_inference_definitions": ["build_identity", "_input_records", "_locate_worker", "_sam_worker", "_valid_patch_mask", "_dino_worker", "_score_worker"], "unchanged_source_definitions_checked": 112}, "scene_count": 600, "schema_version": 1, "stage": "frozen_development_pipeline", "stages": {"dinov2_small": {"complete": true, "completed_shards": 60, "covered_input_count": 12000, "failure_counts": {"empty_mask": 0, "feature_failure": 0, "stage_failure": 2, "zero_proposal": 69}, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "input_count": 12000, "processed_this_run": 10000, "resumed": 2000, "shard_count": 60, "stage": "dinov2_small", "terminal_failures": 71}, "locateanything": {"complete": true, "completed_shards": 60, "covered_input_count": 12000, "failure_counts": {"empty_mask": 0, "feature_failure": 0, "stage_failure": 0, "zero_proposal": 69}, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "input_count": 12000, "processed_this_run": 10000, "resumed": 2000, "shard_count": 60, "stage": "locateanything", "terminal_failures": 69}, "peer_scoring": {"complete": true, "completed_shards": 60, "covered_input_count": 12000, "failure_counts": {"empty_mask": 0, "feature_failure": 0, "stage_failure": 0, "zero_proposal": 69}, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "input_count": 12000, "processed_this_run": 12000, "resumed": 0, "shard_count": 60, "stage": "peer_scoring", "terminal_failures": 69}, "sam21": {"complete": true, "completed_shards": 60, "covered_input_count": 12000, "failure_counts": {"empty_mask": 0, "feature_failure": 0, "stage_failure": 0, "zero_proposal": 69}, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "input_count": 12000, "processed_this_run": 10000, "resumed": 2000, "shard_count": 60, "stage": "sam21", "terminal_failures": 69}}, "status": "complete"}, "toysad8k-development-screen-100-v1": {"audit_panel_count": 14, "cohort_id": "toysad8k-development-screen-100-v1", "evaluator_opened": false, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "image_count": 2000, "prediction_bundle": {"embedding_count": 7594, "embedding_index": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-screen-100-v1/model-safe/embedding_index.jsonl", "embedding_index_sha256": "259cdb52c6df3abb156cd1f261ada0bd4f295e21fe569ccdc372b7188d82618f", "global_embeddings": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-screen-100-v1/model-safe/global_embeddings.npy", "global_embeddings_sha256": "d420d7cafb0600facb189fda825469ba3454cb41dd152e78d5985176d8646027", "prediction_count": 2000, "prediction_lock": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-screen-100-v1/model-safe/prediction_lock.json", "prediction_lock_sha256": "d035bfb59af2e4a296361283ee5f263d5ad2a8682efa93f70b5e9707f0b00404", "prediction_manifest": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-screen-100-v1/model-safe/prediction_manifest.jsonl", "prediction_manifest_sha256": "c15d2cbf2d53f0dbedcb887f6ddd1237347e213896a63004fc7f30a369a6c95b"}, "prediction_only": true, "recovery_origin": {"cohorts": {"toysad8k-development-remainder-600-v1": {"embedding_index_blocks": 1991, "embedding_rows": 8391, "verified_shards": 30, "view_count": 2000}, "toysad8k-development-screen-100-v1": {"audit_panels": 14, "embedding_index_blocks": 1983, "embedding_rows": 7594, "verified_shards": 40, "view_count": 2000}}, "packaging_code_provenance": {"git_commit": "81d601d25fb683a0ba76a2cda8ae209ca277ad5d", "git_dirty": false, "notebook_sha256": "878bca2c5baae0b26507a9e58ace64400d5aa7e68fd833aa24f0a7a6f1e4e015", "snapshot_sha256": "898847224661c75990ea159f641a2149b3e1553f2c72dd1a0b77a01fbc679c73"}, "pipeline_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "source_code_provenance": {"git_commit": "dbd14bccd1e757421d1b0d3c33612e098898d3e3", "git_dirty": false, "notebook_sha256": "6bdfaef523c971a6a5632a9597c61865f0297e7e9c19f817d74ea8ac32182750", "snapshot_sha256": "6e5544dbd2b921936e0889ae65368ba87c7d156687e229feb4c95354fb5fd4cc"}, "source_run": "esreekarreddy/toysad-8k-frozen-development-pipeline/3", "status": "passed", "unchanged_inference_definitions": ["build_identity", "_input_records", "_locate_worker", "_sam_worker", "_valid_patch_mask", "_dino_worker", "_score_worker"], "unchanged_source_definitions_checked": 112}, "scene_count": 100, "schema_version": 1, "stage": "frozen_development_pipeline", "stages": {"dinov2_small": {"complete": true, "completed_shards": 10, "covered_input_count": 2000, "failure_counts": {"empty_mask": 0, "feature_failure": 0, "stage_failure": 0, "zero_proposal": 17}, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "input_count": 2000, "processed_this_run": 0, "resumed": 2000, "shard_count": 10, "stage": "dinov2_small", "terminal_failures": 17}, "locateanything": {"complete": true, "completed_shards": 10, "covered_input_count": 2000, "failure_counts": {"empty_mask": 0, "feature_failure": 0, "stage_failure": 0, "zero_proposal": 17}, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "input_count": 2000, "processed_this_run": 0, "resumed": 2000, "shard_count": 10, "stage": "locateanything", "terminal_failures": 17}, "peer_scoring": {"complete": true, "completed_shards": 10, "covered_input_count": 2000, "failure_counts": {"empty_mask": 0, "feature_failure": 0, "stage_failure": 0, "zero_proposal": 17}, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "input_count": 2000, "processed_this_run": 0, "resumed": 2000, "shard_count": 10, "stage": "peer_scoring", "terminal_failures": 17}, "sam21": {"complete": true, "completed_shards": 10, "covered_input_count": 2000, "failure_counts": {"empty_mask": 0, "feature_failure": 0, "stage_failure": 0, "zero_proposal": 17}, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "input_count": 2000, "processed_this_run": 0, "resumed": 2000, "shard_count": 10, "stage": "sam21", "terminal_failures": 17}}, "status": "complete"}}, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "recovery": {"artifact_count": 776, "bundle": "/kaggle/working/notebook08e_recovery/notebook08e-recovery.zip", "bundle_sha256": "8a68f8a7ba64557250c17a27e4b3cd612b7f8844a847913d9c6eb54320386d26", "manifest": "/kaggle/working/notebook08e_recovery/notebook08e-recovery-manifest.json"}, "recovery_imported": true, "schema_version": 1, "status": "complete"}
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cohort</th>
+      <th>scenes</th>
+      <th>images</th>
+      <th>audit panels</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>toysad8k-development-screen-100-v1</td>
+      <td>100</td>
+      <td>2000</td>
+      <td>14</td>
+      <td>complete</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>toysad8k-development-remainder-600-v1</td>
+      <td>600</td>
+      <td>12000</td>
+      <td>15</td>
+      <td>complete</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                  cohort  scenes  images  audit panels  \
+0     toysad8k-development-screen-100-v1     100    2000            14
+1  toysad8k-development-remainder-600-v1     600   12000            15
+
+     status
+0  complete
+1  complete
+
+[cell 9]
+{'model preflight': 'passed',
+ 'pipeline complete': True,
+ 'recovery ZIP': '/kaggle/working/notebook08e_recovery/notebook08e-recovery.zip',
+ 'recovery SHA-256': '8a68f8a7ba64557250c17a27e4b3cd612b7f8844a847913d9c6eb54320386d26',
+ 'next action': 'finalise the development result'}
+
+[cell 11]
+{"event": "shard_complete", "shard": 0, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 1, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 2, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 3, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 4, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 5, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 6, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 7, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 8, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 9, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 10, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 11, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 12, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 13, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 14, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 15, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 16, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 17, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 18, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 19, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 20, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 21, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 22, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 23, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 24, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 25, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 26, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 27, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 28, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 29, "shards": 30, "stage": "dinov2_small"}
+{"event": "shard_complete", "shard": 0, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 1, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 2, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 3, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 4, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 5, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 6, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 7, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 8, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 9, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 10, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 11, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 12, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 13, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 14, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 15, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 16, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 17, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 18, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 19, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 20, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 21, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 22, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 23, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 24, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 25, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 26, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 27, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 28, "shards": 30, "stage": "peer_scoring"}
+{"event": "shard_complete", "shard": 29, "shards": 30, "stage": "peer_scoring"}
+{"audit_panel_count": 16, "backfill_attestation_sha256": "a3af17dcb326487b4601f3a4892fc4536f946b2c5b9b116f756654589565e27d", "cohort_id": "toysad8k-development-confirm-300-v1", "evaluator_opened": false, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "image_count": 6000, "prediction_bundle": {"embedding_count": 23179, "embedding_index": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-confirm-300-v1/model-safe/embedding_index.jsonl", "embedding_index_sha256": "c8837e8852be32b7c58276a637a1545b1904797e1ca881ce794d4b06cbf9f159", "global_embeddings": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-confirm-300-v1/model-safe/global_embeddings.npy", "global_embeddings_sha256": "7c00085f71dd04644b4c6a1fe44676ff5a8ac5b0876b3e127424cfe4e0900fbe", "prediction_count": 6000, "prediction_lock": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-confirm-300-v1/model-safe/prediction_lock.json", "prediction_lock_sha256": "7d7b683e3edfe2c8ebd2b6623d16e292870cdb70bed84586a14aae950739d7bb", "prediction_manifest": "/kaggle/working/toysad8k_frozen_development_pipeline/toysad8k-development-confirm-300-v1/model-safe/prediction_manifest.jsonl", "prediction_manifest_sha256": "b59039dff30f5a44875538f09db749b877483d6cec7e9da722c84effc5c62ce8"}, "prediction_only": true, "rebuilt_stages": ["dinov2_small", "peer_scoring"], "reused_stages": ["locateanything", "sam21"], "scene_count": 300, "schema_version": 1, "stage": "frozen_development_pipeline", "stages": {"dinov2_small": {"complete": true, "completed_shards": 30, "covered_input_count": 6000, "failure_counts": {"empty_mask": 0, "feature_failure": 0, "stage_failure": 0, "zero_proposal": 38}, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "input_count": 6000, "processed_this_run": 6000, "resumed": 0, "shard_count": 30, "stage": "dinov2_small", "terminal_failures": 38}, "peer_scoring": {"complete": true, "completed_shards": 30, "covered_input_count": 6000, "failure_counts": {"empty_mask": 0, "feature_failure": 0, "stage_failure": 0, "zero_proposal": 38}, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "input_count": 6000, "processed_this_run": 6000, "resumed": 0, "shard_count": 30, "stage": "peer_scoring", "terminal_failures": 38}}, "status": "complete"}
+
+[cell 11]
+{'status': 'complete',
+ 'reused stages': ['locateanything', 'sam21'],
+ 'rebuilt stages': ['dinov2_small', 'peer_scoring'],
+ 'scenes': 300,
+ 'images': 6000,
+ 'backfill phase': 'full',
+ 'final lock': True}
+
+[cell 13]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cohort</th>
+      <th>stage</th>
+      <th>inputs</th>
+      <th>processed this run</th>
+      <th>resumed</th>
+      <th>terminal failures</th>
+      <th>zero proposal</th>
+      <th>empty mask</th>
+      <th>feature failure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>toysad8k-development-screen-100-v1</td>
+      <td>dinov2_small</td>
+      <td>2000</td>
+      <td>0</td>
+      <td>2000</td>
+      <td>17</td>
+      <td>17</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>toysad8k-development-screen-100-v1</td>
+      <td>locateanything</td>
+      <td>2000</td>
+      <td>0</td>
+      <td>2000</td>
+      <td>17</td>
+      <td>17</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>toysad8k-development-screen-100-v1</td>
+      <td>peer_scoring</td>
+      <td>2000</td>
+      <td>0</td>
+      <td>2000</td>
+      <td>17</td>
+      <td>17</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>toysad8k-development-screen-100-v1</td>
+      <td>sam21</td>
+      <td>2000</td>
+      <td>0</td>
+      <td>2000</td>
+      <td>17</td>
+      <td>17</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>toysad8k-development-remainder-600-v1</td>
+      <td>dinov2_small</td>
+      <td>12000</td>
+      <td>10000</td>
+      <td>2000</td>
+      <td>71</td>
+      <td>69</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>toysad8k-development-remainder-600-v1</td>
+      <td>locateanything</td>
+      <td>12000</td>
+      <td>10000</td>
+      <td>2000</td>
+      <td>69</td>
+      <td>69</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>toysad8k-development-remainder-600-v1</td>
+      <td>peer_scoring</td>
+      <td>12000</td>
+      <td>12000</td>
+      <td>0</td>
+      <td>69</td>
+      <td>69</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>toysad8k-development-remainder-600-v1</td>
+      <td>sam21</td>
+      <td>12000</td>
+      <td>10000</td>
+      <td>2000</td>
+      <td>69</td>
+      <td>69</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>toysad8k-development-confirm-300-v1</td>
+      <td>dinov2_small</td>
+      <td>6000</td>
+      <td>6000</td>
+      <td>0</td>
+      <td>38</td>
+      <td>38</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>toysad8k-development-confirm-300-v1</td>
+      <td>peer_scoring</td>
+      <td>6000</td>
+      <td>6000</td>
+      <td>0</td>
+      <td>38</td>
+      <td>38</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                  cohort           stage  inputs  \
+0     toysad8k-development-screen-100-v1    dinov2_small    2000
+1     toysad8k-development-screen-100-v1  locateanything    2000
+2     toysad8k-development-screen-100-v1    peer_scoring    2000
+3     toysad8k-development-screen-100-v1           sam21    2000
+4  toysad8k-development-remainder-600-v1    dinov2_small   12000
+5  toysad8k-development-remainder-600-v1  locateanything   12000
+6  toysad8k-development-remainder-600-v1    peer_scoring   12000
+7  toysad8k-development-remainder-600-v1           sam21   12000
+8    toysad8k-development-confirm-300-v1    dinov2_small    6000
+9    toysad8k-development-confirm-300-v1    peer_scoring    6000
+
+   processed this run  resumed  terminal failures  zero proposal  empty mask  \
+0                   0     2000                 17             17           0
+1                   0     2000                 17             17           0
+2                   0     2000                 17             17           0
+3                   0     2000                 17             17           0
+4               10000     2000                 71             69           0
+5               10000     2000                 69             69           0
+6               12000        0                 69             69           0
+7               10000     2000                 69             69           0
+8                6000        0                 38             38           0
+9                6000        0                 38             38           0
+
+   feature failure
+0                0
+1                0
+2                0
+3                0
+4                0
+5                0
+6                0
+7                0
+8                0
+9                0
+
+[cell 15]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cohort</th>
+      <th>scenes</th>
+      <th>images</th>
+      <th>artifacts</th>
+      <th>identity SHA-256</th>
+      <th>lock SHA-256</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>toysad8k-development-screen-100-v1</td>
+      <td>100</td>
+      <td>2000</td>
+      <td>3</td>
+      <td>c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d...</td>
+      <td>d035bfb59af2e4a296361283ee5f263d5ad2a8682efa93...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>toysad8k-development-remainder-600-v1</td>
+      <td>600</td>
+      <td>12000</td>
+      <td>3</td>
+      <td>c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d...</td>
+      <td>f5c88d87836c2b1a82c2499edf71af753fb125a74e3ea1...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>toysad8k-development-confirm-300-v1</td>
+      <td>300</td>
+      <td>6000</td>
+      <td>3</td>
+      <td>c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d...</td>
+      <td>7d7b683e3edfe2c8ebd2b6623d16e292870cdb70bed845...</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                  cohort  scenes  images  artifacts  \
+0     toysad8k-development-screen-100-v1     100    2000          3
+1  toysad8k-development-remainder-600-v1     600   12000          3
+2    toysad8k-development-confirm-300-v1     300    6000          3
+
+                                    identity SHA-256  \
+0  c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d...
+1  c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d...
+2  c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d...
+
+                                        lock SHA-256
+0  d035bfb59af2e4a296361283ee5f263d5ad2a8682efa93...
+1  f5c88d87836c2b1a82c2499edf71af753fb125a74e3ea1...
+2  7d7b683e3edfe2c8ebd2b6623d16e292870cdb70bed845...
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+{'prediction-only audit figures': 90}
+
+[cell 19]
+{"cohort_id": "toysad8k-development-full-1000-v1", "component_locks": [{"cohort_id": "toysad8k-development-screen-100-v1", "lock_sha256": "d035bfb59af2e4a296361283ee5f263d5ad2a8682efa93f70b5e9707f0b00404"}, {"cohort_id": "toysad8k-development-remainder-600-v1", "lock_sha256": "f5c88d87836c2b1a82c2499edf71af753fb125a74e3ea1354d1bb077fa8d337f"}, {"cohort_id": "toysad8k-development-confirm-300-v1", "lock_sha256": "7d7b683e3edfe2c8ebd2b6623d16e292870cdb70bed84586a14aae950739d7bb"}], "ds2_reused_only_after_full_identity_check": true, "identity": {"configuration_sha256": "6af6710e2b4cf6908ff2ac2a567a9fec848b8a9414b1f8fe0e9dfe3a6c8a090a", "dinov2_sha256": "35a7fb09a5edf3f93ddd221029bfcda351e860e1797f5cb8efe2f718219aed91", "locateanything_sha256": "dac3f379588afca42d1070ad8c1010975e1e231b323e48a782f49ad66b7ca4af", "preprocessing_sha256": "31a77a0b4e6acd5801502e8acd2852c4f84ab8577a4f4cc65d0208947300c14c", "sam21_sha256": "39690d431d70c2192a6ba0c4530785c9208e07b035842d05022a67fb700a850b", "schema_sha256": "2bd78b4f031ad04bdbf754782c78320fdfeb65cef82b03dd6501e606f0f6f868", "split_sha256": "00e400350a056631778bd9c4dace1667d95e52bf58c0a29ea7c48d190c41de0c"}, "identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7", "image_count": 20000, "scene_count": 1000, "schema_version": 1, "status": "verified"}
+
+[cell 19]
+{'status': 'verified',
+ 'development scenes represented': 1000,
+ 'confirmation reused': True}
+
+[cell 22]
+Traceback (most recent call last):
+  File "/kaggle/input/datasets/esreekarreddy/vpi-code-snapshot/scripts/finalize_ds2_clearml.py", line 300, in <module>
+    main()
+  File "/kaggle/input/datasets/esreekarreddy/vpi-code-snapshot/scripts/finalize_ds2_clearml.py", line 251, in main
+    record = validate_safe_root(root, expected_stage=args.stage)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/input/datasets/esreekarreddy/vpi-code-snapshot/scripts/finalize_ds2_clearml.py", line 149, in validate_safe_root
+    raise last_error
+  File "/kaggle/input/datasets/esreekarreddy/vpi-code-snapshot/scripts/finalize_ds2_clearml.py", line 140, in validate_safe_root
+    record, _manifest = validate_tracking_safe_root(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/input/datasets/esreekarreddy/vpi-code-snapshot/src/visual_peer_inspector/tracking_safe_artifacts.py", line 62, in validate_tracking_safe_root
+    raise ValueError("ClearML safe root differs from the stage allowlist")
+ValueError: ClearML safe root differs from the stage allowlist
+
+[cell 22]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cohort</th>
+      <th>status</th>
+      <th>task_id</th>
+      <th>record kind</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>toysad8k-development-screen-100-v1</td>
+      <td>disabled</td>
+      <td>None</td>
+      <td>final</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>toysad8k-development-remainder-600-v1</td>
+      <td>disabled</td>
+      <td>None</td>
+      <td>final</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>toysad8k-development-confirm-300-v1</td>
+      <td>failed</td>
+      <td>None</td>
+      <td>final</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                  cohort    status task_id record kind
+0     toysad8k-development-screen-100-v1  disabled    None       final
+1  toysad8k-development-remainder-600-v1  disabled    None       final
+2    toysad8k-development-confirm-300-v1    failed    None       final
+
+[cell 24]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>path</th>
+      <th>bytes</th>
+      <th>sha256</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>development_progress.json</td>
+      <td>11915</td>
+      <td>97c45a2a7f4028680ff61c7075306740d6e638fb93f672...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>full-development-lock.json</td>
+      <td>1459</td>
+      <td>9d8505d2bccdcf9d6e59ebf39c52676278517ff6564c39...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>prediction_locks.csv</td>
+      <td>594</td>
+      <td>e571c9931a43cdbd9b2622a182c16e50a0283773df9bbf...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>preflight/model_preflight.json</td>
+      <td>436</td>
+      <td>ea7ab62f8a8d1edd2b4ca3b2c2bd791101b047da578171...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>stage_coverage.csv</td>
+      <td>827</td>
+      <td>5c37e2aa55a9577905506c67347eb2badcda5e5534a20e...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1002</th>
+      <td>toysad8k-development-screen-100-v1/sam21/shard...</td>
+      <td>691073</td>
+      <td>0b6fd06a1cddb2c5b146873d45ba04327814f97901d622...</td>
+    </tr>
+    <tr>
+      <th>1003</th>
+      <td>toysad8k-development-screen-100-v1/sam21/shard...</td>
+      <td>460</td>
+      <td>b51dc94774679085e4bd3f4171995c2a0ff2cebc31214c...</td>
+    </tr>
+    <tr>
+      <th>1004</th>
+      <td>toysad8k-development-screen-100-v1/tracking/cl...</td>
+      <td>637</td>
+      <td>41d12bb9febf7f793145a8a169a1cf631329e037da44bb...</td>
+    </tr>
+    <tr>
+      <th>1005</th>
+      <td>tracking-safe/artifact_manifest.json</td>
+      <td>174</td>
+      <td>c19a42d45ef6a68c2115e578763bcbcdb10572d7955752...</td>
+    </tr>
+    <tr>
+      <th>1006</th>
+      <td>tracking-safe/run_record.json</td>
+      <td>592</td>
+      <td>5ceed7bc8ca74d5b95a1ede86efcdf1c8a82d90c5a64e8...</td>
+    </tr>
+  </tbody>
+</table>
+<p>1007 rows × 3 columns</p>
+</div>                                                   path   bytes  \
+0                             development_progress.json   11915
+1                            full-development-lock.json    1459
+2                                  prediction_locks.csv     594
+3                        preflight/model_preflight.json     436
+4                                    stage_coverage.csv     827
+...                                                 ...     ...
+1002  toysad8k-development-screen-100-v1/sam21/shard...  691073
+1003  toysad8k-development-screen-100-v1/sam21/shard...     460
+1004  toysad8k-development-screen-100-v1/tracking/cl...     637
+1005               tracking-safe/artifact_manifest.json     174
+1006                      tracking-safe/run_record.json     592
+
+                                                 sha256
+0     97c45a2a7f4028680ff61c7075306740d6e638fb93f672...
+1     9d8505d2bccdcf9d6e59ebf39c52676278517ff6564c39...
+2     e571c9931a43cdbd9b2622a182c16e50a0283773df9bbf...
+3     ea7ab62f8a8d1edd2b4ca3b2c2bd791101b047da578171...
+4     5c37e2aa55a9577905506c67347eb2badcda5e5534a20e...
+...                                                 ...
+1002  0b6fd06a1cddb2c5b146873d45ba04327814f97901d622...
+1003  b51dc94774679085e4bd3f4171995c2a0ff2cebc31214c...
+1004  41d12bb9febf7f793145a8a169a1cf631329e037da44bb...
+1005  c19a42d45ef6a68c2115e578763bcbcdb10572d7955752...
+1006  5ceed7bc8ca74d5b95a1ede86efcdf1c8a82d90c5a64e8...
+
+[1007 rows x 3 columns]

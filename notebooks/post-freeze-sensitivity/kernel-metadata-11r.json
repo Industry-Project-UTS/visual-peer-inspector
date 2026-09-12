@@ -12,7 +12,7 @@
   "id": "esreekarreddy/toysad-8k-post-freeze-full-pool-release",
   "is_private": true,
   "kernel_sources": [
-    "esreekarreddy/10b-toysad8k-official-seen-unseen-evaluation"
+    "esreekarreddy/toysad-8k-official-seen-and-unseen-test-evaluation"
   ],
   "kernel_type": "notebook",
   "language": "python",

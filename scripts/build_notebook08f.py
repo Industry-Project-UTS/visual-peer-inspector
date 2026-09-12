@@ -6,6 +6,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import nbformat
+from notebook_runtime_cells import harden_notebook
 
 ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOK_ROOT = ROOT / "notebooks" / "development-freeze"
@@ -398,5 +399,5 @@ notebook = nbformat.v4.new_notebook(
     },
 )
 NOTEBOOK_ROOT.mkdir(parents=True, exist_ok=True)
-nbformat.write(notebook, NOTEBOOK_ROOT / NOTEBOOK_NAME)
+nbformat.write(harden_notebook(notebook), NOTEBOOK_ROOT / NOTEBOOK_NAME)
 print(NOTEBOOK_ROOT / NOTEBOOK_NAME)

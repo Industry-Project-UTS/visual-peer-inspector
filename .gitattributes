@@ -1,1 +1,5 @@
 *.csv whitespace=cr-at-eol
+
+# Keep downloaded evidence bytes stable across Git clients and operating systems.
+reports/development-freeze/** -text
+notebooks/executed/development-freeze/** -text

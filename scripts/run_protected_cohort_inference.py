@@ -252,7 +252,7 @@ def _publish_recovery(
             "exact_resume_available": bool(result["exact_resume_available"]),
         },
     )
-    if args.prune_after_recovery:
+    if args.prune_after_recovery and result["status"] != "interrupted":
         result["pruned_file_count"] = prune_verified_state(
             source_root=args.output_root,
             bundle_path=bundle_path,
@@ -333,6 +333,38 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             raise ValueError("Existing output belongs to another frozen pipeline identity")
     else:
         _write_json(identity_path, identity_record)
+    try:
+        return _run_prepared(
+            args, contract=contract, identity=identity, input_rows=input_rows,
+            locate_configuration=locate_configuration, execution_policy=execution_policy,
+            method=method, policy=policy, cohort_root=cohort_root,
+            recovery_binding=recovery_binding,
+        )
+    except (Exception, KeyboardInterrupt) as error:
+        # Keep valid shards; never prune state while handling an interrupted run.
+        interrupted = {
+            "status": "interrupted",
+            "error_type": type(error).__name__,
+            "exact_resume_available": True,
+            "covered_image_count": 0,
+        }
+        try:
+            _write_json(cohort_root / "interruption_record.json", interrupted)
+            _publish_recovery(args, binding=recovery_binding, result=interrupted)
+        except Exception as recovery_error:  # noqa: BLE001 - preserve the original inference error
+            _progress("recovery_export_failed", {
+                "error_type": type(recovery_error).__name__,
+                "loose_shards_retained": True,
+            })
+        raise
+
+
+def _run_prepared(
+    args: argparse.Namespace, *, contract: Any, identity: Any,
+    input_rows: list[dict[str, Any]], locate_configuration: Any, execution_policy: Any,
+    method: Mapping[str, Any], policy: Mapping[str, Any] | None,
+    cohort_root: Path, recovery_binding: Mapping[str, Any],
+) -> dict[str, Any]:
     shard_limit = 1 if args.run_mode == "gate" else None
     maximum_new_shards = args.maximum_new_shards if args.run_mode == "incremental" else None
     wall_started = time.monotonic()

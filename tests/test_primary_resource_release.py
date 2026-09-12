@@ -4,15 +4,45 @@ import json
 import sqlite3
 import zipfile
 from hashlib import sha256
+from io import BytesIO
 from pathlib import Path
 from types import SimpleNamespace
 
 import nbformat
+import pytest
 from PIL import Image
 
 from visual_peer_inspector.data.cohort_contract import CohortContract
 from visual_peer_inspector.data.model_safe_package import file_sha256, membership_sha256
 from visual_peer_inspector.workflows import primary_resource_release as release
+from visual_peer_inspector.workflows.official_release import IndexedArchive
+
+
+@pytest.mark.parametrize("mode", ["L", "RGB", "RGBA"])
+def test_reference_mask_ignores_faint_background(mode: str) -> None:
+    mask = Image.new("L", (256, 256), 30)
+    mask.paste(207, (40, 60, 95, 140))
+    content = BytesIO()
+    mask.convert(mode).save(content, format="PNG")
+    assert release._mask_box(content.getvalue()) == [40, 60, 95, 140]
+
+
+def test_reference_mask_uses_exact_threshold_and_empty_geometry() -> None:
+    mask = Image.new("L", (256, 256), 127)
+    content = BytesIO()
+    mask.save(content, format="PNG")
+    assert release._mask_box(content.getvalue()) == [0, 0, 0, 0]
+    mask.putpixel((70, 80), 128)
+    content = BytesIO()
+    mask.save(content, format="PNG")
+    assert release._mask_box(content.getvalue()) == [70, 80, 71, 81]
+
+
+def test_reference_mask_rejects_other_coordinate_size() -> None:
+    content = BytesIO()
+    Image.new("L", (512, 512), 255).save(content, format="PNG")
+    with pytest.raises(ValueError, match="supplied-mask size"):
+        release._mask_box(content.getvalue())
 
 
 def _write_jsonl(path: Path, rows: list[dict]) -> None:
@@ -187,6 +217,100 @@ def _fixture(tmp_path: Path) -> tuple[dict[str, Path], CohortContract]:
         "source": source,
         "prerequisite": prerequisite,
     }, contract
+
+
+def _extract_fixture_source(root: Path) -> tuple[dict[str, bytes], dict]:
+    """Match Kaggle's ZIP-to-directory conversion without changing the index."""
+    archive_path = root / "toysAD8K.zip"
+    identity = release.verify_release_source(root)
+    manifest = {
+        "reconstruction": {
+            "expected_size_bytes": identity["archive_size_bytes"],
+            "sha256": identity["archive_sha256"],
+        }
+    }
+    for name, value in (
+        ("archive-manifest.json", manifest),
+        ("archive_summary.json", {"fixture": True}),
+        ("source-chunks-manifest.json", {"fixture": True}),
+    ):
+        (root / name).write_text(json.dumps(value))
+    with (root / "package-checksums.sha256").open("a") as stream:
+        for name in ("archive-manifest.json", "archive_summary.json", "source-chunks-manifest.json"):
+            stream.write(f"{file_sha256(root / name)}  {name}\n")
+    with zipfile.ZipFile(archive_path) as archive:
+        members = {name: archive.read(name) for name in archive.namelist()}
+    for name, content in members.items():
+        destination = root / "toysAD8K" / name
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(content)
+    archive_path.rename(root / "original-source.zip")
+    return members, identity
+
+
+def test_extracted_source_is_byte_equivalent_and_crc_checked(tmp_path: Path) -> None:
+    paths, _ = _fixture(tmp_path)
+    source = paths["source"]
+    members, original = _extract_fixture_source(source)
+    extracted = release.verify_release_source(source)
+    for field in ("archive_sha256", "archive_index_sha256", "source_master_sha256", "archive_size_bytes"):
+        assert extracted[field] == original[field]
+    assert extracted["source_access_mode"] == "kaggle_extracted_members"
+    assert extracted["archive_bytes_verified"] is False
+    with IndexedArchive(source / "toysAD8K.zip", source / "archive_index.sqlite3") as reader:
+        for name, content in members.items():
+            assert reader.read(name) == content
+        name = next(iter(members))
+        with pytest.raises(ValueError, match="read limit"):
+            reader.read(name, maximum_bytes=1)
+        path = source / "toysAD8K" / name
+        content = path.read_bytes()
+        path.write_bytes(bytes([content[0] ^ 1]) + content[1:])
+        with pytest.raises(ValueError, match="CRC"):
+            reader.read(name)
+        with pytest.raises(ValueError, match="indexed archive member"):
+            reader.read("not-in-the-index.png")
+
+
+def test_extracted_source_rejects_changed_identity_files(tmp_path: Path) -> None:
+    paths, _ = _fixture(tmp_path)
+    source = paths["source"]
+    _extract_fixture_source(source)
+    (source / "archive-manifest.json").write_text("{}")
+    with pytest.raises(ValueError, match="identity checksum"):
+        release.verify_release_source(source)
+
+
+@pytest.mark.parametrize("field,value", [("is_symlink", 1), ("unsafe_reason", "unsafe"), ("flags", 1)])
+def test_extracted_source_rejects_unsafe_index_rows(tmp_path: Path, field, value) -> None:
+    paths, _ = _fixture(tmp_path)
+    source = paths["source"]
+    members, _ = _extract_fixture_source(source)
+    name = next(iter(members))
+    with sqlite3.connect(source / "archive_index.sqlite3") as database:
+        database.execute(f"UPDATE members SET {field}=? WHERE name=?", (value, name))
+    with (
+        IndexedArchive(source / "toysAD8K.zip", source / "archive_index.sqlite3") as reader,
+        pytest.raises(ValueError, match="Unsafe extracted"),
+    ):
+        reader.read(name)
+    with pytest.raises(ValueError, match="checksum differs"):
+        release.verify_release_source(source)
+
+
+def test_extracted_source_rejects_parent_symlink(tmp_path: Path) -> None:
+    paths, _ = _fixture(tmp_path)
+    source = paths["source"]
+    members, _ = _extract_fixture_source(source)
+    parent = source / "toysAD8K" / "archive"
+    moved = source / "moved-fixture"
+    parent.rename(moved)
+    parent.symlink_to(moved, target_is_directory=True)
+    with (
+        IndexedArchive(source / "toysAD8K.zip", source / "archive_index.sqlite3") as reader,
+        pytest.raises(ValueError, match="Symlink"),
+    ):
+        reader.read(next(iter(members)))
 
 
 def test_protected_resource_release_is_bounded_separate_and_equivalent(
@@ -445,6 +569,15 @@ def test_development_identity_evaluator_is_prediction_bound_and_bounded(
     ]
     assert len(rows) == 12
     assert {row["reference_identity_id"] for row in rows} == {"O00", "O01", "O02"}
+    assert second["reference_mapped_observation_count"] == 12
+    assert second["reference_unmapped_observation_count"] == 0
+    assert second["reference_geometry_policy"]["mask_threshold"] == 128
+    monkeypatch.setattr(release, "REFERENCE_GEOMETRY_POLICY", {"decoder": "changed"})
+    with pytest.raises(ValueError, match="resume state identifies another input"):
+        release.build_development_identity_evaluator(
+            prediction_roots=[tmp_path], administrative_root=paths["administration"],
+            source_root=paths["source"], output_root=output,
+        )
 
 
 def test_primary_resource_notebooks_are_clean_cpu_release_stages() -> None:

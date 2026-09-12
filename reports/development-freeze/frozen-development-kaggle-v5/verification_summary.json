@@ -1,0 +1,101 @@
+{
+  "completed_stages": {
+    "08d": 2,
+    "08e": 5,
+    "08e1": 4,
+    "08f": 1
+  },
+  "component_locks_verified": 3,
+  "downloaded_registered_files_verified": 1007,
+  "executed_notebooks": [
+    {
+      "clean_notebook": "notebooks/executed/development-freeze/08d-kaggle-v2.ipynb",
+      "executed_notebook": "notebooks/executed/development-freeze/08d-kaggle-v2-executed.ipynb",
+      "execution_log": "reports/development-freeze/execution-logs/08d-kaggle-v2.txt",
+      "original_clean_sha256": "95a4916261f230a6c4d360f53dfd7618a747ae6ced25c1cf166b401ebd377a73",
+      "original_executed_sha256": "12de58c2f78c0cc587a87cac076101c50534c9b3a7152ba9fbe077912cf5e860",
+      "removed_private_visuals": 1,
+      "stage": "08d",
+      "version": "2"
+    },
+    {
+      "clean_notebook": "notebooks/executed/development-freeze/08e-kaggle-v5.ipynb",
+      "executed_notebook": "notebooks/executed/development-freeze/08e-kaggle-v5-executed.ipynb",
+      "execution_log": "reports/development-freeze/execution-logs/08e-kaggle-v5.txt",
+      "original_clean_sha256": "878bca2c5baae0b26507a9e58ace64400d5aa7e68fd833aa24f0a7a6f1e4e015",
+      "original_executed_sha256": "f0713957e2db7da18e77468b4d9bab060f806803f966e6933cf85fa02d0a9540",
+      "removed_private_visuals": 12,
+      "stage": "08e",
+      "version": "5"
+    },
+    {
+      "clean_notebook": "notebooks/executed/development-freeze/08e1-kaggle-v4.ipynb",
+      "executed_notebook": "notebooks/executed/development-freeze/08e1-kaggle-v4-executed.ipynb",
+      "execution_log": "reports/development-freeze/execution-logs/08e1-kaggle-v4.txt",
+      "original_clean_sha256": "c57b604a4de5f0d80d6aa3b16dd3a1797b881ab19abab3f53582ac50d61b25fe",
+      "original_executed_sha256": "d393a473ec1955dc70d3fc05b2132548504d14bf7ca313dc65656d02244df9eb",
+      "removed_private_visuals": 0,
+      "stage": "08e1",
+      "version": "4"
+    },
+    {
+      "clean_notebook": "notebooks/executed/development-freeze/08f-kaggle-v1.ipynb",
+      "executed_notebook": "notebooks/executed/development-freeze/08f-kaggle-v1-executed.ipynb",
+      "execution_log": "reports/development-freeze/execution-logs/08f-kaggle-v1.txt",
+      "original_clean_sha256": "fb2f9b3d69874d7ad252ee2f338f19c94499ed162c9445bf25c84a18452e1f8f",
+      "original_executed_sha256": "7a489422c88a3c8f22e4b6921cfced1ecabd205051e747980e7f49abd2dfdef8",
+      "removed_private_visuals": 0,
+      "stage": "08f",
+      "version": "1"
+    }
+  ],
+  "frozen_pipeline_identity_sha256": "c7c4c8df023c30884baf0fd2693fdbaece5840f1fb5e8d0788bcc82cb53674d7",
+  "full_development_scenes": 1000,
+  "full_development_views": 20000,
+  "full_suite_passed": 548,
+  "pending_stages": [],
+  "post_run_clearml": [
+    {
+      "cohort": "08d",
+      "stage": "08d",
+      "status": "completed",
+      "task_id": "46584b517c354514a643589701cacec0"
+    },
+    {
+      "cohort": "confirmation",
+      "stage": "08e",
+      "status": "completed",
+      "task_id": "59238c7743574514b15a0ca9404f450e"
+    },
+    {
+      "cohort": "remainder-600",
+      "stage": "08e",
+      "status": "completed",
+      "task_id": "e9f41e3dd21e4b7cb35e03842ee4751b"
+    },
+    {
+      "cohort": "screen-100",
+      "stage": "08e",
+      "status": "completed",
+      "task_id": "2a5bd951554f48e38c9b8a2a01b33a3c"
+    },
+    {
+      "cohort": "08e1",
+      "stage": "08e1",
+      "status": "completed",
+      "task_id": "5b15fe00642841c8ae7b98f717a9f50c"
+    },
+    {
+      "cohort": "08f",
+      "stage": "08f",
+      "status": "complete",
+      "task_id": "242f657c747b45f9a5a705133752af0e"
+    }
+  ],
+  "pr_created": false,
+  "publication_tests_passed": 4,
+  "qualitative_figures_decoded": 90,
+  "status": "verified_complete",
+  "subtests_passed": 29,
+  "validation_scope": "complete code checkout; transfer overlay will also be tested against its base"
+}
