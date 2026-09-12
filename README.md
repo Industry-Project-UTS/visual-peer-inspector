@@ -51,7 +51,12 @@ application pipeline, data boundaries, route names, and claim limits.
 
 ## Repository layout
 
+The independent [web app](apps/web/README.md) provides the upload, inspection,
+review and report interface. It starts without GPU dependencies; live inference
+is connected through an optional backend adapter.
+
 ```text
+apps/web/             Independent inspection web app and launch instructions
 data/manifests/       Public-safe dataset and historical cohort records
 docs/                 Architecture, method, dataset, experiment, and progress notes
 notebooks/            Ordered Kaggle and experiment entry points

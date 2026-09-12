@@ -42,8 +42,13 @@ checkpoints/
 *.pth
 *.ckpt
 *.onnx
+*.safetensors
 
 # Editors and operating systems
 .DS_Store
 .idea/
 .vscode/
+
+# Local browser verification artifacts
+output/playwright/
+.playwright-cli/

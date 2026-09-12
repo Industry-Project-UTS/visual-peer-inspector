@@ -29,3 +29,6 @@ representation = [
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"visual_peer_inspector.web" = ["styles.css"]
