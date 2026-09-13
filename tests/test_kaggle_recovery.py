@@ -44,6 +44,7 @@ BINDING = {
     "cohort_id": "test-cohort",
     "pipeline_identity_sha256": "1" * 64,
     "input_membership_sha256": "2" * 64,
+    "crop_background": (238, 241, 245),
 }
 ALLOWED = ("pipeline_identity.json", "locateanything", "sam21")
 
@@ -229,9 +230,16 @@ def test_recovery_rejects_wrong_identity_and_changed_existing_file(
 
 def test_recovery_rejects_corrupt_archive_before_restore(tmp_path: Path) -> None:
     _state_root, bundle, manifest, _record = _bundle(tmp_path)
-    content = bytearray(bundle.read_bytes())
-    content[len(content) // 2] ^= 0xFF
-    bundle.write_bytes(content)
+    rewritten = bundle.with_name("rewritten-corrupt.zip")
+    with ZipFile(bundle) as source, ZipFile(
+        rewritten, "w", compression=ZIP_DEFLATED
+    ) as destination:
+        for entry in source.infolist():
+            content = source.read(entry.filename)
+            if entry.filename == "state/sam21/shard-00000.npy":
+                content = b"changed-feature-bytes"
+            destination.writestr(entry, content)
+    rewritten.replace(bundle)
     sidecar = json.loads(manifest.read_text(encoding="utf-8"))
     sidecar["bundle_sha256"] = file_sha256(bundle)
     sidecar["bundle_size_bytes"] = bundle.stat().st_size

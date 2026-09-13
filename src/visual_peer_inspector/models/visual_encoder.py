@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 from hashlib import sha256
 import json
+from pathlib import Path
 from typing import Any, Iterable, Sequence
 
 import numpy as np
@@ -131,6 +132,7 @@ class FrozenVisualEncoder:
         revision: str,
         device: str,
         token: str | None = None,
+        model_source: str | Path | None = None,
     ) -> None:
         if not revision or revision == "main":
             raise ValueError("An immutable model revision is required")
@@ -139,11 +141,13 @@ class FrozenVisualEncoder:
         self.device = device
         torch, _functional, AutoModel = _load_libraries()
         self._torch = torch
-        self.model = AutoModel.from_pretrained(
-            specification.model_id,
-            revision=revision,
-            token=token,
-        ).eval().to(device)
+        source = Path(model_source).expanduser().resolve() if model_source is not None else specification.model_id
+        options = {"token": token}
+        if model_source is None:
+            options["revision"] = revision
+        else:
+            options["local_files_only"] = True
+        self.model = AutoModel.from_pretrained(source, **options).eval().to(device)
 
     @staticmethod
     def resolve_revision(model_id: str, *, token: str | None = None) -> str:

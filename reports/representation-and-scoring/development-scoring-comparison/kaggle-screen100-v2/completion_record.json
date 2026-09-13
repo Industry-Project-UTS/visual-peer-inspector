@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "base_commit": "127d071",
+  "scope": "100-scene development screen nested in the fixed 2,000-scene protocol",
+  "notebook_08g": {
+    "kaggle_version": 2,
+    "status": "complete",
+    "scenes": 100,
+    "rgb_views": 2000,
+    "route_views": 4000,
+    "encoder": "facebook/dinov2-small",
+    "encoder_revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+    "prediction_lock_sha256": "12ce9bfc2bb401c29621d91000c53ff4fd39504fc28e55ff8a921e0b5443690d",
+    "clearml_task_id": "1bcbb232e3f342d8b9fa7b78c146bc01"
+  },
+  "notebook_08h": {
+    "kaggle_version": 2,
+    "status": "complete",
+    "scenes": 100,
+    "ranking_rows": 99,
+    "paired_interval_rows": 264,
+    "context_folds": 10,
+    "private_galleries": 24,
+    "artifact_lock_sha256": "85b5e75c88145c432ec9edf189eba68fb095acf37a7747061cb0610c2cbbf0bd",
+    "clearml_task_id": "d8b38d6277b04afabb24c46710eb7060"
+  },
+  "primary_result": {
+    "route": "automatic",
+    "identity": "predicted",
+    "views": 3,
+    "best_average_precision_method": "forward_10_cov0",
+    "best_average_precision": 0.34164880952380955,
+    "best_top1": 0.24,
+    "p1_average_precision": 0.3199801587301587,
+    "p1_top1": 0.23
+  },
+  "decision": "Keep DINOv2-small and P1 as the comparator. Improve cross-view identity before protected evaluation."
+}

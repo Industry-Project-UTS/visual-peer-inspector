@@ -18,10 +18,11 @@ describe a next step that has since been completed. Use the current
 | Week 7 | [DS1 representation screen](week-07-ds1-representation-screen.md) | DINOv2-small and P1 selected for confirmation |
 | Week 8 | [DS2 confirmation](week-08-ds2-confirmation-preparation.md) | Frozen 300-scene model run and protected multi-view evaluation completed |
 | Development freeze | [Full development results](development-freeze-completion.md) | 1,000 scenes and 20,000 views locked; cross-view comparison complete, with low identity accuracy |
+| Development scoring | [Scoring comparison](development-scoring-comparison.md) | Fixed DINOv2-small features reused to compare nine scorers; identity association remains the main limitation |
 
 ## Current position
 
-Notebooks 01 to 08F are complete as development evidence. The DS1 screen
+Notebooks 01 to 08H are complete as development evidence. The DS1 screen
 selected DINOv2-small with P1 for confirmation, with B0 retained as the
 baseline. The bounded LocateAnything prompt comparison was verified on Kaggle
 Version 4. The 300-scene DS2 release, frozen model run, and protected
@@ -43,3 +44,11 @@ one view only. The code and output contract are reproducible, but reliable
 cross-view identity is not solved. Review these development limitations
 before starting protected calibration. Any method change needs a new
 development-only comparison and method lock.
+
+Notebooks 08G and 08H reused the existing 100-scene development screen. They
+did not change the 2,000-scene split and did not rerun LocateAnything or SAM.
+The best automatic three-view scorer reached 0.34165 scene average precision
+and 0.24 top-1 accuracy. On the supplied-mask, reference-identity diagnostic,
+top-1 accuracy reached 0.66. The gap confirms that predicted cross-view
+identity is the main next development problem. P1 remains the frozen comparator
+until an identity-aware development rerun supports a replacement.
