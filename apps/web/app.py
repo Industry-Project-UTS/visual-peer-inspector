@@ -23,6 +23,8 @@ def main():
     )
     arguments = parser.parse_args()
     backend_spec = os.getenv("VPI_BACKEND")
+    if backend_spec is None and os.getenv("VPI_ENABLE_INFERENCE") == "1":
+        backend_spec = "visual_peer_inspector.web.backend:create_backend"
     username, password = os.getenv("VPI_AUTH_USERNAME"), os.getenv("VPI_AUTH_PASSWORD")
     if bool(username) != bool(password):
         raise ValueError(
