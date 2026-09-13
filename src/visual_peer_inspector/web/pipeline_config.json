@@ -1,0 +1,61 @@
+{
+  "schema_version": "vpi-web-pipeline/v1",
+  "method_version": "web-p1-multiview-v1",
+  "preprocessing": "rgb-letterbox-256-bicubic-v1",
+  "input_size": 256,
+  "locateanything": {
+    "model_id": "nvidia/LocateAnything-3B",
+    "revision": "c32291ca5e996f5a7a485845b4f57a233936bba0",
+    "prompt": "individual object",
+    "maximum_attempts": 2,
+    "max_new_tokens": 8192,
+    "generation_mode": "hybrid",
+    "seed": 32040,
+    "upscale_factor": 1,
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "top_k": 0,
+    "repetition_penalty": 1.1
+  },
+  "proposal_policy": {
+    "key": "area_nms_075_cap8",
+    "minimum_area_fraction": 0.0015,
+    "maximum_area_fraction": 0.7,
+    "nms_iou": 0.75,
+    "maximum_proposals": 8
+  },
+  "sam2": {
+    "model_id": "facebook/sam2.1-hiera-large",
+    "revision": "665f8e2ad61cf5f53d65644ff27c8ee525124610",
+    "code_revision": "2b90b9f5ceec907a1c18123530e92e794ad901a4",
+    "filename": "sam2.1_hiera_large.pt",
+    "sha256": "2647878d5dfa5098f2f8649825738a9345572bae2d4350a2468587ece47dd318",
+    "size_bytes": 898083611,
+    "model_config": "configs/sam2.1/sam2.1_hiera_l.yaml",
+    "precision": "float16",
+    "seed": 20260824,
+    "multimask_output": false,
+    "mask_threshold": 0.0,
+    "max_hole_area": 0.0,
+    "max_sprinkle_area": 0.0
+  },
+  "encoder": {
+    "model_id": "facebook/dinov2-small",
+    "revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+    "key": "dinov2_small",
+    "batch_size": 8
+  },
+  "crop": {
+    "input_size": 224,
+    "padding_fraction": 0.15,
+    "background_rgb": [238, 241, 245],
+    "minimum_foreground_pixels": 4
+  },
+  "patch_validity_minimum_fraction": 0.5,
+  "p1_top_fraction": 0.1,
+  "fusion": "mean_normalized_rank",
+  "identity": {"unmatched_cost": 0.35, "ambiguity_margin": 0.05, "geometry_weight": 0.0},
+  "invalid_mask_policy": "unscored_retained_for_review",
+  "default_review_policy": "provisional-review-all-v1"
+}

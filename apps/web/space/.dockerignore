@@ -1,0 +1,17 @@
+**
+!src/
+!src/**
+!apps/
+!apps/web/
+!apps/web/**
+!Dockerfile
+!README.md
+!pyproject.toml
+**/__pycache__/
+**/*.pyc
+**/.env*
+**/.local/
+**/.venv/
+**/*.pt
+**/*.pth
+**/*.safetensors

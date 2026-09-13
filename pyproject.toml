@@ -31,4 +31,4 @@ representation = [
 where = ["src"]
 
 [tool.setuptools.package-data]
-"visual_peer_inspector.web" = ["styles.css"]
+"visual_peer_inspector.web" = ["styles.css", "pipeline_config.json"]
