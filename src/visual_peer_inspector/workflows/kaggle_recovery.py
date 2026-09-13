@@ -35,12 +35,15 @@ def _atomic_bytes(path: Path, content: bytes) -> None:
 
 
 def _binding_record(binding: Mapping[str, Any]) -> tuple[dict[str, Any], str]:
-    record = {
+    raw_record = {
         **dict(binding),
         **runtime_code_provenance(required=False),
     }
-    if not record:
+    if not raw_record:
         raise ValueError("A recovery bundle requires an exact identity binding")
+    # Normalize tuples and NumPy-compatible scalar values through the same
+    # canonical JSON representation stored inside the recovery archive.
+    record = json.loads(canonical_json_bytes(raw_record))
     digest = sha256(canonical_json_bytes(record)).hexdigest()
     return record, digest
 
@@ -208,7 +211,7 @@ def create_recovery_bundle(
     verify_recovery_bundle(
         bundle_path=destination,
         manifest_path=sidecar_path,
-        expected_binding=identity,
+        expected_binding=binding,
         allowed_top_levels=sorted(allowed),
     )
     return sidecar
@@ -228,15 +231,20 @@ def verify_recovery_bundle(
     manifest = json.loads(sidecar.read_text(encoding="utf-8"))
     allowed = {str(value) for value in allowed_top_levels}
     binding, binding_sha256 = _binding_record(expected_binding)
-    if (
-        manifest.get("schema_version") != RECOVERY_SCHEMA
-        or manifest.get("binding") != binding
-        or manifest.get("binding_sha256") != binding_sha256
-        or manifest.get("allowed_top_levels") != sorted(allowed)
-        or manifest.get("bundle_sha256") != file_sha256(bundle)
-        or int(manifest.get("bundle_size_bytes", -1)) != bundle.stat().st_size
-    ):
-        raise ValueError("Recovery bundle identity differs")
+    identity_checks = {
+        "schema": manifest.get("schema_version") == RECOVERY_SCHEMA,
+        "binding": manifest.get("binding") == binding,
+        "binding_sha256": manifest.get("binding_sha256") == binding_sha256,
+        "allowlist": manifest.get("allowed_top_levels") == sorted(allowed),
+        "bundle_sha256": manifest.get("bundle_sha256") == file_sha256(bundle),
+        "bundle_size": int(manifest.get("bundle_size_bytes", -1))
+        == bundle.stat().st_size,
+    }
+    failed_checks = [name for name, passed in identity_checks.items() if not passed]
+    if failed_checks:
+        raise ValueError(
+            "Recovery bundle identity differs: " + ", ".join(failed_checks)
+        )
     artifacts = manifest.get("artifacts")
     if (
         not isinstance(artifacts, list)

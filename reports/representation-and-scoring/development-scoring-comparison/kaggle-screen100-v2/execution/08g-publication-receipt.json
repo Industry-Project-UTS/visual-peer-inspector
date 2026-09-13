@@ -1,0 +1,13 @@
+{
+  "clean_notebook_sha256": "7a05e9ce16dea4fc3455b688dd489d7ce4fc7623b16296dce169efd7e1354bbd",
+  "downloaded_saved_output_sha256": "6445acc9fcee824181bc913325df33878434e105f898f57f1b6025be4db404ec",
+  "executed_code_cells": 11,
+  "label": "08G-screen100",
+  "published_log_sha256": "4063978203b9f22e7367285f33f309fc01c95f8d69aad6752b75309da59cb506",
+  "published_notebook_sha256": "4fb17b5d44b64be5bbee992f04838216c2695b07a4ddf0933f542054f88296d8",
+  "removed_private_visuals": 13,
+  "retained_output_blocks": 27,
+  "retained_safe_visuals": 0,
+  "schema_version": 1,
+  "status": "completed"
+}

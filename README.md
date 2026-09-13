@@ -11,7 +11,7 @@ evidence, and documentation for the UTS 32040 Industry Project.
 ## Current status
 
 The controlled 2,000-scene experiment is fixed and leakage checked. Verified
-development evidence is complete through Notebook 08F. The remaining protected
+development evidence is complete through Notebook 08H. The remaining protected
 and official notebook sequence is built and locally checked, but has not yet
 been run on Kaggle.
 
@@ -26,6 +26,7 @@ been run on Kaggle.
 | 07 to 07.1 Representation and Peer Scores | Complete candidate evidence; DINOv2-small with P1 selected for the development freeze |
 | 08A to 08C DS2 Confirmation | Complete development confirmation evidence |
 | 08D to 08F Development Freeze | Four stages complete; 20,000 views locked and 3,000 application results verified; cross-view identity remains weak |
+| 08G to 08H Development Scoring Comparison | Nine scoring methods compared on the existing 100-scene development screen; automatic-route accuracy remains limited by predicted identity |
 | 08F.1 to 10B Protected and Official Evaluation | Built and locally checked; Kaggle scientific evidence pending |
 | 11R to 11B Full-pool Sensitivity | Three optional post-official stages built and locally checked; execution remains optional |
 
@@ -35,8 +36,14 @@ cross-view identity, and mean normalized-rank fusion. This is a development
 freeze for the protected evaluation sequence. It is not final official
 performance or a production deployment claim. Notebook 08F retained
 embedding-only matching, but its five-view mean pairwise identity accuracy is
-33.04%. This measures object linking, not odd-one-out accuracy. See the
-[development results](docs/progress/development-freeze-completion.md) before
+33.04%. This measures object linking, not odd-one-out accuracy. Notebooks 08G
+and 08H then reused the fixed DINOv2-small features to compare P1 with
+directional, mutual-support, geometry, consensus, and out-of-fold context
+scorers. The best automatic three-view result reached 0.34165 scene average
+precision and 0.24 top-1 accuracy. With supplied masks and reference identity,
+the same feature pipeline reached up to 0.66 top-1 accuracy. This shows that
+cross-view identity is the main next development problem. See the [development
+scoring comparison](docs/progress/development-scoring-comparison.md) before
 starting protected calibration or making a web-app readiness claim.
 
 ## Pipeline
