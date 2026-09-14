@@ -19,10 +19,11 @@ describe a next step that has since been completed. Use the current
 | Week 8 | [DS2 confirmation](week-08-ds2-confirmation-preparation.md) | Frozen 300-scene model run and protected multi-view evaluation completed |
 | Development freeze | [Full development results](development-freeze-completion.md) | 1,000 scenes and 20,000 views locked; cross-view comparison complete, with low identity accuracy |
 | Development scoring | [Scoring comparison](development-scoring-comparison.md) | Fixed DINOv2-small features reused to compare nine scorers; identity association remains the main limitation |
+| Identity refinement | [Foreground patch comparison](development-identity-refinement.md) | Same 100-scene screen reused; top-1 improved but identity-link F1 fell, so no method was promoted |
 
 ## Current position
 
-Notebooks 01 to 08H are complete as development evidence. The DS1 screen
+Notebooks 01 to 08I are complete as development evidence. The DS1 screen
 selected DINOv2-small with P1 for confirmation, with B0 retained as the
 baseline. The bounded LocateAnything prompt comparison was verified on Kaggle
 Version 4. The 300-scene DS2 release, frozen model run, and protected
@@ -52,3 +53,10 @@ and 0.24 top-1 accuracy. On the supplied-mask, reference-identity diagnostic,
 top-1 accuracy reached 0.66. The gap confirms that predicted cross-view
 identity is the main next development problem. P1 remains the frozen comparator
 until an identity-aware development rerun supports a replacement.
+
+Notebook 08I completed that bounded development rerun with foreground patch
+and hybrid descriptors. The main candidate improved automatic three-view
+top-1 accuracy from 0.24 to 0.31, but identity-link F1 fell from 0.188789 to
+0.139612 and the average-precision interval crossed zero. No method was
+promoted. The current global descriptor remains the stable default while the
+next development study focuses only on track association.

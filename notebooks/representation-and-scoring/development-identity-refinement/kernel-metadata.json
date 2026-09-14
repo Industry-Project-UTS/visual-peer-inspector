@@ -1,0 +1,27 @@
+{
+  "id": "esreekarreddy/toysad-8k-development-identity-refinement",
+  "id_no": 134267868,
+  "title": "ToysAD-8K Development Identity Refinement",
+  "code_file": "toysad-8k-development-identity-refinement.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [
+    "gpu"
+  ],
+  "dataset_sources": [
+    "esreekarreddy/vpi-development-scoring-evaluator",
+    "esreekarreddy/vpi-development-scoring-model-input",
+    "esreekarreddy/vpi-identity-refinement-source"
+  ],
+  "kernel_sources": [
+    "esreekarreddy/toysad-8k-development-scoring-comparison-full"
+  ],
+  "competition_sources": [],
+  "model_sources": [],
+  "docker_image": "gcr.io/kaggle-private-byod/python@sha256:37c64f7dd9c54116ecd1bcc88817c5469b88387388fade02bfa8bf3fc647d461",
+  "machine_shape": "NvidiaTeslaT4"
+}

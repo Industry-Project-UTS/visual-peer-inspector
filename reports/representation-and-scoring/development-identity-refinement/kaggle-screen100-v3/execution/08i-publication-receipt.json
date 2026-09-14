@@ -1,0 +1,13 @@
+{
+  "clean_notebook_sha256": "e955c4a7a1f619f6ccc8d050293fd4d3a11726507cda72b5cc9b0f19198e8e1a",
+  "downloaded_saved_output_sha256": "bca913030711c7fc5dc4d49e365d23742087bde022055513f5fe5145a3115f39",
+  "executed_code_cells": 11,
+  "label": "08I-screen100",
+  "published_log_sha256": "f02d547a596adeceed5a66bd1a69937ad0ea7370fc97353b165ebef19e3afca3",
+  "published_notebook_sha256": "f2db158c4f4ea133a696541b6ed814df0e8ba677e62ac8360142fec2d245ff81",
+  "removed_private_visuals": 14,
+  "retained_output_blocks": 54,
+  "retained_safe_visuals": 0,
+  "schema_version": 1,
+  "status": "completed"
+}

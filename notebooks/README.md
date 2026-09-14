@@ -31,6 +31,7 @@ model, scoring, evaluation, and tracking logic belongs in tested modules under
 | 08F Cross-View Identity Freeze | Selects label-free identity matching and freezes the application output contract | V1 complete; embedding-only retained, 3,000 application results; five-view identity accuracy 33.04% |
 | 08G Development Scoring Comparison | Reuses the fixed 100-scene development screen and DINOv2-small feature cache to calculate P1 and eight bounded alternatives | V2 complete; 100 scenes, 2,000 views and both routes verified |
 | 08H Development Scoring Evaluation | Compares the nine scorers across routes, identity modes and view counts using asset-grouped uncertainty | V2 complete; no scorer promoted automatically; predicted cross-view identity remains the main limitation |
+| 08I Development Identity Refinement | Compares global, foreground patch, and hybrid identity descriptors on the same 100-scene development screen | V3 complete; top-1 improved but identity-link F1 fell, so no candidate was promoted |
 | 08F.1 Calibration Resource Release | Publishes the physically separate `vpi-toysad-calibration600-model-input` and `vpi-toysad-calibration600-evaluator` resources after the method freeze | Built and locally checked; Kaggle evidence pending |
 | 09A Calibration Inference | Produces locked, prediction-only output for all 600 calibration scenes | Built and locally checked; Kaggle evidence pending |
 | 09B Calibration Review Policy | Opens calibration references after the prediction lock and freezes only the optional review policy | Built and locally checked; Kaggle evidence pending |
@@ -82,7 +83,8 @@ flowchart LR
     N8E1 --> N8F["08F Identity and method freeze"]
     N8F --> N8G["08G Development scoring comparison"]
     N8G --> N8H["08H Development scoring evaluation"]
-    N8H --> N8F1["08F.1 Calibration resource release"]
+    N8H --> N8I["08I Development identity refinement"]
+    N8I --> N8F1["08F.1 Calibration resource release"]
     N8F1 --> N9A["09A Calibration inference"]
     N9A --> N9B["09B Review-policy freeze"]
     N9B --> N9B1["09B.1 Internal-lock resource release"]
@@ -157,6 +159,8 @@ flowchart LR
   `representation-and-scoring/development-scoring-comparison/08g-development-scoring-comparison.ipynb`
 - Notebook 08H:
   `representation-and-scoring/development-scoring-comparison/08h-development-scoring-evaluation.ipynb`
+- Notebook 08I:
+  `representation-and-scoring/development-identity-refinement/08i-development-identity-refinement.ipynb`
 - Notebook 08F.1:
   `protected-evaluation/08f1-toysad8k-calibration-resource-release.ipynb`
 - Notebook 09A:
