@@ -1,0 +1,16 @@
+{
+  "clearml_task_id": "af7a6e7e1a414643a27a1cb8989f56ff",
+  "downloaded_notebook_sha256": "bca913030711c7fc5dc4d49e365d23742087bde022055513f5fe5145a3115f39",
+  "evaluator_lock_sha256": "8012cd20c63b3788f861f2ba991b3181a0c1666f26e176beeee370228c8500c3",
+  "kaggle_kernel": "esreekarreddy/toysad-8k-development-identity-refinement",
+  "kaggle_version": 3,
+  "model": "facebook/dinov2-small",
+  "model_revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "prediction_lock_sha256": "ddcc27fdfb77fe5a125539f9926f863da7e8fcfeaef2bbe542f6e55a114de755",
+  "protected_data_used": false,
+  "runtime_seconds": 413,
+  "scene_count": 100,
+  "source_archive_sha256": "486af54d39ec810ae31fc804c4763cf3d3f51ae540972955da4d103114cf28cd",
+  "split_changed": false,
+  "status": "complete"
+}

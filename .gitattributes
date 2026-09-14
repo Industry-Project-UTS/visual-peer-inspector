@@ -3,3 +3,5 @@
 # Keep downloaded evidence bytes stable across Git clients and operating systems.
 reports/development-freeze/** -text
 notebooks/executed/development-freeze/** -text
+reports/representation-and-scoring/development-identity-refinement/** -text
+notebooks/executed/development-identity/** -text

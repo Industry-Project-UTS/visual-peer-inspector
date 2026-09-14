@@ -11,7 +11,7 @@ evidence, and documentation for the UTS 32040 Industry Project.
 ## Current status
 
 The controlled 2,000-scene experiment is fixed and leakage checked. Verified
-development evidence is complete through Notebook 08H. The remaining protected
+development evidence is complete through Notebook 08I. The remaining protected
 and official notebook sequence is built and locally checked, but has not yet
 been run on Kaggle.
 
@@ -27,6 +27,7 @@ been run on Kaggle.
 | 08A to 08C DS2 Confirmation | Complete development confirmation evidence |
 | 08D to 08F Development Freeze | Four stages complete; 20,000 views locked and 3,000 application results verified; cross-view identity remains weak |
 | 08G to 08H Development Scoring Comparison | Nine scoring methods compared on the existing 100-scene development screen; automatic-route accuracy remains limited by predicted identity |
+| 08I Development Identity Refinement | Foreground patch identity tested on the same 100-scene screen; top-1 improved to 0.31 but identity-link F1 fell, so no method was promoted |
 | 08F.1 to 10B Protected and Official Evaluation | Built and locally checked; Kaggle scientific evidence pending |
 | 11R to 11B Full-pool Sensitivity | Three optional post-official stages built and locally checked; execution remains optional |
 
@@ -42,8 +43,11 @@ directional, mutual-support, geometry, consensus, and out-of-fold context
 scorers. The best automatic three-view result reached 0.34165 scene average
 precision and 0.24 top-1 accuracy. With supplied masks and reference identity,
 the same feature pipeline reached up to 0.66 top-1 accuracy. This shows that
-cross-view identity is the main next development problem. See the [development
-scoring comparison](docs/progress/development-scoring-comparison.md) before
+cross-view identity is the main next development problem. Notebook 08I then
+tested foreground patch descriptors without changing the split or model stack.
+The primary candidate reached 0.31 top-1 accuracy, but identity-link F1 fell,
+so the current identity method remains the stable default. See the [development
+identity refinement](docs/progress/development-identity-refinement.md) before
 starting protected calibration or making a web-app readiness claim.
 
 ## Pipeline

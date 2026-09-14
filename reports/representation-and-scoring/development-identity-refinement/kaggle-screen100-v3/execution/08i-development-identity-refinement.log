@@ -1,0 +1,2380 @@
+Stage: 08I-screen100
+Status: completed
+Clean notebook: 08i-development-identity-refinement.ipynb
+Clean notebook SHA-256: e955c4a7a1f619f6ccc8d050293fd4d3a11726507cda72b5cc9b0f19198e8e1a
+Downloaded saved-output SHA-256: bca913030711c7fc5dc4d49e365d23742087bde022055513f5fe5145a3115f39
+Executed code cells: 11
+Retained output blocks: 54
+Retained safe visuals: 0
+Removed private visuals: 14
+
+Sanitised execution transcript
+==============================
+
+[cell 5]
+Collecting transformers==5.14.1 (from -r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading transformers-5.14.1-py3-none-any.whl.metadata (32 kB)
+Collecting huggingface-hub==1.26.1 (from -r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 4))
+  Downloading huggingface_hub-1.26.1-py3-none-any.whl.metadata (16 kB)
+Collecting numpy==2.5.1 (from -r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 5))
+  Downloading numpy-2.5.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Collecting pandas==2.3.3 (from -r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 6))
+  Downloading pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 91.2/91.2 kB 2.6 MB/s eta 0:00:00
+Collecting pillow==12.3.0 (from -r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 7))
+  Downloading pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Collecting scipy==1.16.1 (from -r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 8))
+  Downloading scipy-1.16.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.0/62.0 kB 4.1 MB/s eta 0:00:00
+Collecting matplotlib==3.10.8 (from -r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 9))
+  Downloading matplotlib-3.10.8-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (52 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 52.8/52.8 kB 4.0 MB/s eta 0:00:00
+Collecting nbformat==5.11.1 (from -r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 10))
+  Downloading nbformat-5.11.1-py3-none-any.whl.metadata (3.7 kB)
+Collecting pytest==9.1.1 (from -r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 11))
+  Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting packaging>=20.0 (from transformers==5.14.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pyyaml>=5.1 (from transformers==5.14.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting regex>=2025.10.22 (from transformers==5.14.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading regex-2026.9.10-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.6/40.6 kB 2.2 MB/s eta 0:00:00
+Collecting tokenizers<=0.23.0,>=0.22.0 (from transformers==5.14.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+Collecting typer (from transformers==5.14.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading typer-0.27.2-py3-none-any.whl.metadata (16 kB)
+Collecting safetensors>=0.8.0 (from transformers==5.14.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting tqdm>=4.60 (from transformers==5.14.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.4/57.4 kB 2.4 MB/s eta 0:00:00
+Collecting click<9.0.0,>=8.4.2 (from huggingface-hub==1.26.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 4))
+  Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting filelock>=3.10.0 (from huggingface-hub==1.26.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 4))
+  Downloading filelock-3.32.6-py3-none-any.whl.metadata (2.0 kB)
+Collecting fsspec>=2023.5.0 (from huggingface-hub==1.26.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 4))
+  Downloading fsspec-2026.7.0-py3-none-any.whl.metadata (10 kB)
+Collecting hf-xet<2.0.0,>=1.5.1 (from huggingface-hub==1.26.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 4))
+  Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+Collecting httpx<1,>=0.23.0 (from huggingface-hub==1.26.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 4))
+  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting typing-extensions>=4.1.0 (from huggingface-hub==1.26.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 4))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting python-dateutil>=2.8.2 (from pandas==2.3.3->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 6))
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz>=2020.1 (from pandas==2.3.3->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 6))
+  Downloading pytz-2026.3.post1-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas==2.3.3->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 6))
+  Downloading tzdata-2026.4-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting contourpy>=1.0.1 (from matplotlib==3.10.8->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 9))
+  Downloading contourpy-1.4.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Collecting cycler>=0.10 (from matplotlib==3.10.8->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 9))
+  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.22.0 (from matplotlib==3.10.8->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 9))
+  Downloading fonttools-4.65.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (125 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 125.0/125.0 kB 8.6 MB/s eta 0:00:00
+Collecting kiwisolver>=1.3.1 (from matplotlib==3.10.8->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 9))
+  Downloading kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.2 kB)
+Collecting pyparsing>=3 (from matplotlib==3.10.8->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 9))
+  Downloading pyparsing-3.3.2-py3-none-any.whl.metadata (5.8 kB)
+Collecting fastjsonschema>=2.15 (from nbformat==5.11.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 10))
+  Downloading fastjsonschema-2.22.2-py3-none-any.whl.metadata (2.1 kB)
+Collecting jsonschema>=2.6 (from nbformat==5.11.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 10))
+  Downloading jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+Collecting jupyter-core!=5.0.*,>=4.12 (from nbformat==5.11.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 10))
+  Downloading jupyter_core-5.9.1-py3-none-any.whl.metadata (1.5 kB)
+Collecting traitlets>=5.1 (from nbformat==5.11.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 10))
+  Downloading traitlets-5.16.1-py3-none-any.whl.metadata (10 kB)
+Collecting iniconfig>=1.0.1 (from pytest==9.1.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 11))
+  Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting pluggy<2,>=1.5 (from pytest==9.1.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 11))
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Collecting pygments>=2.7.2 (from pytest==9.1.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 11))
+  Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting anyio (from httpx<1,>=0.23.0->huggingface-hub==1.26.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 4))
+  Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+Collecting certifi (from httpx<1,>=0.23.0->huggingface-hub==1.26.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 4))
+  Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+Collecting httpcore==1.* (from httpx<1,>=0.23.0->huggingface-hub==1.26.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 4))
+  Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting idna (from httpx<1,>=0.23.0->huggingface-hub==1.26.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 4))
+  Downloading idna-3.19-py3-none-any.whl.metadata (9.2 kB)
+Collecting h11>=0.16 (from httpcore==1.*->httpx<1,>=0.23.0->huggingface-hub==1.26.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 4))
+  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting attrs>=22.2.0 (from jsonschema>=2.6->nbformat==5.11.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 10))
+  Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=2.6->nbformat==5.11.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 10))
+  Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting referencing>=0.28.4 (from jsonschema>=2.6->nbformat==5.11.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 10))
+  Downloading referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+Collecting rpds-py>=0.25.0 (from jsonschema>=2.6->nbformat==5.11.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 10))
+  Downloading rpds_py-2026.6.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+Collecting platformdirs>=2.5 (from jupyter-core!=5.0.*,>=4.12->nbformat==5.11.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 10))
+  Downloading platformdirs-4.11.8-py3-none-any.whl.metadata (5.5 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas==2.3.3->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 6))
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting shellingham>=1.3.0 (from typer->transformers==5.14.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+Collecting rich>=13.8.0 (from typer->transformers==5.14.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+Collecting annotated-doc>=0.0.2 (from typer->transformers==5.14.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+Collecting markdown-it-py>=2.2.0 (from rich>=13.8.0->typer->transformers==5.14.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.8.0->typer->transformers==5.14.1->-r /kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/requirements/identity-refinement.txt (line 3))
+  Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+Downloading transformers-5.14.1-py3-none-any.whl (11.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.6/11.6 MB 89.8 MB/s eta 0:00:00
+Downloading huggingface_hub-1.26.1-py3-none-any.whl (780 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 780.8/780.8 kB 45.0 MB/s eta 0:00:00
+Downloading numpy-2.5.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 53.6 MB/s eta 0:00:00
+Downloading pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.4/12.4 MB 71.6 MB/s eta 0:00:00
+Downloading pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 74.8 MB/s eta 0:00:00
+Downloading scipy-1.16.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (35.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.2/35.2 MB 40.7 MB/s eta 0:00:00
+Downloading matplotlib-3.10.8-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (8.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.7/8.7 MB 84.3 MB/s eta 0:00:00
+Downloading nbformat-5.11.1-py3-none-any.whl (79 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.8/79.8 kB 6.0 MB/s eta 0:00:00
+Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 386.5/386.5 kB 29.7 MB/s eta 0:00:00
+Downloading click-8.5.0-py3-none-any.whl (125 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 125.3/125.3 kB 9.1 MB/s eta 0:00:00
+Downloading contourpy-1.4.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (383 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 383.2/383.2 kB 26.7 MB/s eta 0:00:00
+Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fastjsonschema-2.22.2-py3-none-any.whl (27 kB)
+Downloading filelock-3.32.6-py3-none-any.whl (100 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.2/100.2 kB 7.8 MB/s eta 0:00:00
+Downloading fonttools-4.65.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 89.4 MB/s eta 0:00:00
+Downloading fsspec-2026.7.0-py3-none-any.whl (206 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 206.6/206.6 kB 15.5 MB/s eta 0:00:00
+Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 97.9 MB/s eta 0:00:00
+Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.5/73.5 kB 5.9 MB/s eta 0:00:00
+Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.8/78.8 kB 6.8 MB/s eta 0:00:00
+Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Downloading jsonschema-4.26.0-py3-none-any.whl (90 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 90.6/90.6 kB 6.4 MB/s eta 0:00:00
+Downloading jupyter_core-5.9.1-py3-none-any.whl (29 kB)
+Downloading kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 49.9 MB/s eta 0:00:00
+Downloading packaging-26.3-py3-none-any.whl (129 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 130.0/130.0 kB 10.5 MB/s eta 0:00:00
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 58.3 MB/s eta 0:00:00
+Downloading pyparsing-3.3.2-py3-none-any.whl (122 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 122.8/122.8 kB 9.6 MB/s eta 0:00:00
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 13.8 MB/s eta 0:00:00
+Downloading pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 508.3/508.3 kB 29.9 MB/s eta 0:00:00
+Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 46.7 MB/s eta 0:00:00
+Downloading regex-2026.9.10-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (804 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 804.6/804.6 kB 39.9 MB/s eta 0:00:00
+Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 516.0/516.0 kB 33.3 MB/s eta 0:00:00
+Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 61.5 MB/s eta 0:00:00
+Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 80.2/80.2 kB 6.0 MB/s eta 0:00:00
+Downloading traitlets-5.16.1-py3-none-any.whl (86 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 86.2/86.2 kB 6.0 MB/s eta 0:00:00
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 3.2 MB/s eta 0:00:00
+Downloading tzdata-2026.4-py2.py3-none-any.whl (347 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 347.5/347.5 kB 24.0 MB/s eta 0:00:00
+Downloading typer-0.27.2-py3-none-any.whl (123 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 123.1/123.1 kB 8.1 MB/s eta 0:00:00
+Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 67.5/67.5 kB 5.5 MB/s eta 0:00:00
+Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+Downloading platformdirs-4.11.8-py3-none-any.whl (24 kB)
+Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+Downloading rich-15.0.0-py3-none-any.whl (310 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 310.7/310.7 kB 22.2 MB/s eta 0:00:00
+Downloading rpds_py-2026.6.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (366 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 366.2/366.2 kB 25.4 MB/s eta 0:00:00
+Downloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 132.1/132.1 kB 11.0 MB/s eta 0:00:00
+Downloading idna-3.19-py3-none-any.whl (68 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 68.5/68.5 kB 5.0 MB/s eta 0:00:00
+Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 137.0/137.0 kB 11.6 MB/s eta 0:00:00
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 91.7/91.7 kB 6.4 MB/s eta 0:00:00
+Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Installing collected packages: pytz, tzdata, typing-extensions, traitlets, tqdm, six, shellingham, safetensors, rpds-py, regex, pyyaml, pyparsing, pygments, pluggy, platformdirs, pillow, packaging, numpy, mdurl, kiwisolver, iniconfig, idna, hf-xet, h11, fsspec, fonttools, filelock, fastjsonschema, cycler, click, certifi, attrs, annotated-doc, scipy, referencing, python-dateutil, pytest, markdown-it-py, jupyter-core, httpcore, contourpy, anyio, rich, pandas, matplotlib, jsonschema-specifications, httpx, typer, jsonschema, huggingface-hub, tokenizers, nbformat, transformers
+
+[cell 5]
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+bigframes 2.39.0 requires google-cloud-bigquery-storage<3.0.0,>=2.30.0, which is not installed.
+google-adk 1.29.0 requires google-cloud-bigquery-storage>=2.0.0, which is not installed.
+datasets 5.0.0 requires fsspec[http]<=2026.4.0,>=2023.1.0, but you have fsspec 2026.7.0 which is incompatible.
+ydata-profiling 4.18.4 requires matplotlib<=3.10,>=3.5, but you have matplotlib 3.10.8 which is incompatible.
+ydata-profiling 4.18.4 requires numpy<2.4,>=1.22, but you have numpy 2.5.1 which is incompatible.
+google-colab 1.0.0 requires jupyter-server==2.14.0, but you have jupyter-server 2.12.5 which is incompatible.
+google-colab 1.0.0 requires pandas==2.2.2, but you have pandas 2.3.3 which is incompatible.
+dopamine-rl 4.1.2 requires gym<=0.25.2, but you have gym 0.26.2 which is incompatible.
+moviepy 1.0.3 requires decorator<5.0,>=4.0.2, but you have decorator 5.3.1 which is incompatible.
+bigframes 2.39.0 requires rich<14,>=12.4.4, but you have rich 15.0.0 which is incompatible.
+numba 0.60.0 requires numpy<2.1,>=1.22, but you have numpy 2.5.1 which is incompatible.
+pyiceberg 0.11.1 requires rich<15.0.0,>=10.11.0, but you have rich 15.0.0 which is incompatible.
+gcsfs 2025.3.0 requires fsspec==2025.3.0, but you have fsspec 2026.7.0 which is incompatible.
+gradio 5.50.0 requires pillow<12.0,>=8.0, but you have pillow 12.3.0 which is incompatible.
+
+[cell 5]
+Successfully installed annotated-doc-0.0.5 anyio-4.15.1 attrs-26.1.0 certifi-2026.7.22 click-8.5.0 contourpy-1.4.0 cycler-0.12.1 fastjsonschema-2.22.2 filelock-3.32.6 fonttools-4.65.0 fsspec-2026.7.0 h11-0.16.0 hf-xet-1.6.0 httpcore-1.0.9 httpx-0.28.1 huggingface-hub-1.26.1 idna-3.19 iniconfig-2.3.0 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 jupyter-core-5.9.1 kiwisolver-1.5.1 markdown-it-py-4.2.0 matplotlib-3.10.8 mdurl-0.1.2 nbformat-5.11.1 numpy-2.5.1 packaging-26.3 pandas-2.3.3 pillow-12.3.0 platformdirs-4.11.8 pluggy-1.6.0 pygments-2.21.0 pyparsing-3.3.2 pytest-9.1.1 python-dateutil-2.9.0.post0 pytz-2026.3.post1 pyyaml-6.0.3 referencing-0.37.0 regex-2026.9.10 rich-15.0.0 rpds-py-2026.6.3 safetensors-0.8.0 scipy-1.16.1 shellingham-1.5.4 six-1.17.0 tokenizers-0.22.2 tqdm-4.70.1 traitlets-5.16.1 transformers-5.14.1 typer-0.27.2 typing-extensions-4.16.0 tzdata-2026.4
+........                                                                 [100%]
+8 passed in 1.64s
+
+[cell 5]
+CompletedProcess(args=['/usr/bin/python3', '-m', 'pytest', '-p', 'no:cacheprovider', '/kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/tests/test_identity_patch_matching.py', '/kaggle/input/datasets/esreekarreddy/vpi-identity-refinement-source/identity-refinement/tests/test_identity_refinement_contract.py', '-q'], returncode=0)
+
+[cell 7]
+{'scene_count': 100, 'scenes': ['[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]'], 'view_count': 8, 'configuration_count_per_scene': 63, 'model_input_lock_sha256': '9baa53454d2482caf8240e7a8b591a6e9e9646dd160c5b3abdc8bd17265ebda1', 'scoring_prediction_lock_sha256': '12ce9bfc2bb401c29621d91000c53ff4fd39504fc28e55ff8a921e0b5443690d'}
+
+[cell 9]
+{"archive": null, "attached": false, "event": "recovery_discovery", "expected": false}
+
+[cell 11]
+{'event': 'runtime_ready', 'gpu': 'Tesla T4', 'visible_gpus': 2, 'devices_used': 1, 'output_free_bytes': 20351041536}
+{"event": "model_load_start", "revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056"}
+{'event': 'model_download_start', 'revision': 'ed25f3a31f01632728cabb09d1542f84ab7b0056'}
+
+Fetching 6 files:   0%|          | 0/6 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 6 files:  33%|███▎      | 2/6 [00:00<00:00, 12.79it/s]
+Fetching 6 files:  83%|████████▎ | 5/6 [00:01<00:00,  3.69it/s]
+Fetching 6 files: 100%|██████████| 6/6 [00:06<00:00,  1.46s/it]
+Fetching 6 files: 100%|██████████| 6/6 [00:06<00:00,  1.06s/it]
+{'event': 'model_download_complete', 'snapshot': 'ed25f3a31f01632728cabb09d1542f84ab7b0056'}
+
+Loading weights:   0%|          | 0/223 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 223/223 [00:00<00:00, 2874.25it/s]
+{'event': 'model_cpu_ready'}
+{'event': 'model_cuda_ready', 'allocated_bytes': 88226304}
+{"event": "model_ready"}
+{"event": "scene_complete", "scene_number": 1, "total": 100}
+{"event": "scene_complete", "scene_number": 2, "total": 100}
+{"event": "scene_complete", "scene_number": 3, "total": 100}
+{"event": "scene_complete", "scene_number": 4, "total": 100}
+{"event": "scene_complete", "scene_number": 5, "total": 100}
+{"event": "scene_complete", "scene_number": 6, "total": 100}
+{"event": "scene_complete", "scene_number": 7, "total": 100}
+{"event": "scene_complete", "scene_number": 8, "total": 100}
+{"event": "scene_complete", "scene_number": 9, "total": 100}
+{"event": "scene_complete", "scene_number": 10, "total": 100}
+{"event": "scene_complete", "scene_number": 11, "total": 100}
+{"event": "scene_complete", "scene_number": 12, "total": 100}
+{"event": "scene_complete", "scene_number": 13, "total": 100}
+{"event": "scene_complete", "scene_number": 14, "total": 100}
+{"event": "scene_complete", "scene_number": 15, "total": 100}
+{"event": "scene_complete", "scene_number": 16, "total": 100}
+{"event": "scene_complete", "scene_number": 17, "total": 100}
+{"event": "scene_complete", "scene_number": 18, "total": 100}
+{"event": "scene_complete", "scene_number": 19, "total": 100}
+{"event": "scene_complete", "scene_number": 20, "total": 100}
+{"event": "scene_complete", "scene_number": 21, "total": 100}
+{"event": "scene_complete", "scene_number": 22, "total": 100}
+{"event": "scene_complete", "scene_number": 23, "total": 100}
+{"event": "scene_complete", "scene_number": 24, "total": 100}
+{"event": "scene_complete", "scene_number": 25, "total": 100}
+{"event": "scene_complete", "scene_number": 26, "total": 100}
+{"event": "scene_complete", "scene_number": 27, "total": 100}
+{"event": "scene_complete", "scene_number": 28, "total": 100}
+{"event": "scene_complete", "scene_number": 29, "total": 100}
+{"event": "scene_complete", "scene_number": 30, "total": 100}
+{"event": "scene_complete", "scene_number": 31, "total": 100}
+{"event": "scene_complete", "scene_number": 32, "total": 100}
+{"event": "scene_complete", "scene_number": 33, "total": 100}
+{"event": "scene_complete", "scene_number": 34, "total": 100}
+{"event": "scene_complete", "scene_number": 35, "total": 100}
+{"event": "scene_complete", "scene_number": 36, "total": 100}
+{"event": "scene_complete", "scene_number": 37, "total": 100}
+{"event": "scene_complete", "scene_number": 38, "total": 100}
+{"event": "scene_complete", "scene_number": 39, "total": 100}
+{"event": "scene_complete", "scene_number": 40, "total": 100}
+{"event": "scene_complete", "scene_number": 41, "total": 100}
+{"event": "scene_complete", "scene_number": 42, "total": 100}
+{"event": "scene_complete", "scene_number": 43, "total": 100}
+{"event": "scene_complete", "scene_number": 44, "total": 100}
+{"event": "scene_complete", "scene_number": 45, "total": 100}
+{"event": "scene_complete", "scene_number": 46, "total": 100}
+{"event": "scene_complete", "scene_number": 47, "total": 100}
+{"event": "scene_complete", "scene_number": 48, "total": 100}
+{"event": "scene_complete", "scene_number": 49, "total": 100}
+{"event": "scene_complete", "scene_number": 50, "total": 100}
+{"event": "scene_complete", "scene_number": 51, "total": 100}
+{"event": "scene_complete", "scene_number": 52, "total": 100}
+{"event": "scene_complete", "scene_number": 53, "total": 100}
+{"event": "scene_complete", "scene_number": 54, "total": 100}
+{"event": "scene_complete", "scene_number": 55, "total": 100}
+{"event": "scene_complete", "scene_number": 56, "total": 100}
+{"event": "scene_complete", "scene_number": 57, "total": 100}
+{"event": "scene_complete", "scene_number": 58, "total": 100}
+{"event": "scene_complete", "scene_number": 59, "total": 100}
+{"event": "scene_complete", "scene_number": 60, "total": 100}
+{"event": "scene_complete", "scene_number": 61, "total": 100}
+{"event": "scene_complete", "scene_number": 62, "total": 100}
+{"event": "scene_complete", "scene_number": 63, "total": 100}
+{"event": "scene_complete", "scene_number": 64, "total": 100}
+{"event": "scene_complete", "scene_number": 65, "total": 100}
+{"event": "scene_complete", "scene_number": 66, "total": 100}
+{"event": "scene_complete", "scene_number": 67, "total": 100}
+{"event": "scene_complete", "scene_number": 68, "total": 100}
+{"event": "scene_complete", "scene_number": 69, "total": 100}
+{"event": "scene_complete", "scene_number": 70, "total": 100}
+{"event": "scene_complete", "scene_number": 71, "total": 100}
+{"event": "scene_complete", "scene_number": 72, "total": 100}
+{"event": "scene_complete", "scene_number": 73, "total": 100}
+{"event": "scene_complete", "scene_number": 74, "total": 100}
+{"event": "scene_complete", "scene_number": 75, "total": 100}
+{"event": "scene_complete", "scene_number": 76, "total": 100}
+{"event": "scene_complete", "scene_number": 77, "total": 100}
+{"event": "scene_complete", "scene_number": 78, "total": 100}
+{"event": "scene_complete", "scene_number": 79, "total": 100}
+{"event": "scene_complete", "scene_number": 80, "total": 100}
+{"event": "scene_complete", "scene_number": 81, "total": 100}
+{"event": "scene_complete", "scene_number": 82, "total": 100}
+{"event": "scene_complete", "scene_number": 83, "total": 100}
+{"event": "scene_complete", "scene_number": 84, "total": 100}
+{"event": "scene_complete", "scene_number": 85, "total": 100}
+{"event": "scene_complete", "scene_number": 86, "total": 100}
+{"event": "scene_complete", "scene_number": 87, "total": 100}
+{"event": "scene_complete", "scene_number": 88, "total": 100}
+{"event": "scene_complete", "scene_number": 89, "total": 100}
+{"event": "scene_complete", "scene_number": 90, "total": 100}
+{"event": "scene_complete", "scene_number": 91, "total": 100}
+{"event": "scene_complete", "scene_number": 92, "total": 100}
+{"event": "scene_complete", "scene_number": 93, "total": 100}
+{"event": "scene_complete", "scene_number": 94, "total": 100}
+{"event": "scene_complete", "scene_number": 95, "total": 100}
+{"event": "scene_complete", "scene_number": 96, "total": 100}
+{"event": "scene_complete", "scene_number": 97, "total": 100}
+{"event": "scene_complete", "scene_number": 98, "total": 100}
+{"event": "scene_complete", "scene_number": 99, "total": 100}
+{"event": "scene_complete", "scene_number": 100, "total": 100}
+{'event': 'gpu_summary', 'peak_allocated_bytes': 163530240}
+{'files': {'preflight.json': 'ecc10c8c5e749d4fc77602676d72f4f9100c5608a1fb85e3cf9bfaf4f1a6c983', 'run_binding.json': '1bf40c53bcec54dbff295348230772639052cbcb2efeb8f4180f363304298b63', 'scenes/[protected identifier removed].json': 'c844450d7845a3b7730b704b28b6cfb15b5774368ad2512d3af634068948de3f', 'scenes/[protected identifier removed].receipt.json': 'ca70134c6ef68878ee07e8bd26c7b11359e69b8a5cccd62a38f9be56bfb9b3fa', 'scenes/[protected identifier removed].json': 'e448494a86767284b4734daca9eb33995edd035fc127c8fd117e5dbf0203d1c8', 'scenes/[protected identifier removed].receipt.json': '7e4425475490a967f6079c0f8d722768092292ec4cf763d4f701c58063917ca9', 'scenes/[protected identifier removed].json': '0bcefda96ba048e8dcd1ee473eb5f3a357164ee9736a09a5508ed31b352415c4', 'scenes/[protected identifier removed].receipt.json': '7c0f41d8ff4e981bf7b77ec52907c73e0b2085d4bc073be001bcbb6add547eb7', 'scenes/[protected identifier removed].json': '53840f76ce9a2ae6fc42593c19062999af18facd715b2261e596060beebcb27e', 'scenes/[protected identifier removed].receipt.json': 'a154675c58b26b478dae93337de7555e4de1810b5fa75fd8b91876fe809293d0', 'scenes/[protected identifier removed].json': 'aff2220e21c9cbb52ab3f3612b03f499c8615034552352c902e9f016730cf24c', 'scenes/[protected identifier removed].receipt.json': 'd59d363096758d38fb080970c4783fa09e98365614fc7b82cbec621f6ebd3f7f', 'scenes/[protected identifier removed].json': 'c2df58d9210963a1a9789b28dd6efaab289b60cc243dd823309d3e885971abf5', 'scenes/[protected identifier removed].receipt.json': 'b66b3fb686fcfeb3972b988befe5a072b62210ff615c51f0541339bab7cfdf0e', 'scenes/[protected identifier removed].json': '94e014afac0d0cf4ad092cdaa2ba40b5a0124f23bfa491c6d745fae423fc0724', 'scenes/[protected identifier removed].receipt.json': 'ecb379a21f2eacb942dc0ff66d9af85706f31a0ef7619f6c468fb4615a354425', 'scenes/[protected identifier removed].json': '41a1cfe431ea604fdba56957a2c21d7958a562b212c0dff2f7dda181c87e4a15', 'scenes/[protected identifier removed].receipt.json': '87981d229fbaaaa885677047798d9cf883c18a3a19378738c981014ecd95b232', 'scenes/[protected identifier removed].json': 'fcf125b14b483fb6ab24ba0d9c58af26aba69ffb7cc4ace3a1effbc37b50e712', 'scenes/[protected identifier removed].receipt.json': '69d94819e8db9678944c3da5ac9dcc94ab040a61c83faedd54c386c70a2243ef', 'scenes/[protected identifier removed].json': '561ddc2b09cdefc2f95bd37727b2d6e8f0b7fb0600cc4b1c06fc96205dc298b8', 'scenes/[protected identifier removed].receipt.json': '563c3c352ec285e4a093806c61ea00417774dcfab54acd6edf14606cebc644b3', 'scenes/[protected identifier removed].json': 'db021bdea4fe744c4474e1a11a5c4f290c3ab573c28554e15f32688d5f41e5ab', 'scenes/[protected identifier removed].receipt.json': '2941d13a9018503bead9b1fac4b9bc854ea34406a94e5f4fe15d0b3e1e813ac8', 'scenes/[protected identifier removed].json': 'a4977c12b4fa4b067aa90990bbfd46118dc9d15f42ebddda30c49b0b14482aaf', 'scenes/[protected identifier removed].receipt.json': '086326d75dc4053cf75dcf41f2828914ccf8338e4f89ec537b808fb83d6c6074', 'scenes/[protected identifier removed].json': '9124d22d586f7bdfc59b7ab07596ae8b75819baaedd5d02d4e967562c76c9c27', 'scenes/[protected identifier removed].receipt.json': '218c325868438102024f6b86061446a39b2eb59dcca933c1ed15b96865a16f8d', 'scenes/[protected identifier removed].json': 'a0da6455adb42f4f109254c02de0964f2ffdb61a5498f9eac6b86e8341fe9559', 'scenes/[protected identifier removed].receipt.json': '1d15564e810cdc25de4c26de3541b554ae9be0fcf4dd309f35c4fd7af111ecb2', 'scenes/[protected identifier removed].json': 'cc970fc6284561013728553db95843a974db1591c8d0b5bfbcd084cf410161ac', 'scenes/[protected identifier removed].receipt.json': 'ecc3329e245851a5d32909eca6931a4c0de1db1222ae7d056facbe7b77d57ba3', 'scenes/[protected identifier removed].json': 'e58174f30c199edde041dae3f3080f44ee92b6d06836c46900eb8c19f0a26128', 'scenes/[protected identifier removed].receipt.json': '10e6add2bea494187be2086b6136f9509346b10c525cb04c572b7a50e1a71b92', 'scenes/[protected identifier removed].json': 'fac8593a35f99600bd0b7754ddcd0d6db80bd2cdc11787681c467835632d238c', 'scenes/[protected identifier removed].receipt.json': '395e2e77f1f0c663a45cad3822993a8ee5584777cadaaea50a419a83ed6e26ad', 'scenes/[protected identifier removed].json': '5a00fd84f44f996687e072015c01706d1e142ae2cd230f03c5e15e98350adf73', 'scenes/[protected identifier removed].receipt.json': '2bfd956a3dc56993b0da208b51f6a60d8ab517368805223d56984131a8a21021', 'scenes/[protected identifier removed].json': '521351dd4e9022cbf1b9edcdd54e6d483aa430ff3f792528f43292ea7b924eb0', 'scenes/[protected identifier removed].receipt.json': '6ca76be3bdd3c842db21829ec3f71a771e1eb6b83e25810f4a25845bbdf71b54', 'scenes/[protected identifier removed].json': '53a91c7d6d1f8c88f165495c185e63bc7589dc4526a9523bba85c8843975e85f', 'scenes/[protected identifier removed].receipt.json': '93d1fc119c2491d04747f992511fa76cd6320f7dfd474c74f81f9171871f6b3e', 'scenes/[protected identifier removed].json': '11d31b92018a85ac4a43078a607d3da7c4ced4e29c3322fc6cafe0a250b2fa1f', 'scenes/[protected identifier removed].receipt.json': 'ceb9d9568c228264f5e0edffa91d5e460b58bf9fe4c975f4e8ff39869c19d19b', 'scenes/[protected identifier removed].json': '51c363d9a66570882e89a2d655aa1b3242d13cb96877444d2918bf627b72dcda', 'scenes/[protected identifier removed].receipt.json': 'a9c1fc36ab710881281c32ae1230277e79e0995882db885ce05d1c36bd82c39e', 'scenes/[protected identifier removed].json': '0e1485b61a325a05a58ed3d8e9b036d6a275d80725274b79c50f274a0116f1de', 'scenes/[protected identifier removed].receipt.json': 'c41f961669e1a632f7bd21f326d6172b3891a0900773016190ce14931595cbcb', 'scenes/[protected identifier removed].json': 'f65b615884c209ee538e63cc840af673b0a6e0a3387ab004185abc481d2f14c0', 'scenes/[protected identifier removed].receipt.json': 'b8dcfaa3010ec48265f8c990c0ebfd38904ac25d587d6a3393da4ffbfa2b858d', 'scenes/[protected identifier removed].json': '1821df0cd2ea0d79d53b6d843f453115bf889eaeb5e32176fd786d8dcaaa58b2', 'scenes/[protected identifier removed].receipt.json': 'b08624533b515605e6b4b0b579e4038a6b8eab74f9c3d5b21446022f49995d63', 'scenes/[protected identifier removed].json': 'd1e2872105adca00e2300ad36e1f97d05435c04316f12cc0b1f2d52c0fafe3b8', 'scenes/[protected identifier removed].receipt.json': 'e9d3260f74510ccde2553235e80279e728e437b9a6490bfbb08c9a2c22061fcc', 'scenes/[protected identifier removed].json': 'b801afffa30353c6e565a43fb947223773b3b7b10314b8a1a5f40d98efc11279', 'scenes/[protected identifier removed].receipt.json': '4a3c56c85f6a2415e3665c9c57ac96223aa4d08e230a910ad9e3d8294d5f6138', 'scenes/[protected identifier removed].json': '9afc2b50dc76cd3b1227d0220a1d203f1f917bd40115d56d6acc36abc0e56a06', 'scenes/[protected identifier removed].receipt.json': 'b9b1c13c80095295da2c33adf1a6b47f57f8a43944c32804d0032de4f71ae2a6', 'scenes/[protected identifier removed].json': '8886392c0a21acd0c74cfe3a23a7df8f54224a7032d56951daa97b2fdca500aa', 'scenes/[protected identifier removed].receipt.json': '4287b5094e5cd41fb341264be322bc924b6778460e408cd3510110741da809a0', 'scenes/[protected identifier removed].json': 'b871272d7441a4dba4ec92910c3861193bffac3ac5fbf289e33f391c5f416baf', 'scenes/[protected identifier removed].receipt.json': 'a78d6d7109c1fd4f7411352a809b4b0ed8aca3f44a7872472ab8d72ec5c3cfee', 'scenes/[protected identifier removed].json': '6b2c81939c3f4f35d07b42a784d65ce679f1b9f60f91098b8a370ad8df48d221', 'scenes/[protected identifier removed].receipt.json': '34acafeea9922b498023c2a37644f525beaece47aad2af417fd2735df127ecd0', 'scenes/[protected identifier removed].json': '9d7c747c1a51eb8aaeb7e8540a8d30ebe4beec75e1a269c37d9ef8630da54bf8', 'scenes/[protected identifier removed].receipt.json': 'c3bbe779ebfdbde817c63107af4c3493506a82dd4dde28db91372c2f5192a917', 'scenes/[protected identifier removed].json': '389bc217336577b3d71b494c8049b579cf2ff6a1423b356b62dd5a4b3a778aec', 'scenes/[protected identifier removed].receipt.json': 'aa7599f39b8ad512a2af82ee72e8d47ef1b6a4b191c7fd03c030e1437e70ffd2', 'scenes/[protected identifier removed].json': '4fb0bf89a459014a0ff3845ebf50f8d53526cb2931b638cbc25f7ac814ed30da', 'scenes/[protected identifier removed].receipt.json': 'eed0be9ec76ab1f16c04738b3a468c631e7466cf0138f69ceccc8560cd3909d8', 'scenes/[protected identifier removed].json': '13e17496568079e98757625d6c23805c46583aaea4fc47cba4af9a723a64c02e', 'scenes/[protected identifier removed].receipt.json': '1246d33b5e4e265f4ec0497d9be0d5893e2305a72abb90e7b9dc7a61e9448643', 'scenes/[protected identifier removed].json': 'cd02e72c5e8b3e5be963666e044e707d5c406bb6f68281268f61cb01d882a417', 'scenes/[protected identifier removed].receipt.json': '22091e055343dd03c818e4796aa8a2519dd17770e87c42461b17df7ea4c77274', 'scenes/[protected identifier removed].json': '7d027d384cd67a6e9a02e6329ec16aaebcdd912ec92f965b166577b372e2b3f6', 'scenes/[protected identifier removed].receipt.json': 'e503137eab4ffb8bdf2fcd8105960c75568a4713d141edbbc40b57deabec5c8a', 'scenes/[protected identifier removed].json': 'ef1a4f0997bfdc2aeab083116815aebf2bb5f7d60dc9d8cec5821ada1c931e0b', 'scenes/[protected identifier removed].receipt.json': '0dbcb0ea4978e0cd239c376bf7e25237deac835cf793ab8c20c54919a40592d4', 'scenes/[protected identifier removed].json': 'a62a946d3664b1e20feaf0ddd3aa2a78b3c19660a8bfa3c0ada4f81babce9bea', 'scenes/[protected identifier removed].receipt.json': 'f56000f7544dad426d9e58df6e10b22554eff9cca92dc81e0e3b650e05e54333', 'scenes/[protected identifier removed].json': '469c7adaf1bd56c2ec4eb2fd1eb2286f1aa582f39c0d30aec933a4121fd06157', 'scenes/[protected identifier removed].receipt.json': '44200fc9d98558d2f27d17fe999a690f7178458686cd30424de9bede8df606af', 'scenes/[protected identifier removed].json': '20a8b3c25c0e7140c8dcb7648f90f74a30c66e5ed200da9a0ed12147dc746cc9', 'scenes/[protected identifier removed].receipt.json': '122a282bfa6d8b387e10a1ab7bb9ee96962c9f7b5672e4ce12da43b413f71496', 'scenes/[protected identifier removed].json': '6b78d6a27974c47927aef0cec60f166db9bb4a3d6e1ac74f6ae99de6329c9c3b', 'scenes/[protected identifier removed].receipt.json': 'd81b50575cd5de0cde518e57d28ca99f8b029fd52dfc4ea52cafbe13f93227d3', 'scenes/[protected identifier removed].json': '93a4240e047eb0e6fab0e8110ed984155cf4563a6f8b749e3a56f8b579890ff1', 'scenes/[protected identifier removed].receipt.json': '0073fbeba0180d7587fbf41ae70644542875d7894e9f43e39313f6524d5c067a', 'scenes/[protected identifier removed].json': '6fc234004f550a0312d85612769b9acc7c1a4bda60ba40b5946e8bb70a386c50', 'scenes/[protected identifier removed].receipt.json': 'e22328da233156973a3bcd0ba35bb9c5e4a8f4647af6f51e421ec8d4d38f8811', 'scenes/[protected identifier removed].json': '9aa95ba360f51ad6c474666ab3bec5ae75c188863d8c6223ffc409a2fcf72422', 'scenes/[protected identifier removed].receipt.json': '65171d0c8f167b974b6cf19f71ce6c161ffa078da3ca5a51936ac6e109106020', 'scenes/[protected identifier removed].json': '4c821b5af2c889b04003451a005e49bb79bc8fc689ffe367da8d8823717d69d7', 'scenes/[protected identifier removed].receipt.json': 'c7fb102d471d8b5ee092ae50f45c280de109887f6b389c0a89171e55adeff225', 'scenes/[protected identifier removed].json': 'be0c631394663e8d28dc3ab92b57486c1f2be8f1bbd4abdc6ab6b981a94e1fec', 'scenes/[protected identifier removed].receipt.json': '46adbe86d86f0e724b9f1b9a1f4ad9894da189bf3200aadc2be1387edb6a617d', 'scenes/[protected identifier removed].json': '6510f36fc9601e53d5b7d80b917944be6dc3ba49fb414282f317af493dd7b407', 'scenes/[protected identifier removed].receipt.json': 'a1d3695c08c3a5bb652237a3a124768698d3bfe9251b2a4375aa84520430f9d6', 'scenes/[protected identifier removed].json': '1b9cd4e243876a1288ab795d08ab0f60828437e001cddc4df91bfed45f870ce5', 'scenes/[protected identifier removed].receipt.json': 'e80ecc61c5b78af3f0110de480ed3488631dd535d166a40c8b11beec06ab4c3b', 'scenes/[protected identifier removed].json': '7ffe1d0de4e68ee45a05c5b528cae7d1172a8b6d17d06d2603c9748649fe8f64', 'scenes/[protected identifier removed].receipt.json': 'c9ff6358f9e872b2edb0e086d18b7be5869b7299a822ca5786636f64f4eedc85', 'scenes/[protected identifier removed].json': 'e9fef65f7f5f60e8238946b760d36f3b348d9a01261522c146a9e051bb6cfe2d', 'scenes/[protected identifier removed].receipt.json': '44ee32d18a1f2635f007a6cc1af4a1f70b499809ba4c6d7597ee9e9ada71427d', 'scenes/[protected identifier removed].json': '4248bfe9826163c8f8a8bcc8fa668ed7a9e4a3f5a1c078c5a7dd64fcffe2ad83', 'scenes/[protected identifier removed].receipt.json': '92f812c298f45c61685b2524d6d23fdff1191343558fb19c4f15871566625e80', 'scenes/[protected identifier removed].json': '439b72ffebe3c98ae40b2ec0fbc97cd5abb8c560eb93c3c8f916e4c4e9bf556e', 'scenes/[protected identifier removed].receipt.json': 'b2c65ba0d4dc5f4b739191245a99c1e7bb795b770cb0640beeb8bdb3a9749bfb', 'scenes/[protected identifier removed].json': '31b9b7513a0537cc94e0ba87483cb7ef5ebde495349b4e87fb2c9a113916c6da', 'scenes/[protected identifier removed].receipt.json': 'afdf07008ac05dfe2e7dfda52a755d789e9b3c8805fe30faf0cc54bcd665a767', 'scenes/[protected identifier removed].json': '0594ff38acafc36984ca6b1cd11f5cc85eab730a4395c2f5102b566b9040daf3', 'scenes/[protected identifier removed].receipt.json': '20a3ba61961c36f51dc2e37a806211082aa26a88a143a0c54309f6920ccba47a', 'scenes/[protected identifier removed].json': 'daf5ca293cf75ca4a9b145d6082880a529425f8777f5318132665c678a61e052', 'scenes/[protected identifier removed].receipt.json': '0d2271848ece4485a9cce8a1f6e2b4feb387b2bfe7ddb1f2239e834b7a2697e9', 'scenes/[protected identifier removed].json': 'ccd7e0bb45957e239a94724d3b1111747ad974dee53b256cc705732a222845fa', 'scenes/[protected identifier removed].receipt.json': '9caf8ac9526d40137ee0c2806a0e9b0234a22611a900811357e697e6054b534c', 'scenes/[protected identifier removed].json': '0072ef732d3d7782e1eb025eb3926c482fd86430137495c578f146f304085f69', 'scenes/[protected identifier removed].receipt.json': '951fb320874097024e45680f32331ce13fa86ebc1b084fc35f33fb395528193d', 'scenes/[protected identifier removed].json': '9c146ecb916e30e6b1d2df0e4424cf97c0ebfba23c666028b3349aa9c55307b7', 'scenes/[protected identifier removed].receipt.json': 'c9707c6b36eb4f8a4746974579ac1e59c947ddd08cf4e407421a010640e76059', 'scenes/[protected identifier removed].json': 'c9f6e1f9c066caaf836518bb77e10539a904bb61f7882acaf867b3ceeb0d78c2', 'scenes/[protected identifier removed].receipt.json': '60f22d09caf22b97409efb17c50e433a8ac09db85a4facb392cbf99a2640853b', 'scenes/[protected identifier removed].json': '4e5e6b263b5170ec47717fa21e5913af792bf80fb50ec2ceff48bfee6c9ff87d', 'scenes/[protected identifier removed].receipt.json': '18e262295ac0f36f65ed3947ea24ef729241a05334304c590a83002cb5858817', 'scenes/[protected identifier removed].json': '144f3b4b66bef2d06c9115a1aae3041aa43761047794e7ddb5ecf2b73c272593', 'scenes/[protected identifier removed].receipt.json': '2eb3af9879da6e26766b36b6b529eaa06371cf55305b9c72b2b837ae4940bd07', 'scenes/[protected identifier removed].json': 'fcb11565825f7b3edc2b588c460373ed3cc01126e165ae0d5cfa627d059fcd28', 'scenes/[protected identifier removed].receipt.json': '43b900e674d11db57bd9e63b8bd16f431d30ce43eb9e3daff0db7256c981dc8b', 'scenes/[protected identifier removed].json': 'aee16afcabe4b4a1223bacc612d2980640e4cc194093822eebd80e7713f49a37', 'scenes/[protected identifier removed].receipt.json': '5900f55f92e382a197287d4bef609adb9cb10d337fa3b0ae22559fa0ee582848', 'scenes/[protected identifier removed].json': '8e76683b96d318f91c208de5fb580df7a9807e4a1e08b7037146bb56d795874b', 'scenes/[protected identifier removed].receipt.json': 'fcc461d759aa249b5f16ac63253173aeb7eb40d64ab0c066dc0c396b1750e5ca', 'scenes/[protected identifier removed].json': '5a2dcc7b64305651416ca71608137b67ecd90e70a2ddd60ff4d9481589f1299e', 'scenes/[protected identifier removed].receipt.json': '54f68a6e782de89d2cee23836a1e5652b83e2843ddcbd8b573bf05fdae3126e0', 'scenes/[protected identifier removed].json': '1cd0da996d20bff79816dad1affc3251f52786441db1015e2a1a3250f7258788', 'scenes/[protected identifier removed].receipt.json': '036ca955a364a0df0d5ee9867eb61966bb807b7caa75f416e3224b61d1f2e0cf', 'scenes/[protected identifier removed].json': '5b13daa70c6b5ec47c6cdf698c16c4c02a307d8fd1c53016b682b4342979532e', 'scenes/[protected identifier removed].receipt.json': 'be1f181298b0b30e64ac87dc96d2a684c9c65f76d19f976ae42cf70c1fcaf34e', 'scenes/[protected identifier removed].json': 'c1f0aedaf0e8a190995dabb410e2fd63ac020285e3ec65e1441ace8b27889e4e', 'scenes/[protected identifier removed].receipt.json': '71e67cd5baa236dd433d111487fcbc7cc5de41f21768d482bf67fd1adfce6b05', 'scenes/[protected identifier removed].json': 'c2a95d2bb6635184c6751a81ef8ec6ec7b3b50da16b9c0f3375475eb1dbd5af5', 'scenes/[protected identifier removed].receipt.json': '13fe333451c425db345c83cb6468a08ad469d82e116e570d10704220e3664db8', 'scenes/[protected identifier removed].json': 'e5d514626cbb4cf1378fbfe332c405c63ecc61ca7822691f4428bc5db11fb58d', 'scenes/[protected identifier removed].receipt.json': '5c592d3b6cdec3a27cc65c6451327bb4faf64c7b34d87714e6f7c3374c09394d', 'scenes/[protected identifier removed].json': 'b76f0c6446fd4c1cb556dade5636f344940dad2f2ddc1059f3f0aea1317aca40', 'scenes/[protected identifier removed].receipt.json': 'bea10f5f973f1f12c303bf6fa3e5e2af9962b1d1e9493cf993e19e2fbb927b13', 'scenes/[protected identifier removed].json': '1beb2921546a7308dc48d3610884988a33fdcb1edf223d9f292b1afa7618dd87', 'scenes/[protected identifier removed].receipt.json': '744e1ee65c9ddcc36e552ef02201bca119327301eb887bff153ca59b82bc01d2', 'scenes/[protected identifier removed].json': 'c8d556548dbc5bcb3aabf0a3617848e98f73f47197607621268d653012dc4fc7', 'scenes/[protected identifier removed].receipt.json': '02d8c59c3cb131377e31bd6c08047067249ff2e51650ef0a14eae560a6aebd0f', 'scenes/[protected identifier removed].json': '396339f1ec25b90fd236eb3fe80304982c829fb86261ef70531aa911c884ec34', 'scenes/[protected identifier removed].receipt.json': '6e7bafb2950bea1942a5634bbcb34854832a198375edc8c275402b0fb95e75ab', 'scenes/[protected identifier removed].json': '562c913089dbf8ccbf8440cbd0d90c6c926900b92a2b5324229ed2fb3ef06cc1', 'scenes/[protected identifier removed].receipt.json': '033e918529e3959f48a71f14a670b5491f47ed7f1ede6e2390e77ea9337ed840', 'scenes/[protected identifier removed].json': 'a07c44e2040fbaed3b2ee7426dc91ae867c84e66f5b56ebb922534bd47c43de7', 'scenes/[protected identifier removed].receipt.json': '1f54fd1c4aec8515bd940ada500fb92936e541017fec0b440de9debe04e46282', 'scenes/[protected identifier removed].json': 'fd1261cc4508096ec17cc95689423c3c55309ff28a4af0a620a7208416521590', 'scenes/[protected identifier removed].receipt.json': '8f3f0d9f31033d2b289f90be3d84e1e90b98afa4c0d608cadde9b50ba8c4398a', 'scenes/[protected identifier removed].json': '6c9a74757a00f9b2a9e39339405b5fee861c08508cbcffc2e35e8d90337dc422', 'scenes/[protected identifier removed].receipt.json': '2db8fe151432dc868db4e5a4ba10870ef4982af765bfd2a18d18e0610b1d809a', 'scenes/[protected identifier removed].json': '27c05495140e6b298d54ed07cb58869698ed7fd120318637adbb0b3d2f5b12dc', 'scenes/[protected identifier removed].receipt.json': '060b2d89a831bf28f147d0bf9fe34ce4599b35c1e6fc0deefd9b8bde058d1a8c', 'scenes/[protected identifier removed].json': '4870e91d42e6ce72203010a206afd849cf514bbbd4d9648f96effdcd596c7433', 'scenes/[protected identifier removed].receipt.json': 'fb9da9c3219b86ebf775c6499f33e2cf0d6feb84a8584b41a09741f3bd10c130', 'scenes/[protected identifier removed].json': '33513dd88da81ab47372ce2849fdff423a646b43818d311a4cc41b1df123eaa5', 'scenes/[protected identifier removed].receipt.json': '602df3e1602e54295136d9b5ecff403a51676785b3d718d1aea5ee605db7fb7f', 'scenes/[protected identifier removed].json': '50289a7510e153a57596f03299c9c3161320b7a6b5f945bcd19dc46c76b190f5', 'scenes/[protected identifier removed].receipt.json': 'f58117d17cb8e6c20869f02f2d40722beb5687fcd47d157f0ae054a6bfe95b42', 'scenes/[protected identifier removed].json': 'f0da0e8de97c524e393652d4d021469607d8c83b65ad6f3fdbbdc4f2602b6de5', 'scenes/[protected identifier removed].receipt.json': 'df05e24bd955d0952c66f3341c96f716974499a2e609b9ada55286cda713201c', 'scenes/[protected identifier removed].json': '80005e55a92f635e5bdc225ba53db447a729a9ce10d8b51d57f805eada04dd1b', 'scenes/[protected identifier removed].receipt.json': '2010284016e0862ae685830ff114d655df2de782de8d2191db48cee47aa5fcf9', 'scenes/[protected identifier removed].json': 'cf3e95b47f446e29a1b5ca131491d3c17aa406fdc375a3b4d7a97b6fe6c89f0c', 'scenes/[protected identifier removed].receipt.json': '2e5f1d0b74d3d399df4767a6bfb5d3786b5be0ec0099148c0cdab7a6e3c67e12', 'scenes/[protected identifier removed].json': 'd6317446ec2840a740aa80fd6ec5eb61c115b977f24f4f9889b1bf594d6ec2cb', 'scenes/[protected identifier removed].receipt.json': '7edfe4a2911ff2064d50fe5d3b2ec7f3fe66d28e18960ba655380e6b3a2ea504', 'scenes/[protected identifier removed].json': '42d9516bf4649094dbe0a35761e7f8435877f6e8f56bb7f9af0abbfa9c054dae', 'scenes/[protected identifier removed].receipt.json': 'f5acd9619da0d4e6d5a6e79e0deae29bd220bb2c3a7e545fa83a3cd79b0eafdf', 'scenes/[protected identifier removed].json': 'a6c63f76a286759f0419db56c9e169375e6e92c2195e05680612f55c6b2e429e', 'scenes/[protected identifier removed].receipt.json': 'b80bc01fa358c14c9a90899dd84cb3be7dec1e05d79a5a29a941b4c4e9248488', 'scenes/[protected identifier removed].json': '1f008a1fa90e17dbf64f344555328d2a0fe8732dab9a410e86567463b225faef', 'scenes/[protected identifier removed].receipt.json': '5c4148753842ce173aea28504d0ac77d6e54c033173b0934a841e09917b3a1bf', 'scenes/[protected identifier removed].json': '55550537ea4be8076cbb6583e7c7d8f86a324857b4be040abe5137daec60e7cb', 'scenes/[protected identifier removed].receipt.json': 'fb5909ae3a0d40d7fd2686cf60f8fe378b62ff360a5fe3fb3bb2574ec7ffa9d0', 'scenes/[protected identifier removed].json': 'd3a183bf2c2d5126211d2d1b932e830528093ae481cc008498cb0c27b48f083f', 'scenes/[protected identifier removed].receipt.json': 'a0f1f8c0bd8766efddfae2d127826e1aeb67a9c7727af6a22abba226caf47d79', 'scenes/[protected identifier removed].json': '0da92b16a4e98803ce3c222ee14c80854b32a7bc54b0cfe079e686d33ccbc807', 'scenes/[protected identifier removed].receipt.json': '00897c20fd6f284f85fe5881c174c1afa6c80ddcb674e3642b3ba7c1d73bb918', 'scenes/[protected identifier removed].json': 'a1b1e8fe4e2c9dcf2f4afdc3364cba37a14db9f4d59bd056edc01047c079a3c5', 'scenes/[protected identifier removed].receipt.json': 'bb17d38364979f8bcafe99594169acb3f9833e9a7f4e679cf613c67168520e2a', 'scenes/[protected identifier removed].json': '2b52abeba426d22ade4a2af6cf151ebcda03032771756055fc7c65b4f074a893', 'scenes/[protected identifier removed].receipt.json': '2cf7a814ee470df6a3cc4640329e03d0847ea850839f24422ad3f8dde328e50f', 'scenes/[protected identifier removed].json': '90158d4bf2dd3ba3a54ef62347b6cba82c59d48c4af01074710b9260d9d10e0d', 'scenes/[protected identifier removed].receipt.json': '6ce7705ae61d3788437f19e5cb55daad06d0ba9e177c63e34fe33bdd3262abc1', 'scenes/[protected identifier removed].json': 'c415b67a8baff48899a78227f82b8da51ee206280174c718f353aa9319b74dd8', 'scenes/[protected identifier removed].receipt.json': 'a5525bd9aef17e9034befbf3c0b6240b171a15a3dd8cb8591b9e38490b33e500', 'scenes/[protected identifier removed].json': '247f19c78eecf91d9279ae5187c0007ec2bb1be648efb01f16ad5b3033515850', 'scenes/[protected identifier removed].receipt.json': '053150fa61b9b32861707b27e6d07cd1e5ec91779cf896a4f24cf723430f7fe0', 'scenes/[protected identifier removed].json': 'b3e60d74039e5503dd8967bc676970b592a8b73cb8cda59a20cb1b2662e53c23', 'scenes/[protected identifier removed].receipt.json': '83e917bc531e31147b76357a92fbe9f8ff489e90ecac702eedf9518d449c5802', 'scenes/[protected identifier removed].json': 'daa72a550ba3faa3597a596b90fdffc7e4f6138c777c215456086add87af0ce2', 'scenes/[protected identifier removed].receipt.json': '55d49a50d8320e4bfc1589faa442796094988fdcd2b55ae691972b4438fe96a8'}, 'metadata': {'configuration_count_per_scene': 63, 'elapsed_seconds': 185.57871215299997, 'scenes': ['[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]', '[protected identifier removed]'], 'status': 'complete'}, 'schema': 1}
+
+[cell 11]
+{'scene_count': 100, 'status': 'complete'}
+
+[cell 11]
+{'complete_scenes': 100, 'expected_scenes': 100}
+
+[cell 13]
+{"event": "scene_evaluated", "scene_number": 1, "total": 100}
+{"event": "scene_evaluated", "scene_number": 2, "total": 100}
+{"event": "scene_evaluated", "scene_number": 3, "total": 100}
+{"event": "scene_evaluated", "scene_number": 4, "total": 100}
+{"event": "scene_evaluated", "scene_number": 5, "total": 100}
+{"event": "scene_evaluated", "scene_number": 6, "total": 100}
+{"event": "scene_evaluated", "scene_number": 7, "total": 100}
+{"event": "scene_evaluated", "scene_number": 8, "total": 100}
+{"event": "scene_evaluated", "scene_number": 9, "total": 100}
+{"event": "scene_evaluated", "scene_number": 10, "total": 100}
+{"event": "scene_evaluated", "scene_number": 11, "total": 100}
+{"event": "scene_evaluated", "scene_number": 12, "total": 100}
+{"event": "scene_evaluated", "scene_number": 13, "total": 100}
+{"event": "scene_evaluated", "scene_number": 14, "total": 100}
+{"event": "scene_evaluated", "scene_number": 15, "total": 100}
+{"event": "scene_evaluated", "scene_number": 16, "total": 100}
+{"event": "scene_evaluated", "scene_number": 17, "total": 100}
+{"event": "scene_evaluated", "scene_number": 18, "total": 100}
+{"event": "scene_evaluated", "scene_number": 19, "total": 100}
+{"event": "scene_evaluated", "scene_number": 20, "total": 100}
+{"event": "scene_evaluated", "scene_number": 21, "total": 100}
+{"event": "scene_evaluated", "scene_number": 22, "total": 100}
+{"event": "scene_evaluated", "scene_number": 23, "total": 100}
+{"event": "scene_evaluated", "scene_number": 24, "total": 100}
+{"event": "scene_evaluated", "scene_number": 25, "total": 100}
+{"event": "scene_evaluated", "scene_number": 26, "total": 100}
+{"event": "scene_evaluated", "scene_number": 27, "total": 100}
+{"event": "scene_evaluated", "scene_number": 28, "total": 100}
+{"event": "scene_evaluated", "scene_number": 29, "total": 100}
+{"event": "scene_evaluated", "scene_number": 30, "total": 100}
+{"event": "scene_evaluated", "scene_number": 31, "total": 100}
+{"event": "scene_evaluated", "scene_number": 32, "total": 100}
+{"event": "scene_evaluated", "scene_number": 33, "total": 100}
+{"event": "scene_evaluated", "scene_number": 34, "total": 100}
+{"event": "scene_evaluated", "scene_number": 35, "total": 100}
+{"event": "scene_evaluated", "scene_number": 36, "total": 100}
+{"event": "scene_evaluated", "scene_number": 37, "total": 100}
+{"event": "scene_evaluated", "scene_number": 38, "total": 100}
+{"event": "scene_evaluated", "scene_number": 39, "total": 100}
+{"event": "scene_evaluated", "scene_number": 40, "total": 100}
+{"event": "scene_evaluated", "scene_number": 41, "total": 100}
+{"event": "scene_evaluated", "scene_number": 42, "total": 100}
+{"event": "scene_evaluated", "scene_number": 43, "total": 100}
+{"event": "scene_evaluated", "scene_number": 44, "total": 100}
+{"event": "scene_evaluated", "scene_number": 45, "total": 100}
+{"event": "scene_evaluated", "scene_number": 46, "total": 100}
+{"event": "scene_evaluated", "scene_number": 47, "total": 100}
+{"event": "scene_evaluated", "scene_number": 48, "total": 100}
+{"event": "scene_evaluated", "scene_number": 49, "total": 100}
+{"event": "scene_evaluated", "scene_number": 50, "total": 100}
+{"event": "scene_evaluated", "scene_number": 51, "total": 100}
+{"event": "scene_evaluated", "scene_number": 52, "total": 100}
+{"event": "scene_evaluated", "scene_number": 53, "total": 100}
+{"event": "scene_evaluated", "scene_number": 54, "total": 100}
+{"event": "scene_evaluated", "scene_number": 55, "total": 100}
+{"event": "scene_evaluated", "scene_number": 56, "total": 100}
+{"event": "scene_evaluated", "scene_number": 57, "total": 100}
+{"event": "scene_evaluated", "scene_number": 58, "total": 100}
+{"event": "scene_evaluated", "scene_number": 59, "total": 100}
+{"event": "scene_evaluated", "scene_number": 60, "total": 100}
+{"event": "scene_evaluated", "scene_number": 61, "total": 100}
+{"event": "scene_evaluated", "scene_number": 62, "total": 100}
+{"event": "scene_evaluated", "scene_number": 63, "total": 100}
+{"event": "scene_evaluated", "scene_number": 64, "total": 100}
+{"event": "scene_evaluated", "scene_number": 65, "total": 100}
+{"event": "scene_evaluated", "scene_number": 66, "total": 100}
+{"event": "scene_evaluated", "scene_number": 67, "total": 100}
+{"event": "scene_evaluated", "scene_number": 68, "total": 100}
+{"event": "scene_evaluated", "scene_number": 69, "total": 100}
+{"event": "scene_evaluated", "scene_number": 70, "total": 100}
+{"event": "scene_evaluated", "scene_number": 71, "total": 100}
+{"event": "scene_evaluated", "scene_number": 72, "total": 100}
+{"event": "scene_evaluated", "scene_number": 73, "total": 100}
+{"event": "scene_evaluated", "scene_number": 74, "total": 100}
+{"event": "scene_evaluated", "scene_number": 75, "total": 100}
+{"event": "scene_evaluated", "scene_number": 76, "total": 100}
+{"event": "scene_evaluated", "scene_number": 77, "total": 100}
+{"event": "scene_evaluated", "scene_number": 78, "total": 100}
+{"event": "scene_evaluated", "scene_number": 79, "total": 100}
+{"event": "scene_evaluated", "scene_number": 80, "total": 100}
+{"event": "scene_evaluated", "scene_number": 81, "total": 100}
+{"event": "scene_evaluated", "scene_number": 82, "total": 100}
+{"event": "scene_evaluated", "scene_number": 83, "total": 100}
+{"event": "scene_evaluated", "scene_number": 84, "total": 100}
+{"event": "scene_evaluated", "scene_number": 85, "total": 100}
+{"event": "scene_evaluated", "scene_number": 86, "total": 100}
+{"event": "scene_evaluated", "scene_number": 87, "total": 100}
+{"event": "scene_evaluated", "scene_number": 88, "total": 100}
+{"event": "scene_evaluated", "scene_number": 89, "total": 100}
+{"event": "scene_evaluated", "scene_number": 90, "total": 100}
+{"event": "scene_evaluated", "scene_number": 91, "total": 100}
+{"event": "scene_evaluated", "scene_number": 92, "total": 100}
+{"event": "scene_evaluated", "scene_number": 93, "total": 100}
+{"event": "scene_evaluated", "scene_number": 94, "total": 100}
+{"event": "scene_evaluated", "scene_number": 95, "total": 100}
+{"event": "scene_evaluated", "scene_number": 96, "total": 100}
+{"event": "scene_evaluated", "scene_number": 97, "total": 100}
+{"event": "scene_evaluated", "scene_number": 98, "total": 100}
+{"event": "scene_evaluated", "scene_number": 99, "total": 100}
+{"event": "scene_evaluated", "scene_number": 100, "total": 100}
+        configuration_id     descriptor  unmatched_cost  view_count           method  scenes  asset_groups       ap  top1  recall_at_2    auroc  identity_link_precision  identity_link_recall  identity_link_f1  identity_track_purity  winner_support  winner_purity
+global_current__u020__v2 global_current            0.20           2       P1_current     100            27 0.429790  0.33        0.390 0.439851                 0.107833              0.059167          0.072437               0.920000            1.20       0.735000
+global_current__u020__v2 global_current            0.20           2     P2_consensus     100            27 0.416143  0.31        0.390 0.425071                 0.107833              0.059167          0.072437               0.920000            1.21       0.685000
+global_current__u020__v2 global_current            0.20           2 forward_02_cov70     100            27 0.460242  0.39        0.430 0.458291                 0.107833              0.059167          0.072437               0.920000            1.23       0.750000
+global_current__u020__v2 global_current            0.20           2  forward_10_cov0     100            27 0.453444  0.36        0.410 0.453889                 0.107833              0.059167          0.072437               0.920000            1.22       0.750000
+global_current__u020__v3 global_current            0.20           3       P1_current     100            27 0.345850  0.27        0.290 0.371109                 0.197740              0.095571          0.121122               0.858556            1.41       0.588333
+global_current__u020__v3 global_current            0.20           3     P2_consensus     100            27 0.343286  0.26        0.315 0.373269                 0.197740              0.095571          0.121122               0.858556            1.34       0.543333
+global_current__u020__v3 global_current            0.20           3 forward_02_cov70     100            27 0.374627  0.31        0.335 0.403671                 0.197740              0.095571          0.121122               0.858556            1.37       0.530000
+global_current__u020__v3 global_current            0.20           3  forward_10_cov0     100            27 0.356220  0.29        0.290 0.382562                 0.197740              0.095571          0.121122               0.858556            1.36       0.560000
+global_current__u020__v5 global_current            0.20           5       P1_current     100            27 0.214695  0.13        0.175 0.292029                 0.235475              0.117249          0.147329               0.763208            1.47       0.300667
+global_current__u020__v5 global_current            0.20           5     P2_consensus     100            27 0.214021  0.13        0.170 0.288782                 0.235475              0.117249          0.147329               0.763208            1.53       0.283000
+global_current__u020__v5 global_current            0.20           5 forward_02_cov70     100            27 0.256147  0.21        0.215 0.318836                 0.235475              0.117249          0.147329               0.763208            1.58       0.321167
+global_current__u020__v5 global_current            0.20           5  forward_10_cov0     100            27 0.237421  0.17        0.180 0.309726                 0.235475              0.117249          0.147329               0.763208            1.50       0.324167
+global_current__u035__v2 global_current            0.35           2       P1_current     100            27 0.324845  0.24        0.300 0.319875                 0.154667              0.136500          0.142444               0.740000            1.56       0.650000
+global_current__u035__v2 global_current            0.35           2     P2_consensus     100            27 0.316679  0.22        0.310 0.308625                 0.154667              0.136500          0.142444               0.740000            1.64       0.590000
+global_current__u035__v2 global_current            0.35           2 forward_02_cov70     100            27 0.335833  0.27        0.325 0.323417                 0.154667              0.136500          0.142444               0.740000            1.59       0.610000
+global_current__u035__v2 global_current            0.35           2  forward_10_cov0     100            27 0.328429  0.23        0.350 0.321208                 0.154667              0.136500          0.142444               0.740000            1.56       0.635000
+global_current__u035__v3 global_current            0.35           3       P1_current     100            27 0.319980  0.23        0.295 0.305462                 0.212644              0.173899          0.188789               0.687222            2.15       0.476667
+global_current__u035__v3 global_current            0.35           3     P2_consensus     100            27 0.316694  0.21        0.290 0.313333                 0.212644              0.173899          0.188789               0.687222            2.15       0.455000
+global_current__u035__v3 global_current            0.35           3 forward_02_cov70     100            27 0.339835  0.24        0.355 0.335573                 0.212644              0.173899          0.188789               0.687222            2.10       0.426667
+global_current__u035__v3 global_current            0.35           3  forward_10_cov0     100            27 0.341649  0.23        0.325 0.347312                 0.212644              0.173899          0.188789               0.687222            2.18       0.475000
+global_current__u035__v5 global_current            0.35           5       P1_current     100            27 0.275236  0.19        0.295 0.301190                 0.257156              0.216434          0.232629               0.555000            2.88       0.301833
+global_current__u035__v5 global_current            0.35           5     P2_consensus     100            27 0.254242  0.15        0.270 0.274824                 0.257156              0.216434          0.232629               0.555000            2.94       0.299833
+global_current__u035__v5 global_current            0.35           5 forward_02_cov70     100            27 0.265845  0.17        0.280 0.299342                 0.257156              0.216434          0.232629               0.555000            3.10       0.313333
+global_current__u035__v5 global_current            0.35           5  forward_10_cov0     100            27 0.273242  0.18        0.265 0.305232                 0.257156              0.216434          0.232629               0.555000            2.90       0.307000
+global_current__u050__v2 global_current            0.50           2       P1_current     100            27 0.260667  0.19        0.240 0.241250                 0.181500              0.181167          0.180770               0.620000            1.84       0.635000
+global_current__u050__v2 global_current            0.50           2     P2_consensus     100            27 0.263167  0.19        0.275 0.247083                 0.181500              0.181167          0.180770               0.620000            1.83       0.620000
+global_current__u050__v2 global_current            0.50           2 forward_02_cov70     100            27 0.279500  0.22        0.275 0.258250                 0.181500              0.181167          0.180770               0.620000            1.84       0.640000
+global_current__u050__v2 global_current            0.50           2  forward_10_cov0     100            27 0.265833  0.20        0.255 0.246417                 0.181500              0.181167          0.180770               0.620000            1.80       0.625000
+global_current__u050__v3 global_current            0.50           3       P1_current     100            27 0.332345  0.25        0.310 0.303464                 0.190754              0.184966          0.187458               0.617778            2.60       0.516667
+global_current__u050__v3 global_current            0.50           3     P2_consensus     100            27 0.335024  0.25        0.305 0.312321                 0.190754              0.184966          0.187458               0.617778            2.55       0.535000
+global_current__u050__v3 global_current            0.50           3 forward_02_cov70     100            27 0.343833  0.25        0.340 0.318280                 0.190754              0.184966          0.187458               0.617778            2.59       0.515000
+global_current__u050__v3 global_current            0.50           3  forward_10_cov0     100            27 0.334750  0.23        0.320 0.315137                 0.190754              0.184966          0.187458               0.617778            2.61       0.506667
+global_current__u050__v5 global_current            0.50           5       P1_current     100            27 0.305417  0.23        0.320 0.313667                 0.255907              0.247050          0.251045               0.490889            4.29       0.430500
+global_current__u050__v5 global_current            0.50           5     P2_consensus     100            27 0.303333  0.23        0.340 0.309750                 0.255907              0.247050          0.251045               0.490889            4.23       0.434500
+global_current__u050__v5 global_current            0.50           5 forward_02_cov70     100            27 0.313333  0.23        0.365 0.328000                 0.255907              0.247050          0.251045               0.490889            4.38       0.452000
+global_current__u050__v5 global_current            0.50           5  forward_10_cov0     100            27 0.301250  0.24        0.315 0.310708                 0.255907              0.247050          0.251045               0.490889            4.29       0.435333
+hybrid25_cov25__u020__v2 hybrid25_cov25            0.20           2       P1_current     100            27 0.415790  0.32        0.375 0.422530                 0.107833              0.064167          0.076889               0.910000            1.21       0.730000
+hybrid25_cov25__u020__v2 hybrid25_cov25            0.20           2     P2_consensus     100            27 0.404476  0.30        0.375 0.413511                 0.107833              0.064167          0.076889               0.910000            1.24       0.685000
+hybrid25_cov25__u020__v2 hybrid25_cov25            0.20           2 forward_02_cov70     100            27 0.444242  0.37        0.415 0.446720                 0.107833              0.064167          0.076889               0.910000            1.25       0.720000
+hybrid25_cov25__u020__v2 hybrid25_cov25            0.20           2  forward_10_cov0     100            27 0.437444  0.34        0.395 0.439942                 0.107833              0.064167          0.076889               0.910000            1.23       0.735000
+hybrid25_cov25__u020__v3 hybrid25_cov25            0.20           3       P1_current     100            27 0.347248  0.28        0.295 0.361344                 0.201177              0.099571          0.126531               0.835500            1.41       0.561667
+hybrid25_cov25__u020__v3 hybrid25_cov25            0.20           3     P2_consensus     100            27 0.334639  0.25        0.300 0.367832                 0.201177              0.099571          0.126531               0.835500            1.35       0.486667
+hybrid25_cov25__u020__v3 hybrid25_cov25            0.20           3 forward_02_cov70     100            27 0.365397  0.29        0.330 0.393058                 0.201177              0.099571          0.126531               0.835500            1.38       0.500000
+hybrid25_cov25__u020__v3 hybrid25_cov25            0.20           3  forward_10_cov0     100            27 0.353673  0.29        0.290 0.382596                 0.201177              0.099571          0.126531               0.835500            1.36       0.550000
+hybrid25_cov25__u020__v5 hybrid25_cov25            0.20           5       P1_current     100            27 0.251695  0.16        0.220 0.325242                 0.242367              0.123126          0.154301               0.788972            1.54       0.331667
+hybrid25_cov25__u020__v5 hybrid25_cov25            0.20           5     P2_consensus     100            27 0.241288  0.14        0.190 0.332015                 0.242367              0.123126          0.154301               0.788972            1.57       0.295667
+hybrid25_cov25__u020__v5 hybrid25_cov25            0.20           5 forward_02_cov70     100            27 0.282205  0.20        0.250 0.363744                 0.242367              0.123126          0.154301               0.788972            1.68       0.333500
+hybrid25_cov25__u020__v5 hybrid25_cov25            0.20           5  forward_10_cov0     100            27 0.271230  0.19        0.210 0.343285                 0.242367              0.123126          0.154301               0.788972            1.56       0.341000
+hybrid25_cov25__u035__v2 hybrid25_cov25            0.35           2       P1_current     100            27 0.317583  0.24        0.295 0.307708                 0.165000              0.147667          0.153302               0.750000            1.57       0.655000
+hybrid25_cov25__u035__v2 hybrid25_cov25            0.35           2     P2_consensus     100            27 0.302845  0.21        0.295 0.291208                 0.165000              0.147667          0.153302               0.750000            1.66       0.590000
+hybrid25_cov25__u035__v2 hybrid25_cov25            0.35           2 forward_02_cov70     100            27 0.329500  0.27        0.310 0.312917                 0.165000              0.147667          0.153302               0.750000            1.62       0.630000
+hybrid25_cov25__u035__v2 hybrid25_cov25            0.35           2  forward_10_cov0     100            27 0.315667  0.23        0.325 0.308250                 0.165000              0.147667          0.153302               0.750000            1.57       0.640000
+hybrid25_cov25__u035__v3 hybrid25_cov25            0.35           3       P1_current     100            27 0.298643  0.21        0.275 0.289173                 0.204524              0.171519          0.184315               0.663056            2.20       0.463333
+hybrid25_cov25__u035__v3 hybrid25_cov25            0.35           3     P2_consensus     100            27 0.301202  0.20        0.270 0.303518                 0.204524              0.171519          0.184315               0.663056            2.19       0.440000
+hybrid25_cov25__u035__v3 hybrid25_cov25            0.35           3 forward_02_cov70     100            27 0.315794  0.22        0.340 0.309065                 0.204524              0.171519          0.184315               0.663056            2.19       0.426667
+hybrid25_cov25__u035__v3 hybrid25_cov25            0.35           3  forward_10_cov0     100            27 0.313804  0.20        0.295 0.319500                 0.204524              0.171519          0.184315               0.663056            2.21       0.446667
+hybrid25_cov25__u035__v5 hybrid25_cov25            0.35           5       P1_current     100            27 0.304643  0.22        0.305 0.323679                 0.257457              0.217655          0.233591               0.557625            2.99       0.321000
+hybrid25_cov25__u035__v5 hybrid25_cov25            0.35           5     P2_consensus     100            27 0.283067  0.18        0.290 0.299676                 0.257457              0.217655          0.233591               0.557625            2.96       0.317667
+hybrid25_cov25__u035__v5 hybrid25_cov25            0.35           5 forward_02_cov70     100            27 0.302583  0.20        0.320 0.336095                 0.257457              0.217655          0.233591               0.557625            3.22       0.332167
+hybrid25_cov25__u035__v5 hybrid25_cov25            0.35           5  forward_10_cov0     100            27 0.296417  0.20        0.280 0.317036                 0.257457              0.217655          0.233591               0.557625            3.01       0.325833
+hybrid25_cov25__u050__v2 hybrid25_cov25            0.50           2       P1_current     100            27 0.229833  0.16        0.210 0.214375                 0.176167              0.177333          0.176270               0.610000            1.87       0.615000
+hybrid25_cov25__u050__v2 hybrid25_cov25            0.50           2     P2_consensus     100            27 0.233667  0.16        0.240 0.221250                 0.176167              0.177333          0.176270               0.610000            1.85       0.605000
+hybrid25_cov25__u050__v2 hybrid25_cov25            0.50           2 forward_02_cov70     100            27 0.252833  0.19        0.255 0.237000                 0.176167              0.177333          0.176270               0.610000            1.87       0.620000
+hybrid25_cov25__u050__v2 hybrid25_cov25            0.50           2  forward_10_cov0     100            27 0.243000  0.19        0.230 0.225167                 0.176167              0.177333          0.176270               0.610000            1.83       0.615000
+hybrid25_cov25__u050__v3 hybrid25_cov25            0.50           3       P1_current     100            27 0.318250  0.22        0.305 0.293381                 0.188816              0.183974          0.186021               0.611667            2.61       0.493333
+hybrid25_cov25__u050__v3 hybrid25_cov25            0.50           3     P2_consensus     100            27 0.323095  0.23        0.310 0.302155                 0.188816              0.183974          0.186021               0.611667            2.57       0.510000
+hybrid25_cov25__u050__v3 hybrid25_cov25            0.50           3 forward_02_cov70     100            27 0.323667  0.23        0.310 0.293196                 0.188816              0.183974          0.186021               0.611667            2.60       0.501667
+hybrid25_cov25__u050__v3 hybrid25_cov25            0.50           3  forward_10_cov0     100            27 0.313417  0.20        0.290 0.289554                 0.188816              0.183974          0.186021               0.611667            2.62       0.486667
+hybrid25_cov25__u050__v5 hybrid25_cov25            0.50           5       P1_current     100            27 0.313333  0.23        0.325 0.312167                 0.254513              0.246200          0.249948               0.505167            4.38       0.448667
+hybrid25_cov25__u050__v5 hybrid25_cov25            0.50           5     P2_consensus     100            27 0.308250  0.22        0.350 0.308750                 0.254513              0.246200          0.249948               0.505167            4.31       0.439833
+hybrid25_cov25__u050__v5 hybrid25_cov25            0.50           5 forward_02_cov70     100            27 0.318333  0.23        0.365 0.329583                 0.254513              0.246200          0.249948               0.505167            4.34       0.437333
+hybrid25_cov25__u050__v5 hybrid25_cov25            0.50           5  forward_10_cov0     100            27 0.312000  0.25        0.320 0.313375                 0.254513              0.246200          0.249948               0.505167            4.31       0.433333
+hybrid50_cov25__u020__v2 hybrid50_cov25            0.20           2       P1_current     100            27 0.407290  0.32        0.375 0.413958                 0.122000              0.072000          0.087635               0.890000            1.23       0.705000
+hybrid50_cov25__u020__v2 hybrid50_cov25            0.20           2     P2_consensus     100            27 0.387893  0.28        0.370 0.396803                 0.122000              0.072000          0.087635               0.890000            1.29       0.670000
+hybrid50_cov25__u020__v2 hybrid50_cov25            0.20           2 forward_02_cov70     100            27 0.430909  0.36        0.410 0.433143                 0.122000              0.072000          0.087635               0.890000            1.29       0.710000
+hybrid50_cov25__u020__v2 hybrid50_cov25            0.20           2  forward_10_cov0     100            27 0.414667  0.32        0.370 0.423127                 0.122000              0.072000          0.087635               0.890000            1.27       0.715000
+hybrid50_cov25__u020__v3 hybrid50_cov25            0.20           3       P1_current     100            27 0.353952  0.29        0.300 0.367856                 0.205782              0.113974          0.139612               0.842944            1.46       0.545000
+hybrid50_cov25__u020__v3 hybrid50_cov25            0.20           3     P2_consensus     100            27 0.332079  0.23        0.305 0.368211                 0.205782              0.113974          0.139612               0.842944            1.43       0.458333
+hybrid50_cov25__u020__v3 hybrid50_cov25            0.20           3 forward_02_cov70     100            27 0.375897  0.31        0.335 0.397954                 0.205782              0.113974          0.139612               0.842944            1.44       0.490000
+hybrid50_cov25__u020__v3 hybrid50_cov25            0.20           3  forward_10_cov0     100            27 0.363853  0.30        0.310 0.391613                 0.205782              0.113974          0.139612               0.842944            1.41       0.558333
+hybrid50_cov25__u020__v5 hybrid50_cov25            0.20           5       P1_current     100            27 0.253739  0.16        0.230 0.327384                 0.252326              0.135047          0.166806               0.786458            1.62       0.334667
+hybrid50_cov25__u020__v5 hybrid50_cov25            0.20           5     P2_consensus     100            27 0.241500  0.13        0.200 0.336098                 0.252326              0.135047          0.166806               0.786458            1.63       0.287000
+hybrid50_cov25__u020__v5 hybrid50_cov25            0.20           5 forward_02_cov70     100            27 0.291778  0.22        0.250 0.369635                 0.252326              0.135047          0.166806               0.786458            1.71       0.354333
+hybrid50_cov25__u020__v5 hybrid50_cov25            0.20           5  forward_10_cov0     100            27 0.270119  0.18        0.235 0.345623                 0.252326              0.135047          0.166806               0.786458            1.60       0.328000
+hybrid50_cov25__u035__v2 hybrid50_cov25            0.35           2       P1_current     100            27 0.314083  0.24        0.285 0.304458                 0.173167              0.155500          0.161175               0.730000            1.62       0.650000
+hybrid50_cov25__u035__v2 hybrid50_cov25            0.35           2     P2_consensus     100            27 0.302012  0.22        0.295 0.285958                 0.173167              0.155500          0.161175               0.730000            1.71       0.605000
+hybrid50_cov25__u035__v2 hybrid50_cov25            0.35           2 forward_02_cov70     100            27 0.321167  0.26        0.300 0.307917                 0.173167              0.155500          0.161175               0.730000            1.67       0.635000
+hybrid50_cov25__u035__v2 hybrid50_cov25            0.35           2  forward_10_cov0     100            27 0.322167  0.25        0.325 0.312167                 0.173167              0.155500          0.161175               0.730000            1.61       0.650000
+hybrid50_cov25__u035__v3 hybrid50_cov25            0.35           3       P1_current     100            27 0.306214  0.21        0.295 0.294107                 0.199094              0.175603          0.185172               0.679444            2.27       0.461667
+hybrid50_cov25__u035__v3 hybrid50_cov25            0.35           3     P2_consensus     100            27 0.314179  0.22        0.275 0.315012                 0.199094              0.175603          0.185172               0.679444            2.23       0.450000
+hybrid50_cov25__u035__v3 hybrid50_cov25            0.35           3 forward_02_cov70     100            27 0.331012  0.25        0.335 0.316940                 0.199094              0.175603          0.185172               0.679444            2.22       0.446667
+hybrid50_cov25__u035__v3 hybrid50_cov25            0.35           3  forward_10_cov0     100            27 0.320220  0.22        0.300 0.315839                 0.199094              0.175603          0.185172               0.679444            2.26       0.445000
+hybrid50_cov25__u035__v5 hybrid50_cov25            0.35           5       P1_current     100            27 0.301167  0.22        0.300 0.318286                 0.255943              0.220600          0.235284               0.555986            3.10       0.314667
+hybrid50_cov25__u035__v5 hybrid50_cov25            0.35           5     P2_consensus     100            27 0.276042  0.17        0.290 0.296402                 0.255943              0.220600          0.235284               0.555986            3.07       0.311500
+hybrid50_cov25__u035__v5 hybrid50_cov25            0.35           5 forward_02_cov70     100            27 0.292833  0.19        0.320 0.326393                 0.255943              0.220600          0.235284               0.555986            3.38       0.333167
+hybrid50_cov25__u035__v5 hybrid50_cov25            0.35           5  forward_10_cov0     100            27 0.290131  0.19        0.290 0.321821                 0.255943              0.220600          0.235284               0.555986            3.12       0.324667
+hybrid50_cov25__u050__v2 hybrid50_cov25            0.50           2       P1_current     100            27 0.231167  0.16        0.220 0.221250                 0.178667              0.179000          0.178246               0.610000            1.86       0.610000
+hybrid50_cov25__u050__v2 hybrid50_cov25            0.50           2     P2_consensus     100            27 0.232833  0.16        0.245 0.221667                 0.178667              0.179000          0.178246               0.610000            1.85       0.605000
+hybrid50_cov25__u050__v2 hybrid50_cov25            0.50           2 forward_02_cov70     100            27 0.250833  0.19        0.250 0.237000                 0.178667              0.179000          0.178246               0.610000            1.86       0.615000
+hybrid50_cov25__u050__v2 hybrid50_cov25            0.50           2  forward_10_cov0     100            27 0.239500  0.18        0.230 0.226000                 0.178667              0.179000          0.178246               0.610000            1.83       0.605000
+hybrid50_cov25__u050__v3 hybrid50_cov25            0.50           3       P1_current     100            27 0.327500  0.22        0.315 0.306714                 0.200936              0.196094          0.198140               0.625000            2.61       0.500000
+hybrid50_cov25__u050__v3 hybrid50_cov25            0.50           3     P2_consensus     100            27 0.339512  0.25        0.330 0.324655                 0.200936              0.196094          0.198140               0.625000            2.58       0.520000
+hybrid50_cov25__u050__v3 hybrid50_cov25            0.50           3 forward_02_cov70     100            27 0.347417  0.27        0.335 0.313405                 0.200936              0.196094          0.198140               0.625000            2.61       0.518333
+hybrid50_cov25__u050__v3 hybrid50_cov25            0.50           3  forward_10_cov0     100            27 0.332833  0.23        0.310 0.308512                 0.200936              0.196094          0.198140               0.625000            2.64       0.503333
+hybrid50_cov25__u050__v5 hybrid50_cov25            0.50           5       P1_current     100            27 0.306750  0.24        0.305 0.298833                 0.255247              0.247013          0.250744               0.503667            4.37       0.449000
+hybrid50_cov25__u050__v5 hybrid50_cov25            0.50           5     P2_consensus     100            27 0.294333  0.21        0.320 0.296795                 0.255247              0.247013          0.250744               0.503667            4.33       0.430500
+hybrid50_cov25__u050__v5 hybrid50_cov25            0.50           5 forward_02_cov70     100            27 0.308333  0.22        0.360 0.320833                 0.255247              0.247013          0.250744               0.503667            4.37       0.435667
+hybrid50_cov25__u050__v5 hybrid50_cov25            0.50           5  forward_10_cov0     100            27 0.305000  0.24        0.305 0.312875                 0.255247              0.247013          0.250744               0.503667            4.37       0.441167
+hybrid75_cov25__u020__v2 hybrid75_cov25            0.20           2       P1_current     100            27 0.410349  0.31        0.380 0.419903                 0.138667              0.080000          0.098460               0.880000            1.24       0.680000
+hybrid75_cov25__u020__v2 hybrid75_cov25            0.20           2     P2_consensus     100            27 0.391226  0.27        0.375 0.402162                 0.138667              0.080000          0.098460               0.880000            1.32       0.650000
+hybrid75_cov25__u020__v2 hybrid75_cov25            0.20           2 forward_02_cov70     100            27 0.427909  0.34        0.405 0.433313                 0.138667              0.080000          0.098460               0.880000            1.31       0.660000
+hybrid75_cov25__u020__v2 hybrid75_cov25            0.20           2  forward_10_cov0     100            27 0.413690  0.31        0.365 0.419593                 0.138667              0.080000          0.098460               0.880000            1.28       0.690000
+hybrid75_cov25__u020__v3 hybrid75_cov25            0.20           3       P1_current     100            27 0.331075  0.26        0.270 0.349677                 0.199722              0.116406          0.140021               0.816111            1.48       0.503333
+hybrid75_cov25__u020__v3 hybrid75_cov25            0.20           3     P2_consensus     100            27 0.318425  0.21        0.295 0.362546                 0.199722              0.116406          0.140021               0.816111            1.47       0.435000
+hybrid75_cov25__u020__v3 hybrid75_cov25            0.20           3 forward_02_cov70     100            27 0.353560  0.27        0.325 0.386191                 0.199722              0.116406          0.140021               0.816111            1.47       0.441667
+hybrid75_cov25__u020__v3 hybrid75_cov25            0.20           3  forward_10_cov0     100            27 0.339728  0.26        0.275 0.376800                 0.199722              0.116406          0.140021               0.816111            1.45       0.518333
+hybrid75_cov25__u020__v5 hybrid75_cov25            0.20           5       P1_current     100            27 0.288268  0.21        0.255 0.349107                 0.252112              0.143153          0.174426               0.761306            1.79       0.369333
+hybrid75_cov25__u020__v5 hybrid75_cov25            0.20           5     P2_consensus     100            27 0.253810  0.14        0.205 0.341728                 0.252112              0.143153          0.174426               0.761306            1.70       0.296000
+hybrid75_cov25__u020__v5 hybrid75_cov25            0.20           5 forward_02_cov70     100            27 0.304871  0.23        0.265 0.382917                 0.252112              0.143153          0.174426               0.761306            1.82       0.376167
+hybrid75_cov25__u020__v5 hybrid75_cov25            0.20           5  forward_10_cov0     100            27 0.289764  0.20        0.250 0.365132                 0.252112              0.143153          0.174426               0.761306            1.74       0.347500
+hybrid75_cov25__u035__v2 hybrid75_cov25            0.35           2       P1_current     100            27 0.307000  0.24        0.280 0.295708                 0.184833              0.170000          0.174516               0.720000            1.68       0.640000
+hybrid75_cov25__u035__v2 hybrid75_cov25            0.35           2     P2_consensus     100            27 0.293679  0.21        0.285 0.280125                 0.184833              0.170000          0.174516               0.720000            1.74       0.610000
+hybrid75_cov25__u035__v2 hybrid75_cov25            0.35           2 forward_02_cov70     100            27 0.306333  0.24        0.295 0.292750                 0.184833              0.170000          0.174516               0.720000            1.71       0.640000
+hybrid75_cov25__u035__v2 hybrid75_cov25            0.35           2  forward_10_cov0     100            27 0.311000  0.24        0.310 0.303417                 0.184833              0.170000          0.174516               0.720000            1.67       0.640000
+hybrid75_cov25__u035__v3 hybrid75_cov25            0.35           3       P1_current     100            27 0.309083  0.21        0.305 0.300542                 0.208565              0.186024          0.195305               0.665556            2.29       0.475000
+hybrid75_cov25__u035__v3 hybrid75_cov25            0.35           3     P2_consensus     100            27 0.329417  0.24        0.305 0.325815                 0.208565              0.186024          0.195305               0.665556            2.29       0.468333
+hybrid75_cov25__u035__v3 hybrid75_cov25            0.35           3 forward_02_cov70     100            27 0.336417  0.25        0.340 0.329071                 0.208565              0.186024          0.195305               0.665556            2.30       0.471667
+hybrid75_cov25__u035__v3 hybrid75_cov25            0.35           3  forward_10_cov0     100            27 0.327417  0.22        0.330 0.327464                 0.208565              0.186024          0.195305               0.665556            2.32       0.470000
+hybrid75_cov25__u035__v5 hybrid75_cov25            0.35           5       P1_current     100            27 0.278214  0.20        0.255 0.297113                 0.248870              0.220210          0.232469               0.542694            3.17       0.322500
+hybrid75_cov25__u035__v5 hybrid75_cov25            0.35           5     P2_consensus     100            27 0.261917  0.15        0.285 0.284700                 0.248870              0.220210          0.232469               0.542694            3.13       0.300667
+hybrid75_cov25__u035__v5 hybrid75_cov25            0.35           5 forward_02_cov70     100            27 0.289833  0.19        0.335 0.332738                 0.248870              0.220210          0.232469               0.542694            3.40       0.349333
+hybrid75_cov25__u035__v5 hybrid75_cov25            0.35           5  forward_10_cov0     100            27 0.283131  0.19        0.285 0.317488                 0.248870              0.220210          0.232469               0.542694            3.25       0.332000
+hybrid75_cov25__u050__v2 hybrid75_cov25            0.50           2       P1_current     100            27 0.249083  0.18        0.235 0.239583                 0.187000              0.188167          0.187056               0.620000            1.88       0.615000
+hybrid75_cov25__u050__v2 hybrid75_cov25            0.50           2     P2_consensus     100            27 0.240750  0.16        0.245 0.231667                 0.187000              0.188167          0.187056               0.620000            1.87       0.595000
+hybrid75_cov25__u050__v2 hybrid75_cov25            0.50           2 forward_02_cov70     100            27 0.262500  0.20        0.255 0.249500                 0.187000              0.188167          0.187056               0.620000            1.88       0.630000
+hybrid75_cov25__u050__v2 hybrid75_cov25            0.50           2  forward_10_cov0     100            27 0.249500  0.18        0.240 0.240167                 0.187000              0.188167          0.187056               0.620000            1.85       0.600000
+hybrid75_cov25__u050__v3 hybrid75_cov25            0.50           3       P1_current     100            27 0.328917  0.21        0.320 0.312923                 0.204531              0.200673          0.202299               0.628889            2.67       0.498333
+hybrid75_cov25__u050__v3 hybrid75_cov25            0.50           3     P2_consensus     100            27 0.344000  0.25        0.330 0.325030                 0.204531              0.200673          0.202299               0.628889            2.65       0.516667
+hybrid75_cov25__u050__v3 hybrid75_cov25            0.50           3 forward_02_cov70     100            27 0.344750  0.26        0.320 0.312696                 0.204531              0.200673          0.202299               0.628889            2.67       0.510000
+hybrid75_cov25__u050__v3 hybrid75_cov25            0.50           3  forward_10_cov0     100            27 0.334750  0.22        0.325 0.311387                 0.204531              0.200673          0.202299               0.628889            2.69       0.500000
+hybrid75_cov25__u050__v5 hybrid75_cov25            0.50           5       P1_current     100            27 0.292083  0.21        0.285 0.275917                 0.251610              0.243973          0.247436               0.496333            4.36       0.441333
+hybrid75_cov25__u050__v5 hybrid75_cov25            0.50           5     P2_consensus     100            27 0.279750  0.18        0.300 0.279295                 0.251610              0.243973          0.247436               0.496333            4.29       0.412667
+hybrid75_cov25__u050__v5 hybrid75_cov25            0.50           5 forward_02_cov70     100            27 0.316167  0.23        0.375 0.330000                 0.251610              0.243973          0.247436               0.496333            4.30       0.424833
+hybrid75_cov25__u050__v5 hybrid75_cov25            0.50           5  forward_10_cov0     100            27 0.296167  0.22        0.295 0.296625                 0.251610              0.243973          0.247436               0.496333            4.35       0.437500
+   local_cov05__u020__v2    local_cov05            0.20           2       P1_current     100            27 0.379968  0.29        0.350 0.391051                 0.127833              0.079833          0.095254               0.870000            1.28       0.655000
+   local_cov05__u020__v2    local_cov05            0.20           2     P2_consensus     100            27 0.368786  0.26        0.355 0.379394                 0.127833              0.079833          0.095254               0.870000            1.35       0.635000
+   local_cov05__u020__v2    local_cov05            0.20           2 forward_02_cov70     100            27 0.406218  0.34        0.385 0.401956                 0.127833              0.079833          0.095254               0.870000            1.36       0.665000
+   local_cov05__u020__v2    local_cov05            0.20           2  forward_10_cov0     100            27 0.388345  0.29        0.350 0.394843                 0.127833              0.079833          0.095254               0.870000            1.32       0.680000
+   local_cov05__u020__v3    local_cov05            0.20           3       P1_current     100            27 0.308226  0.22        0.260 0.317401                 0.205510              0.129021          0.152857               0.807500            1.55       0.480000
+   local_cov05__u020__v3    local_cov05            0.20           3     P2_consensus     100            27 0.317750  0.22        0.280 0.341484                 0.205510              0.129021          0.152857               0.807500            1.55       0.455000
+   local_cov05__u020__v3    local_cov05            0.20           3 forward_02_cov70     100            27 0.351159  0.28        0.330 0.368426                 0.205510              0.129021          0.152857               0.807500            1.52       0.458333
+   local_cov05__u020__v3    local_cov05            0.20           3  forward_10_cov0     100            27 0.329466  0.24        0.275 0.362972                 0.205510              0.129021          0.152857               0.807500            1.53       0.511667
+   local_cov05__u020__v5    local_cov05            0.20           5       P1_current     100            27 0.272874  0.18        0.245 0.325997                 0.246560              0.154092          0.183746               0.695667            1.86       0.320500
+   local_cov05__u020__v5    local_cov05            0.20           5     P2_consensus     100            27 0.248534  0.12        0.225 0.323218                 0.246560              0.154092          0.183746               0.695667            1.79       0.263000
+   local_cov05__u020__v5    local_cov05            0.20           5 forward_02_cov70     100            27 0.304002  0.21        0.285 0.373749                 0.246560              0.154092          0.183746               0.695667            1.89       0.344167
+   local_cov05__u020__v5    local_cov05            0.20           5  forward_10_cov0     100            27 0.259938  0.15        0.220 0.342885                 0.246560              0.154092          0.183746               0.695667            1.80       0.296333
+   local_cov05__u035__v2    local_cov05            0.35           2       P1_current     100            27 0.263667  0.20        0.240 0.261417                 0.164000              0.155000          0.156992               0.680000            1.72       0.625000
+   local_cov05__u035__v2    local_cov05            0.35           2     P2_consensus     100            27 0.268250  0.20        0.255 0.259208                 0.164000              0.155000          0.156992               0.680000            1.74       0.600000
+   local_cov05__u035__v2    local_cov05            0.35           2 forward_02_cov70     100            27 0.286500  0.24        0.275 0.274583                 0.164000              0.155000          0.156992               0.680000            1.73       0.650000
+   local_cov05__u035__v2    local_cov05            0.35           2  forward_10_cov0     100            27 0.267000  0.20        0.260 0.267083                 0.164000              0.155000          0.156992               0.680000            1.70       0.620000
+   local_cov05__u035__v3    local_cov05            0.35           3       P1_current     100            27 0.312250  0.22        0.330 0.306839                 0.203892              0.185020          0.192895               0.648333            2.30       0.491667
+   local_cov05__u035__v3    local_cov05            0.35           3     P2_consensus     100            27 0.326667  0.25        0.310 0.321905                 0.203892              0.185020          0.192895               0.648333            2.32       0.481667
+   local_cov05__u035__v3    local_cov05            0.35           3 forward_02_cov70     100            27 0.339500  0.27        0.355 0.334030                 0.203892              0.185020          0.192895               0.648333            2.32       0.481667
+   local_cov05__u035__v3    local_cov05            0.35           3  forward_10_cov0     100            27 0.324250  0.23        0.325 0.324554                 0.203892              0.185020          0.192895               0.648333            2.34       0.480000
+   local_cov05__u035__v5    local_cov05            0.35           5       P1_current     100            27 0.296458  0.20        0.290 0.313720                 0.261833              0.236218          0.247202               0.573667            3.26       0.336833
+   local_cov05__u035__v5    local_cov05            0.35           5     P2_consensus     100            27 0.285250  0.16        0.295 0.302333                 0.261833              0.236218          0.247202               0.573667            3.28       0.339333
+   local_cov05__u035__v5    local_cov05            0.35           5 forward_02_cov70     100            27 0.326250  0.21        0.385 0.374027                 0.261833              0.236218          0.247202               0.573667            3.56       0.395333
+   local_cov05__u035__v5    local_cov05            0.35           5  forward_10_cov0     100            27 0.305875  0.19        0.315 0.342420                 0.261833              0.236218          0.247202               0.573667            3.30       0.352833
+   local_cov05__u050__v2    local_cov05            0.50           2       P1_current     100            27 0.227083  0.16        0.225 0.221667                 0.179333              0.180500          0.179389               0.610000            1.88       0.610000
+   local_cov05__u050__v2    local_cov05            0.50           2     P2_consensus     100            27 0.230333  0.16        0.235 0.224167                 0.179333              0.180500          0.179389               0.610000            1.87       0.600000
+   local_cov05__u050__v2    local_cov05            0.50           2 forward_02_cov70     100            27 0.245000  0.19        0.245 0.236250                 0.179333              0.180500          0.179389               0.610000            1.88       0.630000
+   local_cov05__u050__v2    local_cov05            0.50           2  forward_10_cov0     100            27 0.231667  0.17        0.220 0.222917                 0.179333              0.180500          0.179389               0.610000            1.85       0.600000
+   local_cov05__u050__v3    local_cov05            0.50           3       P1_current     100            27 0.344417  0.23        0.340 0.331250                 0.209516              0.206483          0.207789               0.610278            2.68       0.513333
+   local_cov05__u050__v3    local_cov05            0.50           3     P2_consensus     100            27 0.356250  0.27        0.340 0.342708                 0.209516              0.206483          0.207789               0.610278            2.69       0.528333
+   local_cov05__u050__v3    local_cov05            0.50           3 forward_02_cov70     100            27 0.370083  0.30        0.365 0.346250                 0.209516              0.206483          0.207789               0.610278            2.69       0.526667
+   local_cov05__u050__v3    local_cov05            0.50           3  forward_10_cov0     100            27 0.352667  0.25        0.335 0.327208                 0.209516              0.206483          0.207789               0.610278            2.72       0.528333
+   local_cov05__u050__v5    local_cov05            0.50           5       P1_current     100            27 0.345333  0.25        0.360 0.334988                 0.259032              0.253221          0.255740               0.532806            4.44       0.450833
+   local_cov05__u050__v5    local_cov05            0.50           5     P2_consensus     100            27 0.324167  0.20        0.355 0.324030                 0.259032              0.253221          0.255740               0.532806            4.51       0.449667
+   local_cov05__u050__v5    local_cov05            0.50           5 forward_02_cov70     100            27 0.375333  0.28        0.445 0.389500                 0.259032              0.253221          0.255740               0.532806            4.48       0.464167
+   local_cov05__u050__v5    local_cov05            0.50           5  forward_10_cov0     100            27 0.343583  0.24        0.360 0.351000                 0.259032              0.253221          0.255740               0.532806            4.48       0.457167
+   local_cov25__u020__v2    local_cov25            0.20           2       P1_current     100            27 0.396302  0.30        0.370 0.408135                 0.112000              0.070333          0.083714               0.870000            1.27       0.650000
+   local_cov25__u020__v2    local_cov25            0.20           2     P2_consensus     100            27 0.380548  0.26        0.375 0.393227                 0.112000              0.070333          0.083714               0.870000            1.35       0.635000
+   local_cov25__u020__v2    local_cov25            0.20           2 forward_02_cov70     100            27 0.415313  0.34        0.390 0.418248                 0.112000              0.070333          0.083714               0.870000            1.34       0.660000
+   local_cov25__u020__v2    local_cov25            0.20           2  forward_10_cov0     100            27 0.400179  0.29        0.370 0.408593                 0.112000              0.070333          0.083714               0.870000            1.32       0.665000
+   local_cov25__u020__v3    local_cov25            0.20           3       P1_current     100            27 0.301032  0.22        0.245 0.305827                 0.215488              0.128982          0.154077               0.808889            1.51       0.485000
+   local_cov25__u020__v3    local_cov25            0.20           3     P2_consensus     100            27 0.297405  0.20        0.255 0.322916                 0.215488              0.128982          0.154077               0.808889            1.49       0.440000
+   local_cov25__u020__v3    local_cov25            0.20           3 forward_02_cov70     100            27 0.334159  0.26        0.305 0.351251                 0.215488              0.128982          0.154077               0.808889            1.48       0.445000
+   local_cov25__u020__v3    local_cov25            0.20           3  forward_10_cov0     100            27 0.318633  0.23        0.260 0.350856                 0.215488              0.128982          0.154077               0.808889            1.50       0.510000
+   local_cov25__u020__v5    local_cov25            0.20           5       P1_current     100            27 0.279770  0.19        0.250 0.331667                 0.246835              0.147102          0.177163               0.726472            1.84       0.347167
+   local_cov25__u020__v5    local_cov25            0.20           5     P2_consensus     100            27 0.250622  0.15        0.210 0.316174                 0.246835              0.147102          0.177163               0.726472            1.78       0.314000
+   local_cov25__u020__v5    local_cov25            0.20           5 forward_02_cov70     100            27 0.300291  0.23        0.255 0.355200                 0.246835              0.147102          0.177163               0.726472            1.89       0.353167
+   local_cov25__u020__v5    local_cov25            0.20           5  forward_10_cov0     100            27 0.271523  0.17        0.250 0.336370                 0.246835              0.147102          0.177163               0.726472            1.78       0.322167
+   local_cov25__u035__v2    local_cov25            0.35           2       P1_current     100            27 0.284833  0.22        0.260 0.281542                 0.168167              0.156833          0.159849               0.690000            1.70       0.635000
+   local_cov25__u035__v2    local_cov25            0.35           2     P2_consensus     100            27 0.282845  0.21        0.265 0.273458                 0.168167              0.156833          0.159849               0.690000            1.72       0.600000
+   local_cov25__u035__v2    local_cov25            0.35           2 forward_02_cov70     100            27 0.296833  0.24        0.285 0.289250                 0.168167              0.156833          0.159849               0.690000            1.71       0.665000
+   local_cov25__u035__v2    local_cov25            0.35           2  forward_10_cov0     100            27 0.283167  0.21        0.280 0.285500                 0.168167              0.156833          0.159849               0.690000            1.68       0.620000
+   local_cov25__u035__v3    local_cov25            0.35           3       P1_current     100            27 0.308000  0.21        0.315 0.296881                 0.206598              0.184615          0.193763               0.664167            2.27       0.485000
+   local_cov25__u035__v3    local_cov25            0.35           3     P2_consensus     100            27 0.324917  0.24        0.305 0.315905                 0.206598              0.184615          0.193763               0.664167            2.31       0.483333
+   local_cov25__u035__v3    local_cov25            0.35           3 forward_02_cov70     100            27 0.337500  0.26        0.345 0.329363                 0.206598              0.184615          0.193763               0.664167            2.34       0.495000
+   local_cov25__u035__v3    local_cov25            0.35           3  forward_10_cov0     100            27 0.324667  0.22        0.335 0.322220                 0.206598              0.184615          0.193763               0.664167            2.34       0.483333
+   local_cov25__u035__v5    local_cov25            0.35           5       P1_current     100            27 0.294714  0.21        0.285 0.315589                 0.248282              0.221986          0.233258               0.560306            3.22       0.332333
+   local_cov25__u035__v5    local_cov25            0.35           5     P2_consensus     100            27 0.286798  0.17        0.310 0.303060                 0.248282              0.221986          0.233258               0.560306            3.22       0.328500
+   local_cov25__u035__v5    local_cov25            0.35           5 forward_02_cov70     100            27 0.317667  0.21        0.370 0.359845                 0.248282              0.221986          0.233258               0.560306            3.47       0.373167
+   local_cov25__u035__v5    local_cov25            0.35           5  forward_10_cov0     100            27 0.299798  0.19        0.320 0.339065                 0.248282              0.221986          0.233258               0.560306            3.17       0.331500
+   local_cov25__u050__v2    local_cov25            0.50           2       P1_current     100            27 0.232083  0.17        0.225 0.223333                 0.178000              0.179167          0.178056               0.610000            1.88       0.615000
+   local_cov25__u050__v2    local_cov25            0.50           2     P2_consensus     100            27 0.230833  0.16        0.235 0.225833                 0.178000              0.179167          0.178056               0.610000            1.87       0.595000
+   local_cov25__u050__v2    local_cov25            0.50           2 forward_02_cov70     100            27 0.241667  0.19        0.230 0.230417                 0.178000              0.179167          0.178056               0.610000            1.88       0.625000
+   local_cov25__u050__v2    local_cov25            0.50           2  forward_10_cov0     100            27 0.234167  0.17        0.235 0.223750                 0.178000              0.179167          0.178056               0.610000            1.85       0.595000
+   local_cov25__u050__v3    local_cov25            0.50           3       P1_current     100            27 0.339583  0.22        0.330 0.321756                 0.206356              0.203189          0.204529               0.627778            2.66       0.498333
+   local_cov25__u050__v3    local_cov25            0.50           3     P2_consensus     100            27 0.351167  0.26        0.325 0.329821                 0.206356              0.203189          0.204529               0.627778            2.66       0.526667
+   local_cov25__u050__v3    local_cov25            0.50           3 forward_02_cov70     100            27 0.355667  0.27        0.335 0.327321                 0.206356              0.203189          0.204529               0.627778            2.67       0.508333
+   local_cov25__u050__v3    local_cov25            0.50           3  forward_10_cov0     100            27 0.342667  0.23        0.315 0.312387                 0.206356              0.203189          0.204529               0.627778            2.70       0.510000
+   local_cov25__u050__v5    local_cov25            0.50           5       P1_current     100            27 0.330167  0.24        0.345 0.321500                 0.250934              0.244676          0.247506               0.526917            4.39       0.444167
+   local_cov25__u050__v5    local_cov25            0.50           5     P2_consensus     100            27 0.308500  0.19        0.345 0.307545                 0.250934              0.244676          0.247506               0.526917            4.35       0.417500
+   local_cov25__u050__v5    local_cov25            0.50           5 forward_02_cov70     100            27 0.359250  0.27        0.420 0.372000                 0.250934              0.244676          0.247506               0.526917            4.38       0.441500
+   local_cov25__u050__v5    local_cov25            0.50           5  forward_10_cov0     100            27 0.331333  0.23        0.360 0.340292                 0.250934              0.244676          0.247506               0.526917            4.38       0.437833
+   local_cov50__u020__v2    local_cov50            0.20           2       P1_current     100            27 0.406694  0.31        0.365 0.412885                 0.107833              0.067833          0.080349               0.880000            1.25       0.670000
+   local_cov50__u020__v2    local_cov50            0.20           2     P2_consensus     100            27 0.394560  0.28        0.375 0.404364                 0.107833              0.067833          0.080349               0.880000            1.31       0.640000
+   local_cov50__u020__v2    local_cov50            0.20           2 forward_02_cov70     100            27 0.430813  0.36        0.385 0.428373                 0.107833              0.067833          0.080349               0.880000            1.33       0.680000
+   local_cov50__u020__v2    local_cov50            0.20           2  forward_10_cov0     100            27 0.422452  0.31        0.400 0.428807                 0.107833              0.067833          0.080349               0.880000            1.28       0.680000
+   local_cov50__u020__v3    local_cov50            0.20           3       P1_current     100            27 0.317159  0.24        0.260 0.325958                 0.213512              0.123649          0.149000               0.815000            1.49       0.500000
+   local_cov50__u020__v3    local_cov50            0.20           3     P2_consensus     100            27 0.312405  0.22        0.270 0.341303                 0.213512              0.123649          0.149000               0.815000            1.47       0.455000
+   local_cov50__u020__v3    local_cov50            0.20           3 forward_02_cov70     100            27 0.340956  0.27        0.310 0.363021                 0.213512              0.123649          0.149000               0.815000            1.48       0.446667
+   local_cov50__u020__v3    local_cov50            0.20           3  forward_10_cov0     100            27 0.326411  0.24        0.265 0.363924                 0.213512              0.123649          0.149000               0.815000            1.48       0.515000
+   local_cov50__u020__v5    local_cov50            0.20           5       P1_current     100            27 0.280470  0.19        0.255 0.329231                 0.234128              0.144118          0.172187               0.739833            1.83       0.337667
+   local_cov50__u020__v5    local_cov50            0.20           5     P2_consensus     100            27 0.247359  0.13        0.195 0.320850                 0.234128              0.144118          0.172187               0.739833            1.82       0.289000
+   local_cov50__u020__v5    local_cov50            0.20           5 forward_02_cov70     100            27 0.299507  0.22        0.255 0.362463                 0.234128              0.144118          0.172187               0.739833            1.91       0.355333
+   local_cov50__u020__v5    local_cov50            0.20           5  forward_10_cov0     100            27 0.281163  0.19        0.250 0.335795                 0.234128              0.144118          0.172187               0.739833            1.77       0.321167
+   local_cov50__u035__v2    local_cov50            0.35           2       P1_current     100            27 0.283167  0.22        0.260 0.284417                 0.172833              0.156167          0.160270               0.690000            1.71       0.635000
+   local_cov50__u035__v2    local_cov50            0.35           2     P2_consensus     100            27 0.279179  0.21        0.255 0.273875                 0.172833              0.156167          0.160270               0.690000            1.73       0.600000
+   local_cov50__u035__v2    local_cov50            0.35           2 forward_02_cov70     100            27 0.294333  0.24        0.285 0.292250                 0.172833              0.156167          0.160270               0.690000            1.72       0.665000
+   local_cov50__u035__v2    local_cov50            0.35           2  forward_10_cov0     100            27 0.283667  0.21        0.290 0.289417                 0.172833              0.156167          0.160270               0.690000            1.69       0.620000
+   local_cov50__u035__v3    local_cov50            0.35           3       P1_current     100            27 0.320833  0.24        0.305 0.306917                 0.202532              0.181369          0.190040               0.655278            2.28       0.486667
+   local_cov50__u035__v3    local_cov50            0.35           3     P2_consensus     100            27 0.332000  0.26        0.305 0.316940                 0.202532              0.181369          0.190040               0.655278            2.27       0.485000
+   local_cov50__u035__v3    local_cov50            0.35           3 forward_02_cov70     100            27 0.348083  0.28        0.350 0.332613                 0.202532              0.181369          0.190040               0.655278            2.32       0.486667
+   local_cov50__u035__v3    local_cov50            0.35           3  forward_10_cov0     100            27 0.331250  0.24        0.315 0.320923                 0.202532              0.181369          0.190040               0.655278            2.31       0.478333
+   local_cov50__u035__v5    local_cov50            0.35           5       P1_current     100            27 0.276048  0.19        0.255 0.291423                 0.248192              0.220988          0.232581               0.543778            3.19       0.324333
+   local_cov50__u035__v5    local_cov50            0.35           5     P2_consensus     100            27 0.273512  0.16        0.280 0.285426                 0.248192              0.220988          0.232581               0.543778            3.12       0.304833
+   local_cov50__u035__v5    local_cov50            0.35           5 forward_02_cov70     100            27 0.312750  0.21        0.360 0.346732                 0.248192              0.220988          0.232581               0.543778            3.41       0.358667
+   local_cov50__u035__v5    local_cov50            0.35           5  forward_10_cov0     100            27 0.285458  0.18        0.295 0.315863                 0.248192              0.220988          0.232581               0.543778            3.20       0.333167
+   local_cov50__u050__v2    local_cov50            0.50           2       P1_current     100            27 0.232083  0.17        0.225 0.226250                 0.176833              0.178000          0.176889               0.610000            1.88       0.615000
+   local_cov50__u050__v2    local_cov50            0.50           2     P2_consensus     100            27 0.227917  0.16        0.225 0.220000                 0.176833              0.178000          0.176889               0.610000            1.87       0.595000
+   local_cov50__u050__v2    local_cov50            0.50           2 forward_02_cov70     100            27 0.243333  0.19        0.240 0.234500                 0.176833              0.178000          0.176889               0.610000            1.88       0.630000
+   local_cov50__u050__v2    local_cov50            0.50           2  forward_10_cov0     100            27 0.234167  0.17        0.230 0.227667                 0.176833              0.178000          0.176889               0.610000            1.85       0.595000
+   local_cov50__u050__v3    local_cov50            0.50           3       P1_current     100            27 0.335000  0.23        0.320 0.317589                 0.211047              0.207880          0.209220               0.634167            2.66       0.505000
+   local_cov50__u050__v3    local_cov50            0.50           3     P2_consensus     100            27 0.346583  0.27        0.325 0.323988                 0.211047              0.207880          0.209220               0.634167            2.66       0.533333
+   local_cov50__u050__v3    local_cov50            0.50           3 forward_02_cov70     100            27 0.357333  0.28        0.350 0.333155                 0.211047              0.207880          0.209220               0.634167            2.67       0.521667
+   local_cov50__u050__v3    local_cov50            0.50           3  forward_10_cov0     100            27 0.339750  0.24        0.310 0.309054                 0.211047              0.207880          0.209220               0.634167            2.70       0.516667
+   local_cov50__u050__v5    local_cov50            0.50           5       P1_current     100            27 0.296667  0.19        0.315 0.286333                 0.248404              0.241268          0.244491               0.514972            4.35       0.421000
+   local_cov50__u050__v5    local_cov50            0.50           5     P2_consensus     100            27 0.292917  0.18        0.310 0.282878                 0.248404              0.241268          0.244491               0.514972            4.32       0.403833
+   local_cov50__u050__v5    local_cov50            0.50           5 forward_02_cov70     100            27 0.343250  0.25        0.400 0.355000                 0.248404              0.241268          0.244491               0.514972            4.38       0.429500
+   local_cov50__u050__v5    local_cov50            0.50           5  forward_10_cov0     100            27 0.303750  0.20        0.320 0.305250                 0.248404              0.241268          0.244491               0.514972            4.37       0.422000
+{'files': {'evaluation_binding.json': 'fe2fcf0f318f35f2e32e87568318885145bedb86ce81b7f703235ae4b0fcc76f', 'private/figures/identity_example_01.png': '67746fa2812a755805382b64b7293031a26d9e28fa1706a9681965969f48e7e2', 'private/figures/identity_example_02.png': 'd1c15bd828b481cd22d61a9eb3df5ebc9d5cf2f6ec96b5a2f2006bdc425b1ab1', 'private/figures/identity_example_03.png': 'c64450923129703733e99e700d5fc6e7fb32e53888ca6682cf916652f83872fd', 'private/figures/identity_example_04.png': 'f518444f5e1fad6de5feb7c38d42cc6235b256e4f09a1716a8d855011b2fac81', 'private/figures/identity_example_05.png': 'cc8dd9d0e0c8acab4d617a6df1f595cc7861e99a770f2471e4e87ca1cef344ab', 'private/figures/identity_example_06.png': 'bd3a033e9c2398b341cba33449782e993e0f2b0df62a5eb206e74940f74e3d1c', 'private/figures/identity_example_07.png': '3ecf4bc9ac749422a59cd8ae6f3544fc3a01359733b86b9f0d2fec07fda93773', 'private/figures/identity_example_08.png': '00339efcc96f9dc5d2fceabdd9e5ae6f342343ec034ac732e8319c12fa6d6239', 'private/figures/identity_example_09.png': 'd5c074186be65f1caaa755842bdcbb377c02996f4fc1f826f37ffc0a59c66049', 'private/figures/identity_example_10.png': '03a3bab4952c99c9ebdd17a4ca0f0bb6477c714e5da174de01c9b76c76b182ae', 'private/figures/identity_example_11.png': '6435787432c2997eb266011d9e9c8c743d211f36e9edd7400bbe591cce76484a', 'private/figures/identity_example_12.png': 'ba5e170d1f82c867e9aa0c152d5595b526056afc9b75ccb510b39f952efda048', 'private/gallery_manifest.json': '0946fc7c2b4b0bc0da333157d9f8cabeb95734083888b6b4d909900ac562071f', 'private/scene_metrics.csv': '184725422006491d3bb9b6799bcbf2ff66cb8ac156f7d762fb8fab680e4de69c', 'progress.json': 'a6c8a4d2630a32b192a3ebd68db9dbace18740ae6ee9ff7eeebbc925d6acbea3', 'run_status.json': '0523ed134129ad0edfc67ee7057d1f6be2a3e7f2e4374a6d7366ce05657d305f', 'shareable/category_summary.csv': '32a12e88849e999bee72f7ebce69ced264d6003a3adee36eb4243b3741ecddc8', 'shareable/development_decision.json': '9a7b9eabfead9891ee66c6289e64f244e12eec2df094c2964c1352ac7ab660ca', 'shareable/evaluation_receipt.json': '135f9e35ec5c73f389952d0db5d88e6d342c5d3eebf7feeedfcf077a34854df8', 'shareable/family_summary.csv': '442733e234b6a80fe052a5ec9c2ff38803a4a2a905e73809db85c8714ce4b1b9', 'shareable/figures/identity_vs_top1.png': '7dd7c700377d0c03e3cd65b9770bfe71cba40329c655c147ce4ba7566f09160a', 'shareable/figures/primary_top1_comparison.png': '32241ce9d14b191cf8b1970b24ee037a851f22327634e0ce0b5825624173f5ba', 'shareable/identity_refinement_summary.csv': 'c71788d3a22f33028a976017ef046c0f837302dc131a5b708e6f8c044820db8f', 'shareable/paired_asset_intervals.csv': '6fba7a928164d6cd6ce480a62b839d8b671f8448095a0bc2f916e8c12cdc9409', 'shareable/patch_fallback_summary.csv': 'd7c1ad1151c9c442cbadb3efb1ac451c338c9a7c28df1027e1fb82fba83b41f5', 'shareable/primary_candidate_ranking.csv': 'd7c6b93aed308f0d4e0b073ce9066c5141ee7e3052cf2b58dd3ee4f92d035736'}, 'metadata': {}, 'schema': 1}
+
+[cell 15]
+primary_candidate_ranking.csv
+
+[cell 15]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>configuration_id</th>
+      <th>descriptor</th>
+      <th>unmatched_cost</th>
+      <th>view_count</th>
+      <th>method</th>
+      <th>scenes</th>
+      <th>asset_groups</th>
+      <th>ap</th>
+      <th>top1</th>
+      <th>recall_at_2</th>
+      <th>auroc</th>
+      <th>identity_link_precision</th>
+      <th>identity_link_recall</th>
+      <th>identity_link_f1</th>
+      <th>identity_track_purity</th>
+      <th>winner_support</th>
+      <th>winner_purity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>hybrid50_cov25__u020__v3</td>
+      <td>hybrid50_cov25</td>
+      <td>0.20</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.375897</td>
+      <td>0.31</td>
+      <td>0.335</td>
+      <td>0.397954</td>
+      <td>0.205782</td>
+      <td>0.113974</td>
+      <td>0.139612</td>
+      <td>0.842944</td>
+      <td>1.44</td>
+      <td>0.490000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>global_current__u020__v3</td>
+      <td>global_current</td>
+      <td>0.20</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.374627</td>
+      <td>0.31</td>
+      <td>0.335</td>
+      <td>0.403671</td>
+      <td>0.197740</td>
+      <td>0.095571</td>
+      <td>0.121122</td>
+      <td>0.858556</td>
+      <td>1.37</td>
+      <td>0.530000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>local_cov05__u050__v3</td>
+      <td>local_cov05</td>
+      <td>0.50</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.370083</td>
+      <td>0.30</td>
+      <td>0.365</td>
+      <td>0.346250</td>
+      <td>0.209516</td>
+      <td>0.206483</td>
+      <td>0.207789</td>
+      <td>0.610278</td>
+      <td>2.69</td>
+      <td>0.526667</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>hybrid25_cov25__u020__v3</td>
+      <td>hybrid25_cov25</td>
+      <td>0.20</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.365397</td>
+      <td>0.29</td>
+      <td>0.330</td>
+      <td>0.393058</td>
+      <td>0.201177</td>
+      <td>0.099571</td>
+      <td>0.126531</td>
+      <td>0.835500</td>
+      <td>1.38</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>local_cov50__u050__v3</td>
+      <td>local_cov50</td>
+      <td>0.50</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.357333</td>
+      <td>0.28</td>
+      <td>0.350</td>
+      <td>0.333155</td>
+      <td>0.211047</td>
+      <td>0.207880</td>
+      <td>0.209220</td>
+      <td>0.634167</td>
+      <td>2.67</td>
+      <td>0.521667</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>local_cov05__u020__v3</td>
+      <td>local_cov05</td>
+      <td>0.20</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.351159</td>
+      <td>0.28</td>
+      <td>0.330</td>
+      <td>0.368426</td>
+      <td>0.205510</td>
+      <td>0.129021</td>
+      <td>0.152857</td>
+      <td>0.807500</td>
+      <td>1.52</td>
+      <td>0.458333</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>local_cov50__u035__v3</td>
+      <td>local_cov50</td>
+      <td>0.35</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.348083</td>
+      <td>0.28</td>
+      <td>0.350</td>
+      <td>0.332613</td>
+      <td>0.202532</td>
+      <td>0.181369</td>
+      <td>0.190040</td>
+      <td>0.655278</td>
+      <td>2.32</td>
+      <td>0.486667</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>local_cov25__u050__v3</td>
+      <td>local_cov25</td>
+      <td>0.50</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.355667</td>
+      <td>0.27</td>
+      <td>0.335</td>
+      <td>0.327321</td>
+      <td>0.206356</td>
+      <td>0.203189</td>
+      <td>0.204529</td>
+      <td>0.627778</td>
+      <td>2.67</td>
+      <td>0.508333</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>hybrid75_cov25__u020__v3</td>
+      <td>hybrid75_cov25</td>
+      <td>0.20</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.353560</td>
+      <td>0.27</td>
+      <td>0.325</td>
+      <td>0.386191</td>
+      <td>0.199722</td>
+      <td>0.116406</td>
+      <td>0.140021</td>
+      <td>0.816111</td>
+      <td>1.47</td>
+      <td>0.441667</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>hybrid50_cov25__u050__v3</td>
+      <td>hybrid50_cov25</td>
+      <td>0.50</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.347417</td>
+      <td>0.27</td>
+      <td>0.335</td>
+      <td>0.313405</td>
+      <td>0.200936</td>
+      <td>0.196094</td>
+      <td>0.198140</td>
+      <td>0.625000</td>
+      <td>2.61</td>
+      <td>0.518333</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>local_cov50__u020__v3</td>
+      <td>local_cov50</td>
+      <td>0.20</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.340956</td>
+      <td>0.27</td>
+      <td>0.310</td>
+      <td>0.363021</td>
+      <td>0.213512</td>
+      <td>0.123649</td>
+      <td>0.149000</td>
+      <td>0.815000</td>
+      <td>1.48</td>
+      <td>0.446667</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>local_cov05__u035__v3</td>
+      <td>local_cov05</td>
+      <td>0.35</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.339500</td>
+      <td>0.27</td>
+      <td>0.355</td>
+      <td>0.334030</td>
+      <td>0.203892</td>
+      <td>0.185020</td>
+      <td>0.192895</td>
+      <td>0.648333</td>
+      <td>2.32</td>
+      <td>0.481667</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>hybrid75_cov25__u050__v3</td>
+      <td>hybrid75_cov25</td>
+      <td>0.50</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.344750</td>
+      <td>0.26</td>
+      <td>0.320</td>
+      <td>0.312696</td>
+      <td>0.204531</td>
+      <td>0.200673</td>
+      <td>0.202299</td>
+      <td>0.628889</td>
+      <td>2.67</td>
+      <td>0.510000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>local_cov25__u035__v3</td>
+      <td>local_cov25</td>
+      <td>0.35</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.337500</td>
+      <td>0.26</td>
+      <td>0.345</td>
+      <td>0.329363</td>
+      <td>0.206598</td>
+      <td>0.184615</td>
+      <td>0.193763</td>
+      <td>0.664167</td>
+      <td>2.34</td>
+      <td>0.495000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>local_cov25__u020__v3</td>
+      <td>local_cov25</td>
+      <td>0.20</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.334159</td>
+      <td>0.26</td>
+      <td>0.305</td>
+      <td>0.351251</td>
+      <td>0.215488</td>
+      <td>0.128982</td>
+      <td>0.154077</td>
+      <td>0.808889</td>
+      <td>1.48</td>
+      <td>0.445000</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>global_current__u050__v3</td>
+      <td>global_current</td>
+      <td>0.50</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.343833</td>
+      <td>0.25</td>
+      <td>0.340</td>
+      <td>0.318280</td>
+      <td>0.190754</td>
+      <td>0.184966</td>
+      <td>0.187458</td>
+      <td>0.617778</td>
+      <td>2.59</td>
+      <td>0.515000</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>hybrid75_cov25__u035__v3</td>
+      <td>hybrid75_cov25</td>
+      <td>0.35</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.336417</td>
+      <td>0.25</td>
+      <td>0.340</td>
+      <td>0.329071</td>
+      <td>0.208565</td>
+      <td>0.186024</td>
+      <td>0.195305</td>
+      <td>0.665556</td>
+      <td>2.30</td>
+      <td>0.471667</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>hybrid50_cov25__u035__v3</td>
+      <td>hybrid50_cov25</td>
+      <td>0.35</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.331012</td>
+      <td>0.25</td>
+      <td>0.335</td>
+      <td>0.316940</td>
+      <td>0.199094</td>
+      <td>0.175603</td>
+      <td>0.185172</td>
+      <td>0.679444</td>
+      <td>2.22</td>
+      <td>0.446667</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>global_current__u035__v3</td>
+      <td>global_current</td>
+      <td>0.35</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.339835</td>
+      <td>0.24</td>
+      <td>0.355</td>
+      <td>0.335573</td>
+      <td>0.212644</td>
+      <td>0.173899</td>
+      <td>0.188789</td>
+      <td>0.687222</td>
+      <td>2.10</td>
+      <td>0.426667</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>hybrid25_cov25__u050__v3</td>
+      <td>hybrid25_cov25</td>
+      <td>0.50</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.323667</td>
+      <td>0.23</td>
+      <td>0.310</td>
+      <td>0.293196</td>
+      <td>0.188816</td>
+      <td>0.183974</td>
+      <td>0.186021</td>
+      <td>0.611667</td>
+      <td>2.60</td>
+      <td>0.501667</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>hybrid25_cov25__u035__v3</td>
+      <td>hybrid25_cov25</td>
+      <td>0.35</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.315794</td>
+      <td>0.22</td>
+      <td>0.340</td>
+      <td>0.309065</td>
+      <td>0.204524</td>
+      <td>0.171519</td>
+      <td>0.184315</td>
+      <td>0.663056</td>
+      <td>2.19</td>
+      <td>0.426667</td>
+    </tr>
+  </tbody>
+</table>
+</div>            configuration_id      descriptor  unmatched_cost  view_count  \
+0   hybrid50_cov25__u020__v3  hybrid50_cov25            0.20           3
+1   global_current__u020__v3  global_current            0.20           3
+2      local_cov05__u050__v3     local_cov05            0.50           3
+3   hybrid25_cov25__u020__v3  hybrid25_cov25            0.20           3
+4      local_cov50__u050__v3     local_cov50            0.50           3
+5      local_cov05__u020__v3     local_cov05            0.20           3
+6      local_cov50__u035__v3     local_cov50            0.35           3
+7      local_cov25__u050__v3     local_cov25            0.50           3
+8   hybrid75_cov25__u020__v3  hybrid75_cov25            0.20           3
+9   hybrid50_cov25__u050__v3  hybrid50_cov25            0.50           3
+10     local_cov50__u020__v3     local_cov50            0.20           3
+11     local_cov05__u035__v3     local_cov05            0.35           3
+12  hybrid75_cov25__u050__v3  hybrid75_cov25            0.50           3
+13     local_cov25__u035__v3     local_cov25            0.35           3
+14     local_cov25__u020__v3     local_cov25            0.20           3
+15  global_current__u050__v3  global_current            0.50           3
+16  hybrid75_cov25__u035__v3  hybrid75_cov25            0.35           3
+17  hybrid50_cov25__u035__v3  hybrid50_cov25            0.35           3
+18  global_current__u035__v3  global_current            0.35           3
+19  hybrid25_cov25__u050__v3  hybrid25_cov25            0.50           3
+20  hybrid25_cov25__u035__v3  hybrid25_cov25            0.35           3
+
+              method  scenes  asset_groups        ap  top1  recall_at_2  \
+0   forward_02_cov70     100            27  0.375897  0.31        0.335
+1   forward_02_cov70     100            27  0.374627  0.31        0.335
+2   forward_02_cov70     100            27  0.370083  0.30        0.365
+3   forward_02_cov70     100            27  0.365397  0.29        0.330
+4   forward_02_cov70     100            27  0.357333  0.28        0.350
+5   forward_02_cov70     100            27  0.351159  0.28        0.330
+6   forward_02_cov70     100            27  0.348083  0.28        0.350
+7   forward_02_cov70     100            27  0.355667  0.27        0.335
+8   forward_02_cov70     100            27  0.353560  0.27        0.325
+9   forward_02_cov70     100            27  0.347417  0.27        0.335
+10  forward_02_cov70     100            27  0.340956  0.27        0.310
+11  forward_02_cov70     100            27  0.339500  0.27        0.355
+12  forward_02_cov70     100            27  0.344750  0.26        0.320
+13  forward_02_cov70     100            27  0.337500  0.26        0.345
+14  forward_02_cov70     100            27  0.334159  0.26        0.305
+15  forward_02_cov70     100            27  0.343833  0.25        0.340
+16  forward_02_cov70     100            27  0.336417  0.25        0.340
+17  forward_02_cov70     100            27  0.331012  0.25        0.335
+18  forward_02_cov70     100            27  0.339835  0.24        0.355
+19  forward_02_cov70     100            27  0.323667  0.23        0.310
+20  forward_02_cov70     100            27  0.315794  0.22        0.340
+
+       auroc  identity_link_precision  identity_link_recall  identity_link_f1  \
+0   0.397954                 0.205782              0.113974          0.139612
+1   0.403671                 0.197740              0.095571          0.121122
+2   0.346250                 0.209516              0.206483          0.207789
+3   0.393058                 0.201177              0.099571          0.126531
+4   0.333155                 0.211047              0.207880          0.209220
+5   0.368426                 0.205510              0.129021          0.152857
+6   0.332613                 0.202532              0.181369          0.190040
+7   0.327321                 0.206356              0.203189          0.204529
+8   0.386191                 0.199722              0.116406          0.140021
+9   0.313405                 0.200936              0.196094          0.198140
+10  0.363021                 0.213512              0.123649          0.149000
+11  0.334030                 0.203892              0.185020          0.192895
+12  0.312696                 0.204531              0.200673          0.202299
+13  0.329363                 0.206598              0.184615          0.193763
+14  0.351251                 0.215488              0.128982          0.154077
+15  0.318280                 0.190754              0.184966          0.187458
+16  0.329071                 0.208565              0.186024          0.195305
+17  0.316940                 0.199094              0.175603          0.185172
+18  0.335573                 0.212644              0.173899          0.188789
+19  0.293196                 0.188816              0.183974          0.186021
+20  0.309065                 0.204524              0.171519          0.184315
+
+    identity_track_purity  winner_support  winner_purity
+0                0.842944            1.44       0.490000
+1                0.858556            1.37       0.530000
+2                0.610278            2.69       0.526667
+3                0.835500            1.38       0.500000
+4                0.634167            2.67       0.521667
+5                0.807500            1.52       0.458333
+6                0.655278            2.32       0.486667
+7                0.627778            2.67       0.508333
+8                0.816111            1.47       0.441667
+9                0.625000            2.61       0.518333
+10               0.815000            1.48       0.446667
+11               0.648333            2.32       0.481667
+12               0.628889            2.67       0.510000
+13               0.664167            2.34       0.495000
+14               0.808889            1.48       0.445000
+15               0.617778            2.59       0.515000
+16               0.665556            2.30       0.471667
+17               0.679444            2.22       0.446667
+18               0.687222            2.10       0.426667
+19               0.611667            2.60       0.501667
+20               0.663056            2.19       0.426667
+
+[cell 15]
+identity_refinement_summary.csv
+
+[cell 15]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>configuration_id</th>
+      <th>descriptor</th>
+      <th>unmatched_cost</th>
+      <th>view_count</th>
+      <th>method</th>
+      <th>scenes</th>
+      <th>asset_groups</th>
+      <th>ap</th>
+      <th>top1</th>
+      <th>recall_at_2</th>
+      <th>auroc</th>
+      <th>identity_link_precision</th>
+      <th>identity_link_recall</th>
+      <th>identity_link_f1</th>
+      <th>identity_track_purity</th>
+      <th>winner_support</th>
+      <th>winner_purity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.429790</td>
+      <td>0.33</td>
+      <td>0.390</td>
+      <td>0.439851</td>
+      <td>0.107833</td>
+      <td>0.059167</td>
+      <td>0.072437</td>
+      <td>0.920000</td>
+      <td>1.20</td>
+      <td>0.735000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>P2_consensus</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.416143</td>
+      <td>0.31</td>
+      <td>0.390</td>
+      <td>0.425071</td>
+      <td>0.107833</td>
+      <td>0.059167</td>
+      <td>0.072437</td>
+      <td>0.920000</td>
+      <td>1.21</td>
+      <td>0.685000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.460242</td>
+      <td>0.39</td>
+      <td>0.430</td>
+      <td>0.458291</td>
+      <td>0.107833</td>
+      <td>0.059167</td>
+      <td>0.072437</td>
+      <td>0.920000</td>
+      <td>1.23</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>forward_10_cov0</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.453444</td>
+      <td>0.36</td>
+      <td>0.410</td>
+      <td>0.453889</td>
+      <td>0.107833</td>
+      <td>0.059167</td>
+      <td>0.072437</td>
+      <td>0.920000</td>
+      <td>1.22</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>global_current__u020__v3</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>3</td>
+      <td>P1_current</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.345850</td>
+      <td>0.27</td>
+      <td>0.290</td>
+      <td>0.371109</td>
+      <td>0.197740</td>
+      <td>0.095571</td>
+      <td>0.121122</td>
+      <td>0.858556</td>
+      <td>1.41</td>
+      <td>0.588333</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>247</th>
+      <td>local_cov50__u050__v3</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>3</td>
+      <td>forward_10_cov0</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.339750</td>
+      <td>0.24</td>
+      <td>0.310</td>
+      <td>0.309054</td>
+      <td>0.211047</td>
+      <td>0.207880</td>
+      <td>0.209220</td>
+      <td>0.634167</td>
+      <td>2.70</td>
+      <td>0.516667</td>
+    </tr>
+    <tr>
+      <th>248</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>P1_current</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.296667</td>
+      <td>0.19</td>
+      <td>0.315</td>
+      <td>0.286333</td>
+      <td>0.248404</td>
+      <td>0.241268</td>
+      <td>0.244491</td>
+      <td>0.514972</td>
+      <td>4.35</td>
+      <td>0.421000</td>
+    </tr>
+    <tr>
+      <th>249</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>P2_consensus</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.292917</td>
+      <td>0.18</td>
+      <td>0.310</td>
+      <td>0.282878</td>
+      <td>0.248404</td>
+      <td>0.241268</td>
+      <td>0.244491</td>
+      <td>0.514972</td>
+      <td>4.32</td>
+      <td>0.403833</td>
+    </tr>
+    <tr>
+      <th>250</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.343250</td>
+      <td>0.25</td>
+      <td>0.400</td>
+      <td>0.355000</td>
+      <td>0.248404</td>
+      <td>0.241268</td>
+      <td>0.244491</td>
+      <td>0.514972</td>
+      <td>4.38</td>
+      <td>0.429500</td>
+    </tr>
+    <tr>
+      <th>251</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.303750</td>
+      <td>0.20</td>
+      <td>0.320</td>
+      <td>0.305250</td>
+      <td>0.248404</td>
+      <td>0.241268</td>
+      <td>0.244491</td>
+      <td>0.514972</td>
+      <td>4.37</td>
+      <td>0.422000</td>
+    </tr>
+  </tbody>
+</table>
+<p>252 rows × 17 columns</p>
+</div>             configuration_id      descriptor  unmatched_cost  view_count  \
+0    global_current__u020__v2  global_current             0.2           2
+1    global_current__u020__v2  global_current             0.2           2
+2    global_current__u020__v2  global_current             0.2           2
+3    global_current__u020__v2  global_current             0.2           2
+4    global_current__u020__v3  global_current             0.2           3
+..                        ...             ...             ...         ...
+247     local_cov50__u050__v3     local_cov50             0.5           3
+248     local_cov50__u050__v5     local_cov50             0.5           5
+249     local_cov50__u050__v5     local_cov50             0.5           5
+250     local_cov50__u050__v5     local_cov50             0.5           5
+251     local_cov50__u050__v5     local_cov50             0.5           5
+
+               method  scenes  asset_groups        ap  top1  recall_at_2  \
+0          P1_current     100            27  0.429790  0.33        0.390
+1        P2_consensus     100            27  0.416143  0.31        0.390
+2    forward_02_cov70     100            27  0.460242  0.39        0.430
+3     forward_10_cov0     100            27  0.453444  0.36        0.410
+4          P1_current     100            27  0.345850  0.27        0.290
+..                ...     ...           ...       ...   ...          ...
+247   forward_10_cov0     100            27  0.339750  0.24        0.310
+248        P1_current     100            27  0.296667  0.19        0.315
+249      P2_consensus     100            27  0.292917  0.18        0.310
+250  forward_02_cov70     100            27  0.343250  0.25        0.400
+251   forward_10_cov0     100            27  0.303750  0.20        0.320
+
+        auroc  identity_link_precision  identity_link_recall  \
+0    0.439851                 0.107833              0.059167
+1    0.425071                 0.107833              0.059167
+2    0.458291                 0.107833              0.059167
+3    0.453889                 0.107833              0.059167
+4    0.371109                 0.197740              0.095571
+..        ...                      ...                   ...
+247  0.309054                 0.211047              0.207880
+248  0.286333                 0.248404              0.241268
+249  0.282878                 0.248404              0.241268
+250  0.355000                 0.248404              0.241268
+251  0.305250                 0.248404              0.241268
+
+     identity_link_f1  identity_track_purity  winner_support  winner_purity
+0            0.072437               0.920000            1.20       0.735000
+1            0.072437               0.920000            1.21       0.685000
+2            0.072437               0.920000            1.23       0.750000
+3            0.072437               0.920000            1.22       0.750000
+4            0.121122               0.858556            1.41       0.588333
+..                ...                    ...             ...            ...
+247          0.209220               0.634167            2.70       0.516667
+248          0.244491               0.514972            4.35       0.421000
+249          0.244491               0.514972            4.32       0.403833
+250          0.244491               0.514972            4.38       0.429500
+251          0.244491               0.514972            4.37       0.422000
+
+[252 rows x 17 columns]
+
+[cell 15]
+paired_asset_intervals.csv
+
+[cell 15]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>view_count</th>
+      <th>method</th>
+      <th>measure</th>
+      <th>candidate</th>
+      <th>baseline</th>
+      <th>difference</th>
+      <th>ci_low</th>
+      <th>ci_high</th>
+      <th>asset_groups</th>
+      <th>scenes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>ap</td>
+      <td>global_current__u020__v2</td>
+      <td>global_current__u035__v2</td>
+      <td>0.104944</td>
+      <td>0.036477</td>
+      <td>0.172819</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>ap</td>
+      <td>global_current__u050__v2</td>
+      <td>global_current__u035__v2</td>
+      <td>-0.064179</td>
+      <td>-0.110882</td>
+      <td>-0.021333</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>ap</td>
+      <td>hybrid25_cov25__u020__v2</td>
+      <td>global_current__u035__v2</td>
+      <td>0.090944</td>
+      <td>0.026746</td>
+      <td>0.163500</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>ap</td>
+      <td>hybrid25_cov25__u035__v2</td>
+      <td>global_current__u035__v2</td>
+      <td>-0.007262</td>
+      <td>-0.034014</td>
+      <td>0.013093</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>ap</td>
+      <td>hybrid25_cov25__u050__v2</td>
+      <td>global_current__u035__v2</td>
+      <td>-0.095012</td>
+      <td>-0.152320</td>
+      <td>-0.043111</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>715</th>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>identity_link_f1</td>
+      <td>local_cov25__u035__v5</td>
+      <td>global_current__u035__v5</td>
+      <td>0.000629</td>
+      <td>-0.014657</td>
+      <td>0.014919</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>716</th>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>identity_link_f1</td>
+      <td>local_cov25__u050__v5</td>
+      <td>global_current__u035__v5</td>
+      <td>0.014877</td>
+      <td>-0.001466</td>
+      <td>0.030073</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>717</th>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>identity_link_f1</td>
+      <td>local_cov50__u020__v5</td>
+      <td>global_current__u035__v5</td>
+      <td>-0.060442</td>
+      <td>-0.079555</td>
+      <td>-0.041390</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>718</th>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>identity_link_f1</td>
+      <td>local_cov50__u035__v5</td>
+      <td>global_current__u035__v5</td>
+      <td>-0.000048</td>
+      <td>-0.016444</td>
+      <td>0.015140</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>719</th>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>identity_link_f1</td>
+      <td>local_cov50__u050__v5</td>
+      <td>global_current__u035__v5</td>
+      <td>0.011862</td>
+      <td>-0.003239</td>
+      <td>0.027003</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+<p>720 rows × 10 columns</p>
+</div>     view_count           method           measure                 candidate  \
+0             2       P1_current                ap  global_current__u020__v2
+1             2       P1_current                ap  global_current__u050__v2
+2             2       P1_current                ap  hybrid25_cov25__u020__v2
+3             2       P1_current                ap  hybrid25_cov25__u035__v2
+4             2       P1_current                ap  hybrid25_cov25__u050__v2
+..          ...              ...               ...                       ...
+715           5  forward_10_cov0  identity_link_f1     local_cov25__u035__v5
+716           5  forward_10_cov0  identity_link_f1     local_cov25__u050__v5
+717           5  forward_10_cov0  identity_link_f1     local_cov50__u020__v5
+718           5  forward_10_cov0  identity_link_f1     local_cov50__u035__v5
+719           5  forward_10_cov0  identity_link_f1     local_cov50__u050__v5
+
+                     baseline  difference    ci_low   ci_high  asset_groups  \
+0    global_current__u035__v2    0.104944  0.036477  0.172819            27
+1    global_current__u035__v2   -0.064179 -0.110882 -0.021333            27
+2    global_current__u035__v2    0.090944  0.026746  0.163500            27
+3    global_current__u035__v2   -0.007262 -0.034014  0.013093            27
+4    global_current__u035__v2   -0.095012 -0.152320 -0.043111            27
+..                        ...         ...       ...       ...           ...
+715  global_current__u035__v5    0.000629 -0.014657  0.014919            27
+716  global_current__u035__v5    0.014877 -0.001466  0.030073            27
+717  global_current__u035__v5   -0.060442 -0.079555 -0.041390            27
+718  global_current__u035__v5   -0.000048 -0.016444  0.015140            27
+719  global_current__u035__v5    0.011862 -0.003239  0.027003            27
+
+     scenes
+0       100
+1       100
+2       100
+3       100
+4       100
+..      ...
+715     100
+716     100
+717     100
+718     100
+719     100
+
+[720 rows x 10 columns]
+
+[cell 15]
+patch_fallback_summary.csv
+
+[cell 15]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>coverage</th>
+      <th>fallback_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>coverage_0.05</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>coverage_0.25</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>coverage_0.50</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>        coverage  fallback_count
+0  coverage_0.05               0
+1  coverage_0.25               0
+2  coverage_0.50               0
+
+[cell 15]
+category_summary.csv
+
+[cell 15]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>configuration_id</th>
+      <th>descriptor</th>
+      <th>unmatched_cost</th>
+      <th>view_count</th>
+      <th>method</th>
+      <th>category</th>
+      <th>ap</th>
+      <th>top1</th>
+      <th>identity_link_f1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>apple</td>
+      <td>0.375000</td>
+      <td>0.250000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>bottle</td>
+      <td>0.166667</td>
+      <td>0.000000</td>
+      <td>0.083333</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>bowl</td>
+      <td>0.833333</td>
+      <td>0.666667</td>
+      <td>0.111111</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>bread</td>
+      <td>0.431548</td>
+      <td>0.250000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>bunny</td>
+      <td>0.166667</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>6799</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>monkey</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.144841</td>
+    </tr>
+    <tr>
+      <th>6800</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>mouse</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.204074</td>
+    </tr>
+    <tr>
+      <th>6801</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>orange</td>
+      <td>0.333333</td>
+      <td>0.333333</td>
+      <td>0.188333</td>
+    </tr>
+    <tr>
+      <th>6802</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>pig</td>
+      <td>0.500000</td>
+      <td>0.333333</td>
+      <td>0.218333</td>
+    </tr>
+    <tr>
+      <th>6803</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>shark</td>
+      <td>0.083333</td>
+      <td>0.000000</td>
+      <td>0.187500</td>
+    </tr>
+  </tbody>
+</table>
+<p>6804 rows × 9 columns</p>
+</div>              configuration_id      descriptor  unmatched_cost  view_count  \
+0     global_current__u020__v2  global_current             0.2           2
+1     global_current__u020__v2  global_current             0.2           2
+2     global_current__u020__v2  global_current             0.2           2
+3     global_current__u020__v2  global_current             0.2           2
+4     global_current__u020__v2  global_current             0.2           2
+...                        ...             ...             ...         ...
+6799     local_cov50__u050__v5     local_cov50             0.5           5
+6800     local_cov50__u050__v5     local_cov50             0.5           5
+6801     local_cov50__u050__v5     local_cov50             0.5           5
+6802     local_cov50__u050__v5     local_cov50             0.5           5
+6803     local_cov50__u050__v5     local_cov50             0.5           5
+
+               method category        ap      top1  identity_link_f1
+0          P1_current    apple  0.375000  0.250000          0.000000
+1          P1_current   bottle  0.166667  0.000000          0.083333
+2          P1_current     bowl  0.833333  0.666667          0.111111
+3          P1_current    bread  0.431548  0.250000          0.000000
+4          P1_current    bunny  0.166667  0.000000          0.000000
+...               ...      ...       ...       ...               ...
+6799  forward_10_cov0   monkey  0.000000  0.000000          0.144841
+6800  forward_10_cov0    mouse  0.000000  0.000000          0.204074
+6801  forward_10_cov0   orange  0.333333  0.333333          0.188333
+6802  forward_10_cov0      pig  0.500000  0.333333          0.218333
+6803  forward_10_cov0    shark  0.083333  0.000000          0.187500
+
+[6804 rows x 9 columns]
+
+[cell 15]
+family_summary.csv
+
+[cell 15]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>configuration_id</th>
+      <th>descriptor</th>
+      <th>unmatched_cost</th>
+      <th>view_count</th>
+      <th>method</th>
+      <th>families</th>
+      <th>ap</th>
+      <th>top1</th>
+      <th>identity_link_f1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>bump</td>
+      <td>0.550866</td>
+      <td>0.454545</td>
+      <td>0.074459</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>crack</td>
+      <td>0.425490</td>
+      <td>0.352941</td>
+      <td>0.043137</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>crack+disc</td>
+      <td>0.541667</td>
+      <td>0.750000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>crack+frac</td>
+      <td>0.495536</td>
+      <td>0.375000</td>
+      <td>0.091667</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>global_current__u020__v2</td>
+      <td>global_current</td>
+      <td>0.2</td>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>defr</td>
+      <td>0.166667</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2767</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>frac</td>
+      <td>0.473684</td>
+      <td>0.315789</td>
+      <td>0.269185</td>
+    </tr>
+    <tr>
+      <th>2768</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>miss</td>
+      <td>0.500000</td>
+      <td>0.375000</td>
+      <td>0.356944</td>
+    </tr>
+    <tr>
+      <th>2769</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>miss+tran</td>
+      <td>0.375000</td>
+      <td>0.500000</td>
+      <td>0.262500</td>
+    </tr>
+    <tr>
+      <th>2770</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>rota</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.162656</td>
+    </tr>
+    <tr>
+      <th>2771</th>
+      <td>local_cov50__u050__v5</td>
+      <td>local_cov50</td>
+      <td>0.5</td>
+      <td>5</td>
+      <td>forward_10_cov0</td>
+      <td>tran</td>
+      <td>0.250000</td>
+      <td>0.000000</td>
+      <td>0.224627</td>
+    </tr>
+  </tbody>
+</table>
+<p>2772 rows × 9 columns</p>
+</div>              configuration_id      descriptor  unmatched_cost  view_count  \
+0     global_current__u020__v2  global_current             0.2           2
+1     global_current__u020__v2  global_current             0.2           2
+2     global_current__u020__v2  global_current             0.2           2
+3     global_current__u020__v2  global_current             0.2           2
+4     global_current__u020__v2  global_current             0.2           2
+...                        ...             ...             ...         ...
+2767     local_cov50__u050__v5     local_cov50             0.5           5
+2768     local_cov50__u050__v5     local_cov50             0.5           5
+2769     local_cov50__u050__v5     local_cov50             0.5           5
+2770     local_cov50__u050__v5     local_cov50             0.5           5
+2771     local_cov50__u050__v5     local_cov50             0.5           5
+
+               method    families        ap      top1  identity_link_f1
+0          P1_current        bump  0.550866  0.454545          0.074459
+1          P1_current       crack  0.425490  0.352941          0.043137
+2          P1_current  crack+disc  0.541667  0.750000          0.000000
+3          P1_current  crack+frac  0.495536  0.375000          0.091667
+4          P1_current        defr  0.166667  0.000000          0.000000
+...               ...         ...       ...       ...               ...
+2767  forward_10_cov0        frac  0.473684  0.315789          0.269185
+2768  forward_10_cov0        miss  0.500000  0.375000          0.356944
+2769  forward_10_cov0   miss+tran  0.375000  0.500000          0.262500
+2770  forward_10_cov0        rota  0.000000  0.000000          0.162656
+2771  forward_10_cov0        tran  0.250000  0.000000          0.224627
+
+[2772 rows x 9 columns]
+
+[cell 15]
+{'baseline': 'global_current__u035__v3',
+ 'development_candidate': 'hybrid50_cov25__u020__v3',
+ 'primary_route': 'automatic masks, predicted identity, three views',
+ 'primary_scorer': 'forward_02_cov70',
+ 'promotion': 'No automatic promotion. Review intervals, identity quality, subgroups and galleries.',
+ 'protected_data_used': False,
+ 'split_changed': False,
+ 'status': 'review_required'}
+
+[cell 17]
+identity_vs_top1.png
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+primary_top1_comparison.png
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+identity_example_01.png : improvement
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+identity_example_02.png : improvement
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+identity_example_03.png : improvement
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+identity_example_04.png : improvement
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+identity_example_05.png : regression
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+identity_example_06.png : regression
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+identity_example_07.png : regression
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+identity_example_08.png : regression
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+identity_example_09.png : fixed_hash_sample
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+identity_example_10.png : fixed_hash_sample
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+identity_example_11.png : fixed_hash_sample
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 17]
+identity_example_12.png : fixed_hash_sample
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 19]
+ClearML secrets are unavailable. Preserve the outputs and enable the existing notebook secrets.
+
+[cell 21]
+Prediction evidence: /kaggle/working/identity-refinement-predictions
+Evaluation evidence: /kaggle/working/identity-refinement-evaluation
+Recovery archive: /kaggle/working/identity-refinement-predictions-recovery.zip
+The development decision remains pending manual review.
+
+[cell 23]
+Disposable directories removed. Scientific evidence is unchanged.
