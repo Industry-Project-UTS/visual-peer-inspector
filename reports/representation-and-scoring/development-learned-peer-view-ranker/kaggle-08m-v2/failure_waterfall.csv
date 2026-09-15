@@ -1,0 +1,7 @@
+stage,count
+scenes_evaluated,100
+anomaly_not_rankable,29
+unique_correct_top1,33
+unique_wrong_top1,26
+tied_top_with_anomaly,10
+tied_top_without_anomaly,2

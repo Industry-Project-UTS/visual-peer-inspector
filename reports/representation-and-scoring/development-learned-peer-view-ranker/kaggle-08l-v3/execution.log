@@ -1,0 +1,149 @@
+Stage: 08L Kaggle Version 3
+Status: completed
+Clean notebook: 08l-development-learned-peer-view-features.ipynb
+Clean notebook SHA-256: d64b31f66f67c6563fa40d942cd28c050bbdc05d61e270936ee7d485258910c9
+Downloaded saved-output SHA-256: 13ebde3b802f85829e9fac444e1a3e2ce67144db71f9d75a157d59ac89f65382
+Executed code cells: 5
+Retained output blocks: 8
+Retained safe visuals: 0
+Removed private visuals: 0
+
+Sanitised execution transcript
+==============================
+
+[cell 2]
+{"event": "preflight_complete", "runtime_versions": {"matplotlib": "3.10.0", "numpy": "2.0.2", "pandas": "2.3.3", "pillow": "11.3.0", "scipy": "1.16.3"}, "scoring_lock_sha256": "12ce9bfc2bb401c29621d91000c53ff4fd39504fc28e55ff8a921e0b5443690d", "scoring_root": "/kaggle/input/notebooks/esreekarreddy/toysad-8k-development-scoring-comparison-full/scoring-comparison-08g", "source_root": "/kaggle/input/datasets/esreekarreddy/vpi-learned-peer-view-source/learned-peer-view-source-v1/learned-peer-view-source", "stage": "notebook-08l"}
+
+[cell 4]
+{'event': 'feature_checkpoint', 'completed': 10, 'expected': 100, 'reused': 0}
+{'event': 'feature_checkpoint', 'completed': 20, 'expected': 100, 'reused': 0}
+{'event': 'feature_checkpoint', 'completed': 30, 'expected': 100, 'reused': 0}
+{'event': 'feature_checkpoint', 'completed': 40, 'expected': 100, 'reused': 0}
+{'event': 'feature_checkpoint', 'completed': 50, 'expected': 100, 'reused': 0}
+{'event': 'feature_checkpoint', 'completed': 60, 'expected': 100, 'reused': 0}
+{'event': 'feature_checkpoint', 'completed': 70, 'expected': 100, 'reused': 0}
+{'event': 'feature_checkpoint', 'completed': 80, 'expected': 100, 'reused': 0}
+{'event': 'feature_checkpoint', 'completed': 90, 'expected': 100, 'reused': 0}
+{'event': 'feature_checkpoint', 'completed': 100, 'expected': 100, 'reused': 0}
+{"binding_sha256": "e673866686549de6fc7fcf3c14185b1c5aee0c6f93405e701c506c72ca308ae5", "event": "feature_preparation_complete", "feature_count": 68, "feature_lock_sha256": "b39a1ca6b37ab238f74c969d5234a748cc6c5969780bc6ab5356d5ef31484301", "locked_files": 204, "reused_scenes": 0, "scene_count": 100}
+
+[cell 4]
+CompletedProcess(args=['/usr/bin/python3', '/kaggle/input/datasets/esreekarreddy/vpi-learned-peer-view-source/learned-peer-view-source-v1/learned-peer-view-source/scripts/run_metric_feature_preparation.py', '--scoring-root', '/kaggle/input/notebooks/esreekarreddy/toysad-8k-development-scoring-comparison-full/scoring-comparison-08g', '--output', '/kaggle/working/learned-peer-features-08l'], returncode=0)
+
+[cell 6]
+Counter({'locked_files': 204, 'scene_files': 100, 'feature_count': 68})
+
+[cell 6]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature_index</th>
+      <th>feature</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>rank_B0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>robust_z_B0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>available_B0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>rank_B1_control</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>robust_z_B1_control</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>63</th>
+      <td>63</td>
+      <td>cross_similarity_fraction_ge_070</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>64</td>
+      <td>cross_anomaly_support_mean</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>65</td>
+      <td>cross_anomaly_support_max</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>66</td>
+      <td>view_count</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>67</td>
+      <td>log_view_count</td>
+    </tr>
+  </tbody>
+</table>
+<p>68 rows × 2 columns</p>
+</div>    feature_index                           feature
+0               0                           rank_B0
+1               1                       robust_z_B0
+2               2                      available_B0
+3               3                   rank_B1_control
+4               4               robust_z_B1_control
+..            ...                               ...
+63             63  cross_similarity_fraction_ge_070
+64             64        cross_anomaly_support_mean
+65             65         cross_anomaly_support_max
+66             66                        view_count
+67             67                    log_view_count
+
+[68 rows x 2 columns]
+
+[cell 8]
+{"archive": "learned-peer-features-08l-downstream.zip", "bytes": 9737831, "sha256": "35080f93349836d7201bb8eb1981715396704f4fe81129edafc172497ae019f1"}
+{"event": "metric_stage_packaged", "repository": {"bytes": 2189, "file": "learned-peer-features-08l-repository-evidence.zip", "members": 2, "sha256": "9fb280869303f63edd617045c8f3f8d5874cbb1018f974717d14604be04ff5d4"}, "review": {"bytes": 2189, "file": "learned-peer-features-08l-review-evidence.zip", "members": 2, "sha256": "9fb280869303f63edd617045c8f3f8d5874cbb1018f974717d14604be04ff5d4"}, "schema_version": "metric-stage-package/v1"}
+
+[cell 8]
+{'repository': {'bytes': 2189,
+  'file': 'learned-peer-features-08l-repository-evidence.zip',
+  'members': 2,
+  'sha256': '9fb280869303f63edd617045c8f3f8d5874cbb1018f974717d14604be04ff5d4'},
+ 'review': {'bytes': 2189,
+  'file': 'learned-peer-features-08l-review-evidence.zip',
+  'members': 2,
+  'sha256': '9fb280869303f63edd617045c8f3f8d5874cbb1018f974717d14604be04ff5d4'},
+ 'schema_version': 'metric-stage-package/v1'}
+
+[cell 10]
+{"event": "tracking_finished", "status": "failed"}

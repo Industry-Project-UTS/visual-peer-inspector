@@ -1,0 +1,13 @@
+{
+  "clean_notebook_sha256": "4f6784d1c07b0a785c3e792d6bd075a202a9f584a5fc95c31a388309abf15b9a",
+  "downloaded_saved_output_sha256": "de144b50a36f8d39cfacf811369f419fcdaa7750fed5d1205e53f1cf517153c8",
+  "executed_code_cells": 10,
+  "label": "08K Kaggle Version 3",
+  "published_log_sha256": "b787296efeb7d8b71b622168e321b5d277487895eb3e55e16367cadaea92e3a0",
+  "published_notebook_sha256": "b342805c106da51f9d4ce03bb6cf139e295897b1874dc20ce6a943011a81ea55",
+  "removed_private_visuals": 15,
+  "retained_output_blocks": 57,
+  "retained_safe_visuals": 0,
+  "schema_version": 1,
+  "status": "completed"
+}
