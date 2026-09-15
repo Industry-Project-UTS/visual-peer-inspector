@@ -1,0 +1,32 @@
+{
+  "artifact_hashes": {
+    "cpu-primary-2-3-5/aggregate_lock.json": "fc170f4a63e7900503ddde589c13f8ae6a84d692d548c60bf47617a2399a7521",
+    "cpu-primary-2-3-5/metric_summary.csv": "88eae0a12fd3cfb596932a745c4b97eab0926277d7507f47f1038d67eb192332",
+    "cpu-primary-2-3-5/receipt.json": "4649b8de79a0e5421887ecc94bc37b940709ccaca545c986769c7ed7ef54b1b7",
+    "cpu-primary-2-3-5/summary.md": "4a29bbdbe1bba2e045bae1b145e6bb409470c01bca6e01413b44bc3ebce45af1",
+    "real-cpu-dino-smoke.json": "3af22e1e52630ad93a3ee1edf6a2b75e97b421b0dcd5948e152bfd7bf6a335e2",
+    "selected_primary_top1.csv": "069f02116a427a1160990c45405bac612a2b7722dcfd7160520bbaecfc72ee5d",
+    "selected_primary_top1.png": "16a6d631fc5b301110c53c6d61211807a6b77f3f8c9d45e0ea9ccb9e930784e3",
+    "selected_primary_top1.receipt.json": "022e5bee932cb427163d8839a9a61e90572f6481ffccbb3e0f7163ab6cb33a93"
+  },
+  "binding_sha256": "ed15367fa780e23b5ac5d1acc95f00752fc389fd28fe13599f03c2a63e8e3473",
+  "remote_artifacts_verified": true,
+  "scientific_lock_hashes": {
+    "09e_reference_publication": "1c7a248d749090c2bb1319c74fb7d3d3c33ca5a343cbecd656883aa59ed847e4",
+    "cpu_aggregate": "fc170f4a63e7900503ddde589c13f8ae6a84d692d548c60bf47617a2399a7521"
+  },
+  "status": "completed",
+  "task_id": "d4ce88534c54487a91bbbff8836d10fa",
+  "task_name": "Web app CPU development revalidation \u00b7 primary 2/3/5 [ed15367fa780e23b]",
+  "task_url": "https://app.clear.ml/projects/62a09a229f184cb7bbe50da59b4226e7/experiments/d4ce88534c54487a91bbbff8836d10fa/output/log",
+  "uploaded": {
+    "cpu-primary-2-3-5/aggregate_lock.json": "fc170f4a63e7900503ddde589c13f8ae6a84d692d548c60bf47617a2399a7521",
+    "cpu-primary-2-3-5/metric_summary.csv": "88eae0a12fd3cfb596932a745c4b97eab0926277d7507f47f1038d67eb192332",
+    "cpu-primary-2-3-5/receipt.json": "4649b8de79a0e5421887ecc94bc37b940709ccaca545c986769c7ed7ef54b1b7",
+    "cpu-primary-2-3-5/summary.md": "4a29bbdbe1bba2e045bae1b145e6bb409470c01bca6e01413b44bc3ebce45af1",
+    "real-cpu-dino-smoke.json": "3af22e1e52630ad93a3ee1edf6a2b75e97b421b0dcd5948e152bfd7bf6a335e2",
+    "selected_primary_top1.csv": "069f02116a427a1160990c45405bac612a2b7722dcfd7160520bbaecfc72ee5d",
+    "selected_primary_top1.png": "16a6d631fc5b301110c53c6d61211807a6b77f3f8c9d45e0ea9ccb9e930784e3",
+    "selected_primary_top1.receipt.json": "022e5bee932cb427163d8839a9a61e90572f6481ffccbb3e0f7163ab6cb33a93"
+  }
+}

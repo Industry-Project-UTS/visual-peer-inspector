@@ -1,0 +1,616 @@
+Stage: 09E existing development100 and remaining-cohort readiness
+Status: completed
+Clean notebook: 09e-remaining-cohort-readiness-and-evidence.ipynb
+Clean notebook SHA-256: 4e9f78af0316d4bff6ea8269674ce357bbec2f609c9256c8c6fc16ef0ab83f8b
+Downloaded saved-output SHA-256: f9b5c7c0719f9f46704a4597f997b4984c9b2622b4a16fd6e6d1c878ab78b430
+Executed code cells: 6
+Retained output blocks: 28
+Retained safe visuals: 7
+Removed private visuals: 24
+
+Sanitised execution transcript
+==============================
+
+[cell 4]
+{'schema': 'vpi-remaining-evaluation-workbench/v1',
+ 'status': 'development_evidence_prepared',
+ 'evaluated_scenes': 100,
+ 'asset_groups': 27,
+ 'original_role_scene_count': 2000,
+ 'new_protected_evaluations': 0,
+ 'protected_execution_ready': False,
+ 'neural_inference_run': False,
+ 'registered_condition_rows': 116,
+ 'table_count': 7,
+ 'current_methods': {'automatic': 'winner_cluster_consensus',
+  'assisted': 'object_bank_top2'},
+ 'protected_blockers': ['resolved asset-exposure ledger',
+  'current-method cohort prediction/evaluation adapters'],
+ 'scope': 'original roles retained; actual completed evidence is the existing development100 only'}
+
+[cell 4]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>source_stage</th>
+      <th>route</th>
+      <th>method</th>
+      <th>view_count</th>
+      <th>correspondence</th>
+      <th>regions</th>
+      <th>report_status</th>
+      <th>development_evidence</th>
+      <th>full_role_compatibility</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>08O</td>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>predicted</td>
+      <td>predicted masks</td>
+      <td>development comparison; not selected</td>
+      <td>verified 100 scenes / 27 assets</td>
+      <td>not yet verified</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>08O</td>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>2</td>
+      <td>predicted</td>
+      <td>predicted masks</td>
+      <td>development comparison; not selected</td>
+      <td>verified 100 scenes / 27 assets</td>
+      <td>not yet verified</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>08O</td>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>3</td>
+      <td>predicted</td>
+      <td>predicted masks</td>
+      <td>development comparison; not selected</td>
+      <td>verified 100 scenes / 27 assets</td>
+      <td>not yet verified</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>08O</td>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>5</td>
+      <td>predicted</td>
+      <td>predicted masks</td>
+      <td>development comparison; not selected</td>
+      <td>verified 100 scenes / 27 assets</td>
+      <td>not yet verified</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>08O</td>
+      <td>automatic_predicted</td>
+      <td>cached_forward_top2</td>
+      <td>1</td>
+      <td>predicted</td>
+      <td>predicted masks</td>
+      <td>development comparison; not selected</td>
+      <td>verified 100 scenes / 27 assets</td>
+      <td>not yet verified</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>111</th>
+      <td>08P</td>
+      <td>automatic_predicted</td>
+      <td>global_partial_assignment</td>
+      <td>5</td>
+      <td>predicted</td>
+      <td>predicted masks</td>
+      <td>development comparison; not selected</td>
+      <td>verified 100 scenes / 27 assets</td>
+      <td>not yet verified</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>08P</td>
+      <td>automatic_predicted</td>
+      <td>winner_cluster_consensus</td>
+      <td>1</td>
+      <td>predicted</td>
+      <td>predicted masks</td>
+      <td>frozen automatic baseline</td>
+      <td>verified 100 scenes / 27 assets</td>
+      <td>not yet verified</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>08P</td>
+      <td>automatic_predicted</td>
+      <td>winner_cluster_consensus</td>
+      <td>2</td>
+      <td>predicted</td>
+      <td>predicted masks</td>
+      <td>frozen automatic baseline</td>
+      <td>verified 100 scenes / 27 assets</td>
+      <td>not yet verified</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>08P</td>
+      <td>automatic_predicted</td>
+      <td>winner_cluster_consensus</td>
+      <td>3</td>
+      <td>predicted</td>
+      <td>predicted masks</td>
+      <td>frozen automatic baseline</td>
+      <td>verified 100 scenes / 27 assets</td>
+      <td>not yet verified</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>08P</td>
+      <td>automatic_predicted</td>
+      <td>winner_cluster_consensus</td>
+      <td>5</td>
+      <td>predicted</td>
+      <td>predicted masks</td>
+      <td>frozen automatic baseline</td>
+      <td>verified 100 scenes / 27 assets</td>
+      <td>not yet verified</td>
+    </tr>
+  </tbody>
+</table>
+<p>116 rows × 9 columns</p>
+</div>    source_stage                route                     method  view_count  \
+0            08O  automatic_predicted        cached_forward_mean           1
+1            08O  automatic_predicted        cached_forward_mean           2
+2            08O  automatic_predicted        cached_forward_mean           3
+3            08O  automatic_predicted        cached_forward_mean           5
+4            08O  automatic_predicted        cached_forward_top2           1
+..           ...                  ...                        ...         ...
+111          08P  automatic_predicted  global_partial_assignment           5
+112          08P  automatic_predicted   winner_cluster_consensus           1
+113          08P  automatic_predicted   winner_cluster_consensus           2
+114          08P  automatic_predicted   winner_cluster_consensus           3
+115          08P  automatic_predicted   winner_cluster_consensus           5
+
+    correspondence          regions                         report_status  \
+0        predicted  predicted masks  development comparison; not selected
+1        predicted  predicted masks  development comparison; not selected
+2        predicted  predicted masks  development comparison; not selected
+3        predicted  predicted masks  development comparison; not selected
+4        predicted  predicted masks  development comparison; not selected
+..             ...              ...                                   ...
+111      predicted  predicted masks  development comparison; not selected
+112      predicted  predicted masks             frozen automatic baseline
+113      predicted  predicted masks             frozen automatic baseline
+114      predicted  predicted masks             frozen automatic baseline
+115      predicted  predicted masks             frozen automatic baseline
+
+                development_evidence full_role_compatibility
+0    verified 100 scenes / 27 assets        not yet verified
+1    verified 100 scenes / 27 assets        not yet verified
+2    verified 100 scenes / 27 assets        not yet verified
+3    verified 100 scenes / 27 assets        not yet verified
+4    verified 100 scenes / 27 assets        not yet verified
+..                               ...                     ...
+111  verified 100 scenes / 27 assets        not yet verified
+112  verified 100 scenes / 27 assets        not yet verified
+113  verified 100 scenes / 27 assets        not yet verified
+114  verified 100 scenes / 27 assets        not yet verified
+115  verified 100 scenes / 27 assets        not yet verified
+
+[116 rows x 9 columns]
+
+[cell 4]
+{'files': {'run_binding.json': '44c1d1f3e7124abe2266c8f86364f00f04830e5a131c26893ebc0582e170524a',
+  'shareable/anomaly_count_summary.csv': '3be4d261cdb537eaaf09215e85dcd4fa647f3ca1e0a7972daaf4abe9accb2782',
+  'shareable/cohort_readiness.csv': '95d066bb809ef526ff20ba3eb442755f64b692e6ffab46ec346a4dfc09b9c933',
+  'shareable/current_method_freeze.json': '41ace7cfdba797d7bc2cf984b75bb5cca020eb6f68cb0548b7767e5db96201a4',
+  'shareable/failure_summary.csv': 'a3901bf1531c03e488344fe04ec4f52390421d74de030157b614ca9092e5be06',
+  'shareable/identity_summary.csv': 'd57a33429732a2f1e1cc8f240e09c053aec82cb815fe4197bcf393de9d7dde78',
+  'shareable/majority_summary.csv': '4643d122baa920ab32070103e8cd6f26166d91126d6cee3b1defb786e5735ca0',
+  'shareable/metric_summary.csv': '3b172182d7f1f4b80f84b37dc319f5c5add1a3aadc1a0b7540c998a5c3e0d870',
+  'shareable/paired_asset_intervals.csv': '0e74c2353cbb47ceed858c7029e7b16b457fff101e5d13f1976da052a828b5a8',
+  'shareable/resource_recipe.json': 'a3b25407ec5e19b13ea7fd46442ffbf7869538addeb7c87ac846cd87ce86756b',
+  'shareable/technique_feature_matrix.csv': '104f1216a9fd846ccfa36a8f3c5a00523d47b4258931c16e5e0e6d43e9f95d90',
+  'shareable/view_schedule_summary.csv': '90b5fd4ffa31ce13236a21cb8ee48c0c8e4982d0a87d8baad83c7fd018fedfa5',
+  'shareable/workbench_receipt.json': '4882e29146b08f33b0c907a4b3f8f25f349f20bee70009e476e1d532b2497c6c'},
+ 'metadata': {'protected_execution_ready': False,
+  'schema': 'vpi-remaining-evaluation-workbench/v1',
+  'scientific_status': 'development_evidence_prepared'},
+ 'schema': 1}
+
+[cell 6]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>role</th>
+      <th>scene_count</th>
+      <th>asset_group_count</th>
+      <th>membership_sha256</th>
+      <th>exposure_status</th>
+      <th>current_method_adapter</th>
+      <th>execution_ready</th>
+      <th>action</th>
+      <th>current_scoring_evaluated_scenes</th>
+      <th>scenes_without_current_scoring_verification</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>development</td>
+      <td>1000</td>
+      <td>273</td>
+      <td>00e400350a056631778bd9c4dace1667d95e52bf58c0a2...</td>
+      <td>EXPOSURE_LEDGER_MISSING</td>
+      <td>not_implemented_for_full_role</td>
+      <td>False</td>
+      <td>EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...</td>
+      <td>100</td>
+      <td>900</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>calibration</td>
+      <td>600</td>
+      <td>163</td>
+      <td>6700bb065210bfd45188babd2b3d45973d6b4f57e5066d...</td>
+      <td>EXPOSURE_LEDGER_MISSING</td>
+      <td>not_implemented_for_full_role</td>
+      <td>False</td>
+      <td>EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...</td>
+      <td>0</td>
+      <td>600</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>internal_lock</td>
+      <td>400</td>
+      <td>109</td>
+      <td>819f21f49705f9398c809002905abe52b8305ad41e4cab...</td>
+      <td>EXPOSURE_LEDGER_MISSING</td>
+      <td>not_implemented_for_full_role</td>
+      <td>False</td>
+      <td>EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...</td>
+      <td>0</td>
+      <td>400</td>
+    </tr>
+  </tbody>
+</table>
+</div>            role  scene_count  asset_group_count  \
+0    development         1000                273
+1    calibration          600                163
+2  internal_lock          400                109
+
+                                   membership_sha256          exposure_status  \
+0  00e400350a056631778bd9c4dace1667d95e52bf58c0a2...  EXPOSURE_LEDGER_MISSING
+1  6700bb065210bfd45188babd2b3d45973d6b4f57e5066d...  EXPOSURE_LEDGER_MISSING
+2  819f21f49705f9398c809002905abe52b8305ad41e4cab...  EXPOSURE_LEDGER_MISSING
+
+          current_method_adapter  execution_ready  \
+0  not_implemented_for_full_role            False
+1  not_implemented_for_full_role            False
+2  not_implemented_for_full_role            False
+
+                                              action  \
+0  EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...
+1  EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...
+2  EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...
+
+   current_scoring_evaluated_scenes  \
+0                               100
+1                                 0
+2                                 0
+
+   scenes_without_current_scoring_verification
+0                                          900
+1                                          600
+2                                          400
+
+[cell 6]
+{'adapter_status': 'generic current-method cached prediction hook implemented; actual role cache/resource bridges and new protected evaluator adapters not implemented; legacy P1 contracts remain guarded',
+ 'assisted_provenance': ['dataset_reference', 'user_confirmed'],
+ 'cached_prediction_hook': {'adapter': 'visual_peer_inspector.web.decision.decide_cached',
+  'asset_attribution': 'native scene-to-asset resource bridge is still unimplemented; declared asset count alone does not verify attribution',
+  'membership_validation': 'recompute canonical sorted opaque-scene membership hash from actual scene IDs and compare with original model-facing role hash',
+  'module': 'vpi_remaining_evaluation.cohort.predict_cached_cohort',
+  'per_scene': ['scene',
+   'score_rows by selected view',
+   'bank_observations with foreground patches',
+   'correspondence_provenance'],
+  'required_manifest': ['role',
+   'cohort_id',
+   'membership_sha256',
+   'scene_count',
+   'asset_group_count',
+   'scenes',
+   'method_freeze_sha256'],
+  'schema': 'vpi-current-method-cohort-cache/v1'},
+ 'current_methods': {'assisted': 'object_bank_top2',
+  'automatic': 'winner_cluster_consensus'},
+ 'exposure_package': {'asset_record_fields': ['asset_group',
+   'role',
+   'scene_count',
+   'resolved',
+   'prior_access: kind + source_sha256'],
+  'coverage': 'all original 273 development, 163 calibration and 109 internal-lock assets; no empty or reshuffled protected subset',
+  'event_kinds': ['rgb',
+   'predictions',
+   'reference_identities',
+   'anomaly_labels',
+   'evaluation_results'],
+  'files': ['artifact_lock.json',
+   'exposure_ledger.json',
+   'asset_records.json'],
+  'ledger_fields': ['schema',
+   'status=resolved',
+   'reviewed_source_sha256 (nonempty)',
+   'roles with exact membership_sha256'],
+  'schema': 'vpi-asset-exposure-audit/v1'},
+ 'input_scene_contract': {'assisted_only': ['opaque neutral correspondence IDs and explicit provenance; null for unknown'],
+  'forbidden_model_inputs': ['anomaly labels',
+   'normal/anomaly filenames',
+   'evaluator verdicts',
+   'protected score-selected schedules'],
+  'missing_neural_outputs': 'inventory missing items first; reuse existing boxes/masks/global features; extract only missing frozen DINO patches',
+  'required': ['opaque scene ID',
+   'exact original role and membership hash',
+   'selected RGB checksums',
+   'all candidate IDs',
+   'original-coordinate boxes',
+   'SAM RLE masks and checksums',
+   'DINOv2-small global embeddings',
+   'forward/P1/P2 scores for winner consensus',
+   'foreground patch arrays for object bank',
+   'padded crop box, crop checksum and valid patch grid']},
+ 'known_report_issues': ['Inherited identity_reference_coverage is invalid because defaultdict lookups add absent references before its numerator is computed. Original means remain in original_reported_mean for audit, while usable means are blank. Ranking metrics and failure counts are unchanged.',
+  'Current app cache revalidation is a separate post-hoc runtime check; it is not merged into the historical 08O/08P conditions.'],
+ 'original_roles': {'calibration': 600,
+  'development': 1000,
+  'internal_lock': 400},
+ 'protected_selection': 'frozen automatic winner consensus and assisted top2; protected outcomes cannot promote alternatives',
+ 'report_contract': ['all registered compatible techniques stay in development tables',
+  'primary schedules and scene-averaged schedules reported separately',
+  'tie-aware top1/AP/Recall2/MRR with asset-group intervals',
+  'candidate/association/score/ranking failures retain scene denominators',
+  'selected-object boxes are not validated defect boundaries',
+  'raw galleries and scene score matrices stay private; aggregate tables and charts may be selected for report later'],
+ 'schema': 'vpi-remaining-evaluation-workbench/v1',
+ 'stage_bridges': {'09A': '600 calibration scenes: current-method label-free prediction adapter, exact shards and final prediction seal',
+  '09B': 'verify current prediction seal; evaluate only frozen methods; any review policy changes only within the declared calibration protocol',
+  '09B1': '400 internal-lock resources: require resolved exposure and frozen current method/review policy; keep identities and labels separate',
+  '09C': '400 internal-lock scenes: unchanged current-method prediction adapter; no evaluator mounted',
+  '09D': 'verify all fixed prediction/method/policy/membership seals; one-shot evaluation, no method selection',
+  '09E': 'reusable compatibility/readiness and rich report workbench; currently verified on existing development100'},
+ 'view_sets': {'five-primary': ['V00', 'V04', 'V08', 'V12', 'V16'],
+  'five-rotated-01': ['V01', 'V05', 'V09', 'V13', 'V17'],
+  'five-rotated-02': ['V02', 'V06', 'V10', 'V14', 'V18'],
+  'five-rotated-03': ['V03', 'V07', 'V11', 'V15', 'V19'],
+  'one-primary': ['V00'],
+  'one-rotated-04': ['V04'],
+  'one-rotated-08': ['V08'],
+  'one-rotated-12': ['V12'],
+  'one-rotated-16': ['V16'],
+  'three-primary': ['V00', 'V07', 'V14'],
+  'three-rotated-04': ['V04', 'V11', 'V18'],
+  'three-rotated-08': ['V02', 'V08', 'V15'],
+  'three-rotated-12': ['V06', 'V12', 'V19'],
+  'three-rotated-16': ['V03', 'V10', 'V16'],
+  'two-primary': ['V00', 'V10'],
+  'two-rotated-02': ['V02', 'V12'],
+  'two-rotated-04': ['V04', 'V14'],
+  'two-rotated-06': ['V06', 'V16'],
+  'two-rotated-08': ['V08', 'V18']}}
+
+[cell 6]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stage</th>
+      <th>status</th>
+      <th>code</th>
+      <th>detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>09a</td>
+      <td>blocked</td>
+      <td>EXPOSURE_LEDGER_MISSING</td>
+      <td>EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>09b</td>
+      <td>blocked</td>
+      <td>EXPOSURE_LEDGER_MISSING</td>
+      <td>EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>09b1</td>
+      <td>blocked</td>
+      <td>EXPOSURE_LEDGER_MISSING</td>
+      <td>EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>09c</td>
+      <td>blocked</td>
+      <td>EXPOSURE_LEDGER_MISSING</td>
+      <td>EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>09d</td>
+      <td>blocked</td>
+      <td>EXPOSURE_LEDGER_MISSING</td>
+      <td>EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...</td>
+    </tr>
+  </tbody>
+</table>
+</div>  stage   status                     code  \
+0   09a  blocked  EXPOSURE_LEDGER_MISSING
+1   09b  blocked  EXPOSURE_LEDGER_MISSING
+2  09b1  blocked  EXPOSURE_LEDGER_MISSING
+3   09c  blocked  EXPOSURE_LEDGER_MISSING
+4   09d  blocked  EXPOSURE_LEDGER_MISSING
+
+                                              detail
+0  EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...
+1  EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...
+2  EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...
+3  EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...
+4  EXPOSURE_LEDGER_MISSING: Set VPI_EXPOSURE_ROOT...
+
+[cell 8]
+Gallery 1/12 saved
+
+[cell 8]
+Gallery 2/12 saved
+
+[cell 8]
+Gallery 3/12 saved
+
+[cell 8]
+Gallery 4/12 saved
+
+[cell 8]
+Gallery 5/12 saved
+
+[cell 8]
+Gallery 6/12 saved
+
+[cell 8]
+Gallery 7/12 saved
+
+[cell 8]
+Gallery 8/12 saved
+
+[cell 8]
+Gallery 9/12 saved
+
+[cell 8]
+Gallery 10/12 saved
+
+[cell 8]
+Gallery 11/12 saved
+
+[cell 8]
+Gallery 12/12 saved
+
+[cell 8]
+{'status': 'complete',
+ 'aggregate_figures': ['top1_tie_expected.png',
+  'ap_tie_expected.png',
+  'recall_at_2_tie_expected.png',
+  'reciprocal_rank_tie_expected.png',
+  'technique_primary_matrix.png',
+  'schedule_sensitivity.png',
+  'failure_decomposition.png'],
+ 'gallery_count': 12,
+ 'gallery_view_counts': [1, 2, 3, 5],
+ 'privacy': 'all images/scene IDs/object scores remain under private; aggregate figures are shareable',
+ 'selection': 'fixed first scenes plus disclosed post-hoc development failure/tie/missing-view illustrations',
+ 'box_semantics': 'selected object region, not a validated defect boundary',
+ 'scientific_results_preserved': True,
+ 'tracking_status': 'not_attempted; publish aggregates after report seal'}
+
+[cell 8]
+<IPython.core.display.Image object>
+
+[cell 8]
+<IPython.core.display.Image object>
+
+[cell 8]
+<IPython.core.display.Image object>
+
+[cell 8]
+<IPython.core.display.Image object>
+
+[cell 8]
+<IPython.core.display.Image object>
+
+[cell 8]
+<IPython.core.display.Image object>
+
+[cell 8]
+<IPython.core.display.Image object>
+
+[cell 12]
+{'status': 'pending_separate_publication',
+ 'scientific_results_preserved': True,
+ 'report_sealed': True,
+ 'private_artifacts_allowed': False,
+ 'note': 'Run a bounded publisher over verified shareable artifacts; never repeat inference for tracking.'}
+
+[cell 12]
+{'completed': 'existing development evidence and protected compatibility preflight',
+ 'new_protected_scenes_evaluated': 0,
+ 'protected_stages': 'blocked; see explicit prerequisite records'}

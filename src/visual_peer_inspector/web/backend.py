@@ -10,6 +10,9 @@ import subprocess
 import tempfile
 import threading
 import time
+import secrets
+import weakref
+from dataclasses import replace
 from pathlib import Path
 
 from .core import STAGES, InspectionCancelled, InspectionError
@@ -23,6 +26,7 @@ ERRORS = {
     "proposal_truncated": "Object detection could not finish reliably. Try a simpler or clearer scene.",
     "out_of_memory": "The GPU ran out of memory. Try fewer views or a larger GPU.",
     "dependencies": "The inference environment is incomplete. Check the deployment build logs.",
+    "dino_runtime": "The pinned CPU DINO environment is unavailable. Configure VPI_DINO_PYTHON; cached identity corrections need no model downloads.",
     "policy": "The configured review policy does not match this app. Check deployment settings.",
 }
 
@@ -58,6 +62,54 @@ class SubprocessBackend:
         self._gate = threading.Lock()
         self._state_lock = threading.Lock()
         self._active = {}
+        self._request_sessions = {}
+        self._sessions = {}
+        self._cache_directory = tempfile.TemporaryDirectory(prefix='vpi-sessions-')
+        stopped = threading.Event()
+        weakref.finalize(self, stopped.set)
+        reference = weakref.ref(self)
+
+        def reap():
+            while not stopped.wait(30):
+                owner = reference()
+                if owner is None:
+                    return
+                owner.cleanup_expired_sessions()
+                del owner
+
+        threading.Thread(target=reap, daemon=True, name='vpi-session-expiry').start()
+
+    def _cleanup_expired_locked(self):
+        from .session_cache import SessionCache
+        cache = SessionCache(self._cache_directory.name)
+        removed = cache.cleanup_expired()
+        for session_id in list(self._sessions):
+            if cache.path(session_id).name in removed:
+                self._sessions.pop(session_id, None)
+
+    def cleanup_expired_sessions(self):
+        # A model worker may still be writing; expiry waits for its bounded job.
+        if not self._gate.acquire(blocking=False):
+            return
+        try:
+            with self._state_lock:
+                self._cleanup_expired_locked()
+        finally:
+            self._gate.release()
+
+    def clear_session(self, session_id, cache_token=None):
+        from .session_cache import SessionCache
+        with self._state_lock:
+            owned = self._sessions.get(session_id)
+            if owned is not None and cache_token is not None and owned != cache_token:
+                raise InspectionError('This candidate cache belongs to another session.')
+            active = [rid for rid,sid in self._request_sessions.items() if sid == session_id]
+            for rid in active:
+                self._active[rid].set()
+        # Active workers remove the session after their process has stopped.
+        if not active:
+            SessionCache(self._cache_directory.name).clear(session_id)
+            self._sessions.pop(session_id, None)
 
     def cancel(self, request_id: str) -> bool:
         with self._state_lock:
@@ -74,7 +126,17 @@ class SubprocessBackend:
             )
         cancelled = threading.Event()
         with self._state_lock:
+            self._cleanup_expired_locked()
+            current_token = self._sessions.get(request.session_id)
+            if request.cache_token is not None and request.cache_token != current_token:
+                self._gate.release()
+                raise InspectionError('The cached session is unavailable or belongs to another session. Reset it.')
+            creating = current_token is None
+            current_token = current_token or secrets.token_hex(32)
+            self._sessions[request.session_id] = current_token
+            request = replace(request, cache_token=current_token)
             self._active[request.request_id] = cancelled
+            self._request_sessions[request.request_id] = request.session_id
         process = None
         reader = None
         temporary = None
@@ -85,6 +147,8 @@ class SubprocessBackend:
             env = os.environ.copy()
             env["PYTHONPATH"] = str(Path(__file__).resolve().parents[2])
             env["PYTHONUNBUFFERED"] = "1"
+            env['VPI_SESSION_CACHE_ROOT'] = self._cache_directory.name
+            env['VPI_CREATE_SESSION_CACHE'] = '1' if creating else '0'
             env["VPI_ALLOW_MODEL_DOWNLOADS"] = (
                 "1" if self.settings.allow_downloads else "0"
             )
@@ -173,6 +237,11 @@ class SubprocessBackend:
             finally:
                 with self._state_lock:
                     self._active.pop(request.request_id, None)
+                    self._request_sessions.pop(request.request_id, None)
+                    if cancelled.is_set():
+                        from .session_cache import SessionCache
+                        SessionCache(self._cache_directory.name).clear(request.session_id)
+                        self._sessions.pop(request.session_id, None)
                 self._gate.release()
 
 

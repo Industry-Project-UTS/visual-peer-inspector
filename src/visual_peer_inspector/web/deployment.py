@@ -16,7 +16,24 @@ def pipeline_config() -> dict:
 
 
 def pipeline_fingerprint() -> str:
-    payload = json.dumps(pipeline_config(), sort_keys=True, separators=(",", ":"))
+    # Bind exported decisions and any later policy to the executable method too.
+    base = Path(__file__).resolve().parents[2]
+    paths = [
+        'visual_peer_inspector/web/' + name for name in
+        ('pipeline.py', 'decision.py', 'core.py', 'deployment.py', 'model_runtime.py', 'encoder_worker.py')
+    ]
+    paths += [
+        'visual_peer_inspector/workflows/learned_peer_features.py',
+        'visual_peer_inspector/representation/cross_view_identity.py',
+        'visual_peer_inspector/representation/crops.py',
+        'visual_peer_inspector/models/visual_encoder.py',
+        'visual_peer_inspector/scoring/forward_patch.py',
+        'visual_peer_inspector/scoring/peer.py',
+        'visual_peer_inspector/scoring/peer_support.py',
+        'vpi_object_bank/scoring.py', 'vpi_object_bank/prediction.py',
+    ]
+    sources = {path: hashlib.sha256((base / path).read_bytes()).hexdigest() for path in paths}
+    payload = json.dumps({'configuration': pipeline_config(), 'sources': sources}, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(payload.encode()).hexdigest()
 
 

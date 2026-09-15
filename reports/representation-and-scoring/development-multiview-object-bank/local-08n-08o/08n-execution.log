@@ -1,0 +1,579 @@
+Stage: 08N local development
+Status: completed
+Clean notebook: 08n-object-registry-and-patch-preparation.ipynb
+Clean notebook SHA-256: c71d1d5212287edfc55d7e467e424729305c9d10d591caf466fd1665ae5f2622
+Downloaded saved-output SHA-256: 9dc30131fb24be0f4196c180169ecf3aa2ee9bb9fd511848555aa50a4992933a
+Executed code cells: 6
+Retained output blocks: 109
+Retained safe visuals: 0
+Removed private visuals: 0
+
+Sanitised execution transcript
+==============================
+
+[cell 3]
+{'event': 'notebook_ready', 'python': '3.12.14'}
+
+[cell 5]
+{"stage": "preflight", "scenes": 100, "protocol_sha256": "52011f63a676a5abf549b884deb3e76f5603a92e53aa9e0147ce80a6378f2fc3", "status": "verified"}
+
+[cell 7]
+{"result": {"completed_units": 4000, "elapsed_seconds": 0.0, "extracted_units": 0, "sealed": true, "total_units": 4000}, "stage": "extract"}
+
+[cell 9]
+{"completed":1,"computed":1,"elapsed_seconds":0.5985918330006825,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":2,"computed":2,"elapsed_seconds":1.3461859160015592,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":3,"computed":3,"elapsed_seconds":1.9603225829996518,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":4,"computed":4,"elapsed_seconds":2.533294000000751,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":5,"computed":5,"elapsed_seconds":3.033793582999351,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":6,"computed":6,"elapsed_seconds":3.480924708001112,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":7,"computed":7,"elapsed_seconds":4.078146250001737,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":8,"computed":8,"elapsed_seconds":4.42551850000018,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":9,"computed":9,"elapsed_seconds":5.064865708001889,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":10,"computed":10,"elapsed_seconds":5.743181624999124,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":11,"computed":11,"elapsed_seconds":6.245454457999585,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":12,"computed":12,"elapsed_seconds":6.60675104099937,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":13,"computed":13,"elapsed_seconds":6.936125666001317,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":14,"computed":14,"elapsed_seconds":7.303551708002487,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":15,"computed":15,"elapsed_seconds":7.880768958002591,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":16,"computed":16,"elapsed_seconds":8.551259541000036,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":17,"computed":17,"elapsed_seconds":9.035082582999166,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":18,"computed":18,"elapsed_seconds":9.409615832999407,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":19,"computed":19,"elapsed_seconds":10.24045045800085,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":20,"computed":20,"elapsed_seconds":10.680135250000603,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":21,"computed":21,"elapsed_seconds":11.171404250002524,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":22,"computed":22,"elapsed_seconds":11.683205416000419,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":23,"computed":23,"elapsed_seconds":12.058378416000778,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":24,"computed":24,"elapsed_seconds":12.416094583000813,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":25,"computed":25,"elapsed_seconds":13.361860790999344,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":26,"computed":26,"elapsed_seconds":13.851630749999458,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":27,"computed":27,"elapsed_seconds":14.685809375001554,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":28,"computed":28,"elapsed_seconds":15.2391469159993,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":29,"computed":29,"elapsed_seconds":15.682163666002452,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":30,"computed":30,"elapsed_seconds":16.467068416000984,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":31,"computed":31,"elapsed_seconds":16.942132874999515,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":32,"computed":32,"elapsed_seconds":17.43769237500237,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":33,"computed":33,"elapsed_seconds":17.914275416002056,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":34,"computed":34,"elapsed_seconds":18.306392458001937,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":35,"computed":35,"elapsed_seconds":19.011150250000355,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":36,"computed":36,"elapsed_seconds":19.356926915999793,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":37,"computed":37,"elapsed_seconds":19.786346832999698,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":38,"computed":38,"elapsed_seconds":20.247054916002526,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":39,"computed":39,"elapsed_seconds":20.666066458001296,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":40,"computed":40,"elapsed_seconds":21.521124625000084,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":41,"computed":41,"elapsed_seconds":21.941111333002482,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":42,"computed":42,"elapsed_seconds":22.455663250002544,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":43,"computed":43,"elapsed_seconds":22.83505708300072,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":44,"computed":44,"elapsed_seconds":23.402996625001833,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":45,"computed":45,"elapsed_seconds":24.06273599999986,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":46,"computed":46,"elapsed_seconds":24.77581954100242,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":47,"computed":47,"elapsed_seconds":25.451958416000707,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":48,"computed":48,"elapsed_seconds":25.955609332999302,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":49,"computed":49,"elapsed_seconds":26.612266791002185,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":50,"computed":50,"elapsed_seconds":27.41506766599923,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":51,"computed":51,"elapsed_seconds":27.80993112500073,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":52,"computed":52,"elapsed_seconds":28.26327583300008,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":53,"computed":53,"elapsed_seconds":28.798660791002476,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":54,"computed":54,"elapsed_seconds":29.151474708000023,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":55,"computed":55,"elapsed_seconds":29.501003249999485,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":56,"computed":56,"elapsed_seconds":29.952056665999407,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":57,"computed":57,"elapsed_seconds":30.29231795799933,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":58,"computed":58,"elapsed_seconds":30.95213791599963,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":59,"computed":59,"elapsed_seconds":31.295869833000324,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":60,"computed":60,"elapsed_seconds":32.03451750000022,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":61,"computed":61,"elapsed_seconds":32.62565891600025,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":62,"computed":62,"elapsed_seconds":33.0206588330002,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":63,"computed":63,"elapsed_seconds":33.56065637500069,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":64,"computed":64,"elapsed_seconds":33.90392124999926,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":65,"computed":65,"elapsed_seconds":34.30258933300138,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":66,"computed":66,"elapsed_seconds":34.833039375000226,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":67,"computed":67,"elapsed_seconds":35.307533375002095,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":68,"computed":68,"elapsed_seconds":35.97418183300033,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":69,"computed":69,"elapsed_seconds":36.43052175000048,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":70,"computed":70,"elapsed_seconds":36.8952115409993,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":71,"computed":71,"elapsed_seconds":37.39748325000255,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":72,"computed":72,"elapsed_seconds":37.80759945799946,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":73,"computed":73,"elapsed_seconds":38.375127416002215,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":74,"computed":74,"elapsed_seconds":39.0493030409998,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":75,"computed":75,"elapsed_seconds":39.550413500001014,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":76,"computed":76,"elapsed_seconds":39.90524470799937,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":77,"computed":77,"elapsed_seconds":40.46333141600189,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":78,"computed":78,"elapsed_seconds":41.11504541600152,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":79,"computed":79,"elapsed_seconds":41.7860600410022,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":80,"computed":80,"elapsed_seconds":42.222790333002195,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":81,"computed":81,"elapsed_seconds":42.71050612500039,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":82,"computed":82,"elapsed_seconds":43.07569379100096,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":83,"computed":83,"elapsed_seconds":43.497183625000616,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":84,"computed":84,"elapsed_seconds":44.07364533299915,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":85,"computed":85,"elapsed_seconds":44.505554708001,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":86,"computed":86,"elapsed_seconds":44.92937333300142,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":87,"computed":87,"elapsed_seconds":45.619020791000366,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":88,"computed":88,"elapsed_seconds":46.23695091600166,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":89,"computed":89,"elapsed_seconds":46.74465670800055,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":90,"computed":90,"elapsed_seconds":47.047376165999594,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":91,"computed":91,"elapsed_seconds":47.454081791001954,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":92,"computed":92,"elapsed_seconds":47.90459858300164,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":93,"computed":93,"elapsed_seconds":48.2671713330019,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":94,"computed":94,"elapsed_seconds":48.83665254100197,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":95,"computed":95,"elapsed_seconds":49.330649083000026,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":96,"computed":96,"elapsed_seconds":49.694553083001665,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":97,"computed":97,"elapsed_seconds":50.30132175000108,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":98,"computed":98,"elapsed_seconds":50.71640070799913,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":99,"computed":99,"elapsed_seconds":51.06700929100043,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"completed":100,"computed":100,"elapsed_seconds":51.63526895800169,"event":"progress","reused":0,"total":100}
+
+[cell 9]
+{"result": {"computed": 100, "elapsed_seconds": 51.72542387499925, "reused": 0, "scenes": 100, "sealed": true}, "stage": "predict"}
+
+[cell 11]
+{"result": {"feature_root": {"verified_files": 12002}, "prediction_root": {"verified_files": 301}, "prepared_root": {"verified_files": 101}}, "stage": "verify"}
+
+[cell 13]
+{'schema': 'vpi-object-bank/v1',
+ 'scope': 'existing 100-scene development screen; no new roles or protected data',
+ 'view_sets': {'one-primary': ['V00'],
+  'one-rotated-04': ['V04'],
+  'one-rotated-08': ['V08'],
+  'one-rotated-12': ['V12'],
+  'one-rotated-16': ['V16'],
+  'two-primary': ['V00', 'V10'],
+  'two-rotated-04': ['V04', 'V14'],
+  'two-rotated-08': ['V08', 'V18'],
+  'two-rotated-02': ['V02', 'V12'],
+  'two-rotated-06': ['V06', 'V16'],
+  'three-primary': ['V00', 'V07', 'V14'],
+  'three-rotated-04': ['V04', 'V11', 'V18'],
+  'three-rotated-08': ['V02', 'V08', 'V15'],
+  'three-rotated-12': ['V06', 'V12', 'V19'],
+  'three-rotated-16': ['V03', 'V10', 'V16'],
+  'five-primary': ['V00', 'V04', 'V08', 'V12', 'V16'],
+  'five-rotated-01': ['V01', 'V05', 'V09', 'V13', 'V17'],
+  'five-rotated-02': ['V02', 'V06', 'V10', 'V14', 'V18'],
+  'five-rotated-03': ['V03', 'V07', 'V11', 'V15', 'V19']},
+ 'extraction': {'encoder': 'facebook/dinov2-small',
+  'revision': 'ed25f3a31f01632728cabb09d1542f84ab7b0056',
+  'input_size': 224,
+  'padding_fraction': 0.15,
+  'background_rgb': [238, 241, 245],
+  'minimum_foreground_pixels': 4,
+  'coverage': 0.7,
+  'fallback': 'all',
+  'feature_dtype': 'float32',
+  'grid_size': 16,
+  'feature_dimension': 384,
+  'batch_size': 4},
+ 'primary_view_set': 'three-primary',
+ 'routes': ['supplied_reference',
+  'automatic_reference',
+  'automatic_predicted'],
+ 'scorers': ['cached_forward',
+  'within_view',
+  'object_bank',
+  'view_mean_control'],
+ 'fusion': ['mean', 'top2'],
+ 'tail': {'fraction': 0.02,
+  'rounding': 'floor',
+  'peer_reduction': 'lower_median'},
+ 'normalization': 'average within-view percentile ranks; >=3 scored candidates',
+ 'unknown_identity': 'retain observation; bank score unavailable; exclude from peer banks',
+ 'automatic_association': 'unchanged Hungarian baseline; no new matcher until scoring gate',
+ 'bank_size_control': 'mean nearest-patch distance across peer views before peer lower median',
+ 'selection': {'primary': 'supplied_reference three-primary; paired asset bootstrap against regenerated within_view mean',
+  'candidate_fusions': ['mean', 'top2'],
+  'continue_mapping_if': 'positive top1 paired 95% lower bound, no AP/Recall2 regression, positive top1 mean across three-view schedules',
+  'tie_break': 'mean fusion, then simpler within_view method',
+  'otherwise': 'stop new scoring/matching; retain stronger existing method and report limitations',
+  'interpretation': 'development selection only; no independent confirmation claim'},
+ 'metrics': ['top1_tie_expected',
+  'recall_at_2_tie_expected',
+  'ap_tie_expected',
+  'reciprocal_rank_tie_expected'],
+ 'bootstrap': {'unit': 'asset_group', 'samples': 2000, 'seed': 32040},
+ 'report_breakdowns': ['view_schedule',
+  'anomaly_count',
+  'strict_normal_majority',
+  'candidate_coverage',
+  'association',
+  'ranking_loss'],
+ 'clearml': 'verified aggregate artifacts after scientific seal; bounded separate process'}
+
+[cell 13]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>schedule</th>
+      <th>view_count</th>
+      <th>views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>one-primary</td>
+      <td>1</td>
+      <td>V00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>one-rotated-04</td>
+      <td>1</td>
+      <td>V04</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>one-rotated-08</td>
+      <td>1</td>
+      <td>V08</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>one-rotated-12</td>
+      <td>1</td>
+      <td>V12</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>one-rotated-16</td>
+      <td>1</td>
+      <td>V16</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>two-primary</td>
+      <td>2</td>
+      <td>V00, V10</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>two-rotated-04</td>
+      <td>2</td>
+      <td>V04, V14</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>two-rotated-08</td>
+      <td>2</td>
+      <td>V08, V18</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>two-rotated-02</td>
+      <td>2</td>
+      <td>V02, V12</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>two-rotated-06</td>
+      <td>2</td>
+      <td>V06, V16</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>three-primary</td>
+      <td>3</td>
+      <td>V00, V07, V14</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>three-rotated-04</td>
+      <td>3</td>
+      <td>V04, V11, V18</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>three-rotated-08</td>
+      <td>3</td>
+      <td>V02, V08, V15</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>three-rotated-12</td>
+      <td>3</td>
+      <td>V06, V12, V19</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>three-rotated-16</td>
+      <td>3</td>
+      <td>V03, V10, V16</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>five-primary</td>
+      <td>5</td>
+      <td>V00, V04, V08, V12, V16</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>five-rotated-01</td>
+      <td>5</td>
+      <td>V01, V05, V09, V13, V17</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>five-rotated-02</td>
+      <td>5</td>
+      <td>V02, V06, V10, V14, V18</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>five-rotated-03</td>
+      <td>5</td>
+      <td>V03, V07, V11, V15, V19</td>
+    </tr>
+  </tbody>
+</table>
+</div>            schedule  view_count                    views
+0        one-primary           1                      V00
+1     one-rotated-04           1                      V04
+2     one-rotated-08           1                      V08
+3     one-rotated-12           1                      V12
+4     one-rotated-16           1                      V16
+5        two-primary           2                 V00, V10
+6     two-rotated-04           2                 V04, V14
+7     two-rotated-08           2                 V08, V18
+8     two-rotated-02           2                 V02, V12
+9     two-rotated-06           2                 V06, V16
+10     three-primary           3            V00, V07, V14
+11  three-rotated-04           3            V04, V11, V18
+12  three-rotated-08           3            V02, V08, V15
+13  three-rotated-12           3            V06, V12, V19
+14  three-rotated-16           3            V03, V10, V16
+15      five-primary           5  V00, V04, V08, V12, V16
+16   five-rotated-01           5  V01, V05, V09, V13, V17
+17   five-rotated-02           5  V02, V06, V10, V14, V18
+18   five-rotated-03           5  V03, V07, V11, V15, V19
+
+[cell 13]
+{'sealed_scene_count': 100,
+ 'cached_view_count': 20,
+ 'completed_scene_region_view_units': 4000,
+ 'last_extraction_progress': {'completed': 4000,
+  'total': 4000,
+  'extracted': 4000,
+  'reused': 0,
+  'elapsed_seconds': 365.7540948749993},
+ 'device': 'cpu',
+ 'runtime': {'numpy': '2.5.3',
+  'pillow': '12.3.0',
+  'safetensors': '0.8.0',
+  'torch': '2.13.0',
+  'transformers': '5.14.1'},
+ 'model_file_sha256': {'config.json': '1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d',
+  'model.safetensors': 'ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1'}}
+
+[cell 13]
+The extraction cell reports zero extracted units when an identical sealed cache is reused.

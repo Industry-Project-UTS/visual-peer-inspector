@@ -15,8 +15,21 @@ def package(output: Path):
         raise ValueError(
             "Choose an empty output directory; existing files are never replaced."
         )
+    required = (
+        "src/vpi_object_bank/scoring.py",
+        "src/vpi_object_bank/prediction.py",
+        "src/visual_peer_inspector/web/decision.py",
+        "src/visual_peer_inspector/web/session_cache.py",
+    )
+    missing = [name for name in required if not (ROOT / name).is_file()]
+    if missing:
+        raise ValueError(f"Selected multi-view method dependencies are missing: {missing}")
     sources = [ROOT / "pyproject.toml"]
-    for directory in (ROOT / "src", ROOT / "apps/web"):
+    for directory in (
+        ROOT / "src/visual_peer_inspector",
+        ROOT / "src/vpi_object_bank",
+        ROOT / "apps/web",
+    ):
         sources.extend(
             p
             for p in directory.rglob("*")

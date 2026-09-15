@@ -1,0 +1,9 @@
+{
+  "operation": "Remove trailing whitespace from the SVG export for repository formatting",
+  "source_sha256": "07dc4806d3948da270d4a9e2af654a91407499495e47779a36ecfe8b3ec31cc4",
+  "formatted_sha256": "9dc65f0a1fa67c672d8f06b13aeebd709bb3cc84b768288a767519d9c6449931",
+  "svg_element_and_attribute_equivalence_verified": true,
+  "scientific_values_changed": false,
+  "source_plotting_script_changed": false,
+  "published_png_or_ClearML_receipts_changed": false
+}

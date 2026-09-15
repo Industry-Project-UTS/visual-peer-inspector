@@ -58,6 +58,13 @@ class InspectionRequest:
     # None means automatic; an explicit sequence is an assisted rerun.
     corrections: tuple[Box, ...] | None = None
     request_id: str = field(default_factory=lambda: uuid4().hex)
+    session_id: str = field(default_factory=lambda: uuid4().hex)
+    cache_token: str | None = None
+    mode: str | None = None
+
+    @property
+    def decision_mode(self):
+        return self.mode or ("assisted" if self.corrections is not None else "automatic")
 
 
 @dataclass(frozen=True)
@@ -65,6 +72,8 @@ class RankedObject:
     identity_id: str
     relative_score: float
     view_ids: tuple[str, ...]
+    contributors: tuple[dict, ...] = ()
+    score_method: str = ""
 
 
 @dataclass(frozen=True)
@@ -73,6 +82,12 @@ class Observation:
     p1_score: float | None
     mask: Image.Image | None = None
     heatmap: Image.Image | None = None
+    score: float | None = None
+    score_method: str = ""
+    component_scores: dict = field(default_factory=dict)
+    normalized_rank: float | None = None
+    identity_status: str = ""
+    identity_source: str = ""
 
 
 @dataclass(frozen=True)
@@ -85,6 +100,10 @@ class InspectionResult:
     policy_version: str = ""
     mode: str = "automatic"
     provenance: dict = field(default_factory=dict)
+    selected_identity_id: str | None = None
+    session_id: str = ""
+    cache_token: str | None = None
+    score_metadata: dict = field(default_factory=dict)
 
 
 class InspectionBackend(Protocol):
@@ -177,18 +196,19 @@ def validate_boxes(boxes: Sequence[Box], views: Sequence[View]) -> None:
     for box in boxes:
         if box.view_id not in dimensions:
             raise InspectionError("A box refers to a view that is no longer uploaded.")
-        if not TOKEN.fullmatch(box.object_id) or not TOKEN.fullmatch(box.identity_id):
+        if not TOKEN.fullmatch(box.object_id) or (box.identity_id and not TOKEN.fullmatch(box.identity_id)):
             raise InspectionError(
                 "Object and identity IDs must use letters, numbers, underscores or hyphens."
             )
         if (box.view_id, box.object_id) in keys:
             raise InspectionError("Each object ID must appear only once in a view.")
         keys.add((box.view_id, box.object_id))
-        if (box.view_id, box.identity_id) in identities:
+        if box.identity_id and (box.view_id, box.identity_id) in identities:
             raise InspectionError(
                 "One identity cannot belong to two objects in the same view."
             )
-        identities.add((box.view_id, box.identity_id))
+        if box.identity_id:
+            identities.add((box.view_id, box.identity_id))
         if len(box.xyxy) != 4 or any(type(v) is not int for v in box.xyxy):
             raise InspectionError("Box coordinates must be four whole numbers.")
         x1, y1, x2, y2 = box.xyxy
@@ -236,7 +256,7 @@ def validate_result(result: InspectionResult, request: InspectionRequest) -> Non
         raise InspectionError(
             "The inspection service returned an unknown review state."
         )
-    expected_mode = "assisted" if request.corrections is not None else "automatic"
+    expected_mode = request.decision_mode
     if result.mode != expected_mode:
         raise InspectionError(
             "The inspection result has an incorrect automatic/assisted label."
@@ -259,7 +279,10 @@ def validate_result(result: InspectionResult, request: InspectionRequest) -> Non
             raise InspectionError(
                 "The inspection service returned an invalid object score."
             )
-        if observation.p1_score is not None:
+        score = observation.score if observation.score_method else observation.p1_score
+        if score is not None and not math.isfinite(score):
+            raise InspectionError("The inspection service returned an invalid score.")
+        if (observation.normalized_rank is not None if observation.score_method else score is not None):
             evidence.setdefault(observation.box.identity_id, set()).add(
                 observation.box.view_id
             )
@@ -290,6 +313,11 @@ def validate_result(result: InspectionResult, request: InspectionRequest) -> Non
             raise InspectionError(
                 "Object view support does not match the displayed evidence."
             )
+    if result.selected_identity_id is not None:
+        if not result.ranking or result.selected_identity_id != result.ranking[0].identity_id:
+            raise InspectionError("The selected object is not the leading ranked object.")
+        if len(result.ranking) > 1 and math.isclose(result.ranking[0].relative_score, result.ranking[1].relative_score, abs_tol=1e-12, rel_tol=0):
+            raise InspectionError("Tied rankings cannot select one object.")
 
 
 @dataclass
@@ -300,3 +328,6 @@ class Session:
     pending_corner: tuple[int, int] | None = None
     corrections: list[list] = field(default_factory=list)
     active_request_id: str | None = None
+    session_id: str = field(default_factory=lambda: uuid4().hex)
+    cache_token: str | None = None
+    mode: str = "automatic"

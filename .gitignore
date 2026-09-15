@@ -27,6 +27,7 @@ dist/
 # ClearML local state and offline runs
 .clearml/
 clearml_offline/
+reports/**/clearml-publication.lock
 
 # Raw data, generated outputs and model artifacts
 data/*

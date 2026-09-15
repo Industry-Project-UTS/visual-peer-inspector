@@ -1,4 +1,4 @@
-"""Real upload orchestration using the existing crop, P1 and identity algorithms.
+"""Two-mode upload orchestration using frozen decisions and session-owned tensors.
 
 Model access is injected, so geometry, scoring, fusion and review can be tested
 without GPU libraries or checkpoint downloads. No dataset manifests are read.
@@ -116,344 +116,229 @@ class Candidate:
     embedding: tuple | None = None
     patches: np.ndarray | None = None
     validity: np.ndarray | None = None
-    score: float | None = None
-    normalized_rank: float | None = None
-    heatmap: np.ndarray | None = None
+    validity50: np.ndarray | None = None
+    cache_key: str = ''
+
+
+def cache_binding():
+    from pathlib import Path
+    from .session_cache import digest, file_hash
+    base = Path(__file__).resolve().parents[2]
+    paths = ['visual_peer_inspector/web/' + name for name in ('pipeline.py', 'model_runtime.py', 'session_cache.py','encoder_worker.py')]
+    paths += ['visual_peer_inspector/representation/crops.py', 'visual_peer_inspector/models/visual_encoder.py']
+    import importlib.metadata
+    runtime={name:importlib.metadata.version(name) for name in ('numpy','scipy','pillow')}
+    return digest({'configuration': pipeline_config(), 'runtime':runtime,'sources': {p: file_hash(base/p) for p in paths}})
 
 
 class UploadPipeline:
-    def __init__(self, models: ModelStages, *, review_policy_path=None):
+    def __init__(self, models: ModelStages, *, review_policy_path=None, cache_root=None):
+        import os, tempfile
+        from .session_cache import SessionCache
         self.models = models
         self.config = pipeline_config()
         self.policy, self.policy_version = load_review_policy(review_policy_path)
+        if self.policy is not None:
+            raise ValueError('The two-mode app requires a mode-specific review policy; legacy thresholds cannot be applied to these decisions.')
+        self._temporary = None
+        root = cache_root or os.environ.get('VPI_SESSION_CACHE_ROOT')
+        if root is None:
+            self._temporary = tempfile.TemporaryDirectory(prefix='vpi-candidates-')
+            root = self._temporary.name
+        self.cache = SessionCache(root)
+
+    def clear_session(self, session_id, cache_token=None):
+        self.cache.clear(session_id, cache_token)
 
     def inspect(self, request: InspectionRequest, progress) -> InspectionResult:
+        import os
+        from .session_cache import digest, pixels
+        from visual_peer_inspector.scoring.forward_patch import patch_policy
         if not MIN_VIEWS <= len(request.views) <= MAX_VIEWS:
-            raise InspectionError("Upload between two and five views.")
+            raise InspectionError('Upload between two and five views.')
+        if request.decision_mode not in ('automatic', 'assisted'):
+            raise InspectionError('Choose automatic or assisted inspection.')
         if len({v.view_id for v in request.views}) != len(request.views):
-            raise InspectionError("View IDs must be unique.")
+            raise InspectionError('View IDs must be unique.')
         if request.corrections is not None:
             validate_boxes(request.corrections, request.views)
-            if any(
-                sum(b.view_id == v.view_id for b in request.corrections) > 8
-                for v in request.views
-            ):
-                raise InspectionError("Keep at most eight objects in each view.")
-        reasons = []
-        prepared = {v.view_id: ImageTransform.prepare(v.image) for v in request.views}
+            if any(sum(b.view_id == v.view_id for b in request.corrections) > 8 for v in request.views):
+                raise InspectionError('Keep at most eight objects in each view.')
+        binding = cache_binding()
+        path, state, token = self.cache.open(request.session_id, request.cache_token, binding,
+            allow_create=os.environ.get('VPI_CREATE_SESSION_CACHE') == '1')
         by_view = {v.view_id: [] for v in request.views}
+        prepared = {v.view_id: ImageTransform.prepare(v.image) for v in request.views}
+        reasons, reused, computed = [], 0, 0
         try:
-            progress("Finding objects")
+            progress('Finding objects')
             for view in sorted(request.views, key=lambda v: v.view_id):
                 canvas, transform = prepared[view.view_id]
-                if request.corrections is None:
-                    boxes, notes = self.models.propose(canvas, view.view_id)
-                    reasons.extend(notes)
-                    for index, coords in enumerate(boxes):
-                        original = transform.to_original_box(coords)
-                        if original is not None:
-                            box = Box(
-                                view.view_id,
-                                f"object_{index + 1}",
-                                f"pending_{index + 1}",
-                                original,
-                            )
-                            by_view[view.view_id].append(Candidate(box, tuple(coords)))
+                image_key = pixels(view.image)
+                if request.corrections is not None:
+                    boxes = [b for b in request.corrections if b.view_id == view.view_id]
+                elif image_key in state['views']:
+                    boxes = [Box(view.view_id, b['object_id'], '', tuple(b['xyxy'])) for b in state['views'][image_key]]
                 else:
-                    for box in request.corrections:
-                        if box.view_id == view.view_id:
-                            by_view[view.view_id].append(
-                                Candidate(box, transform.to_model_box(box.xyxy))
-                            )
+                    proposals, notes = self.models.propose(canvas, view.view_id)
+                    reasons.extend(notes)
+                    boxes = []
+                    for index, coords in enumerate(proposals):
+                        original = transform.to_original_box(coords)
+                        if original:
+                            boxes.append(Box(view.view_id, f'object_{index+1}', '', original))
+                    state['views'][image_key] = [{'object_id': b.object_id, 'xyxy': b.xyxy} for b in boxes]
+                    self.cache.save(path, state)
+                for box in boxes:
+                    c = Candidate(box, transform.to_model_box(box.xyxy))
+                    c.cache_key = digest({'image': image_key, 'box': box.xyxy, 'model_box': c.model_box, 'binding': binding})
+                    saved = self.cache.load(path, state, c.cache_key)
+                    if saved is not None:
+                        c.mask = saved['mask'].astype(bool)
+                        if c.mask.shape != (view.image.height, view.image.width):
+                            raise InspectionError('Cached mask dimensions differ. Reset this session.')
+                        c.quality = saved['quality']
+                        c.embedding = tuple(saved['embedding']) if len(saved['embedding']) else None
+                        c.patches = saved['patches']
+                        reused += 1
+                    by_view[view.view_id].append(c)
             self.models.release()
-            progress("Creating masks")
+            progress('Creating masks')
             for view in request.views:
-                candidates = by_view[view.view_id]
-                if not candidates:
-                    reasons.append("No objects were found in one or more views.")
-                    continue
-                canvas, transform = prepared[view.view_id]
-                masks, qualities = self.models.segment(
-                    canvas, [c.model_box for c in candidates]
-                )
-                if np.asarray(masks).shape != (len(candidates), 256, 256):
-                    raise ValueError("SAM mask dimensions do not match the request.")
-                if (
-                    np.asarray(qualities).shape != (len(candidates),)
-                    or not np.isfinite(qualities).all()
-                ):
-                    raise ValueError("SAM returned invalid quality scores.")
-                for candidate, mask, quality in zip(
-                    candidates, masks, qualities, strict=True
-                ):
-                    candidate.mask = transform.trim_mask(mask)
-                    candidate.quality = float(quality)
-                    if (
-                        candidate.mask.sum()
-                        < self.config["crop"]["minimum_foreground_pixels"]
-                    ):
-                        reasons.append(
-                            "An object mask is empty or too small. Review its box."
-                        )
-                        continue
-                    candidate.crop = prepare_masked_crop(
-                        canvas,
-                        candidate.mask,
-                        configuration=CropConfiguration(**self.config["crop"]),
-                    )
+                missing = [c for c in by_view[view.view_id] if c.mask is None]
+                if missing:
+                    canvas, transform = prepared[view.view_id]
+                    masks, qualities = self.models.segment(canvas, [c.model_box for c in missing])
+                    if np.asarray(masks).shape != (len(missing), 256, 256) or np.asarray(qualities).shape != (len(missing),) or not np.isfinite(qualities).all():
+                        raise ValueError('Invalid SAM mask or quality schema.')
+                    for c, mask, quality in zip(missing, masks, qualities, strict=True):
+                        model_mask = transform.trim_mask(mask)
+                        c.mask = np.asarray(transform.restore(Image.fromarray(model_mask.astype(np.uint8)*255), nearest=True)) > 0
+                        c.quality = float(quality)
+                for c in by_view[view.view_id]:
+                    if c.mask.sum() >= self.config['crop']['minimum_foreground_pixels']:
+                        c.crop = prepare_masked_crop(np.asarray(view.image), c.mask, configuration=CropConfiguration(**self.config['crop']))
+                        c.validity = patch_policy(c.crop, 16, .70, fallback='all')[0]
+                        c.validity50 = patch_policy(c.crop, 16, .50, fallback='largest')[0]
+                    else:
+                        reasons.append('An object mask is empty or too small; it remains available for correction.')
             self.models.release()
-            progress("Extracting features")
-            usable = [
-                c for values in by_view.values() for c in values if c.crop is not None
-            ]
-            size = self.config["encoder"]["batch_size"]
-            for start in range(0, len(usable), size):
-                batch = usable[start : start + size]
+            progress('Extracting features')
+            missing = [c for cs in by_view.values() for c in cs if c.crop is not None and c.patches is None]
+            for start in range(0, len(missing), 4):
+                batch = missing[start:start+4]
                 encoded = self.models.encode([c.crop.rgb for c in batch])
-                if len(encoded.global_features) != len(batch) or len(
-                    encoded.patch_features
-                ) != len(batch):
-                    raise ValueError(
-                        "Encoder batch dimensions differ from object count."
-                    )
-                for candidate, vector, patches in zip(
-                    batch, encoded.global_features, encoded.patch_features, strict=True
-                ):
-                    if not np.isfinite(vector).all() or not np.isfinite(patches).all():
-                        raise ValueError("Encoder returned non-finite features.")
-                    candidate.embedding = tuple(float(v) for v in vector)
-                    candidate.patches = patches
-                    candidate.validity = candidate.crop.patch_validity(
-                        encoded.patch_grid_size,
-                        minimum_fraction=self.config["patch_validity_minimum_fraction"],
-                    )
+                if len(encoded.patch_features) != len(batch) or encoded.global_features.shape != (len(batch), encoded.feature_dimension) or encoded.patch_grid_size != 16:
+                    raise ValueError('Encoder output does not match the fixed patch contract.')
+                for c, vector, patches in zip(batch, encoded.global_features, encoded.patch_features, strict=True):
+                    if np.asarray(patches).shape != (256, encoded.feature_dimension) or not np.isfinite(patches).all() or not np.isfinite(vector).all():
+                        raise ValueError('Invalid encoder tensor.')
+                    c.embedding, c.patches = tuple(float(x) for x in vector), np.asarray(patches, dtype=np.float32)
+                    computed += 1
             self.models.release()
-            progress("Comparing peers")
-            for candidates in by_view.values():
-                valid = [
-                    c for c in candidates if c.validity is not None and c.validity.any()
-                ]
-                if len(valid) < 3:
-                    reasons.append(
-                        "P1 needs at least three usable peer objects in a view."
-                    )
-                    continue
-                result = p1_scores(
-                    [c.patches for c in valid],
-                    [c.validity for c in valid],
-                    top_fraction=self.config["p1_top_fraction"],
-                )
-                order = deterministic_ranking(
-                    result.scores, [c.box.object_id for c in valid]
-                )
-                if len({round(float(s), 12) for s in result.scores}) < len(
-                    result.scores
-                ):
-                    reasons.append(
-                        "Some peer scores are tied; their order is uncertain."
-                    )
-                for rank, index in enumerate(order, 1):
-                    valid[index].score = float(result.scores[index])
-                    valid[index].normalized_rank = (len(valid) - rank) / (
-                        len(valid) - 1
-                    )
-                    valid[index].heatmap = project_crop_heatmap(
-                        result.heatmaps[index], valid[index].crop, valid[index].mask
-                    )
-            progress("Combining views")
-            return self._combine(request, by_view, prepared, reasons)
+            dimensions = next((c.patches.shape[1] for cs in by_view.values() for c in cs if c.patches is not None and len(c.patches)),384)
+            for cs in by_view.values():
+                for c in cs:
+                    if c.patches is None:
+                        c.patches = np.empty((0, dimensions), dtype=np.float32)
+                    self.cache.put(path, state, c.cache_key, {'quality': c.quality},
+                        {'mask': c.mask, 'patches': c.patches, 'embedding': np.asarray(c.embedding or (), dtype=np.float32)})
+            progress('Comparing peers')
+            result = self._decide(request, by_view, reasons, token, reused, computed)
+            progress('Combining views')
+            return result
         finally:
             self.models.release()
 
-    def _combine(self, request, by_view, prepared, reasons):
-        local = {
-            (c.box.view_id, c.box.object_id): c
-            for values in by_view.values()
-            for c in values
-        }
-        identities = {}
-        tracks = []
-        if request.corrections is None:
-            views = [
-                ViewObservation(
-                    view_id,
-                    tuple(
-                        CandidateObservation(c.box.object_id, c.embedding)
-                        for c in candidates
-                        if c.embedding is not None
-                    ),
-                )
-                for view_id, candidates in by_view.items()
-            ]
-            matched = match_cross_view_identities(
-                views, configuration=IdentityConfiguration(**self.config["identity"])
-            )
-            for track in matched.tracks:
-                members = [(m.view_id, m.candidate_id) for m in track.members]
-                identities.update({key: track.identity_id for key in members})
-                tracks.append(
-                    {
-                        "identity_id": track.identity_id,
-                        "identity_status": track.status,
-                        "cycle_consistent": track.cycle_consistent,
-                        "members": members,
-                    }
-                )
-        else:
-            for key, candidate in local.items():
-                identities[key] = candidate.box.identity_id
-            for identity in sorted(set(identities.values())):
-                members = [
-                    key for key, value in identities.items() if value == identity
-                ]
-                tracks.append(
-                    {
-                        "identity_id": identity,
-                        "identity_status": "matched"
-                        if len(members) >= 2
-                        else "unmatched",
-                        "cycle_consistent": True,
-                        "members": members,
-                    }
-                )
-        for index, key in enumerate(sorted(local)):
-            if key not in identities:
-                identity = f"unmatched_{index + 1}"
-                identities[key] = identity
-                tracks.append(
-                    {
-                        "identity_id": identity,
-                        "identity_status": "unmatched",
-                        "cycle_consistent": False,
-                        "members": [key],
-                    }
-                )
-        ranked = []
-        votes = {}
-        for track in tracks:
-            scored = [
-                local[key] for key in track["members"] if local[key].score is not None
-            ]
-            if scored:
-                ranked.append(
-                    RankedObject(
-                        track["identity_id"],
-                        float(np.mean([c.normalized_rank for c in scored])),
-                        tuple(sorted(c.box.view_id for c in scored)),
-                    )
-                )
-                votes[track["identity_id"]] = sum(
-                    c.normalized_rank == 1 for c in scored
-                ) / len(scored)
-        ranked.sort(key=lambda r: (-r.relative_score, r.identity_id))
-        winner = ranked[0] if ranked else None
-        decision = {
-            "tracks": tracks,
-            "fused_odd_one_out": winner.identity_id if winner else None,
-            "margin": ranked[0].relative_score - ranked[1].relative_score
-            if len(ranked) > 1
-            else None,
-            "agreement": votes.get(winner.identity_id) if winner else None,
-            "insufficient_evidence": winner is None or len(winner.view_ids) < 2,
-        }
-        rows = [
-            {
-                "objects": [
-                    {
-                        "box_xyxy": c.model_box,
-                        "foreground_pixels": int(c.mask.sum()),
-                        "predicted_quality_score": c.quality,
-                    }
-                    for c in candidates
-                ]
-            }
-            for candidates in by_view.values()
-        ]
-        signals = build_prediction_review_signals(decision, rows)
-        decision.update(signals)
-        if signals["insufficient_evidence"]:
-            state = "insufficient_evidence"
-            reasons.append(
-                "There is not enough evidence to compare the same object across at least two views."
-            )
-        elif self.policy is None:
-            state = "review_recommended"
-            reasons.append(
-                "The review policy is provisional. Check the highlighted objects and matches."
-            )
-        else:
-            state, policy_reasons = apply_review_policy(decision, self.policy)
-            state = "review_recommended" if state == "review_required" else state
-            reasons.extend(
-                reason.replace("_", " ").capitalize() + "." for reason in policy_reasons
-            )
-        if signals["identity_unmatched_or_ambiguous"]:
-            reasons.append("Some cross-view matches are uncertain or unmatched.")
-        if any(c.score is None for c in local.values()):
-            reasons.append(
-                "Some objects have no usable peer score; they remain available for review."
-            )
-        if winner and len(winner.view_ids) < len(request.views):
-            reasons.append(
-                "The top object has scoring evidence in only some uploaded views."
-            )
-        if decision["margin"] is not None and decision["margin"] <= 1e-12:
-            reasons.append("The top combined scores are tied.")
-        if reasons and state == "result_ready":
-            state = "review_recommended"
-        observations = []
-        finite = [
-            c.heatmap[np.isfinite(c.heatmap)]
-            for c in local.values()
-            if c.heatmap is not None
-        ]
-        limit = max(
-            (float(values.max()) for values in finite if values.size), default=1.0
-        )
-        for key, candidate in local.items():
-            view = next(v for v in request.views if v.view_id == key[0])
-            _, transform = prepared[key[0]]
-            mask = transform.restore(
-                Image.fromarray(candidate.mask.astype(np.uint8) * 255), nearest=True
-            )
+    def _decide(self, request, by_view, reasons, token, reused, computed):
+        from .decision import component_scores, decide_cached
+        from visual_peer_inspector.scoring.peer_support import mask_shape_descriptor
+        candidates = [c for v in sorted(by_view) for c in sorted(by_view[v], key=lambda c:c.box.object_id)]
+        records = [{'view_id': c.box.view_id, 'candidate_id': c.box.object_id, 'embedding': c.embedding,
+                    'patches': c.patches, 'valid50': c.validity50, 'valid70': c.validity,
+                    'geometry': mask_shape_descriptor(c.crop.foreground) if c.crop else None} for c in candidates]
+        rows, heatmaps = component_scores(records)
+        views = sorted(by_view)
+        for view in views:
+            rows.setdefault(view, {'objects': []})
+        bank = [{'view_id': c.box.view_id, 'candidate_id': c.box.object_id,
+                 'object_id': (c.box.identity_id or None) if request.decision_mode == 'assisted' else None,
+                 'patches': c.patches[c.validity.ravel()] if c.validity is not None else np.empty((0, c.patches.shape[1]))} for c in candidates]
+        decision = decide_cached(rows, bank, views=views, mode=request.decision_mode)
+        raw_rankings = decision['ranking']
+        ranking = []
+        for obj in raw_rankings:
+            if obj['score'] is None:
+                continue
+            members = obj['members']
+            contributors = [{**m, 'normalized_rank': decision['component_rank'].get((m['view_id'],m['candidate_id']))} for m in members]
+            usable = [m for m in contributors if m['normalized_rank'] is not None]
+            used = sorted(usable, key=lambda m:(-m['normalized_rank'],m['view_id'],m['candidate_id']))[:2] if request.decision_mode == 'assisted' else usable
+            used_keys = {(m['view_id'],m['candidate_id']) for m in used}
+            for member in contributors:
+                member['used_in_fusion'] = (member['view_id'],member['candidate_id']) in used_keys
+            ranking.append(RankedObject(obj['id'], obj['score'], tuple(sorted(m['view_id'] for m in usable)), tuple(contributors),
+                'object_bank_top2' if request.decision_mode == 'assisted' else 'winner_cluster_consensus'))
+        ranking.sort(key=lambda r:(-r.relative_score,r.identity_id))
+        tied = bool(len(ranking)>1 and np.isclose(ranking[0].relative_score,ranking[1].relative_score,atol=1e-12,rtol=0))
+        selected = ranking[0].identity_id if ranking and not tied else None
+        if tied:
+            reasons.append('The leading combined scores are tied; no unique object is selected.')
+        if not ranking:
+            reasons.append('At least three usable peers and sufficient identity evidence are required.')
+        if request.decision_mode == 'assisted' and request.corrections is None:
+            reasons.append('Confirm neutral identities across all views before assisted scoring.')
+        if selected and len(ranking[0].view_ids) < len(views):
+            reasons.append('The selected object is not linked in every uploaded view; absence is not established.')
+        if request.decision_mode == 'assisted' and any(not c.box.identity_id for c in candidates):
+            reasons.append('Unknown identities remain visible and unscored; they are excluded from trusted peer banks.')
+        reasons.append('Development method: review identities and visual evidence; scores are not calibrated probabilities.')
+        lookup = {(v,o['candidate_id']):o['scores'] for v,row in rows.items() for o in row['objects']}
+        scored = {(o['view_id'],o['candidate_id']):o for o in decision['scored_observations'] or []}
+        output = []
+        for index,c in enumerate(candidates):
+            key = (c.box.view_id,c.box.object_id)
+            identity = decision['identities'].get(key, f'unlinked_{index+1}')
+            components = dict(lookup[key])
+            score = decision['component_rank'].get(key)
+            patchmap = heatmaps.get(key)
+            status = 'supported_winner' if key in decision['identities'] else 'unlinked'
+            source = 'predicted'
+            if request.decision_mode == 'assisted':
+                item = scored[key]
+                score = item['object_bank']['score']
+                components['object_bank'] = score
+                status = 'confirmed' if c.box.identity_id else 'unknown'
+                source = 'user_confirmed' if c.box.identity_id else 'unknown'
+                if item['object_bank']['patch_scores']:
+                    patchmap = np.full((16,16),np.nan)
+                    patchmap[c.validity] = item['object_bank']['patch_scores']
+                else:
+                    patchmap = None
             heatmap = None
-            if candidate.heatmap is not None:
-                strength = np.clip(
-                    np.nan_to_num(candidate.heatmap, nan=0.0) / max(limit, 1e-12), 0, 1
-                )
-                alpha = transform.restore(
-                    Image.fromarray((strength * 255).astype(np.uint8))
-                )
-                heatmap = Image.composite(
-                    Image.new("RGB", view.image.size, "#ec7c36"), view.image, alpha
-                )
-            box = Box(key[0], key[1], identities[key], candidate.box.xyxy)
-            observations.append(Observation(box, candidate.score, mask, heatmap))
-        result = InspectionResult(
-            tuple(ranked),
-            tuple(observations),
-            state,
-            tuple(dict.fromkeys(reasons)),
-            f"{self.config['method_version']}:{pipeline_fingerprint()}",
-            self.policy_version,
-            "assisted" if request.corrections is not None else "automatic",
-            provenance={
-                "pipeline": self.config,
-                "pipeline_sha256": pipeline_fingerprint(),
-                "score_kind": "mean_normalized_rank",
-                "prediction_only": True,
-                "review_signals": signals,
-                "identity_tracks": [
-                    {
-                        **track,
-                        "members": [
-                            {"view_id": key[0], "object_id": key[1]}
-                            for key in track["members"]
-                        ],
-                    }
-                    for track in tracks
-                ],
-            },
-        )
-        validate_result(result, request)
+            if patchmap is not None and c.crop is not None:
+                projected = project_crop_heatmap(patchmap,c.crop,c.mask)
+                finite = projected[np.isfinite(projected)]
+                strength = np.clip(np.nan_to_num(projected,nan=0)/max(float(finite.max()) if len(finite) else 0,1e-12),0,1)
+                image = next(v.image for v in request.views if v.view_id == c.box.view_id)
+                heatmap = Image.composite(Image.new('RGB',image.size,'#ec7c36'),image,Image.fromarray((strength*255).astype(np.uint8)))
+            output.append(Observation(Box(c.box.view_id,c.box.object_id,identity,c.box.xyxy),components.get('P1_current'),
+                Image.fromarray(c.mask.astype(np.uint8)*255),heatmap,score,
+                'object_bank' if request.decision_mode=='assisted' else 'winner_consensus_components', components,
+                decision['component_rank'].get(key),status,source))
+        evidence = tuple(output)
+        insufficient = not ranking or (selected is not None and len(ranking[0].view_ids)<2)
+        result = InspectionResult(tuple(ranking), evidence, 'insufficient_evidence' if insufficient else 'review_recommended',
+            tuple(dict.fromkeys(reasons)), self.config['method_version']+':'+pipeline_fingerprint(),self.policy_version,request.decision_mode,
+            {'pipeline':self.config,'pipeline_sha256':pipeline_fingerprint(),'prediction_only':True,
+             'review_signals':{'insufficient_evidence':insufficient}, 'cache':{'reused_candidates':reused,'encoded_candidates':computed},
+             'identity_tracks':decision['tracks'],'score_kind':'object_bank_top2' if request.decision_mode=='assisted' else 'winner_cluster_consensus'},
+            selected,request.session_id,token,
+            {'method_label':'Assisted patch bank' if request.decision_mode=='assisted' else 'Automatic winner consensus',
+             'selection_status':'tied' if tied else ('unique' if selected else 'insufficient'),
+             'missing_links':[v for v in views if selected and v not in ranking[0].view_ids],
+             'suggested_identities':decision['suggested_identities'] if request.decision_mode=='automatic' or request.corrections is None else
+                [{'view_id':c.box.view_id,'candidate_id':c.box.object_id,'identity_id':c.box.identity_id,'status':'confirmed' if c.box.identity_id else 'unknown'} for c in candidates],
+             'all_object_rankings':raw_rankings,'heatmap_scope':'coarse foreground patch evidence; independently scaled for display'})
+        validate_result(result,request)
         return result

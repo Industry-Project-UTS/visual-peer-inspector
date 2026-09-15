@@ -59,8 +59,11 @@ def main():
     models = None
     try:
         with redirect_stdout(sys.stderr):
-            versions = check_installation()
-            from .model_runtime import GPUModels
+            from .model_runtime import GPUModels, runtime_versions
+            # Cached decisions need only NumPy/SciPy and never initialise CUDA,
+            # SAM, Transformers or checkpoint downloads. Neural stages validate
+            # their own dependencies lazily when missing evidence requires them.
+            versions = runtime_versions()
             from .pipeline import UploadPipeline
             from .transport import read_request, write_result
 

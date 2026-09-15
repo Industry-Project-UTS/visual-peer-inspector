@@ -1,0 +1,5 @@
+# CPU-only matching/fusion runtime used by the selected 08O/08P decision code.
+numpy==2.5.3
+scipy==1.18.1
+pandas==2.2.3
+pillow==12.3.0

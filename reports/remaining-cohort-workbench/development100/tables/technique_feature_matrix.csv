@@ -1,0 +1,117 @@
+source_stage,route,method,view_count,correspondence,regions,report_status,development_evidence,full_role_compatibility
+08O,automatic_predicted,cached_forward_mean,1,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,cached_forward_mean,2,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,cached_forward_mean,3,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,cached_forward_mean,5,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,cached_forward_top2,1,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,cached_forward_top2,2,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,cached_forward_top2,3,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,cached_forward_top2,5,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,object_bank_mean,1,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,object_bank_mean,2,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,object_bank_mean,3,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,object_bank_mean,5,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,object_bank_top2,1,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,object_bank_top2,2,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,object_bank_top2,3,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,object_bank_top2,5,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,view_mean_control_mean,1,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,view_mean_control_mean,2,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,view_mean_control_mean,3,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,view_mean_control_mean,5,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,view_mean_control_top2,1,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,view_mean_control_top2,2,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,view_mean_control_top2,3,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,view_mean_control_top2,5,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,winner_cluster_consensus,1,predicted,predicted masks,frozen automatic baseline,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,winner_cluster_consensus,2,predicted,predicted masks,frozen automatic baseline,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,winner_cluster_consensus,3,predicted,predicted masks,frozen automatic baseline,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,winner_cluster_consensus,5,predicted,predicted masks,frozen automatic baseline,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,within_view_mean,1,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,within_view_mean,2,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,within_view_mean,3,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,within_view_mean,5,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,within_view_top2,1,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,within_view_top2,2,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,within_view_top2,3,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_predicted,within_view_top2,5,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,cached_forward_mean,1,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,cached_forward_mean,2,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,cached_forward_mean,3,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,cached_forward_mean,5,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,cached_forward_top2,1,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,cached_forward_top2,2,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,cached_forward_top2,3,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,cached_forward_top2,5,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,object_bank_mean,1,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,object_bank_mean,2,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,object_bank_mean,3,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,object_bank_mean,5,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,object_bank_top2,1,supplied,predicted masks,frozen assisted method,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,object_bank_top2,2,supplied,predicted masks,frozen assisted method,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,object_bank_top2,3,supplied,predicted masks,frozen assisted method,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,object_bank_top2,5,supplied,predicted masks,frozen assisted method,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,view_mean_control_mean,1,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,view_mean_control_mean,2,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,view_mean_control_mean,3,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,view_mean_control_mean,5,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,view_mean_control_top2,1,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,view_mean_control_top2,2,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,view_mean_control_top2,3,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,view_mean_control_top2,5,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,within_view_mean,1,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,within_view_mean,2,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,within_view_mean,3,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,within_view_mean,5,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,within_view_top2,1,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,within_view_top2,2,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,within_view_top2,3,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,automatic_reference,within_view_top2,5,supplied,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,cached_forward_mean,1,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,cached_forward_mean,2,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,cached_forward_mean,3,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,cached_forward_mean,5,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,cached_forward_top2,1,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,cached_forward_top2,2,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,cached_forward_top2,3,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,cached_forward_top2,5,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,object_bank_mean,1,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,object_bank_mean,2,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,object_bank_mean,3,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,object_bank_mean,5,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,object_bank_top2,1,supplied,supplied masks,frozen assisted method,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,object_bank_top2,2,supplied,supplied masks,frozen assisted method,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,object_bank_top2,3,supplied,supplied masks,frozen assisted method,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,object_bank_top2,5,supplied,supplied masks,frozen assisted method,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,view_mean_control_mean,1,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,view_mean_control_mean,2,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,view_mean_control_mean,3,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,view_mean_control_mean,5,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,view_mean_control_top2,1,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,view_mean_control_top2,2,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,view_mean_control_top2,3,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,view_mean_control_top2,5,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,within_view_mean,1,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,within_view_mean,2,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,within_view_mean,3,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,within_view_mean,5,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,within_view_top2,1,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,within_view_top2,2,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,within_view_top2,3,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08O,supplied_reference,within_view_top2,5,supplied,supplied masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,correspondence_assisted_reference,1,supplied,predicted masks,frozen assisted method,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,correspondence_assisted_reference,2,supplied,predicted masks,frozen assisted method,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,correspondence_assisted_reference,3,supplied,predicted masks,frozen assisted method,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,correspondence_assisted_reference,5,supplied,predicted masks,frozen assisted method,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,existing_all_candidates,1,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,existing_all_candidates,2,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,existing_all_candidates,3,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,existing_all_candidates,5,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,global_partial_assignment,1,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,global_partial_assignment,2,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,global_partial_assignment,3,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,global_partial_assignment,5,predicted,predicted masks,development comparison; not selected,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,winner_cluster_consensus,1,predicted,predicted masks,frozen automatic baseline,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,winner_cluster_consensus,2,predicted,predicted masks,frozen automatic baseline,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,winner_cluster_consensus,3,predicted,predicted masks,frozen automatic baseline,verified 100 scenes / 27 assets,not yet verified
+08P,automatic_predicted,winner_cluster_consensus,5,predicted,predicted masks,frozen automatic baseline,verified 100 scenes / 27 assets,not yet verified

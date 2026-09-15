@@ -80,13 +80,15 @@ def app_header(connected: bool) -> gr.HTML:
               <span>DINOv2-small</span></li>
             <li><h3>Compare peers</h3>
               <p>Rank objects by how different they look from similar objects.</p>
-              <span>P1 patch comparison</span></li>
+              <span>Automatic: forward, P1 and P2 scores<br>Assisted: cross-view object banks</span></li>
             <li><h3>Combine views</h3>
-              <p>Match the same object across images and combine its evidence.</p>
-              <span>Cross-view matching and rank fusion</span></li>
+              <p>Automatic uses winner consensus. Assisted combines the two strongest usable views after you confirm object identities.</p>
+              <span>Shared IDs mean the same physical object</span></li>
           </ol>
           <p class="pipeline-note">Unusual does not always mean defective.
-            Uncertain object matches may need your review.</p>
+            Check suggested matches in Review; leave uncertain IDs blank.
+            You do not label the unusual object. Editing only IDs reuses saved features.
+            Tied scores have no unique selection.</p>
         </dialog>
         """,
         js_on_load=PANEL_JS,
