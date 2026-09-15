@@ -1,0 +1,8 @@
+{
+  "evaluator_accessed": false,
+  "feature_count": 68,
+  "feature_lock_sha256": "b39a1ca6b37ab238f74c969d5234a748cc6c5969780bc6ab5356d5ef31484301",
+  "locked_files": 204,
+  "scene_count": 100,
+  "stage": "development-learned-peer-view-features-v1"
+}

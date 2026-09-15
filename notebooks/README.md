@@ -84,7 +84,11 @@ flowchart LR
     N8F --> N8G["08G Development scoring comparison"]
     N8G --> N8H["08H Development scoring evaluation"]
     N8H --> N8I["08I Development identity refinement"]
-    N8I --> N8F1["08F.1 Calibration resource release"]
+    N8I --> N8J["08J Identity association study"]
+    N8J --> N8K["08K Patch correspondence study"]
+    N8K --> N8L["08L Learned peer features"]
+    N8L --> N8M["08M Learned peer ranker"]
+    N8M --> N8F1["08F.1 Calibration resource release"]
     N8F1 --> N9A["09A Calibration inference"]
     N9A --> N9B["09B Review-policy freeze"]
     N9B --> N9B1["09B.1 Internal-lock resource release"]
@@ -161,6 +165,14 @@ flowchart LR
   `representation-and-scoring/development-scoring-comparison/08h-development-scoring-evaluation.ipynb`
 - Notebook 08I:
   `representation-and-scoring/development-identity-refinement/08i-development-identity-refinement.ipynb`
+- Notebook 08J:
+  `representation-and-scoring/development-identity-association/08j-development-identity-association.ipynb`
+- Notebook 08K:
+  `representation-and-scoring/development-patch-correspondence/08k-development-patch-correspondence.ipynb`
+- Notebook 08L:
+  `representation-and-scoring/development-learned-peer-view-ranker/08l-development-learned-peer-view-features.ipynb`
+- Notebook 08M:
+  `representation-and-scoring/development-learned-peer-view-ranker/08m-development-learned-peer-view-ranker.ipynb`
 - Notebook 08F.1:
   `protected-evaluation/08f1-toysad8k-calibration-resource-release.ipynb`
 - Notebook 09A:

@@ -20,10 +20,13 @@ describe a next step that has since been completed. Use the current
 | Development freeze | [Full development results](development-freeze-completion.md) | 1,000 scenes and 20,000 views locked; cross-view comparison complete, with low identity accuracy |
 | Development scoring | [Scoring comparison](development-scoring-comparison.md) | Fixed DINOv2-small features reused to compare nine scorers; identity association remains the main limitation |
 | Identity refinement | [Foreground patch comparison](development-identity-refinement.md) | Same 100-scene screen reused; top-1 improved but identity-link F1 fell, so no method was promoted |
+| Identity association | [Association study](development-identity-association.md) | Reciprocal and cycle-pruned alternatives were rejected because ranking gains came with weak or fragmented identity tracks |
+| Patch correspondence | [Patch correspondence study](development-patch-correspondence.md) | Foreground patch and Sinkhorn alternatives did not pass the joint promotion rule |
+| Learned peer ranking | [Learned peer-view ranker](development-learned-peer-view-ranker.md) | Winner consensus improved tie-aware top-1 on the development screen and was selected for frozen confirmation |
 
 ## Current position
 
-Notebooks 01 to 08I are complete as development evidence. The DS1 screen
+Notebooks 01 to 08M are complete as development evidence. The DS1 screen
 selected DINOv2-small with P1 for confirmation, with B0 retained as the
 baseline. The bounded LocateAnything prompt comparison was verified on Kaggle
 Version 4. The 300-scene DS2 release, frozen model run, and protected
@@ -60,3 +63,13 @@ top-1 accuracy from 0.24 to 0.31, but identity-link F1 fell from 0.188789 to
 0.139612 and the average-precision interval crossed zero. No method was
 promoted. The current global descriptor remains the stable default while the
 next development study focuses only on track association.
+
+Notebooks 08J and 08K completed the bounded association studies. Reciprocal,
+cycle-pruned, foreground-patch and Sinkhorn candidates did not improve identity
+quality and ranking together, so the existing Hungarian association was
+retained. Notebook 08M then compared fixed and learned peer-ranking rules using
+the locked 08L features and asset-group folds. Winner consensus reached 0.377
+tie-aware top-1 on the primary automatic three-view schedule, compared with
+0.205 for the previous forward-patch baseline. Across all five declared
+three-view schedules it averaged 0.301. This is a development selection for a
+separate frozen confirmation, not a final accuracy claim.

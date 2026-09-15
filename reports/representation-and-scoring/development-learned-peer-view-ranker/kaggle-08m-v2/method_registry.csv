@@ -1,0 +1,15 @@
+method,description,learned,deployable_route
+B0,Mean fused B0 percentile rank,False,automatic
+P1_current,Mean fused current P1 percentile rank,False,automatic
+P2_consensus,Mean fused P2 percentile rank,False,automatic
+forward_02_cov70,Mean fused selected forward-patch percentile rank,False,automatic
+robust_forward,Huber fused forward-patch percentile rank,False,automatic
+robust_borda,Huber fusion of five within-view scorer ranks,False,automatic
+soft_support_fusion,"Fixed robust fusion of forward, P1 and cross-view DINO support",False,automatic
+view_vote_forward,Single-view forward rankings accumulated as soft votes across predicted tracks,False,automatic
+view_vote_consensus,"Single-view forward, P1 and P2 rankings accumulated as soft votes across predicted tracks",False,automatic
+winner_cluster_forward,Cluster per-view forward winners at fixed DINO distance 0.20; retain unsupported winners as review cases,False,automatic
+winner_cluster_consensus,Cluster per-view consensus winners at fixed DINO distance 0.20; retain unsupported winners as review cases,False,automatic
+learned_listwise,Linear scene-softmax learning-to-rank head,True,automatic
+learned_ranknet,Linear pairwise RankNet-style head,True,automatic
+learned_hybrid,Equal-weight scene-softmax and pairwise loss,True,automatic

@@ -1,0 +1,2795 @@
+Stage: 08M Kaggle Version 2
+Status: completed
+Clean notebook: 08m-development-learned-peer-view-ranker.ipynb
+Clean notebook SHA-256: babadf5cf3f403da571dc02e8f4df3da20fc9a088ad2e1652bbcfa0e7e505c3a
+Downloaded saved-output SHA-256: f9f43a4ffcc78c15a31d8fad1ec3d7b72cf90219ab6669567e141b2ef96b6c2f
+Executed code cells: 8
+Retained output blocks: 34
+Retained safe visuals: 5
+Removed private visuals: 12
+
+Sanitised execution transcript
+==============================
+
+[cell 3]
+{"event": "preflight_complete", "runtime_versions": {"matplotlib": "3.10.0", "numpy": "2.0.2", "pandas": "2.3.3", "pillow": "11.3.0", "scipy": "1.16.3"}, "scoring_lock_sha256": "12ce9bfc2bb401c29621d91000c53ff4fd39504fc28e55ff8a921e0b5443690d", "scoring_root": "/kaggle/input/notebooks/esreekarreddy/toysad-8k-development-scoring-comparison-full/scoring-comparison-08g", "source_root": "/kaggle/input/datasets/esreekarreddy/vpi-learned-peer-view-source/learned-peer-view-source-v1/learned-peer-view-source", "stage": "notebook-08m"}
+{"evaluator_root": "/kaggle/input/datasets/esreekarreddy/vpi-development-scoring-evaluator/evaluator-only", "event": "evaluation_inputs_located", "feature_root": "/kaggle/input/notebooks/esreekarreddy/toysad-8k-development-learned-peer-features/learned-peer-features-08l", "model_input_root": "/kaggle/input/datasets/esreekarreddy/vpi-development-scoring-model-input/model-input"}
+
+[cell 5]
+{"artifact_lock_sha256": "cc6d1b64e9ec616087bc2ef787f348e74dd4f9ee5b3f27da302e4fdaa0427221", "asset_groups": 27, "event": "metric_evaluation_complete", "locked_files": 52, "methods": 14, "scenes": 100, "selected_method": "winner_cluster_consensus", "status": "selected_for_frozen_confirmation"}
+
+[cell 5]
+CompletedProcess(args=['/usr/bin/python3', '/kaggle/input/datasets/esreekarreddy/vpi-learned-peer-view-source/learned-peer-view-source-v1/learned-peer-view-source/scripts/run_metric_evaluation.py', '--feature-root', '/kaggle/input/notebooks/esreekarreddy/toysad-8k-development-learned-peer-features/learned-peer-features-08l', '--scoring-root', '/kaggle/input/notebooks/esreekarreddy/toysad-8k-development-scoring-comparison-full/scoring-comparison-08g', '--evaluator-root', '/kaggle/input/datasets/esreekarreddy/vpi-development-scoring-evaluator/evaluator-only', '--model-input-root', '/kaggle/input/datasets/esreekarreddy/vpi-development-scoring-model-input/model-input', '--output', '/kaggle/working/learned-peer-evaluation-08m'], returncode=0)
+
+[cell 7]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>method</th>
+      <th>scenes</th>
+      <th>asset_groups</th>
+      <th>top1_tie_expected</th>
+      <th>top1_tie_best</th>
+      <th>top1_tie_worst</th>
+      <th>ap_tie_expected</th>
+      <th>recall_at_2_tie_expected</th>
+      <th>reciprocal_rank_tie_expected</th>
+      <th>mean_top_tie_count</th>
+      <th>mean_margin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>winner_cluster_consensus</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.376667</td>
+      <td>0.43</td>
+      <td>0.33</td>
+      <td>0.476500</td>
+      <td>0.525833</td>
+      <td>0.528167</td>
+      <td>1.17</td>
+      <td>0.113982</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>winner_cluster_forward</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.303333</td>
+      <td>0.53</td>
+      <td>0.16</td>
+      <td>0.424306</td>
+      <td>0.505833</td>
+      <td>0.480278</td>
+      <td>1.87</td>
+      <td>0.133092</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>view_vote_consensus</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.235000</td>
+      <td>0.24</td>
+      <td>0.23</td>
+      <td>0.339738</td>
+      <td>0.335000</td>
+      <td>0.364286</td>
+      <td>1.05</td>
+      <td>0.259817</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>view_vote_forward</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.235000</td>
+      <td>0.27</td>
+      <td>0.21</td>
+      <td>0.333646</td>
+      <td>0.334167</td>
+      <td>0.362962</td>
+      <td>1.18</td>
+      <td>0.306331</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>soft_support_fusion</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.220000</td>
+      <td>0.22</td>
+      <td>0.22</td>
+      <td>0.324764</td>
+      <td>0.300000</td>
+      <td>0.347242</td>
+      <td>1.00</td>
+      <td>0.205734</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>robust_forward</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.215000</td>
+      <td>0.26</td>
+      <td>0.18</td>
+      <td>0.325076</td>
+      <td>0.325000</td>
+      <td>0.350545</td>
+      <td>1.27</td>
+      <td>0.240179</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>robust_borda</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.215000</td>
+      <td>0.23</td>
+      <td>0.20</td>
+      <td>0.313536</td>
+      <td>0.290000</td>
+      <td>0.339214</td>
+      <td>1.07</td>
+      <td>0.231742</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>P1_current</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.210000</td>
+      <td>0.24</td>
+      <td>0.18</td>
+      <td>0.311563</td>
+      <td>0.294167</td>
+      <td>0.338853</td>
+      <td>1.21</td>
+      <td>0.220873</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>forward_02_cov70</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.205000</td>
+      <td>0.25</td>
+      <td>0.17</td>
+      <td>0.321465</td>
+      <td>0.334167</td>
+      <td>0.346851</td>
+      <td>1.26</td>
+      <td>0.241845</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>learned_listwise</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.200000</td>
+      <td>0.20</td>
+      <td>0.20</td>
+      <td>0.309889</td>
+      <td>0.295000</td>
+      <td>0.332198</td>
+      <td>1.00</td>
+      <td>0.254955</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>learned_ranknet</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.200000</td>
+      <td>0.20</td>
+      <td>0.20</td>
+      <td>0.309627</td>
+      <td>0.290000</td>
+      <td>0.331603</td>
+      <td>1.00</td>
+      <td>0.245581</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>P2_consensus</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.195000</td>
+      <td>0.21</td>
+      <td>0.18</td>
+      <td>0.307048</td>
+      <td>0.278333</td>
+      <td>0.332679</td>
+      <td>1.14</td>
+      <td>0.249157</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>B0</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.193333</td>
+      <td>0.23</td>
+      <td>0.16</td>
+      <td>0.305834</td>
+      <td>0.287500</td>
+      <td>0.331438</td>
+      <td>1.27</td>
+      <td>0.212262</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>learned_hybrid</td>
+      <td>100</td>
+      <td>27</td>
+      <td>0.190000</td>
+      <td>0.19</td>
+      <td>0.19</td>
+      <td>0.306056</td>
+      <td>0.295000</td>
+      <td>0.326365</td>
+      <td>1.00</td>
+      <td>0.250475</td>
+    </tr>
+  </tbody>
+</table>
+</div>                      method  scenes  asset_groups  top1_tie_expected  \
+0   winner_cluster_consensus     100            27           0.376667
+1     winner_cluster_forward     100            27           0.303333
+2        view_vote_consensus     100            27           0.235000
+3          view_vote_forward     100            27           0.235000
+4        soft_support_fusion     100            27           0.220000
+5             robust_forward     100            27           0.215000
+6               robust_borda     100            27           0.215000
+7                 P1_current     100            27           0.210000
+8           forward_02_cov70     100            27           0.205000
+9           learned_listwise     100            27           0.200000
+10           learned_ranknet     100            27           0.200000
+11              P2_consensus     100            27           0.195000
+12                        B0     100            27           0.193333
+13            learned_hybrid     100            27           0.190000
+
+    top1_tie_best  top1_tie_worst  ap_tie_expected  recall_at_2_tie_expected  \
+0            0.43            0.33         0.476500                  0.525833
+1            0.53            0.16         0.424306                  0.505833
+2            0.24            0.23         0.339738                  0.335000
+3            0.27            0.21         0.333646                  0.334167
+4            0.22            0.22         0.324764                  0.300000
+5            0.26            0.18         0.325076                  0.325000
+6            0.23            0.20         0.313536                  0.290000
+7            0.24            0.18         0.311563                  0.294167
+8            0.25            0.17         0.321465                  0.334167
+9            0.20            0.20         0.309889                  0.295000
+10           0.20            0.20         0.309627                  0.290000
+11           0.21            0.18         0.307048                  0.278333
+12           0.23            0.16         0.305834                  0.287500
+13           0.19            0.19         0.306056                  0.295000
+
+    reciprocal_rank_tie_expected  mean_top_tie_count  mean_margin
+0                       0.528167                1.17     0.113982
+1                       0.480278                1.87     0.133092
+2                       0.364286                1.05     0.259817
+3                       0.362962                1.18     0.306331
+4                       0.347242                1.00     0.205734
+5                       0.350545                1.27     0.240179
+6                       0.339214                1.07     0.231742
+7                       0.338853                1.21     0.220873
+8                       0.346851                1.26     0.241845
+9                       0.332198                1.00     0.254955
+10                      0.331603                1.00     0.245581
+11                      0.332679                1.14     0.249157
+12                      0.331438                1.27     0.212262
+13                      0.326365                1.00     0.250475
+
+[cell 7]
+{'baseline': {'ap': 0.3214649470899471,
+  'deterministic_top1': 0.24,
+  'recall_at_2': 0.33416666666666667,
+  'reciprocal_rank': 0.3468505291005291,
+  'top1': 0.205},
+ 'baseline_ap_standard_error': 0.045000986779143326,
+ 'baseline_recall_at_2_standard_error': 0.047519342995122976,
+ 'best_grouped_fold_standard_error': 0.02378129326390875,
+ 'best_observed_method': 'winner_cluster_consensus',
+ 'candidates': [{'ap': 0.4765,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.4,
+   'folds_improved': 5,
+   'method': 'winner_cluster_consensus',
+   'recall_at_2': 0.5258333333333334,
+   'recall_at_2_noninferior': True,
+   'reciprocal_rank': 0.5281666666666667,
+   'top1': 0.37666666666666665,
+   'top1_difference': 0.17166666666666666,
+   'within_one_standard_error': True},
+  {'ap': 0.42430555555555555,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.43,
+   'folds_improved': 5,
+   'method': 'winner_cluster_forward',
+   'recall_at_2': 0.5058333333333334,
+   'recall_at_2_noninferior': True,
+   'reciprocal_rank': 0.4802777777777778,
+   'top1': 0.30333333333333334,
+   'top1_difference': 0.09833333333333336,
+   'within_one_standard_error': False},
+  {'ap': 0.33973809523809523,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.24,
+   'folds_improved': 2,
+   'method': 'view_vote_consensus',
+   'recall_at_2': 0.335,
+   'recall_at_2_noninferior': True,
+   'reciprocal_rank': 0.3642857142857143,
+   'top1': 0.235,
+   'top1_difference': 0.03,
+   'within_one_standard_error': False},
+  {'ap': 0.3336455026455027,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.25,
+   'folds_improved': 4,
+   'method': 'view_vote_forward',
+   'recall_at_2': 0.33416666666666667,
+   'recall_at_2_noninferior': True,
+   'reciprocal_rank': 0.3629616402116402,
+   'top1': 0.235,
+   'top1_difference': 0.03,
+   'within_one_standard_error': False},
+  {'ap': 0.3247638888888889,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.22,
+   'folds_improved': 2,
+   'method': 'soft_support_fusion',
+   'recall_at_2': 0.3,
+   'recall_at_2_noninferior': True,
+   'reciprocal_rank': 0.3472420634920635,
+   'top1': 0.22,
+   'top1_difference': 0.015000000000000013,
+   'within_one_standard_error': False},
+  {'ap': 0.3250760582010582,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.25,
+   'folds_improved': 1,
+   'method': 'robust_forward',
+   'recall_at_2': 0.325,
+   'recall_at_2_noninferior': True,
+   'reciprocal_rank': 0.35054497354497355,
+   'top1': 0.215,
+   'top1_difference': 0.010000000000000009,
+   'within_one_standard_error': False},
+  {'ap': 0.31353571428571425,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.22,
+   'folds_improved': 2,
+   'method': 'robust_borda',
+   'recall_at_2': 0.29,
+   'recall_at_2_noninferior': True,
+   'reciprocal_rank': 0.3392142857142857,
+   'top1': 0.215,
+   'top1_difference': 0.010000000000000009,
+   'within_one_standard_error': False},
+  {'ap': 0.31156349206349204,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.23,
+   'folds_improved': 3,
+   'method': 'P1_current',
+   'recall_at_2': 0.2941666666666667,
+   'recall_at_2_noninferior': True,
+   'reciprocal_rank': 0.3388531746031746,
+   'top1': 0.21,
+   'top1_difference': 0.0050000000000000044,
+   'within_one_standard_error': False},
+  {'ap': 0.3098888888888889,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.2,
+   'folds_improved': 2,
+   'method': 'learned_listwise',
+   'recall_at_2': 0.295,
+   'recall_at_2_noninferior': True,
+   'reciprocal_rank': 0.33219841269841266,
+   'top1': 0.2,
+   'top1_difference': -0.004999999999999977,
+   'within_one_standard_error': False},
+  {'ap': 0.30962698412698414,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.2,
+   'folds_improved': 1,
+   'method': 'learned_ranknet',
+   'recall_at_2': 0.29,
+   'recall_at_2_noninferior': True,
+   'reciprocal_rank': 0.33160317460317457,
+   'top1': 0.2,
+   'top1_difference': -0.004999999999999977,
+   'within_one_standard_error': False},
+  {'ap': 0.30704761904761907,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.21,
+   'folds_improved': 2,
+   'method': 'P2_consensus',
+   'recall_at_2': 0.2783333333333333,
+   'recall_at_2_noninferior': False,
+   'reciprocal_rank': 0.33267857142857143,
+   'top1': 0.195,
+   'top1_difference': -0.009999999999999981,
+   'within_one_standard_error': False},
+  {'ap': 0.3058343253968254,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.23,
+   'folds_improved': 2,
+   'method': 'B0',
+   'recall_at_2': 0.2875,
+   'recall_at_2_noninferior': True,
+   'reciprocal_rank': 0.331438492063492,
+   'top1': 0.19333333333333333,
+   'top1_difference': -0.011666666666666659,
+   'within_one_standard_error': False},
+  {'ap': 0.3060555555555555,
+   'ap_noninferior': True,
+   'deterministic_top1': 0.19,
+   'folds_improved': 1,
+   'method': 'learned_hybrid',
+   'recall_at_2': 0.295,
+   'recall_at_2_noninferior': True,
+   'reciprocal_rank': 0.3263650793650794,
+   'top1': 0.19,
+   'top1_difference': -0.014999999999999986,
+   'within_one_standard_error': False}],
+ 'decision_rule': {'complexity_order': ['forward_02_cov70',
+   'B0',
+   'P1_current',
+   'P2_consensus',
+   'robust_forward',
+   'robust_borda',
+   'soft_support_fusion',
+   'view_vote_forward',
+   'view_vote_consensus',
+   'winner_cluster_forward',
+   'winner_cluster_consensus',
+   'learned_listwise',
+   'learned_ranknet',
+   'learned_hybrid'],
+  'route': 'automatic',
+  'rule': 'simplest method within one grouped-fold standard error of the best tie-expected top-1, subject to one-standard-error non-inferiority for tie-expected AP and recall at two',
+  'tie_handling': 'average all scientific metrics over equal-score permutations',
+  'view_set_id': 'three-primary'},
+ 'development_only': True,
+ 'one_standard_error_floor': 0.3528853734027579,
+ 'primary_route': 'automatic',
+ 'primary_view_set': 'three-primary',
+ 'protected_calibration_used': False,
+ 'protected_internal_lock_used': False,
+ 'selected_method': 'winner_cluster_consensus',
+ 'status': 'selected_for_frozen_confirmation'}
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>view_set_id</th>
+      <th>view_count</th>
+      <th>method</th>
+      <th>fold</th>
+      <th>scenes</th>
+      <th>top1</th>
+      <th>top1_tie_expected</th>
+      <th>ap</th>
+      <th>ap_tie_expected</th>
+      <th>recall_at_2</th>
+      <th>recall_at_2_tie_expected</th>
+      <th>reciprocal_rank</th>
+      <th>reciprocal_rank_tie_expected</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>630</th>
+      <td>automatic</td>
+      <td>three-primary</td>
+      <td>3</td>
+      <td>B0</td>
+      <td>0</td>
+      <td>22</td>
+      <td>0.227273</td>
+      <td>0.181818</td>
+      <td>0.293398</td>
+      <td>0.265923</td>
+      <td>0.250000</td>
+      <td>0.238636</td>
+      <td>0.335281</td>
+      <td>0.305709</td>
+    </tr>
+    <tr>
+      <th>631</th>
+      <td>automatic</td>
+      <td>three-primary</td>
+      <td>3</td>
+      <td>B0</td>
+      <td>1</td>
+      <td>19</td>
+      <td>0.157895</td>
+      <td>0.157895</td>
+      <td>0.250877</td>
+      <td>0.254532</td>
+      <td>0.210526</td>
+      <td>0.241228</td>
+      <td>0.257895</td>
+      <td>0.263743</td>
+    </tr>
+    <tr>
+      <th>632</th>
+      <td>automatic</td>
+      <td>three-primary</td>
+      <td>3</td>
+      <td>B0</td>
+      <td>2</td>
+      <td>19</td>
+      <td>0.210526</td>
+      <td>0.157895</td>
+      <td>0.285150</td>
+      <td>0.265633</td>
+      <td>0.236842</td>
+      <td>0.236842</td>
+      <td>0.309712</td>
+      <td>0.282519</td>
+    </tr>
+    <tr>
+      <th>633</th>
+      <td>automatic</td>
+      <td>three-primary</td>
+      <td>3</td>
+      <td>B0</td>
+      <td>3</td>
+      <td>19</td>
+      <td>0.052632</td>
+      <td>0.052632</td>
+      <td>0.226754</td>
+      <td>0.223225</td>
+      <td>0.236842</td>
+      <td>0.210526</td>
+      <td>0.240351</td>
+      <td>0.236508</td>
+    </tr>
+    <tr>
+      <th>634</th>
+      <td>automatic</td>
+      <td>three-primary</td>
+      <td>3</td>
+      <td>B0</td>
+      <td>4</td>
+      <td>21</td>
+      <td>0.476190</td>
+      <td>0.396825</td>
+      <td>0.541553</td>
+      <td>0.505178</td>
+      <td>0.523810</td>
+      <td>0.496032</td>
+      <td>0.590136</td>
+      <td>0.549792</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>695</th>
+      <td>automatic</td>
+      <td>three-primary</td>
+      <td>3</td>
+      <td>winner_cluster_forward</td>
+      <td>0</td>
+      <td>22</td>
+      <td>0.363636</td>
+      <td>0.234848</td>
+      <td>0.465909</td>
+      <td>0.388258</td>
+      <td>0.590909</td>
+      <td>0.492424</td>
+      <td>0.522727</td>
+      <td>0.443182</td>
+    </tr>
+    <tr>
+      <th>696</th>
+      <td>automatic</td>
+      <td>three-primary</td>
+      <td>3</td>
+      <td>winner_cluster_forward</td>
+      <td>1</td>
+      <td>19</td>
+      <td>0.368421</td>
+      <td>0.280702</td>
+      <td>0.447368</td>
+      <td>0.402047</td>
+      <td>0.552632</td>
+      <td>0.491228</td>
+      <td>0.473684</td>
+      <td>0.418129</td>
+    </tr>
+    <tr>
+      <th>697</th>
+      <td>automatic</td>
+      <td>three-primary</td>
+      <td>3</td>
+      <td>winner_cluster_forward</td>
+      <td>2</td>
+      <td>19</td>
+      <td>0.526316</td>
+      <td>0.438596</td>
+      <td>0.539474</td>
+      <td>0.495614</td>
+      <td>0.605263</td>
+      <td>0.539474</td>
+      <td>0.631579</td>
+      <td>0.571637</td>
+    </tr>
+    <tr>
+      <th>698</th>
+      <td>automatic</td>
+      <td>three-primary</td>
+      <td>3</td>
+      <td>winner_cluster_forward</td>
+      <td>3</td>
+      <td>19</td>
+      <td>0.473684</td>
+      <td>0.236842</td>
+      <td>0.460526</td>
+      <td>0.361111</td>
+      <td>0.500000</td>
+      <td>0.447368</td>
+      <td>0.570175</td>
+      <td>0.440058</td>
+    </tr>
+    <tr>
+      <th>699</th>
+      <td>automatic</td>
+      <td>three-primary</td>
+      <td>3</td>
+      <td>winner_cluster_forward</td>
+      <td>4</td>
+      <td>21</td>
+      <td>0.428571</td>
+      <td>0.333333</td>
+      <td>0.539683</td>
+      <td>0.474868</td>
+      <td>0.642857</td>
+      <td>0.555556</td>
+      <td>0.595238</td>
+      <td>0.529101</td>
+    </tr>
+  </tbody>
+</table>
+<p>70 rows × 14 columns</p>
+</div>         route    view_set_id  view_count                  method  fold  \
+630  automatic  three-primary           3                      B0     0
+631  automatic  three-primary           3                      B0     1
+632  automatic  three-primary           3                      B0     2
+633  automatic  three-primary           3                      B0     3
+634  automatic  three-primary           3                      B0     4
+..         ...            ...         ...                     ...   ...
+695  automatic  three-primary           3  winner_cluster_forward     0
+696  automatic  three-primary           3  winner_cluster_forward     1
+697  automatic  three-primary           3  winner_cluster_forward     2
+698  automatic  three-primary           3  winner_cluster_forward     3
+699  automatic  three-primary           3  winner_cluster_forward     4
+
+     scenes      top1  top1_tie_expected        ap  ap_tie_expected  \
+630      22  0.227273           0.181818  0.293398         0.265923
+631      19  0.157895           0.157895  0.250877         0.254532
+632      19  0.210526           0.157895  0.285150         0.265633
+633      19  0.052632           0.052632  0.226754         0.223225
+634      21  0.476190           0.396825  0.541553         0.505178
+..      ...       ...                ...       ...              ...
+695      22  0.363636           0.234848  0.465909         0.388258
+696      19  0.368421           0.280702  0.447368         0.402047
+697      19  0.526316           0.438596  0.539474         0.495614
+698      19  0.473684           0.236842  0.460526         0.361111
+699      21  0.428571           0.333333  0.539683         0.474868
+
+     recall_at_2  recall_at_2_tie_expected  reciprocal_rank  \
+630     0.250000                  0.238636         0.335281
+631     0.210526                  0.241228         0.257895
+632     0.236842                  0.236842         0.309712
+633     0.236842                  0.210526         0.240351
+634     0.523810                  0.496032         0.590136
+..           ...                       ...              ...
+695     0.590909                  0.492424         0.522727
+696     0.552632                  0.491228         0.473684
+697     0.605263                  0.539474         0.631579
+698     0.500000                  0.447368         0.570175
+699     0.642857                  0.555556         0.595238
+
+     reciprocal_rank_tie_expected
+630                      0.305709
+631                      0.263743
+632                      0.282519
+633                      0.236508
+634                      0.549792
+..                            ...
+695                      0.443182
+696                      0.418129
+697                      0.571637
+698                      0.440058
+699                      0.529101
+
+[70 rows x 14 columns]
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>view_count</th>
+      <th>method</th>
+      <th>schedules</th>
+      <th>scenes</th>
+      <th>top1</th>
+      <th>top1_tie_expected</th>
+      <th>ap</th>
+      <th>ap_tie_expected</th>
+      <th>recall_at_2</th>
+      <th>recall_at_2_tie_expected</th>
+      <th>reciprocal_rank</th>
+      <th>reciprocal_rank_tie_expected</th>
+      <th>schedule_top1_std</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>B0</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.3820</td>
+      <td>0.382000</td>
+      <td>0.600683</td>
+      <td>0.600683</td>
+      <td>0.59900</td>
+      <td>0.599000</td>
+      <td>0.612667</td>
+      <td>0.612667</td>
+      <td>0.059749</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>P1_current</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4300</td>
+      <td>0.429000</td>
+      <td>0.631533</td>
+      <td>0.629617</td>
+      <td>0.64200</td>
+      <td>0.631000</td>
+      <td>0.644667</td>
+      <td>0.642500</td>
+      <td>0.051889</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>P2_consensus</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.3920</td>
+      <td>0.389667</td>
+      <td>0.607969</td>
+      <td>0.609867</td>
+      <td>0.61800</td>
+      <td>0.627000</td>
+      <td>0.623267</td>
+      <td>0.624411</td>
+      <td>0.058207</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>forward_02_cov70</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4820</td>
+      <td>0.481000</td>
+      <td>0.659986</td>
+      <td>0.659652</td>
+      <td>0.65400</td>
+      <td>0.654500</td>
+      <td>0.673333</td>
+      <td>0.672833</td>
+      <td>0.050547</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>learned_hybrid</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4480</td>
+      <td>0.452000</td>
+      <td>0.647302</td>
+      <td>0.649302</td>
+      <td>0.66500</td>
+      <td>0.665000</td>
+      <td>0.659733</td>
+      <td>0.661733</td>
+      <td>0.039623</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>learned_listwise</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4460</td>
+      <td>0.448000</td>
+      <td>0.646386</td>
+      <td>0.647386</td>
+      <td>0.66500</td>
+      <td>0.665000</td>
+      <td>0.658733</td>
+      <td>0.659733</td>
+      <td>0.040559</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>learned_ranknet</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4480</td>
+      <td>0.450000</td>
+      <td>0.647736</td>
+      <td>0.648736</td>
+      <td>0.66700</td>
+      <td>0.667000</td>
+      <td>0.660833</td>
+      <td>0.661833</td>
+      <td>0.042131</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>robust_borda</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4060</td>
+      <td>0.406667</td>
+      <td>0.617486</td>
+      <td>0.618608</td>
+      <td>0.62800</td>
+      <td>0.632833</td>
+      <td>0.631300</td>
+      <td>0.632789</td>
+      <td>0.057819</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>robust_forward</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4820</td>
+      <td>0.481000</td>
+      <td>0.659986</td>
+      <td>0.659652</td>
+      <td>0.65400</td>
+      <td>0.654500</td>
+      <td>0.673333</td>
+      <td>0.672833</td>
+      <td>0.050547</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>soft_support_fusion</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4820</td>
+      <td>0.484000</td>
+      <td>0.664319</td>
+      <td>0.665319</td>
+      <td>0.66400</td>
+      <td>0.663500</td>
+      <td>0.677667</td>
+      <td>0.678500</td>
+      <td>0.052010</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>view_vote_consensus</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4260</td>
+      <td>0.424000</td>
+      <td>0.635986</td>
+      <td>0.634902</td>
+      <td>0.66600</td>
+      <td>0.666500</td>
+      <td>0.647933</td>
+      <td>0.647100</td>
+      <td>0.056943</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>view_vote_forward</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4820</td>
+      <td>0.481000</td>
+      <td>0.659986</td>
+      <td>0.659652</td>
+      <td>0.65400</td>
+      <td>0.654500</td>
+      <td>0.673333</td>
+      <td>0.672833</td>
+      <td>0.050547</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>winner_cluster_consensus</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4240</td>
+      <td>0.423000</td>
+      <td>0.365500</td>
+      <td>0.365250</td>
+      <td>0.37100</td>
+      <td>0.371000</td>
+      <td>0.430000</td>
+      <td>0.429500</td>
+      <td>0.062710</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>automatic</td>
+      <td>1</td>
+      <td>winner_cluster_forward</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4820</td>
+      <td>0.481000</td>
+      <td>0.411000</td>
+      <td>0.410500</td>
+      <td>0.41100</td>
+      <td>0.411000</td>
+      <td>0.482000</td>
+      <td>0.481500</td>
+      <td>0.050547</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>B0</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.1980</td>
+      <td>0.176000</td>
+      <td>0.261822</td>
+      <td>0.251203</td>
+      <td>0.25200</td>
+      <td>0.246667</td>
+      <td>0.292129</td>
+      <td>0.279643</td>
+      <td>0.036645</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>P1_current</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2000</td>
+      <td>0.189333</td>
+      <td>0.265213</td>
+      <td>0.259361</td>
+      <td>0.25400</td>
+      <td>0.256333</td>
+      <td>0.294652</td>
+      <td>0.288170</td>
+      <td>0.032529</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>P2_consensus</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.1960</td>
+      <td>0.182000</td>
+      <td>0.264118</td>
+      <td>0.256725</td>
+      <td>0.26600</td>
+      <td>0.257000</td>
+      <td>0.292088</td>
+      <td>0.283155</td>
+      <td>0.039267</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>forward_02_cov70</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2180</td>
+      <td>0.210000</td>
+      <td>0.273711</td>
+      <td>0.269968</td>
+      <td>0.27000</td>
+      <td>0.267000</td>
+      <td>0.304017</td>
+      <td>0.299392</td>
+      <td>0.031793</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>learned_hybrid</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.1980</td>
+      <td>0.198000</td>
+      <td>0.264567</td>
+      <td>0.264567</td>
+      <td>0.26500</td>
+      <td>0.265000</td>
+      <td>0.294933</td>
+      <td>0.294933</td>
+      <td>0.047645</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>learned_listwise</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2040</td>
+      <td>0.204000</td>
+      <td>0.267817</td>
+      <td>0.267817</td>
+      <td>0.26600</td>
+      <td>0.266000</td>
+      <td>0.298100</td>
+      <td>0.298100</td>
+      <td>0.048270</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>learned_ranknet</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2000</td>
+      <td>0.200000</td>
+      <td>0.265669</td>
+      <td>0.265669</td>
+      <td>0.26900</td>
+      <td>0.269000</td>
+      <td>0.296119</td>
+      <td>0.296119</td>
+      <td>0.045826</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>robust_borda</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2060</td>
+      <td>0.195000</td>
+      <td>0.266001</td>
+      <td>0.261398</td>
+      <td>0.25000</td>
+      <td>0.250000</td>
+      <td>0.296621</td>
+      <td>0.290955</td>
+      <td>0.041982</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>robust_forward</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2180</td>
+      <td>0.210000</td>
+      <td>0.273711</td>
+      <td>0.269968</td>
+      <td>0.27000</td>
+      <td>0.267000</td>
+      <td>0.304017</td>
+      <td>0.299392</td>
+      <td>0.031793</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>soft_support_fusion</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2040</td>
+      <td>0.201000</td>
+      <td>0.269714</td>
+      <td>0.268714</td>
+      <td>0.27000</td>
+      <td>0.270000</td>
+      <td>0.297483</td>
+      <td>0.295983</td>
+      <td>0.032094</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>view_vote_consensus</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.1840</td>
+      <td>0.177000</td>
+      <td>0.257002</td>
+      <td>0.253619</td>
+      <td>0.25300</td>
+      <td>0.251000</td>
+      <td>0.281855</td>
+      <td>0.277971</td>
+      <td>0.032133</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>view_vote_forward</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.1820</td>
+      <td>0.163000</td>
+      <td>0.256231</td>
+      <td>0.248362</td>
+      <td>0.25700</td>
+      <td>0.259500</td>
+      <td>0.282686</td>
+      <td>0.272869</td>
+      <td>0.023076</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>winner_cluster_consensus</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.3740</td>
+      <td>0.359500</td>
+      <td>0.424333</td>
+      <td>0.418792</td>
+      <td>0.50100</td>
+      <td>0.503500</td>
+      <td>0.479833</td>
+      <td>0.473208</td>
+      <td>0.034839</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>automatic</td>
+      <td>2</td>
+      <td>winner_cluster_forward</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.4140</td>
+      <td>0.365000</td>
+      <td>0.453500</td>
+      <td>0.432500</td>
+      <td>0.53600</td>
+      <td>0.533000</td>
+      <td>0.507000</td>
+      <td>0.482000</td>
+      <td>0.043875</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>B0</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.1820</td>
+      <td>0.164167</td>
+      <td>0.278139</td>
+      <td>0.268551</td>
+      <td>0.25600</td>
+      <td>0.251167</td>
+      <td>0.304743</td>
+      <td>0.294304</td>
+      <td>0.036190</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>P1_current</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2040</td>
+      <td>0.192167</td>
+      <td>0.292792</td>
+      <td>0.285069</td>
+      <td>0.28700</td>
+      <td>0.273500</td>
+      <td>0.323945</td>
+      <td>0.314946</td>
+      <td>0.018082</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>P2_consensus</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.1740</td>
+      <td>0.166167</td>
+      <td>0.280613</td>
+      <td>0.273675</td>
+      <td>0.27300</td>
+      <td>0.258500</td>
+      <td>0.306383</td>
+      <td>0.299504</td>
+      <td>0.029578</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>forward_02_cov70</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2140</td>
+      <td>0.204167</td>
+      <td>0.304417</td>
+      <td>0.297833</td>
+      <td>0.30300</td>
+      <td>0.293500</td>
+      <td>0.332982</td>
+      <td>0.326259</td>
+      <td>0.054912</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>learned_hybrid</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2000</td>
+      <td>0.200000</td>
+      <td>0.292325</td>
+      <td>0.292325</td>
+      <td>0.28000</td>
+      <td>0.280000</td>
+      <td>0.320067</td>
+      <td>0.320067</td>
+      <td>0.046904</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>learned_listwise</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2060</td>
+      <td>0.206000</td>
+      <td>0.295008</td>
+      <td>0.295008</td>
+      <td>0.28200</td>
+      <td>0.282000</td>
+      <td>0.323667</td>
+      <td>0.323667</td>
+      <td>0.046152</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>learned_ranknet</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.1960</td>
+      <td>0.196000</td>
+      <td>0.290271</td>
+      <td>0.290271</td>
+      <td>0.27600</td>
+      <td>0.276000</td>
+      <td>0.318078</td>
+      <td>0.318078</td>
+      <td>0.051769</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>robust_borda</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.1800</td>
+      <td>0.176667</td>
+      <td>0.278788</td>
+      <td>0.277030</td>
+      <td>0.25900</td>
+      <td>0.257833</td>
+      <td>0.306414</td>
+      <td>0.304448</td>
+      <td>0.034721</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>robust_forward</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2220</td>
+      <td>0.214833</td>
+      <td>0.309265</td>
+      <td>0.303127</td>
+      <td>0.30700</td>
+      <td>0.293667</td>
+      <td>0.337282</td>
+      <td>0.331003</td>
+      <td>0.048906</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>soft_support_fusion</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2140</td>
+      <td>0.214000</td>
+      <td>0.302819</td>
+      <td>0.302819</td>
+      <td>0.28500</td>
+      <td>0.285000</td>
+      <td>0.330387</td>
+      <td>0.330387</td>
+      <td>0.049800</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>view_vote_consensus</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2240</td>
+      <td>0.221667</td>
+      <td>0.308760</td>
+      <td>0.307307</td>
+      <td>0.29600</td>
+      <td>0.294333</td>
+      <td>0.336648</td>
+      <td>0.335237</td>
+      <td>0.048276</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>view_vote_forward</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.2380</td>
+      <td>0.232667</td>
+      <td>0.319469</td>
+      <td>0.314903</td>
+      <td>0.32600</td>
+      <td>0.319000</td>
+      <td>0.349752</td>
+      <td>0.345437</td>
+      <td>0.045071</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>winner_cluster_consensus</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.3180</td>
+      <td>0.301333</td>
+      <td>0.435667</td>
+      <td>0.427272</td>
+      <td>0.49500</td>
+      <td>0.485500</td>
+      <td>0.476667</td>
+      <td>0.467550</td>
+      <td>0.062153</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>automatic</td>
+      <td>3</td>
+      <td>winner_cluster_forward</td>
+      <td>5</td>
+      <td>100</td>
+      <td>0.3860</td>
+      <td>0.294667</td>
+      <td>0.477500</td>
+      <td>0.430333</td>
+      <td>0.55900</td>
+      <td>0.504500</td>
+      <td>0.534000</td>
+      <td>0.477722</td>
+      <td>0.017256</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>B0</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.1425</td>
+      <td>0.130500</td>
+      <td>0.245530</td>
+      <td>0.237659</td>
+      <td>0.23250</td>
+      <td>0.220417</td>
+      <td>0.261495</td>
+      <td>0.252048</td>
+      <td>0.022474</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>P1_current</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.1625</td>
+      <td>0.151750</td>
+      <td>0.260509</td>
+      <td>0.253093</td>
+      <td>0.25375</td>
+      <td>0.248188</td>
+      <td>0.277054</td>
+      <td>0.269394</td>
+      <td>0.022460</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>P2_consensus</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.1500</td>
+      <td>0.143125</td>
+      <td>0.252529</td>
+      <td>0.248709</td>
+      <td>0.24750</td>
+      <td>0.243333</td>
+      <td>0.269590</td>
+      <td>0.264715</td>
+      <td>0.032733</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>forward_02_cov70</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.1675</td>
+      <td>0.158333</td>
+      <td>0.266790</td>
+      <td>0.262649</td>
+      <td>0.26375</td>
+      <td>0.264417</td>
+      <td>0.285604</td>
+      <td>0.281475</td>
+      <td>0.018295</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>learned_hybrid</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.1775</td>
+      <td>0.177500</td>
+      <td>0.269238</td>
+      <td>0.269238</td>
+      <td>0.25125</td>
+      <td>0.251250</td>
+      <td>0.288146</td>
+      <td>0.288146</td>
+      <td>0.017078</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>learned_listwise</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.1825</td>
+      <td>0.182500</td>
+      <td>0.273679</td>
+      <td>0.273679</td>
+      <td>0.26125</td>
+      <td>0.261250</td>
+      <td>0.292896</td>
+      <td>0.292896</td>
+      <td>0.009574</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>learned_ranknet</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.1750</td>
+      <td>0.175000</td>
+      <td>0.268672</td>
+      <td>0.268672</td>
+      <td>0.25375</td>
+      <td>0.253750</td>
+      <td>0.288104</td>
+      <td>0.288104</td>
+      <td>0.019149</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>robust_borda</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.1575</td>
+      <td>0.152083</td>
+      <td>0.256191</td>
+      <td>0.253634</td>
+      <td>0.24750</td>
+      <td>0.246042</td>
+      <td>0.273452</td>
+      <td>0.270427</td>
+      <td>0.021230</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>robust_forward</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.1750</td>
+      <td>0.166250</td>
+      <td>0.271257</td>
+      <td>0.265428</td>
+      <td>0.26375</td>
+      <td>0.261167</td>
+      <td>0.289021</td>
+      <td>0.283849</td>
+      <td>0.008727</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>soft_support_fusion</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.1525</td>
+      <td>0.152500</td>
+      <td>0.260303</td>
+      <td>0.260303</td>
+      <td>0.25625</td>
+      <td>0.256250</td>
+      <td>0.277327</td>
+      <td>0.277327</td>
+      <td>0.025000</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>view_vote_consensus</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.2350</td>
+      <td>0.235000</td>
+      <td>0.309773</td>
+      <td>0.309322</td>
+      <td>0.31875</td>
+      <td>0.317083</td>
+      <td>0.335220</td>
+      <td>0.334769</td>
+      <td>0.010000</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>view_vote_forward</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.2450</td>
+      <td>0.243750</td>
+      <td>0.314913</td>
+      <td>0.314063</td>
+      <td>0.31625</td>
+      <td>0.317083</td>
+      <td>0.342074</td>
+      <td>0.340811</td>
+      <td>0.022867</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>winner_cluster_consensus</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.2175</td>
+      <td>0.201667</td>
+      <td>0.380024</td>
+      <td>0.368947</td>
+      <td>0.38125</td>
+      <td>0.367812</td>
+      <td>0.412292</td>
+      <td>0.401398</td>
+      <td>0.017769</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>automatic</td>
+      <td>5</td>
+      <td>winner_cluster_forward</td>
+      <td>4</td>
+      <td>100</td>
+      <td>0.2400</td>
+      <td>0.224167</td>
+      <td>0.421479</td>
+      <td>0.397382</td>
+      <td>0.47250</td>
+      <td>0.401917</td>
+      <td>0.457958</td>
+      <td>0.429832</td>
+      <td>0.042196</td>
+    </tr>
+  </tbody>
+</table>
+</div>        route  view_count                    method  schedules  scenes  \
+0   automatic           1                        B0          5     100
+1   automatic           1                P1_current          5     100
+2   automatic           1              P2_consensus          5     100
+3   automatic           1          forward_02_cov70          5     100
+4   automatic           1            learned_hybrid          5     100
+5   automatic           1          learned_listwise          5     100
+6   automatic           1           learned_ranknet          5     100
+7   automatic           1              robust_borda          5     100
+8   automatic           1            robust_forward          5     100
+9   automatic           1       soft_support_fusion          5     100
+10  automatic           1       view_vote_consensus          5     100
+11  automatic           1         view_vote_forward          5     100
+12  automatic           1  winner_cluster_consensus          5     100
+13  automatic           1    winner_cluster_forward          5     100
+14  automatic           2                        B0          5     100
+15  automatic           2                P1_current          5     100
+16  automatic           2              P2_consensus          5     100
+17  automatic           2          forward_02_cov70          5     100
+18  automatic           2            learned_hybrid          5     100
+19  automatic           2          learned_listwise          5     100
+20  automatic           2           learned_ranknet          5     100
+21  automatic           2              robust_borda          5     100
+22  automatic           2            robust_forward          5     100
+23  automatic           2       soft_support_fusion          5     100
+24  automatic           2       view_vote_consensus          5     100
+25  automatic           2         view_vote_forward          5     100
+26  automatic           2  winner_cluster_consensus          5     100
+27  automatic           2    winner_cluster_forward          5     100
+28  automatic           3                        B0          5     100
+29  automatic           3                P1_current          5     100
+30  automatic           3              P2_consensus          5     100
+31  automatic           3          forward_02_cov70          5     100
+32  automatic           3            learned_hybrid          5     100
+33  automatic           3          learned_listwise          5     100
+34  automatic           3           learned_ranknet          5     100
+35  automatic           3              robust_borda          5     100
+36  automatic           3            robust_forward          5     100
+37  automatic           3       soft_support_fusion          5     100
+38  automatic           3       view_vote_consensus          5     100
+39  automatic           3         view_vote_forward          5     100
+40  automatic           3  winner_cluster_consensus          5     100
+41  automatic           3    winner_cluster_forward          5     100
+42  automatic           5                        B0          4     100
+43  automatic           5                P1_current          4     100
+44  automatic           5              P2_consensus          4     100
+45  automatic           5          forward_02_cov70          4     100
+46  automatic           5            learned_hybrid          4     100
+47  automatic           5          learned_listwise          4     100
+48  automatic           5           learned_ranknet          4     100
+49  automatic           5              robust_borda          4     100
+50  automatic           5            robust_forward          4     100
+51  automatic           5       soft_support_fusion          4     100
+52  automatic           5       view_vote_consensus          4     100
+53  automatic           5         view_vote_forward          4     100
+54  automatic           5  winner_cluster_consensus          4     100
+55  automatic           5    winner_cluster_forward          4     100
+
+      top1  top1_tie_expected        ap  ap_tie_expected  recall_at_2  \
+0   0.3820           0.382000  0.600683         0.600683      0.59900
+1   0.4300           0.429000  0.631533         0.629617      0.64200
+2   0.3920           0.389667  0.607969         0.609867      0.61800
+3   0.4820           0.481000  0.659986         0.659652      0.65400
+4   0.4480           0.452000  0.647302         0.649302      0.66500
+5   0.4460           0.448000  0.646386         0.647386      0.66500
+6   0.4480           0.450000  0.647736         0.648736      0.66700
+7   0.4060           0.406667  0.617486         0.618608      0.62800
+8   0.4820           0.481000  0.659986         0.659652      0.65400
+9   0.4820           0.484000  0.664319         0.665319      0.66400
+10  0.4260           0.424000  0.635986         0.634902      0.66600
+11  0.4820           0.481000  0.659986         0.659652      0.65400
+12  0.4240           0.423000  0.365500         0.365250      0.37100
+13  0.4820           0.481000  0.411000         0.410500      0.41100
+14  0.1980           0.176000  0.261822         0.251203      0.25200
+15  0.2000           0.189333  0.265213         0.259361      0.25400
+16  0.1960           0.182000  0.264118         0.256725      0.26600
+17  0.2180           0.210000  0.273711         0.269968      0.27000
+18  0.1980           0.198000  0.264567         0.264567      0.26500
+19  0.2040           0.204000  0.267817         0.267817      0.26600
+20  0.2000           0.200000  0.265669         0.265669      0.26900
+21  0.2060           0.195000  0.266001         0.261398      0.25000
+22  0.2180           0.210000  0.273711         0.269968      0.27000
+23  0.2040           0.201000  0.269714         0.268714      0.27000
+24  0.1840           0.177000  0.257002         0.253619      0.25300
+25  0.1820           0.163000  0.256231         0.248362      0.25700
+26  0.3740           0.359500  0.424333         0.418792      0.50100
+27  0.4140           0.365000  0.453500         0.432500      0.53600
+28  0.1820           0.164167  0.278139         0.268551      0.25600
+29  0.2040           0.192167  0.292792         0.285069      0.28700
+30  0.1740           0.166167  0.280613         0.273675      0.27300
+31  0.2140           0.204167  0.304417         0.297833      0.30300
+32  0.2000           0.200000  0.292325         0.292325      0.28000
+33  0.2060           0.206000  0.295008         0.295008      0.28200
+34  0.1960           0.196000  0.290271         0.290271      0.27600
+35  0.1800           0.176667  0.278788         0.277030      0.25900
+36  0.2220           0.214833  0.309265         0.303127      0.30700
+37  0.2140           0.214000  0.302819         0.302819      0.28500
+38  0.2240           0.221667  0.308760         0.307307      0.29600
+39  0.2380           0.232667  0.319469         0.314903      0.32600
+40  0.3180           0.301333  0.435667         0.427272      0.49500
+41  0.3860           0.294667  0.477500         0.430333      0.55900
+42  0.1425           0.130500  0.245530         0.237659      0.23250
+43  0.1625           0.151750  0.260509         0.253093      0.25375
+44  0.1500           0.143125  0.252529         0.248709      0.24750
+45  0.1675           0.158333  0.266790         0.262649      0.26375
+46  0.1775           0.177500  0.269238         0.269238      0.25125
+47  0.1825           0.182500  0.273679         0.273679      0.26125
+48  0.1750           0.175000  0.268672         0.268672      0.25375
+49  0.1575           0.152083  0.256191         0.253634      0.24750
+50  0.1750           0.166250  0.271257         0.265428      0.26375
+51  0.1525           0.152500  0.260303         0.260303      0.25625
+52  0.2350           0.235000  0.309773         0.309322      0.31875
+53  0.2450           0.243750  0.314913         0.314063      0.31625
+54  0.2175           0.201667  0.380024         0.368947      0.38125
+55  0.2400           0.224167  0.421479         0.397382      0.47250
+
+    recall_at_2_tie_expected  reciprocal_rank  reciprocal_rank_tie_expected  \
+0                   0.599000         0.612667                      0.612667
+1                   0.631000         0.644667                      0.642500
+2                   0.627000         0.623267                      0.624411
+3                   0.654500         0.673333                      0.672833
+4                   0.665000         0.659733                      0.661733
+5                   0.665000         0.658733                      0.659733
+6                   0.667000         0.660833                      0.661833
+7                   0.632833         0.631300                      0.632789
+8                   0.654500         0.673333                      0.672833
+9                   0.663500         0.677667                      0.678500
+10                  0.666500         0.647933                      0.647100
+11                  0.654500         0.673333                      0.672833
+12                  0.371000         0.430000                      0.429500
+13                  0.411000         0.482000                      0.481500
+14                  0.246667         0.292129                      0.279643
+15                  0.256333         0.294652                      0.288170
+16                  0.257000         0.292088                      0.283155
+17                  0.267000         0.304017                      0.299392
+18                  0.265000         0.294933                      0.294933
+19                  0.266000         0.298100                      0.298100
+20                  0.269000         0.296119                      0.296119
+21                  0.250000         0.296621                      0.290955
+22                  0.267000         0.304017                      0.299392
+23                  0.270000         0.297483                      0.295983
+24                  0.251000         0.281855                      0.277971
+25                  0.259500         0.282686                      0.272869
+26                  0.503500         0.479833                      0.473208
+27                  0.533000         0.507000                      0.482000
+28                  0.251167         0.304743                      0.294304
+29                  0.273500         0.323945                      0.314946
+30                  0.258500         0.306383                      0.299504
+31                  0.293500         0.332982                      0.326259
+32                  0.280000         0.320067                      0.320067
+33                  0.282000         0.323667                      0.323667
+34                  0.276000         0.318078                      0.318078
+35                  0.257833         0.306414                      0.304448
+36                  0.293667         0.337282                      0.331003
+37                  0.285000         0.330387                      0.330387
+38                  0.294333         0.336648                      0.335237
+39                  0.319000         0.349752                      0.345437
+40                  0.485500         0.476667                      0.467550
+41                  0.504500         0.534000                      0.477722
+42                  0.220417         0.261495                      0.252048
+43                  0.248188         0.277054                      0.269394
+44                  0.243333         0.269590                      0.264715
+45                  0.264417         0.285604                      0.281475
+46                  0.251250         0.288146                      0.288146
+47                  0.261250         0.292896                      0.292896
+48                  0.253750         0.288104                      0.288104
+49                  0.246042         0.273452                      0.270427
+50                  0.261167         0.289021                      0.283849
+51                  0.256250         0.277327                      0.277327
+52                  0.317083         0.335220                      0.334769
+53                  0.317083         0.342074                      0.340811
+54                  0.367812         0.412292                      0.401398
+55                  0.401917         0.457958                      0.429832
+
+    schedule_top1_std
+0            0.059749
+1            0.051889
+2            0.058207
+3            0.050547
+4            0.039623
+5            0.040559
+6            0.042131
+7            0.057819
+8            0.050547
+9            0.052010
+10           0.056943
+11           0.050547
+12           0.062710
+13           0.050547
+14           0.036645
+15           0.032529
+16           0.039267
+17           0.031793
+18           0.047645
+19           0.048270
+20           0.045826
+21           0.041982
+22           0.031793
+23           0.032094
+24           0.032133
+25           0.023076
+26           0.034839
+27           0.043875
+28           0.036190
+29           0.018082
+30           0.029578
+31           0.054912
+32           0.046904
+33           0.046152
+34           0.051769
+35           0.034721
+36           0.048906
+37           0.049800
+38           0.048276
+39           0.045071
+40           0.062153
+41           0.017256
+42           0.022474
+43           0.022460
+44           0.032733
+45           0.018295
+46           0.017078
+47           0.009574
+48           0.019149
+49           0.021230
+50           0.008727
+51           0.025000
+52           0.010000
+53           0.022867
+54           0.017769
+55           0.042196
+
+[cell 9]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>method</th>
+      <th>baseline</th>
+      <th>measure</th>
+      <th>difference</th>
+      <th>ci_low</th>
+      <th>ci_high</th>
+      <th>asset_groups</th>
+      <th>scenes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>B0</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>-0.011667</td>
+      <td>-0.057266</td>
+      <td>2.921468e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B0</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>-0.015631</td>
+      <td>-0.047351</td>
+      <td>1.522837e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>B0</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>-0.046667</td>
+      <td>-0.109743</td>
+      <td>1.501562e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>B0</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>-0.015412</td>
+      <td>-0.053762</td>
+      <td>2.039470e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>P1_current</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>0.005000</td>
+      <td>-0.036667</td>
+      <td>4.688158e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>P1_current</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>-0.009901</td>
+      <td>-0.036591</td>
+      <td>1.721544e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>P1_current</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>-0.040000</td>
+      <td>-0.105180</td>
+      <td>2.083882e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>P1_current</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>-0.007997</td>
+      <td>-0.039368</td>
+      <td>2.382138e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>P2_consensus</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>-0.010000</td>
+      <td>-0.040462</td>
+      <td>1.667088e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>P2_consensus</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>-0.014417</td>
+      <td>-0.037093</td>
+      <td>7.503188e-03</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>P2_consensus</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>-0.055833</td>
+      <td>-0.101010</td>
+      <td>-1.375405e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>P2_consensus</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>-0.014172</td>
+      <td>-0.036757</td>
+      <td>7.845005e-03</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>robust_forward</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>0.010000</td>
+      <td>0.000000</td>
+      <td>3.092784e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>robust_forward</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>0.003611</td>
+      <td>-0.003345</td>
+      <td>1.548936e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>robust_forward</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>-0.009167</td>
+      <td>-0.021930</td>
+      <td>0.000000e+00</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>robust_forward</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.003694</td>
+      <td>-0.003214</td>
+      <td>1.516667e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>robust_borda</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>0.010000</td>
+      <td>-0.021277</td>
+      <td>4.546197e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>robust_borda</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>-0.007929</td>
+      <td>-0.029788</td>
+      <td>1.523808e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>robust_borda</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>-0.044167</td>
+      <td>-0.101190</td>
+      <td>6.737478e-03</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>robust_borda</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>-0.007636</td>
+      <td>-0.032297</td>
+      <td>1.583633e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>soft_support_fusion</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>0.015000</td>
+      <td>-0.011905</td>
+      <td>4.385965e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>soft_support_fusion</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>0.003299</td>
+      <td>-0.012217</td>
+      <td>1.988891e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>soft_support_fusion</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>-0.034167</td>
+      <td>-0.077500</td>
+      <td>8.780819e-04</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>soft_support_fusion</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.000392</td>
+      <td>-0.014368</td>
+      <td>1.678819e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>view_vote_forward</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>0.030000</td>
+      <td>-0.031675</td>
+      <td>8.755706e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>view_vote_forward</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>0.012181</td>
+      <td>-0.017825</td>
+      <td>4.104467e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>view_vote_forward</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>0.000000</td>
+      <td>-0.043344</td>
+      <td>4.513889e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>view_vote_forward</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.016111</td>
+      <td>-0.019360</td>
+      <td>4.880710e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>view_vote_consensus</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>0.030000</td>
+      <td>-0.027211</td>
+      <td>8.414280e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>view_vote_consensus</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>0.018273</td>
+      <td>-0.011730</td>
+      <td>4.618133e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>view_vote_consensus</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>0.000833</td>
+      <td>-0.049668</td>
+      <td>5.198541e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>view_vote_consensus</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.017435</td>
+      <td>-0.014813</td>
+      <td>4.829212e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>winner_cluster_forward</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>0.098333</td>
+      <td>0.032345</td>
+      <td>1.683682e-01</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>winner_cluster_forward</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>0.102841</td>
+      <td>0.045387</td>
+      <td>1.672195e-01</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>winner_cluster_forward</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>0.171667</td>
+      <td>0.098678</td>
+      <td>2.467184e-01</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>winner_cluster_forward</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.133427</td>
+      <td>0.072575</td>
+      <td>2.017560e-01</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>winner_cluster_consensus</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>0.171667</td>
+      <td>0.095692</td>
+      <td>2.483544e-01</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>winner_cluster_consensus</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>0.155035</td>
+      <td>0.087725</td>
+      <td>2.239192e-01</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>winner_cluster_consensus</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>0.191667</td>
+      <td>0.118812</td>
+      <td>2.687142e-01</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>winner_cluster_consensus</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.181316</td>
+      <td>0.111036</td>
+      <td>2.515115e-01</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>learned_listwise</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>-0.005000</td>
+      <td>-0.064650</td>
+      <td>5.280528e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>learned_listwise</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>-0.011576</td>
+      <td>-0.047227</td>
+      <td>2.307725e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>learned_listwise</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>-0.039167</td>
+      <td>-0.091837</td>
+      <td>9.353741e-03</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>learned_listwise</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>-0.014652</td>
+      <td>-0.053786</td>
+      <td>2.249364e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>learned_ranknet</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>-0.005000</td>
+      <td>-0.060000</td>
+      <td>4.833333e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>learned_ranknet</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>-0.011838</td>
+      <td>-0.046044</td>
+      <td>1.920145e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>learned_ranknet</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>-0.044167</td>
+      <td>-0.094741</td>
+      <td>2.317963e-18</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>learned_ranknet</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>-0.015247</td>
+      <td>-0.053080</td>
+      <td>1.971807e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>learned_hybrid</td>
+      <td>forward_02_cov70</td>
+      <td>top1_tie_expected</td>
+      <td>-0.015000</td>
+      <td>-0.069448</td>
+      <td>3.921569e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>learned_hybrid</td>
+      <td>forward_02_cov70</td>
+      <td>ap_tie_expected</td>
+      <td>-0.015409</td>
+      <td>-0.050242</td>
+      <td>1.744213e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>learned_hybrid</td>
+      <td>forward_02_cov70</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>-0.039167</td>
+      <td>-0.091837</td>
+      <td>9.353741e-03</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>learned_hybrid</td>
+      <td>forward_02_cov70</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>-0.020485</td>
+      <td>-0.056980</td>
+      <td>1.394042e-02</td>
+      <td>27</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+</div>                      method          baseline                       measure  \
+0                         B0  forward_02_cov70             top1_tie_expected
+1                         B0  forward_02_cov70               ap_tie_expected
+2                         B0  forward_02_cov70      recall_at_2_tie_expected
+3                         B0  forward_02_cov70  reciprocal_rank_tie_expected
+4                 P1_current  forward_02_cov70             top1_tie_expected
+5                 P1_current  forward_02_cov70               ap_tie_expected
+6                 P1_current  forward_02_cov70      recall_at_2_tie_expected
+7                 P1_current  forward_02_cov70  reciprocal_rank_tie_expected
+8               P2_consensus  forward_02_cov70             top1_tie_expected
+9               P2_consensus  forward_02_cov70               ap_tie_expected
+10              P2_consensus  forward_02_cov70      recall_at_2_tie_expected
+11              P2_consensus  forward_02_cov70  reciprocal_rank_tie_expected
+12            robust_forward  forward_02_cov70             top1_tie_expected
+13            robust_forward  forward_02_cov70               ap_tie_expected
+14            robust_forward  forward_02_cov70      recall_at_2_tie_expected
+15            robust_forward  forward_02_cov70  reciprocal_rank_tie_expected
+16              robust_borda  forward_02_cov70             top1_tie_expected
+17              robust_borda  forward_02_cov70               ap_tie_expected
+18              robust_borda  forward_02_cov70      recall_at_2_tie_expected
+19              robust_borda  forward_02_cov70  reciprocal_rank_tie_expected
+20       soft_support_fusion  forward_02_cov70             top1_tie_expected
+21       soft_support_fusion  forward_02_cov70               ap_tie_expected
+22       soft_support_fusion  forward_02_cov70      recall_at_2_tie_expected
+23       soft_support_fusion  forward_02_cov70  reciprocal_rank_tie_expected
+24         view_vote_forward  forward_02_cov70             top1_tie_expected
+25         view_vote_forward  forward_02_cov70               ap_tie_expected
+26         view_vote_forward  forward_02_cov70      recall_at_2_tie_expected
+27         view_vote_forward  forward_02_cov70  reciprocal_rank_tie_expected
+28       view_vote_consensus  forward_02_cov70             top1_tie_expected
+29       view_vote_consensus  forward_02_cov70               ap_tie_expected
+30       view_vote_consensus  forward_02_cov70      recall_at_2_tie_expected
+31       view_vote_consensus  forward_02_cov70  reciprocal_rank_tie_expected
+32    winner_cluster_forward  forward_02_cov70             top1_tie_expected
+33    winner_cluster_forward  forward_02_cov70               ap_tie_expected
+34    winner_cluster_forward  forward_02_cov70      recall_at_2_tie_expected
+35    winner_cluster_forward  forward_02_cov70  reciprocal_rank_tie_expected
+36  winner_cluster_consensus  forward_02_cov70             top1_tie_expected
+37  winner_cluster_consensus  forward_02_cov70               ap_tie_expected
+38  winner_cluster_consensus  forward_02_cov70      recall_at_2_tie_expected
+39  winner_cluster_consensus  forward_02_cov70  reciprocal_rank_tie_expected
+40          learned_listwise  forward_02_cov70             top1_tie_expected
+41          learned_listwise  forward_02_cov70               ap_tie_expected
+42          learned_listwise  forward_02_cov70      recall_at_2_tie_expected
+43          learned_listwise  forward_02_cov70  reciprocal_rank_tie_expected
+44           learned_ranknet  forward_02_cov70             top1_tie_expected
+45           learned_ranknet  forward_02_cov70               ap_tie_expected
+46           learned_ranknet  forward_02_cov70      recall_at_2_tie_expected
+47           learned_ranknet  forward_02_cov70  reciprocal_rank_tie_expected
+48            learned_hybrid  forward_02_cov70             top1_tie_expected
+49            learned_hybrid  forward_02_cov70               ap_tie_expected
+50            learned_hybrid  forward_02_cov70      recall_at_2_tie_expected
+51            learned_hybrid  forward_02_cov70  reciprocal_rank_tie_expected
+
+    difference    ci_low       ci_high  asset_groups  scenes
+0    -0.011667 -0.057266  2.921468e-02            27     100
+1    -0.015631 -0.047351  1.522837e-02            27     100
+2    -0.046667 -0.109743  1.501562e-02            27     100
+3    -0.015412 -0.053762  2.039470e-02            27     100
+4     0.005000 -0.036667  4.688158e-02            27     100
+5    -0.009901 -0.036591  1.721544e-02            27     100
+6    -0.040000 -0.105180  2.083882e-02            27     100
+7    -0.007997 -0.039368  2.382138e-02            27     100
+8    -0.010000 -0.040462  1.667088e-02            27     100
+9    -0.014417 -0.037093  7.503188e-03            27     100
+10   -0.055833 -0.101010 -1.375405e-02            27     100
+11   -0.014172 -0.036757  7.845005e-03            27     100
+12    0.010000  0.000000  3.092784e-02            27     100
+13    0.003611 -0.003345  1.548936e-02            27     100
+14   -0.009167 -0.021930  0.000000e+00            27     100
+15    0.003694 -0.003214  1.516667e-02            27     100
+16    0.010000 -0.021277  4.546197e-02            27     100
+17   -0.007929 -0.029788  1.523808e-02            27     100
+18   -0.044167 -0.101190  6.737478e-03            27     100
+19   -0.007636 -0.032297  1.583633e-02            27     100
+20    0.015000 -0.011905  4.385965e-02            27     100
+21    0.003299 -0.012217  1.988891e-02            27     100
+22   -0.034167 -0.077500  8.780819e-04            27     100
+23    0.000392 -0.014368  1.678819e-02            27     100
+24    0.030000 -0.031675  8.755706e-02            27     100
+25    0.012181 -0.017825  4.104467e-02            27     100
+26    0.000000 -0.043344  4.513889e-02            27     100
+27    0.016111 -0.019360  4.880710e-02            27     100
+28    0.030000 -0.027211  8.414280e-02            27     100
+29    0.018273 -0.011730  4.618133e-02            27     100
+30    0.000833 -0.049668  5.198541e-02            27     100
+31    0.017435 -0.014813  4.829212e-02            27     100
+32    0.098333  0.032345  1.683682e-01            27     100
+33    0.102841  0.045387  1.672195e-01            27     100
+34    0.171667  0.098678  2.467184e-01            27     100
+35    0.133427  0.072575  2.017560e-01            27     100
+36    0.171667  0.095692  2.483544e-01            27     100
+37    0.155035  0.087725  2.239192e-01            27     100
+38    0.191667  0.118812  2.687142e-01            27     100
+39    0.181316  0.111036  2.515115e-01            27     100
+40   -0.005000 -0.064650  5.280528e-02            27     100
+41   -0.011576 -0.047227  2.307725e-02            27     100
+42   -0.039167 -0.091837  9.353741e-03            27     100
+43   -0.014652 -0.053786  2.249364e-02            27     100
+44   -0.005000 -0.060000  4.833333e-02            27     100
+45   -0.011838 -0.046044  1.920145e-02            27     100
+46   -0.044167 -0.094741  2.317963e-18            27     100
+47   -0.015247 -0.053080  1.971807e-02            27     100
+48   -0.015000 -0.069448  3.921569e-02            27     100
+49   -0.015409 -0.050242  1.744213e-02            27     100
+50   -0.039167 -0.091837  9.353741e-03            27     100
+51   -0.020485 -0.056980  1.394042e-02            27     100
+
+[cell 11]
+fold_stability.png
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+hybrid_coefficients.png
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+primary_method_comparison.png
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+risk_coverage.png
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+view_count_top1.png
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 13]
+{'files': ['example_01_supported_correct.png',
+  'example_02_supported_correct.png',
+  'example_03_supported_correct.png',
+  'example_04_supported_correct.png',
+  'example_05_uncertain.png',
+  'example_06_uncertain.png',
+  'example_07_uncertain.png',
+  'example_08_uncertain.png',
+  'example_09_failure.png',
+  'example_10_failure.png',
+  'example_11_failure.png',
+  'example_12_failure.png'],
+ 'private': True,
+ 'selected_method': 'winner_cluster_consensus',
+ 'selection': 'deterministic out-of-fold definite-correct cases prioritised by cross-view support, ambiguous cases and definite failures, all with distinct asset groups'}
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 15]
+{"event": "metric_stage_packaged", "repository": {"bytes": 1478405, "file": "learned-peer-view-08m-repository-evidence.zip", "members": 17, "sha256": "715d04970261fbe07f457b8b40f4f124ec606425736315e290469f3367e4dea2"}, "review": {"bytes": 29415199, "file": "learned-peer-view-08m-review-evidence.zip", "members": 63, "sha256": "052407bec851f242458319d111339ba520e4d9402aa137d47b93f9529fc07358"}, "schema_version": "metric-stage-package/v1"}
+
+[cell 15]
+{'repository': {'bytes': 1478405,
+  'file': 'learned-peer-view-08m-repository-evidence.zip',
+  'members': 17,
+  'sha256': '715d04970261fbe07f457b8b40f4f124ec606425736315e290469f3367e4dea2'},
+ 'review': {'bytes': 29415199,
+  'file': 'learned-peer-view-08m-review-evidence.zip',
+  'members': 63,
+  'sha256': '052407bec851f242458319d111339ba520e4d9402aa137d47b93f9529fc07358'},
+ 'schema_version': 'metric-stage-package/v1'}
+
+[cell 17]
+{"event": "tracking_finished", "status": "failed"}
