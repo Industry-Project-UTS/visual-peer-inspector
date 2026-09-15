@@ -1,11 +1,38 @@
 # Visual Peer Inspector web app
 
-A separate Gradio application in the existing implementation repository. The
-app runs without GPUs, model weights, datasets or recorded examples.
+Upload 2–5 views of the same arrangement and obtain one combined object ranking.
+The existing **Images**, **Results**, **Review** and **Report** tabs support two
+explicit modes. Three views are the main application setting; two and five are
+also supported. More views do not guarantee a better result.
 
-## Run locally
+## Decision pipeline
 
-From the repository root, using Python 3.11 or newer:
+```text
+Uploaded RGB views → LocateAnything boxes → SAM 2.1 masks → DINOv2-small
+    → Automatic: per-view forward/P1/P2 consensus → compatible winner clusters
+    → Assisted: confirm neutral object IDs → cross-view peer patch banks
+    → combined ranking → selected object on every supported view
+```
+
+Automatic uses the frozen `winner_cluster_consensus` adapter. Every valid
+candidate remains available for review, although only per-view winners enter
+this method's ranking. Other observations are explicitly unlinked. Assisted
+uses `object_bank_top2`: exclude the target physical object from peer banks,
+score its foreground patches, normalize scores within each view, then average
+its two strongest available view ranks. With one usable observation, use that
+one and disclose the limited support. Identity confirmation does not choose the
+anomaly; the scorer still ranks the objects.
+
+Results contain consistent IDs where supported, all-candidate scores,
+forward/P1/P2 components, fusion contributors, boxes, SAM masks, objects on
+black, and coarse patch evidence. Tied leaders do not receive a unique selected
+box. A missing link is not proof that an object is absent. Scores are relative
+comparisons, not calibrated probabilities. Every usable result currently
+recommends review.
+
+## Local interface
+
+Use Python 3.12 and a separate app environment:
 
 ```bash
 python3 -m venv .venv
@@ -13,156 +40,88 @@ python3 -m venv .venv
 .venv/bin/python apps/web/app.py
 ```
 
-Open <http://127.0.0.1:7860>. To use a different port, add `--port 7861`.
-The app binds to localhost by default and does not create a public share link.
-Use its own environment; do not add UI dependencies to running notebook jobs.
+Open `http://127.0.0.1:7860`; add `--port 7861` to change the port. This default
+starts an interface preview with inspection disabled. It does not manufacture
+scores or use a dataset lookup. The app binds to localhost without a public
+share link. Do not modify a running notebook environment to add UI packages.
 
-## What works now
+## Inference and runtime separation
 
-- Upload, validate, preview and remove 2–5 real images, and start a new scene.
-- Reject duplicate decoded images, unsupported formats, animated images,
-  corrupt files and excessive image dimensions/sizes.
-- Prepare the inspection/result/review/report flow independently of inference.
-- Open the optional **How it works** guide for the planned pipeline and model
-  roles. It starts closed, opens alongside the app on desktop, and uses a modal
-  overlay on smaller screens. Close it with its button, Escape, or the backdrop.
-- Render actual backend rankings, supporting-view counts, boxes, masks and
-  heatmaps once an adapter returns them.
-- After inference, edit boxes and cross-view identities, or add a box by
-  clicking two corners. Reruns are explicitly labelled assisted.
-- Export an HTML report with embedded evidence and a JSON result. HTML can be
-  printed to PDF from a browser.
+The real adapter runs uploaded images in a bounded worker subprocess. Set
+`VPI_ENABLE_INFERENCE=1` and point `VPI_WORKER_PYTHON` to its environment. The
+[Docker setup](space/README.md) defines three environments:
 
-The default app says **Inspection not connected** and disables inspection.
-Uploading images never generates substitute scores or replays another scene.
-The results and report stay empty until actual inference completes.
+| Environment | Responsibility |
+| --- | --- |
+| Web | Gradio, image validation, review and export |
+| Inference | LocateAnything/SAM on CUDA; CPU matching and score fusion |
+| DINO | Fixed DINOv2-small CPU FP32 runtime matching the executed feature cache |
 
-## GPU inference adapter
+LocateAnything's Transformers version differs from the DINO experiment's
+version. `VPI_DINO_PYTHON` selects the isolated DINO interpreter; do not upgrade
+LocateAnything's runtime to make the dependency conflict disappear. The DINO
+adapter rejects incompatible versions. Requests use JSON/PNG and tensor
+boundaries use NPZ with pickle disabled. Only configured model downloads are
+allowed (`VPI_ALLOW_MODEL_DOWNLOADS=1`); the default uses cached pinned weights.
 
-The built-in adapter now connects uploaded images to LocateAnything, SAM 2.1,
-DINOv2-small, P1 scoring, embedding-only identity matching and mean normalized
-rank fusion. It runs in a separate Python process and environment. See
-[`space/README.md`](space/README.md) for the Docker Spaces setup.
+GPU detection and segmentation on new uploads still require suitable hardware.
+CPU tests and recorded-stage replay establish integration behavior; they do not
+establish GPU latency, Linux container compatibility or accuracy on new photos.
 
-The local preview remains model-free by default. Neither imports, packaging,
-CPU tests nor the deployment build download weights. On deployed hardware,
-`VPI_ENABLE_INFERENCE=1` selects the built-in adapter and
-`VPI_WORKER_PYTHON=/opt/inference/bin/python` selects its environment.
-`VPI_ALLOW_MODEL_DOWNLOADS=1` explicitly allows pinned checkpoints to be
-downloaded inside that deployment. With `0`, only existing caches are used.
+## Session data and corrections
 
-The two environments are necessary: Gradio 6.27 requires huggingface-hub >=1.16,
-while the selected Transformers 4.57.1 requires huggingface-hub <1.0. The UI does
-not import the inference libraries. Requests and results cross the boundary as
-temporary JSON/PNG files; there is no pickle or exposed inference endpoint.
-One inspection runs at a time. Cancel and the configurable wall-time limit stop
-the worker process group before deleting its temporary files.
+A database is unnecessary for this demo. Each session has an in-memory object
+map and private JSON/NPZ candidate files. Cache access uses an opaque session
+capability. Entries are bound to image pixels, boxes, preprocessing, source
+versions and tensor checksums. Reports never contain cache handles or embeddings.
 
-Every stage uses real inference in deployment. The model stubs used by CPU
-tests are confined to `tests/`, which is excluded from the deployment package.
+Changing only identities reuses masks and DINO features. Changed boxes/images
+invalidate the affected candidates. Unknown, expired, corrupt or incompatible
+cache handles produce an error; they do not silently launch expensive inference.
+Reset, cancellation and session expiry release cache data. Gradio independently
+cleans temporary uploads and downloads after 30 minutes. A downloaded report
+intentionally contains the user's inspection images.
 
-### Build the deployment folder without running models
+The Review tab presents proposed IDs across all views. The user must confirm
+the identity map before assisted scoring; editing rows clears that confirmation.
+Predicted suggestions are not treated as confirmed identities by themselves.
+HTML exports embed images and score tables; JSON preserves all public evidence
+and method/provenance fields without model tensors or server cache secrets.
+
+## Build and verify
 
 ```bash
+.venv/bin/python -m pip install -r apps/web/space/requirements-scoring.txt pytest==8.4.2
+PYTHONPATH=src GRADIO_ANALYTICS_ENABLED=False .venv/bin/python -m pytest tests/test_webapp.py tests/test_web_pipeline.py tests/test_web_two_mode.py tests/test_web_presentation.py tests/test_web_packaged_decision.py -q
 .venv/bin/python apps/web/check_deployment.py
 .venv/bin/python apps/web/package_space.py --output .local/huggingface-space
 ```
 
-The output directory must be empty. The package has a root Spaces README,
-Dockerfile, dependency files, application source, and a SHA-256 manifest.
-It excludes notebooks, research outputs, datasets, credentials, model weights,
-tests and caches. Creating the folder does not deploy, upload, or build Docker.
+The destination must be empty. The source package contains the complete selected
+scoring dependency tree and a SHA-256 manifest. It excludes datasets, model
+weights, notebooks, results, credentials, caches, QA replay scripts and tests.
+Packaging does not upload, deploy or run Docker.
 
-### Optional alternative backend
+For local recorded-development QA, use `scripts/verify_web_cached_replay.py`
+with an explicit private artifact configuration. It verifies RGB/crop/checkpoint
+hashes, exercises 2/3/5 views, exports evidence, and asserts that identity-only
+reranking performs zero additional model-stage calls. Dataset correspondence is
+labelled as such. This QA tool is not part of the deployed app.
 
-Set `VPI_BACKEND=your_package.adapter:create_backend` when launching. The factory
-must return an object implementing `InspectionBackend` from
-[`core.py`](../../src/visual_peer_inspector/web/core.py). It is operator-side
-configuration, not an input field in the web app. The factory loads once.
+See [verification evidence](VERIFICATION.md) for what was actually checked.
 
-```python
-class PipelineBackend:
-    def inspect(self, request, progress):
-        # request.views: opaque ID, metadata-free RGB pixels, content hash
-        # request.corrections: None for automatic; corrected boxes for assisted
-        progress("Finding objects")
-        # Call the existing frozen pipeline here. Do not reimplement it in UI.
-        # Return a validated InspectionResult with actual observations/ranking.
-```
+## Evaluation boundary
 
-Supported progress labels are `Finding objects`, `Creating masks`,
-`Extracting features`, `Comparing peers`, and `Combining views`. Report stages when they actually run.
-The UI processes one queued operation at a time (maximum queue size eight).
+The selected methods come from a 100-scene development cohort with 27 asset
+groups. Automatic and supplied-correspondence results have separate denominators
+and labels in the report. Supplied correspondence is not evidence of reliable
+human identity confirmation, and a selected gallery is not evaluation accuracy.
+The original 1000/600/400 role assignment remains unchanged. The remaining
+notebooks require an exposure audit and compatible current-method adapters
+before protected results can be reported.
 
-The adapter must preserve the [frozen application requirements](../../reports/development-freeze/08f-kaggle-v1/safe/application_output_contract.json):
-2–5 views, relative ranking, per-view evidence and explicit review states. The
-Python dataclasses describe a UI transport boundary; they do not replace or
-modify the frozen research artifacts. The adapter must map the internal policy
-state `review_required` to the public contract state `review_recommended`.
-
-Return the actual method and review-policy versions. Do not invent a calibrated
-policy while calibration is pending. An adapter can identify a provisional
-policy explicitly. Scores must be finite and ranked from most to least unusual.
-Support counts must match observations. Masks and RGB heatmaps must be in the
-original, EXIF-corrected image dimensions. Missing evidence is shown explicitly.
-
-### Upload preprocessing and review policy
-
-The separately versioned manifest is
-`src/visual_peer_inspector/web/pipeline_config.json`. Aspect-preserving
-letterboxing maps uploads into the 256×256 model canvas; masks, boxes and
-heatmaps are restored to original image coordinates. The selected crop and
-P1 settings are retained. Invalid masks have no fabricated score and remain
-available for correction. Scoring requires at least three usable peers in a
-view; fused winners need scored observations in at least two views. These
-deployment adaptations are not a claim of unchanged research accuracy.
-
-All usable results default to `review_recommended`, with the explicit
-`provisional-review-all-v1` policy version. To supply an approved policy, set
-`VPI_REVIEW_POLICY` to a deployment-local JSON file with exactly these fields:
-
-```json
-{
-  "schema_version": "vpi-web-review-policy/v1",
-  "pipeline_sha256": "<fingerprint printed by check_deployment.py>",
-  "policy_configuration": "<the complete ReviewPolicy object from the approved policy>"
-}
-```
-
-`policy_configuration` must be a JSON object, not the explanatory string above.
-Its exact fields are defined by `ReviewPolicy` in `src/visual_peer_inspector/review_policy.py`.
-The app rejects a partial policy or a fingerprint mismatch. Do not re-label a
-research policy as validated for resized arbitrary uploads without confirming
-its applicability. Reports include the policy hash and upload-pipeline identity.
-
-The code and CPU contracts can be verified locally. A fresh Linux container
-build and real checkpoint/GPU runs are still required later to verify package
-compatibility, memory, latency, model quality and the complete hosted journey.
-
-## Temporary data
-
-The app strips EXIF and other source metadata from inference inputs. Original
-filenames and source paths are not part of `InspectionRequest`. Gradio retains
-temporary upload/preview/download files and removes files older than 30 minutes
-on a one-minute cleanup interval. Reset clears session results and the app's
-export directory; Gradio's copies remain until its cleanup interval. Session
-state expires after 30 minutes. Nothing is written to the research dataset or
-experiment outputs. A downloaded report intentionally contains the user's
-inspection images.
-
-Public hosting, access controls and GPU deployment are separate integration
-steps. This local workspace has no authentication and should not be exposed to
-the internet as-is.
-
-## Verification
-
-```bash
-PYTHONPATH=src GRADIO_ANALYTICS_ENABLED=False .venv/bin/python -m pytest tests/test_webapp.py tests/test_web_pipeline.py -q
-```
-
-Tests create small synthetic images in temporary directories. They test upload
-validation, backend boundaries, result invalidation, assisted labels, HTML
-escaping, report cleanup, real CPU P1/matching orchestration, image transforms,
-worker cancellation/timeouts and deployment packaging. They are not
-model-accuracy tests or app examples. Test packages require pytest, NumPy and
-SciPy in addition to the UI requirements; they do not require torch or SAM.
+`pipeline_config.json` records fixed model revisions and method settings. Old external P1 review-policy envelopes are rejected because their thresholds
+do not apply to these two scoring modes. The current route uses the provisional
+review-all policy; a calibrated two-mode policy is not enabled. The UI/transport dataclasses are not a replacement for sealed research
+artifacts. An operator may set `VPI_BACKEND=module:factory` for another explicit
+adapter; web users cannot select arbitrary Python modules.

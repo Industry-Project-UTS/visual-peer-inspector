@@ -1,0 +1,1149 @@
+Stage: 08O local development
+Status: completed
+Clean notebook: 08o-object-bank-evaluation.ipynb
+Clean notebook SHA-256: e569bdaa5ebc56faee8af07a40893e46c7749d17653296c7a23f0123536af664
+Downloaded saved-output SHA-256: 978bf9e309ea085891518cc1f184f63e3f7541939d1edb9b6edb9add5b3498ef
+Executed code cells: 9
+Retained output blocks: 22
+Retained safe visuals: 2
+Removed private visuals: 4
+
+Sanitised execution transcript
+==============================
+
+[cell 3]
+{'event': 'notebook_ready', 'python': '3.12.14'}
+
+[cell 5]
+{"result": {"aggregation": "one row per scene per method; schedules averaged within scene before asset bootstrap", "asset_group_count": 27, "bootstrap": {"samples": 2000, "seed": 32040, "unit": "asset_group"}, "elapsed_seconds": 8.1129767909988, "historical_baseline_checks": [{"expected": 0.37666666666666665, "method": "winner_cluster_consensus", "metric": "top1_tie_expected", "observed": 0.37666666666666665, "passed": true, "route": "automatic_predicted", "view_set_id": "three-primary"}, {"expected": 0.5116666666666667, "method": "cached_forward_mean", "metric": "top1_tie_expected", "observed": 0.5116666666666666, "passed": true, "route": "supplied_reference", "view_set_id": "three-primary"}, {"expected": 0.61, "method": "cached_forward_mean", "metric": "top1_tie_expected", "observed": 0.61, "passed": true, "route": "supplied_reference", "view_set_id": "five-primary"}], "identity_undefined": "no cross-view pairs yields undefined precision/recall; defined_scene_count is explicit", "mapping_allowed": true, "metric_rows": 47500, "scene_count": 100, "schema": "vpi-object-bank/v1", "scientific_status": "complete", "scope": "existing development cohort; no independent confirmation", "selected_method": "object_bank_top2", "shareable_files": ["metric_summary.csv", "view_schedule_summary.csv", "paired_asset_intervals.csv", "anomaly_count_summary.csv", "majority_summary.csv", "failure_summary.csv", "identity_summary.csv", "decision.json", "evaluation_receipt.json"], "view_schedule_count": 19}, "stage": "evaluate"}
+
+[cell 7]
+{"result": {"aggregate_figures": ["view_count_accuracy.png", "paired_improvement.png"], "gallery_count": 18, "heatmap_scope": "coarse patch evidence, not validated defect masks", "source": "sealed development predictions", "status": "completed"}, "stage": "report"}
+
+[cell 9]
+{"result": {"evaluation_root": {"verified_files": 211}, "feature_root": {"verified_files": 12002}, "prediction_root": {"verified_files": 301}, "prepared_root": {"verified_files": 101}, "report_root": {"verified_files": 23}}, "stage": "verify"}
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>method</th>
+      <th>view_count</th>
+      <th>metric</th>
+      <th>mean</th>
+      <th>ci_low</th>
+      <th>ci_high</th>
+      <th>scene_count</th>
+      <th>asset_group_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>top1_tie_expected</td>
+      <td>0.481000</td>
+      <td>0.420384</td>
+      <td>0.546163</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>0.654500</td>
+      <td>0.606558</td>
+      <td>0.700971</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>ap_tie_expected</td>
+      <td>0.659652</td>
+      <td>0.621668</td>
+      <td>0.699341</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.672833</td>
+      <td>0.632820</td>
+      <td>0.714339</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>2</td>
+      <td>top1_tie_expected</td>
+      <td>0.210000</td>
+      <td>0.157092</td>
+      <td>0.278424</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>395</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>3</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.738131</td>
+      <td>0.688126</td>
+      <td>0.789777</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>396</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>top1_tie_expected</td>
+      <td>0.538833</td>
+      <td>0.460839</td>
+      <td>0.613961</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>397</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>0.755792</td>
+      <td>0.697675</td>
+      <td>0.810099</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>398</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>ap_tie_expected</td>
+      <td>0.726899</td>
+      <td>0.680200</td>
+      <td>0.770843</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>399</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.736468</td>
+      <td>0.688544</td>
+      <td>0.783000</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+  </tbody>
+</table>
+<p>400 rows × 9 columns</p>
+</div>                   route               method  view_count  \
+0    automatic_predicted  cached_forward_mean           1
+1    automatic_predicted  cached_forward_mean           1
+2    automatic_predicted  cached_forward_mean           1
+3    automatic_predicted  cached_forward_mean           1
+4    automatic_predicted  cached_forward_mean           2
+..                   ...                  ...         ...
+395   supplied_reference     within_view_top2           3
+396   supplied_reference     within_view_top2           5
+397   supplied_reference     within_view_top2           5
+398   supplied_reference     within_view_top2           5
+399   supplied_reference     within_view_top2           5
+
+                           metric      mean    ci_low   ci_high  scene_count  \
+0               top1_tie_expected  0.481000  0.420384  0.546163          100
+1        recall_at_2_tie_expected  0.654500  0.606558  0.700971          100
+2                 ap_tie_expected  0.659652  0.621668  0.699341          100
+3    reciprocal_rank_tie_expected  0.672833  0.632820  0.714339          100
+4               top1_tie_expected  0.210000  0.157092  0.278424          100
+..                            ...       ...       ...       ...          ...
+395  reciprocal_rank_tie_expected  0.738131  0.688126  0.789777          100
+396             top1_tie_expected  0.538833  0.460839  0.613961          100
+397      recall_at_2_tie_expected  0.755792  0.697675  0.810099          100
+398               ap_tie_expected  0.726899  0.680200  0.770843          100
+399  reciprocal_rank_tie_expected  0.736468  0.688544  0.783000          100
+
+     asset_group_count
+0                   27
+1                   27
+2                   27
+3                   27
+4                   27
+..                 ...
+395                 27
+396                 27
+397                 27
+398                 27
+399                 27
+
+[400 rows x 9 columns]
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>method</th>
+      <th>view_count</th>
+      <th>view_set_id</th>
+      <th>metric</th>
+      <th>mean</th>
+      <th>ci_low</th>
+      <th>ci_high</th>
+      <th>scene_count</th>
+      <th>asset_group_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>one-primary</td>
+      <td>top1_tie_expected</td>
+      <td>0.560000</td>
+      <td>0.455446</td>
+      <td>0.666667</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>one-primary</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>0.710000</td>
+      <td>0.632653</td>
+      <td>0.784213</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>one-primary</td>
+      <td>ap_tie_expected</td>
+      <td>0.709500</td>
+      <td>0.650500</td>
+      <td>0.770590</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>one-primary</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.728000</td>
+      <td>0.666130</td>
+      <td>0.791001</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>2</td>
+      <td>two-primary</td>
+      <td>top1_tie_expected</td>
+      <td>0.246667</td>
+      <td>0.163332</td>
+      <td>0.338055</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1867</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>3</td>
+      <td>three-primary</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.714944</td>
+      <td>0.654891</td>
+      <td>0.778149</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1884</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>five-primary</td>
+      <td>top1_tie_expected</td>
+      <td>0.576667</td>
+      <td>0.476898</td>
+      <td>0.678113</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1885</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>five-primary</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>0.791667</td>
+      <td>0.718934</td>
+      <td>0.857744</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1886</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>five-primary</td>
+      <td>ap_tie_expected</td>
+      <td>0.752556</td>
+      <td>0.694930</td>
+      <td>0.808834</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1887</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>five-primary</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.760861</td>
+      <td>0.698611</td>
+      <td>0.821964</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+  </tbody>
+</table>
+<p>400 rows × 10 columns</p>
+</div>                    route               method  view_count    view_set_id  \
+0     automatic_predicted  cached_forward_mean           1    one-primary
+1     automatic_predicted  cached_forward_mean           1    one-primary
+2     automatic_predicted  cached_forward_mean           1    one-primary
+3     automatic_predicted  cached_forward_mean           1    one-primary
+20    automatic_predicted  cached_forward_mean           2    two-primary
+...                   ...                  ...         ...            ...
+1867   supplied_reference     within_view_top2           3  three-primary
+1884   supplied_reference     within_view_top2           5   five-primary
+1885   supplied_reference     within_view_top2           5   five-primary
+1886   supplied_reference     within_view_top2           5   five-primary
+1887   supplied_reference     within_view_top2           5   five-primary
+
+                            metric      mean    ci_low   ci_high  scene_count  \
+0                top1_tie_expected  0.560000  0.455446  0.666667          100
+1         recall_at_2_tie_expected  0.710000  0.632653  0.784213          100
+2                  ap_tie_expected  0.709500  0.650500  0.770590          100
+3     reciprocal_rank_tie_expected  0.728000  0.666130  0.791001          100
+20               top1_tie_expected  0.246667  0.163332  0.338055          100
+...                            ...       ...       ...       ...          ...
+1867  reciprocal_rank_tie_expected  0.714944  0.654891  0.778149          100
+1884             top1_tie_expected  0.576667  0.476898  0.678113          100
+1885      recall_at_2_tie_expected  0.791667  0.718934  0.857744          100
+1886               ap_tie_expected  0.752556  0.694930  0.808834          100
+1887  reciprocal_rank_tie_expected  0.760861  0.698611  0.821964          100
+
+      asset_group_count
+0                    27
+1                    27
+2                    27
+3                    27
+20                   27
+...                 ...
+1867                 27
+1884                 27
+1885                 27
+1886                 27
+1887                 27
+
+[400 rows x 10 columns]
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>metric</th>
+      <th>ap_tie_expected</th>
+      <th>recall_at_2_tie_expected</th>
+      <th>reciprocal_rank_tie_expected</th>
+      <th>top1_tie_expected</th>
+    </tr>
+    <tr>
+      <th>route</th>
+      <th>method</th>
+      <th>view_count</th>
+      <th>view_set_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">automatic_predicted</th>
+      <th rowspan="4" valign="top">cached_forward_mean</th>
+      <th>1</th>
+      <th>one-primary</th>
+      <td>0.709500</td>
+      <td>0.710000</td>
+      <td>0.728000</td>
+      <td>0.560000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>two-primary</th>
+      <td>0.326375</td>
+      <td>0.323333</td>
+      <td>0.350639</td>
+      <td>0.246667</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <th>three-primary</th>
+      <td>0.321465</td>
+      <td>0.334167</td>
+      <td>0.346851</td>
+      <td>0.205000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <th>five-primary</th>
+      <td>0.266839</td>
+      <td>0.292500</td>
+      <td>0.292583</td>
+      <td>0.165000</td>
+    </tr>
+    <tr>
+      <th>cached_forward_top2</th>
+      <th>1</th>
+      <th>one-primary</th>
+      <td>0.709500</td>
+      <td>0.710000</td>
+      <td>0.728000</td>
+      <td>0.560000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">supplied_reference</th>
+      <th>within_view_mean</th>
+      <th>5</th>
+      <th>five-primary</th>
+      <td>0.769333</td>
+      <td>0.817500</td>
+      <td>0.779500</td>
+      <td>0.610000</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">within_view_top2</th>
+      <th>1</th>
+      <th>one-primary</th>
+      <td>0.711583</td>
+      <td>0.715000</td>
+      <td>0.725667</td>
+      <td>0.540000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>two-primary</th>
+      <td>0.681622</td>
+      <td>0.662333</td>
+      <td>0.691678</td>
+      <td>0.487000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <th>three-primary</th>
+      <td>0.710833</td>
+      <td>0.728333</td>
+      <td>0.714944</td>
+      <td>0.515000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <th>five-primary</th>
+      <td>0.752556</td>
+      <td>0.791667</td>
+      <td>0.760861</td>
+      <td>0.576667</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 4 columns</p>
+</div>metric                                                            ap_tie_expected  \
+route               method              view_count view_set_id
+automatic_predicted cached_forward_mean 1          one-primary           0.709500
+                                        2          two-primary           0.326375
+                                        3          three-primary         0.321465
+                                        5          five-primary          0.266839
+                    cached_forward_top2 1          one-primary           0.709500
+...                                                                           ...
+supplied_reference  within_view_mean    5          five-primary          0.769333
+                    within_view_top2    1          one-primary           0.711583
+                                        2          two-primary           0.681622
+                                        3          three-primary         0.710833
+                                        5          five-primary          0.752556
+
+metric                                                            recall_at_2_tie_expected  \
+route               method              view_count view_set_id
+automatic_predicted cached_forward_mean 1          one-primary                    0.710000
+                                        2          two-primary                    0.323333
+                                        3          three-primary                  0.334167
+                                        5          five-primary                   0.292500
+                    cached_forward_top2 1          one-primary                    0.710000
+...                                                                                    ...
+supplied_reference  within_view_mean    5          five-primary                   0.817500
+                    within_view_top2    1          one-primary                    0.715000
+                                        2          two-primary                    0.662333
+                                        3          three-primary                  0.728333
+                                        5          five-primary                   0.791667
+
+metric                                                            reciprocal_rank_tie_expected  \
+route               method              view_count view_set_id
+automatic_predicted cached_forward_mean 1          one-primary                        0.728000
+                                        2          two-primary                        0.350639
+                                        3          three-primary                      0.346851
+                                        5          five-primary                       0.292583
+                    cached_forward_top2 1          one-primary                        0.728000
+...                                                                                        ...
+supplied_reference  within_view_mean    5          five-primary                       0.779500
+                    within_view_top2    1          one-primary                        0.725667
+                                        2          two-primary                        0.691678
+                                        3          three-primary                      0.714944
+                                        5          five-primary                       0.760861
+
+metric                                                            top1_tie_expected
+route               method              view_count view_set_id
+automatic_predicted cached_forward_mean 1          one-primary             0.560000
+                                        2          two-primary             0.246667
+                                        3          three-primary           0.205000
+                                        5          five-primary            0.165000
+                    cached_forward_top2 1          one-primary             0.560000
+...                                                                             ...
+supplied_reference  within_view_mean    5          five-primary            0.610000
+                    within_view_top2    1          one-primary             0.540000
+                                        2          two-primary             0.487000
+                                        3          three-primary           0.515000
+                                        5          five-primary            0.576667
+
+[100 rows x 4 columns]
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>method</th>
+      <th>view_count</th>
+      <th>view_set_id</th>
+      <th>baseline</th>
+      <th>metric</th>
+      <th>delta</th>
+      <th>ci_low</th>
+      <th>ci_high</th>
+      <th>scene_count</th>
+      <th>asset_group_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>one-primary</td>
+      <td>within_view_mean</td>
+      <td>top1_tie_expected</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>one-primary</td>
+      <td>within_view_mean</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>-0.005000</td>
+      <td>-0.015306</td>
+      <td>0.000000</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>one-primary</td>
+      <td>within_view_mean</td>
+      <td>ap_tie_expected</td>
+      <td>-0.001667</td>
+      <td>-0.005102</td>
+      <td>0.000000</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>one-primary</td>
+      <td>within_view_mean</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>one-rotated-04</td>
+      <td>within_view_mean</td>
+      <td>top1_tie_expected</td>
+      <td>-0.010000</td>
+      <td>-0.030612</td>
+      <td>0.000000</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2019</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>3</td>
+      <td>all-schedules</td>
+      <td>within_view_mean</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>-0.003886</td>
+      <td>-0.017989</td>
+      <td>0.008139</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>2020</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>all-schedules</td>
+      <td>within_view_mean</td>
+      <td>top1_tie_expected</td>
+      <td>-0.062417</td>
+      <td>-0.099850</td>
+      <td>-0.024336</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>2021</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>all-schedules</td>
+      <td>within_view_mean</td>
+      <td>recall_at_2_tie_expected</td>
+      <td>-0.012542</td>
+      <td>-0.046043</td>
+      <td>0.019584</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>2022</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>all-schedules</td>
+      <td>within_view_mean</td>
+      <td>ap_tie_expected</td>
+      <td>-0.027879</td>
+      <td>-0.049066</td>
+      <td>-0.007534</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>2023</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>all-schedules</td>
+      <td>within_view_mean</td>
+      <td>reciprocal_rank_tie_expected</td>
+      <td>-0.031164</td>
+      <td>-0.053413</td>
+      <td>-0.008747</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+  </tbody>
+</table>
+<p>2024 rows × 11 columns</p>
+</div>                    route               method  view_count     view_set_id  \
+0     automatic_predicted  cached_forward_mean           1     one-primary
+1     automatic_predicted  cached_forward_mean           1     one-primary
+2     automatic_predicted  cached_forward_mean           1     one-primary
+3     automatic_predicted  cached_forward_mean           1     one-primary
+4     automatic_predicted  cached_forward_mean           1  one-rotated-04
+...                   ...                  ...         ...             ...
+2019   supplied_reference     within_view_top2           3   all-schedules
+2020   supplied_reference     within_view_top2           5   all-schedules
+2021   supplied_reference     within_view_top2           5   all-schedules
+2022   supplied_reference     within_view_top2           5   all-schedules
+2023   supplied_reference     within_view_top2           5   all-schedules
+
+              baseline                        metric     delta    ci_low  \
+0     within_view_mean             top1_tie_expected  0.000000  0.000000
+1     within_view_mean      recall_at_2_tie_expected -0.005000 -0.015306
+2     within_view_mean               ap_tie_expected -0.001667 -0.005102
+3     within_view_mean  reciprocal_rank_tie_expected  0.000000  0.000000
+4     within_view_mean             top1_tie_expected -0.010000 -0.030612
+...                ...                           ...       ...       ...
+2019  within_view_mean  reciprocal_rank_tie_expected -0.003886 -0.017989
+2020  within_view_mean             top1_tie_expected -0.062417 -0.099850
+2021  within_view_mean      recall_at_2_tie_expected -0.012542 -0.046043
+2022  within_view_mean               ap_tie_expected -0.027879 -0.049066
+2023  within_view_mean  reciprocal_rank_tie_expected -0.031164 -0.053413
+
+       ci_high  scene_count  asset_group_count
+0     0.000000          100                 27
+1     0.000000          100                 27
+2     0.000000          100                 27
+3     0.000000          100                 27
+4     0.000000          100                 27
+...        ...          ...                ...
+2019  0.008139          100                 27
+2020 -0.024336          100                 27
+2021  0.019584          100                 27
+2022 -0.007534          100                 27
+2023 -0.008747          100                 27
+
+[2024 rows x 11 columns]
+
+[cell 11]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>route</th>
+      <th>method</th>
+      <th>view_count</th>
+      <th>view_set_id</th>
+      <th>metric</th>
+      <th>mean</th>
+      <th>scene_count</th>
+      <th>defined_scene_count</th>
+      <th>asset_group_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>all-schedules</td>
+      <td>candidate_coverage</td>
+      <td>0.960</td>
+      <td>100</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>all-schedules</td>
+      <td>candidate_anomaly_recall</td>
+      <td>0.957</td>
+      <td>100</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>all-schedules</td>
+      <td>detection_loss</td>
+      <td>0.040</td>
+      <td>100</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>all-schedules</td>
+      <td>pruning_loss</td>
+      <td>0.000</td>
+      <td>100</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>automatic_predicted</td>
+      <td>cached_forward_mean</td>
+      <td>1</td>
+      <td>all-schedules</td>
+      <td>association_loss</td>
+      <td>0.000</td>
+      <td>100</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1395</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>all-schedules</td>
+      <td>retained_candidate_count</td>
+      <td>19.250</td>
+      <td>100</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1396</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>all-schedules</td>
+      <td>unknown_candidate_count</td>
+      <td>0.000</td>
+      <td>100</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1397</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>all-schedules</td>
+      <td>unscored_object_count</td>
+      <td>0.000</td>
+      <td>100</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1398</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>all-schedules</td>
+      <td>scored_object_count</td>
+      <td>3.850</td>
+      <td>100</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1399</th>
+      <td>supplied_reference</td>
+      <td>within_view_top2</td>
+      <td>5</td>
+      <td>all-schedules</td>
+      <td>all_objects_unscored</td>
+      <td>0.000</td>
+      <td>100</td>
+      <td>100</td>
+      <td>27</td>
+    </tr>
+  </tbody>
+</table>
+<p>1400 rows × 9 columns</p>
+</div>                    route               method  view_count    view_set_id  \
+0     automatic_predicted  cached_forward_mean           1  all-schedules
+1     automatic_predicted  cached_forward_mean           1  all-schedules
+2     automatic_predicted  cached_forward_mean           1  all-schedules
+3     automatic_predicted  cached_forward_mean           1  all-schedules
+4     automatic_predicted  cached_forward_mean           1  all-schedules
+...                   ...                  ...         ...            ...
+1395   supplied_reference     within_view_top2           5  all-schedules
+1396   supplied_reference     within_view_top2           5  all-schedules
+1397   supplied_reference     within_view_top2           5  all-schedules
+1398   supplied_reference     within_view_top2           5  all-schedules
+1399   supplied_reference     within_view_top2           5  all-schedules
+
+                        metric    mean  scene_count  defined_scene_count  \
+0           candidate_coverage   0.960          100                  100
+1     candidate_anomaly_recall   0.957          100                  100
+2               detection_loss   0.040          100                  100
+3                 pruning_loss   0.000          100                  100
+4             association_loss   0.000          100                  100
+...                        ...     ...          ...                  ...
+1395  retained_candidate_count  19.250          100                  100
+1396   unknown_candidate_count   0.000          100                  100
+1397     unscored_object_count   0.000          100                  100
+1398       scored_object_count   3.850          100                  100
+1399      all_objects_unscored   0.000          100                  100
+
+      asset_group_count
+0                    27
+1                    27
+2                    27
+3                    27
+4                    27
+...                 ...
+1395                 27
+1396                 27
+1397                 27
+1398                 27
+1399                 27
+
+[1400 rows x 9 columns]
+
+[cell 11]
+{'baseline_method': 'within_view_mean',
+ 'decision': 'continue_bounded_mapping',
+ 'diagnostic_controls_eligible': False,
+ 'eligible_candidates': [{'method': 'object_bank_mean',
+   'passed': True,
+   'primary_ap_delta': 0.041527777777777775,
+   'primary_recall_at_2_delta': 0.003333333333333335,
+   'primary_top1_ci_low': 0.006666666666666671,
+   'primary_top1_delta': 0.095,
+   'three_view_schedule_mean_top1_delta': 0.09486666666666667},
+  {'method': 'object_bank_top2',
+   'passed': True,
+   'primary_ap_delta': 0.058576388888888886,
+   'primary_recall_at_2_delta': 0.006666666666666667,
+   'primary_top1_ci_low': 0.04713273511817202,
+   'primary_top1_delta': 0.13083333333333333,
+   'three_view_schedule_mean_top1_delta': 0.10169999999999998}],
+ 'interpretation': 'development selection only; supplied correspondence; no independent confirmation',
+ 'mapping_allowed': True,
+ 'schema': 'vpi-object-bank/v1',
+ 'selected_method': 'object_bank_top2',
+ 'selection_basis': {'candidate_fusions': ['mean', 'top2'],
+  'continue_mapping_if': 'positive top1 paired 95% lower bound, no AP/Recall2 regression, positive top1 mean across three-view schedules',
+  'interpretation': 'development selection only; no independent confirmation claim',
+  'otherwise': 'stop new scoring/matching; retain stronger existing method and report limitations',
+  'primary': 'supplied_reference three-primary; paired asset bootstrap against regenerated within_view mean',
+  'tie_break': 'mean fusion, then simpler within_view method'}}
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 13]
+<IPython.core.display.Image object>
+
+[cell 15]
+{'route': 'supplied_reference', 'selection_reason': 'fixed first development scene', 'top_tie_count': 1, 'unlocated_views': []}
+
+[cell 15]
+<IPython.core.display.Image object>
+
+[cell 15]
+{'route': 'automatic_reference', 'selection_reason': 'fixed first development scene', 'top_tie_count': 1, 'unlocated_views': []}
+
+[cell 15]
+<IPython.core.display.Image object>
+
+[cell 15]
+{'route': 'automatic_predicted', 'selection_reason': 'fixed first development scene', 'top_tie_count': 1, 'unlocated_views': []}
+
+[cell 15]
+<IPython.core.display.Image object>
+
+[cell 15]
+Gallery heatmaps are coarse patch evidence, not validated defect masks.
+
+[cell 17]
+{'status': 'completed', 'method': 'object_bank_top2', 'gallery_count': 9, 'scope': 'private development examples; separate from evaluation denominator'}
+
+[cell 17]
+<IPython.core.display.Image object>
+
+[cell 19]
+{'event': 'tracking_finished', 'status': 'completed', 'task_id': 'acd73b155c49417bbb00e6d17b324a6e'}

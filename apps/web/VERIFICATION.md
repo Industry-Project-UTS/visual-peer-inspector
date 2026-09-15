@@ -1,44 +1,66 @@
-# Deployment preparation verification — 12 September 2026
-
-The application and deployment code were originally prepared on
-`codex/inspection-webapp`. The interface is now merged through
-[PR #17](https://github.com/Industry-Project-UTS/visual-peer-inspector/pull/17), at main commit
-`bf85c1bc6b066e7d26cc42a7b2281455e77a16fe`. The inference/deployment code is the subsequent change.
-No model weights were downloaded, no Kaggle jobs were started, no Docker image
-was pulled or built, and no hosted deployment was performed during preparation.
+# Web integration verification
 
 ## Verified locally
 
-- 42 tests and 9 subtests passed across `test_webapp.py` and `test_web_pipeline.py`.
-- Ruff checks and formatting, Git whitespace checks, and the model-free
-  deployment preflight passed.
-- CPU tests execute the actual crop preparation, P1 scoring, identity matching,
-  normalized-rank fusion, review decisions, overlay restoration and report code.
-  GPU-stage outputs are injected by fixtures confined to `tests/`.
-- Subprocess tests cover JSON/PNG transport, successful results, worker failures,
-  cancellation scoped to a request, timeout, process cleanup and temporary files.
-- Tests cover empty masks, fewer than three peers, missing views, assisted IDs,
-  non-square image transforms, policy fingerprint mismatch and path rejection.
-- Runtime guard tests check lazy imports, offline cache access, CUDA checks before
-  checkpoint access, pinned revisions and truncated detection responses.
-- Browser checks against a temporary test-only worker covered real file uploads,
-  automatic results, mask/heatmap controls, assisted reruns, HTML/JSON downloads,
-  exported provenance, empty state in a fresh session and mobile cancellation.
-  The temporary QA server was then stopped. The normal preview remains model-free.
-- PyPI dependency metadata confirms that Gradio and Transformers need separate
-  Hugging Face Hub versions. The Dockerfile creates separate environments.
-- Registry metadata confirmed the pinned Python base image and Linux amd64
-  platform. Only metadata was read; no image layers were downloaded.
+- **71 app tests passed**, with the cached scientific parity test explicitly
+  enabled: UI, transport, both decision modes, ties, identity constraints,
+  candidate retention, original-image coordinates, session isolation, corruption,
+  expiry, per-candidate invalidation, cancellation, runtime separation and exports.
+- **36 remaining-workflow/notebook checks passed**, including original membership
+  hashing, synthetic full-size 1000/600/400 caches, protected-stage guards,
+  checkpoint resume and publication boundaries. Guard helpers use isolated
+  fixtures; the 09E builder leaves future notebooks unchanged.
+- **185 prior-stage and publication checks passed** for the included 08N/08O/08P
+  code, including the configured sealed-pilot check and a real Jupyter kernel
+  smoke test. The kernel test passed after allowing its local socket binding.
+- Recorded model-stage replay exercised 2/3/5 views of one fixed development
+  scene. It retained 10/14/24 candidates. Identity-only reranking made **zero**
+  additional proposal, segmentation or encoding calls at all three view counts.
+- A real four-crop CPU DINO subprocess produced exactly the same global and
+  patch tensors as the sealed 08N cache (maximum absolute difference 0).
+  The parent app environment had no torch installation. This checks the actual
+  process boundary with the verified local snapshot, not model download behavior.
+- Browser checks covered upload, Automatic inspection, fresh Assisted preparation,
+  seeded neutral-ID suggestions, explicit confirmation, cached reranking,
+  black-background evidence and HTML/JSON export. Recorded inputs were labelled.
+- Desktop/narrow layouts were inspected; the 390-pixel layout had no document
+  horizontal overflow. Oversized labels were replaced with compact consistent
+  aliases. Full IDs and alias legends remain in tables/reports.
+- The CPU automatic adapter was re-evaluated once on the existing 100 development
+  scenes for the fixed primary 2/3/5 schedules. Predictions were sealed before
+  opening the already-used evaluator. No new model inference or scorer search.
+- Deployment preflight and the isolated packaged-decision import passed. The
+  latter executes without importing torch, Transformers or SAM. The source
+  package includes the selected scorer dependency tree and excludes QA replay
+  adapters, datasets, checkpoints, private evidence and tests.
 
-## Checks reserved for deployed GPU hardware
+The combined PR validation total is **292 passed** across these three suites.
+The tests use generated fixtures plus explicitly configured private cache checks; synthetic cohort-sized tests
+are not real 2000-scene model evaluations. Earlier verification counts refer to
+older source revisions and are not added to this total.
 
-- Build the Linux container and verify the complete resolved dependency graph.
-- Fetch and load the real pinned checkpoints in the Space.
-- Verify GPU memory, cold-start time, normal inspection time and cancellation
-  while actual model kernels/downloads are active.
-- Run new images through the complete hosted journey and inspect model outputs.
-- Confirm or supply the review policy appropriate for this upload adapter.
+## Evidence
 
-These pending checks are deliberately not represented as passing. A packaged
-application and passing CPU tests do not establish checkpoint compatibility,
-GPU performance, calibrated accuracy or production acceptance.
+- [CPU development metrics](../../reports/web-integration/safe/cpu-primary-2-3-5/summary.md)
+- [Real CPU encoder receipt](../../reports/web-integration/safe/real-cpu-dino-smoke.json)
+- [Selected-route comparison](../../reports/web-integration/safe/selected_primary_top1.png)
+- [Verified ClearML publication](../../reports/web-integration/clearml-publication.json)
+- [Integration and next milestones](../../docs/progress/multiview-web-integration.md)
+
+Private replay reports, model-stage call counts, per-scene predictions, evaluator
+seals and browser-export checks remain under `.local/app-qa/`. The local replay
+server is operator-configured QA and is excluded from deployment; it accepts
+only its exact recorded development images.
+
+## Not yet verified
+
+- Linux Docker image execution: a Docker binary exists locally, but its daemon
+  was unavailable.
+- Fresh LocateAnything/SAM GPU inference through the enhanced upload adapter.
+- GPU memory, full-pipeline latency, hosted access and restart behavior.
+- Human-confirmed matching accuracy, arbitrary user-image accuracy and an
+  independent protected-cohort result.
+
+The default app still opens as an interface preview unless an inference adapter
+is explicitly enabled. Passing CPU tests or publishing ClearML artifacts does
+not establish those remaining results.

@@ -60,7 +60,7 @@ def request_images(tmp_path):
 
 
 class PixelModels:
-    """Supplies stage outputs; the real P1, matcher and upload code still execute."""
+    """Supplies stage outputs; the frozen decisions and upload code still execute."""
 
     boxes = ((20, 50, 75, 190), (92, 50, 147, 190), (164, 50, 219, 190))
 
@@ -98,9 +98,13 @@ def test_real_cpu_pipeline_and_report_roundtrip(request_images, tmp_path):
     stages = []
     result = UploadPipeline(models).inspect(request_images, stages.append)
     validate_result(result, request_images)
-    assert len(result.ranking) == 3
-    assert result.ranking[0].relative_score == 1
-    assert len(result.ranking[0].view_ids) == 2
+    assert len(result.observations) == 6
+    # This fixture's batch-local encoder changes its winner between views.
+    assert len(result.ranking) == 2
+    assert all(r.score_method == 'winner_cluster_consensus' for r in result.ranking)
+    assert result.ranking[0].relative_score == result.ranking[1].relative_score
+    assert result.selected_identity_id is None
+    assert all(len(r.view_ids) == 1 for r in result.ranking)
     assert result.review_state == "review_recommended"
     assert result.policy_version == "provisional-review-all-v1"
     assert stages == [
@@ -407,5 +411,6 @@ def test_subprocess_cpu_pipeline_runs_across_serialized_boundary(
     )
     result = backend.inspect(request_images, lambda _: None)
     assert result.provenance["test_only"] is True
-    assert result.ranking[0].relative_score == 1
+    assert result.ranking[0].score_method == 'winner_cluster_consensus'
+    assert result.selected_identity_id is None
     assert result.provenance["review_signals"]["insufficient_evidence"] is False

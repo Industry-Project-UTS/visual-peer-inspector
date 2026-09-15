@@ -1,6 +1,6 @@
 {
   "schema_version": "vpi-web-pipeline/v1",
-  "method_version": "web-p1-multiview-v1",
+  "method_version": "web-two-mode-frozen-08m-08o-v1",
   "preprocessing": "rgb-letterbox-256-bicubic-v1",
   "input_size": 256,
   "locateanything": {
@@ -44,18 +44,50 @@
     "model_id": "facebook/dinov2-small",
     "revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
     "key": "dinov2_small",
-    "batch_size": 8
+    "batch_size": 4,
+    "device": "cpu",
+    "precision": "float32",
+    "sha256": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1",
+    "runtime": {
+      "torch": "2.13.0",
+      "transformers": "5.14.1",
+      "numpy": "2.5.3",
+      "pillow": "12.3.0"
+    },
+    "config_sha256": "1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d"
   },
   "crop": {
     "input_size": 224,
     "padding_fraction": 0.15,
-    "background_rgb": [238, 241, 245],
+    "background_rgb": [
+      238,
+      241,
+      245
+    ],
     "minimum_foreground_pixels": 4
   },
   "patch_validity_minimum_fraction": 0.5,
   "p1_top_fraction": 0.1,
-  "fusion": "mean_normalized_rank",
-  "identity": {"unmatched_cost": 0.35, "ambiguity_margin": 0.05, "geometry_weight": 0.0},
+  "fusion": "automatic-winner-consensus-or-assisted-bank-top2",
+  "identity": {
+    "unmatched_cost": 0.35,
+    "ambiguity_margin": 0.05,
+    "geometry_weight": 0.0
+  },
   "invalid_mask_policy": "unscored_retained_for_review",
-  "default_review_policy": "provisional-review-all-v1"
+  "default_review_policy": "provisional-review-all-v1",
+  "decisions": {
+    "automatic": "winner_cluster_consensus",
+    "assisted": "object_bank_top2",
+    "winner_distance_threshold": 0.2,
+    "forward_coverage": 0.7,
+    "forward_tail_fraction": 0.02,
+    "automatic_components": [
+      "forward_02_cov70",
+      "P1_current",
+      "P2_consensus"
+    ],
+    "normalization": "average within-view ranks",
+    "ties": "no unique selected identity"
+  }
 }

@@ -1,0 +1,1208 @@
+Stage: 08P local CPU physical-object mapping
+Status: completed
+Clean notebook: 08p-physical-object-mapping-and-freeze.ipynb
+Clean notebook SHA-256: dd18f0f24be383099ca9f896116a0256a1835dfc8cb81f173c02220503492f0a
+Downloaded saved-output SHA-256: 52aad764c755737150aa2c1eb0b068b3a1e37c96f96581cb53a368754298525e
+Executed code cells: 7
+Retained output blocks: 125
+Retained safe visuals: 2
+Removed private visuals: 2
+
+Sanitised execution transcript
+==============================
+
+[cell 2]
+{
+  "schema": "vpi-object-mapping/v1",
+  "scope": "existing 100 development scenes; 27 assets; no protected cohort",
+  "view_sets": {
+    "one-primary": [
+      "V00"
+    ],
+    "one-rotated-04": [
+      "V04"
+    ],
+    "one-rotated-08": [
+      "V08"
+    ],
+    "one-rotated-12": [
+      "V12"
+    ],
+    "one-rotated-16": [
+      "V16"
+    ],
+    "two-primary": [
+      "V00",
+      "V10"
+    ],
+    "two-rotated-04": [
+      "V04",
+      "V14"
+    ],
+    "two-rotated-08": [
+      "V08",
+      "V18"
+    ],
+    "two-rotated-02": [
+      "V02",
+      "V12"
+    ],
+    "two-rotated-06": [
+      "V06",
+      "V16"
+    ],
+    "three-primary": [
+      "V00",
+      "V07",
+      "V14"
+    ],
+    "three-rotated-04": [
+      "V04",
+      "V11",
+      "V18"
+    ],
+    "three-rotated-08": [
+      "V02",
+      "V08",
+      "V15"
+    ],
+    "three-rotated-12": [
+      "V06",
+      "V12",
+      "V19"
+    ],
+    "three-rotated-16": [
+      "V03",
+      "V10",
+      "V16"
+    ],
+    "five-primary": [
+      "V00",
+      "V04",
+      "V08",
+      "V12",
+      "V16"
+    ],
+    "five-rotated-01": [
+      "V01",
+      "V05",
+      "V09",
+      "V13",
+      "V17"
+    ],
+    "five-rotated-02": [
+      "V02",
+      "V06",
+      "V10",
+      "V14",
+      "V18"
+    ],
+    "five-rotated-03": [
+      "V03",
+      "V07",
+      "V11",
+      "V15",
+      "V19"
+    ]
+  },
+  "primary_view_set": "three-primary",
+  "methods": [
+    "existing_all_candidates",
+    "global_partial_assignment",
+    "winner_cluster_consensus",
+    "correspondence_assisted_reference"
+  ],
+  "scorer": "08O frozen object_bank_top2; byte-preserved implementation",
+  "matching": {
+    "features": "existing per-observation DINOv2-small global embeddings",
+    "maximum_cosine_distance": 0.35,
+    "objective": "maximize sum of (0.35 - cosine_distance) over all within-track cross-view pairs",
+    "constraints": "each candidate in exactly one track; at most one candidate per selected view; every linked pair passes threshold",
+    "max_hypotheses": 3,
+    "time_limit_seconds": 5.0,
+    "max_tracks": 50000,
+    "fallback": "explicit singleton map if primary optimality is not established",
+    "size_bias": "more mutually compatible cross-view pairs receive greater total support",
+    "uncertainty": "retain alternative maps and objective gaps; not calibrated probabilities"
+  },
+  "primary_prediction": "best proven map with unchanged scorer; alternatives are diagnostic only",
+  "singleton_scoring": "retained as a hypothesized distinct object as in existing automatic route; self-contamination from fragmentation remains measurable",
+  "selection": {
+    "global_promotion": "primary three-view top1 paired lower 95% bound > 0 against winner consensus; AP and Recall2 nonregression; identity link F1 improvement and no extra fragmentation vs existing all-candidate association; positive top1 gain across three-view schedules",
+    "otherwise": "stop matching/scoring search; retain winner consensus automatic baseline and supplied-correspondence development fallback",
+    "interpretation": "development decision; automatic app reliability and independent confirmation remain unproved"
+  },
+  "bootstrap": {
+    "unit": "asset_group",
+    "samples": 2000,
+    "seed": 32040
+  },
+  "metrics": [
+    "top1_tie_expected",
+    "recall_at_2_tie_expected",
+    "ap_tie_expected",
+    "reciprocal_rank_tie_expected"
+  ],
+  "labels": "matcher never receives reference identities or anomaly labels; seal predictions before evaluation"
+}
+
+[cell 4]
+{"completed":1,"elapsed_seconds":1.6042980829988664,"event":"progress","total":100}
+
+[cell 4]
+{"completed":2,"elapsed_seconds":3.5743698329970357,"event":"progress","total":100}
+
+[cell 4]
+{"completed":3,"elapsed_seconds":7.516167457997653,"event":"progress","total":100}
+
+[cell 4]
+{"completed":4,"elapsed_seconds":8.424872374998813,"event":"progress","total":100}
+
+[cell 4]
+{"completed":5,"elapsed_seconds":9.124407040999358,"event":"progress","total":100}
+
+[cell 4]
+{"completed":6,"elapsed_seconds":9.729493540999101,"event":"progress","total":100}
+
+[cell 4]
+{"completed":7,"elapsed_seconds":10.994220415999735,"event":"progress","total":100}
+
+[cell 4]
+{"completed":8,"elapsed_seconds":11.419595665996894,"event":"progress","total":100}
+
+[cell 4]
+{"completed":9,"elapsed_seconds":12.512497832998633,"event":"progress","total":100}
+
+[cell 4]
+{"completed":10,"elapsed_seconds":13.28324262499882,"event":"progress","total":100}
+
+[cell 4]
+{"completed":11,"elapsed_seconds":15.264151374998619,"event":"progress","total":100}
+
+[cell 4]
+{"completed":12,"elapsed_seconds":15.91227295799763,"event":"progress","total":100}
+
+[cell 4]
+{"completed":13,"elapsed_seconds":16.364125124997372,"event":"progress","total":100}
+
+[cell 4]
+{"completed":14,"elapsed_seconds":16.890155249999225,"event":"progress","total":100}
+
+[cell 4]
+{"completed":15,"elapsed_seconds":18.046989415997814,"event":"progress","total":100}
+
+[cell 4]
+{"completed":16,"elapsed_seconds":20.115367540998704,"event":"progress","total":100}
+
+[cell 4]
+{"completed":17,"elapsed_seconds":20.782691249998607,"event":"progress","total":100}
+
+[cell 4]
+{"completed":18,"elapsed_seconds":21.315035207997425,"event":"progress","total":100}
+
+[cell 4]
+{"completed":19,"elapsed_seconds":22.517686915998638,"event":"progress","total":100}
+
+[cell 4]
+{"completed":20,"elapsed_seconds":23.187780958000076,"event":"progress","total":100}
+
+[cell 4]
+{"completed":21,"elapsed_seconds":25.041082749998168,"event":"progress","total":100}
+
+[cell 4]
+{"completed":22,"elapsed_seconds":26.693447165998805,"event":"progress","total":100}
+
+[cell 4]
+{"completed":23,"elapsed_seconds":27.419880999997986,"event":"progress","total":100}
+
+[cell 4]
+{"completed":24,"elapsed_seconds":27.914121499998146,"event":"progress","total":100}
+
+[cell 4]
+{"completed":25,"elapsed_seconds":30.021534874998906,"event":"progress","total":100}
+
+[cell 4]
+{"completed":26,"elapsed_seconds":30.864751624998462,"event":"progress","total":100}
+
+[cell 4]
+{"completed":27,"elapsed_seconds":32.362097707999055,"event":"progress","total":100}
+
+[cell 4]
+{"completed":28,"elapsed_seconds":33.95213266599967,"event":"progress","total":100}
+
+[cell 4]
+{"completed":29,"elapsed_seconds":34.657825165999384,"event":"progress","total":100}
+
+[cell 4]
+{"completed":30,"elapsed_seconds":37.46566387499843,"event":"progress","total":100}
+
+[cell 4]
+{"completed":31,"elapsed_seconds":38.336799165997945,"event":"progress","total":100}
+
+[cell 4]
+{"completed":32,"elapsed_seconds":39.11920458299937,"event":"progress","total":100}
+
+[cell 4]
+{"completed":33,"elapsed_seconds":39.85304929099948,"event":"progress","total":100}
+
+[cell 4]
+{"completed":34,"elapsed_seconds":40.40967570799694,"event":"progress","total":100}
+
+[cell 4]
+{"completed":35,"elapsed_seconds":41.358507416000066,"event":"progress","total":100}
+
+[cell 4]
+{"completed":36,"elapsed_seconds":41.7935031249981,"event":"progress","total":100}
+
+[cell 4]
+{"completed":37,"elapsed_seconds":42.37555649999922,"event":"progress","total":100}
+
+[cell 4]
+{"completed":38,"elapsed_seconds":42.988138875000004,"event":"progress","total":100}
+
+[cell 4]
+{"completed":39,"elapsed_seconds":43.52522512499854,"event":"progress","total":100}
+
+[cell 4]
+{"completed":40,"elapsed_seconds":44.54418054099733,"event":"progress","total":100}
+
+[cell 4]
+{"completed":41,"elapsed_seconds":45.08793174999664,"event":"progress","total":100}
+
+[cell 4]
+{"completed":42,"elapsed_seconds":46.24701512499814,"event":"progress","total":100}
+
+[cell 4]
+{"completed":43,"elapsed_seconds":46.89795249999952,"event":"progress","total":100}
+
+[cell 4]
+{"completed":44,"elapsed_seconds":48.03729941599886,"event":"progress","total":100}
+
+[cell 4]
+{"completed":45,"elapsed_seconds":49.420720832997176,"event":"progress","total":100}
+
+[cell 4]
+{"completed":46,"elapsed_seconds":50.52433537499746,"event":"progress","total":100}
+
+[cell 4]
+{"completed":47,"elapsed_seconds":52.16908858299939,"event":"progress","total":100}
+
+[cell 4]
+{"completed":48,"elapsed_seconds":53.002862290999474,"event":"progress","total":100}
+
+[cell 4]
+{"completed":49,"elapsed_seconds":54.531561540999974,"event":"progress","total":100}
+
+[cell 4]
+{"completed":50,"elapsed_seconds":56.17100312499679,"event":"progress","total":100}
+
+[cell 4]
+{"completed":51,"elapsed_seconds":56.658719457998814,"event":"progress","total":100}
+
+[cell 4]
+{"completed":52,"elapsed_seconds":57.402947208000114,"event":"progress","total":100}
+
+[cell 4]
+{"completed":53,"elapsed_seconds":58.15957437499674,"event":"progress","total":100}
+
+[cell 4]
+{"completed":54,"elapsed_seconds":58.6656907079996,"event":"progress","total":100}
+
+[cell 4]
+{"completed":55,"elapsed_seconds":59.218936040997505,"event":"progress","total":100}
+
+[cell 4]
+{"completed":56,"elapsed_seconds":59.787629582999216,"event":"progress","total":100}
+
+[cell 4]
+{"completed":57,"elapsed_seconds":60.20265570799893,"event":"progress","total":100}
+
+[cell 4]
+{"completed":58,"elapsed_seconds":64.29617679099829,"event":"progress","total":100}
+
+[cell 4]
+{"completed":59,"elapsed_seconds":64.82561866600008,"event":"progress","total":100}
+
+[cell 4]
+{"completed":60,"elapsed_seconds":66.69659229099852,"event":"progress","total":100}
+
+[cell 4]
+{"completed":61,"elapsed_seconds":67.89329404099772,"event":"progress","total":100}
+
+[cell 4]
+{"completed":62,"elapsed_seconds":68.43099895799969,"event":"progress","total":100}
+
+[cell 4]
+{"completed":63,"elapsed_seconds":69.32287733299745,"event":"progress","total":100}
+
+[cell 4]
+{"completed":64,"elapsed_seconds":69.68263679099982,"event":"progress","total":100}
+
+[cell 4]
+{"completed":65,"elapsed_seconds":70.21062666599755,"event":"progress","total":100}
+
+[cell 4]
+{"completed":66,"elapsed_seconds":70.8312617499978,"event":"progress","total":100}
+
+[cell 4]
+{"completed":67,"elapsed_seconds":71.65372862499862,"event":"progress","total":100}
+
+[cell 4]
+{"completed":68,"elapsed_seconds":72.51112045799891,"event":"progress","total":100}
+
+[cell 4]
+{"completed":69,"elapsed_seconds":73.27003899999909,"event":"progress","total":100}
+
+[cell 4]
+{"completed":70,"elapsed_seconds":73.79375158299808,"event":"progress","total":100}
+
+[cell 4]
+{"completed":71,"elapsed_seconds":74.45402804100013,"event":"progress","total":100}
+
+[cell 4]
+{"completed":72,"elapsed_seconds":74.91345099999671,"event":"progress","total":100}
+
+[cell 4]
+{"completed":73,"elapsed_seconds":75.74468258299748,"event":"progress","total":100}
+
+[cell 4]
+{"completed":74,"elapsed_seconds":77.26063412499934,"event":"progress","total":100}
+
+[cell 4]
+{"completed":75,"elapsed_seconds":78.14186937499835,"event":"progress","total":100}
+
+[cell 4]
+{"completed":76,"elapsed_seconds":78.57673033299943,"event":"progress","total":100}
+
+[cell 4]
+{"completed":77,"elapsed_seconds":79.6549834159996,"event":"progress","total":100}
+
+[cell 4]
+{"completed":78,"elapsed_seconds":80.71645887499835,"event":"progress","total":100}
+
+[cell 4]
+{"completed":79,"elapsed_seconds":81.66926804099785,"event":"progress","total":100}
+
+[cell 4]
+{"completed":80,"elapsed_seconds":82.85587345800013,"event":"progress","total":100}
+
+[cell 4]
+{"completed":81,"elapsed_seconds":83.58105099999739,"event":"progress","total":100}
+
+[cell 4]
+{"completed":82,"elapsed_seconds":84.04079537500002,"event":"progress","total":100}
+
+[cell 4]
+{"completed":83,"elapsed_seconds":84.79936520799674,"event":"progress","total":100}
+
+[cell 4]
+{"completed":84,"elapsed_seconds":86.11674774999847,"event":"progress","total":100}
+
+[cell 4]
+{"completed":85,"elapsed_seconds":86.90967291599736,"event":"progress","total":100}
+
+[cell 4]
+{"completed":86,"elapsed_seconds":87.58835095799805,"event":"progress","total":100}
+
+[cell 4]
+{"completed":87,"elapsed_seconds":89.54038379099802,"event":"progress","total":100}
+
+[cell 4]
+{"completed":88,"elapsed_seconds":91.16792395799712,"event":"progress","total":100}
+
+[cell 4]
+{"completed":89,"elapsed_seconds":92.34976762499718,"event":"progress","total":100}
+
+[cell 4]
+{"completed":90,"elapsed_seconds":92.6836180829996,"event":"progress","total":100}
+
+[cell 4]
+{"completed":91,"elapsed_seconds":93.47794241599695,"event":"progress","total":100}
+
+[cell 4]
+{"completed":92,"elapsed_seconds":93.99584854099885,"event":"progress","total":100}
+
+[cell 4]
+{"completed":93,"elapsed_seconds":94.48153133300002,"event":"progress","total":100}
+
+[cell 4]
+{"completed":94,"elapsed_seconds":95.61650879099761,"event":"progress","total":100}
+
+[cell 4]
+{"completed":95,"elapsed_seconds":96.505493749999,"event":"progress","total":100}
+
+[cell 4]
+{"completed":96,"elapsed_seconds":97.17329749999772,"event":"progress","total":100}
+
+[cell 4]
+{"completed":97,"elapsed_seconds":98.2052706659997,"event":"progress","total":100}
+
+[cell 4]
+{"completed":98,"elapsed_seconds":98.89764508299777,"event":"progress","total":100}
+
+[cell 4]
+{"completed":99,"elapsed_seconds":99.31433829099842,"event":"progress","total":100}
+
+[cell 4]
+{"completed":100,"elapsed_seconds":100.17801004099965,"event":"progress","total":100}
+
+[cell 4]
+{
+  "computed": 100,
+  "reused": 0,
+  "sealed": true,
+  "elapsed_seconds": 100.21253808299662
+}
+
+[cell 4]
+{'files': {'run_binding.json': 'e34b7d06a40fd049200fc261e875fc0a18388683aa11454c502922d0d687e918',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'b789a68e8f5137a23fbd8f8dd0eec96e6350ce7d1a19a2a60ac777b8c6295580',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '032c2fad5393ec28114cc10f399a595509ad660fc9e45f1d4cb662c9853c6aae',
+  'scenes/[protected identifier removed]/predictions.json': 'd236180452bd93e2015f231776c32925daa47aad3a15df71fec4b337a24ac7bd',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'efe42233347868d065644220fca9416fb19f89f7f01451fe3556ea32207e233e',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '58bc254097712e093d3fcdef6400cc6e0da47bd99202c995a030d604338f7079',
+  'scenes/[protected identifier removed]/predictions.json': '35e23546006a86932d5915797fd9751c70ea630b5f3317f7aea7cab6c6ed6443',
+  'scenes/[protected identifier removed]/artifact_lock.json': '8b3cebe3d6a996d4f2a48c11342652a18d6afdcdedaf29d86407e53670d52cf7',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'cbc95a273577ea6ddaf3db29621fee18e626e8046bdd34f1a4a323d920a0eb64',
+  'scenes/[protected identifier removed]/predictions.json': '3776bb72bebcf43e5b4fd096acbad17bd4f2359d79ff199c03a4cc2c1d4a51e5',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'ec48d5661320cff4742ef28436a83b8598ac733322e6f3ed7ffb9d5afb2632b8',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'fdf57e041c227345413ae80195ff1241407c4dcf8b10bcf86bd6f7ac04f62cea',
+  'scenes/[protected identifier removed]/predictions.json': 'bc05dcf543441fb7da4c75480de36e96bf38f75b0afa620a1f9777488684dd9e',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'd587507b77989d8e4ae05773ba146af2eab2f9a64d1dd4f83f6b0bc512537ea2',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'df23b9bc24371d77e17c4ef2036c8171dceff7d79b2bcfeb8e83c8eb96b8f36e',
+  'scenes/[protected identifier removed]/predictions.json': '2b7545e06ad62f5271071fdd764f42ad16f02c3756a826ce0bafb973168310f7',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'dea78ce308e74fcbf0d9a6447afaa999b3cfaf5379fb523a1c7ec79492d99eb3',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '0a428604a82d91a81a5aa24d1f38c249e35ecd6b910489110acff83108a29f52',
+  'scenes/[protected identifier removed]/predictions.json': '1f3af98cd1a3cd16fba4fd35c157063bce8d425e2e49718dd3d2263bc2c284db',
+  'scenes/[protected identifier removed]/artifact_lock.json': '53beb0ba300cb275b990b7ed6c13967c1a401c625ba740366cb598c87ea203da',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '1502bff1be9b8f3df6780d82fb3ece5c778ca1014239ce1e14c6601c00233011',
+  'scenes/[protected identifier removed]/predictions.json': 'a14ba385b051cf88fa5dd7faeaa96fae527ef4632d5e1d7655e59c6fd020d831',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'c2c60d5c3c09df6eca5d6ad5a605de84fa9af3d5987b8a1d4dd14e21a1deba71',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'dc448203f478874dc065b615a686844b0eec1bf83923245bfcbc7b0139652b4b',
+  'scenes/[protected identifier removed]/predictions.json': '4d42da1d65696a3ee478e2f742276c64b4f89bdd19961dc534235a9d02116793',
+  'scenes/[protected identifier removed]/artifact_lock.json': '6c8e60ce8098defdcc6b624a4c47592772737d6b919c8b04238c5136a4b8e99e',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'aebaa8a10b455f0212aaaad63dc8429e282e0126953ef9857d89803072a4b3f5',
+  'scenes/[protected identifier removed]/predictions.json': '20bd8416fa7b86c90c20ede000692ec2d3c2afc74e2a23cd92509219425f5e6f',
+  'scenes/[protected identifier removed]/artifact_lock.json': '531f21f3b69eec1631e977be37a92c4e02e9087adc04f25815a0cfe0c11e6d9d',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'bbf334d3e84d65c416707c4ed1b87b5eedef1c584c42c8b55a766070cd28d635',
+  'scenes/[protected identifier removed]/predictions.json': 'eccc5276156f163fad60d22b59a8de6008b5ebd56af4d136396a33cfb84f1c3d',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'f4825364aa91e32102999f9b339d0ab2dac90aa670168a11da64c16b5cfc7cca',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'bb9d5414aa33d911b73a568045cef0f53d97582af2dd36c3f66da572b3a40f50',
+  'scenes/[protected identifier removed]/predictions.json': '14594c5d062654af85b972812b8b73b63f9a07d31b27927813e2c2a07fdbabb8',
+  'scenes/[protected identifier removed]/artifact_lock.json': '540bb55d8cdac0c458f326b9ff776363e4ce1b47fb741cf61b1247a5b358fe6c',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '69eac88654bd756a34798327d4307a93f257e420b8d0703ed87bd865df6b985b',
+  'scenes/[protected identifier removed]/predictions.json': 'b29461df234c9494c5ab44f183ec347c80ac4a4099dbc854e9a8c83d35495cf4',
+  'scenes/[protected identifier removed]/artifact_lock.json': '4cd9ac55b07dd0824659ab1d41fd8096db699091731ee9e5758a47f5b8de099d',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '6f4156743e38132d90a878553b7d41c04ed40a9f9e1a09908c8e667aced1ad38',
+  'scenes/[protected identifier removed]/predictions.json': '20c9c574804aca130da240f384fe03c17a06deb56083df5fe79d3478d9874471',
+  'scenes/[protected identifier removed]/artifact_lock.json': '5a0102b63668c426459f36bb24622aa87e2a2aedf7dc6fbdf9a0681d4565aea1',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'e746c209a93794cd07ddaa8d5a6c14fc5d5f1023ec445a7c052f690435c7df4f',
+  'scenes/[protected identifier removed]/predictions.json': '282160d749a4775c3af05464b06411dc951703621dfd075ae26600edd6d18ce7',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'ee3d9faedceaa18a3ff265640e1591dd7f61d47d8658ec40c7f656b1027e807d',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'bd88a50db502e8c7cbf279ffd10fd8beb87c4fd2ca8cc30062e491da2135244a',
+  'scenes/[protected identifier removed]/predictions.json': '2a0f65e6ace8afbb20fad72ca06e9f5080f7121ecb2c8e14cad946b2ef051a02',
+  'scenes/[protected identifier removed]/artifact_lock.json': '8e5be81bc800f95e35af8e76722cbf5bf7e12a718fd683ff2e918714f00e0754',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'e0f167c67d0a192bcd2432613f0309b3276b7392075c79f32b0b7e574b7d675a',
+  'scenes/[protected identifier removed]/predictions.json': 'cecfc50034ca0e005f73572f4bd3bc9ccf41638202cdf009f396acaa08d639d9',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'b9a8deec35107938ae7d5419fb976b41cbeb20207f81e4a1d4f239a2f13ff1a9',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '754e45074d048c312965718d1477a930f742f175f3fb7c7ce56339480b5c305a',
+  'scenes/[protected identifier removed]/predictions.json': 'ef97cd34b6cfb823b3af3c106916fb9f4bcc9ba990cf7750db53bcc8227530bb',
+  'scenes/[protected identifier removed]/artifact_lock.json': '03682be70d69c92cd28fbeccd171de5a54d594e4f489c694c0e417443723614f',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'f71c8875089aa17741b5001d0b0f0408f41e6ce177426ee6d2e74b0953964a62',
+  'scenes/[protected identifier removed]/predictions.json': 'fda26baaef71e05b8f5bcfa47309dd6b207651925176c63c44bf7b8853a76c8f',
+  'scenes/[protected identifier removed]/artifact_lock.json': '0f3a99ec0c76d9fdce211495c4942a3dee56837ea46a64f92a137975fd0ffc25',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '7cd01f30019e2fed386f1e5ce614369594723e4c4525ed780c6d9945c7cd7855',
+  'scenes/[protected identifier removed]/predictions.json': 'ac1d1ed81bfb88d1d5673776f2d2501879a4cb53bef007d61fe5a7ebff37c325',
+  'scenes/[protected identifier removed]/artifact_lock.json': '24a653c5562cd229f2b308700d298ca79bcd87db445e190b5dae85d3b5417cb3',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'f3112e27036d79856caaf05fb65f93807b02c77996cad3eeb51012409c8b7fae',
+  'scenes/[protected identifier removed]/predictions.json': 'eb58e8db948ee7273bf626216188edf585226497c031169dbf0caf2babfa4c81',
+  'scenes/[protected identifier removed]/artifact_lock.json': '7c56a751ac04bee37257de99401ca13c86920d77398813dd70a848c531929e6f',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '72be217ad1cad06992642d7bff37d2d03801d8af35b06bd999e7fdd20e2bcfb9',
+  'scenes/[protected identifier removed]/predictions.json': 'e93d984eabac9a58e33d0692798ef8997478c0997f543eb522b409b8c37db6b9',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'd3597169ba98b14f3e7fb37832fd71dc869bc55c8f3cc3f8ed7e0996bc4039cb',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'f58d0c542bf6f001bdae7d80330a46f0c223c8ca7022e5b14b0d678bc39820ac',
+  'scenes/[protected identifier removed]/predictions.json': '0fcda101d012134de3f851f754b8aab1826131ee1e1506c4fb6a2798160188f3',
+  'scenes/[protected identifier removed]/artifact_lock.json': '3e2158fcf10d76e92e53ed858b917b577a4fcbeca2707eb399a8da55b50b7566',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'c78c437d117653c652692083dc757a9efadd7a457a49f05168bc5532e14d47d7',
+  'scenes/[protected identifier removed]/predictions.json': '267a370932c9be4892638d036fd9d3e9cac83d9d104dece3dc10df3e11ee6ab8',
+  'scenes/[protected identifier removed]/artifact_lock.json': '85fe84f7ea37fe9296a960f8d2ce6cece9d8fd941d7052a66a558d81c4b9b3e4',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'acb98c735fce021d3ed7049af8ec9d7fbbceb44d6a16cd1caef96e538ef22e68',
+  'scenes/[protected identifier removed]/predictions.json': '832bdc6234a91720e3b27ea7177c7701e0a867776c74463540a14ea663479f0d',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'fd89f9dab5e18bc48231f062fb2ad378dac220accf46a6f78e4bc069d226610c',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '7c8d129fd6eaf34d7fc06aa1f957edb60b85092d6ab5be3048326060a61e6329',
+  'scenes/[protected identifier removed]/predictions.json': '686974f6e908bdcc6a6d1d7e18aa3afb81625939901efec496108b2f299d4dbe',
+  'scenes/[protected identifier removed]/artifact_lock.json': '8339b961347772bdd7d63d66c6df1190db7d1d03a8196c89cdc3a08704234e91',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '9377df1b9db65e6cd4525d23f191153406590df9635338254fe437047035c085',
+  'scenes/[protected identifier removed]/predictions.json': '73bbbe3a710c52a34b01ff5b0b43f0121dd28ae76c6fb161b2331ba49357a950',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'cd820d909216605fa7cb37702ae7917f4454ec3fbe1ae02630de307270520f77',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '804151ddfb4ba6354bfef5491f0f8c9495ff2b9ace496bb3e9914107d54bb2d4',
+  'scenes/[protected identifier removed]/predictions.json': '45c34df07fc7c791f831ae80072c401a5e55f0c19af9a5ef311b5681e781fb2e',
+  'scenes/[protected identifier removed]/artifact_lock.json': '34fbd3ae737718a5cdc3771c001f2216e8af600e6a779f6fe73c9167731d7990',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '60c9148633bf0f470fe83ffc93599bb3736700c47b83d95ea37685b310ce2d7a',
+  'scenes/[protected identifier removed]/predictions.json': '7a7a617c265d6bb7fa47fbfd7f0f7b5e2af62d581b7d654f3f36942e7be19c31',
+  'scenes/[protected identifier removed]/artifact_lock.json': '5ef0464ceaad11ea1934b19926d7e0511bd6d702ea0999d9393448705c8421cd',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '09fbb069b9709946876a39a53408cdacea83c20e263002c17050822ab09c3e75',
+  'scenes/[protected identifier removed]/predictions.json': '9d0fe29f6c7007440dda568498df06d423d9cc1c650c3b00dd7f6db5c00e073e',
+  'scenes/[protected identifier removed]/artifact_lock.json': '357b256048f0721627b558bafe40b759875d8336c2a13a545a8d3011ebc06290',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'c735e256ca5184062fd55cc07e7037a0d04144f97ada64ef0a7547feb8346b1a',
+  'scenes/[protected identifier removed]/predictions.json': '35f842a102ff694631a7cb60ee4e5aa0bb78801118ef2bdbcee9bdfe3700accc',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'aab9bfc92f6c1194530aa3579d1ad9507405099d87b0751829e4abfcbd220770',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'a88a026a5e5be7fdfb87480cd20380d2f57fa0fad9491b9d88a5ac57578862ad',
+  'scenes/[protected identifier removed]/predictions.json': 'bc41263cf6d7169dd2eaf98281dd75018af79344a2a00e95fcbc97635a6bb075',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'ab326b65a79e9941999066790c1c69ae181873542d6bd9018071daa46e9cee87',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '2a821abd910b6485f425ceda49d1d6c49fcadda017877760c4b49aef5aaeed10',
+  'scenes/[protected identifier removed]/predictions.json': 'd868caf0a29fdac89e016210ff4dd7a06da13ad4ceaf009f7957b07e25004a9b',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'f5720d1befaf25c8e928e65df969f3dc130603d8bf2ac3d46803dbe771d9c671',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '83483cb529c49a8a2c9e2770c645bbfb4b16bed088267fc2dfbd6c21fee49ba3',
+  'scenes/[protected identifier removed]/predictions.json': '342df5b77c0af76b8b2217f2e782e7cbaf1ca276f0c9ba4abff9c9ea18df59c1',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'c6c6c0ebf0c3365608f73962369ef79ad89ea1bf85a5496ff1c7e370ad0acc63',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'b4d0d07c87f0984a566ffaace6fc3cffd3b792b4463a388ab6f5d3ee18ed8bb6',
+  'scenes/[protected identifier removed]/predictions.json': 'b730789eb9b6ac65954126779207d68f3a6017ac0f2aeed6f620554f60f449ed',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'ad994cc4d895f597bdcbf3755d936592d9018b2013a7b95d7442ccf6da770c21',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '4439d639f82bd6197d9688e584f67978ea75d1689268c85f90e911064113191d',
+  'scenes/[protected identifier removed]/predictions.json': '4c3e5fd545e3f87a19d9099cac1f71cefb102cc2b4ed542acfc5540cab304e14',
+  'scenes/[protected identifier removed]/artifact_lock.json': '019e94442fad90acea7ecaa274487c737278d3d88806c34cec7195f88fd38511',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'd8ce6057744f05ecd5b973115d2e82701b81b66f3fdc768ef9bb9271d3fa2c1e',
+  'scenes/[protected identifier removed]/predictions.json': '6ebf8e07a366a0c9c20a2dfa595f0378758ba268a1a63c21f57fddd3f62c7228',
+  'scenes/[protected identifier removed]/artifact_lock.json': '4f81c9f565f996603a59cb50efd71b876bb9264a00e5ee98c7b688db145dcdcd',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'fda783b641e2c8b8434e0163c5ab0db7cdfa94e44071b4f5fb0e189676b16b22',
+  'scenes/[protected identifier removed]/predictions.json': '8cdd850b9b153dd957458ecd5a6905fffbeb85cf785ea204b30bc49aad50126b',
+  'scenes/[protected identifier removed]/artifact_lock.json': '8e59c539276c0e8779fc6ea55496956221092087e77a5b6823dcad66a1eb08c9',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '664e600f5ad8bcc3692fc262cac132dd5af53ccdfbb0fbb9383b4fd2e42e5ff1',
+  'scenes/[protected identifier removed]/predictions.json': 'f324e233750729b1c0b653c05a3472ac95f6edeac06d1bf7388c552a8fe1f706',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'b54884dfb0da33cc0fad6af8ea9d1c7b533356b15223c97bcc75377b7fa0fdf7',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '5ba52b776ad93e53438be69c4b004eebcf4583734409c457d14802bfcedcb70a',
+  'scenes/[protected identifier removed]/predictions.json': '7907c59954f6b475e45ce0b478b625c426c12b1f447ed6ee32025c39b416797d',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'aea4351912ec35b5a1ffe238a27d4b64bdd89acdd9487e65add172a99be83cc6',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '057fa10646290fa5c351b0c77e1dae935a7114e951adf3f56c87fe8b60d97925',
+  'scenes/[protected identifier removed]/predictions.json': '8cdbd6c46f598b94de0549ff3ab749c2ba5b038b7e2d45b3c45c335702242d27',
+  'scenes/[protected identifier removed]/artifact_lock.json': '9f07a828b2c604b40aec15aa32a0172cafb86b33331ed10043f23f949a3cfb45',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'e9c77f91f565ea992fcc72d40c87945927afecf5dee4d5108358cbc7bf1ea45d',
+  'scenes/[protected identifier removed]/predictions.json': '6cf7bdb1e7b44b73a955bd3743874383f3e7e800693a63c8eb9815425b47b5bc',
+  'scenes/[protected identifier removed]/artifact_lock.json': '4ddb36c97633ea4e23f3839f2332ce64e8ae204b59bfa4ce51fa3ad257e9177b',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'b090d14f6ef9ef8dce436877287c99430416c08f477665ba3f64fe29282698ab',
+  'scenes/[protected identifier removed]/predictions.json': 'a6449486a3e1f5f852ebbb84ae165a5e02907f47721ceb54c79972316f27d3aa',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'a5a63a47f6d3150cb80df26d1194bbc0ec0d564c572cbb11f3549952d7e31f75',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '48270be81b84a6d934808e3a71a7210a134a54a861b8c67c74760645d232c632',
+  'scenes/[protected identifier removed]/predictions.json': '504beffda6f42829dc02700fdb0bdcca9f9b2222835c92e5bc7f061011864013',
+  'scenes/[protected identifier removed]/artifact_lock.json': '3f9342a1255d19ee6a6ce35ac06bc3adc85312238f524f450866ce9b16f88560',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '21194f79af88bb0a30819634385121c788370ab97958098f015ae98443a3acea',
+  'scenes/[protected identifier removed]/predictions.json': '679e8dba54e55ce4e502e59fb98ddeda52e14f509550fed37b8041b26e5861b0',
+  'scenes/[protected identifier removed]/artifact_lock.json': '54f8825dcf1ff637a50e92ff1614a6962361267c5911ed98788c4630af836679',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '7d25068494aedfc9e344715ce8eb25d428c859f9628118cd95a647448c73c652',
+  'scenes/[protected identifier removed]/predictions.json': '72b04a0ae690f177e77f58c9429c9b1d390fea5c48c05a65e580ba98e15acd86',
+  'scenes/[protected identifier removed]/artifact_lock.json': '7835aa9f953f916c69edb6962d35677537f27a838575a1c5179ed1c93acc0caf',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '41024904f5eb11fee7fe96b81f53dba9f9d4fe6c25f1578d32ca6694fc45a84e',
+  'scenes/[protected identifier removed]/predictions.json': '2bb978189a1ae96224868981989bf5de75980db3cb4fffeacf00833cd113d5e2',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'afa3b881cabe9d245010dc5755f36e8432cafcffe51c7b32e46c1bae077574b2',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '5d6efa39cd5556655b6e6ee537961dad38016e8118191759f7603b4193fe91dd',
+  'scenes/[protected identifier removed]/predictions.json': 'fbf80589d21c1aa6277564cdff054800bdb2bb9d47b1c419b87ee37d7a65bdce',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'd71feefb1367377e098de7d9db9b9dece26f3f5d16f8d925a1ae629bb127b6a2',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'a2f2220be9252a0fc28e505894e13614115b51a30171f8aae17ed4b8d4ddc1c3',
+  'scenes/[protected identifier removed]/predictions.json': '93af980b6046347f4ac60e10d0bad71f606e0c969cc5d83e6588037bebe03b61',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'ea4a04c946f1f1beae9e9cdc2b97e8639ec23229f54dfdb1e527fada78cc38c0',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'd92003edd7a84d14385dd210fa37801bf9133c965093bae9ace43184d8948104',
+  'scenes/[protected identifier removed]/predictions.json': 'd38a795529ed8b288f01d58743c4c3329b0c01055959c75c87f5736d8adb5cdb',
+  'scenes/[protected identifier removed]/artifact_lock.json': '2bd6897704468a06eb6abf8df92d7a377bedc2ca737db84c77e0b664460d455c',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '55ab9bf05db332f65b7facbb34805befd2227d64597976f484ba8133fd704e44',
+  'scenes/[protected identifier removed]/predictions.json': '67db4b22346e31d9cae278b19df1516b781339eea9626a00db6b8d68e34f1073',
+  'scenes/[protected identifier removed]/artifact_lock.json': '82201d50c5475bd5d20b373916074a8cab0ca6d653416977d4b9a9650ad3f8e9',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '53ae4d6cf6758165294841925565fc4db6cdd854977a6717755b6ffda4faae5f',
+  'scenes/[protected identifier removed]/predictions.json': 'a305c96fb3fde014052e06a0d040246cbc5f39b5adf28384b7b5bedfc6f47f07',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'c8b1329199c19bcca8642f3da095f92b83ad92dd8884ced7b23044dedf1ca838',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '9b5cfa4403bd30bd7a7f6a6f902a6d2748c7f22bfe6d3e0937f3cf02abe48df9',
+  'scenes/[protected identifier removed]/predictions.json': 'bcb9e3d1608b4328b1c68e93eaaacc438d357d8022c875ee9b5702f35e5dfe08',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'bf4c89f8a3f88df6fac762c71cb253aefeadaae7ed5d8315cb705bd0c6f8adbc',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '792d24e5be0fc0e7dc699fd4877e4b7dc16a52447eaedafe6bd8fb671657d0ab',
+  'scenes/[protected identifier removed]/predictions.json': '18eb2a8bae37c558cc3deb55ad468ed5ea0407a0e7d01da8b3d7e8e482ff3df5',
+  'scenes/[protected identifier removed]/artifact_lock.json': '93b8880841da684bb5457e9ff40595f1e323b40c999ade6e27a36921ff2c0b50',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '7f381283393d49827a3865504e9421a80be151098881cbebee2986e43cfceae1',
+  'scenes/[protected identifier removed]/predictions.json': 'f73028c3e7a507c307e994f7ba53ef11d1330ba1f47222aa767b5844830afcaf',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'b3f6b51e17b97ec1802f56d6504e8b7f998c5cc7562566e7a42e9a3ac83e93c4',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '14554a23d4807edc002eb21802abbbaade2772cdfbc73b1a648804adc6b5d0e8',
+  'scenes/[protected identifier removed]/predictions.json': '825a04a477fafa1db6a7316cad98d4f1dc1b98d0b48ea166676e830439d36e78',
+  'scenes/[protected identifier removed]/artifact_lock.json': '9e168434175e5e8cff7752f9f5dbf12d9fd0f848498ba69ece0896d4b289278e',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'b1df870c73e4b48ce65dea0b9010ad2ee24d1d8a54fea6e6e92604d79f2a266d',
+  'scenes/[protected identifier removed]/predictions.json': 'd6d96244b79df8b65dbb90d15e3b36db2f651fde78d5db72d85dfbc89b9c8b85',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'a390b11c1fceedb060ef99da0c10dff700a5d850ed788077019f23df085be34f',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '5141cde814e1ae43ba093ed21febe9820f7b3ca6b14b5db7f71fef6164bb85f0',
+  'scenes/[protected identifier removed]/predictions.json': '048f419d5603291396db90c1b04730431d4a8ce2038cc629fdb4d8b579cf2ba2',
+  'scenes/[protected identifier removed]/artifact_lock.json': '778199f9ce489612924c153c8f7e5316ea0b5955c75531f284a3be15c5448d6f',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '03900eb7c70f8c1e299e56f390669fbb7179e8a1a0a88bffb033801809f2d4d7',
+  'scenes/[protected identifier removed]/predictions.json': '07603b4fbcf85013e8bc5524292bb474684d6d8d796839ed456769639853142f',
+  'scenes/[protected identifier removed]/artifact_lock.json': '30a3bed0b92926617ad7ac97ae947061f7d8d29ac3e3855f7ed1e2bacb746dbc',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '12889c115241cdabe8ac79268517af1c8c7b23ddc7400a2b7fb95e95f2c2b331',
+  'scenes/[protected identifier removed]/predictions.json': '64b9e041cc73dc4e7b073f257f403c8f35db94f8c62a87c0bf23541c31c4ee7c',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'f191f68c3811578378e07dfdf3211697f823cb557a3d0f0bc6ee7dc36ede27d3',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '47697c73c49e0faa175b123405aaf602faf0c570093158b4b6f8b75a7edf677a',
+  'scenes/[protected identifier removed]/predictions.json': '43be95e4274dfc510a1dc47b482d7bf946a01c2b9ec91808289a1e6e4da09d17',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'c5389488ab420f17af93e00064914381b5d057c093d281c2d6bf42650cdceeba',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '56198471c6945390693aed85807ec4188eaa6670f9338590011f69f9c75e1178',
+  'scenes/[protected identifier removed]/predictions.json': 'a2e1c44993dd5a69979d6dd97766c53f9ec02068c49e98d62ac1d01a72f954b9',
+  'scenes/[protected identifier removed]/artifact_lock.json': '751ef7451c60de02bb5c3aeefe93df4546e06b94eb4ca5e6f013b837d73cda71',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'ccfd8c19584555e8efe721eeef703865b7ed379aa278978aeb8c09e6f6bc5316',
+  'scenes/[protected identifier removed]/predictions.json': 'ea0882845e4c24b5b44c9a56900a136c41a66235c554589e8939bf697d4bde07',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'a43fc8654baf7f83274dced4aeae4b046538042c46d97219cf16d0d4572b37b3',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '0469c43ed5c0ccd4f544ab69892eb839a01bbe990e3ce86f5648c3391c3333dc',
+  'scenes/[protected identifier removed]/predictions.json': 'a9c3d087ca108018f9fd3185194f448bf8e93a0ed24d6999e50d96eb4cc06b52',
+  'scenes/[protected identifier removed]/artifact_lock.json': '285f19df59bab9c65e132e5e0ca4c573fe7722e91c17cd749f241c498b631a12',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '15c6b5e0d47a0b9400d7d9650ca557fdbba6f9c1bdc73c5fcf7bda16dea194cc',
+  'scenes/[protected identifier removed]/predictions.json': 'ee49a83025b070b4e84b368e776f3ac99f0f6227d6b8e426c7a434f3e69e485e',
+  'scenes/[protected identifier removed]/artifact_lock.json': '1844ff19d20412373d6c5de2dccc7da2f6fed6f4325cd065fcfeb8b20e4e5113',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '37ea34864850ca2311c6319c684827c5273c1a7e62045709b3809366df59aec9',
+  'scenes/[protected identifier removed]/predictions.json': 'b174216896cef01f94a3aa2487ff48014707800198f495368284ab39405eec78',
+  'scenes/[protected identifier removed]/artifact_lock.json': '0276eef11172b00ba4ff06f938fd5bcfff3a73c57e8d8c927da6ea547d26e9e4',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'f0aad4e1be6f2c2c2f43aaea210048a0508a51965313208ddb30876f9915fd86',
+  'scenes/[protected identifier removed]/predictions.json': '80bdb0702d92bba9b61bd532953633a39e1640e7225a56360c96672f19abb842',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'a6e46bd56b41ca2f7ca1e60013255e4eec375be8ac42ba09df3d4ca5074017d6',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'b6192b962c6e0b9cfbfc973654a54a066c87c1f3f6e1a43db3a6380c93ec13a6',
+  'scenes/[protected identifier removed]/predictions.json': '0d87191d3f69a79726c73f4cbfbc77ed0c024b33a5668abab39cf312bd9628aa',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'de1e801c4baee4eacee018e52fd61845bf9f6852230a6805b772ae8528814f3a',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'a62bd5e25711a788fad196a8589b85a1f05d9975cc60065ba59f9a4b59b941bc',
+  'scenes/[protected identifier removed]/predictions.json': '6ffe64265443cd19d74ead2a9f817565883ef701de03a2a3449fa08d3fe486ed',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'e74b979c69f98c296b7d80f01db68b3df6b63bf460f093cd8563fe570983bb36',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'f8103d2a0a0e94b8fbb1e6649fca691299c6c17cc57d50ef80fae38ceb877fd0',
+  'scenes/[protected identifier removed]/predictions.json': 'ddfd672b2dfe1d8250272ca419ffb1f99ae46587981c932f99876c4dc9a54bd8',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'd2c32d352e24e62b0b3565cc0f3f8ac9cd50e083a8d338f487fcb429c80ff2eb',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '96eeea1db2e388421bb49da8b63fc9f091977bf0e25c2b765e5e3a063616ac35',
+  'scenes/[protected identifier removed]/predictions.json': 'f90e41be415055d783359216927f0f75d962cbc6c5692681f042f10bb7b7a426',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'df34a143fdb101887ae9e95ed0e63b3c46b658ca120d1a57e21e69aeb352d00c',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'de29aed20603072f9d464e04efc785e221268ce2b3e4e46671c5edf8eb8dadb0',
+  'scenes/[protected identifier removed]/predictions.json': '6ab4833b97c106e6f4097c7eee5002379350c3a8b50f73194e0b9e71456ec754',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'c007f0733de6012e6936eeba9815f12ace18a78b17940a8adf5139f6f5b87f0b',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '3ae5cad949b193e9fc88baaebf0527b79338ed600403efe6335f02cdd7ea4950',
+  'scenes/[protected identifier removed]/predictions.json': 'e37d0ab8e2f3a86ff559276e7132f23f0a16e2d315576499d239b44633625994',
+  'scenes/[protected identifier removed]/artifact_lock.json': '6f23e61c876c1336db2d133b8ab7dbd75355e5d47d7f51c086881c3d31a95913',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '473297f93024a81276760d6c0b1d04d47064669bc6419160ff181ffcdddc34de',
+  'scenes/[protected identifier removed]/predictions.json': '38cb244c85afa2f7b8f38be75fcb75dda909c477a30f66b092ce1352052c282f',
+  'scenes/[protected identifier removed]/artifact_lock.json': '516d227f8ee1b25bff4e31e3ee1001945a040dc9e9ad1bff7d36a0b6f4e3a933',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '737b94ffeade4bf381d006665507980a9da702ebd6ee6ed359fd7d90db416807',
+  'scenes/[protected identifier removed]/predictions.json': '996e4247ea79edb6fb8052fbdf164bc31434ce632bf3ed82c12ce8764bdd37ee',
+  'scenes/[protected identifier removed]/artifact_lock.json': '3092e749bd7a5b0264e3b64de7aa4ab8fc479587cc726bb03e8857b0afa4af75',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'b8ccd93153964b851006b1d5f4274ec3b4dfdbadd565b3e209513bc6ac8e58d2',
+  'scenes/[protected identifier removed]/predictions.json': '8c97276ed359b77a3cc68deeb60b0804e31b63a86b017f0a3462a2548a86f0f8',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'f14da21f9f7730fb8a425fa401c96b83d61dd7194681b069a0261030a9761b7e',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'd3199ac8940de3e7643c9ee19a1b3c0e582041075aad5c818b30d510285900dd',
+  'scenes/[protected identifier removed]/predictions.json': 'c1e875333c618de1ddd4d731451d78d1342b5a6b194180c7bf5c3b680cdb7f76',
+  'scenes/[protected identifier removed]/artifact_lock.json': '7973ce646ba0faeabb43808e9e98426a90a637944d8319ae81a83532c792f41a',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'e0feb5d8c16cc30eb4703825937b5a5adcea0a8a45a16d4bbd3a2d417a3e492a',
+  'scenes/[protected identifier removed]/predictions.json': '7681fd9dd02bc01c148792be5facc51314ca8aebd5f7716b2ca1050cc341c635',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'a25a2ebf29b93dc9f4ea565f98fbe72ce4b9f8cc7ca2f61a099fcd9079c4aaf7',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'c923200ed1ec28a2974f8604f4acbbac6e18585ddb2403c188f8dc82e8857978',
+  'scenes/[protected identifier removed]/predictions.json': '8ded76cc5173a46118c826754c47b4605acbb90f39990526130fa03c5ee41b01',
+  'scenes/[protected identifier removed]/artifact_lock.json': '0a400682f1b542ffd39d63eee7c688767a901a59848994a2501efb20f000bd4c',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'd350ee6656934b710cfddd7e527c8a29b308fc4583641d0aeab811987e311c37',
+  'scenes/[protected identifier removed]/predictions.json': 'f0e492c1c21bbcccf3adffa1c6a1274e1ba7245db3ffc7c1817ff55d4ca784e8',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'ed89bb5958d5d57bce0a97f561b31315bd47f15c89ad46b13bbba6b919176807',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '4f5a6336580b44f59cc8ba9fe99061db76ee1271b347b032b3595b731d84af16',
+  'scenes/[protected identifier removed]/predictions.json': '5dbaf1c0d49baf1688accd0f1be3654027b3645001a93afd6966c1e9a154ee04',
+  'scenes/[protected identifier removed]/artifact_lock.json': '9c80d28c9f504d8b28fec0dd32f3c71bc5e19fa94d974bbfd152e315a4b0436a',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'e7c383c6be318503f064f1eba863a2875f31125e31ea2ce4c98b39a0a33c2bb5',
+  'scenes/[protected identifier removed]/predictions.json': '8d5da360146f4831b6ddce7dffefb31d7307d2a64ba405d8572bd540d70aa656',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'b8c6b753099cd6c9fd591b79d49a58eb18ef73ad0745db56e26a62620b0008be',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '938943d1ef0c93a2409727df0eb19b0aa4b7298488dfda36f52753694abb41d3',
+  'scenes/[protected identifier removed]/predictions.json': '4ddb17a0a712afd46776bc743a861b33ce542314e22b40d289d31a74e339cfe0',
+  'scenes/[protected identifier removed]/artifact_lock.json': '3a3c6ea734df3891a79a5747a809aea33e7f303877f7680a73d55ce1791be478',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'c52f16ff491df93cdad483791c812b08210404df92dd9ddf974cd5e456ff8827',
+  'scenes/[protected identifier removed]/predictions.json': '96d69e524aaae012fbca7d32c3e9a8e81e9b688ce1f209a04eb282500cb65ba9',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'c80a4b8f88017c91ae5a96e8fc54183462a63b4700c7ac7748bfa066e0ca48df',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'c87dca3d22d80a5ad8fabc7775688f9cd690c610da26eed7c353d70f0d73ecba',
+  'scenes/[protected identifier removed]/predictions.json': 'a944512481128f2f782faad0ef61d1323c6391fed08847a88b0f3b523ddc81ec',
+  'scenes/[protected identifier removed]/artifact_lock.json': '95f1151dd1da0e8665aa2c4122dfca91af54f0ad39bb86664306b399cad3872e',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '156bc7a6650173472e2bfa46b1d0075287ddb4541d8f59c0bd1e85459feeb6be',
+  'scenes/[protected identifier removed]/predictions.json': 'ec0de3c9ce477dcac6905bf03290326bd4a5c2e5458d9c474c600d3f50ebf425',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'c1bca8634ceebe3fb95de41e06df920caa4e0c0ad4b672279b91172f6a5a92af',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'c7432cf582ee13d59e045facebe3a2526e4083149dc5288844a3102339e39141',
+  'scenes/[protected identifier removed]/predictions.json': '5ca32e312fbc34cd482739a49a7389345f7f96b3ef3b21a1e5e5ba0a15bd2eea',
+  'scenes/[protected identifier removed]/artifact_lock.json': '5dd6dc4aa9367bd68b6f5b538526fb8ff524c752a6419590061b87c05bb1596f',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '259d997cbb1a3a8e3fa4102e93f00483d7523056373236917adb75606c84aad8',
+  'scenes/[protected identifier removed]/predictions.json': '5630d257cf58a5383d74de78700e229b4ddf666162229d06b805d9c3f73632a2',
+  'scenes/[protected identifier removed]/artifact_lock.json': '266b5b3690b8ed90ea22d1cb56883e562c90f033a1a43f634814f58f19346d53',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '654619052a1095a965e7cd699e7070c58fd7d708aabbd3c0538c9790759e73ae',
+  'scenes/[protected identifier removed]/predictions.json': 'c83fbf57ca36262dafa34b6adb8d798f3012eea67cb3a86e591477a1d6def0d1',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'b31a057d33df6a11260462bfb3df960360ae5508b3b9c0d18a76045802c75a93',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'd1bf970d820253d62e5a95e0d84fa72a02c9ced751d30c387ca0bdf0f528c871',
+  'scenes/[protected identifier removed]/predictions.json': 'd60c5cffe62b3581f636def5bc34ea2ffd377562c52bd754d4519b7a854dd3f3',
+  'scenes/[protected identifier removed]/artifact_lock.json': '8d8c60f19cfde9a33e0caa8dc290f1403d9f2918a09cf58a02ba9c367e4251d9',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'b347e633c846f477fbb38a64e32a8e2b48bc4417f6c807e9b5e48f3ca89d8c99',
+  'scenes/[protected identifier removed]/predictions.json': 'bbf457344044aa632ebdf763bc6897a62b001c1046885e8aa612df6f41d20e03',
+  'scenes/[protected identifier removed]/artifact_lock.json': '5c3217d2d30c2d6c908427565dd8494513e1b1bf4539d0b32d7bbab54277cb27',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '103145aa8bc51d1ea9f3f9ee7a5d3e62ecf787b791f1d91e8372b9e6ee09dba1',
+  'scenes/[protected identifier removed]/predictions.json': 'c5d0fad7d1018372e8191ca134c3bbaa3a84043d3d702356f1232c3a14636aa4',
+  'scenes/[protected identifier removed]/artifact_lock.json': '1f5cbda59cfee168fa7628857dcf2f7f3176ba6331d76668d9a398c8c144b1c3',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '11ef9a0e3070dc2d48dde22cc866e68a56ede4b52644dccb0283e892bd93759a',
+  'scenes/[protected identifier removed]/predictions.json': '8ed94fb8710f4b4328b3e2c7d5700c35e80bb9795d0b6e9834b286c18cf5db9f',
+  'scenes/[protected identifier removed]/artifact_lock.json': '3337ab8072a2e5dddbe47c9bb0ad1a56875584859ba94fad9fe114918fc7102a',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'c10f50e9fa1a8e64f9e9bcd5991cfcae9c7d4814a6353356531c4597c3e755c0',
+  'scenes/[protected identifier removed]/predictions.json': 'ed9d2c8dfa2660f2f113eaf0b06bb81cbcbecdfe6b094f28ef3c122bb95cd711',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'e18cb69a0d47433eab08358798652bdeeda5d8eab570644fc73193cdc66527bb',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '3385f9f918d517956fb4f1cefcf69802231207091a675eb6c1bdf2893ae186dd',
+  'scenes/[protected identifier removed]/predictions.json': '0a236b09ac76a1d5d4716f98b423a7009ffd239a973bfbf7668e538c4965c258',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'd74e2bc757093e15ce49466b06b8a63fd63d90a0a311ab059e50894eb2f74745',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'e39de20848018a5b4dfa05703e37037f14addeabf6476e5e6f22d76a3e93c00f',
+  'scenes/[protected identifier removed]/predictions.json': '73379eb54e459262c9a595bc96cad0cd255c46d7309207b50cbb3e733c57d429',
+  'scenes/[protected identifier removed]/artifact_lock.json': '80f8a31c8d262791eaa3bce31ff87146dc5d7da91868b248ae2038f6612b8846',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '6dda1d5dcff8cd1cde72d11a397d4c77191fecef7d5017924b1dedd3c8593d2a',
+  'scenes/[protected identifier removed]/predictions.json': 'bd39ba81388a4fa68d3f8f1128d8c922493a157fb29ac4b9f137990b6943b673',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'd11dfce3d0d6330053e598fe4ffe278e00dc5d5b172ad12f6b41ffb4f4a8f132',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'c56e9f52d8202ed8f56095a695f8e2cb48558c8b1e8fbfbd5c3732495a7c8ff7',
+  'scenes/[protected identifier removed]/predictions.json': '0e0adf6c6d928307ca911b549192062edd2dd704fa7f8e3984ab3ed420f3aa07',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'a8408c1a6abbeea41e00cecc180a0b4f365201b49a179b9d48d3519c705f8c40',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'e5370d95c46da47053283996bc33615ed998ddb67e4b98723638046dc6e88f63',
+  'scenes/[protected identifier removed]/predictions.json': '68abf9c11aae216df5c09056dddc864bb83e8de95ccae5827e0940b82d900e48',
+  'scenes/[protected identifier removed]/artifact_lock.json': 'dd56cbe848c1fa3d36e6c60ce8072ff718c7ef032634c02b98dfb61ec90785fe',
+  'scenes/[protected identifier removed]/patch_evidence.npz': '9a93d015ffb3d9ac6884714c34f779675b914c2e998e3694bf2b27396d211a71',
+  'scenes/[protected identifier removed]/predictions.json': 'a4598280ed899c63cfd10304f3496d733ac64618c30b26058bfe4f0faf91b589',
+  'scenes/[protected identifier removed]/artifact_lock.json': '6de6d320cb76cf583bd438897f6a5a15a0d400934d80305fea7a25eea682f950',
+  'scenes/[protected identifier removed]/patch_evidence.npz': 'f9ee26e4ca0843fd438f7493aaa47725bed0798e590ab4a19aff496e86089923',
+  'scenes/[protected identifier removed]/predictions.json': 'f159a84d11fb8151e99e1cb2856a23cd1d269f1043e0f6f3e3585984e49b2aee'},
+ 'metadata': {'binding_sha256': 'e34b7d06a40fd049200fc261e875fc0a18388683aa11454c502922d0d687e918',
+  'scenes': ['[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]',
+   '[protected identifier removed]']},
+ 'schema': 1}
+
+[cell 6]
+{"completed":1,"elapsed_seconds":0.01151354200192145,"event":"progress","total":100}
+
+[cell 6]
+{"completed":10,"elapsed_seconds":0.10744987500220304,"event":"progress","total":100}
+
+[cell 6]
+{"completed":20,"elapsed_seconds":0.20300370800032397,"event":"progress","total":100}
+
+[cell 6]
+{"completed":30,"elapsed_seconds":0.30022516700046253,"event":"progress","total":100}
+
+[cell 6]
+{"completed":40,"elapsed_seconds":0.40023125000152504,"event":"progress","total":100}
+
+[cell 6]
+{"completed":50,"elapsed_seconds":0.49745479200282716,"event":"progress","total":100}
+
+[cell 6]
+{"completed":60,"elapsed_seconds":0.5905185000010533,"event":"progress","total":100}
+
+[cell 6]
+{"completed":70,"elapsed_seconds":0.6932385830004932,"event":"progress","total":100}
+
+[cell 6]
+{"completed":80,"elapsed_seconds":0.8246632920017873,"event":"progress","total":100}
+
+[cell 6]
+{"completed":90,"elapsed_seconds":0.9198777080018772,"event":"progress","total":100}
+
+[cell 6]
+{"completed":100,"elapsed_seconds":1.0158089169999585,"event":"progress","total":100}
+
+[cell 6]
+{
+  "schema": "vpi-object-mapping/v1",
+  "scientific_status": "complete",
+  "scene_count": 100,
+  "asset_group_count": 27,
+  "view_schedule_count": 19,
+  "metric_rows": 7600,
+  "bootstrap": {
+    "unit": "asset_group",
+    "samples": 2000,
+    "seed": 32040
+  },
+  "selected_method": "winner_cluster_consensus",
+  "global_mapping_accepted": false,
+  "assisted_fallback_method": "correspondence_assisted_reference",
+  "scope": "existing development cohort; no independent confirmation",
+  "aggregation": "one scene per method; average schedules within scene before asset bootstrap",
+  "identity_f1_definition": "2*correct_cross_view_pairs/(predicted_cross_view_pairs+reference_cross_view_pairs); undefined if both zero",
+  "undefined_identity_handling": "explicit defined_scene_count; the primary gate requires all 100 scenes",
+  "assisted_method_label": "predicted masks with supplied neutral correspondence; dataset-assisted development mode",
+  "cohort_anomaly_objects": 125,
+  "cohort_normal_objects": 260,
+  "strict_normal_majority_scenes": 85,
+  "elapsed_seconds": 1.5722512080028537,
+  "shareable_files": [
+    "metric_summary.csv",
+    "view_schedule_summary.csv",
+    "paired_asset_intervals.csv",
+    "anomaly_count_summary.csv",
+    "majority_summary.csv",
+    "failure_summary.csv",
+    "identity_summary.csv",
+    "decision.json",
+    "evaluation_receipt.json"
+  ]
+}
+
+[cell 8]
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>method</th>
+      <th>view_count</th>
+      <th>mean</th>
+      <th>ci_low</th>
+      <th>ci_high</th>
+      <th>scene_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>20</th>
+      <td>correspondence_assisted_reference</td>
+      <td>2</td>
+      <td>0.576667</td>
+      <td>0.506667</td>
+      <td>0.653212</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>correspondence_assisted_reference</td>
+      <td>3</td>
+      <td>0.628333</td>
+      <td>0.521651</td>
+      <td>0.730903</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>60</th>
+      <td>correspondence_assisted_reference</td>
+      <td>5</td>
+      <td>0.690000</td>
+      <td>0.593750</td>
+      <td>0.779426</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>existing_all_candidates</td>
+      <td>2</td>
+      <td>0.253333</td>
+      <td>0.166667</td>
+      <td>0.346499</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>existing_all_candidates</td>
+      <td>3</td>
+      <td>0.203667</td>
+      <td>0.127539</td>
+      <td>0.287137</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>136</th>
+      <td>existing_all_candidates</td>
+      <td>5</td>
+      <td>0.186667</td>
+      <td>0.102294</td>
+      <td>0.281667</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>172</th>
+      <td>global_partial_assignment</td>
+      <td>2</td>
+      <td>0.253333</td>
+      <td>0.166667</td>
+      <td>0.346499</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>192</th>
+      <td>global_partial_assignment</td>
+      <td>3</td>
+      <td>0.236667</td>
+      <td>0.150691</td>
+      <td>0.331786</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>212</th>
+      <td>global_partial_assignment</td>
+      <td>5</td>
+      <td>0.180333</td>
+      <td>0.095407</td>
+      <td>0.272124</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>248</th>
+      <td>winner_cluster_consensus</td>
+      <td>2</td>
+      <td>0.390000</td>
+      <td>0.300947</td>
+      <td>0.485149</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>268</th>
+      <td>winner_cluster_consensus</td>
+      <td>3</td>
+      <td>0.376667</td>
+      <td>0.290850</td>
+      <td>0.469392</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>288</th>
+      <td>winner_cluster_consensus</td>
+      <td>5</td>
+      <td>0.189167</td>
+      <td>0.110000</td>
+      <td>0.282370</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+</div>                                method  view_count      mean    ci_low  \
+20   correspondence_assisted_reference           2  0.576667  0.506667
+40   correspondence_assisted_reference           3  0.628333  0.521651
+60   correspondence_assisted_reference           5  0.690000  0.593750
+96             existing_all_candidates           2  0.253333  0.166667
+116            existing_all_candidates           3  0.203667  0.127539
+136            existing_all_candidates           5  0.186667  0.102294
+172          global_partial_assignment           2  0.253333  0.166667
+192          global_partial_assignment           3  0.236667  0.150691
+212          global_partial_assignment           5  0.180333  0.095407
+248           winner_cluster_consensus           2  0.390000  0.300947
+268           winner_cluster_consensus           3  0.376667  0.290850
+288           winner_cluster_consensus           5  0.189167  0.110000
+
+      ci_high  scene_count
+20   0.653212          100
+40   0.730903          100
+60   0.779426          100
+96   0.346499          100
+116  0.287137          100
+136  0.281667          100
+172  0.346499          100
+192  0.331786          100
+212  0.272124          100
+248  0.485149          100
+268  0.469392          100
+288  0.282370          100
+
+[cell 8]
+{
+  "assisted_fallback_label": "predicted masks with supplied neutral correspondence; dataset-assisted development mode",
+  "assisted_fallback_method": "correspondence_assisted_reference",
+  "assisted_method_eligible": false,
+  "automatic_method": "winner_cluster_consensus",
+  "comparisons": {
+    "primary_ap_vs_winner": {
+      "ci_high": -0.05011427186916134,
+      "ci_low": -0.19511505211581065,
+      "defined_scene_count": 100.0,
+      "delta": -0.12061309523809523,
+      "scene_count": 100.0
+    },
+    "primary_fragmentation_vs_existing": {
+      "ci_high": 0.04881268996960486,
+      "ci_low": -0.015306802721088433,
+      "defined_scene_count": 100.0,
+      "delta": 0.019666666666666673,
+      "scene_count": 100.0
+    },
+    "primary_identity_f1_vs_existing": {
+      "ci_high": 0.008225835440241247,
+      "ci_low": -0.020545426558448224,
+      "defined_scene_count": 100.0,
+      "delta": -0.0075073724648095355,
+      "scene_count": 100.0
+    },
+    "primary_recall_at_2_vs_winner": {
+      "ci_high": -0.07362221587664193,
+      "ci_low": -0.2442372329338197,
+      "defined_scene_count": 100.0,
+      "delta": -0.15500000000000003,
+      "scene_count": 100.0
+    },
+    "primary_top1_vs_winner": {
+      "ci_high": -0.04620462046204621,
+      "ci_low": -0.23090578589108912,
+      "defined_scene_count": 100.0,
+      "delta": -0.14,
+      "scene_count": 100.0
+    },
+    "three_view_mean_top1_vs_winner": {
+      "ci_high": -0.014049619847939194,
+      "ci_low": -0.13434918300653592,
+      "defined_scene_count": 100.0,
+      "delta": -0.07999999999999999,
+      "scene_count": 100.0
+    }
+  },
+  "decision": "retain_winner_and_assisted_fallback_stop_search",
+  "further_search_allowed": false,
+  "gate_checks": {
+    "ap_no_regression": false,
+    "complete_primary_comparisons": true,
+    "fragmentation_not_increased": false,
+    "identity_f1_improved": false,
+    "recall_at_2_no_regression": false,
+    "three_view_schedule_mean_improved": false,
+    "top1_paired_lower_positive": false
+  },
+  "global_mapping_accepted": false,
+  "interpretation": "existing development cohort; no independent confirmation or 60-percent claim",
+  "schema": "vpi-object-mapping/v1",
+  "selected_method": "winner_cluster_consensus"
+}
+
+[cell 10]
+{
+  "status": "completed",
+  "gallery_count": 2,
+  "solver_status_counts": {
+    "optimal": 1900
+  },
+  "available_hypothesis_counts": {
+    "1": 524,
+    "3": 1372,
+    "2": 4
+  },
+  "setting_count": 1900,
+  "matching_and_scoring_seconds_sum": 96.82443864492961,
+  "maximum_setting_seconds": 1.583918915999675,
+  "figures": [
+    "view_count_accuracy.png",
+    "paired_improvement.png"
+  ],
+  "gallery_boxes": "saved mask-bounding boxes; not validated defect boundaries",
+  "uncertainty": "up to three appearance maps, not calibrated probabilities"
+}
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 10]
+<IPython.core.display.Image object>
+
+[cell 11]
+post-hoc low-accuracy illustration optimal hypothesis_sensitivity_only
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 11]
+post-hoc high-accuracy illustration optimal hypothesis_sensitivity_only
+
+[cell 11]
+<IPython.core.display.Image object>
+
+[cell 13]
+{'status': 'completed', 'task_id': 'bbc36baf29bd419197f0671ce3e27894', 'task_url': 'https://app.clear.ml/projects/62a09a229f184cb7bbe50da59b4226e7/experiments/bbc36baf29bd419197f0671ce3e27894/output/log', 'uploaded_artifact_count': None, 'remote_artifacts_verified': True}

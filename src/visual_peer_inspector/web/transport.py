@@ -52,7 +52,8 @@ def write_request(root: Path, request: InspectionRequest):
         name = f"input-{index}.png"
         view.image.save(root / name, format="PNG")
         views.append({"view_id": view.view_id, "digest": view.digest, "image": name})
-    record = {"views": views, "request_id": request.request_id, "corrections": None}
+    record = {"views": views, "request_id": request.request_id, "corrections": None,
+              "session_id": request.session_id, "cache_token": request.cache_token, "mode": request.mode}
     if request.corrections is not None:
         record["corrections"] = [vars(box) for box in request.corrections]
     (root / "request.json").write_text(
@@ -83,13 +84,15 @@ def read_request(root: Path):
     )
     if corrections is not None:
         validate_boxes(corrections, views)
-    return InspectionRequest(tuple(views), corrections, request_id=value["request_id"])
+    return InspectionRequest(tuple(views), corrections, request_id=value["request_id"],
+        **{k:value[k] for k in ('session_id','cache_token','mode') if k in value})
 
 
 def write_result(root: Path, result: InspectionResult):
     observations = []
     for index, observation in enumerate(result.observations):
-        row = {"box": vars(observation.box), "p1_score": observation.p1_score}
+        row = {"box": vars(observation.box), "p1_score": observation.p1_score,
+               **{k:getattr(observation,k) for k in ('score','score_method','component_scores','normalized_rank','identity_status','identity_source')}}
         for layer in ("mask", "heatmap"):
             overlay = getattr(observation, layer)
             name = None if overlay is None else f"output-{index}-{layer}.png"
@@ -106,6 +109,7 @@ def write_result(root: Path, result: InspectionResult):
         "policy_version": result.policy_version,
         "mode": result.mode,
         "provenance": result.provenance,
+        **{k:getattr(result,k) for k in ('selected_identity_id','session_id','cache_token','score_metadata')},
     }
     (root / "result.json").write_text(
         json.dumps(record, allow_nan=False), encoding="utf-8"
@@ -135,11 +139,13 @@ def read_result(root: Path, request: InspectionRequest):
                 ),
                 row["p1_score"],
                 *layers,
+                **{k:row[k] for k in ('score','score_method','component_scores','normalized_rank','identity_status','identity_source') if k in row},
             )
         )
     result = InspectionResult(
         tuple(
-            RankedObject(r["identity_id"], r["relative_score"], tuple(r["view_ids"]))
+            RankedObject(r["identity_id"], r["relative_score"], tuple(r["view_ids"]),
+                         tuple(r.get('contributors',())), r.get('score_method',''))
             for r in value["ranking"]
         ),
         tuple(observations),
@@ -149,6 +155,7 @@ def read_result(root: Path, request: InspectionRequest):
         value["policy_version"],
         value["mode"],
         value["provenance"],
+        **{k:value[k] for k in ('selected_identity_id','session_id','cache_token','score_metadata') if k in value},
     )
     validate_result(result, request)
     return result

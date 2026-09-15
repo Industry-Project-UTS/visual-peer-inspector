@@ -1,0 +1,1009 @@
+source_stage,route,method,view_count,view_set_id,metric,mean,scene_count,defined_scene_count,asset_group_count,correspondence,regions,report_status,metric_validity,original_reported_mean
+08O,automatic_predicted,cached_forward_mean,1,all-schedules,identity_precision,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,cached_forward_mean,1,all-schedules,identity_recall,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,cached_forward_mean,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_predicted,cached_forward_mean,1,all-schedules,identity_fragmentation,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,cached_forward_mean,1,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,cached_forward_mean,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,cached_forward_mean,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,cached_forward_mean,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,cached_forward_mean,2,all-schedules,identity_precision,0.1762388888888889,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1762388888888889
+08O,automatic_predicted,cached_forward_mean,2,all-schedules,identity_recall,0.1512027777777777,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1512027777777777
+08O,automatic_predicted,cached_forward_mean,2,all-schedules,identity_purity,0.6512670274170275,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.6512670274170275
+08O,automatic_predicted,cached_forward_mean,2,all-schedules,identity_fragmentation,0.7848555555555556,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.7848555555555556
+08O,automatic_predicted,cached_forward_mean,2,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,cached_forward_mean,2,all-schedules,predicted_cross_view_pairs,3.094,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.094
+08O,automatic_predicted,cached_forward_mean,2,all-schedules,correct_cross_view_pairs,0.5220000000000001,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5220000000000001
+08O,automatic_predicted,cached_forward_mean,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_predicted,cached_forward_mean,3,all-schedules,identity_precision,0.184669375069375,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.184669375069375
+08O,automatic_predicted,cached_forward_mean,3,all-schedules,identity_recall,0.1558470723720723,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1558470723720723
+08O,automatic_predicted,cached_forward_mean,3,all-schedules,identity_purity,0.5554978562974694,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5554978562974694
+08O,automatic_predicted,cached_forward_mean,3,all-schedules,identity_fragmentation,1.4758666666666669,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.4758666666666669
+08O,automatic_predicted,cached_forward_mean,3,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,cached_forward_mean,3,all-schedules,predicted_cross_view_pairs,9.22,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,9.22
+08O,automatic_predicted,cached_forward_mean,3,all-schedules,correct_cross_view_pairs,1.6359999999999997,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.6359999999999997
+08O,automatic_predicted,cached_forward_mean,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_predicted,cached_forward_mean,5,all-schedules,identity_precision,0.2449569450513052,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2449569450513052
+08O,automatic_predicted,cached_forward_mean,5,all-schedules,identity_recall,0.2083752026089033,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2083752026089033
+08O,automatic_predicted,cached_forward_mean,5,all-schedules,identity_purity,0.5172858449831529,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5172858449831529
+08O,automatic_predicted,cached_forward_mean,5,all-schedules,identity_fragmentation,2.243916666666667,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,2.243916666666667
+08O,automatic_predicted,cached_forward_mean,5,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,cached_forward_mean,5,all-schedules,predicted_cross_view_pairs,30.6175,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,30.6175
+08O,automatic_predicted,cached_forward_mean,5,all-schedules,correct_cross_view_pairs,7.2625,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,7.2625
+08O,automatic_predicted,cached_forward_mean,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_predicted,cached_forward_top2,1,all-schedules,identity_precision,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,cached_forward_top2,1,all-schedules,identity_recall,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,cached_forward_top2,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_predicted,cached_forward_top2,1,all-schedules,identity_fragmentation,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,cached_forward_top2,1,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,cached_forward_top2,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,cached_forward_top2,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,cached_forward_top2,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,cached_forward_top2,2,all-schedules,identity_precision,0.1762388888888889,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1762388888888889
+08O,automatic_predicted,cached_forward_top2,2,all-schedules,identity_recall,0.1512027777777777,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1512027777777777
+08O,automatic_predicted,cached_forward_top2,2,all-schedules,identity_purity,0.6512670274170275,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.6512670274170275
+08O,automatic_predicted,cached_forward_top2,2,all-schedules,identity_fragmentation,0.7848555555555556,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.7848555555555556
+08O,automatic_predicted,cached_forward_top2,2,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,cached_forward_top2,2,all-schedules,predicted_cross_view_pairs,3.094,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.094
+08O,automatic_predicted,cached_forward_top2,2,all-schedules,correct_cross_view_pairs,0.5220000000000001,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5220000000000001
+08O,automatic_predicted,cached_forward_top2,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_predicted,cached_forward_top2,3,all-schedules,identity_precision,0.184669375069375,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.184669375069375
+08O,automatic_predicted,cached_forward_top2,3,all-schedules,identity_recall,0.1558470723720723,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1558470723720723
+08O,automatic_predicted,cached_forward_top2,3,all-schedules,identity_purity,0.5554978562974694,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5554978562974694
+08O,automatic_predicted,cached_forward_top2,3,all-schedules,identity_fragmentation,1.4758666666666669,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.4758666666666669
+08O,automatic_predicted,cached_forward_top2,3,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,cached_forward_top2,3,all-schedules,predicted_cross_view_pairs,9.22,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,9.22
+08O,automatic_predicted,cached_forward_top2,3,all-schedules,correct_cross_view_pairs,1.6359999999999997,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.6359999999999997
+08O,automatic_predicted,cached_forward_top2,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_predicted,cached_forward_top2,5,all-schedules,identity_precision,0.2449569450513052,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2449569450513052
+08O,automatic_predicted,cached_forward_top2,5,all-schedules,identity_recall,0.2083752026089033,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2083752026089033
+08O,automatic_predicted,cached_forward_top2,5,all-schedules,identity_purity,0.5172858449831529,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5172858449831529
+08O,automatic_predicted,cached_forward_top2,5,all-schedules,identity_fragmentation,2.243916666666667,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,2.243916666666667
+08O,automatic_predicted,cached_forward_top2,5,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,cached_forward_top2,5,all-schedules,predicted_cross_view_pairs,30.6175,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,30.6175
+08O,automatic_predicted,cached_forward_top2,5,all-schedules,correct_cross_view_pairs,7.2625,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,7.2625
+08O,automatic_predicted,cached_forward_top2,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_predicted,object_bank_mean,1,all-schedules,identity_precision,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,object_bank_mean,1,all-schedules,identity_recall,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,object_bank_mean,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_predicted,object_bank_mean,1,all-schedules,identity_fragmentation,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,object_bank_mean,1,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,object_bank_mean,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,object_bank_mean,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,object_bank_mean,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,object_bank_mean,2,all-schedules,identity_precision,0.1762388888888889,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1762388888888889
+08O,automatic_predicted,object_bank_mean,2,all-schedules,identity_recall,0.1512027777777777,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1512027777777777
+08O,automatic_predicted,object_bank_mean,2,all-schedules,identity_purity,0.6512670274170275,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.6512670274170275
+08O,automatic_predicted,object_bank_mean,2,all-schedules,identity_fragmentation,0.7848555555555556,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.7848555555555556
+08O,automatic_predicted,object_bank_mean,2,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,object_bank_mean,2,all-schedules,predicted_cross_view_pairs,3.094,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.094
+08O,automatic_predicted,object_bank_mean,2,all-schedules,correct_cross_view_pairs,0.5220000000000001,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5220000000000001
+08O,automatic_predicted,object_bank_mean,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_predicted,object_bank_mean,3,all-schedules,identity_precision,0.184669375069375,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.184669375069375
+08O,automatic_predicted,object_bank_mean,3,all-schedules,identity_recall,0.1558470723720723,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1558470723720723
+08O,automatic_predicted,object_bank_mean,3,all-schedules,identity_purity,0.5554978562974694,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5554978562974694
+08O,automatic_predicted,object_bank_mean,3,all-schedules,identity_fragmentation,1.4758666666666669,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.4758666666666669
+08O,automatic_predicted,object_bank_mean,3,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,object_bank_mean,3,all-schedules,predicted_cross_view_pairs,9.22,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,9.22
+08O,automatic_predicted,object_bank_mean,3,all-schedules,correct_cross_view_pairs,1.6359999999999997,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.6359999999999997
+08O,automatic_predicted,object_bank_mean,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_predicted,object_bank_mean,5,all-schedules,identity_precision,0.2449569450513052,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2449569450513052
+08O,automatic_predicted,object_bank_mean,5,all-schedules,identity_recall,0.2083752026089033,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2083752026089033
+08O,automatic_predicted,object_bank_mean,5,all-schedules,identity_purity,0.5172858449831529,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5172858449831529
+08O,automatic_predicted,object_bank_mean,5,all-schedules,identity_fragmentation,2.243916666666667,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,2.243916666666667
+08O,automatic_predicted,object_bank_mean,5,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,object_bank_mean,5,all-schedules,predicted_cross_view_pairs,30.6175,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,30.6175
+08O,automatic_predicted,object_bank_mean,5,all-schedules,correct_cross_view_pairs,7.2625,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,7.2625
+08O,automatic_predicted,object_bank_mean,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_predicted,object_bank_top2,1,all-schedules,identity_precision,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,object_bank_top2,1,all-schedules,identity_recall,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,object_bank_top2,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_predicted,object_bank_top2,1,all-schedules,identity_fragmentation,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,object_bank_top2,1,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,object_bank_top2,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,object_bank_top2,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,object_bank_top2,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,object_bank_top2,2,all-schedules,identity_precision,0.1762388888888889,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1762388888888889
+08O,automatic_predicted,object_bank_top2,2,all-schedules,identity_recall,0.1512027777777777,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1512027777777777
+08O,automatic_predicted,object_bank_top2,2,all-schedules,identity_purity,0.6512670274170275,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.6512670274170275
+08O,automatic_predicted,object_bank_top2,2,all-schedules,identity_fragmentation,0.7848555555555556,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.7848555555555556
+08O,automatic_predicted,object_bank_top2,2,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,object_bank_top2,2,all-schedules,predicted_cross_view_pairs,3.094,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.094
+08O,automatic_predicted,object_bank_top2,2,all-schedules,correct_cross_view_pairs,0.5220000000000001,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5220000000000001
+08O,automatic_predicted,object_bank_top2,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_predicted,object_bank_top2,3,all-schedules,identity_precision,0.184669375069375,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.184669375069375
+08O,automatic_predicted,object_bank_top2,3,all-schedules,identity_recall,0.1558470723720723,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1558470723720723
+08O,automatic_predicted,object_bank_top2,3,all-schedules,identity_purity,0.5554978562974694,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5554978562974694
+08O,automatic_predicted,object_bank_top2,3,all-schedules,identity_fragmentation,1.4758666666666669,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.4758666666666669
+08O,automatic_predicted,object_bank_top2,3,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,object_bank_top2,3,all-schedules,predicted_cross_view_pairs,9.22,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,9.22
+08O,automatic_predicted,object_bank_top2,3,all-schedules,correct_cross_view_pairs,1.6359999999999997,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.6359999999999997
+08O,automatic_predicted,object_bank_top2,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_predicted,object_bank_top2,5,all-schedules,identity_precision,0.2449569450513052,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2449569450513052
+08O,automatic_predicted,object_bank_top2,5,all-schedules,identity_recall,0.2083752026089033,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2083752026089033
+08O,automatic_predicted,object_bank_top2,5,all-schedules,identity_purity,0.5172858449831529,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5172858449831529
+08O,automatic_predicted,object_bank_top2,5,all-schedules,identity_fragmentation,2.243916666666667,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,2.243916666666667
+08O,automatic_predicted,object_bank_top2,5,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,object_bank_top2,5,all-schedules,predicted_cross_view_pairs,30.6175,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,30.6175
+08O,automatic_predicted,object_bank_top2,5,all-schedules,correct_cross_view_pairs,7.2625,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,7.2625
+08O,automatic_predicted,object_bank_top2,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_predicted,view_mean_control_mean,1,all-schedules,identity_precision,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,view_mean_control_mean,1,all-schedules,identity_recall,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,view_mean_control_mean,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_predicted,view_mean_control_mean,1,all-schedules,identity_fragmentation,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,view_mean_control_mean,1,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,view_mean_control_mean,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,view_mean_control_mean,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,view_mean_control_mean,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,view_mean_control_mean,2,all-schedules,identity_precision,0.1762388888888889,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1762388888888889
+08O,automatic_predicted,view_mean_control_mean,2,all-schedules,identity_recall,0.1512027777777777,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1512027777777777
+08O,automatic_predicted,view_mean_control_mean,2,all-schedules,identity_purity,0.6512670274170275,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.6512670274170275
+08O,automatic_predicted,view_mean_control_mean,2,all-schedules,identity_fragmentation,0.7848555555555556,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.7848555555555556
+08O,automatic_predicted,view_mean_control_mean,2,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,view_mean_control_mean,2,all-schedules,predicted_cross_view_pairs,3.094,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.094
+08O,automatic_predicted,view_mean_control_mean,2,all-schedules,correct_cross_view_pairs,0.5220000000000001,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5220000000000001
+08O,automatic_predicted,view_mean_control_mean,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_predicted,view_mean_control_mean,3,all-schedules,identity_precision,0.184669375069375,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.184669375069375
+08O,automatic_predicted,view_mean_control_mean,3,all-schedules,identity_recall,0.1558470723720723,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1558470723720723
+08O,automatic_predicted,view_mean_control_mean,3,all-schedules,identity_purity,0.5554978562974694,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5554978562974694
+08O,automatic_predicted,view_mean_control_mean,3,all-schedules,identity_fragmentation,1.4758666666666669,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.4758666666666669
+08O,automatic_predicted,view_mean_control_mean,3,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,view_mean_control_mean,3,all-schedules,predicted_cross_view_pairs,9.22,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,9.22
+08O,automatic_predicted,view_mean_control_mean,3,all-schedules,correct_cross_view_pairs,1.6359999999999997,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.6359999999999997
+08O,automatic_predicted,view_mean_control_mean,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_predicted,view_mean_control_mean,5,all-schedules,identity_precision,0.2449569450513052,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2449569450513052
+08O,automatic_predicted,view_mean_control_mean,5,all-schedules,identity_recall,0.2083752026089033,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2083752026089033
+08O,automatic_predicted,view_mean_control_mean,5,all-schedules,identity_purity,0.5172858449831529,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5172858449831529
+08O,automatic_predicted,view_mean_control_mean,5,all-schedules,identity_fragmentation,2.243916666666667,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,2.243916666666667
+08O,automatic_predicted,view_mean_control_mean,5,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,view_mean_control_mean,5,all-schedules,predicted_cross_view_pairs,30.6175,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,30.6175
+08O,automatic_predicted,view_mean_control_mean,5,all-schedules,correct_cross_view_pairs,7.2625,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,7.2625
+08O,automatic_predicted,view_mean_control_mean,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_predicted,view_mean_control_top2,1,all-schedules,identity_precision,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,view_mean_control_top2,1,all-schedules,identity_recall,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,view_mean_control_top2,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_predicted,view_mean_control_top2,1,all-schedules,identity_fragmentation,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,view_mean_control_top2,1,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,view_mean_control_top2,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,view_mean_control_top2,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,view_mean_control_top2,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,view_mean_control_top2,2,all-schedules,identity_precision,0.1762388888888889,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1762388888888889
+08O,automatic_predicted,view_mean_control_top2,2,all-schedules,identity_recall,0.1512027777777777,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1512027777777777
+08O,automatic_predicted,view_mean_control_top2,2,all-schedules,identity_purity,0.6512670274170275,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.6512670274170275
+08O,automatic_predicted,view_mean_control_top2,2,all-schedules,identity_fragmentation,0.7848555555555556,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.7848555555555556
+08O,automatic_predicted,view_mean_control_top2,2,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,view_mean_control_top2,2,all-schedules,predicted_cross_view_pairs,3.094,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.094
+08O,automatic_predicted,view_mean_control_top2,2,all-schedules,correct_cross_view_pairs,0.5220000000000001,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5220000000000001
+08O,automatic_predicted,view_mean_control_top2,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_predicted,view_mean_control_top2,3,all-schedules,identity_precision,0.184669375069375,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.184669375069375
+08O,automatic_predicted,view_mean_control_top2,3,all-schedules,identity_recall,0.1558470723720723,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1558470723720723
+08O,automatic_predicted,view_mean_control_top2,3,all-schedules,identity_purity,0.5554978562974694,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5554978562974694
+08O,automatic_predicted,view_mean_control_top2,3,all-schedules,identity_fragmentation,1.4758666666666669,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.4758666666666669
+08O,automatic_predicted,view_mean_control_top2,3,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,view_mean_control_top2,3,all-schedules,predicted_cross_view_pairs,9.22,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,9.22
+08O,automatic_predicted,view_mean_control_top2,3,all-schedules,correct_cross_view_pairs,1.6359999999999997,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.6359999999999997
+08O,automatic_predicted,view_mean_control_top2,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_predicted,view_mean_control_top2,5,all-schedules,identity_precision,0.2449569450513052,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2449569450513052
+08O,automatic_predicted,view_mean_control_top2,5,all-schedules,identity_recall,0.2083752026089033,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2083752026089033
+08O,automatic_predicted,view_mean_control_top2,5,all-schedules,identity_purity,0.5172858449831529,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5172858449831529
+08O,automatic_predicted,view_mean_control_top2,5,all-schedules,identity_fragmentation,2.243916666666667,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,2.243916666666667
+08O,automatic_predicted,view_mean_control_top2,5,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,view_mean_control_top2,5,all-schedules,predicted_cross_view_pairs,30.6175,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,30.6175
+08O,automatic_predicted,view_mean_control_top2,5,all-schedules,correct_cross_view_pairs,7.2625,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,7.2625
+08O,automatic_predicted,view_mean_control_top2,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_predicted,winner_cluster_consensus,1,all-schedules,identity_precision,,100,0,27,predicted,predicted masks,frozen automatic baseline,usable as reported,
+08O,automatic_predicted,winner_cluster_consensus,1,all-schedules,identity_recall,,100,0,27,predicted,predicted masks,frozen automatic baseline,usable as reported,
+08O,automatic_predicted,winner_cluster_consensus,1,all-schedules,identity_purity,0.981,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.981
+08O,automatic_predicted,winner_cluster_consensus,1,all-schedules,identity_fragmentation,0.0,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0
+08O,automatic_predicted,winner_cluster_consensus,1,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,frozen automatic baseline,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,winner_cluster_consensus,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0
+08O,automatic_predicted,winner_cluster_consensus,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0
+08O,automatic_predicted,winner_cluster_consensus,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0
+08O,automatic_predicted,winner_cluster_consensus,2,all-schedules,identity_precision,0.2623456790123457,100,54,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.2623456790123457
+08O,automatic_predicted,winner_cluster_consensus,2,all-schedules,identity_recall,0.0144666666666666,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0144666666666666
+08O,automatic_predicted,winner_cluster_consensus,2,all-schedules,identity_purity,0.911888888888889,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.911888888888889
+08O,automatic_predicted,winner_cluster_consensus,2,all-schedules,identity_fragmentation,0.0761999999999999,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0761999999999999
+08O,automatic_predicted,winner_cluster_consensus,2,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,frozen automatic baseline,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,winner_cluster_consensus,2,all-schedules,predicted_cross_view_pairs,0.18,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.18
+08O,automatic_predicted,winner_cluster_consensus,2,all-schedules,correct_cross_view_pairs,0.05,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.05
+08O,automatic_predicted,winner_cluster_consensus,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,3.5520000000000005
+08O,automatic_predicted,winner_cluster_consensus,3,all-schedules,identity_precision,0.2459595959595959,100,77,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.2459595959595959
+08O,automatic_predicted,winner_cluster_consensus,3,all-schedules,identity_recall,0.0136256216006216,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0136256216006216
+08O,automatic_predicted,winner_cluster_consensus,3,all-schedules,identity_purity,0.8797,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.8797
+08O,automatic_predicted,winner_cluster_consensus,3,all-schedules,identity_fragmentation,0.1854666666666666,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.1854666666666666
+08O,automatic_predicted,winner_cluster_consensus,3,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,frozen automatic baseline,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,winner_cluster_consensus,3,all-schedules,predicted_cross_view_pairs,0.472,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.472
+08O,automatic_predicted,winner_cluster_consensus,3,all-schedules,correct_cross_view_pairs,0.142,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.142
+08O,automatic_predicted,winner_cluster_consensus,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,10.704
+08O,automatic_predicted,winner_cluster_consensus,5,all-schedules,identity_precision,0.2887719298245614,100,95,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.2887719298245614
+08O,automatic_predicted,winner_cluster_consensus,5,all-schedules,identity_recall,0.0173156127062584,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0173156127062584
+08O,automatic_predicted,winner_cluster_consensus,5,all-schedules,identity_purity,0.8179583333333332,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.8179583333333332
+08O,automatic_predicted,winner_cluster_consensus,5,all-schedules,identity_fragmentation,0.4853333333333332,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.4853333333333332
+08O,automatic_predicted,winner_cluster_consensus,5,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,frozen automatic baseline,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,winner_cluster_consensus,5,all-schedules,predicted_cross_view_pairs,1.6275,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,1.6275
+08O,automatic_predicted,winner_cluster_consensus,5,all-schedules,correct_cross_view_pairs,0.55,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.55
+08O,automatic_predicted,winner_cluster_consensus,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,35.7575
+08O,automatic_predicted,within_view_mean,1,all-schedules,identity_precision,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,within_view_mean,1,all-schedules,identity_recall,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,within_view_mean,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_predicted,within_view_mean,1,all-schedules,identity_fragmentation,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,within_view_mean,1,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,within_view_mean,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,within_view_mean,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,within_view_mean,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,within_view_mean,2,all-schedules,identity_precision,0.1762388888888889,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1762388888888889
+08O,automatic_predicted,within_view_mean,2,all-schedules,identity_recall,0.1512027777777777,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1512027777777777
+08O,automatic_predicted,within_view_mean,2,all-schedules,identity_purity,0.6512670274170275,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.6512670274170275
+08O,automatic_predicted,within_view_mean,2,all-schedules,identity_fragmentation,0.7848555555555556,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.7848555555555556
+08O,automatic_predicted,within_view_mean,2,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,within_view_mean,2,all-schedules,predicted_cross_view_pairs,3.094,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.094
+08O,automatic_predicted,within_view_mean,2,all-schedules,correct_cross_view_pairs,0.5220000000000001,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5220000000000001
+08O,automatic_predicted,within_view_mean,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_predicted,within_view_mean,3,all-schedules,identity_precision,0.184669375069375,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.184669375069375
+08O,automatic_predicted,within_view_mean,3,all-schedules,identity_recall,0.1558470723720723,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1558470723720723
+08O,automatic_predicted,within_view_mean,3,all-schedules,identity_purity,0.5554978562974694,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5554978562974694
+08O,automatic_predicted,within_view_mean,3,all-schedules,identity_fragmentation,1.4758666666666669,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.4758666666666669
+08O,automatic_predicted,within_view_mean,3,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,within_view_mean,3,all-schedules,predicted_cross_view_pairs,9.22,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,9.22
+08O,automatic_predicted,within_view_mean,3,all-schedules,correct_cross_view_pairs,1.6359999999999997,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.6359999999999997
+08O,automatic_predicted,within_view_mean,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_predicted,within_view_mean,5,all-schedules,identity_precision,0.2449569450513052,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2449569450513052
+08O,automatic_predicted,within_view_mean,5,all-schedules,identity_recall,0.2083752026089033,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2083752026089033
+08O,automatic_predicted,within_view_mean,5,all-schedules,identity_purity,0.5172858449831529,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5172858449831529
+08O,automatic_predicted,within_view_mean,5,all-schedules,identity_fragmentation,2.243916666666667,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,2.243916666666667
+08O,automatic_predicted,within_view_mean,5,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,within_view_mean,5,all-schedules,predicted_cross_view_pairs,30.6175,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,30.6175
+08O,automatic_predicted,within_view_mean,5,all-schedules,correct_cross_view_pairs,7.2625,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,7.2625
+08O,automatic_predicted,within_view_mean,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_predicted,within_view_top2,1,all-schedules,identity_precision,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,within_view_top2,1,all-schedules,identity_recall,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_predicted,within_view_top2,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_predicted,within_view_top2,1,all-schedules,identity_fragmentation,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,within_view_top2,1,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,within_view_top2,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,within_view_top2,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,within_view_top2,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_predicted,within_view_top2,2,all-schedules,identity_precision,0.1762388888888889,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1762388888888889
+08O,automatic_predicted,within_view_top2,2,all-schedules,identity_recall,0.1512027777777777,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1512027777777777
+08O,automatic_predicted,within_view_top2,2,all-schedules,identity_purity,0.6512670274170275,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.6512670274170275
+08O,automatic_predicted,within_view_top2,2,all-schedules,identity_fragmentation,0.7848555555555556,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.7848555555555556
+08O,automatic_predicted,within_view_top2,2,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,within_view_top2,2,all-schedules,predicted_cross_view_pairs,3.094,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.094
+08O,automatic_predicted,within_view_top2,2,all-schedules,correct_cross_view_pairs,0.5220000000000001,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5220000000000001
+08O,automatic_predicted,within_view_top2,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_predicted,within_view_top2,3,all-schedules,identity_precision,0.184669375069375,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.184669375069375
+08O,automatic_predicted,within_view_top2,3,all-schedules,identity_recall,0.1558470723720723,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1558470723720723
+08O,automatic_predicted,within_view_top2,3,all-schedules,identity_purity,0.5554978562974694,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5554978562974694
+08O,automatic_predicted,within_view_top2,3,all-schedules,identity_fragmentation,1.4758666666666669,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.4758666666666669
+08O,automatic_predicted,within_view_top2,3,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,within_view_top2,3,all-schedules,predicted_cross_view_pairs,9.22,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,9.22
+08O,automatic_predicted,within_view_top2,3,all-schedules,correct_cross_view_pairs,1.6359999999999997,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.6359999999999997
+08O,automatic_predicted,within_view_top2,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_predicted,within_view_top2,5,all-schedules,identity_precision,0.2449569450513052,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2449569450513052
+08O,automatic_predicted,within_view_top2,5,all-schedules,identity_recall,0.2083752026089033,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2083752026089033
+08O,automatic_predicted,within_view_top2,5,all-schedules,identity_purity,0.5172858449831529,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5172858449831529
+08O,automatic_predicted,within_view_top2,5,all-schedules,identity_fragmentation,2.243916666666667,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,2.243916666666667
+08O,automatic_predicted,within_view_top2,5,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_predicted,within_view_top2,5,all-schedules,predicted_cross_view_pairs,30.6175,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,30.6175
+08O,automatic_predicted,within_view_top2,5,all-schedules,correct_cross_view_pairs,7.2625,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,7.2625
+08O,automatic_predicted,within_view_top2,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,cached_forward_mean,1,all-schedules,identity_precision,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,cached_forward_mean,1,all-schedules,identity_recall,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,cached_forward_mean,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_reference,cached_forward_mean,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_mean,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,cached_forward_mean,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_mean,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_mean,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_mean,2,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,cached_forward_mean,2,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,cached_forward_mean,2,all-schedules,identity_purity,0.9787695526695528,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9787695526695528
+08O,automatic_reference,cached_forward_mean,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_mean,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,cached_forward_mean,2,all-schedules,predicted_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,cached_forward_mean,2,all-schedules,correct_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,cached_forward_mean,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,cached_forward_mean,3,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,cached_forward_mean,3,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,cached_forward_mean,3,all-schedules,identity_purity,0.9771517253300536,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9771517253300536
+08O,automatic_reference,cached_forward_mean,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_mean,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,cached_forward_mean,3,all-schedules,predicted_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,cached_forward_mean,3,all-schedules,correct_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,cached_forward_mean,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,cached_forward_mean,5,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,cached_forward_mean,5,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,cached_forward_mean,5,all-schedules,identity_purity,0.9751207578845292,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9751207578845292
+08O,automatic_reference,cached_forward_mean,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_mean,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,cached_forward_mean,5,all-schedules,predicted_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,cached_forward_mean,5,all-schedules,correct_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,cached_forward_mean,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,cached_forward_top2,1,all-schedules,identity_precision,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,cached_forward_top2,1,all-schedules,identity_recall,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,cached_forward_top2,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_reference,cached_forward_top2,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_top2,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,cached_forward_top2,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_top2,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_top2,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_top2,2,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,cached_forward_top2,2,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,cached_forward_top2,2,all-schedules,identity_purity,0.9787695526695528,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9787695526695528
+08O,automatic_reference,cached_forward_top2,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_top2,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,cached_forward_top2,2,all-schedules,predicted_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,cached_forward_top2,2,all-schedules,correct_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,cached_forward_top2,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,cached_forward_top2,3,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,cached_forward_top2,3,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,cached_forward_top2,3,all-schedules,identity_purity,0.9771517253300536,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9771517253300536
+08O,automatic_reference,cached_forward_top2,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_top2,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,cached_forward_top2,3,all-schedules,predicted_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,cached_forward_top2,3,all-schedules,correct_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,cached_forward_top2,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,cached_forward_top2,5,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,cached_forward_top2,5,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,cached_forward_top2,5,all-schedules,identity_purity,0.9751207578845292,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9751207578845292
+08O,automatic_reference,cached_forward_top2,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,cached_forward_top2,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,cached_forward_top2,5,all-schedules,predicted_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,cached_forward_top2,5,all-schedules,correct_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,cached_forward_top2,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,object_bank_mean,1,all-schedules,identity_precision,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,object_bank_mean,1,all-schedules,identity_recall,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,object_bank_mean,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_reference,object_bank_mean,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,object_bank_mean,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,object_bank_mean,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,object_bank_mean,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,object_bank_mean,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,object_bank_mean,2,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,object_bank_mean,2,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,object_bank_mean,2,all-schedules,identity_purity,0.9787695526695528,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9787695526695528
+08O,automatic_reference,object_bank_mean,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,object_bank_mean,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,object_bank_mean,2,all-schedules,predicted_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,object_bank_mean,2,all-schedules,correct_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,object_bank_mean,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,object_bank_mean,3,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,object_bank_mean,3,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,object_bank_mean,3,all-schedules,identity_purity,0.9771517253300536,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9771517253300536
+08O,automatic_reference,object_bank_mean,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,object_bank_mean,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,object_bank_mean,3,all-schedules,predicted_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,object_bank_mean,3,all-schedules,correct_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,object_bank_mean,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,object_bank_mean,5,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,object_bank_mean,5,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,object_bank_mean,5,all-schedules,identity_purity,0.9751207578845292,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9751207578845292
+08O,automatic_reference,object_bank_mean,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,object_bank_mean,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,object_bank_mean,5,all-schedules,predicted_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,object_bank_mean,5,all-schedules,correct_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,object_bank_mean,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,object_bank_top2,1,all-schedules,identity_precision,,100,0,27,supplied,predicted masks,frozen assisted method,usable as reported,
+08O,automatic_reference,object_bank_top2,1,all-schedules,identity_recall,,100,0,27,supplied,predicted masks,frozen assisted method,usable as reported,
+08O,automatic_reference,object_bank_top2,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.9727630952380952
+08O,automatic_reference,object_bank_top2,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08O,automatic_reference,object_bank_top2,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,frozen assisted method,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,object_bank_top2,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08O,automatic_reference,object_bank_top2,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08O,automatic_reference,object_bank_top2,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08O,automatic_reference,object_bank_top2,2,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08O,automatic_reference,object_bank_top2,2,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08O,automatic_reference,object_bank_top2,2,all-schedules,identity_purity,0.9787695526695528,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.9787695526695528
+08O,automatic_reference,object_bank_top2,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08O,automatic_reference,object_bank_top2,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,frozen assisted method,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,object_bank_top2,2,all-schedules,predicted_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,3.5520000000000005
+08O,automatic_reference,object_bank_top2,2,all-schedules,correct_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,3.5520000000000005
+08O,automatic_reference,object_bank_top2,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,3.5520000000000005
+08O,automatic_reference,object_bank_top2,3,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08O,automatic_reference,object_bank_top2,3,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08O,automatic_reference,object_bank_top2,3,all-schedules,identity_purity,0.9771517253300536,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.9771517253300536
+08O,automatic_reference,object_bank_top2,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08O,automatic_reference,object_bank_top2,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,frozen assisted method,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,object_bank_top2,3,all-schedules,predicted_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,10.704
+08O,automatic_reference,object_bank_top2,3,all-schedules,correct_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,10.704
+08O,automatic_reference,object_bank_top2,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,10.704
+08O,automatic_reference,object_bank_top2,5,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08O,automatic_reference,object_bank_top2,5,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08O,automatic_reference,object_bank_top2,5,all-schedules,identity_purity,0.9751207578845292,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.9751207578845292
+08O,automatic_reference,object_bank_top2,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08O,automatic_reference,object_bank_top2,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,frozen assisted method,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,object_bank_top2,5,all-schedules,predicted_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,35.7575
+08O,automatic_reference,object_bank_top2,5,all-schedules,correct_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,35.7575
+08O,automatic_reference,object_bank_top2,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,35.7575
+08O,automatic_reference,view_mean_control_mean,1,all-schedules,identity_precision,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,view_mean_control_mean,1,all-schedules,identity_recall,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,view_mean_control_mean,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_reference,view_mean_control_mean,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_mean,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,view_mean_control_mean,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_mean,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_mean,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_mean,2,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,view_mean_control_mean,2,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,view_mean_control_mean,2,all-schedules,identity_purity,0.9787695526695528,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9787695526695528
+08O,automatic_reference,view_mean_control_mean,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_mean,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,view_mean_control_mean,2,all-schedules,predicted_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,view_mean_control_mean,2,all-schedules,correct_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,view_mean_control_mean,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,view_mean_control_mean,3,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,view_mean_control_mean,3,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,view_mean_control_mean,3,all-schedules,identity_purity,0.9771517253300536,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9771517253300536
+08O,automatic_reference,view_mean_control_mean,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_mean,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,view_mean_control_mean,3,all-schedules,predicted_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,view_mean_control_mean,3,all-schedules,correct_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,view_mean_control_mean,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,view_mean_control_mean,5,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,view_mean_control_mean,5,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,view_mean_control_mean,5,all-schedules,identity_purity,0.9751207578845292,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9751207578845292
+08O,automatic_reference,view_mean_control_mean,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_mean,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,view_mean_control_mean,5,all-schedules,predicted_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,view_mean_control_mean,5,all-schedules,correct_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,view_mean_control_mean,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,view_mean_control_top2,1,all-schedules,identity_precision,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,view_mean_control_top2,1,all-schedules,identity_recall,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,view_mean_control_top2,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_reference,view_mean_control_top2,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_top2,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,view_mean_control_top2,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_top2,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_top2,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_top2,2,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,view_mean_control_top2,2,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,view_mean_control_top2,2,all-schedules,identity_purity,0.9787695526695528,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9787695526695528
+08O,automatic_reference,view_mean_control_top2,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_top2,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,view_mean_control_top2,2,all-schedules,predicted_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,view_mean_control_top2,2,all-schedules,correct_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,view_mean_control_top2,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,view_mean_control_top2,3,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,view_mean_control_top2,3,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,view_mean_control_top2,3,all-schedules,identity_purity,0.9771517253300536,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9771517253300536
+08O,automatic_reference,view_mean_control_top2,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_top2,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,view_mean_control_top2,3,all-schedules,predicted_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,view_mean_control_top2,3,all-schedules,correct_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,view_mean_control_top2,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,view_mean_control_top2,5,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,view_mean_control_top2,5,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,view_mean_control_top2,5,all-schedules,identity_purity,0.9751207578845292,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9751207578845292
+08O,automatic_reference,view_mean_control_top2,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,view_mean_control_top2,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,view_mean_control_top2,5,all-schedules,predicted_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,view_mean_control_top2,5,all-schedules,correct_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,view_mean_control_top2,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,within_view_mean,1,all-schedules,identity_precision,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,within_view_mean,1,all-schedules,identity_recall,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,within_view_mean,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_reference,within_view_mean,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_mean,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,within_view_mean,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_mean,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_mean,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_mean,2,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,within_view_mean,2,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,within_view_mean,2,all-schedules,identity_purity,0.9787695526695528,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9787695526695528
+08O,automatic_reference,within_view_mean,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_mean,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,within_view_mean,2,all-schedules,predicted_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,within_view_mean,2,all-schedules,correct_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,within_view_mean,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,within_view_mean,3,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,within_view_mean,3,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,within_view_mean,3,all-schedules,identity_purity,0.9771517253300536,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9771517253300536
+08O,automatic_reference,within_view_mean,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_mean,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,within_view_mean,3,all-schedules,predicted_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,within_view_mean,3,all-schedules,correct_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,within_view_mean,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,within_view_mean,5,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,within_view_mean,5,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,within_view_mean,5,all-schedules,identity_purity,0.9751207578845292,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9751207578845292
+08O,automatic_reference,within_view_mean,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_mean,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,within_view_mean,5,all-schedules,predicted_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,within_view_mean,5,all-schedules,correct_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,within_view_mean,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,within_view_top2,1,all-schedules,identity_precision,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,within_view_top2,1,all-schedules,identity_recall,,100,0,27,supplied,predicted masks,development comparison; not selected,usable as reported,
+08O,automatic_reference,within_view_top2,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08O,automatic_reference,within_view_top2,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_top2,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,within_view_top2,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_top2,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_top2,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_top2,2,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,within_view_top2,2,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,within_view_top2,2,all-schedules,identity_purity,0.9787695526695528,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9787695526695528
+08O,automatic_reference,within_view_top2,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_top2,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,within_view_top2,2,all-schedules,predicted_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,within_view_top2,2,all-schedules,correct_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,within_view_top2,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08O,automatic_reference,within_view_top2,3,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,within_view_top2,3,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,within_view_top2,3,all-schedules,identity_purity,0.9771517253300536,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9771517253300536
+08O,automatic_reference,within_view_top2,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_top2,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,within_view_top2,3,all-schedules,predicted_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,within_view_top2,3,all-schedules,correct_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,within_view_top2,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,10.704
+08O,automatic_reference,within_view_top2,5,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,within_view_top2,5,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,1.0
+08O,automatic_reference,within_view_top2,5,all-schedules,identity_purity,0.9751207578845292,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.9751207578845292
+08O,automatic_reference,within_view_top2,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,0.0
+08O,automatic_reference,within_view_top2,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,automatic_reference,within_view_top2,5,all-schedules,predicted_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,within_view_top2,5,all-schedules,correct_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,automatic_reference,within_view_top2,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,development comparison; not selected,usable as reported,35.7575
+08O,supplied_reference,cached_forward_mean,1,all-schedules,identity_precision,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,cached_forward_mean,1,all-schedules,identity_recall,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,cached_forward_mean,1,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_mean,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_mean,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,cached_forward_mean,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_mean,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_mean,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_mean,2,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_mean,2,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_mean,2,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_mean,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_mean,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,cached_forward_mean,2,all-schedules,predicted_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,cached_forward_mean,2,all-schedules,correct_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,cached_forward_mean,2,all-schedules,reference_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,cached_forward_mean,3,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_mean,3,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_mean,3,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_mean,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_mean,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,cached_forward_mean,3,all-schedules,predicted_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,cached_forward_mean,3,all-schedules,correct_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,cached_forward_mean,3,all-schedules,reference_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,cached_forward_mean,5,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_mean,5,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_mean,5,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_mean,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_mean,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,cached_forward_mean,5,all-schedules,predicted_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,cached_forward_mean,5,all-schedules,correct_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,cached_forward_mean,5,all-schedules,reference_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,cached_forward_top2,1,all-schedules,identity_precision,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,cached_forward_top2,1,all-schedules,identity_recall,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,cached_forward_top2,1,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_top2,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_top2,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,cached_forward_top2,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_top2,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_top2,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_top2,2,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_top2,2,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_top2,2,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_top2,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_top2,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,cached_forward_top2,2,all-schedules,predicted_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,cached_forward_top2,2,all-schedules,correct_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,cached_forward_top2,2,all-schedules,reference_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,cached_forward_top2,3,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_top2,3,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_top2,3,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_top2,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_top2,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,cached_forward_top2,3,all-schedules,predicted_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,cached_forward_top2,3,all-schedules,correct_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,cached_forward_top2,3,all-schedules,reference_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,cached_forward_top2,5,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_top2,5,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_top2,5,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,cached_forward_top2,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,cached_forward_top2,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,cached_forward_top2,5,all-schedules,predicted_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,cached_forward_top2,5,all-schedules,correct_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,cached_forward_top2,5,all-schedules,reference_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,object_bank_mean,1,all-schedules,identity_precision,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,object_bank_mean,1,all-schedules,identity_recall,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,object_bank_mean,1,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,object_bank_mean,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,object_bank_mean,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,object_bank_mean,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,object_bank_mean,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,object_bank_mean,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,object_bank_mean,2,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,object_bank_mean,2,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,object_bank_mean,2,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,object_bank_mean,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,object_bank_mean,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,object_bank_mean,2,all-schedules,predicted_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,object_bank_mean,2,all-schedules,correct_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,object_bank_mean,2,all-schedules,reference_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,object_bank_mean,3,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,object_bank_mean,3,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,object_bank_mean,3,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,object_bank_mean,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,object_bank_mean,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,object_bank_mean,3,all-schedules,predicted_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,object_bank_mean,3,all-schedules,correct_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,object_bank_mean,3,all-schedules,reference_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,object_bank_mean,5,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,object_bank_mean,5,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,object_bank_mean,5,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,object_bank_mean,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,object_bank_mean,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,object_bank_mean,5,all-schedules,predicted_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,object_bank_mean,5,all-schedules,correct_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,object_bank_mean,5,all-schedules,reference_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,object_bank_top2,1,all-schedules,identity_precision,,100,0,27,supplied,supplied masks,frozen assisted method,usable as reported,
+08O,supplied_reference,object_bank_top2,1,all-schedules,identity_recall,,100,0,27,supplied,supplied masks,frozen assisted method,usable as reported,
+08O,supplied_reference,object_bank_top2,1,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,1.0
+08O,supplied_reference,object_bank_top2,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,0.0
+08O,supplied_reference,object_bank_top2,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,frozen assisted method,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,object_bank_top2,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,0.0
+08O,supplied_reference,object_bank_top2,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,0.0
+08O,supplied_reference,object_bank_top2,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,0.0
+08O,supplied_reference,object_bank_top2,2,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,1.0
+08O,supplied_reference,object_bank_top2,2,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,1.0
+08O,supplied_reference,object_bank_top2,2,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,1.0
+08O,supplied_reference,object_bank_top2,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,0.0
+08O,supplied_reference,object_bank_top2,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,frozen assisted method,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,object_bank_top2,2,all-schedules,predicted_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,3.85
+08O,supplied_reference,object_bank_top2,2,all-schedules,correct_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,3.85
+08O,supplied_reference,object_bank_top2,2,all-schedules,reference_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,3.85
+08O,supplied_reference,object_bank_top2,3,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,1.0
+08O,supplied_reference,object_bank_top2,3,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,1.0
+08O,supplied_reference,object_bank_top2,3,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,1.0
+08O,supplied_reference,object_bank_top2,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,0.0
+08O,supplied_reference,object_bank_top2,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,frozen assisted method,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,object_bank_top2,3,all-schedules,predicted_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,11.55
+08O,supplied_reference,object_bank_top2,3,all-schedules,correct_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,11.55
+08O,supplied_reference,object_bank_top2,3,all-schedules,reference_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,11.55
+08O,supplied_reference,object_bank_top2,5,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,1.0
+08O,supplied_reference,object_bank_top2,5,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,1.0
+08O,supplied_reference,object_bank_top2,5,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,1.0
+08O,supplied_reference,object_bank_top2,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,0.0
+08O,supplied_reference,object_bank_top2,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,frozen assisted method,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,object_bank_top2,5,all-schedules,predicted_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,38.5
+08O,supplied_reference,object_bank_top2,5,all-schedules,correct_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,38.5
+08O,supplied_reference,object_bank_top2,5,all-schedules,reference_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,frozen assisted method,usable as reported,38.5
+08O,supplied_reference,view_mean_control_mean,1,all-schedules,identity_precision,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,view_mean_control_mean,1,all-schedules,identity_recall,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,view_mean_control_mean,1,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_mean,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_mean,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,view_mean_control_mean,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_mean,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_mean,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_mean,2,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_mean,2,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_mean,2,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_mean,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_mean,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,view_mean_control_mean,2,all-schedules,predicted_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,view_mean_control_mean,2,all-schedules,correct_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,view_mean_control_mean,2,all-schedules,reference_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,view_mean_control_mean,3,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_mean,3,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_mean,3,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_mean,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_mean,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,view_mean_control_mean,3,all-schedules,predicted_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,view_mean_control_mean,3,all-schedules,correct_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,view_mean_control_mean,3,all-schedules,reference_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,view_mean_control_mean,5,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_mean,5,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_mean,5,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_mean,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_mean,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,view_mean_control_mean,5,all-schedules,predicted_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,view_mean_control_mean,5,all-schedules,correct_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,view_mean_control_mean,5,all-schedules,reference_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,view_mean_control_top2,1,all-schedules,identity_precision,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,view_mean_control_top2,1,all-schedules,identity_recall,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,view_mean_control_top2,1,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_top2,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_top2,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,view_mean_control_top2,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_top2,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_top2,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_top2,2,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_top2,2,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_top2,2,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_top2,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_top2,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,view_mean_control_top2,2,all-schedules,predicted_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,view_mean_control_top2,2,all-schedules,correct_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,view_mean_control_top2,2,all-schedules,reference_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,view_mean_control_top2,3,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_top2,3,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_top2,3,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_top2,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_top2,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,view_mean_control_top2,3,all-schedules,predicted_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,view_mean_control_top2,3,all-schedules,correct_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,view_mean_control_top2,3,all-schedules,reference_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,view_mean_control_top2,5,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_top2,5,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_top2,5,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,view_mean_control_top2,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,view_mean_control_top2,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,view_mean_control_top2,5,all-schedules,predicted_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,view_mean_control_top2,5,all-schedules,correct_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,view_mean_control_top2,5,all-schedules,reference_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,within_view_mean,1,all-schedules,identity_precision,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,within_view_mean,1,all-schedules,identity_recall,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,within_view_mean,1,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_mean,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_mean,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,within_view_mean,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_mean,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_mean,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_mean,2,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_mean,2,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_mean,2,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_mean,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_mean,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,within_view_mean,2,all-schedules,predicted_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,within_view_mean,2,all-schedules,correct_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,within_view_mean,2,all-schedules,reference_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,within_view_mean,3,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_mean,3,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_mean,3,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_mean,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_mean,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,within_view_mean,3,all-schedules,predicted_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,within_view_mean,3,all-schedules,correct_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,within_view_mean,3,all-schedules,reference_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,within_view_mean,5,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_mean,5,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_mean,5,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_mean,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_mean,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,within_view_mean,5,all-schedules,predicted_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,within_view_mean,5,all-schedules,correct_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,within_view_mean,5,all-schedules,reference_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,within_view_top2,1,all-schedules,identity_precision,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,within_view_top2,1,all-schedules,identity_recall,,100,0,27,supplied,supplied masks,development comparison; not selected,usable as reported,
+08O,supplied_reference,within_view_top2,1,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_top2,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_top2,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,within_view_top2,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_top2,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_top2,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_top2,2,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_top2,2,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_top2,2,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_top2,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_top2,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,within_view_top2,2,all-schedules,predicted_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,within_view_top2,2,all-schedules,correct_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,within_view_top2,2,all-schedules,reference_cross_view_pairs,3.85,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,3.85
+08O,supplied_reference,within_view_top2,3,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_top2,3,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_top2,3,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_top2,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_top2,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,within_view_top2,3,all-schedules,predicted_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,within_view_top2,3,all-schedules,correct_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,within_view_top2,3,all-schedules,reference_cross_view_pairs,11.55,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,11.55
+08O,supplied_reference,within_view_top2,5,all-schedules,identity_precision,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_top2,5,all-schedules,identity_recall,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_top2,5,all-schedules,identity_purity,1.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,1.0
+08O,supplied_reference,within_view_top2,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,0.0
+08O,supplied_reference,within_view_top2,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,supplied masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08O,supplied_reference,within_view_top2,5,all-schedules,predicted_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,within_view_top2,5,all-schedules,correct_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08O,supplied_reference,within_view_top2,5,all-schedules,reference_cross_view_pairs,38.5,100,100,27,supplied,supplied masks,development comparison; not selected,usable as reported,38.5
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,identity_precision,,100,0,27,supplied,predicted masks,frozen assisted method,usable as reported,
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,identity_recall,,100,0,27,supplied,predicted masks,frozen assisted method,usable as reported,
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.9727630952380952
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,frozen assisted method,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,identity_f1,,100,0,27,supplied,predicted masks,frozen assisted method,usable as reported,
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,object_track_count,3.772,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,3.772
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,singleton_track_count,3.772,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,3.772
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,singleton_track_fraction,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08P,automatic_predicted,correspondence_assisted_reference,1,all-schedules,singleton_observation_fraction,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,identity_purity,0.9787695526695528,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.9787695526695528
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,frozen assisted method,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,predicted_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,3.5520000000000005
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,correct_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,3.5520000000000005
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,3.5520000000000005
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,identity_f1,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,object_track_count,4.007999999999999,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,4.007999999999999
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,singleton_track_count,0.456,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.456
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,singleton_track_fraction,0.0875735449735449,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0875735449735449
+08P,automatic_predicted,correspondence_assisted_reference,2,all-schedules,singleton_observation_fraction,0.071330303030303,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.071330303030303
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,identity_purity,0.9771517253300536,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.9771517253300536
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,frozen assisted method,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,predicted_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,10.704
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,correct_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,10.704
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,10.704
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,identity_f1,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,object_track_count,4.115999999999999,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,4.115999999999999
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,singleton_track_count,0.32,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.32
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,singleton_track_fraction,0.0464472620946305,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0464472620946305
+08P,automatic_predicted,correspondence_assisted_reference,3,all-schedules,singleton_observation_fraction,0.0294476253192971,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0294476253192971
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,identity_precision,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,identity_recall,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,identity_purity,0.9751207578845292,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.9751207578845292
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,identity_fragmentation,0.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,identity_reference_coverage,,100,100,27,supplied,predicted masks,frozen assisted method,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,predicted_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,35.7575
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,correct_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,35.7575
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,35.7575
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,identity_f1,1.0,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,1.0
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,object_track_count,4.3225,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,4.3225
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,singleton_track_count,0.4775,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.4775
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,singleton_track_fraction,0.0659028361344537,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0659028361344537
+08P,automatic_predicted,correspondence_assisted_reference,5,all-schedules,singleton_observation_fraction,0.0252152104949175,100,100,27,supplied,predicted masks,frozen assisted method,usable as reported,0.0252152104949175
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,identity_precision,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,identity_recall,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,identity_fragmentation,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,identity_f1,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,object_track_count,3.772,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.772
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,singleton_track_count,3.772,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.772
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,singleton_track_fraction,1.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.0
+08P,automatic_predicted,existing_all_candidates,1,all-schedules,singleton_observation_fraction,1.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.0
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,identity_precision,0.1762388888888889,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1762388888888889
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,identity_recall,0.1512027777777777,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1512027777777777
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,identity_purity,0.6512670274170275,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.6512670274170275
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,identity_fragmentation,0.7848555555555556,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.7848555555555556
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,predicted_cross_view_pairs,3.094,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.094
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,correct_cross_view_pairs,0.5220000000000001,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5220000000000001
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,identity_f1,0.1592404761904761,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1592404761904761
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,object_track_count,4.465999999999999,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,4.465999999999999
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,singleton_track_count,1.372,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.372
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,singleton_track_fraction,0.2644491341991342,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2644491341991342
+08P,automatic_predicted,existing_all_candidates,2,all-schedules,singleton_observation_fraction,0.1925024531024531,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1925024531024531
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,identity_precision,0.184669375069375,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.184669375069375
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,identity_recall,0.1558470723720723,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1558470723720723
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,identity_purity,0.5554978562974694,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5554978562974694
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,identity_fragmentation,1.4758666666666669,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.4758666666666669
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,predicted_cross_view_pairs,9.22,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,9.22
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,correct_cross_view_pairs,1.6359999999999997,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.6359999999999997
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,10.704
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,identity_f1,0.1665954541558808,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1665954541558808
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,object_track_count,4.908,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,4.908
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,singleton_track_count,1.2119999999999995,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.2119999999999995
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,singleton_track_fraction,0.2022313780990251,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2022313780990251
+08P,automatic_predicted,existing_all_candidates,3,all-schedules,singleton_observation_fraction,0.1113265042491048,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1113265042491048
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,identity_precision,0.2449569450513052,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2449569450513052
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,identity_recall,0.2083752026089033,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2083752026089033
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,identity_purity,0.5172858449831529,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5172858449831529
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,identity_fragmentation,2.243916666666667,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,2.243916666666667
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,predicted_cross_view_pairs,30.6175,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,30.6175
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,correct_cross_view_pairs,7.2625,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,7.2625
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,35.7575
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,identity_f1,0.2233066085083829,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2233066085083829
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,object_track_count,5.5675,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,5.5675
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,singleton_track_count,1.395,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.395
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,singleton_track_fraction,0.2012798520923521,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2012798520923521
+08P,automatic_predicted,existing_all_candidates,5,all-schedules,singleton_observation_fraction,0.0736714469548725,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0736714469548725
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,identity_precision,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,identity_recall,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,identity_purity,0.9727630952380952,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.9727630952380952
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,identity_fragmentation,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,identity_f1,,100,0,27,predicted,predicted masks,development comparison; not selected,usable as reported,
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,object_track_count,3.772,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.772
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,singleton_track_count,3.772,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.772
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,singleton_track_fraction,1.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.0
+08P,automatic_predicted,global_partial_assignment,1,all-schedules,singleton_observation_fraction,1.0,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.0
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,identity_precision,0.1762388888888889,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1762388888888889
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,identity_recall,0.1512027777777777,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1512027777777777
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,identity_purity,0.6512670274170275,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.6512670274170275
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,identity_fragmentation,0.7848555555555556,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.7848555555555556
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,predicted_cross_view_pairs,3.094,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.094
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,correct_cross_view_pairs,0.5220000000000001,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5220000000000001
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,3.5520000000000005
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,identity_f1,0.1592404761904761,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1592404761904761
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,object_track_count,4.465999999999999,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,4.465999999999999
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,singleton_track_count,1.372,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.372
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,singleton_track_fraction,0.2644491341991342,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2644491341991342
+08P,automatic_predicted,global_partial_assignment,2,all-schedules,singleton_observation_fraction,0.1925024531024531,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1925024531024531
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,identity_precision,0.1871140193140193,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1871140193140193
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,identity_recall,0.1550055694305694,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1550055694305694
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,identity_purity,0.5566964964601963,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5566964964601963
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,identity_fragmentation,1.4791000000000003,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.4791000000000003
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,predicted_cross_view_pairs,9.124,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,9.124
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,correct_cross_view_pairs,1.6300000000000003,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.6300000000000003
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,10.704
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,identity_f1,0.1668359480792311,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1668359480792311
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,object_track_count,4.93,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,4.93
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,singleton_track_count,1.1819999999999995,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.1819999999999995
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,singleton_track_fraction,0.1980694733371203,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1980694733371203
+08P,automatic_predicted,global_partial_assignment,3,all-schedules,singleton_observation_fraction,0.1088757633233639,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1088757633233639
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,identity_precision,0.2358832487281061,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2358832487281061
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,identity_recall,0.1939394670391428,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1939394670391428
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,identity_purity,0.5101810279624555,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.5101810279624555
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,identity_fragmentation,2.31875,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,2.31875
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,development comparison; not selected,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,predicted_cross_view_pairs,29.67,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,29.67
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,correct_cross_view_pairs,6.715,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,6.715
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,35.7575
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,identity_f1,0.2106963711257419,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.2106963711257419
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,object_track_count,5.65,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,5.65
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,singleton_track_count,1.2475,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,1.2475
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,singleton_track_fraction,0.1819914113664113,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.1819914113664113
+08P,automatic_predicted,global_partial_assignment,5,all-schedules,singleton_observation_fraction,0.0662836736288033,100,100,27,predicted,predicted masks,development comparison; not selected,usable as reported,0.0662836736288033
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,identity_precision,,100,0,27,predicted,predicted masks,frozen automatic baseline,usable as reported,
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,identity_recall,,100,0,27,predicted,predicted masks,frozen automatic baseline,usable as reported,
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,identity_purity,0.981,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.981
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,identity_fragmentation,0.0,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,frozen automatic baseline,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,predicted_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,correct_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,reference_cross_view_pairs,0.0,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,identity_f1,,100,0,27,predicted,predicted masks,frozen automatic baseline,usable as reported,
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,object_track_count,1.008,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,1.008
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,singleton_track_count,1.008,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,1.008
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,singleton_track_fraction,1.0,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,1.0
+08P,automatic_predicted,winner_cluster_consensus,1,all-schedules,singleton_observation_fraction,1.0,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,1.0
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,identity_precision,0.2623456790123457,100,54,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.2623456790123457
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,identity_recall,0.0144666666666666,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0144666666666666
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,identity_purity,0.911888888888889,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.911888888888889
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,identity_fragmentation,0.0761999999999999,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0761999999999999
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,frozen automatic baseline,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,predicted_cross_view_pairs,0.18,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.18
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,correct_cross_view_pairs,0.05,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.05
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,reference_cross_view_pairs,3.5520000000000005,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,3.5520000000000005
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,identity_f1,0.0223333333333333,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0223333333333333
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,object_track_count,1.838,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,1.838
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,singleton_track_count,1.658,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,1.658
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,singleton_track_fraction,0.8323333333333334,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.8323333333333334
+08P,automatic_predicted,winner_cluster_consensus,2,all-schedules,singleton_observation_fraction,0.828,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.828
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,identity_precision,0.2459595959595959,100,77,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.2459595959595959
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,identity_recall,0.0136256216006216,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0136256216006216
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,identity_purity,0.8797,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.8797
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,identity_fragmentation,0.1854666666666666,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.1854666666666666
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,frozen automatic baseline,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,predicted_cross_view_pairs,0.472,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.472
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,correct_cross_view_pairs,0.142,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.142
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,reference_cross_view_pairs,10.704,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,10.704
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,identity_f1,0.0234514319014319,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0234514319014319
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,object_track_count,2.5860000000000003,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,2.5860000000000003
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,singleton_track_count,2.206,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,2.206
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,singleton_track_fraction,0.7931,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.7931
+08P,automatic_predicted,winner_cluster_consensus,3,all-schedules,singleton_observation_fraction,0.7395666666666666,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.7395666666666666
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,identity_precision,0.2887719298245614,100,95,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.2887719298245614
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,identity_recall,0.0173156127062584,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0173156127062584
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,identity_purity,0.8179583333333332,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.8179583333333332
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,identity_fragmentation,0.4853333333333332,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.4853333333333332
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,identity_reference_coverage,,100,100,27,predicted,predicted masks,frozen automatic baseline,invalid inherited coverage accounting; not evidence of full identity coverage,1.0
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,predicted_cross_view_pairs,1.6275,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,1.6275
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,correct_cross_view_pairs,0.55,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.55
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,reference_cross_view_pairs,35.7575,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,35.7575
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,identity_f1,0.0301515050151239,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.0301515050151239
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,object_track_count,3.8175,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,3.8175
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,singleton_track_count,2.8675,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,2.8675
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,singleton_track_fraction,0.6869583333333334,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.6869583333333334
+08P,automatic_predicted,winner_cluster_consensus,5,all-schedules,singleton_observation_fraction,0.5683809523809524,100,100,27,predicted,predicted masks,frozen automatic baseline,usable as reported,0.5683809523809524

@@ -1,0 +1,16 @@
+{
+  "crops": 4,
+  "device": "cpu",
+  "dtype": "float32",
+  "elapsed_seconds": 5.861608084000181,
+  "fresh_gpu_inference_verified": false,
+  "global_max_abs_delta": 0.0,
+  "model_config_sha256": "1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d",
+  "patch_max_abs_delta": 0.0,
+  "schema": "vpi-web-real-cpu-encoder-smoke/v1",
+  "scope": "real isolated CPU DINO encoding; supplied local snapshot; no detector/SAM or GPU execution",
+  "status": "passed",
+  "weights_sha256": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1",
+  "fixed_scene_count": 1,
+  "original_receipt_sha256": "94e8cfdc75d2263e1c3d23a9088a68a1eb3e33c9b22a90997f8b39f2efd53832"
+}

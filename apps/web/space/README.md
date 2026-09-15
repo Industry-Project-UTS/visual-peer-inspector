@@ -1,8 +1,8 @@
 ---
 title: Visual Peer Inspector
 emoji: 🔎
-colorFrom: gray
-colorTo: gray
+colorFrom: teal
+colorTo: indigo
 sdk: docker
 app_port: 7860
 fullWidth: true
@@ -15,78 +15,85 @@ short_description: Compare similar objects across multiple views of a scene.
 
 # Visual Peer Inspector
 
-Upload 2–5 views of the same scene, compare peer objects, review the evidence,
-correct boxes or identities, and export an inspection report.
+Upload 2–5 views of the same scene, inspect a combined ranking, confirm object
+identities when needed, and export the visual evidence. Automatic and Assisted
+are separate modes. Both keep the Images, Results, Review and Report workflow.
 
-This package contains application code. It does not include model weights,
-datasets, training labels, recorded predictions or credentials.
+The package contains code only. It excludes datasets, labels, recorded
+predictions, model weights, credentials and local QA adapters.
 
-## Deployment settings
+## Deployment
 
-1. Choose a CUDA GPU in Space settings. Exact memory and latency still need
-   verification on the chosen hardware; CPU Basic cannot execute this route.
-2. Set the Space variable `VPI_ALLOW_MODEL_DOWNLOADS=1`. This enables downloads
-   of the pinned checkpoints **inside the Space**, on the first inspection.
-   The default is `0`, which permits existing cached weights only.
-3. Use a private Space while validating. For an additional app login, set both
-   `VPI_AUTH_USERNAME` and `VPI_AUTH_PASSWORD` as Space secrets. Never put tokens
-   or passwords in source files. `HF_TOKEN` can be supplied as a secret if needed.
-4. Check the build logs, then complete the verification steps below before
-   sharing the app. A successful build alone does not verify GPU inference.
+1. Select a CUDA GPU for LocateAnything and SAM. Memory and latency require a
+   smoke test on the chosen hardware; CPU Basic cannot run the full new-image route.
+2. Set `VPI_ALLOW_MODEL_DOWNLOADS=1` to fetch the pinned checkpoints inside the
+   deployment. Default `0` permits existing model caches only.
+3. Validate in a private Space. Optional `VPI_AUTH_USERNAME` and
+   `VPI_AUTH_PASSWORD` belong in Space secrets, as does `HF_TOKEN` if needed.
+4. Check the build and full-image inference before sharing the application.
 
-The Space starts its web server before loading models. Loading happens in an
-isolated worker, one model stage at a time, to limit peak GPU memory. Downloads
-are cached under `HF_HOME`; ephemeral cache contents may disappear on a Space
-restart. No prediction cache is used. No images leave the Space for inference.
+The Dockerfile separates Gradio, the detector/SAM worker and the exact DINO CPU
+runtime. LocateAnything retains its established Transformers environment;
+DINOv2-small uses the executed experiment's torch/Transformers/NumPy/Pillow
+versions in `/opt/dino`. The DINO worker refuses incompatible versions or model
+bytes. CPU scoring uses the pinned NumPy/SciPy/Pandas stack. No model is loaded
+at import or during packaging. CUDA checkpoints run sequentially to limit peak
+memory. This build recipe is not evidence that a Linux GPU deployment has run.
 
-## Runtime controls
-
-| Variable | Default | Purpose |
+| Variable | Default in this image | Purpose |
 | --- | --- | --- |
-| `VPI_ENABLE_INFERENCE` | `1` in this image | Set `0` for an interface-only preview |
-| `VPI_ALLOW_MODEL_DOWNLOADS` | `0` | Set `1` to fetch pinned weights in the deployment |
-| `VPI_WORKER_PYTHON` | `/opt/inference/bin/python` | Isolated model environment |
-| `VPI_INSPECTION_TIMEOUT` | `1800` | Maximum seconds per inspection, including downloads |
-| `VPI_REVIEW_POLICY` | unset | Optional policy JSON bound to this pipeline |
-| `HF_HOME` | `/home/appuser/.cache/huggingface` | Model cache; use a mounted persistent path if configured |
+| `VPI_ENABLE_INFERENCE` | `1` | `0` starts an interface preview |
+| `VPI_ALLOW_MODEL_DOWNLOADS` | `0` | Permit pinned model downloads explicitly |
+| `VPI_WORKER_PYTHON` | `/opt/inference/bin/python` | Detector/SAM and CPU decision worker |
+| `VPI_DINO_PYTHON` | `/opt/dino/bin/python` | Exact DINO CPU feature worker |
+| `VPI_INSPECTION_TIMEOUT` | `1800` | Maximum inspection time, including downloads |
+| `HF_HOME` | `/home/appuser/.cache/huggingface` | Downloaded model cache |
 
-Cancel inspection stops the worker process and removes its temporary files.
-The app runs one inspection at a time, with a bounded queue. Uploads and reports
-expire after 30 minutes; downloaded reports intentionally contain their images.
+Requests use temporary JSON/PNG files and feature tensors use NPZ without
+pickle. The app runs one inspection at a time with a bounded queue. Cancel
+terminates the process group. No user image is sent to another inference
+service. Model caches may disappear on an ephemeral Space restart.
 
-## Method and review status
+## Decisions and evidence
 
-The manifest in `src/visual_peer_inspector/web/pipeline_config.json` records
-every model revision and the app's method settings. The selected prompt, SAM,
-crop, DINOv2, P1 and embedding-only identity code are reused from the research
-implementation. Uploads are letterboxed to 256×256 while preserving aspect
-ratio, and evidence is mapped back to original image coordinates. This upload
-adapter is separately versioned; research benchmark accuracy is not a claim
-about arbitrary uploaded photos.
+Automatic uses forward-patch/P1/P2 winner consensus and compatible winner
+clusters. Assisted requires neutral identity confirmation and uses the selected
+`object_bank_top2` patch-bank scorer. The scorer chooses the anomaly after
+matching is confirmed. All candidates remain reviewable, including candidates
+that automatic winner selection did not retain.
 
-P1 needs at least three usable peers in a view. Unscoreable objects stay in the
-review screen with a missing score. Mean normalized ranks combine scored
-observations; a winner needs scoring support in at least two views. No normal
-reference library or dataset metadata is required at inference time.
+Results show per-view observation scores, component scores, normalized ranks,
+fusion contributors, masks, boxes and coarse patch evidence. Only a unique
+leader is highlighted, wherever its identity has a supported observation.
+Ties and missing links are explicit. Relative scores are not probabilities,
+and results use a provisional review-all policy. Old P1 review thresholds are
+not valid for these two modes.
 
-Until a matching review policy is supplied, all usable results are marked
-**Review recommended**, with a provisional policy version. This is not a
-calibrated defect detector. The optional policy format is documented in
-`apps/web/README.md`. HTML/JSON reports include actual method and policy versions;
-JSON also contains model revisions, runtime package versions and score meaning.
+Masks and crop heatmaps map back to the original EXIF-corrected image. A cache
+binds each candidate to pixels, boxes, preprocessing, model settings, source
+hashes and tensor checksums. Identity-only edits reuse its features; changing a
+box or image recomputes affected candidates. Unknown or corrupt cache handles
+fail visibly instead of silently repeating neural inference.
 
-## Verification after deployment
+Session caches and temporary uploads expire after 30 minutes. Reset and
+cancellation clear the app cache; Gradio cleans its upload/download copies on
+its own interval. Reports embed inspection images intentionally but omit cache
+capabilities and raw model tensors. A database is not required for this demo.
 
-- Upload new real images and run the full automatic pipeline. Confirm masks,
-  heatmaps and boxes align with the original landscape/portrait images.
-- Correct a box and identity, rerun, and confirm the report says **assisted**.
-- Export HTML and JSON and check versions, scores and supporting views.
-- Exercise fewer than three peers, no proposals, empty masks, uncertain matches,
-  cancellation, timeout and a second browser session. Errors must not fabricate
-  scores or expose another session's images.
-- Record cold-start time, warm inspection time and peak GPU memory for 2–5 views.
+## Deployment checks still required
 
-Code and CPU contract checks are available before deployment. Live checkpoint
-compatibility, GPU memory and end-to-end model quality require this later test.
+- Build the Linux image and check the three environments and complete source tree.
+- Run new 2/3/5-view images through real LocateAnything, SAM and DINO.
+- Check portrait/landscape mask, box and heatmap coordinates.
+- Confirm IDs without box edits and verify zero additional neural calls.
+- Edit one box and verify only its affected candidates are recomputed.
+- Check ties, insufficient peers, empty masks, missing views, expired caches,
+  cancel, timeout, export and isolation between two browser sessions.
+- Record cold/warm latency, host RAM and peak GPU memory.
 
-Platform reference: [Docker Spaces](https://huggingface.co/docs/hub/spaces-sdks-docker).
+Development benchmark accuracy is not an accuracy guarantee for arbitrary
+uploads. Supplied dataset correspondence and human-confirmed correspondence
+must be labelled separately in evaluation.
+
+References: [Docker Spaces](https://huggingface.co/docs/hub/spaces-sdks-docker),
+[PyTorch CPU installation](https://pytorch.org/get-started/locally/).

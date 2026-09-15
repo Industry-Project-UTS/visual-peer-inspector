@@ -2,9 +2,7 @@
 # CUDA wheels are installed first by Dockerfile; never combine this with Gradio.
 torch==2.10.0
 torchvision==0.25.0
-numpy==2.0.2
-pillow==12.3.0
-scipy==1.16.1
+-r requirements-scoring.txt
 transformers==4.57.1
 huggingface-hub==0.36.0
 peft==0.20.0

@@ -59,7 +59,8 @@ class GPUModels:
         if self.stage == stage:
             return self.resource
         self.release()
-        self._torch()
+        if stage != 'encoder':
+            self._torch()
         if stage == "locate":
             from visual_peer_inspector.models.locateanything import (
                 LocateAnythingConfiguration,
@@ -150,11 +151,15 @@ class GPUModels:
                     "Encoder manifest differs from the selected implementation."
                 )
             # Populate the exact cache entry first; an offline worker never fetches weights.
-            self._snapshot(config)
+            source = self._snapshot(config)
+            import torch
+            torch.manual_seed(32040)
+            torch.set_num_threads(min(4, __import__('os').cpu_count() or 1))
             self.resource = FrozenVisualEncoder(
                 specification,
                 revision=config["revision"],
-                device="cuda",
+                device="cpu",
+                model_source=source,
             )
         else:
             raise ValueError("Unknown model stage")
@@ -214,13 +219,42 @@ class GPUModels:
         return masks, np.asarray(scores).reshape(len(boxes))
 
     def encode(self, crops):
-        return self._load("encoder").encode(crops)
+        import os, subprocess, sys, tempfile, json
+        from pathlib import Path
+        from .encoder_worker import compatible_runtime, PINNED
+        from visual_peer_inspector.models.visual_encoder import EncodedBatch
+        python=os.environ.get('VPI_DINO_PYTHON')
+        if not python and not compatible_runtime():
+            raise RuntimeUnavailable('dino_runtime')
+        if not python:
+            # The CPU adapter below validates both runtime and immutable weights.
+            from .encoder_worker import encode_cpu
+            return encode_cpu(crops,self._snapshot(self.config['encoder']))
+        if not Path(python).is_file():
+            raise RuntimeUnavailable('dino_runtime')
+        source=self._snapshot(self.config['encoder'])
+        with tempfile.TemporaryDirectory(prefix='vpi-dino-') as directory:
+            job=Path(directory)
+            np.savez_compressed(job/'input.npz',crops=np.stack(crops).astype(np.uint8))
+            env=os.environ.copy()
+            env.update(HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',CUDA_VISIBLE_DEVICES='',
+                       PYTHONPATH=str(Path(__file__).resolve().parents[2]))
+            try:
+                subprocess.run([python,'-m','visual_peer_inspector.web.encoder_worker','--job',str(job),'--model-source',str(source)],
+                               env=env,stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,
+                               timeout=180,check=True)
+            except (subprocess.SubprocessError,OSError) as error:
+                raise RuntimeUnavailable('dino_runtime') from error
+            receipt=json.loads((job/'receipt.json').read_text())
+            if receipt['runtime']!=PINNED or receipt['feature_dimension']!=384 or receipt['grid']!=16:
+                raise RuntimeUnavailable('dino_runtime')
+            with np.load(job/'output.npz',allow_pickle=False) as data:
+                return EncodedBatch(data['global_features'].copy(),tuple(p.copy() for p in data['patches']),16,384)
 
 
 def runtime_versions():
-    return {
-        name: importlib.metadata.version(name)
-        for name in (
+    result = {}
+    for name in (
             "torch",
             "torchvision",
             "transformers",
@@ -228,5 +262,9 @@ def runtime_versions():
             "numpy",
             "pillow",
             "SAM-2",
-        )
-    }
+        ):
+        try:
+            result[name] = importlib.metadata.version(name)
+        except importlib.metadata.PackageNotFoundError:
+            result[name] = 'unavailable'
+    return result
