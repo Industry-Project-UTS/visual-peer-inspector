@@ -1,0 +1,28 @@
+{
+  "artifact_hashes": {
+    "evaluation/anomaly_count_summary.csv": "6153b302e7f48d7691c4bb1cb20148bd3c87b0f644100f9881db7a5da3cc2037",
+    "evaluation/evaluation_receipt.json": "bc29a1aa5d510ec25537647ac615fe74e0ad693546e303423c7262c06e63c31d",
+    "evaluation/failure_summary.csv": "54c49fa0f64f53e0bff8bb60deca687e4e215771d00ae4b066c9e911abca60dc",
+    "evaluation/identity_summary.csv": "28faad433c017ebdcd11489c7af75c88166f4ea1a9c469863a9cc67de318a194",
+    "evaluation/majority_summary.csv": "a62f55500f60b779a600243f3784186e21fafc6599c0940ea8aa07974c9c5066",
+    "evaluation/metric_summary.csv": "f895a84d1cdcdd4a72c331f12ff15463552d3e889f216abd8b30ef6b8d436e1e",
+    "evaluation/view_schedule_summary.csv": "7c3753eef926eb1f36b9b303aae557eb924309ecf4ca6a77a1545b5501c093ef",
+    "report/ap_tie_expected.png": "a75d362bc62da9a12d14143dcea7bd22be7833ed3922f6ba34a3235b114cd360",
+    "report/candidate_coverage.png": "862dbc31900c970010f3ba3f6523ed5d4c904c01ac056f7a67b26db7aa7e042f",
+    "report/failure_breakdown.png": "b9f3e5bbd6522e51eaa4ba62c055972a2f20af120d7c5c0d6c10beb45e71c306",
+    "report/identity_fragmentation.png": "9365fff7a1b69665c29fbc2e17bdd31cadf55b6c1097bdd324c054e8be6e21f5",
+    "report/identity_quality.png": "a91520e4d7e1bf3592b31eb1a920712162dc3c7acac57ff5560282c04dfd211f",
+    "report/recall_at_2_tie_expected.png": "ab113c627301a7e2a983443b91f00379cadf88244ccfdec1dee88e7d8e36f29b",
+    "report/reciprocal_rank_tie_expected.png": "b68de568aff3522fa9f2eee32507ef1b442266f583d2f7af04eb5baed8cdf5cd",
+    "report/schedule_sensitivity.png": "3e1b1d86eb0d1c834c339683021ac6f1212087f2429b47a5227eab6bb1304f85",
+    "report/top1_tie_expected.png": "6369a8826d08805042179896ce1721c6db8dc16c52160d3e1e1847c8cacf9978"
+  },
+  "binding_sha256": "89e03a1e3ab2174eb20844d06b9a5319bfced4b1b5673550f09949044fb0049e",
+  "error_type": "MissingConfigError",
+  "scientific_lock_hashes": {
+    "evaluation": "e6c80e78c86957d0ba1dfb486dc0ad251178f728233003c2cf270eec90f31652",
+    "report": "37462f81d1a03ef8785f0e6cb59eecad3c0953f06d58d7b6ae9948e40e29da5f"
+  },
+  "status": "pending",
+  "task_name": "DEV-EVALUATE current frozen multi-view evaluation [89e03a1e3ab2174e]"
+}

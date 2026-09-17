@@ -1,0 +1,32 @@
+{
+  "completion_marker_matches_evaluation_lock": true,
+  "full_scientific_download_verified": true,
+  "gallery_lock_count": 7,
+  "gallery_lock_failures": [],
+  "github_transfer_policy": "Only aggregate shareable tables, figures, receipts, and documentation; exclude private scene outputs, caches, checkpoints, raw data, and credentials.",
+  "job_completion_status": "outputs_complete",
+  "job_id": "development-evaluate",
+  "private_outputs_retained_locally": true,
+  "scene_lock_count": 1000,
+  "scene_lock_failures": [],
+  "schema": "vpi-local-full-output-verification/v1",
+  "top_level_locks": [
+    {
+      "expected_files": 2009,
+      "lock": "development-evaluate/evaluation_lock.json",
+      "lock_sha256": "e6c80e78c86957d0ba1dfb486dc0ad251178f728233003c2cf270eec90f31652",
+      "mismatched": [],
+      "missing": [],
+      "verified": true
+    },
+    {
+      "expected_files": 55,
+      "lock": "development-evaluate-report/report_lock.json",
+      "lock_sha256": "37462f81d1a03ef8785f0e6cb59eecad3c0953f06d58d7b6ae9948e40e29da5f",
+      "mismatched": [],
+      "missing": [],
+      "verified": true
+    }
+  ],
+  "verified_at": "2026-09-17T09:57:57.009374+00:00"
+}
