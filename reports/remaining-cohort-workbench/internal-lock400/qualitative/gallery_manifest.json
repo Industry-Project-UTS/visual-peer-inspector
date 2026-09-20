@@ -1,0 +1,74 @@
+[
+  {
+    "missing_media_views": [],
+    "mode": "automatic",
+    "projected_heatmap_count": 0,
+    "reason": "fixed first scene; outcome-independent",
+    "scene": "S000015",
+    "selected_object_located_views": 2,
+    "top_tie_count": 1,
+    "unlocated_views": [],
+    "view_set_id": "two-primary"
+  },
+  {
+    "missing_media_views": [],
+    "mode": "automatic",
+    "projected_heatmap_count": 0,
+    "reason": "fixed first scene; outcome-independent",
+    "scene": "S000015",
+    "selected_object_located_views": 3,
+    "top_tie_count": 1,
+    "unlocated_views": [],
+    "view_set_id": "three-primary"
+  },
+  {
+    "missing_media_views": [],
+    "mode": "automatic",
+    "projected_heatmap_count": 0,
+    "reason": "fixed first scene; outcome-independent",
+    "scene": "S000015",
+    "selected_object_located_views": 2,
+    "top_tie_count": 1,
+    "unlocated_views": [
+      "V04",
+      "V08",
+      "V16"
+    ],
+    "view_set_id": "five-primary"
+  },
+  {
+    "missing_media_views": [],
+    "mode": "assisted",
+    "projected_heatmap_count": 2,
+    "reason": "fixed first scene; outcome-independent",
+    "scene": "S000015",
+    "selected_object_located_views": 2,
+    "top_tie_count": 1,
+    "unlocated_views": [],
+    "view_set_id": "two-primary"
+  },
+  {
+    "missing_media_views": [],
+    "mode": "assisted",
+    "projected_heatmap_count": 3,
+    "reason": "fixed first scene; outcome-independent",
+    "scene": "S000015",
+    "selected_object_located_views": 3,
+    "top_tie_count": 1,
+    "unlocated_views": [],
+    "view_set_id": "three-primary"
+  },
+  {
+    "missing_media_views": [],
+    "mode": "assisted",
+    "projected_heatmap_count": 4,
+    "reason": "fixed first scene; outcome-independent",
+    "scene": "S000015",
+    "selected_object_located_views": 4,
+    "top_tie_count": 1,
+    "unlocated_views": [
+      "V16"
+    ],
+    "view_set_id": "five-primary"
+  }
+]
