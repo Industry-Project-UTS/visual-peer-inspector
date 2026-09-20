@@ -1,0 +1,26 @@
+{
+  "schema": "vpi-current-cpu-runtime/v1",
+  "python": "3.12.14",
+  "packages": {
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "pandas": "2.2.3",
+    "Pillow": "12.3.0",
+    "matplotlib": "3.11.2",
+    "contourpy": "1.4.0",
+    "cycler": "0.12.1",
+    "fonttools": "4.65.0",
+    "kiwisolver": "1.5.1",
+    "packaging": "26.3",
+    "pyparsing": "3.3.2",
+    "python-dateutil": "2.9.0.post0",
+    "pytz": "2026.3.post1",
+    "tzdata": "2026.4",
+    "six": "1.17.0"
+  },
+  "device": "cpu",
+  "scope": "Cached current 09/10 decisions and evaluation; no torch/model installation",
+  "kaggle_linux_wheels_verified": false,
+  "profile_origin": "Verified local macOS CPU environment, not yet a verified Kaggle Linux runtime",
+  "profile_change_rule": "Review a compatible target profile and development numerical checks before creating the new method freeze; never silently repin a frozen run"
+}

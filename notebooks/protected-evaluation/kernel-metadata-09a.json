@@ -1,22 +1,13 @@
 {
-  "id": "esreekarreddy/toysad-8k-protected-calibration-inference",
-  "title": "ToysAD-8K Protected Calibration Inference",
+  "id": "esreekarreddy/09a-toysad8k-protected-calibration-inference",
+  "title": "09A current two-mode Calibration cached prediction",
   "code_file": "09a-toysad8k-protected-calibration-inference.ipynb",
   "language": "python",
   "kernel_type": "notebook",
   "is_private": true,
-  "enable_gpu": true,
-  "machine_shape": "NvidiaTeslaT4",
-  "enable_tpu": false,
-  "enable_internet": true,
-  "keywords": [],
-  "dataset_sources": [
-    "esreekarreddy/vpi-code-snapshot",
-    "esreekarreddy/vpi-toysad-calibration600-model-input",
-    "esreekarreddy/vpi-toysad-ds1-locateanything-prompt-freeze",
-    "esreekarreddy/vpi-toysad-development-method-freeze"
-  ],
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
   "competition_sources": [],
-  "kernel_sources": [],
-  "model_sources": []
+  "kernel_sources": []
 }

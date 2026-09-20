@@ -1,0 +1,51 @@
+{
+  "schema": "vpi-runtime-compatibility-profile/v1",
+  "target": {
+    "os": "Linux",
+    "machine": "x86_64",
+    "python_abi": "cp312"
+  },
+  "validation": {
+    "dependency_resolution": "Exact Linux CPython 3.12 closure resolved and hashed against official PyPI",
+    "target_kernel_execution": false,
+    "service_publication": false
+  },
+  "python_patch_policy": "The setup-only Linux probe may seal its observed Python 3.12 patch before the new method freeze. Package and device pins remain unchanged; subsequent bootstrap verifies that exact receipt.",
+  "sources": [
+    "https://github.com/Kaggle/docker-python/blob/1ed8d43599a7faa1b630baeba82c57def3a8e33b/Dockerfile.tmpl",
+    "https://pytorch.org/get-started/previous-versions/"
+  ],
+  "purpose": "Separate aggregate-only ClearML publication worker; no model or evaluator execution",
+  "runtime_contract": {
+    "schema": "vpi-current-cpu-runtime/v1",
+    "python": "3.12.14",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "pandas": "2.2.3",
+      "Pillow": "12.3.0",
+      "matplotlib": "3.11.2",
+      "contourpy": "1.4.0",
+      "cycler": "0.12.1",
+      "fonttools": "4.65.0",
+      "kiwisolver": "1.5.1",
+      "packaging": "26.3",
+      "pyparsing": "3.3.2",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2026.3.post1",
+      "tzdata": "2026.4",
+      "six": "1.17.0",
+      "clearml": "2.1.10"
+    },
+    "device": "cpu",
+    "scope": "Aggregate-only ClearML publisher in a separate process; outside the scientific method freeze",
+    "kaggle_linux_wheels_verified": false,
+    "profile_origin": "Prepared Linux CPython 3.12 tracking compatibility profile; publication is unverified",
+    "profile_change_rule": "Review a compatible target profile and development numerical checks before creating the new method freeze; never silently repin a frozen run"
+  },
+  "torch_index": "https://pypi.org/simple",
+  "requirements_lock": "linux-tracking-cp312.lock.txt",
+  "requirements_lock_sha256": "75cc286658136063953b7f605ba05e3011b25abad0a3482f3c4f6ed13f1ca215",
+  "offline_install_allowed": true,
+  "offline_install_condition": "Verified full resolved tracking wheelhouse; private target only"
+}

@@ -456,29 +456,10 @@ def build_notebook(configuration: dict) -> nbformat.NotebookNode:
 
 
 def main() -> None:
-    for configuration in CONFIGURATIONS:
-        folder = ROOT / "notebooks" / configuration["folder"]
-        folder.mkdir(parents=True, exist_ok=True)
-        notebook_path = folder / configuration["filename"]
-        nbformat.write(harden_notebook(build_notebook(configuration), preserve_ids=True), notebook_path)
-        metadata = {
-            "id": canonical_kernel_id(configuration["title"]),
-            "title": configuration["title"],
-            "code_file": configuration["filename"],
-            "language": "python",
-            "kernel_type": "notebook",
-            "is_private": True,
-            "enable_gpu": False,
-            "enable_tpu": False,
-            "enable_internet": True,
-            "keywords": [],
-            "dataset_sources": configuration["dataset_sources"],
-            "competition_sources": [],
-            "kernel_sources": configuration["kernel_sources"],
-            "model_sources": [],
-        }
-        metadata_path = folder / f"kernel-metadata-{configuration['code']}.json"
-        metadata_path.write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
+    # Completed08E1 is an immutable historical deliverable, never regenerated here.
+    from notebooks09_current import write_stage
+    for stage in ('08f1', '09b1'):
+        write_stage(stage)
 
 
 if __name__ == "__main__":

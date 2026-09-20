@@ -1,0 +1,13 @@
+{
+  "id": "esreekarreddy/vpi-current-runtime-setup",
+  "title": "VPI current runtime setup only",
+  "code_file": "current-kaggle-runtime-setup.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": []
+}
