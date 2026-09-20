@@ -1,13 +1,9 @@
 {
   "code_file": "10r-toysad8k-official-release.ipynb",
   "competition_sources": [],
-  "dataset_sources": [
-    "esreekarreddy/toysad8k-full-private-v1",
-    "esreekarreddy/vpi-code-snapshot",
-    "esreekarreddy/vpi-toysad-internal-lock-decision"
-  ],
+  "dataset_sources": [],
   "enable_gpu": false,
-  "enable_internet": true,
+  "enable_internet": false,
   "enable_tpu": false,
   "id": "esreekarreddy/toysad-8k-official-evaluation-release",
   "is_private": true,

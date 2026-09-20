@@ -1,0 +1,13 @@
+{
+  "id": "esreekarreddy/current-native-reference-conversion",
+  "title": "Current Native Reference Conversion",
+  "code_file": "current-native-reference-conversion.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": []
+}

@@ -274,10 +274,44 @@ def compile_code_cells(path: Path, cells: list[dict]) -> list[str]:
     return errors
 
 
+CURRENT_ENTRYPOINTS = {'08f1':'release_calibration(', '09a':'predict_current(', '09b':'evaluate_predictions(',
+    '09b1':'release_internal(', '09c':'predict_current(', '09d':'evaluate_predictions(',
+    '10r':'release_verified_cache(', '10a':'predict_official(', '10a1':'predict_official(',
+    '10af':'finalize_official(', '10b':'evaluate_official('}
+
+
+def validate_current_source(stage, path, payload):
+    cells=payload.get('cells',[]);code=cell_text(cells,'code');markdown=cell_text(cells,'markdown')
+    errors=[]
+    if payload.get('nbformat')!=4 or not cells or cells[0].get('cell_type')!='markdown':
+        errors.append('current source must be a v4 notebook with opening markdown')
+    if path.name not in markdown:
+        errors.append('opening markdown must identify the exact notebook')
+    if code.count('_runtime.bootstrap(')!=1 or 'CODE_PROVENANCE' not in code or 'prepared_source_manifest.json' not in code:
+        errors.append('current source must retain one verified prepared-source/runtime bootstrap')
+    if '_runtime.bootstrap(' in code and 'import pandas as pd' in code and code.index('_runtime.bootstrap(')>code.index('import pandas as pd'):
+        errors.append('scientific imports must follow source/runtime verification')
+    if CURRENT_ENTRYPOINTS[stage] not in code:
+        errors.append('current source does not call its stage adapter')
+    if any(name in code for name in ('run_protected_cohort_inference.py','run_calibration_review_policy.py','run_one_shot_evaluation.py','require_stage_adapter(')):
+        errors.append('legacy P1 runner or unconditional guard remains in current source')
+    if SECRET_ASSIGNMENT.search(code) or LEGACY_GATE.search(code):
+        errors.append('current notebook contains a credential or legacy acceptance gate')
+    for topic in ('exposure','freeze','private','recovery','ClearML'):
+        if topic.lower() not in (markdown+code).lower():
+            errors.append('current source omits '+topic+' handling')
+    for index,cell in enumerate(cells):
+        if cell.get('cell_type')=='code' and (cell.get('execution_count') is not None or cell.get('outputs')):
+            errors.append(f'current source cell {index} contains saved execution')
+    return errors+compile_code_cells(path,cells)
+
+
 def validate_notebook(stage: str, path: Path) -> list[str]:
     """Return all static validation errors for one notebook."""
 
     payload = json.loads(path.read_text(encoding="utf-8"))
+    if stage in CURRENT_ENTRYPOINTS:
+        return validate_current_source(stage,path,payload)
     cells = payload.get("cells", [])
     errors: list[str] = []
     if payload.get("nbformat") != 4:
@@ -352,6 +386,12 @@ def validate_metadata(stage: str, path: Path) -> list[str]:
         errors.append("metadata must describe a Python notebook kernel")
     if value.get("is_private") is not True:
         errors.append("remaining research notebooks must stay private on Kaggle")
+    if stage in CURRENT_ENTRYPOINTS:
+        if value.get('enable_gpu') is not False or value.get('enable_internet') is not False:
+            errors.append('current cached stages require CPU and offline defaults')
+        if value.get('dataset_sources') != [] or value.get('kernel_sources') != []:
+            errors.append('current resource attachments must be explicitly prepared, not stale legacy IDs')
+        return errors
     if bool(value.get("enable_gpu")) != (stage in GPU_STAGES):
         errors.append("metadata GPU setting does not match the stage contract")
     observed = tuple(value.get("kernel_sources", []))

@@ -1,0 +1,13 @@
+{
+  "id": "esreekarreddy/current-native-rgb-release",
+  "title": "Current Native Rgb Release",
+  "code_file": "current-native-rgb-release.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": []
+}

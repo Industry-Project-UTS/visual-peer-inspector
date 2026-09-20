@@ -1,0 +1,14 @@
+{
+  "id": "esreekarreddy/vpi-current-dino-gpu-compatibility",
+  "title": "VPI current DINO GPU FP32 compatibility",
+  "code_file": "current-dino-gpu-compatibility.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": false,
+  "machine_shape": "NvidiaTeslaT4",
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": []
+}

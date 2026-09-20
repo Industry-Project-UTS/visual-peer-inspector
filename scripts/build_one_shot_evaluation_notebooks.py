@@ -471,10 +471,23 @@ def metadata(configuration: dict) -> dict:
 
 
 def build(configuration: dict) -> tuple[Path, Path]:
+    if configuration['stage'] == '09d':
+        from notebooks09_current import write_stage
+        path = write_stage('09d')
+        return path, path.parent / 'kernel-metadata-09d.json'
+    if configuration['stage'] == '10b':
+        from build_notebooks10_official import build as build_official
+        build_official()
+        path = ROOT / 'notebooks/official-evaluation' / configuration['filename']
+        return path, path.parent / 'kernel-metadata-10b.json'
     directory = ROOT / "notebooks" / configuration["directory"]
     directory.mkdir(parents=True, exist_ok=True)
     notebook_path = directory / configuration["filename"]
-    cells = build_cells(configuration)
+    if configuration['stage'] == '10b':
+        from notebooks10_current import build_evaluation_cells
+        cells = build_evaluation_cells(configuration)
+    else:
+        cells = build_cells(configuration)
     for index, cell in enumerate(cells):
         source = "".join(cell.get("source", []))
         cell["id"] = sha256(
@@ -491,10 +504,11 @@ def build(configuration: dict) -> tuple[Path, Path]:
             "language_info": {"name": "python", "version": "3"},
         },
     )
-    nbformat.write(harden_notebook(notebook), notebook_path)
+    nbformat.write(notebook, notebook_path)
     metadata_path = directory / f"kernel-metadata-{configuration['stage']}.json"
     metadata_path.write_text(
-        json.dumps(metadata(configuration), indent=2) + "\n", encoding="utf-8"
+        json.dumps({**metadata(configuration), 'enable_gpu':False, 'enable_internet':False,
+                    'dataset_sources':[], 'kernel_sources':[]}, indent=2) + "\n", encoding="utf-8"
     )
     return notebook_path, metadata_path
 

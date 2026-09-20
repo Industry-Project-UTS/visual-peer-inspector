@@ -33,11 +33,15 @@ def test_every_remaining_notebook_verifies_and_retains_snapshot_provenance() -> 
         source = "\n".join(
             "".join(cell.get("source", [])) for cell in payload["cells"]
         )
-        assert source.count("verify_notebook_code_snapshot(") == 1, stage
-        assert "CODE_PROVENANCE = verify_notebook_code_snapshot(" in source, stage
-        assert source.index("CODE_ROOT = find_code_root()") < source.index(
-            "verify_notebook_code_snapshot("
-        ), stage
+        if stage in {'08f1','09a','09b','09b1','09c','09d','10r','10a','10a1','10af','10b'}:
+            assert source.count('_runtime.bootstrap(')==1, stage
+            assert "CODE_PROVENANCE = BOOTSTRAP['provenance']" in source, stage
+            assert source.index('CODE_ROOT = ') < source.index('_runtime.bootstrap(') < source.index('import pandas as pd'), stage
+            assert 'prepared_source_manifest.json' in source, stage
+        else:
+            assert source.count("verify_notebook_code_snapshot(") == 1, stage
+            assert "CODE_PROVENANCE = verify_notebook_code_snapshot(" in source, stage
+            assert source.index("CODE_ROOT = find_code_root()") < source.index("verify_notebook_code_snapshot("), stage
 
 
 def test_notebook_snapshot_helper_verifies_exact_notebook_and_exports_fields(

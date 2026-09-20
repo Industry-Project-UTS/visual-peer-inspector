@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the completed 09E notebook without editing future-stage notebooks."""
+"""Build the completed09E source without changing future09 stage notebooks."""
 from pathlib import Path
 from hashlib import sha256
 import nbformat

@@ -1,0 +1,55 @@
+{
+  "accelerator": "NvidiaTeslaT4",
+  "offline_install_allowed": true,
+  "offline_install_condition": "Verified full resolved wheelhouse from prepare_neural_wheelhouse.py; exact profile and fresh target before imports",
+  "purpose": "Separate frozen DINOv2-small FP32 CUDA worker; same crop/model/userspace package contract as the sealed CPU reference",
+  "python_patch_policy": "The setup-only Linux probe may seal its observed Python 3.12 patch before the new method freeze. Package and device pins remain unchanged; subsequent bootstrap verifies that exact receipt.",
+  "requirements_lock": "linux-dino-fp32-cuda126.lock.txt",
+  "requirements_lock_sha256": "b0c77957c2f74aa64552b5848cb3939a99d506c4efdf99ad43fd683b427df52f",
+  "runtime_contract": {
+    "device": "cuda:0",
+    "kaggle_linux_wheels_verified": false,
+    "packages": {
+      "Pillow": "12.3.0",
+      "contourpy": "1.4.0",
+      "cycler": "0.12.1",
+      "fonttools": "4.65.0",
+      "huggingface-hub": "1.26.1",
+      "kiwisolver": "1.5.1",
+      "matplotlib": "3.11.2",
+      "numpy": "2.5.3",
+      "packaging": "26.3",
+      "pandas": "2.2.3",
+      "pyparsing": "3.3.2",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2026.3.post1",
+      "scipy": "1.18.1",
+      "six": "1.17.0",
+      "torch": "2.13.0+cu126",
+      "transformers": "5.14.1",
+      "tzdata": "2026.4"
+    },
+    "profile_change_rule": "Review a compatible target profile and development numerical checks before creating the new method freeze; never silently repin a frozen run",
+    "profile_origin": "Prepared Linux CPython 3.12 CUDA compatibility profile with exact resolved package pins; not an observed Kaggle runtime",
+    "python": "3.12.14",
+    "schema": "vpi-current-cpu-runtime/v1",
+    "scope": "DINOv2-small strict FP32 CUDA feature extraction in a separate private target; production use requires a passing CPU/GPU numerical compatibility receipt"
+  },
+  "schema": "vpi-runtime-compatibility-profile/v1",
+  "sources": [
+    "https://github.com/Kaggle/docker-python/blob/1ed8d43599a7faa1b630baeba82c57def3a8e33b/Dockerfile.tmpl",
+    "https://pytorch.org/get-started/previous-versions/"
+  ],
+  "target": {
+    "machine": "x86_64",
+    "os": "Linux",
+    "python_abi": "cp312"
+  },
+  "torch_index": "https://download.pytorch.org/whl/cu126",
+  "validation": {
+    "dependency_resolution": "Exact Linux CPython3.12 dependency closure resolved and hashed against official PyPI/PyTorch indexes",
+    "linux_wheel_availability": "Prepared Linux installer must build/download all locked wheels; no neural wheels installed yet",
+    "scientific_compatibility": "requires a sealed development-only CPU/GPU numerical compatibility receipt before production cache extraction",
+    "target_kernel_execution": false
+  }
+}

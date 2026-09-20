@@ -613,16 +613,24 @@ def test_primary_resource_notebooks_are_clean_cpu_release_stages() -> None:
         source = "\n".join(cell.source for cell in notebook.cells)
         assert "recovery" in source.lower()
         assert "ClearML" in source
-        assert "exact full coverage" in source
-        assert all(publication in source for publication in publication_names)
+        if code == '08e1':
+            assert "exact full coverage" in source
+            assert all(publication in source for publication in publication_names)
+        else:
+            assert 'release_calibration(cfg,ROOT)' in source if code == '08f1' else 'release_internal(cfg,ROOT)' in source
+            assert 'current runtime freeze' in source and 'exposure' in source
+            assert 'run_primary_resource_release.py' not in source
         assert all(not cell.get("outputs") for cell in notebook.cells if cell.cell_type == "code")
-        assert [cell.id for cell in notebook.cells] == [
-            sha256(f"{name}:{index}".encode()).hexdigest()[:8]
-            for index in range(len(notebook.cells))
-        ]
+        if code == '08e1':
+            assert [cell.id for cell in notebook.cells] == [
+                sha256(f"{name}:{index}".encode()).hexdigest()[:8]
+                for index in range(len(notebook.cells))
+            ]
+        else:
+            assert len({cell.id for cell in notebook.cells}) == len(notebook.cells)
         metadata = json.loads(
             (root / "notebooks" / folder / f"kernel-metadata-{code}.json").read_text()
         )
         assert metadata["enable_gpu"] is False
-        assert metadata["enable_tpu"] is False
+        assert metadata.get("enable_tpu", False) is False
         assert metadata["is_private"] is True

@@ -1,171 +1,77 @@
-from __future__ import annotations
-
+"""The current10 bodies must never dispatch the historical P1 runners."""
 import json
 import os
+import sys
 from pathlib import Path
-
 import pytest
 
-ROOT = Path(__file__).resolve().parents[1]
-NOTEBOOK_ROOT = ROOT / "notebooks/official-evaluation"
+ROOT=Path(__file__).resolve().parents[1]
+DIRECTORY=ROOT/'notebooks/official-evaluation'
 
 
-def _source(path: Path) -> str:
-    notebook = json.loads(path.read_text(encoding="utf-8"))
-    return "\n".join("".join(cell.get("source", [])) for cell in notebook["cells"])
-
-
-def test_official_notebooks_are_clean_compile_and_state_boundaries() -> None:
-    paths = {
-        "10r": NOTEBOOK_ROOT / "10r-toysad8k-official-release.ipynb",
-        "10a": NOTEBOOK_ROOT / "10a-toysad8k-official-seen-frozen-inference.ipynb",
-        "10a1": NOTEBOOK_ROOT / "10a1-toysad8k-official-unseen-frozen-inference.ipynb",
-        "10a-finalize": NOTEBOOK_ROOT
-        / "10a-finalize-toysad8k-official-prediction-summary.ipynb",
-    }
-    for path in paths.values():
-        notebook = json.loads(path.read_text(encoding="utf-8"))
-        source = _source(path)
+def test_current10_notebooks_are_clean_and_compile():
+    paths=sorted(DIRECTORY.glob('10*.ipynb'))
+    assert len(paths)==5
+    for path in paths:
+        notebook=json.loads(path.read_text())
+        source='\n'.join(''.join(c['source']) for c in notebook['cells'])
         assert path.name in source
-        assert "—" not in source and "–" not in source
-        assert "0.95" not in source and "95%" not in source
-        assert "ClearML" in source
-        for index, cell in enumerate(notebook["cells"]):
-            if cell["cell_type"] == "code":
-                assert cell.get("execution_count") is None
-                assert not cell.get("outputs")
-                compile("".join(cell.get("source", [])), f"{path}:cell-{index}", "exec")
-    release = _source(paths["10r"])
-    assert "one official split at a time" in release
-    assert "storage preflight" in release
-    assert "seen-evaluator-only" in release and "unseen-evaluator-only" in release
-    assert "VPI_MAXIMUM_NEW_SCENES" in release
-    assert "VPI_RESUME_ROOT must contain exactly one official release recovery pair" in release
-    assert '"--recovery-output-directory"' in release
-    assert "not written before exact split coverage" in release
-    assert "internal_lock_result_receipt.json" in release
-    assert release.index("verify_internal_lock_decision") < release.index(
-        'SOURCE_ROOT = next('
-    )
-    runner = (ROOT / "scripts/run_official_release.py").read_text(encoding="utf-8")
-    assert "write_recovery_tracking_root" in runner
-    assert 'tracking_root = args.output_root / "tracking-safe"' in runner
-    assert "Visual Peer Inspector/08 Official Release" in runner
-    for stage, expected_role in (("10a", "seen"), ("10a1", "unseen")):
-        inference = _source(paths[stage])
-        assert "VPI_RESUME_ROOT must contain exactly one recovery ZIP" in inference
-        assert "--export-recovery" in inference and "--prune-after-recovery" in inference
-        recovery_index = inference.index("recovery = find_recovery_pair")
-        export_index = inference.index(
-            'if RUN_PHASE in {"gate", "incremental"}', recovery_index
-        )
-        assert recovery_index < export_index
-        assert "masked-on-black" in inference
-        assert "accuracy metrics" in inference.lower()
-        assert '"preflight"' in inference
-        assert "timeout=1800" in inference
-        assert 'environment["HF_HUB_OFFLINE"] = "1"' in inference
-        assert inference.index('"preflight"') < inference.index(
-            "subprocess.run(command, check=True, env=environment)"
-        )
-        assert f'VPI_OFFICIAL_COHORT", "{expected_role}"' in inference
-        assert f'PINNED_OFFICIAL_COHORT = "{expected_role}"' in inference
-        assert "REQUESTED_OFFICIAL_COHORT != PINNED_OFFICIAL_COHORT" in inference
-        assert "OFFICIAL_COHORT = PINNED_OFFICIAL_COHORT" in inference
-        assert f"official-{expected_role}-prediction" in inference
-    finalizer = _source(paths["10a-finalize"])
-    assert '"--run-mode", "finalize"' in finalizer
-    assert "official-seen-prediction" in finalizer
-    assert "official-unseen-prediction" in finalizer
-    assert "official-prediction-summary" in finalizer
-    inference_runner = (ROOT / "scripts/run_official_inference.py").read_text(
-        encoding="utf-8"
-    )
-    assert "Visual Peer Inspector/09 Frozen Evaluation" in inference_runner
+        assert 'winner_cluster_consensus' in source and 'object_bank_top2' in source
+        assert '_runtime.bootstrap(CODE_ROOT, NOTEBOOK_RELATIVE, runtime_profile=RUNTIME_PROFILE)' in source
+        assert source.index('_runtime.bootstrap(') < source.index('import pandas as pd')
+        assert 'current 09D' in source and 'ClearML' in source
+        assert 'tie-aware top-1' in source and 'Recall@2' in source
+        assert 'asset-grouped 95%' in source
+        for forbidden in ('run_official_inference.py','run_official_release.py','run_one_shot_evaluation.py','pip install'):
+            assert forbidden not in source
+        for i,cell in enumerate(notebook['cells']):
+            if cell['cell_type']=='code':
+                assert cell['execution_count'] is None and not cell['outputs']
+                compile(''.join(cell['source']),f'{path}:cell{i}','exec')
 
 
-def test_official_metadata_uses_exact_upstreams_and_no_evaluator_on_10a() -> None:
-    metadata10r = json.loads((NOTEBOOK_ROOT / "kernel-metadata-10r.json").read_text())
-    metadata10a = json.loads((NOTEBOOK_ROOT / "kernel-metadata-10a.json").read_text())
-    metadata10a1 = json.loads((NOTEBOOK_ROOT / "kernel-metadata-10a1.json").read_text())
-    metadata_finalize = json.loads(
-        (NOTEBOOK_ROOT / "kernel-metadata-10a-finalize.json").read_text()
-    )
-    assert metadata10r["id"] == "esreekarreddy/toysad-8k-official-evaluation-release"
-    assert metadata10r["enable_gpu"] is False
-    assert "esreekarreddy/vpi-toysad-internal-lock-decision" in metadata10r[
-        "dataset_sources"
-    ]
-    assert metadata10a["id"] == "esreekarreddy/toysad-8k-official-frozen-inference"
-    assert metadata10a["kernel_sources"] == []
-    assert "esreekarreddy/vpi-toysad-development-method-freeze" in metadata10a[
-        "dataset_sources"
-    ]
-    assert "esreekarreddy/vpi-toysad-calibration-review-policy" in metadata10a[
-        "dataset_sources"
-    ]
-    assert "esreekarreddy/vpi-toysad-internal-lock-decision" in metadata10a[
-        "dataset_sources"
-    ]
-    joined = " ".join(metadata10a["dataset_sources"] + metadata10a["kernel_sources"]).lower()
-    assert "evaluator" not in joined and "crosswalk" not in joined and "label" not in joined
-    assert "esreekarreddy/vpi-toysad-official-seen-model-input" in metadata10a[
-        "dataset_sources"
-    ]
-    assert "esreekarreddy/vpi-toysad-official-unseen-model-input" not in metadata10a[
-        "dataset_sources"
-    ]
-    unseen_joined = " ".join(
-        metadata10a1["dataset_sources"] + metadata10a1["kernel_sources"]
-    ).lower()
-    assert "evaluator" not in unseen_joined and "label" not in unseen_joined
-    assert "esreekarreddy/vpi-toysad-official-unseen-model-input" in metadata10a1[
-        "dataset_sources"
-    ]
-    assert "esreekarreddy/vpi-toysad-official-seen-model-input" not in metadata10a1[
-        "dataset_sources"
-    ]
-    assert metadata_finalize["enable_gpu"] is False
-    assert metadata_finalize["dataset_sources"] == [
-        "esreekarreddy/vpi-code-snapshot",
-        "esreekarreddy/vpi-toysad-official-seen-prediction",
-        "esreekarreddy/vpi-toysad-official-unseen-prediction",
-        "esreekarreddy/vpi-toysad-development-method-freeze",
-        "esreekarreddy/vpi-toysad-calibration-review-policy",
-        "esreekarreddy/vpi-toysad-internal-lock-decision",
-    ]
+@pytest.mark.parametrize('stage,role',[('10a','seen'),('10a1','unseen')])
+def test_current_official_notebook_rejects_conflicting_role_before_config(stage,role,monkeypatch):
+    path=next(DIRECTORY.glob(stage+'-toysad8k-official-*.ipynb'))
+    notebook=json.loads(path.read_text())
+    source=next(''.join(c['source']) for c in notebook['cells'] if c['cell_type']=='code' and 'PINNED_OFFICIAL_COHORT' in ''.join(c['source']))
+    guard=source.split('CONFIG = load_config()')[0]
+    monkeypatch.setenv('VPI_OFFICIAL_COHORT','unseen' if role=='seen' else 'seen')
+    with pytest.raises(ValueError,match='pinned'):
+        exec(guard,{'os':os})
 
 
-@pytest.mark.parametrize(
-    ("filename", "pinned", "conflicting"),
-    (
-        ("10a-toysad8k-official-seen-frozen-inference.ipynb", "seen", "unseen"),
-        ("10a1-toysad8k-official-unseen-frozen-inference.ipynb", "unseen", "seen"),
-    ),
-)
-def test_official_inference_entry_point_rejects_conflicting_cohort_environment(
-    filename: str, pinned: str, conflicting: str, monkeypatch
-) -> None:
-    notebook = json.loads((NOTEBOOK_ROOT / filename).read_text(encoding="utf-8"))
-    setup = next(
-        "".join(cell.get("source", []))
-        for cell in notebook["cells"]
-        if cell.get("cell_type") == "code"
-        and "PINNED_OFFICIAL_COHORT" in "".join(cell.get("source", []))
-    )
-    lines = setup.splitlines()
-    start = next(index for index, line in enumerate(lines) if line.startswith("NOTEBOOK_FILE"))
-    stop = next(
-        index for index, line in enumerate(lines) if line.startswith("EXECUTION_ENVIRONMENT")
-    )
-    guard = "\n".join(lines[start:stop])
+def test_cpu_prediction_metadata_has_no_evaluator_mounts():
+    for stage in ('10a','10a1'):
+        metadata=json.loads((DIRECTORY/f'kernel-metadata-{stage}.json').read_text())
+        assert metadata['enable_gpu'] is False
+        mounted=' '.join(metadata['dataset_sources']+metadata['kernel_sources'])
+        assert 'evaluator' not in mounted and 'crosswalk' not in mounted
+    notes=(DIRECTORY/'CURRENT_EXECUTION_READINESS.md').read_text()
+    assert 'have not executed official experiments' in notes
+    assert 'atomically release an already typed neutral official cache' in notes
+    assert 'Typed current-schema evaluator' in notes
 
-    monkeypatch.setenv("VPI_RUN_PHASE", "gate")
-    monkeypatch.setenv("VPI_OFFICIAL_COHORT", pinned)
-    namespace = {"os": os}
-    exec(guard, namespace)  # noqa: S102 - execute the isolated generated guard
-    assert namespace["OFFICIAL_COHORT"] == pinned
 
-    monkeypatch.setenv("VPI_OFFICIAL_COHORT", conflicting)
-    with pytest.raises(ValueError, match=f"is pinned to {pinned}"):
-        exec(guard, {"os": os})  # noqa: S102 - exercise the generated guard
+def test_both_official_regeneration_paths_keep_current_bodies(tmp_path,monkeypatch):
+    monkeypatch.syspath_prepend(str(ROOT/'scripts'))
+    import build_notebooks10_official as official_builder
+    import build_one_shot_evaluation_notebooks as shared_builder
+    from notebook_runtime_cells import harden_source
+    target=tmp_path/'notebooks/official-evaluation';target.mkdir(parents=True)
+    for path in DIRECTORY.glob('kernel-metadata-10*.json'):
+        (target/path.name).write_bytes(path.read_bytes())
+    monkeypatch.setattr(official_builder,'NOTEBOOK_ROOT',target)
+    official_builder.build()
+    assert len(list(target.glob('10*.ipynb')))==5
+    name='10b-toysad8k-official-seen-unseen-evaluation.ipynb'
+    previous=json.loads((target/name).read_text())
+    monkeypatch.setattr(shared_builder,'ROOT',tmp_path)
+    shared_builder.build(next(c for c in shared_builder.CONFIGURATIONS if c['stage']=='10b'))
+    regenerated=json.loads((target/name).read_text())
+    normal=lambda cell:harden_source(''.join(cell['source'])) if cell['cell_type']=='code' else ''.join(cell['source'])
+    assert [normal(cell) for cell in previous['cells']]==[normal(cell) for cell in regenerated['cells']]
+    source='\n'.join(''.join(cell['source']) for cell in regenerated['cells'])
+    assert 'evaluate_official(CONFIG, CODE_ROOT)' in source
+    assert "('datasets', 2)" in source
+    assert 'run_one_shot_evaluation.py' not in source
