@@ -1,0 +1,17 @@
+{
+  "omitted": "example-07",
+  "omitted_receipt": {
+    "missing_media_views": [],
+    "mode": "assisted",
+    "projected_heatmap_count": 3,
+    "reason": "post-hoc failure illustration; not an evaluation subset",
+    "scene": "S000015",
+    "selected_object_located_views": 3,
+    "top_tie_count": 1,
+    "unlocated_views": [],
+    "view_set_id": "three-primary"
+  },
+  "reason": "The selected ranking, score table and both figures are byte-identical; the extra source entry differed only in its post-hoc illustration reason.",
+  "retained": "example-05",
+  "schema": "vpi-qualitative-deduplication/v1"
+}

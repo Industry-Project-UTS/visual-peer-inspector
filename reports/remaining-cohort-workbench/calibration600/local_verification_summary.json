@@ -1,0 +1,49 @@
+{
+  "completion_marker": "087188994d32f0ef8181a70cc5ebfbf2ddf8ebcbb34274eb57b66d7069a89526",
+  "downloaded_evaluation_members_verified": 8,
+  "downloaded_report_members_verified": 12,
+  "evaluation_lock_inventory": 1209,
+  "evaluation_lock_sha256": "087188994d32f0ef8181a70cc5ebfbf2ddf8ebcbb34274eb57b66d7069a89526",
+  "evaluation_members": [
+    "run_binding.json",
+    "shareable/anomaly_count_summary.csv",
+    "shareable/evaluation_receipt.json",
+    "shareable/failure_summary.csv",
+    "shareable/identity_summary.csv",
+    "shareable/majority_summary.csv",
+    "shareable/metric_summary.csv",
+    "shareable/view_schedule_summary.csv"
+  ],
+  "full_private_download_verified": false,
+  "job": "09b",
+  "nonsealed_runtime_files": [
+    "run_status.json"
+  ],
+  "note": "All downloaded aggregate members verify. Private scene metrics were downloaded separately for calibration-policy fitting; the full private gallery/checkpoint collection remains on Kaggle.",
+  "private_gallery_download": {
+    "gallery_count": 7,
+    "locked_members_verified": 35,
+    "path": ".local/kaggle-runs/private-outputs/09b-v18/09b-report/private/galleries",
+    "status": "verified"
+  },
+  "protocol_lock_sha256": "749e98e614b36bebf5dad8346b7edbbfd0bc0a3ebb5f7e83b21a42cbb89dd853",
+  "protocol_verified": true,
+  "report_lock_inventory": 55,
+  "report_lock_sha256": "6c02992875d31af38cc122937bfcaa4dbda060886290e6ef7e7d561763f1ae5b",
+  "report_members": [
+    "diagnostic_figures_receipt.json",
+    "report_receipt.json",
+    "run_binding.json",
+    "shareable/figures/ap_tie_expected.png",
+    "shareable/figures/candidate_coverage.png",
+    "shareable/figures/failure_breakdown.png",
+    "shareable/figures/identity_fragmentation.png",
+    "shareable/figures/identity_quality.png",
+    "shareable/figures/recall_at_2_tie_expected.png",
+    "shareable/figures/reciprocal_rank_tie_expected.png",
+    "shareable/figures/schedule_sensitivity.png",
+    "shareable/figures/top1_tie_expected.png"
+  ],
+  "schema": "vpi-local-compact-output-verification/v1",
+  "status": "verified_compact_subset"
+}

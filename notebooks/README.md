@@ -32,12 +32,19 @@ model, scoring, evaluation, and tracking logic belongs in tested modules under
 | 08G Development Scoring Comparison | Reuses the fixed 100-scene development screen and DINOv2-small feature cache to calculate P1 and eight bounded alternatives | V2 complete; 100 scenes, 2,000 views and both routes verified |
 | 08H Development Scoring Evaluation | Compares the nine scorers across routes, identity modes and view counts using asset-grouped uncertainty | V2 complete; no scorer promoted automatically; predicted cross-view identity remains the main limitation |
 | 08I Development Identity Refinement | Compares global, foreground patch, and hybrid identity descriptors on the same 100-scene development screen | V3 complete; top-1 improved but identity-link F1 fell, so no candidate was promoted |
-| 08F.1 Calibration Resource Release | Publishes the physically separate `vpi-toysad-calibration600-model-input` and `vpi-toysad-calibration600-evaluator` resources after the method freeze | Built and locally checked; Kaggle evidence pending |
-| 09A Calibration Inference | Produces locked, prediction-only output for all 600 calibration scenes | Built and locally checked; Kaggle evidence pending |
-| 09B Calibration Review Policy | Opens calibration references after the prediction lock and freezes only the optional review policy | Built and locally checked; Kaggle evidence pending |
-| 09B.1 Internal-Lock Resource Release | Publishes the physically separate `vpi-toysad-internal-lock400-model-input` and `vpi-toysad-internal-lock400-evaluator` resources after the method and policy freezes | Built and locally checked; Kaggle evidence pending |
-| 09C Internal-Lock Inference | Produces locked, prediction-only output for all 400 internal-lock scenes | Built and locally checked; Kaggle evidence pending |
-| 09D Internal-Lock Evaluation | Performs the one-shot internal evaluation without retuning | Built and locally checked; Kaggle evidence pending |
+| 08J Development Identity Association | Compares five predeclared cross-view association strategies on the frozen development cache | Kaggle V2 complete; current Hungarian association retained |
+| 08K Foreground Patch Correspondence | Tests patch and transport alternatives without changing the encoder or scorer | Kaggle V3 complete; no candidate passed the joint promotion rule |
+| 08L Learned Peer Feature Preparation | Builds label-free peer-view features for asset-grouped comparison | Kaggle V3 complete and verified |
+| 08M Learned Peer Ranking | Compares fixed and learned rankers across five asset-grouped folds | Kaggle V2 complete; winner consensus selected for frozen confirmation |
+| 08N Object Registry and Patch Preparation | Retains all valid candidates and prepares reusable object-bank features | Local executed evidence complete; cached vision outputs reused |
+| 08O Object-Bank Evaluation | Evaluates retained-candidate fusion across automatic and supplied correspondence | Local executed evidence complete; `object_bank_top2` selected for assisted correspondence |
+| 08P Physical-Object Mapping and Freeze | Tests the final joint partial-assignment mapper and records the stopping decision | Local executed evidence complete; mapper rejected and method search stopped |
+| 08F.1 Calibration Resource Release | Publishes the physically separate `vpi-toysad-calibration600-model-input` and `vpi-toysad-calibration600-evaluator` resources after the method freeze | Kaggle V17 complete and verified |
+| 09A Calibration Inference | Produces locked, prediction-only output for all 600 calibration scenes | Kaggle V17 complete; 600 predictions sealed before truth conversion |
+| 09B Calibration Review Policy | Opens calibration references after the prediction lock and freezes only the optional review policy | Kaggle V18 complete; aggregate metrics verified and review policy frozen |
+| 09B.1 Internal-Lock Resource Release | Publishes the physically separate `vpi-toysad-internal-lock400-model-input` and `vpi-toysad-internal-lock400-evaluator` resources after the method and policy freezes | Kaggle V1 complete; all 400 scenes released |
+| 09C Internal-Lock Inference | Produces locked, prediction-only output for all 400 internal-lock scenes | Kaggle V1 complete; 400 predictions sealed before truth conversion |
+| 09D Internal-Lock Evaluation | Performs the one-shot internal evaluation without retuning | Kaggle V1 complete; 400 scenes and 109 asset groups evaluated once |
 | 10R Official Release | Builds separate model-facing and evaluator-only resources for the official seen and unseen roles | Built and locally checked; Kaggle evidence pending |
 | 10A Seen Inference | Runs the unchanged frozen route on official seen inputs | Built and locally checked; Kaggle evidence pending |
 | 10A.1 Unseen Inference | Runs the unchanged frozen route on official unseen inputs | Built and locally checked; Kaggle evidence pending |
@@ -52,15 +59,12 @@ pre-commit source snapshot that recorded `git_dirty: true`. The original run
 record must remain unchanged. A clean-snapshot rerun may later replace a
 candidate result.
 
-The current DS2 decision keeps LocateAnything, SAM 2.1 Hiera-large,
-DINOv2-small, P1, two to five declared views, and normalized-rank fusion. B0
-remains the baseline. The automatic result is the normal route. Human box or
-identity correction is an optional rerun when the evidence is incomplete or
-uncertain. This is a development freeze for the next calibration stage, not a
-final production claim. The completed 08F comparison shows weak physical-object
-identity matching despite passing its structural checks. Review that limitation
-before the protected stages. If the method changes, produce a new development
-comparison and method lock without using calibration or internal-lock labels.
+The protected 09-series is complete. The fixed automatic route is
+`winner_cluster_consensus` with predicted correspondence. The fixed assisted
+route is `object_bank_top2` with confirmed correspondence. On the 400-scene
+internal-lock cohort, five-view tie-aware top-1 was 22.00% automatic and
+61.72% assisted. Automatic results require review; assisted readiness follows
+the calibration-fitted policy. The official 10-series remains pending.
 
 ## Dependency flow
 
@@ -88,7 +92,10 @@ flowchart LR
     N8J --> N8K["08K Patch correspondence study"]
     N8K --> N8L["08L Learned peer features"]
     N8L --> N8M["08M Learned peer ranker"]
-    N8M --> N8F1["08F.1 Calibration resource release"]
+    N8M --> N8N["08N Candidate registry and patch preparation"]
+    N8N --> N8O["08O Object-bank evaluation"]
+    N8O --> N8P["08P Physical-object mapping and freeze"]
+    N8P --> N8F1["08F.1 Calibration resource release"]
     N8F1 --> N9A["09A Calibration inference"]
     N9A --> N9B["09B Review-policy freeze"]
     N9B --> N9B1["09B.1 Internal-lock resource release"]
@@ -173,6 +180,12 @@ flowchart LR
   `representation-and-scoring/development-learned-peer-view-ranker/08l-development-learned-peer-view-features.ipynb`
 - Notebook 08M:
   `representation-and-scoring/development-learned-peer-view-ranker/08m-development-learned-peer-view-ranker.ipynb`
+- Notebook 08N:
+  `representation-and-scoring/development-multiview-object-bank/08n-object-registry-and-patch-preparation.ipynb`
+- Notebook 08O:
+  `representation-and-scoring/development-multiview-object-bank/08o-object-bank-evaluation.ipynb`
+- Notebook 08P:
+  `representation-and-scoring/development-physical-object-mapping/08p-physical-object-mapping-and-freeze.ipynb`
 - Notebook 08F.1:
   `protected-evaluation/08f1-toysad8k-calibration-resource-release.ipynb`
 - Notebook 09A:
@@ -215,8 +228,8 @@ An accepted notebook stage must:
    model-facing resources;
 3. support deterministic restart or resume behaviour where applicable;
 4. produce a clean notebook source with no saved execution outputs;
-5. store large or private outputs outside GitHub, with a separate sanitised
-   saved-output copy allowed for repository evidence;
+5. store large model/data artifacts outside GitHub; executed milestone notebooks
+   may retain outputs when they contain no credentials or private evaluator tables;
 6. retain a sanitized run record, aggregate tables, figures, and checksums;
 7. record approved aggregate evidence in ClearML or preserve a synchronized
    offline record when ClearML is unavailable;

@@ -10,10 +10,9 @@ evidence, and documentation for the UTS 32040 Industry Project.
 
 ## Current status
 
-The controlled 2,000-scene experiment is fixed and leakage checked. Verified
-development evidence is complete through Notebook 08I. The remaining protected
-and official notebook sequence is built and locally checked, but has not yet
-been run on Kaggle.
+The controlled 2,000-scene experiment is fixed and leakage checked. Development,
+calibration and one-shot internal-lock evaluation are complete through Notebook
+09D. The official seen/unseen 10-series remains a separate, unopened gate.
 
 | Stage | Result |
 | --- | --- |
@@ -28,27 +27,20 @@ been run on Kaggle.
 | 08D to 08F Development Freeze | Four stages complete; 20,000 views locked and 3,000 application results verified; cross-view identity remains weak |
 | 08G to 08H Development Scoring Comparison | Nine scoring methods compared on the existing 100-scene development screen; automatic-route accuracy remains limited by predicted identity |
 | 08I Development Identity Refinement | Foreground patch identity tested on the same 100-scene screen; top-1 improved to 0.31 but identity-link F1 fell, so no method was promoted |
-| 08F.1 to 10B Protected and Official Evaluation | Built and locally checked; Kaggle scientific evidence pending |
+| 08J to 08P Candidate Retention and Physical Mapping | Complete; automatic mapping rejected and automatic/assisted routes frozen |
+| 08F.1 to 09D Protected Evaluation | Complete for 1,000 development, 600 calibration and 400 internal-lock scenes |
+| 10R to 10B Official Evaluation | Built and locally checked; execution remains pending |
 | 11R to 11B Full-pool Sensitivity | Three optional post-official stages built and locally checked; execution remains optional |
 
-The working route is LocateAnything-3B with the `individual object` prompt and
-`area_nms_075_cap8` cleanup, SAM 2.1 Hiera-large, DINOv2-small, P1, label-free
-cross-view identity, and mean normalized-rank fusion. This is a development
-freeze for the protected evaluation sequence. It is not final official
-performance or a production deployment claim. Notebook 08F retained
-embedding-only matching, but its five-view mean pairwise identity accuracy is
-33.04%. This measures object linking, not odd-one-out accuracy. Notebooks 08G
-and 08H then reused the fixed DINOv2-small features to compare P1 with
-directional, mutual-support, geometry, consensus, and out-of-fold context
-scorers. The best automatic three-view result reached 0.34165 scene average
-precision and 0.24 top-1 accuracy. With supplied masks and reference identity,
-the same feature pipeline reached up to 0.66 top-1 accuracy. This shows that
-cross-view identity is the main next development problem. Notebook 08I then
-tested foreground patch descriptors without changing the split or model stack.
-The primary candidate reached 0.31 top-1 accuracy, but identity-link F1 fell,
-so the current identity method remains the stable default. See the [development
-identity refinement](docs/progress/development-identity-refinement.md) before
-starting protected calibration or making a web-app readiness claim.
+The frozen pipeline uses LocateAnything-3B, SAM 2.1 Hiera-large and
+DINOv2-small. The automatic decision route uses `winner_cluster_consensus`
+with predicted correspondence; the assisted route uses `object_bank_top2`
+with confirmed correspondence. On the 400-scene internal-lock cohort,
+five-view tie-aware top-1 accuracy was 22.00% automatic and 61.72% assisted.
+The assisted route exceeds the project target but is not an automatic RGB-only
+result. The application therefore exposes correspondence confirmation and keeps
+automatic outcomes under review. See the [protected 2,000-scene evaluation]
+(docs/progress/protected-2000-multiview-evaluation.md).
 
 ## Pipeline
 

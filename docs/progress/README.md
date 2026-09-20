@@ -23,10 +23,15 @@ describe a next step that has since been completed. Use the current
 | Identity association | [Association study](development-identity-association.md) | Reciprocal and cycle-pruned alternatives were rejected because ranking gains came with weak or fragmented identity tracks |
 | Patch correspondence | [Patch correspondence study](development-patch-correspondence.md) | Foreground patch and Sinkhorn alternatives did not pass the joint promotion rule |
 | Learned peer ranking | [Learned peer-view ranker](development-learned-peer-view-ranker.md) | Winner consensus improved tie-aware top-1 on the development screen and was selected for frozen confirmation |
+| Candidate retention and fusion | [Multi-view object bank](development-multiview-object-bank.md) | 08N/08O retained candidates and selected `object_bank_top2` for assisted correspondence |
+| Physical-object mapping | [Mapping and stopping decision](development-physical-object-mapping.md) | 08P rejected the joint automatic mapper and ended the method search |
+| Protected evaluation | [2,000-scene multi-view evaluation](protected-2000-multiview-evaluation.md) | Development, calibration and one-shot internal lock complete through 09D |
 
 ## Current position
 
-Notebooks 01 to 08M are complete as development evidence. The DS1 screen
+The 09-series exit gate is complete: 1,000 development, 600 calibration and 400 internal-lock scenes were evaluated with the frozen automatic and assisted methods. Internal-lock five-view tie-aware top-1 accuracy was 22.00% automatic and 61.72% assisted. The assisted route uses confirmed correspondence. The official 10-series remains pending.
+
+Notebooks 01 to 09D are complete through the protected-evaluation exit gate. The historical development detail below records how the frozen methods were selected. The DS1 screen
 selected DINOv2-small with P1 for confirmation, with B0 retained as the
 baseline. The bounded LocateAnything prompt comparison was verified on Kaggle
 Version 4. The 300-scene DS2 release, frozen model run, and protected
