@@ -24,10 +24,6 @@ from visual_peer_inspector.representation.cross_view_identity import (
     ViewObservation,
     match_cross_view_identities,
 )
-from visual_peer_inspector.review_policy import (
-    apply_review_policy,
-    build_prediction_review_signals,
-)
 from visual_peer_inspector.scoring.peer import deterministic_ranking, p1_scores
 
 from .core import (
@@ -138,8 +134,6 @@ class UploadPipeline:
         self.models = models
         self.config = pipeline_config()
         self.policy, self.policy_version = load_review_policy(review_policy_path)
-        if self.policy is not None:
-            raise ValueError('The two-mode app requires a mode-specific review policy; legacy thresholds cannot be applied to these decisions.')
         self._temporary = None
         root = cache_root or os.environ.get('VPI_SESSION_CACHE_ROOT')
         if root is None:
@@ -292,7 +286,7 @@ class UploadPipeline:
             reasons.append('The selected object is not linked in every uploaded view; absence is not established.')
         if request.decision_mode == 'assisted' and any(not c.box.identity_id for c in candidates):
             reasons.append('Unknown identities remain visible and unscored; they are excluded from trusted peer banks.')
-        reasons.append('Development method: review identities and visual evidence; scores are not calibrated probabilities.')
+        reasons.append('Scores compare relative unusualness; they are not correctness probabilities.')
         lookup = {(v,o['candidate_id']):o['scores'] for v,row in rows.items() for o in row['objects']}
         scored = {(o['view_id'],o['candidate_id']):o for o in decision['scored_observations'] or []}
         output = []
@@ -327,11 +321,17 @@ class UploadPipeline:
                 'object_bank' if request.decision_mode=='assisted' else 'winner_consensus_components', components,
                 decision['component_rank'].get(key),status,source))
         evidence = tuple(output)
-        insufficient = not ranking or (selected is not None and len(ranking[0].view_ids)<2)
-        result = InspectionResult(tuple(ranking), evidence, 'insufficient_evidence' if insufficient else 'review_recommended',
-            tuple(dict.fromkeys(reasons)), self.config['method_version']+':'+pipeline_fingerprint(),self.policy_version,request.decision_mode,
+        signals = self.policy.signals(tuple(ranking), request.decision_mode, len(request.views))
+        state, policy_reasons = self.policy.decide(signals,
+            correspondence_confirmed=request.decision_mode == 'assisted' and request.corrections is not None)
+        result = InspectionResult(tuple(ranking), evidence, state,
+            tuple(dict.fromkeys([*policy_reasons, *reasons])) if state != 'result_ready' else (), self.config['method_version']+':'+pipeline_fingerprint(),self.policy_version,request.decision_mode,
             {'pipeline':self.config,'pipeline_sha256':pipeline_fingerprint(),'prediction_only':True,
-             'review_signals':{'insufficient_evidence':insufficient}, 'cache':{'reused_candidates':reused,'encoded_candidates':computed},
+             'review_signals':signals, 'review_policy':{'source':'src/visual_peer_inspector/web/frozen_review_policy.json',
+                'sha256':self.policy.source_sha256,'schema':'vpi-current-two-mode-review-policy/v1',
+                'version':self.policy.version},
+             'correspondence_source':'user_confirmed' if request.decision_mode=='assisted' and request.corrections is not None else 'predicted',
+             'cache':{'reused_candidates':reused,'encoded_candidates':computed},
              'identity_tracks':decision['tracks'],'score_kind':'object_bank_top2' if request.decision_mode=='assisted' else 'winner_cluster_consensus'},
             selected,request.session_id,token,
             {'method_label':'Assisted patch bank' if request.decision_mode=='assisted' else 'Automatic winner consensus',

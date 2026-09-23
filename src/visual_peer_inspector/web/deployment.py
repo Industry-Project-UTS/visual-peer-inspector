@@ -65,19 +65,8 @@ class WorkerSettings:
 
 
 def load_review_policy(path: str | None):
-    """Require an explicit policy bound to this upload pipeline, never guess thresholds."""
-    if path is None:
-        return None, pipeline_config()["default_review_policy"]
-    from visual_peer_inspector.review_policy import ReviewPolicy
+    """Load only the byte-identical policy frozen by calibration stage 09B."""
+    from .frozen_policy import load_frozen_policy
 
-    value = json.loads(Path(path).read_text(encoding="utf-8"))
-    if set(value) != {"schema_version", "pipeline_sha256", "policy_configuration"}:
-        raise ValueError(
-            "Review policy envelope fields differ from vpi-web-review-policy/v1."
-        )
-    if value["schema_version"] != "vpi-web-review-policy/v1":
-        raise ValueError("Unsupported web review policy schema.")
-    if value["pipeline_sha256"] != pipeline_fingerprint():
-        raise ValueError("Review policy belongs to a different upload pipeline.")
-    policy = ReviewPolicy.from_mapping(value["policy_configuration"])
-    return policy, f"review-policy-sha256:{policy.sha256}"
+    policy = load_frozen_policy(path)
+    return policy, policy.version

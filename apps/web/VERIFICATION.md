@@ -1,5 +1,17 @@
 # Web integration verification
 
+## Frozen policy and evidence update
+
+The web app now bundles the byte-identical 09B `calibration-selective-v1`
+policy. The package check verifies its sealed SHA-256. Synthetic 2/3/5-view
+tests check automatic review routing, confirmed assisted reranking from cached
+features, ties, support, thresholds and confidence parity with the evaluator
+formula. JSON and HTML exports include the review signals, selected locations
+and missing-link explanations. The focused local web suite passed **85 tests**
+with **1 skipped** and **9 subtests passed**; offline deployment preflight
+passed. These checks use generated images and do not establish new-upload
+accuracy or hosted GPU readiness.
+
 ## Verified locally
 
 - **71 app tests passed**, with the cached scientific parity test explicitly

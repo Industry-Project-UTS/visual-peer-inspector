@@ -66,8 +66,11 @@ Results show per-view observation scores, component scores, normalized ranks,
 fusion contributors, masks, boxes and coarse patch evidence. Only a unique
 leader is highlighted, wherever its identity has a supported observation.
 Ties and missing links are explicit. Relative scores are not probabilities,
-and results use a provisional review-all policy. Old P1 review thresholds are
-not valid for these two modes.
+and results use the sealed calibration-selective-v1 review policy. Automatic
+results always require review. Assisted readiness requires confirmed matches,
+a unique top object in every uploaded view, and the fixed ranking confidence
+threshold for 2, 3 or 5 views. Four-view results require review. The confidence
+index is not a correctness probability; old P1 thresholds do not apply.
 
 Masks and crop heatmaps map back to the original EXIF-corrected image. A cache
 binds each candidate to pixels, boxes, preprocessing, model settings, source

@@ -75,7 +75,7 @@
     "geometry_weight": 0.0
   },
   "invalid_mask_policy": "unscored_retained_for_review",
-  "default_review_policy": "provisional-review-all-v1",
+  "default_review_policy": "calibration-selective-v1",
   "decisions": {
     "automatic": "winner_cluster_consensus",
     "assisted": "object_bank_top2",

@@ -19,7 +19,7 @@ from .core import Box, Session
 
 LABELS = {
     "result_ready": "Result ready",
-    "review_recommended": "Review recommended",
+    "review_required": "Review required",
     "insufficient_evidence": "Insufficient evidence",
 }
 SOURCES = {
@@ -278,12 +278,17 @@ def summary_html(session: Session) -> str:
     reasons = "".join(f"<li>{html.escape(reason)}</li>" for reason in result.reasons)
     selected = selected_identity(result)
     metadata = getattr(result, "score_metadata", {}) or {}
+    signals = result.provenance.get("review_signals", {})
+    confidence = signals.get("confidence")
+    confidence_text = (f'<span><b>{confidence:.3f}</b>Ranking confidence index</span>'
+                       if isinstance(confidence, (int, float)) and math.isfinite(confidence) else '')
     if selected:
         winner = next(item for item in result.ranking if item.identity_id == selected)
         used = sum(item.get("used_in_fusion", True) for item in getattr(winner, "contributors", ()))
         detail = (f'<h2>{html.escape(selected)}</h2><p>Highest combined unusualness score</p>'
                   f'<div class="result-facts"><span><b>{winner.relative_score:.3f}</b>Relative score</span>'
-                  f'<span><b>{len(winner.view_ids)} / {len(session.views)}</b>Scored views</span>'
+                  f'<span><b>{len(winner.view_ids)} / {len(session.views)}</b>View support</span>'
+                  + confidence_text
                   + (f'<span><b>{used}</b>Fusion contributors</span>' if used else '') + '</div>')
     elif metadata.get("selection_status") == "tied" or (len(result.ranking) > 1 and math.isclose(
         result.ranking[0].relative_score, result.ranking[1].relative_score, abs_tol=1e-12, rel_tol=0)):
@@ -293,10 +298,16 @@ def summary_html(session: Session) -> str:
     recorded = result.provenance.get("input_source") == "recorded_development"
     recording = '<p class="evidence-origin">Recorded development example · inference was not run on these uploads.</p>' if recorded else ''
     source = correspondence_label(result)
+    if confidence_text and not selected:
+        detail += f'<p class="confidence-index">Ranking confidence index: {confidence:.3f}</p>'
+    missing = [f"View {i}" for i, view in enumerate(session.views, 1)
+               if selected and not any(o.box.view_id == view.view_id and o.box.identity_id == selected for o in result.observations)]
+    missing_note = (f'<p class="missing-link">Selected object not linked in {html.escape(", ".join(missing))}; this does not establish absence.</p>'
+                    if missing else '')
     return (f'<div class="result-card"><span class="state-pill {result.review_state}">{state}</span>'
             f'<span class="mode-label">{html.escape(result.mode.title())} · {html.escape(method_label(result))}</span>'
-            f'{recording}{detail}<p class="identity-source">{html.escape(source)}</p>'
-            '<p class="score-explanation">Scores compare these objects; they are not confidence probabilities.</p>'
+            f'{recording}{detail}<p class="identity-source">{html.escape(source)}</p>{missing_note}'
+            '<p class="score-explanation">The ranking confidence index measures score separation for review routing; it is not a correctness probability.</p>'
             f'<ul>{reasons}</ul></div>')
 
 
@@ -329,12 +340,25 @@ def export_report(session: Session, title: str) -> tuple[str, str]:
     discard_exports(session)
     session.export_directory = tempfile.mkdtemp(prefix="vpi-report-")
     directory = Path(session.export_directory)
+    selected = selected_identity(result)
+    selected_locations = [
+        {"view_id": o.box.view_id, "object_id": o.box.object_id, "box_xyxy": list(o.box.xyxy)}
+        for o in result.observations if selected and o.box.identity_id == selected
+    ]
+    matched_views = {row["view_id"] for row in selected_locations}
+    missing_links = [
+        {"view_id": view.view_id, "explanation": "Selected object not linked in this view; absence is not established."}
+        for view in session.views if selected and view.view_id not in matched_views
+    ]
     record = {
         "schema_version": "visual-peer-inspection-report/v2",
         "title": title[:120].strip() or "Untitled inspection",
         "mode": result.mode, "method_label": method_label(result),
         "correspondence": correspondence_label(result),
-        "selected_identity_id": selected_identity(result),
+        "selected_identity_id": selected,
+        "selected_locations": selected_locations,
+        "missing_links": missing_links,
+        "review_signals": export_metadata(result.provenance.get("review_signals", {})),
         "overlay_aliases": _session_aliases(session),
         "score_definitions": {
             "automatic_observation_score": "Mean within-view normalized rank of the available forward, P1 and P2 component scores.",
