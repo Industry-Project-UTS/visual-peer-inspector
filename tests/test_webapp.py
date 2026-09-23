@@ -60,6 +60,7 @@ class WebAppTests(unittest.TestCase):
             "result_ready",
             method_version="test-only",
             policy_version="test-only",
+            selected_identity_id="peer_a",
         )
 
     def test_upload_ids_are_stable_when_reordered_and_names_are_not_model_inputs(self):
@@ -136,7 +137,7 @@ class WebAppTests(unittest.TestCase):
         for bad in (
             replace(self.result, method_version=""),
             replace(self.result, policy_version=""),
-            replace(self.result, review_state="review_required"),
+            replace(self.result, review_state="review_recommended"),
             replace(self.result, ranking=()),
             replace(
                 self.result,
@@ -149,7 +150,7 @@ class WebAppTests(unittest.TestCase):
     def test_result_requires_review_reasons_and_accurate_mode(self):
         with self.assertRaisesRegex(InspectionError, "explain"):
             validate_result(
-                replace(self.result, review_state="review_recommended"),
+                replace(self.result, review_state="review_required"),
                 InspectionRequest(self.views),
             )
         request = InspectionRequest(self.views, tuple(o.box for o in self.observations))

@@ -19,7 +19,7 @@ MIN_VIEWS, MAX_VIEWS = 2, 5
 MAX_BYTES = 10 * 1024 * 1024
 MAX_PIXELS = 12_000_000
 TOKEN = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
-REVIEW_STATES = {"result_ready", "review_recommended", "insufficient_evidence"}
+REVIEW_STATES = {"result_ready", "review_required", "insufficient_evidence"}
 STAGES = (
     "Finding objects",
     "Creating masks",
@@ -271,6 +271,8 @@ def validate_result(result: InspectionResult, request: InspectionRequest) -> Non
         )
     if result.review_state == "result_ready" and not result.ranking:
         raise InspectionError("The inspection service returned no ranked objects.")
+    if result.review_state == "result_ready" and result.selected_identity_id is None:
+        raise InspectionError("A ready result must select one physical object.")
     validate_boxes([o.box for o in result.observations], request.views)
     sizes = {v.view_id: v.image.size for v in request.views}
     evidence: dict[str, set[str]] = {}

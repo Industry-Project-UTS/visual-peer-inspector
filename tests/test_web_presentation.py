@@ -40,7 +40,7 @@ class PhysicalObjectPresentationTests(unittest.TestCase):
                                   for o in self.observations)
         self.result = InspectionResult(
             (RankedObject("object_a", .8, tuple(v.view_id for v in self.views), self.contributors, "bank_top2/v1"),),
-            self.observations, "review_recommended", reasons=("Check object matches.",),
+            self.observations, "review_required", reasons=("Check object matches.",),
             method_version="bank_top2/v1", policy_version="test/v1",
             mode="assisted", selected_identity_id="object_a", cache_token="private-cache-handle",
             score_metadata={"selection_status": "unique", "method_label": "Cross-view object banks · strongest two views"},
@@ -151,6 +151,23 @@ class PhysicalObjectPresentationTests(unittest.TestCase):
         self.assertEqual(record["observations"][0]["p1_score"], .2)
         self.assertEqual(record["ranking"][0]["contributors"], list(self.contributors))
         self.assertEqual(record["provenance"]["nested"], {"runtime_seconds": 1.25})
+        self.assertEqual(len(record["selected_locations"]), 2)
+        self.assertEqual(record["missing_links"], [])
+
+    def test_report_names_missing_selected_link_and_ranking_confidence(self):
+        result = replace(self.result,
+            observations=self.observations[:1],
+            ranking=(replace(self.result.ranking[0], view_ids=(self.views[0].view_id,)),),
+            provenance={"review_signals": {"confidence": .42, "winner_support": 1, "view_count": 2}},
+        )
+        self.session.result = result
+        document, data = export_report(self.session, "Partial match")
+        record = json.loads(Path(data).read_text())
+        self.assertEqual(record["selected_locations"][0]["view_id"], self.views[0].view_id)
+        self.assertEqual(record["missing_links"][0]["view_id"], self.views[1].view_id)
+        self.assertIn("not linked", record["missing_links"][0]["explanation"])
+        self.assertIn("Ranking confidence index", Path(document).read_text())
+        self.assertIn("1 / 2", Path(document).read_text())
 
     def test_human_confirmation_is_not_dataset_correspondence(self):
         self.assertEqual(correspondence_label(self.result), "User-confirmed matches")

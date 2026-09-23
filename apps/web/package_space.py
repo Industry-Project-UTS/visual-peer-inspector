@@ -4,9 +4,11 @@ import argparse
 import hashlib
 import json
 import shutil
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "src"))
 
 
 def package(output: Path):
@@ -20,6 +22,8 @@ def package(output: Path):
         "src/vpi_object_bank/prediction.py",
         "src/visual_peer_inspector/web/decision.py",
         "src/visual_peer_inspector/web/session_cache.py",
+        "src/visual_peer_inspector/web/frozen_policy.py",
+        "src/visual_peer_inspector/web/frozen_review_policy.json",
     )
     missing = [name for name in required if not (ROOT / name).is_file()]
     if missing:
@@ -44,6 +48,10 @@ def package(output: Path):
         target = output / source.relative_to(ROOT)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
+    from visual_peer_inspector.web.frozen_policy import POLICY_SHA256
+    sealed = output / "src/visual_peer_inspector/web/frozen_review_policy.json"
+    if hashlib.sha256(sealed.read_bytes()).hexdigest() != POLICY_SHA256:
+        raise ValueError("Packaged review policy differs from sealed calibration policy.")
     for name in ("Dockerfile", "README.md", ".dockerignore"):
         shutil.copyfile(ROOT / "apps/web/space" / name, output / name)
     manifest = []

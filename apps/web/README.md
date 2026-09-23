@@ -27,8 +27,11 @@ Results contain consistent IDs where supported, all-candidate scores,
 forward/P1/P2 components, fusion contributors, boxes, SAM masks, objects on
 black, and coarse patch evidence. Tied leaders do not receive a unique selected
 box. A missing link is not proof that an object is absent. Scores are relative
-comparisons, not calibrated probabilities. Every usable result currently
-recommends review.
+comparisons, not correctness probabilities. The frozen calibration policy keeps
+automatic results in **Review required**. Assisted results can be **Result ready**
+only with confirmed object matches, a unique leader, support in every uploaded
+view, and a ranking confidence index meeting the fixed threshold for 2, 3 or 5
+views. Four-view inspections remain reviewable but cannot claim readiness.
 
 ## Local interface
 
@@ -92,7 +95,7 @@ and method/provenance fields without model tensors or server cache secrets.
 
 ```bash
 .venv/bin/python -m pip install -r apps/web/space/requirements-scoring.txt pytest==8.4.2
-PYTHONPATH=src GRADIO_ANALYTICS_ENABLED=False .venv/bin/python -m pytest tests/test_webapp.py tests/test_web_pipeline.py tests/test_web_two_mode.py tests/test_web_presentation.py tests/test_web_packaged_decision.py -q
+PYTHONPATH=src GRADIO_ANALYTICS_ENABLED=False .venv/bin/python -m pytest tests/test_webapp.py tests/test_web_pipeline.py tests/test_web_two_mode.py tests/test_web_presentation.py tests/test_web_packaged_decision.py tests/test_web_frozen_policy.py -q
 .venv/bin/python apps/web/check_deployment.py
 .venv/bin/python apps/web/package_space.py --output .local/huggingface-space
 ```
@@ -116,12 +119,14 @@ The selected methods come from a 100-scene development cohort with 27 asset
 groups. Automatic and supplied-correspondence results have separate denominators
 and labels in the report. Supplied correspondence is not evidence of reliable
 human identity confirmation, and a selected gallery is not evaluation accuracy.
-The original 1000/600/400 role assignment remains unchanged. The remaining
-notebooks require an exposure audit and compatible current-method adapters
-before protected results can be reported.
+The original 1000/600/400 role assignment remains unchanged. Development,
+calibration and internal-lock results have been preserved with their exposure
+qualifications; they are not an accuracy guarantee for arbitrary uploads.
 
-`pipeline_config.json` records fixed model revisions and method settings. Old external P1 review-policy envelopes are rejected because their thresholds
-do not apply to these two scoring modes. The current route uses the provisional
-review-all policy; a calibrated two-mode policy is not enabled. The UI/transport dataclasses are not a replacement for sealed research
-artifacts. An operator may set `VPI_BACKEND=module:factory` for another explicit
+`pipeline_config.json` records fixed model revisions and method settings. The
+deployable package includes a byte-verified copy of the sealed 09B two-mode
+review policy. The confidence index is a ranking-separation signal for review
+routing, not a probability that the selected object is correct. Old P1 policy
+envelopes are rejected. The UI/transport dataclasses are not a replacement for
+sealed research artifacts. An operator may set `VPI_BACKEND=module:factory` for another explicit
 adapter; web users cannot select arbitrary Python modules.

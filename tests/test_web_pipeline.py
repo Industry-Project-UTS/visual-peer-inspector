@@ -105,8 +105,8 @@ def test_real_cpu_pipeline_and_report_roundtrip(request_images, tmp_path):
     assert result.ranking[0].relative_score == result.ranking[1].relative_score
     assert result.selected_identity_id is None
     assert all(len(r.view_ids) == 1 for r in result.ranking)
-    assert result.review_state == "review_recommended"
-    assert result.policy_version == "provisional-review-all-v1"
+    assert result.review_state == "review_required"
+    assert result.policy_version == "calibration-selective-v1"
     assert stages == [
         "Finding objects",
         "Creating masks",
@@ -132,7 +132,10 @@ def test_real_cpu_pipeline_and_report_roundtrip(request_images, tmp_path):
     try:
         html, report = export_report(session, "Contract verification")
         assert Path(html).is_file()
-        assert json.loads(Path(report).read_text())["provenance"] == result.provenance
+        exported = json.loads(Path(report).read_text())
+        assert exported["provenance"] == result.provenance
+        assert exported["provenance"]["review_policy"]["sha256"] == result.provenance["review_policy"]["sha256"]
+        assert exported["mode"] == "automatic" and exported["correspondence"] == "Predicted matches"
     finally:
         discard_exports(session)
 
@@ -152,6 +155,30 @@ def test_assisted_boxes_keep_user_identities(request_images):
     assert {r.identity_id for r in result.ranking} == {
         f"my_identity_{i}" for i in range(3)
     }
+
+
+@pytest.mark.parametrize("view_count", [2, 3, 5])
+def test_frozen_policy_and_assisted_reranking_across_supported_view_counts(tmp_path, view_count):
+    paths = []
+    for index in range(view_count):
+        path = tmp_path / f"view_{index}.png"
+        Image.new("RGB", (256, 256), (80 + index * 15, 100, 120)).save(path)
+        paths.append(str(path))
+    request = InspectionRequest(load_views(paths))
+    models = PixelModels()
+    pipeline = UploadPipeline(models, cache_root=tmp_path / "cache")
+    automatic = pipeline.inspect(request, lambda _: None)
+    assert automatic.review_state in {"review_required", "insufficient_evidence"}
+    assert automatic.provenance["review_signals"]["view_count"] == view_count
+    corrections = tuple(replace(o.box, identity_id=o.box.object_id) for o in automatic.observations)
+    assisted = pipeline.inspect(replace(request, mode="assisted", corrections=corrections,
+                                        cache_token=automatic.cache_token), lambda _: None)
+    assert models.proposal_calls == view_count
+    assert assisted.provenance["cache"] == {"reused_candidates": 3 * view_count, "encoded_candidates": 0}
+    assert assisted.policy_version == "calibration-selective-v1"
+    assert assisted.provenance["review_signals"]["view_count"] == view_count
+    assert assisted.provenance["correspondence_source"] == "user_confirmed"
+    validate_result(assisted, replace(request, mode="assisted", corrections=corrections))
 
 
 @pytest.mark.parametrize("count", [0, 1, 2])
@@ -177,7 +204,7 @@ def test_one_missing_view_cannot_claim_multiview_support(request_images):
     result = UploadPipeline(
         PixelModels(zero_view=request_images.views[0].view_id)
     ).inspect(request_images, lambda _: None)
-    assert result.review_state == "insufficient_evidence"
+    assert result.review_state == "review_required"
     assert all(len(r.view_ids) == 1 for r in result.ranking)
 
 
@@ -219,25 +246,18 @@ def test_transport_rejects_path_escape(request_images, tmp_path):
         read_request(tmp_path)
 
 
-def test_review_policy_requires_exact_pipeline_binding(tmp_path):
-    from dataclasses import asdict
-
-    from visual_peer_inspector.review_policy import ReviewPolicy
+def test_review_policy_requires_exact_sealed_artifact(tmp_path):
+    from visual_peer_inspector.web.frozen_policy import POLICY_PATH, POLICY_SHA256
 
     path = tmp_path / "policy.json"
-    policy = ReviewPolicy(0.1, 0.6, 0.8)
-    value = {
-        "schema_version": "vpi-web-review-policy/v1",
-        "pipeline_sha256": "wrong",
-        "policy_configuration": asdict(policy),
-    }
-    path.write_text(json.dumps(value))
-    with pytest.raises(ValueError, match="different upload pipeline"):
-        load_review_policy(str(path))
-    value["pipeline_sha256"] = pipeline_fingerprint()
-    path.write_text(json.dumps(value))
+    path.write_bytes(POLICY_PATH.read_bytes())
     loaded, version = load_review_policy(str(path))
-    assert loaded == policy and policy.sha256 in version
+    assert loaded.source_sha256 == POLICY_SHA256 and version == "calibration-selective-v1"
+    value = json.loads(path.read_text())
+    value["version"] = "altered"
+    path.write_text(json.dumps(value))
+    with pytest.raises(ValueError, match="integrity hash"):
+        load_review_policy(str(path))
 
 
 def test_subprocess_complete_and_failure(request_images, monkeypatch):
@@ -298,6 +318,7 @@ def test_package_contains_only_code_and_pinned_runtime(tmp_path):
     assert not summary["uploaded"] and not summary["model_weights_included"]
     assert (output / "Dockerfile").is_file()
     assert (output / "src/visual_peer_inspector/web/pipeline_config.json").is_file()
+    assert (output / "src/visual_peer_inspector/web/frozen_review_policy.json").is_file()
     assert not (output / "tests").exists()
     assert not (output / "reports").exists()
     assert not list(output.rglob("*.pt")) and not list(output.rglob("*.safetensors"))
@@ -413,4 +434,4 @@ def test_subprocess_cpu_pipeline_runs_across_serialized_boundary(
     assert result.provenance["test_only"] is True
     assert result.ranking[0].score_method == 'winner_cluster_consensus'
     assert result.selected_identity_id is None
-    assert result.provenance["review_signals"]["insufficient_evidence"] is False
+    assert result.provenance["review_signals"]["ranked_count"] > 0
