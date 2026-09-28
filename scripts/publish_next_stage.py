@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Bounded aggregate-only tracking for prepared current09/10 evaluators."""
-from contextlib import redirect_stdout,redirect_stderr
+from contextlib import contextmanager,redirect_stdout,redirect_stderr
 from pathlib import Path
 import argparse
 import json
@@ -9,23 +9,35 @@ import sys
 
 import publish_clearml as tracking
 
-tracking.TABLES=frozenset({'metric_summary.csv','view_schedule_summary.csv','failure_summary.csv',
+CURRENT_TABLES=frozenset({'metric_summary.csv','view_schedule_summary.csv','failure_summary.csv',
     'identity_summary.csv','anomaly_count_summary.csv','majority_summary.csv','evaluation_receipt.json'})
-tracking.FIGURES=frozenset({'failure_breakdown.png','candidate_coverage.png','identity_quality.png','identity_fragmentation.png','schedule_sensitivity.png'}) | frozenset({name+'.png' for name in ('top1_tie_expected','ap_tie_expected','recall_at_2_tie_expected','reciprocal_rank_tie_expected')})
+CURRENT_FIGURES=frozenset({'failure_breakdown.png','candidate_coverage.png','identity_quality.png','identity_fragmentation.png','schedule_sensitivity.png'}) | frozenset({name+'.png' for name in ('top1_tie_expected','ap_tie_expected','recall_at_2_tie_expected','reciprocal_rank_tie_expected')})
+
+
+@contextmanager
+def current_allowlist():
+    """Scope the current-stage allowlist without changing other publishers."""
+    previous_tables, previous_figures = tracking.TABLES, tracking.FIGURES
+    tracking.TABLES, tracking.FIGURES = CURRENT_TABLES, CURRENT_FIGURES
+    try:
+        yield
+    finally:
+        tracking.TABLES, tracking.FIGURES = previous_tables, previous_figures
 
 
 def verify_publication(stage, evaluation_root, report_root):
     """Validate aggregate-only science/report compatibility without any service call."""
     evaluation_root,report_root=Path(evaluation_root),Path(report_root)
-    evaluation,_=tracking.verified_lock(evaluation_root,'evaluation_lock.json')
-    report,_=tracking.verified_lock(report_root,'report_lock.json')
-    if 'run_binding.json' not in evaluation['files'] or 'run_binding.json' not in report['files']:
-        raise ValueError('Scientific publication locks omit their input bindings')
-    if tracking.read_receipt(evaluation_root/'run_binding.json').get('stage')!=stage:
-        raise ValueError('Publication stage differs from completed scientific computation')
-    if tracking.read_receipt(report_root/'run_binding.json').get('evaluation_lock_sha256')!=tracking.digest(evaluation_root/'evaluation_lock.json'):
-        raise ValueError('Report figures belong to different scientific results')
-    return tracking.collect_artifacts(evaluation_root,evaluation_root/'shareable','evaluation_lock.json',report_root)
+    with current_allowlist():
+        evaluation,_=tracking.verified_lock(evaluation_root,'evaluation_lock.json')
+        report,_=tracking.verified_lock(report_root,'report_lock.json')
+        if 'run_binding.json' not in evaluation['files'] or 'run_binding.json' not in report['files']:
+            raise ValueError('Scientific publication locks omit their input bindings')
+        if tracking.read_receipt(evaluation_root/'run_binding.json').get('stage')!=stage:
+            raise ValueError('Publication stage differs from completed scientific computation')
+        if tracking.read_receipt(report_root/'run_binding.json').get('evaluation_lock_sha256')!=tracking.digest(evaluation_root/'evaluation_lock.json'):
+            raise ValueError('Report figures belong to different scientific results')
+        return tracking.collect_artifacts(evaluation_root,evaluation_root/'shareable','evaluation_lock.json',report_root)
 
 
 def main():
@@ -55,8 +67,9 @@ def main():
         try:
             with open(os.devnull,'w') as sink,redirect_stdout(sink),redirect_stderr(sink):
                 verify_publication(args.stage,args.evaluation_root,args.report_root)
-                receipt=tracking.publish(args.evaluation_root,args.evaluation_root/'shareable',args.receipt,
-                    report_root=args.report_root,task_name=f'{args.stage.upper()} current frozen multi-view evaluation')
+                with current_allowlist():
+                    receipt=tracking.publish(args.evaluation_root,args.evaluation_root/'shareable',args.receipt,
+                        report_root=args.report_root,task_name=f'{args.stage.upper()} current frozen multi-view evaluation')
         except BaseException as error:
             receipt=tracking.read_receipt(args.receipt)
             receipt.update(status='pending',error_type=type(error).__name__)

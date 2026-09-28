@@ -24,6 +24,10 @@ ACTIVE={'submitted','submission_requested','submission_uncertain','running','que
 STATUSES=ACTIVE|{COMPLETE,'failed'}
 
 
+class KaggleCapacityError(RuntimeError):
+    """Kaggle rejected a GPU submission before creating a kernel."""
+
+
 def _hash(value):return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 def _file_hash(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def _sha(value):return isinstance(value,str) and re.fullmatch('[0-9a-f]{64}',value) is not None
@@ -126,6 +130,11 @@ def _queue_lock(root):
 
 def _command(args,timeout=120):
     result=subprocess.run(args,capture_output=True,text=True,timeout=timeout)
+    if args[1:3]==['kernels','push'] and any(
+        'kernel push error: maximum batch gpu session count' in output.lower()
+        for output in (result.stdout,result.stderr)
+    ):
+        raise KaggleCapacityError('Kaggle GPU capacity is full; retry when a slot opens')
     if result.returncode:raise RuntimeError('Kaggle command failed; queue will require reconciliation')
     return result.stdout
 
@@ -155,6 +164,8 @@ def submit_next(root,job_id=None,source_manifest=None):
         job=ready[0];record={'status':'submission_requested',**state['prepared_jobs'][job['id']]}
         state['jobs'][job['id']]=record;atomic_json(path,state)
         try:_command(['kaggle','kernels','push','-p',str(root/job['id'])],timeout=180)
+        except KaggleCapacityError:
+            del state['jobs'][job['id']];atomic_json(path,state);raise
         except BaseException:
             record['status']='submission_uncertain';atomic_json(path,state);raise
         record['status']='submitted';atomic_json(path,state)

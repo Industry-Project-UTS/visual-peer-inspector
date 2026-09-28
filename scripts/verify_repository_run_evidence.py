@@ -172,7 +172,12 @@ def verify() -> dict[str, int]:
         ):
             raise EvidenceVerificationError(f"Unsafe execution transcript: {path}")
 
-    clearml_receipts = sorted((EVIDENCE_ROOT / "clearml").glob("*.json"))
+    evidence_manifest = json.loads((EVIDENCE_ROOT / "evidence_manifest.json").read_text())
+    clearml_receipts = sorted(
+        ROOT / row["path"]
+        for row in evidence_manifest["files"]
+        if row["path"].startswith("reports/run-evidence/clearml/")
+    )
     if len(clearml_receipts) != EXPECTED_CLEARML_RECEIPTS:
         raise EvidenceVerificationError("ClearML receipt count differs")
     for path in clearml_receipts:

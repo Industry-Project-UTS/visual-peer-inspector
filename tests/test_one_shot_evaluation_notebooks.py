@@ -54,7 +54,8 @@ def test_10b_keeps_official_roles_and_provenance_separate():
 
 def test_current_tracking_uses_scientific_and_report_lock_bindings():
     source=(ROOT/'scripts/publish_next_stage.py').read_text()
-    assert 'tracking.verified_lock' in source and 'tracking.TABLES=frozenset' in source
+    assert 'tracking.verified_lock' in source and 'CURRENT_TABLES=frozenset' in source
+    assert 'with current_allowlist():' in source
     assert 'evaluation_lock_sha256' in source and 'timeout=180' in source
 
 

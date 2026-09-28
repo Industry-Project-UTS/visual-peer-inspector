@@ -49,46 +49,39 @@ compact.addEventListener('change', () => {
 
 def app_header(connected: bool) -> gr.HTML:
     status = (
-        "Models load when you start an inspection. Run details are included in the report."
+        "Inspection is ready. Models load when you start."
         if connected
-        else "These models are not connected to this app yet."
+        else "Preview mode: add images to see the flow. Inspection needs a model worker."
     )
-    pipeline_label = "Inspection pipeline" if connected else "Planned pipeline"
+    pipeline_label = "Ready" if connected else "Preview mode"
     return gr.HTML(
         f"""
         <header class="app-header">
-          <h1>Visual Peer Inspector</h1>
-          <button id="pipeline-toggle" type="button" aria-controls="pipeline-panel"
-                  aria-expanded="false">How it works</button>
+          <div class="header-copy">
+            <h1>Visual Peer Inspector</h1>
+            <p>Compare objects across multiple views of the same scene.</p>
+          </div>
+          <div class="header-actions">
+            <span class="connection-status">{pipeline_label}</span>
+            <button id="pipeline-toggle" type="button" aria-controls="pipeline-panel"
+                    aria-expanded="false">How it works</button>
+          </div>
         </header>
         <dialog id="pipeline-panel" aria-labelledby="pipeline-title">
           <div class="pipeline-heading">
             <h2 id="pipeline-title">How it works</h2>
             <button id="pipeline-close" type="button" autofocus>Close</button>
           </div>
-          <p class="pipeline-status">{pipeline_label}</p>
           <p class="pipeline-intro">{status}</p>
           <ol class="pipeline-steps">
-            <li><h3>Find objects</h3>
-              <p>Locate each object in every image.</p>
-              <span>LocateAnything-3B</span></li>
-            <li><h3>Create masks</h3>
-              <p>Separate each object from its background.</p>
-              <span>SAM 2.1 Hiera-large</span></li>
-            <li><h3>Extract features</h3>
-              <p>Represent the appearance of each object.</p>
-              <span>DINOv2-small</span></li>
-            <li><h3>Compare peers</h3>
-              <p>Rank objects by how different they look from similar objects.</p>
-              <span>Automatic: forward, P1 and P2 scores<br>Assisted: cross-view object banks</span></li>
-            <li><h3>Combine views</h3>
-              <p>Automatic uses winner consensus. Assisted combines the two strongest usable views after you confirm object identities.</p>
-              <span>Shared IDs mean the same physical object</span></li>
+            <li><h3>Photograph one group</h3><p>Add 2–5 views of the same arrangement.</p></li>
+            <li><h3>Inspect the views</h3><p>The app locates objects and combines evidence into one ranking.</p></li>
+            <li><h3>Check the matches</h3><p>Review which boxes show the same physical object. Assisted mode lets you confirm these links.</p></li>
+            <li><h3>Record and save</h3><p>Make your own physical finding, then download a case ZIP and report.</p></li>
           </ol>
-          <p class="pipeline-note">Unusual does not always mean defective.
-            Check suggested matches in Review; leave uncertain IDs blank.
-            You do not label the unusual object. Editing only IDs reuses saved features.
-            Tied scores have no unique selection.</p>
+          <p class="pipeline-note">The vision stages use LocateAnything-3B, SAM 2.1 and DINOv2-small.
+            Unusual does not always mean defective. A tie has no unique selection.
+            The model ranking and your decision are saved separately.</p>
         </dialog>
         """,
         js_on_load=PANEL_JS,

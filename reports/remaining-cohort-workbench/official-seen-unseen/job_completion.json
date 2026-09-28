@@ -1,0 +1,11 @@
+{
+  "full_download_verified": false,
+  "job_id": "10b",
+  "outputs": {
+    "10b": "96aeb1b72e634a166358b79a96595be893d600a27d44963e9f326a09a375f37b"
+  },
+  "plan_sha256": "7ee6275414f621e9f81f22c6a0c49ba2b5c6f3de533f7f4c5b5b153e344b4b65",
+  "schema": "vpi-current-job-completion/v1",
+  "source_snapshot_sha256": "83523f38e98e8b5d92bc632cc56bbd0087c44d18bf1613c9742e098ebea11f26",
+  "status": "outputs_complete"
+}
