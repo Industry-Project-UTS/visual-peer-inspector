@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import os
 from pathlib import Path
 from uuid import uuid4
 
@@ -21,15 +22,37 @@ from .core import (
     parse_corrections,
     validate_result,
 )
+from .case import (
+    ACTIONS,
+    SEPARATION_NOTE,
+    case_banner_html,
+    case_details_html,
+    case_status,
+    decision_card_html,
+    decision_choices,
+    ensure_case,
+    follow_up_html,
+    log,
+    new_case,
+    open_case,
+    opened_case_html,
+    record_decision,
+    record_inspection,
+    save_case,
+    start_follow_up,
+    timeline_html,
+    update_details,
+)
 from .help_panel import app_header
+from .groq_explanation import ExplanationUnavailable, explain_result
 from .presentation import (
     RANK_HEADERS,
     SCORE_HEADERS,
     discard_exports,
     draw_boxes,
     evidence_gallery,
-    export_report,
     identity_aliases,
+    object_board_html,
     observation_rows,
     ranking_rows,
     summary_html,
@@ -38,6 +61,7 @@ from .presentation import (
 CSS = Path(__file__).with_name("styles.css").read_text(encoding="utf-8")
 LOG = logging.getLogger(__name__)
 HEADERS = ["View ID", "Object ID", "Identity ID", "Left", "Top", "Right", "Bottom"]
+DECISION_HINT = '<p class="empty-notice">Run an inspection, check the items physically, then record your decision here.</p>'
 
 
 def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
@@ -50,29 +74,29 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             clear(current.session_id, current.cache_token)
 
     theme = gr.themes.Base(
-        primary_hue="teal",
-        secondary_hue="indigo",
-        neutral_hue="gray",
-        font=["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        primary_hue="orange",
+        secondary_hue="red",
+        neutral_hue="stone",
+        font=["Avenir Next", "IBM Plex Sans", "ui-sans-serif", "system-ui", "sans-serif"],
     ).set(
-        body_background_fill="#ffffff",
-        body_background_fill_dark="#ffffff",
-        block_background_fill="#ffffff",
-        block_background_fill_dark="#ffffff",
-        body_text_color="#202124",
-        body_text_color_dark="#202124",
-        button_primary_background_fill="#0f766e",
-        button_primary_background_fill_dark="#0f766e",
+        body_background_fill="#fbf9f7",
+        body_background_fill_dark="#fbf9f7",
+        block_background_fill="#fffdfb",
+        block_background_fill_dark="#fffdfb",
+        body_text_color="#2a1110",
+        body_text_color_dark="#2a1110",
+        button_primary_background_fill="#680904",
+        button_primary_background_fill_dark="#680904",
         button_primary_text_color="#ffffff",
         button_primary_text_color_dark="#ffffff",
-        block_border_color="#e3e3e6",
-        block_border_color_dark="#e3e3e6",
-        input_background_fill="#ffffff",
-        input_background_fill_dark="#ffffff",
-        input_border_color="#dedee2",
-        input_border_color_dark="#dedee2",
-        input_radius="8px",
-        block_radius="10px",
+        block_border_color="#efd2ca",
+        block_border_color_dark="#efd2ca",
+        input_background_fill="#fffdfb",
+        input_background_fill_dark="#fffdfb",
+        input_border_color="#e9c9c0",
+        input_border_color_dark="#e9c9c0",
+        input_radius="10px",
+        block_radius="14px",
     )
     with gr.Blocks(
         title="Visual Peer Inspector", analytics_enabled=False, delete_cache=(60, 1800)
@@ -80,19 +104,37 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
         session = gr.State(
             Session(), time_to_live=1800, delete_callback=dispose_session
         )
+        # A reopened case is kept apart from the live session and never reaches a backend.
+        opened = gr.State(None, time_to_live=1800)
         app_header(connected)
         with gr.Tabs(selected="scene", elem_id="inspection-tabs") as tabs:
             with gr.Tab("Images", id="scene"):
                 gr.HTML(
-                    '<div class="section-intro"><h2>Add your images</h2><p>Upload 2–5 photos of the same scene from different angles.</p></div>'
+                    '<div class="section-intro"><h2>New inspection</h2><p>Upload 2–5 clear images of the same group of objects from different angles.</p></div>'
                 )
+                with gr.Row(elem_id="case-details"):
+                    item = gr.Textbox(
+                        label="What are you inspecting?", placeholder="e.g. a group of 500 ml bottles",
+                        max_length=120, max_lines=1, elem_id="case-item", scale=2, min_width=200,
+                    )
+                    operator = gr.Textbox(label="Your name (for the final decision)", max_length=80, max_lines=1, elem_id="case-operator", min_width=160)
+                with gr.Accordion("Reference details (optional)", open=False, elem_id="case-extra"):
+                    case_id = gr.Textbox(label="Case ID", max_length=40, max_lines=1, elem_id="case-id", min_width=160)
+                    batch = gr.Textbox(
+                        label="Batch or reference (optional)", max_length=80, max_lines=1, elem_id="case-batch", min_width=160
+                    )
+                with gr.Row(elem_id="case-actions"):
+                    case_banner = gr.HTML("", elem_id="case-banner")
+                    new_case_button = gr.Button(
+                        "Start new case", size="sm", elem_id="new-case-button", scale=0, min_width=130
+                    )
                 files = gr.File(
                     label="Images",
                     show_label=False,
                     file_count="multiple",
                     file_types=[".jpg", ".jpeg", ".png", ".webp"],
                     type="filepath",
-                    height=190,
+                    height="auto",
                     elem_id="upload-zone",
                 )
                 gr.Markdown(
@@ -103,18 +145,19 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 previews = gr.Gallery(
                     label="Your views",
                     columns=3,
-                    height=240,
+                    height="auto",
                     object_fit="contain",
                     interactive=False,
                     buttons=["fullscreen"],
                     visible=False,
+                    elem_id="view-previews",
                 )
                 mode = gr.Radio(
                     choices=[("Automatic", "automatic"), ("Assisted", "assisted")],
                     value="automatic", label="Inspection mode", elem_id="inspection-mode",
                 )
                 gr.Markdown(
-                    "Automatic combines predicted object evidence. Assisted lets you check which objects match before combining their scores.",
+                    "Automatic uses predicted matches. Assisted asks you to confirm which boxes show the same physical object before ranking.",
                     elem_classes="quiet",
                 )
                 with gr.Row(elem_id="image-actions"):
@@ -149,6 +192,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 with gr.Column(
                     visible=False, elem_id="result-controls"
                 ) as result_controls:
+                    board = gr.HTML("", elem_id="object-board")
                     with gr.Row():
                         identity = gr.Dropdown(
                             label="Object",
@@ -165,32 +209,53 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     evidence = gr.Gallery(
                         label="Evidence by view",
                         columns=2,
-                        height=420,
+                        height="auto",
                         object_fit="contain",
                         interactive=False,
                         buttons=["fullscreen"],
-                    )
-                    rankings = gr.Dataframe(
-                        headers=RANK_HEADERS,
-                        datatype=["number", "str", "number", "str", "str"],
-                        value=[],
-                        interactive=False,
-                        label="Object ranking",
-                        type="array",
-                    )
-                    scores = gr.Dataframe(
-                        headers=SCORE_HEADERS,
-                        datatype=["str", "str", "str", "str", "number", "number", "str", "str"],
-                        value=[], interactive=False, label="Scores in each view", type="array",
+                        elem_id="result-evidence",
                     )
                     gr.Markdown(
-                        "Scores describe relative unusualness, not probability. Heatmaps are coarse feature evidence. “Not linked” means there is no supported match in that view.",
+                        "Scores compare objects; they are not probabilities. A missing link means the app could not match that object in a view. Masks show objects and heatmaps show coarse evidence, not defect outlines.",
                         elem_classes="quiet",
                     )
-                    gr.Markdown(
-                        "**Observation scores:** Automatic averages the normalized ranks of its component scores. Assisted measures patch mismatch against other confirmed objects. Within-view ranks are used to combine views. Compact labels on images map to the full object IDs in the tables.",
-                        elem_classes="quiet",
-                    )
+                    with gr.Accordion("Explain the ranking (optional)", open=False, elem_id="explanation-panel"):
+                        gr.Markdown(
+                            "Clicking sends only anonymous score summaries and view counts to Groq. Photos, case details and decisions stay here. This explanation cannot change the ranking.",
+                            elem_classes="quiet",
+                        )
+                        explain_button = gr.Button(
+                            "Write a short explanation",
+                            interactive=bool(os.environ.get("GROQ_API_KEY")),
+                            elem_id="explain-button",
+                        )
+                        explanation = gr.Textbox(
+                            label="Explanation",
+                            interactive=False,
+                            lines=3,
+                            max_lines=6,
+                            elem_id="explanation-text",
+                        )
+                        if not os.environ.get("GROQ_API_KEY"):
+                            gr.Markdown("Optional explanation is unavailable until Groq is configured.", elem_classes="quiet")
+                    with gr.Accordion("Score tables and components", open=False, elem_id="score-details"):
+                        rankings = gr.Dataframe(
+                            headers=RANK_HEADERS,
+                            datatype=["number", "str", "number", "str", "str"],
+                            value=[],
+                            interactive=False,
+                            label="Object ranking",
+                            type="array",
+                        )
+                        scores = gr.Dataframe(
+                            headers=SCORE_HEADERS,
+                            datatype=["str", "str", "str", "str", "number", "number", "str", "str"],
+                            value=[], interactive=False, label="Scores in each view", type="array",
+                        )
+                        gr.Markdown(
+                            "**Observation scores:** Automatic averages the normalized ranks of its component scores. Assisted measures patch mismatch against other confirmed objects. Within-view ranks are used to combine views. Compact labels on images map to the full object IDs in the tables.",
+                            elem_classes="quiet",
+                        )
             with gr.Tab("Review", id="review"):
                 review_notice = gr.Markdown(
                     "Run an inspection to review and correct objects.",
@@ -204,8 +269,9 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     )
                     review_evidence = gr.Gallery(
                         label="Proposed object identities · check before confirming",
-                        columns=3, height=300, object_fit="contain", interactive=False,
+                        columns=3, height="auto", object_fit="contain", interactive=False,
                         buttons=["fullscreen"],
+                        elem_id="review-evidence",
                     )
                     review_view = gr.Dropdown(
                         label="View", choices=[], interactive=False
@@ -257,6 +323,40 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     rerun = gr.Button(
                         "Confirm identities and rerank", interactive=False, variant="primary"
                     )
+            with gr.Tab("Decision", id="decision"):
+                decision_case = gr.HTML("", elem_id="decision-case")
+                decision_notice = gr.HTML(
+                    DECISION_HINT
+                )
+                with gr.Column(visible=False, elem_id="decision-controls") as decision_controls:
+                    with gr.Row(elem_id="decision-records", equal_height=False):
+                        machine_card = gr.HTML("", elem_id="machine-card", min_width=280)
+                        human_card = gr.HTML("", elem_id="human-card", min_width=280)
+                    gr.HTML(
+                        '<div class="section-intro compact"><h2>Record your finding</h2><p>'
+                        + SEPARATION_NOTE + '</p></div>'
+                    )
+                    decision_object = gr.Dropdown(
+                        label="Object your finding refers to", choices=[], value=None, elem_id="decision-object"
+                    )
+                    decision_action = gr.Radio(
+                        choices=[(label, code) for code, label in ACTIONS.items()], value=None,
+                        label="Action", elem_id="decision-action",
+                    )
+                    finding = gr.Textbox(
+                        label="Finding", placeholder="What did you observe on the item?", max_length=300, lines=2, max_lines=4,
+                        elem_id="decision-finding",
+                    )
+                    reason = gr.Textbox(
+                        label="Reason", placeholder="Why this action?", max_length=300, lines=2, max_lines=4, elem_id="decision-reason"
+                    )
+                    responsible = gr.Textbox(
+                        label="Responsible person (optional)", max_length=80, max_lines=1, elem_id="decision-responsible"
+                    )
+                    record = gr.Button("Record decision", variant="primary", elem_id="record-decision")
+                    decision_status = gr.Markdown("", elem_id="decision-status")
+                follow_up_panel = gr.HTML("", elem_id="follow-up-panel")
+                timeline = gr.HTML("", elem_id="case-timeline")
             with gr.Tab("Report", id="report"):
                 report_note = gr.Markdown(
                     "Run an inspection to create a report.", elem_classes="empty-notice"
@@ -265,22 +365,67 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     visible=False, elem_id="report-controls"
                 ) as report_controls:
                     title = gr.Textbox(
-                        label="Report name (optional)",
-                        placeholder="Untitled inspection",
+                        label="Report title (optional)",
+                        placeholder="Defaults to the case ID",
                         max_length=120,
                     )
                     export = gr.Button(
-                        "Prepare report", interactive=False, variant="primary"
+                        "Save case and report", interactive=False, variant="primary"
                     )
                     gr.Markdown(
-                        "Includes images, scores and review notes. Open the HTML report to print or save as PDF.",
+                        "Download the ZIP to reopen this case later. The HTML report is for reading or printing; JSON contains the result without images.",
                         elem_classes="quiet",
+                    )
+                    case_file = gr.File(
+                        label="Inspection case file", interactive=False, visible=False
                     )
                     report_file = gr.File(
                         label="HTML report", interactive=False, visible=False
                     )
                     json_file = gr.File(
                         label="JSON result", interactive=False, visible=False
+                    )
+            with gr.Tab("Saved cases", id="cases"):
+                gr.HTML(
+                    '<div class="section-intro"><h2>Open a saved case</h2><p>Upload a case ZIP you downloaded earlier. It opens for review without running the models again.</p></div>'
+                )
+                case_upload = gr.File(
+                    label="Saved case file (.zip)", file_count="single", file_types=[".zip"],
+                    type="filepath", elem_id="case-upload",
+                )
+                opened_status = gr.Markdown("", elem_id="opened-status")
+                with gr.Column(visible=False, elem_id="opened-case") as opened_view:
+                    opened_header = gr.HTML("")
+                    with gr.Row(equal_height=False, elem_id="opened-records"):
+                        opened_machine = gr.HTML("", min_width=280)
+                        opened_human = gr.HTML("", min_width=280)
+                    opened_follow_up = gr.HTML("")
+                    opened_board = gr.HTML("")
+                    with gr.Accordion("Evidence layers and score tables", open=False):
+                        opened_layer = gr.Radio(
+                            ["Boxes", "Masks", "Objects on black", "Heatmaps", "Original"],
+                            value="Boxes", label="Show",
+                        )
+                        opened_evidence = gr.Gallery(
+                            label="Saved evidence by view", columns=2, height="auto", object_fit="contain",
+                            interactive=False, buttons=["fullscreen"], elem_id="opened-evidence",
+                        )
+                        opened_rankings = gr.Dataframe(
+                            headers=RANK_HEADERS, datatype=["number", "str", "number", "str", "str"],
+                            value=[], interactive=False, label="Object ranking", type="array",
+                        )
+                        opened_scores = gr.Dataframe(
+                            headers=SCORE_HEADERS,
+                            datatype=["str", "str", "str", "str", "number", "number", "str", "str"],
+                            value=[], interactive=False, label="Scores in each view", type="array",
+                        )
+                    opened_timeline = gr.HTML("")
+                    follow_up_button = gr.Button(
+                        "Start a follow-up inspection", variant="primary", elem_id="follow-up-button"
+                    )
+                    gr.Markdown(
+                        "Starts a new case linked to this one and clears any unsaved inspection. Photograph the full group of items again; scores from the two cases are not compared.",
+                        elem_classes="quiet",
                     )
         gr.HTML(
             '<footer class="app-footer">Temporary uploads are cleared after 30 minutes.</footer>'
@@ -297,6 +442,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             evidence,
             rankings,
             scores,
+            explanation,
             review_evidence,
             review_view,
             review_image,
@@ -310,7 +456,31 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             report_note,
             report_file,
             json_file,
+            case_file,
+            board,
+            decision_notice,
+            decision_controls,
+            machine_card,
+            decision_object,
+            decision_status,
+            case_banner,
+            decision_case,
+            human_card,
+            follow_up_panel,
+            timeline,
         ]
+        case_fields = [case_id, item, batch, operator]
+        case_outputs = [case_banner, decision_case, human_card, follow_up_panel, timeline]
+
+        def case_view(current, message=""):
+            case = ensure_case(current)
+            return {
+                case_banner: case_banner_html(case, message),
+                decision_case: case_details_html(case),
+                human_card: decision_card_html(case, current.result),
+                follow_up_panel: follow_up_html(case, current.result),
+                timeline: timeline_html(case),
+            }
 
         def empty_results():
             return {
@@ -318,6 +488,13 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 review_controls: gr.update(visible=False),
                 report_controls: gr.update(visible=False),
                 review_notice: gr.update(visible=True),
+                board: "",
+                decision_notice: DECISION_HINT,
+                decision_controls: gr.update(visible=False),
+                machine_card: "",
+                decision_object: gr.update(choices=[], value=None),
+                decision_status: "",
+                case_file: gr.update(value=None, visible=False),
                 overview: summary_html(Session()),
                 identity: gr.update(
                     choices=["All objects"], value="All objects", interactive=False
@@ -326,6 +503,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 evidence: [],
                 rankings: [],
                 scores: [],
+                explanation: "",
                 review_evidence: [],
                 review_view: gr.update(choices=[], value=None, interactive=False),
                 review_image: None,
@@ -350,10 +528,15 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             *result_outputs,
         ]
 
-        def prepare_uploads(paths, current):
+        def prepare_uploads(paths, current, *details):
             selected_mode = current.mode
+            if details:
+                apply_details(current, details)
+            case = ensure_case(current)
             dispose_session(current)
-            current = Session(mode=selected_mode)
+            # New photos start a new capture within the same case.
+            current = Session(mode=selected_mode, case=case)
+            case.model_boxes = {}
             message = ""
             try:
                 current.views = load_views(paths)
@@ -362,11 +545,13 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     message = f"**{count} / 5 images added.** " + (
                         "Add one more view to continue." if count < MIN_VIEWS else ""
                     )
+                    log(case, f"Photos loaded: {count} view{'s' if count != 1 else ''}")
             except InspectionError as error:
                 message = f"**Check your images.** {error}"
             ready = len(current.views) >= MIN_VIEWS
             return {
                 **empty_results(),
+                **case_view(current),
                 session: current,
                 previews: gr.update(
                     value=[
@@ -381,12 +566,61 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             }
 
         def start_over(current):
+            if current.views:
+                log(ensure_case(current), "Photos cleared")
             return {
                 **prepare_uploads(None, current),
                 files: None,
                 title: "",
                 tabs: gr.update(selected="scene"),
             }
+
+        def fresh_case(current, case):
+            output = start_over(current)
+            fresh = output[session]
+            fresh.case = case
+            return {
+                **output,
+                **case_view(fresh),
+                case_id: case.case_id,
+                item: case.item,
+                batch: case.batch,
+                operator: case.operator,
+            }
+
+        def start_new_case(current, *details):
+            # Keep the operator name; everything else belongs to the previous case.
+            if details:
+                apply_details(current, details)
+            return fresh_case(current, new_case(operator=current.case.operator if current.case else ""))
+
+        def initialise(current):
+            case = ensure_case(current)
+            return {
+                session: current,
+                case_id: case.case_id,
+                item: case.item,
+                batch: case.batch,
+                operator: case.operator,
+                **case_view(current),
+            }
+
+        def apply_details(current, values):
+            """Store the case fields as shown; an invalid case ID keeps the previous one."""
+            case = ensure_case(current)
+            try:
+                update_details(case, *values)
+            except InspectionError as error:
+                try:
+                    update_details(case, case.case_id, *values[1:])
+                except InspectionError:
+                    pass
+                return str(error)
+            return ""
+
+        def edit_case(current, *values):
+            message = apply_details(current, values)
+            return {session: current, case_id: current.case.case_id, **case_view(current, message)}
 
         def change_mode(current, value):
             current.mode = value
@@ -430,6 +664,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             current.active_request_id = request.request_id
             yield {
                 **empty_results(),
+                **case_view(current),
                 session: current,
                 readiness: "Inspection in progress…",
                 inspect: gr.update(interactive=False),
@@ -453,6 +688,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 validate_result(result, request)
                 current.result = result
                 current.cache_token = result.cache_token or current.cache_token
+                record_inspection(ensure_case(current), result, len(current.views), corrected)
                 suggestions = {
                     (row["view_id"], row["candidate_id"]): row.get("identity_id", "")
                     for row in result.score_metadata.get("suggested_identities", [])
@@ -483,6 +719,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     evidence: evidence_gallery(current, selected, "Boxes"),
                     rankings: ranking_rows(current),
                     scores: observation_rows(current),
+                    explanation: "",
                     review_evidence: review_gallery(current, current.corrections),
                     review_view: gr.update(
                         choices=[
@@ -500,7 +737,14 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     confirmed: gr.update(value=False, interactive=True),
                     rerun: gr.update(interactive=False),
                     export: gr.update(interactive=True),
-                    report_note: f"Ready to export this {result.mode} inspection.",
+                    report_note: f"Ready to save this {result.mode} inspection with its case record.",
+                    board: object_board_html(current),
+                    decision_notice: "",
+                    decision_controls: gr.update(visible=True),
+                    machine_card: summary_html(current),
+                    decision_object: gr.update(choices=decision_choices(result), value=None),
+                    decision_status: "",
+                    **case_view(current),
                     tabs: gr.update(selected="review" if request.decision_mode == "assisted" and corrected is None else "results"),
                 }
             except Exception as error:  # noqa: BLE001 - contain failures at the backend boundary
@@ -516,6 +760,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 )
                 yield {
                     **empty_results(),
+                    **case_view(current),
                     session: current,
                     readiness: message
                     if isinstance(error, InspectionCancelled)
@@ -624,16 +869,108 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             current.pending_corner = None
             return current, "Drawing cancelled. Click a first corner to start again."
 
-        def download(current, name):
+        saved_outputs = [report_file, json_file, case_file]
+
+        def record_finding(current, case_id_value, item_value, batch_value, operator_value,
+                           scope, action, finding_text, reason_text, responsible_text):
+            if current.result is None:
+                raise gr.Error("Run an inspection before recording a decision.")
+            case = ensure_case(current)
+            try:
+                update_details(case, case_id_value, item_value, batch_value, operator_value)
+                record_decision(case, current.result, action=action, finding=finding_text, reason=reason_text,
+                                object_scope=scope, responsible=responsible_text)
+            except InspectionError as error:
+                raise gr.Error(str(error)) from error
+            # Earlier downloads no longer contain the latest human record.
+            discard_exports(current)
+            return {
+                session: current,
+                **case_view(current),
+                **{component: gr.update(value=None, visible=False) for component in saved_outputs},
+                report_note: "Save the case again to include your latest decision.",
+                decision_object: gr.update(value=None),
+                decision_action: None,
+                finding: "",
+                reason: "",
+                responsible: "",
+                decision_status: "Decision recorded. It is stored separately from the model result.",
+            }
+
+        def save_case_files(current, name, *details):
             if current.result is None:
                 raise gr.Error("Run an inspection before preparing a report.")
-            report, data = export_report(current, name)
-            return (
-                current,
-                gr.update(value=report, visible=True),
-                gr.update(value=data, visible=True),
-                "Report ready. Downloads include the current result and review notes.",
-            )
+            case = ensure_case(current)
+            try:
+                update_details(case, *details)
+                report, data, bundle = save_case(current, name)
+            except InspectionError as error:
+                raise gr.Error(str(error)) from error
+            return {
+                session: current,
+                case_file: gr.update(value=bundle, visible=True),
+                report_file: gr.update(value=report, visible=True),
+                report_note: f"Case {case.case_id} saved · {case_status(case)[1]}. The files keep the model result and the operator record separately.",
+                json_file: gr.update(value=data, visible=True),
+                **case_view(current),
+            }
+
+        opened_outputs = [
+            opened, opened_view, opened_status, opened_header, opened_machine, opened_human,
+            opened_follow_up, opened_board, opened_layer, opened_evidence, opened_rankings,
+            opened_scores, opened_timeline,
+        ]
+
+        def open_saved_case(path):
+            if not path:
+                return {opened: None, opened_view: gr.update(visible=False), opened_status: ""}
+            try:
+                earlier = open_case(path)
+            except InspectionError as error:
+                return {
+                    opened: None,
+                    opened_view: gr.update(visible=False),
+                    opened_status: f"**This case file could not be opened.** {error}",
+                }
+            view = earlier.session
+            return {
+                opened: earlier,
+                opened_view: gr.update(visible=True),
+                opened_status: f"Opened case **{earlier.case.case_id}** read-only.",
+                opened_header: opened_case_html(earlier),
+                opened_machine: summary_html(view),
+                opened_human: decision_card_html(earlier.case, view.result),
+                opened_follow_up: follow_up_html(earlier.case, view.result),
+                opened_board: object_board_html(view),
+                opened_layer: "Boxes",
+                opened_evidence: evidence_gallery(view, "All objects", "Boxes"),
+                opened_rankings: ranking_rows(view),
+                opened_scores: observation_rows(view),
+                opened_timeline: timeline_html(earlier.case),
+            }
+
+        def opened_gallery(earlier, value):
+            return evidence_gallery(earlier.session, "All objects", value) if earlier else []
+
+        def explain_inspection(current):
+            try:
+                return explain_result(current)
+            except ExplanationUnavailable as error:
+                return str(error)
+
+        def begin_follow_up(current, earlier, *details):
+            if earlier is None:
+                raise gr.Error("Open a saved case first.")
+            if details:
+                apply_details(current, details)
+            operator_name = current.case.operator if current.case else ""
+            output = fresh_case(current, start_follow_up(earlier, operator_name))
+            # Stay on this tab: switching tabs from here can leave later result updates unapplied.
+            output.pop(tabs)
+            case = output[session].case
+            output[opened_status] = (f"Follow-up case **{case.case_id}** started. Open **Images** and photograph "
+                                     "the full group of items again.")
+            return output
 
         # One shared queue also prevents reset/upload callbacks racing inference.
         event_options = {
@@ -641,13 +978,16 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             "concurrency_id": "inspection",
             "api_visibility": "private",
         }
-        files.change(prepare_uploads, [files, session], all_outputs, **event_options)
+        files.change(prepare_uploads, [files, session, *case_fields], all_outputs, **event_options)
         mode.change(change_mode, [session, mode], [session, inspect], **event_options)
         reset.click(
             start_over, [session], [*all_outputs, files, title, tabs], **event_options
         )
         run_outputs = [*all_outputs, files, reset, tabs, cancel_run, mode]
-        inspect.click(do_inspect, [session], run_outputs, **event_options)
+        # Store the case fields as shown before inspecting, so a missed blur event cannot lose them.
+        inspect.click(
+            edit_case, [session, *case_fields], [session, case_id, *case_outputs], **event_options
+        ).then(do_inspect, [session], run_outputs, **event_options)
         rerun.click(confirm_and_rerun, [session, corrections, confirmed], run_outputs, **event_options)
         confirmed.change(lambda checked: gr.update(interactive=bool(checked)), [confirmed], [rerun], **event_options)
         corrections.change(
@@ -660,6 +1000,9 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             [session, identity, layer],
             evidence,
             **event_options,
+        )
+        explain_button.click(
+            explain_inspection, [session], [explanation], **event_options
         )
         review_view.change(
             review_preview,
@@ -676,10 +1019,35 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
         cancel_corner.click(
             cancel_drawing, [session], [session, drawing_status], **event_options
         )
+        app.load(initialise, [session], [session, *case_fields, *case_outputs], **event_options)
+        gr.on(
+            [field.blur for field in case_fields] + [field.submit for field in case_fields],
+            edit_case, [session, *case_fields], [session, case_id, *case_outputs], **event_options,
+        )
+        new_case_button.click(
+            start_new_case, [session, *case_fields], [*all_outputs, files, title, tabs, *case_fields],
+            **event_options,
+        )
+        record.click(
+            record_finding,
+            [session, *case_fields, decision_object, decision_action, finding, reason, responsible],
+            [session, *case_outputs, *saved_outputs, report_note, decision_object, decision_action,
+             finding, reason, responsible, decision_status],
+            **event_options,
+        )
         export.click(
-            download,
-            [session, title],
-            [session, report_file, json_file, report_note],
+            save_case_files,
+            [session, title, *case_fields],
+            [session, *saved_outputs, report_note, *case_outputs],
+            **event_options,
+        )
+        # Reading a saved case never touches the live session or a backend.
+        saved_options = {"concurrency_limit": 1, "concurrency_id": "saved-cases", "api_visibility": "private"}
+        case_upload.change(open_saved_case, [case_upload], opened_outputs, **saved_options)
+        opened_layer.change(opened_gallery, [opened, opened_layer], opened_evidence, **saved_options)
+        follow_up_button.click(
+            begin_follow_up, [session, opened, *case_fields],
+            [*all_outputs, files, title, opened_status, *case_fields],
             **event_options,
         )
     app.queue(max_size=8, default_concurrency_limit=1)

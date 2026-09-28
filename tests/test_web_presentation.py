@@ -237,7 +237,7 @@ class PhysicalObjectPresentationTests(unittest.TestCase):
                             for value in output.values() if isinstance(value, dict)))
         labels = [component.get("props", {}).get("label") for component in app.config["components"]
                   if component["type"] == "tabitem"]
-        self.assertEqual(labels, ["Images", "Results", "Review", "Report"])
+        self.assertEqual(labels, ["Images", "Results", "Review", "Decision", "Report", "Saved cases"])
 
 
 if __name__ == "__main__":

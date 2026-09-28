@@ -102,6 +102,9 @@ def resolve_resource(spec, *, mount=Path('/kaggle/input'), overrides=None, name=
         path=root/_safe(relative)
         if path.is_symlink() or hashlib.sha256(path.read_bytes()).hexdigest()!=expected:
             raise ValueError(f'Launch resource checksum differs: {name}/{relative}')
+    if name == 'unseen-rgb' and (root.parent/'rgb_transport.json').is_file():
+        from current_rgb_transport import restore_rgb_transport
+        root = restore_rgb_transport(root)
     return root
 
 

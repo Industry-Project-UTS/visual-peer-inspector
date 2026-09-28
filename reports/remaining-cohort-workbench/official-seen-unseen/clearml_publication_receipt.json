@@ -1,0 +1,29 @@
+{
+  "artifact_hashes": {
+    "evaluation/anomaly_count_summary.csv": "ce5adde9679176786d7bbf2d9b0c774b258c07308f1f80c86328c22ae61ed11a",
+    "evaluation/evaluation_receipt.json": "070b920b08d8536fb1b933b26595c231d772ad67ab070875d6c3c471c4a51f9f",
+    "evaluation/failure_summary.csv": "d1c956e76a61c966538bc0b60ea9bdf275f74169f19a08702d408d631514d96f",
+    "evaluation/identity_summary.csv": "d3071ead7c3b3e6f75743cb1bebf4def960e41da098c6bd807fb19749a5ef7c4",
+    "evaluation/majority_summary.csv": "4b01efe46d999cf7ac08f481263bddbc702ad3a80d946871f08401e57b3c3d8c",
+    "evaluation/metric_summary.csv": "cfddd2a11e623d97652270bbdc2a980ed187b2c0952d231d51e5e29e433d6059",
+    "evaluation/view_schedule_summary.csv": "20213c310d4c96912a56e4452255fae4fa96a0bd67cfda1be8a86dfe324fe294",
+    "report/ap_tie_expected.png": "acb6232711fbb3e9af3813bc289e466ae727d24ae3f0fd1bcf25ab0b6fe2b4e4",
+    "report/candidate_coverage.png": "3045ed8f6b544ab61bb7183b80ba143769657bbf28b66ca7400e21431c238bef",
+    "report/failure_breakdown.png": "b7d6e40ccbb25a3f20c8b967fb8332f66bcca4e8b405645f14d3891758903e6a",
+    "report/identity_fragmentation.png": "772759ca1a5e9f87936710793cd45af8b63a039399372317e971c8498dfb43e5",
+    "report/identity_quality.png": "7d15aa4f94a662ae446da75198917d061bba4dfa2a732b176a3ab7805e833ea4",
+    "report/recall_at_2_tie_expected.png": "4a9036c1f1066099ea8c41e27d2e2d4c4796161f02dae1dbed903e3cb5642d6f",
+    "report/reciprocal_rank_tie_expected.png": "6367fb300e644bd88e6a29cdf5921489e5f84a9c1acfa96de99dc11c9636572d",
+    "report/schedule_sensitivity.png": "3c2b42e8c079e217ea66db0b9e383b104daa459d6c639fa2e5aa36045a2defd8",
+    "report/top1_tie_expected.png": "e0c613cb537c26c9c05285071833211bfe16ff74a99b3e95683b69a83f6e03f7"
+  },
+  "binding_sha256": "abbd41783b0577a797002cb88027645bd867badbe03a9298598222f7f25acd29",
+  "remote_artifacts_verified": true,
+  "scientific_lock_hashes": {
+    "evaluation": "96aeb1b72e634a166358b79a96595be893d600a27d44963e9f326a09a375f37b",
+    "report": "1ee3c67167b9f6a54208c2df3d872ea8abd0e14b7b0bd5b068851705cf047b0c"
+  },
+  "status": "completed",
+  "task_id": "99f06937b3054fe5a2a3658b4a09e8dd",
+  "task_url": "https://app.clear.ml/projects/62a09a229f184cb7bbe50da59b4226e7/experiments/99f06937b3054fe5a2a3658b4a09e8dd/output/log"
+}

@@ -333,3 +333,5 @@ class Session:
     session_id: str = field(default_factory=lambda: uuid4().hex)
     cache_token: str | None = None
     mode: str = "automatic"
+    # An InspectionCase from case.py; the operator record never feeds inference.
+    case: object | None = None

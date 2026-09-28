@@ -45,7 +45,8 @@ def test_current_publisher_is_bounded_and_aggregate_only():
     source=(ROOT/'scripts/publish_next_stage.py').read_text()
     assert 'timeout=180' in source and 'tracking.bounded(' in source
     assert "'evaluation_lock.json'" in source and "'report_lock.json'" in source
-    assert 'tracking.TABLES=frozenset' in source and 'tracking.FIGURES=frozenset' in source
+    assert 'CURRENT_TABLES=frozenset' in source and 'CURRENT_FIGURES=frozenset' in source
+    assert 'with current_allowlist():' in source
     assert 'private/galleries' not in source
     assert 'CLEARML_API_ACCESS_KEY' not in source and 'CLEARML_API_SECRET_KEY' not in source
     assert "status='pending'" in source

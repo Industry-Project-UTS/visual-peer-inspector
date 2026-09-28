@@ -86,10 +86,10 @@ class ResearchNotebookValidatorTests(unittest.TestCase):
 
     def test_rejects_output_secret_and_legacy_gate(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / "09b-example.ipynb"
+            path = Path(directory) / "11b-example.ipynb"
             write_notebook(
                 path,
-                "# Review\n\n09b-example.ipynb risk coverage review ClearML hash failure",
+                "# Review\n\n11b-example.ipynb full-pool sensitivity official ClearML hash failure",
                 "CLEARML_API_SECRET_KEY = 'unsafe'\nacceptance_recall = 0.95\n",
             )
             payload = json.loads(path.read_text(encoding="utf-8"))
@@ -97,7 +97,7 @@ class ResearchNotebookValidatorTests(unittest.TestCase):
             payload["cells"][1]["outputs"] = [{"output_type": "stream", "text": "x"}]
             path.write_text(json.dumps(payload), encoding="utf-8")
 
-            errors = validator.validate_notebook("09b", path)
+            errors = validator.validate_notebook("11b", path)
 
             self.assertTrue(any("hard-coded" in error for error in errors))
             self.assertTrue(any("legacy 0.95" in error for error in errors))
@@ -125,33 +125,33 @@ class ResearchNotebookValidatorTests(unittest.TestCase):
     def test_metadata_rejects_a_stale_upstream_kernel(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            notebook = root / "09b-example.ipynb"
+            notebook = root / "11b-example.ipynb"
             write_notebook(
                 notebook,
-                "# Review\n\n09b-example.ipynb risk coverage review ClearML hash failure",
+                "# Review\n\n11b-example.ipynb full-pool sensitivity official ClearML hash failure",
                 "status = 'ready'\n",
             )
-            metadata = root / "kernel-metadata-09b.json"
+            metadata = root / "kernel-metadata-11b.json"
             write_metadata(
                 metadata,
                 code_file=notebook.name,
                 kernel_sources=["esreekarreddy/toysad-8k-development-method-freeze"],
             )
 
-            errors = validator.validate_metadata("09b", notebook)
+            errors = validator.validate_metadata("11b", notebook)
 
             self.assertTrue(any("exact dependency contract" in error for error in errors))
 
     def test_long_stage_requires_cross_version_recovery_language(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / "10a-example.ipynb"
+            path = Path(directory) / "11a-example.ipynb"
             write_notebook(
                 path,
-                "# Official\n\n10a-example.ipynb official seen unseen ClearML hash failure checkpoint",
+                "# Official\n\n11a-example.ipynb full-pool frozen prediction ClearML hash failure checkpoint",
                 "status = 'ready'\n",
             )
 
-            errors = validator.validate_notebook("10a", path)
+            errors = validator.validate_notebook("11a", path)
 
             self.assertTrue(any("incremental" in error for error in errors))
             self.assertTrue(any("recovery" in error for error in errors))
@@ -160,32 +160,32 @@ class ResearchNotebookValidatorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             notebook_root = root / "notebooks" / "protected-evaluation"
-            notebook = notebook_root / "08f1-example.ipynb"
+            notebook = notebook_root / "11r-example.ipynb"
             write_notebook(
                 notebook,
-                "# Calibration resource\n\n08f1-example.ipynb calibration resource "
-                "model resource evaluator resource ClearML hash failure checkpoint "
+                "# Full-pool resource\n\n11r-example.ipynb full-pool post-freeze "
+                "evaluator ClearML hash failure checkpoint "
                 "incremental recovery",
                 "status = 'ready'\n",
             )
-            metadata = notebook_root / "kernel-metadata-08f1.json"
-            expected_datasets = list(validator.EXPECTED_DATASET_SOURCES["08f1"])
+            metadata = notebook_root / "kernel-metadata-11r.json"
+            expected_datasets = list(validator.EXPECTED_DATASET_SOURCES["11r"])
             write_metadata(
                 metadata,
                 code_file=notebook.name,
-                kernel_sources=[],
+                kernel_sources=list(validator.EXPECTED_KERNEL_SOURCES["11r"]),
                 dataset_sources=expected_datasets,
             )
 
             found = validator.notebook_paths(root)
 
-            self.assertEqual(found, {"08f1": notebook})
-            self.assertEqual(validator.validate_notebook("08f1", notebook), [])
-            self.assertEqual(validator.validate_metadata("08f1", notebook), [])
+            self.assertEqual(found, {"11r": notebook})
+            self.assertEqual(validator.validate_notebook("11r", notebook), [])
+            self.assertEqual(validator.validate_metadata("11r", notebook), [])
             value = json.loads(metadata.read_text(encoding="utf-8"))
             value["dataset_sources"] = expected_datasets[:-1]
             metadata.write_text(json.dumps(value), encoding="utf-8")
-            errors = validator.validate_metadata("08f1", notebook)
+            errors = validator.validate_metadata("11r", notebook)
             self.assertTrue(any("dataset_sources" in error for error in errors))
 
     def test_optional_full_pool_stages_are_in_the_shared_contract(self) -> None:

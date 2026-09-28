@@ -1,8 +1,8 @@
 ---
 title: Visual Peer Inspector
 emoji: 🔎
-colorFrom: teal
-colorTo: indigo
+colorFrom: red
+colorTo: pink
 sdk: docker
 app_port: 7860
 fullWidth: true
@@ -17,7 +17,9 @@ short_description: Compare similar objects across multiple views of a scene.
 
 Upload 2–5 views of the same scene, inspect a combined ranking, confirm object
 identities when needed, and export the visual evidence. Automatic and Assisted
-are separate modes. Both keep the Images, Results, Review and Report workflow.
+are separate modes. Both keep the Images, Results, Review and Report workflow,
+with a Decision step for the operator's own finding and Saved cases for
+read-only review of saved case files and linked follow-ups.
 
 The package contains code only. It excludes datasets, labels, recorded
 predictions, model weights, credentials and local QA adapters.
@@ -48,11 +50,16 @@ memory. This build recipe is not evidence that a Linux GPU deployment has run.
 | `VPI_DINO_PYTHON` | `/opt/dino/bin/python` | Exact DINO CPU feature worker |
 | `VPI_INSPECTION_TIMEOUT` | `1800` | Maximum inspection time, including downloads |
 | `HF_HOME` | `/home/appuser/.cache/huggingface` | Downloaded model cache |
+| `GROQ_API_KEY` | unset | Optional text-only explanation of aggregate ranking scores; set as a secret |
 
 Requests use temporary JSON/PNG files and feature tensors use NPZ without
 pickle. The app runs one inspection at a time with a bounded queue. Cancel
 terminates the process group. No user image is sent to another inference
 service. Model caches may disappear on an ephemeral Space restart.
+
+The optional **Explain the ranking** button sends anonymous score summaries
+and view support counts to Groq. It sends no images, case fields or decisions,
+and its response does not alter the inspection or enter saved case files.
 
 ## Decisions and evidence
 

@@ -169,6 +169,19 @@ def test_cli_subprocess_uses_bounded_timeout_and_sanitized_failure(monkeypatch):
     assert seen[0][1]['timeout']==60 and seen[0][1]['capture_output'] and seen[0][1]['text']
 
 
+def test_zero_exit_gpu_quota_rejection_keeps_job_ready(fixture, monkeypatch):
+    root, manifest, _, _ = fixture
+    def run(args, **kwargs):
+        return SimpleNamespace(returncode=0,
+            stdout='Kernel push error: Maximum batch GPU session count of 2 reached.\n', stderr='')
+    monkeypatch.setattr(queue.subprocess, 'run', run)
+    with pytest.raises(queue.KaggleCapacityError, match='capacity is full'):
+        queue.submit_next(root, source_manifest=manifest)
+    state=json.loads((root/'queue-state.json').read_text())
+    assert state['jobs']=={}
+    assert queue.preview(root)['next_ready'][0]=='first'
+
+
 def test_concurrent_controller_cannot_duplicate_submission(fixture,tmp_path,monkeypatch):
     root,manifest,_,_=fixture;calls=fake_kaggle(monkeypatch,fixture,tmp_path)
     with queue._queue_lock(root):

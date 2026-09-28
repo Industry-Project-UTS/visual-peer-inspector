@@ -23,10 +23,15 @@ Operations are explicit: method freeze, private RGB index, model-only RGB releas
         return prepare_method_freeze(CONFIG['reference_root'], CONFIG['output_root'], ROOT)
     if ACTION in {'rgb_index','rgb_release'}:
         from vpi_next_evaluation.native_rgb import prepare_rgb_index, release_rgb
+        if ACTION == 'rgb_release' and CONFIG.get('role') == 'unseen':
+            from current_rgb_transport import reuse_completed_transport
+            retained = reuse_completed_transport(CONFIG['output_root'])
+            if retained is not None:
+                return retained
         return (prepare_rgb_index if ACTION=='rgb_index' else release_rgb)(CONFIG,ROOT)
     if ACTION == 'raw_geometry':
-        from vpi_next_evaluation.raw_reference import prepare_raw_geometry
-        return prepare_raw_geometry(CONFIG)
+        from current_official_geometry import prepare_official_mask_geometry
+        return prepare_official_mask_geometry(CONFIG)
     if ACTION == 'raw_truth':
         from current_truth_conversion import convert_raw_evaluator_with_typed_rejections
         return convert_raw_evaluator_with_typed_rejections(CONFIG)
@@ -43,11 +48,18 @@ Operations are explicit: method freeze, private RGB index, model-only RGB releas
         from vpi_next_evaluation.native_cache import prepare_shard
         return prepare_shard(CONFIG,ROOT)
     if ACTION == 'official_exposure':
-        from vpi_next_evaluation.exposure import prepare_official_exposure
-        return prepare_official_exposure(CONFIG)
+        from current_official_exposure import prepare_official_exposure_from_geometry
+        return prepare_official_exposure_from_geometry(CONFIG)
     raise ValueError('Unknown prepared launch operation')
 
 RESULT = run_stage('preparation-'+ACTION,CONFIG,prepare,CODE_PROVENANCE)
+if ACTION == 'rgb_release' and CONFIG.get('role') == 'unseen':
+    from current_rgb_transport import compact_completed_rgb
+    RGB_TRANSPORT = compact_completed_rgb(CONFIG['output_root'],RESULT,role='unseen')
+    display({'rgb_transport_status':RGB_TRANSPORT['status'],
+             'archive_sha256':RGB_TRANSPORT['archive_sha256'],
+             'scene_count':RGB_TRANSPORT['scene_count'],
+             'model_file_count':RGB_TRANSPORT['file_count']})
 display(RESULT)'''),md('''## Completion and recovery
 
 A checkpointed result is an incomplete job. Keep its retained output and resume with the same configuration; never let a downstream job consume a partial cohort. Cache merging verifies exact membership and rejects overlapping or missing shards. The final decision still uses the complete declared cohort denominator.

@@ -37,7 +37,8 @@ def main():
         share=False,
         theme=app.vpi_theme,
         css=CSS,
-        max_file_size="10mb",
+        # Saved case files hold lossless views; load_views still limits each photo to 10 MB.
+        max_file_size="100mb",
         show_error=False,
         footer_links=[],
         favicon_path=str(Path(__file__).with_name("favicon.svg")),

@@ -1,5 +1,58 @@
 # Web integration verification
 
+## Inspection case workflow update
+
+This update adds case context, an object board, an operator decision step kept
+apart from the model result, portable case files with read-only reopening, and
+linked follow-up inspections. Models, preprocessing, scorers, thresholds, the
+review policy and evaluations are unchanged: `pipeline.py`, `decision.py`,
+`frozen_policy.py` and the sealed policy were not edited, and the deployment
+preflight reports the same pipeline fingerprint.
+
+Checked locally:
+
+- The focused web suite, including the new `tests/test_web_case.py`, passed
+  **128 tests** with **1 skipped** (the private cached parity check). The new
+  tests cover case creation and validation, decision validation and separation,
+  no automatic approval, all-normal decisions, missing links, ties, unlinked
+  observations, save/reopen fidelity and privacy, 19 malformed case files, size
+  limits, rejection of a too-large export without replacing earlier downloads,
+  follow-up linking without score comparison, report/JSON/case-file agreement,
+  data-origin labels, and the UI callbacks end to end. Pinned pytest and scipy
+  ran from a temporary environment layered over the app `.venv`, which was not
+  modified.
+- Offline deployment preflight passed.
+- Browser run against a scratchpad-only backend that runs the real upload
+  pipeline and frozen decision code on stand-in detection, masks and features.
+  Every result was labelled "Synthetic test data". Three generated views went
+  through Assisted suggestions, confirmed reranking (Result ready, one object
+  highest), a correct/rework decision, saving and read-only reopening. A
+  follow-up recapture in which all items matched produced tied scores, "No unique
+  selection", Review required and an open case, which was saved without a
+  decision. The saved reports kept the model and operator sections distinct.
+- Real demo photos (bottles and scrub pads, three views each, duplicate excluded)
+  passed upload validation, ordering and preview in the preview-only app. No
+  inference ran, no result was produced, and the source hashes matched their
+  manifest before and after.
+- At 375 pixels the checked tabs had no document horizontal overflow; the
+  machine and operator record cards stack.
+
+Gradio 6 behaviour found during browser checks:
+
+- Blur events on the case fields were not always delivered, so upload, inspect,
+  decision, save, new-case and follow-up actions read the case fields directly.
+- Starting a follow-up from **Saved cases** while switching tabs left later result
+  updates unapplied. The follow-up now stays on **Saved cases** and tells the
+  operator to open **Images**.
+- `visible=False` on a Markdown notice in a tab not yet opened was not applied.
+  The Decision notice changes its content instead; the existing Review notice
+  shows the same behaviour and was left as it was.
+
+Not verified: fresh LocateAnything/SAM GPU inference through this workflow,
+case files built from real model masks and heatmaps (and their size with 12 MP
+photos), hosted uploads near the 100 MB case-file limit, and operator usability
+with real items.
+
 ## Frozen policy and evidence update
 
 The web app now bundles the byte-identical 09B `calibration-selective-v1`
