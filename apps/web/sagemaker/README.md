@@ -31,7 +31,7 @@ forward the original protocol. Do not disable browser download protection.
 
 ## Restart an installed Space
 
-After starting the Space, open its JupyterLab terminal:
+For a private deployment without the automatic-startup hook, open its JupyterLab terminal after starting the Space:
 
 ```bash
 cd /home/sagemaker-user/visual-peer-inspector
@@ -48,8 +48,8 @@ python apps/web/sagemaker/service.py stop
 
 Cancel any running inspection in the app first. Logs and the PID stay in `logs/`.
 Keep the Space and app server running for the demo. Closing a browser tab does
-not stop them. Space shutdown stops the app; automatic Space startup is not
-configured by these helpers.
+not stop them. Space shutdown stops the app. For the fixed ngrok deployment,
+enable the automatic-startup hook below instead of launching manually.
 
 ## Open the interface
 
@@ -92,11 +92,55 @@ fixed URL. Request inspection is disabled. Verify the external login, upload and
 download flow before sharing the address. The local authentication check alone
 does not verify public connectivity.
 
-After a Space restart, run `start-app` and `start-tunnel` again. The same assigned
-domain is reused; the Space, app and tunnel must all be running. This is a
+Without the automatic-startup hook below, run `start-app` and `start-tunnel` again
+after a Space restart. The same assigned domain is reused; the Space, app and tunnel must all be running. This is a
 supervised demo subject to the free plan's limits, not always-on hosting. Do not
 start multiple tunnel agents for the same address. Stop the owned ngrok process
 before returning to private Studio mode with `service.py stop` / `start`.
 
 References: [ngrok free plan](https://ngrok.com/docs/pricing-limits/free-plan-limits)
 and [Gradio authentication](https://www.gradio.app/guides/sharing-your-app).
+
+## Start automatically with the Space
+
+After configuring the private ngrok settings once, run:
+
+```bash
+python apps/web/sagemaker/autostart.py install
+```
+
+This enables `vpi_space_startup` in the persistent user Jupyter server configuration.
+On a Space start, Jupyter starts a detached supervisor; no terminal or browser tab
+needs to remain open. The supervisor starts the authenticated loopback app,
+checks its login, then starts the same configured ngrok domain. It adopts an
+existing owned app/tunnel and uses an OS lock to prevent duplicate instances.
+Stale PID files are validated against the process command before reuse. Three
+consecutive startup failures stop retrying and leave a diagnostic status.
+
+Check `logs/autostart-status.json`, `logs/app.log`, and `logs/ngrok.log` if startup
+fails. The startup hook never blocks JupyterLab. The university's idle shutdown
+settings are unchanged. Stopping the Space stops the app; starting it again
+requires normal AWS provisioning time before the same demo address is available.
+
+To disable automatic startup, remove the marked Visual Peer Inspector block from
+`~/.jupyter/jupyter_server_config.py` and restart the Space. Any earlier user
+configuration is retained in `jupyter_server_config.py.pre-vpi`.
+
+## Inspection latency and browser refresh
+
+The first inspection after a Space restart also pays for cold model-file reads.
+The app being reachable does not mean the model weights are already loaded.
+On the tested restart the detector checkpoint load alone took about 57 seconds;
+the next observed three-view bottle inspection completed in 50 seconds.
+Do one complete rehearsal after starting the Space before a timed demonstration.
+
+DINO loads once per inspection and keeps the original four-crop CPU FP32 batches.
+On one controlled three-view fish example, fresh backend time fell from 39.152
+to 28.602 seconds with identical ranking scores. These are individual measurements,
+not a latency guarantee. Larger images and more objects can take longer.
+
+Progress appears beneath the active tab's controls with stage detail and elapsed
+time. Page initialisation bypasses the inference queue. Refreshing or closing a
+browser session cancels its active worker when Gradio detects the disconnect;
+it does not resume the old inspection or affect another browser's work. Save a
+case ZIP before refreshing if the result should be retained.

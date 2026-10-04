@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
+import threading
 from pathlib import Path
 from uuid import uuid4
 
@@ -66,6 +67,19 @@ DECISION_HINT = '<p class="empty-notice">Run an inspection, check the items phys
 
 def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
     connected = backend is not None
+    browser_jobs = {}
+    browser_jobs_lock = threading.Lock()
+
+    def browser_disconnected(request: gr.Request):
+        # Refresh/close must release only this browser session's GPU work.
+        with browser_jobs_lock:
+            job = browser_jobs.pop(request.session_hash, None)
+        if job:
+            request_id, disconnected = job
+            disconnected.set()
+            cancel = getattr(backend, "cancel", None)
+            if callable(cancel):
+                cancel(request_id)
 
     def dispose_session(current):
         discard_exports(current)
@@ -107,12 +121,6 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
         # A reopened case is kept apart from the live session and never reaches a backend.
         opened = gr.State(None, time_to_live=1800)
         app_header(connected)
-        readiness = gr.Markdown(
-            "" if connected else "Inspection is not connected yet.", elem_id="readiness"
-        )
-        cancel_run = gr.Button(
-            "Cancel inspection", visible=False, elem_id="cancel-inspection"
-        )
         with gr.Tabs(selected="scene", elem_id="inspection-tabs") as tabs:
             # Keep inactive controls mounted so cross-tab updates retain their values.
             with gr.Tab("Images", id="scene", render_children=True):
@@ -301,6 +309,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                         "Confirm identities and rerank", interactive=False, variant="primary"
                     )
             with gr.Tab("Decision", id="decision", render_children=True):
+                gr.Markdown("**Optional human record.** Record what you found after checking the objects. This does not change the model ranking; you can save a report without it.", elem_classes="quiet")
                 decision_case = gr.HTML("", elem_id="decision-case")
                 decision_notice = gr.HTML(
                     DECISION_HINT
@@ -409,6 +418,12 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                         "Starts a new case linked to this one and clears any unsaved inspection. Photograph the full group of items again; scores from the two cases are not compared.",
                         elem_classes="quiet",
                     )
+        readiness = gr.Markdown(
+            "" if connected else "Inspection is not connected yet.", elem_id="readiness"
+        )
+        cancel_run = gr.Button(
+            "Cancel inspection", visible=False, elem_id="cancel-inspection"
+        )
         gr.HTML(
             '<footer class="app-footer">Temporary uploads are cleared after 30 minutes.</footer>'
         )
@@ -655,7 +670,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                                       visible=callable(getattr(backend, "cancel", None))),
             }
 
-        def do_inspect(current, rows=None, progress=progress_tracker):
+        def do_inspect(current, rows=None, progress=progress_tracker, browser_request: gr.Request = None):
             if backend is None:
                 raise gr.Error(
                     "Inspection is not connected yet. You can still add and preview your images."
@@ -677,13 +692,25 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 mode="assisted" if corrected is not None else current.mode,
             )
             current.active_request_id = request.request_id
+            disconnected = threading.Event()
+            browser_id = getattr(browser_request, "session_hash", None)
+            if browser_id:
+                with browser_jobs_lock:
+                    browser_jobs[browser_id] = (request.request_id, disconnected)
             completion_update = {}
             try:
 
                 def report_progress(stage):
+                    if disconnected.is_set():
+                        raise InspectionCancelled("Inspection cancelled because its browser session closed.")
                     if stage not in STAGES:
                         raise ValueError("The backend reported an unknown stage.")
-                    progress((STAGES.index(stage), len(STAGES)), desc=stage)
+                    detail = getattr(stage, 'detail', '')
+                    elapsed = int(getattr(stage, 'elapsed_seconds', 0))
+                    label = ' · '.join(part for part in (str(stage), detail, f'{elapsed // 60}:{elapsed % 60:02d} elapsed') if part)
+                    # Gradio hides the description when progress has no total.
+                    # This counter measures completed stages, never remaining time.
+                    progress((STAGES.index(stage), len(STAGES)), desc=label, unit="stages")
 
                 result = backend.inspect(request, report_progress)
                 validate_result(result, request)
@@ -716,7 +743,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     overview: summary_html(current),
                     readiness: ("**Objects found.** Open **Review** to confirm the physical object IDs, then rerank."
                                 if request.decision_mode == "assisted" and corrected is None
-                                else "**Inspection complete.** Open **Results** to see the combined ranking."),
+                                else f"**Inspection complete in {result.provenance.get('timing', {}).get('request_seconds', 0):.0f}s.** Open **Results** to see the combined ranking."),
                     identity: gr.update(
                         choices=choices, value=selected, interactive=True
                     ),
@@ -772,6 +799,11 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 }
             finally:
                 current.active_request_id = None
+                if browser_id:
+                    with browser_jobs_lock:
+                        job = browser_jobs.get(browser_id)
+                        if job and job[0] == request.request_id:
+                            browser_jobs.pop(browser_id, None)
             # The preparation event already exposed progress and cancellation.
             # Return all result/visibility updates once, without stream deltas.
             return {
@@ -794,10 +826,10 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 return gr.update(value="Cancelling…", interactive=False)
             return gr.update(value="Cancel inspection", interactive=True)
 
-        def confirm_and_rerun(current, rows, checked, progress=progress_tracker):
+        def confirm_and_rerun(current, rows, checked, progress=progress_tracker, browser_request: gr.Request = None):
             if not checked:
                 raise gr.Error("Check the object identities across all views, then confirm them before reranking.")
-            return do_inspect(current, rows, progress)
+            return do_inspect(current, rows, progress, browser_request)
 
         def edit_identities(current, view_id, rows):
             current, preview, notice = review_preview(current, view_id, rows)
@@ -985,6 +1017,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             "concurrency_limit": 1,
             "concurrency_id": "inspection",
             "api_visibility": "private",
+            "show_progress": "hidden",
         }
         files.change(prepare_uploads, [files, session, *case_fields], all_outputs, **event_options)
         mode.change(change_mode, [session, mode], [session, inspect], **event_options)
@@ -993,7 +1026,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
         )
         run_outputs = [*all_outputs, files, reset, cancel_run, mode]
         # Keep the cancel button and uploaded images usable while the worker runs.
-        run_options = {**event_options, "show_progress": "minimal", "show_progress_on": readiness}
+        run_options = {**event_options, "show_progress": "full", "show_progress_on": readiness}
         # Store the case fields as shown before inspecting, so a missed blur event cannot lose them.
         inspect.click(
             edit_case, [session, *case_fields], [session, case_id, *case_outputs], **event_options
@@ -1032,7 +1065,10 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
         cancel_corner.click(
             cancel_drawing, [session], [session, drawing_status], **event_options
         )
-        app.load(initialise, [session], [session, *case_fields, *case_outputs], **event_options)
+        # A new browser session never waits behind someone else's model job.
+        app.load(initialise, [session], [session, *case_fields, *case_outputs],
+                 queue=False, show_progress="hidden", api_visibility="private")
+        app.unload(browser_disconnected)
         gr.on(
             [field.blur for field in case_fields] + [field.submit for field in case_fields],
             edit_case, [session, *case_fields], [session, case_id, *case_outputs], **event_options,

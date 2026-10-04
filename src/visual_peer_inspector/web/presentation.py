@@ -177,7 +177,7 @@ def draw_boxes(image: Image.Image, boxes: list[Box], winner: str | None = None,
 
 
 def evidence_note(session: Session) -> str:
-    base = ("Scores are not probabilities. Masks cover whole objects; Objects on black removes the background. "
+    base = ("Scores are not probabilities. Masks are coloured overlays of whole objects; Objects on black removes the background. "
             "Heatmaps show coarse patch mismatch, not defect boundaries.")
     if session.result and session.result.mode == "automatic":
         base += " Automatic heatmaps show the forward-patch component; the final ranking also uses other components."

@@ -29,6 +29,15 @@ STAGES = (
 )
 
 
+class ProgressStatus(str):
+    """A stage name compatible with existing backends, plus safe display detail."""
+    def __new__(cls, stage, detail='', elapsed_seconds=0):
+        value = super().__new__(cls, stage)
+        value.detail = detail
+        value.elapsed_seconds = elapsed_seconds
+        return value
+
+
 class InspectionError(ValueError):
     """An actionable error that can be shown to the user."""
 

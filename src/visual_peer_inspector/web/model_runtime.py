@@ -251,6 +251,15 @@ class GPUModels:
             with np.load(job/'output.npz',allow_pickle=False) as data:
                 return EncodedBatch(data['global_features'].copy(),tuple(p.copy() for p in data['patches']),16,384)
 
+    def encode_batches(self, crops):
+        """One isolated CPU worker, retaining four-crop model forwards inside it."""
+        encoded = self.encode(crops)
+        from visual_peer_inspector.models.visual_encoder import EncodedBatch
+        for start in range(0, len(crops), 4):
+            yield EncodedBatch(encoded.global_features[start:start + 4],
+                               encoded.patch_features[start:start + 4],
+                               encoded.patch_grid_size, encoded.feature_dimension)
+
 
 def runtime_versions():
     result = {}

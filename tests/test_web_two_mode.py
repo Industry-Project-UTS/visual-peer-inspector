@@ -235,3 +235,17 @@ def test_actual_sealed_decision_parity_without_labels():
             def clean(items):
                 return [{k:o[k] for k in ('id','score','members','support','fusion_observations')} for o in sorted(items,key=lambda o:o['id'])]
             assert clean(actual)==clean(expected)
+
+
+def test_cached_rerank_never_opens_an_empty_bulk_encoder(tmp_path, inspection):
+    class BulkModels(CountingModels):
+        def encode_batches(self, crops):
+            assert crops, 'Cached reranking must not start DINO with empty input'
+            for start in range(0, len(crops), 4):
+                yield self.encode(crops[start:start + 4])
+    models = BulkModels()
+    pipeline = UploadPipeline(models, cache_root=tmp_path)
+    request = inspection
+    first = pipeline.inspect(request, lambda _: None)
+    second = pipeline.inspect(replace(request, cache_token=first.cache_token), lambda _: None)
+    assert second.provenance['cache']['encoded_candidates'] == 0

@@ -15,7 +15,7 @@ import weakref
 from dataclasses import replace
 from pathlib import Path
 
-from .core import STAGES, InspectionCancelled, InspectionError
+from .core import STAGES, ProgressStatus, InspectionCancelled, InspectionError
 from .deployment import WorkerSettings
 from .transport import read_result, write_request
 
@@ -125,22 +125,22 @@ class SubprocessBackend:
                 "Another inspection is running. Try again when it finishes."
             )
         cancelled = threading.Event()
-        with self._state_lock:
-            self._cleanup_expired_locked()
-            current_token = self._sessions.get(request.session_id)
-            if request.cache_token is not None and request.cache_token != current_token:
-                self._gate.release()
-                raise InspectionError('The cached session is unavailable or belongs to another session. Reset it.')
-            creating = current_token is None
-            current_token = current_token or secrets.token_hex(32)
-            self._sessions[request.session_id] = current_token
-            request = replace(request, cache_token=current_token)
-            self._active[request.request_id] = cancelled
-            self._request_sessions[request.request_id] = request.session_id
-        process = None
-        reader = None
-        temporary = None
+        registered = False
+        process = reader = temporary = None
+        started = time.monotonic()
         try:
+            with self._state_lock:
+                self._cleanup_expired_locked()
+                current_token = self._sessions.get(request.session_id)
+                if request.cache_token is not None and request.cache_token != current_token:
+                    raise InspectionError('The cached session is unavailable or belongs to another session. Reset it.')
+                creating = current_token is None
+                current_token = current_token or secrets.token_hex(32)
+                self._sessions[request.session_id] = current_token
+                request = replace(request, cache_token=current_token)
+                self._active[request.request_id] = cancelled
+                self._request_sessions[request.request_id] = request.session_id
+                registered = True
             temporary = tempfile.TemporaryDirectory(prefix="vpi-job-")
             root = Path(temporary.name)
             write_request(root, request)
@@ -194,6 +194,8 @@ class SubprocessBackend:
             reader.start()
             deadline = time.monotonic() + self.settings.timeout_seconds
             error_code = None
+            stage, detail = 'Finding objects', 'Starting model worker'
+            last_progress = 0
             while process.poll() is None or reader.is_alive() or not messages.empty():
                 if cancelled.is_set():
                     raise InspectionCancelled(
@@ -203,6 +205,10 @@ class SubprocessBackend:
                     raise InspectionError(
                         "Inspection timed out. Try again; model downloads already cached can be reused."
                     )
+                now = time.monotonic()
+                if now - last_progress >= 1:
+                    progress(ProgressStatus(stage, detail, now - started))
+                    last_progress = now
                 try:
                     message = messages.get(timeout=0.1)
                 except queue.Empty:
@@ -210,7 +216,10 @@ class SubprocessBackend:
                 if not isinstance(message, dict):
                     continue
                 if message.get("stage") in STAGES:
-                    progress(message["stage"])
+                    stage = message['stage']
+                    detail = str(message.get('detail', ''))[:100]
+                    progress(ProgressStatus(stage, detail, time.monotonic() - started))
+                    last_progress = time.monotonic()
                 if "error" in message:
                     error_code = message["error"]
             if cancelled.is_set():
@@ -224,7 +233,12 @@ class SubprocessBackend:
                         "Inspection failed. Check the deployment logs and try again.",
                     )
                 )
-            return read_result(root, request)
+            result = read_result(root, request)
+            result.provenance.setdefault('timing', {})['request_seconds'] = round(time.monotonic() - started, 3)
+            return result
+        except InspectionCancelled:
+            cancelled.set()
+            raise
         finally:
             # Stop the complete process group before the temporary images are removed.
             try:
@@ -235,14 +249,24 @@ class SubprocessBackend:
                 if temporary is not None:
                     temporary.cleanup()
             finally:
-                with self._state_lock:
-                    self._active.pop(request.request_id, None)
-                    self._request_sessions.pop(request.request_id, None)
-                    if cancelled.is_set():
+                try:
+                    with self._state_lock:
+                        self._active.pop(request.request_id, None)
+                        self._request_sessions.pop(request.request_id, None)
                         from .session_cache import SessionCache
-                        SessionCache(self._cache_directory.name).clear(request.session_id)
-                        self._sessions.pop(request.session_id, None)
-                self._gate.release()
+                        cache = SessionCache(self._cache_directory.name)
+                        if registered and cancelled.is_set():
+                            try:
+                                cache.clear(request.session_id)
+                            finally:
+                                self._sessions.pop(request.session_id, None)
+                        elif registered and not cache.path(request.session_id).exists():
+                            # A worker that failed before writing any cache must not
+                            # leave a token that makes every later retry fail.
+                            self._sessions.pop(request.session_id, None)
+                finally:
+                    self._gate.release()
+
 
 
 def create_backend():

@@ -107,7 +107,8 @@ def test_real_cpu_pipeline_and_report_roundtrip(request_images, tmp_path):
     assert all(len(r.view_ids) == 1 for r in result.ranking)
     assert result.review_state == "review_required"
     assert result.policy_version == "calibration-selective-v1"
-    assert stages == [
+    from itertools import groupby
+    assert [stage for stage, _ in groupby(stages)] == [
         "Finding objects",
         "Creating masks",
         "Extracting features",

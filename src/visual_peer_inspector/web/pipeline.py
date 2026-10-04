@@ -147,6 +147,20 @@ class UploadPipeline:
 
     def inspect(self, request: InspectionRequest, progress) -> InspectionResult:
         import os
+        import time
+        from .core import ProgressStatus
+        started = stage_started = time.monotonic()
+        timings = {}
+        active_stage = None
+
+        def report(stage, detail=''):
+            nonlocal active_stage, stage_started
+            now = time.monotonic()
+            if active_stage != stage:
+                if active_stage is not None:
+                    timings[active_stage] = round(now - stage_started, 3)
+                active_stage, stage_started = stage, now
+            progress(ProgressStatus(stage, detail, round(now - started, 1)))
         from .session_cache import digest, pixels
         from visual_peer_inspector.scoring.forward_patch import patch_policy
         if not MIN_VIEWS <= len(request.views) <= MAX_VIEWS:
@@ -166,8 +180,9 @@ class UploadPipeline:
         prepared = {v.view_id: ImageTransform.prepare(v.image) for v in request.views}
         reasons, reused, computed = [], 0, 0
         try:
-            progress('Finding objects')
-            for view in sorted(request.views, key=lambda v: v.view_id):
+            report('Finding objects')
+            for index, view in enumerate(sorted(request.views, key=lambda v: v.view_id), 1):
+                report('Finding objects', f'Image {index} of {len(request.views)}')
                 canvas, transform = prepared[view.view_id]
                 image_key = pixels(view.image)
                 if request.corrections is not None:
@@ -198,8 +213,9 @@ class UploadPipeline:
                         reused += 1
                     by_view[view.view_id].append(c)
             self.models.release()
-            progress('Creating masks')
-            for view in request.views:
+            report('Creating masks')
+            for index, view in enumerate(request.views, 1):
+                report('Creating masks', f'View {index} of {len(request.views)}')
                 missing = [c for c in by_view[view.view_id] if c.mask is None]
                 if missing:
                     canvas, transform = prepared[view.view_id]
@@ -218,11 +234,15 @@ class UploadPipeline:
                     else:
                         reasons.append('An object mask is empty or too small; it remains available for correction.')
             self.models.release()
-            progress('Extracting features')
+            report('Extracting features')
             missing = [c for cs in by_view.values() for c in cs if c.crop is not None and c.patches is None]
-            for start in range(0, len(missing), 4):
+            crops = [c.crop.rgb for c in missing]
+            batch_encoder = getattr(self.models, 'encode_batches', None)
+            batches = (() if not crops else batch_encoder(crops) if callable(batch_encoder) else
+                       (self.models.encode(crops[start:start + 4]) for start in range(0, len(crops), 4)))
+            for start, encoded in zip(range(0, len(missing), 4), batches, strict=True):
                 batch = missing[start:start+4]
-                encoded = self.models.encode([c.crop.rgb for c in batch])
+                report('Extracting features', f'{min(start + 4, len(missing))} of {len(missing)} objects')
                 if len(encoded.patch_features) != len(batch) or encoded.global_features.shape != (len(batch), encoded.feature_dimension) or encoded.patch_grid_size != 16:
                     raise ValueError('Encoder output does not match the fixed patch contract.')
                 for c, vector, patches in zip(batch, encoded.global_features, encoded.patch_features, strict=True):
@@ -238,9 +258,11 @@ class UploadPipeline:
                         c.patches = np.empty((0, dimensions), dtype=np.float32)
                     self.cache.put(path, state, c.cache_key, {'quality': c.quality},
                         {'mask': c.mask, 'patches': c.patches, 'embedding': np.asarray(c.embedding or (), dtype=np.float32)})
-            progress('Comparing peers')
+            report('Comparing peers')
             result = self._decide(request, by_view, reasons, token, reused, computed)
-            progress('Combining views')
+            report('Combining views')
+            result.provenance['timing'] = {'stages_seconds': timings,
+                                           'pipeline_seconds': round(time.monotonic() - started, 3)}
             return result
         finally:
             self.models.release()

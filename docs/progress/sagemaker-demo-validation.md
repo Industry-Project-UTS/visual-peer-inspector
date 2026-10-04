@@ -48,13 +48,43 @@ swapped two physical objects in View 2; it was corrected after inspecting the
 original photos and is excluded from valid assisted conclusions. These curated
 demonstrations do not change evaluation accuracy or its denominator.
 
-## Remaining external gates
+## Public startup and responsiveness verification
 
-The free ngrok domain, official agent and private token file are prepared.
-The account owner still needs to enter the new demo login password. Public
-forwarding, external login/upload/download and same-address restart remain
-unverified. The private Studio app is available. See the
-[restart and sharing instructions](../../apps/web/sagemaker/README.md).
+The protected free ngrok address now serves the app. A real Space stop/start
+was verified: the persistent Jupyter extension started the app and tunnel without
+manual terminal launch. A private status receipt verified authentication and new
+process IDs. AWS provisioning still takes time; the address is offline while the
+Space is stopped. See the [startup instructions](../../apps/web/sagemaker/README.md).
+
+The final 153-file application package matched SageMaker with no hash mismatches.
+The updated suite passed **164 tests and 12 subtests**, with one private-cache test
+skipped. The earlier feature checks above remain distinct from this latest run.
+
+- Progress and cancellation sit below the active tab's actions. The display
+  shows stage detail, elapsed time and a count of completed stages. Its percentage
+  is a stage counter, not a prediction of remaining time.
+- Page initialisation bypasses the inspection queue. Cancellation and browser
+  refresh were tested against active hosted work; the worker stopped and the GPU
+  returned to idle. Refresh starts a new inspection session rather than resuming
+  unsaved results.
+- The 390-pixel form has no horizontal overflow; mobile help opens as a dialog.
+- The Decision tab now explicitly describes the human record as optional. Mask
+  overlays are coloured; Objects on black uses the same masks to remove background.
+
+### Measured performance
+
+DINO now loads once per inspection, preserving CPU FP32 and the original four-crop
+forward batches. In one controlled fresh three-view fish benchmark (nine objects),
+backend time fell from **39.152 to 28.602 seconds**, and DINO time from **15.660 to
+5.493 seconds**. The selected object, scores and supporting views were identical.
+A fresh public-browser run displayed **29 seconds**. The user's three-view bottle
+run displayed **50 seconds**. The first detector checkpoint load after the real
+Space restart took about **57 seconds** by itself. These individual measurements
+are not a latency guarantee or an accuracy estimate. Rehearse once after boot.
+
+See the [performance and startup receipt](../../reports/web-integration/safe/sagemaker-performance-startup.json).
+
+## Remaining limits
 
 Chrome blocked the two attempted new ZIP downloads with an organisation-policy
 message. Browser security was not bypassed. The ZIP/HTML/JSON files remain on

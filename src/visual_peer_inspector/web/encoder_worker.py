@@ -32,7 +32,18 @@ def encode_cpu(crops, model_source):
     torch.manual_seed(32040)
     torch.set_num_threads(min(4,__import__('os').cpu_count() or 1))
     model=FrozenVisualEncoder(specification_by_key(config['key']),revision=config['revision'],device='cpu',model_source=source)
-    return model.encode(crops)
+    # Preserve the frozen four-crop forward pass, but load the model just once.
+    return encode_batches(model, crops)
+
+
+def encode_batches(model, crops):
+    from visual_peer_inspector.models.visual_encoder import EncodedBatch
+    if not 1 <= len(crops) <= 40:
+        raise ValueError('An inspection requires between one and forty crops.')
+    batches = [model.encode(list(crops[start:start + 4])) for start in range(0, len(crops), 4)]
+    return EncodedBatch(np.concatenate([b.global_features for b in batches]),
+                        tuple(p for b in batches for p in b.patch_features),
+                        batches[0].patch_grid_size, batches[0].feature_dimension)
 
 
 def main():
@@ -40,7 +51,7 @@ def main():
     args=parser.parse_args()
     with np.load(args.job/'input.npz',allow_pickle=False) as data:
         crops=data['crops']
-    if crops.ndim!=4 or crops.shape[1:]!=(224,224,3) or crops.dtype!=np.uint8 or len(crops)>4:
+    if crops.ndim!=4 or crops.shape[1:]!=(224,224,3) or crops.dtype!=np.uint8 or not 1 <= len(crops) <= 40:
         raise ValueError('Invalid DINO crop exchange')
     batch=encode_cpu(list(crops),args.model_source)
     with (args.job/'output.npz').open('wb') as stream:

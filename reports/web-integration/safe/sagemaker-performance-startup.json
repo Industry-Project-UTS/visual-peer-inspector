@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-04",
+  "instance": "ml.g4dn.2xlarge",
+  "application_files_verified": 153,
+  "source_hash_mismatches": 0,
+  "real_space_restart_verified": true,
+  "manual_app_launch_after_space_restart": false,
+  "public_login_and_fresh_upload_verified": true,
+  "cancellation_restores_controls": true,
+  "refresh_stops_its_active_worker": true,
+  "gpu_after_refresh": {"active_inspection_processes": 0, "utilisation_percent": 0, "memory_mib": 13},
+  "mobile_form": {"viewport_pixels": 390, "page_width_pixels": 390, "help_dialog_verified": true},
+  "fixed_pipeline_and_policy_unchanged": true,
+  "controlled_benchmark": {
+    "scene": "curated fish demo",
+    "views": 3,
+    "candidates": 9,
+    "trials_per_version": 1,
+    "fresh_backend_before_seconds": 39.152,
+    "fresh_backend_after_seconds": 28.602,
+    "dino_before_seconds": 15.660,
+    "dino_after_seconds": 5.493,
+    "ranking_scores_and_members_identical": true
+  },
+  "public_ui_fish_seconds_rounded": 29,
+  "post_refresh_fresh_retry_seconds_rounded": 28,
+  "user_reported_bottle_seconds_rounded": 50,
+  "cold_detector_checkpoint_load_seconds_approximate": 57,
+  "tests": {"passed": 164, "skipped": 1, "subtests_passed": 12},
+  "limitations": [
+    "Individual runtime observations are not an average or service guarantee.",
+    "AWS startup and browser transfer time are separate from backend timing.",
+    "Automatic matching remains imperfect and reviewable.",
+    "Curated demonstrations do not change frozen evaluation accuracy.",
+    "The app is offline when the Space stops, including administrator idle shutdown.",
+    "Public case download remains subject to browser organisation policy."
+  ]
+}

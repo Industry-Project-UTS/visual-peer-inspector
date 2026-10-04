@@ -78,7 +78,7 @@ def main():
                 emit({"error": "policy"})
                 return 1
             request = read_request(args.job)
-            result = pipeline.inspect(request, lambda stage: emit({"stage": stage}))
+            result = pipeline.inspect(request, lambda stage: emit({"stage": str(stage), "detail": getattr(stage, 'detail', '')}))
             result.provenance["runtime_versions"] = versions
             write_result(args.job, result)
         emit({"complete": True})
