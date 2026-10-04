@@ -63,6 +63,87 @@ class WebAppTests(unittest.TestCase):
             selected_identity_id="peer_a",
         )
 
+    def test_completion_restores_inputs_and_result_visibility_in_one_update(self):
+        # Gradio can coalesce streamed updates; the final update must be complete.
+        from visual_peer_inspector.web.backend import InspectionCancelled
+        from visual_peer_inspector.web.ui import build_app
+
+        for outcome in ("success", "failure", "cancelled"):
+            with self.subTest(outcome=outcome):
+                fixture_result = self.result
+
+                class Backend:
+                    def inspect(self, request, progress):
+                        if outcome == "failure":
+                            raise RuntimeError("private /source/path")
+                        if outcome == "cancelled":
+                            raise InspectionCancelled("Inspection cancelled.")
+                        return replace(fixture_result, cache_token="test-token")
+
+                app = build_app(Backend())
+                callback = next(f.fn for f in app.fns.values()
+                                if f.fn and f.fn.__name__ == "do_inspect")
+                state = Session(self.views)
+                prepare = next(f.fn for f in app.fns.values()
+                               if f.fn and f.fn.__name__ == "prepare_inspection")
+                first = prepare(state)
+                terminal = callback(state)
+                self.assertIsInstance(terminal, dict)
+
+                def by_id(update, name):
+                    return next(value for component, value in update.items()
+                                if getattr(component, "elem_id", None) == name)
+
+                self.assertFalse(any(getattr(c, "elem_id", None) == "result-controls"
+                                     for c in first))
+                self.assertFalse(by_id(first, "inspect-button")["interactive"])
+                self.assertTrue(by_id(terminal, "inspect-button")["interactive"])
+                self.assertIsNone(state.active_request_id)
+                for name in ("result-controls", "review-controls", "report-controls", "decision-controls"):
+                    self.assertEqual(by_id(terminal, name)["visible"], outcome == "success")
+                self.assertEqual(state.result is not None, outcome == "success")
+                self.assertNotIn("/source/path", str(terminal))
+
+    def test_preparation_shows_cancel_before_starting_models(self):
+        from visual_peer_inspector.web.ui import build_app
+
+        class Backend:
+            def inspect(self, request, progress):
+                raise AssertionError("Preparation must not start inference")
+
+            def cancel(self, request_id):
+                return False
+
+        app = build_app(Backend())
+        callback = next(f.fn for f in app.fns.values()
+                        if f.fn and f.fn.__name__ == "prepare_inspection")
+        state = Session(self.views, self.result)
+        update = callback(state)
+        cancel = next(v for c, v in update.items() if getattr(c, "value", None) == "Cancel inspection")
+        self.assertTrue(cancel["visible"])
+        self.assertFalse(next(v for c, v in update.items()
+                              if getattr(c, "elem_id", None) == "inspect-button")["interactive"])
+        self.assertIs(state.result, self.result)
+        rows = [[o.box.view_id, o.box.object_id, o.box.identity_id, *o.box.xyxy]
+                for o in self.observations]
+        with self.assertRaisesRegex(Exception, "confirm them before reranking"):
+            callback(state, rows, False)
+        prepared = callback(state, rows, True)
+        for parent in ("result-controls", "review-controls", "report-controls", "decision-controls"):
+            self.assertFalse(any(getattr(c, "elem_id", None) == parent for c in prepared),
+                             "Preparation must not unmount controls needed by later callbacks")
+        downloads = [value for component, value in prepared.items()
+                     if getattr(component, "label", None) in
+                     ("Inspection case file", "HTML report", "JSON result")]
+        self.assertEqual(len(downloads), 3)
+        self.assertTrue(all(value["value"] is None and not value["visible"]
+                            for value in downloads), "Reranking must retire stale download links")
+        for label in ("Boxes and identities", "I checked the object IDs across all views. Blank IDs remain unconfirmed."):
+            self.assertFalse(any(getattr(c, "label", None) == label for c in prepared),
+                             "Preparation must preserve chained rerank inputs")
+        self.assertFalse(any(c.get_block_name() == "tabs" for c in prepared),
+                         "Model callbacks must not recreate the tab container")
+
     def test_upload_ids_are_stable_when_reordered_and_names_are_not_model_inputs(self):
         reversed_views = load_views(self.paths[::-1])
         self.assertEqual(self.views[0].view_id, reversed_views[1].view_id)
@@ -121,6 +202,18 @@ class WebAppTests(unittest.TestCase):
                 parse_corrections(broken, self.views)
         with self.assertRaisesRegex(InspectionError, "two different views"):
             parse_corrections(rows[:1], self.views)
+
+    def test_review_view_labels_follow_upload_order_and_reject_missing_views(self):
+        views = tuple(reversed(self.views))
+        rows = [[f"View {i}", "object_1", "A", 1, 1, 40, 40]
+                for i in range(1, len(views) + 1)]
+        boxes = parse_corrections(rows, views)
+        self.assertEqual([b.view_id for b in boxes], [v.view_id for v in views])
+        self.assertEqual(parse_corrections(
+            [[b.view_id, b.object_id, b.identity_id, *b.xyxy] for b in boxes], views), boxes)
+        rows[0][0] = "View 3"
+        with self.assertRaisesRegex(InspectionError, "no longer uploaded"):
+            parse_corrections(rows, views)
 
     def test_result_support_must_match_observations(self):
         validate_result(self.result, InspectionRequest(self.views))
@@ -250,13 +343,13 @@ class WebAppTests(unittest.TestCase):
             f.fn for f in app.fns.values() if f.fn and f.fn.__name__ == "do_inspect"
         )
         state = Session(self.views)
-        list(callback(state))
+        callback(state)
         self.assertEqual(state.result, self.result)
         backend.fail = True
-        outputs = list(callback(state))
+        outputs = callback(state)
         self.assertIsNone(state.result)
         self.assertNotIn("/source/path", str(outputs))
-        self.assertTrue(any("Inspection failed" in str(output) for output in outputs))
+        self.assertTrue(any("Inspection failed" in str(output) for output in outputs.values()))
 
 
 if __name__ == "__main__":

@@ -198,14 +198,14 @@ class PhysicalObjectPresentationTests(unittest.TestCase):
     def test_mode_and_confirmed_rerank_reuse_session_cache_and_all_candidates(self):
         _, backend, callbacks = self._app()
         state = Session(self.views)
-        list(callbacks["do_inspect"](state))
+        callbacks["do_inspect"](state)
         self.assertEqual(backend.requests[0].decision_mode, "automatic")
         self.assertEqual(state.cache_token, "private-cache-handle")
         self.assertEqual({row[2] for row in state.corrections}, {"suggested_a"})
         with self.assertRaises(Exception):
-            list(callbacks["confirm_and_rerun"](state, state.corrections, False))
+            callbacks["confirm_and_rerun"](state, state.corrections, False)
         self.assertEqual(len(backend.requests), 1)
-        list(callbacks["confirm_and_rerun"](state, state.corrections, True))
+        callbacks["confirm_and_rerun"](state, state.corrections, True)
         request = backend.requests[-1]
         self.assertEqual(request.mode, "assisted")
         self.assertEqual(request.session_id, backend.requests[0].session_id)
@@ -227,17 +227,20 @@ class PhysicalObjectPresentationTests(unittest.TestCase):
         self.assertNotEqual(fresh.session_id, session_id)
         self.assertIsNone(fresh.cache_token)
 
-    def test_assisted_first_pass_opens_review_and_preserves_existing_tabs(self):
+    def test_assisted_first_pass_directs_review_and_preserves_existing_tabs(self):
         app, backend, callbacks = self._app()
         state = Session(self.views, mode="assisted")
-        updates = list(callbacks["do_inspect"](state))
+        updates = callbacks["do_inspect"](state)
         self.assertEqual(backend.requests[0].mode, "assisted")
         self.assertIsNone(backend.requests[0].corrections)
-        self.assertTrue(any(value.get("selected") == "review" for output in updates
-                            for value in output.values() if isinstance(value, dict)))
+        self.assertTrue(any("Open **Review**" in str(value) for value in updates.values()))
+        self.assertFalse(any(component.get_block_name() == "tabs" for component in updates))
         labels = [component.get("props", {}).get("label") for component in app.config["components"]
                   if component["type"] == "tabitem"]
         self.assertEqual(labels, ["Images", "Results", "Review", "Decision", "Report", "Saved cases"])
+        self.assertTrue(all(component["props"].get("render_children")
+                            for component in app.config["components"]
+                            if component["type"] == "tabitem"))
 
 
 if __name__ == "__main__":

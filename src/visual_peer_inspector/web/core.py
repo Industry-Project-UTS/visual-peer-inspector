@@ -225,6 +225,8 @@ def parse_corrections(
     *,
     require_multiple_views: bool = True,
 ) -> tuple[Box, ...]:
+    # The review table uses the same upload-order labels as the image galleries.
+    view_labels = {f"View {i}": view.view_id for i, view in enumerate(views, 1)}
     boxes = []
     for row in rows:
         if len(row) != 7:
@@ -237,7 +239,8 @@ def parse_corrections(
                 raise ValueError
             boxes.append(
                 Box(
-                    str(row[0]), str(row[1]), str(row[2]), tuple(int(v) for v in values)
+                    view_labels.get(str(row[0]), str(row[0])),
+                    str(row[1]), str(row[2]), tuple(int(v) for v in values)
                 )
             )
         except (TypeError, ValueError) as error:

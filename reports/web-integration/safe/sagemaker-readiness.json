@@ -1,0 +1,144 @@
+{
+  "schema": "vpi-hosted-readiness-v1",
+  "base_commit": "7899fc49d07b5cfdef7dc30d7796cb2672e3c49d",
+  "deployment": "private SageMaker Studio",
+  "local_tests": {
+    "passed": 144,
+    "skipped_private_cache": 1,
+    "subtests_passed": 12
+  },
+  "scientific_code_and_policy_unchanged": true,
+  "demo_cases": [
+    {
+      "inputs": "real bottles",
+      "views": 2,
+      "route": "automatic",
+      "selected_object": "uncapped bottle",
+      "selected_support": 2,
+      "relative_score": 1.0817169038362282,
+      "ranking_confidence_index_rounded": 0.5,
+      "correct_selected_object_visually_verified": true,
+      "cache": {
+        "reused_candidates": 0,
+        "encoded_candidates": 6
+      },
+      "review_state": "review_required"
+    },
+    {
+      "inputs": "real bottles",
+      "views": 2,
+      "route": "assisted",
+      "selected_object": "uncapped bottle",
+      "selected_support": 2,
+      "relative_score": 1.0,
+      "ranking_confidence_index_rounded": 0.286,
+      "correct_selected_object_visually_verified": true,
+      "cache": {
+        "reused_candidates": 6,
+        "encoded_candidates": 0
+      },
+      "review_state": "review_required"
+    },
+    {
+      "inputs": "real bottles",
+      "views": 3,
+      "route": "automatic",
+      "selected_object": "uncapped bottle",
+      "selected_support": 2,
+      "ranking_confidence_index_rounded": 0.341,
+      "correct_selected_object_visually_verified": true,
+      "review_state": "review_required"
+    },
+    {
+      "inputs": "real bottles",
+      "views": 3,
+      "route": "assisted",
+      "selected_object": "uncapped bottle",
+      "selected_support": 3,
+      "ranking_confidence_index_rounded": 0.134,
+      "correct_selected_object_visually_verified": true,
+      "cache": {
+        "reused_candidates": 9,
+        "encoded_candidates": 0
+      },
+      "review_state": "review_required"
+    },
+    {
+      "inputs": "real scrub pads",
+      "views": 3,
+      "route": "automatic",
+      "selected_object": "cut pad",
+      "selected_support": 3,
+      "ranking_confidence_index_rounded": 0.535,
+      "correct_selected_object_visually_verified": true,
+      "cache": {
+        "reused_candidates": 0,
+        "encoded_candidates": 15
+      },
+      "review_state": "review_required"
+    },
+    {
+      "inputs": "real scrub pads",
+      "views": 3,
+      "route": "assisted",
+      "selected_object": "cut pad",
+      "selected_support": 3,
+      "ranking_confidence_index_rounded": 0.137,
+      "correct_selected_object_visually_verified": true,
+      "cache": {
+        "reused_candidates": 15,
+        "encoded_candidates": 0
+      },
+      "review_state": "review_required"
+    },
+    {
+      "inputs": "curated development apples",
+      "views": 3,
+      "route": "automatic",
+      "selected_object": "broken apple",
+      "selected_support": 1,
+      "ranking_confidence_index_rounded": 0.012,
+      "correct_selected_object_visually_verified": true,
+      "cache": {
+        "reused_candidates": 0,
+        "encoded_candidates": 9
+      },
+      "review_state": "review_required"
+    },
+    {
+      "inputs": "curated development apples",
+      "views": 3,
+      "route": "assisted",
+      "selected_object": "broken apple",
+      "selected_support": 3,
+      "ranking_confidence_index_rounded": 0.145,
+      "correct_selected_object_visually_verified": true,
+      "cache": {
+        "reused_candidates": 9,
+        "encoded_candidates": 0
+      },
+      "review_state": "review_required"
+    }
+  ],
+  "curated_demo_only": true,
+  "independent_accuracy_cohort": false,
+  "invalid_attempt_retained": "An earlier Assisted apple attempt swapped physical IDs between two views; it is invalid correspondence input and excluded from scoring conclusions. Corrected neutral IDs select the broken apple in every view.",
+  "engineering_checks": [
+    "2/3/5-view execution",
+    "cancellation restores controls and preserves uploads",
+    "confirmed identity reranking reuses features",
+    "saved case opens without inference or replacing live session",
+    "original-image masks and heatmap coordinates",
+    "HTTPS portable-case downloads",
+    "upload-order View labels",
+    "stale download links cleared during rerank"
+  ],
+  "observed_peak_gpu_memory_mib": 7849,
+  "exact_latency_measured": false,
+  "limits": [
+    "Automatic matching can fragment objects",
+    "Assisted requires correct human confirmation",
+    "Maximum-size and sustained concurrent load not tested",
+    "Studio link requires private AWS access"
+  ]
+}

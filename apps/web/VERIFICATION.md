@@ -1,6 +1,69 @@
 # Web integration verification
 
-## Inspection case workflow update
+## Private SageMaker readiness checks
+
+The application is installed in a persistent SageMaker Studio Space on a T4.
+LocateAnything and SAM run in an isolated CUDA environment; DINO uses the exact
+CPU environment required by the frozen encoder contract. The Space and app
+server must both run. The authenticated Studio URL is private.
+
+Current local validation: **144 passed, 1 skipped, 12 subtests passed**. The
+skipped check requires a private feature cache. Deployment preflight passed;
+its model/GPU fields describe the local code check, not the hosted model test.
+The pipeline, scorer, model configuration and calibrated review policy remain
+byte-identical to the base revision.
+
+Hosted checks completed on selected inputs:
+
+- Real bottles, two views: fresh Automatic selected the uncapped bottle and
+  linked it in 2/2, confidence index 0.500. Confirmed Assisted selected the same
+  bottle C in 2/2, confidence 0.286, reusing all six candidates without encoding.
+  Both remained Review required. The review table's upload-order View labels
+  and cleared stale export links were verified in this fresh hosted flow.
+- Real bottles, three views: Automatic selected the uncapped bottle but split
+  its evidence across tracks, with selected support 2/3. Assisted confirmation
+  linked the same physical bottle in 3/3 and selected it; reranking reused all
+  nine candidates and encoded none.
+- Real scrub pads, three views: fresh Automatic inference selected the cut pad
+  and linked it in 3/3, with confidence index 0.535 and Review required.
+  Confirmed Assisted also selected that pad in 3/3, confidence 0.137, reusing
+  all 15 candidates with no encoding.
+- Curated apples, three views: Automatic selected the broken apple but linked
+  it in 1/3. Correctly confirmed Assisted selected it in 3/3, confidence 0.145,
+  Review required. An earlier incorrect correspondence entry produced a wrong
+  selection; it is retained in the private notes and is not a valid scoring check.
+- A previously used development scene completed fresh 2-, 3- and 5-view
+  diagnostic checks. These checks establish execution, not correct selection.
+- Cancellation preserved the uploads and restored controls. Separate browser
+  sessions and disposable local tests checked session/cache isolation.
+- Case ZIP, HTML and JSON downloads worked through HTTPS Studio links.
+  Reopened case masks and reconstructed heatmaps matched original image sizes.
+- Observed peak GPU allocation was 7,849 MiB for the initial
+  three-view check; exact latency and maximum-upload capacity are unmeasured.
+
+Interface fixes retain inactive tab controls and correction inputs during
+reranking, leave the tab container unchanged by model callbacks, return one
+complete result update, expose global progress and cancellation before work,
+clear stale export links during work, use upload-order View labels in the
+correction table, and restore inputs after success, cancellation or failure. Groq's optional
+panel is removed. Restart helpers preserve an existing app, refuse foreign
+listeners and refuse to stop active inference. Details and private report
+screenshots remain in the working project's `development/sagemaker-deployment`.
+
+These are selected engineering and demonstration checks, not a new accuracy
+cohort. Confidence is a routing index, masks cover objects, and heatmaps are
+coarse evidence. Automatic matching still needs review; assisted matching
+requires explicit confirmation. No threshold was changed to relabel a weak
+result as ready.
+
+The curated demo inputs are two-view bottles and three-view scrub pads for both
+modes, and three-view apples for Assisted. They were selected after observing
+demo outcomes and must not be presented as an independent accuracy sample.
+Compact aggregate evidence is recorded in
+[`sagemaker-readiness.json`](../../reports/web-integration/safe/sagemaker-readiness.json).
+
+
+## Earlier inspection case workflow checks
 
 This update adds case context, an object board, an operator decision step kept
 apart from the model result, portable case files with read-only reopening, and
@@ -48,10 +111,9 @@ Gradio 6 behaviour found during browser checks:
   The Decision notice changes its content instead; the existing Review notice
   shows the same behaviour and was left as it was.
 
-Not verified: fresh LocateAnything/SAM GPU inference through this workflow,
-case files built from real model masks and heatmaps (and their size with 12 MP
-photos), hosted uploads near the 100 MB case-file limit, and operator usability
-with real items.
+At that earlier checkpoint, fresh GPU inference was unverified. The current
+SageMaker checks above supersede that limitation for the selected photos only.
+Uploads near the 100 MB case-file limit and operator usability remain unverified.
 
 ## Frozen policy and evidence update
 
@@ -117,15 +179,14 @@ seals and browser-export checks remain under `.local/app-qa/`. The local replay
 server is operator-configured QA and is excluded from deployment; it accepts
 only its exact recorded development images.
 
-## Not yet verified
+## Remaining validation boundaries
 
 - Linux Docker image execution: a Docker binary exists locally, but its daemon
   was unavailable.
-- Fresh LocateAnything/SAM GPU inference through the enhanced upload adapter.
-- GPU memory, full-pipeline latency, hosted access and restart behavior.
+- Uploads at maximum resolution/size, simultaneous-user load and exact latency benchmarks.
 - Human-confirmed matching accuracy, arbitrary user-image accuracy and an
   independent protected-cohort result.
 
-The default app still opens as an interface preview unless an inference adapter
-is explicitly enabled. Passing CPU tests or publishing ClearML artifacts does
-not establish those remaining results.
+The default local app remains a preview unless an inference adapter is enabled.
+The private SageMaker deployment explicitly enables inference. Selected hosted
+smoke checks do not establish arbitrary-image accuracy or public access.

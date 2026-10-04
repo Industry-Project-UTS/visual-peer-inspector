@@ -16,6 +16,10 @@ are optional and the case ID is generated automatically. Results show the
 combined ranking and image evidence first; score components remain available
 in a collapsed section.
 
+Progress and cancellation stay visible above the tabs. When an inspection
+finishes, open **Results**; for an initial Assisted pass, open **Review**,
+confirm the physical object IDs, and rerank. Tab navigation preserves edits.
+
 ## Decision pipeline
 
 ```text
@@ -46,6 +50,9 @@ views. Four-view inspections remain reviewable but cannot claim readiness.
 
 ## Local interface
 
+For the private GPU demo in SageMaker Studio, use the
+[SageMaker setup and restart instructions](sagemaker/README.md).
+
 Use Python 3.12 and a separate app environment:
 
 ```bash
@@ -58,18 +65,6 @@ Open `http://127.0.0.1:7860`; add `--port 7861` to change the port. This default
 starts an interface preview with inspection disabled. It does not manufacture
 scores or use a dataset lookup. The app binds to localhost without a public
 share link. Do not modify a running notebook environment to add UI packages.
-
-### Optional Groq explanation
-
-Set `GROQ_API_KEY` in the app process environment before starting the server to
-enable the **Explain the ranking** button. The app uses Groq's text-only
-`openai/gpt-oss-20b` chat completion endpoint with an eight-second timeout.
-Clicking the button sends only the view count, review state, relative scores and
-number of views supporting up to five ranked candidates. It does not send
-photos, object IDs, case fields, decisions, embeddings or cache handles. The
-generated text is temporary, is not included in the saved case, and cannot
-change the model result. The app continues normally if Groq is unconfigured or
-unavailable. Do not put the API key into source files or a case ZIP.
 
 ## Inference and runtime separation
 
@@ -90,9 +85,10 @@ adapter rejects incompatible versions. Requests use JSON/PNG and tensor
 boundaries use NPZ with pickle disabled. Only configured model downloads are
 allowed (`VPI_ALLOW_MODEL_DOWNLOADS=1`); the default uses cached pinned weights.
 
-GPU detection and segmentation on new uploads still require suitable hardware.
-CPU tests and recorded-stage replay establish integration behavior; they do not
-establish GPU latency, Linux container compatibility or accuracy on new photos.
+Fresh GPU detection and segmentation completed on selected photos in SageMaker
+Studio. See [verification](VERIFICATION.md) for the bounded checks and matching
+limitations. Exact latency, maximum-size uploads and general new-photo accuracy
+are not established by those demonstrations.
 
 ## Session data and corrections
 
@@ -111,6 +107,8 @@ into the case and decision fields.
 
 The Review tab presents proposed IDs across all views. The user must confirm
 the identity map before assisted scoring; editing rows clears that confirmation.
+View 1, View 2 and later labels follow upload order and match the image gallery.
+Check the actual images and boxes before assigning the same ID across views.
 Predicted suggestions are not treated as confirmed identities by themselves.
 HTML exports embed images and score tables; JSON preserves all public evidence
 and method/provenance fields without model tensors or server cache secrets.

@@ -319,6 +319,8 @@ def test_package_contains_only_code_and_pinned_runtime(tmp_path):
     assert (output / "Dockerfile").is_file()
     assert (output / "src/visual_peer_inspector/web/pipeline_config.json").is_file()
     assert (output / "src/visual_peer_inspector/web/frozen_review_policy.json").is_file()
+    assert (output / "apps/web/sagemaker/launch_sagemaker.sh").is_file()
+    assert (output / "apps/web/sagemaker/service.py").is_file()
     assert not (output / "tests").exists()
     assert not (output / "reports").exists()
     assert not list(output.rglob("*.pt")) and not list(output.rglob("*.safetensors"))

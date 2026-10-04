@@ -560,19 +560,19 @@ def test_ui_workflow_from_upload_through_assisted_review_decision_save_and_reope
     callbacks["edit_case"](state, first_case, "Dish soap bottle", "B-12", "")
     callbacks["change_mode"](state, "assisted")
 
-    list(callbacks["do_inspect"](state))
+    callbacks["do_inspect"](state)
     assert state.result.mode == "assisted" and not state.result.ranking
     assert state.result.review_state == "insufficient_evidence"
     assert state.case.inspection_number == 1
     with pytest.raises(gr.Error, match="operator name"):
         callbacks["record_finding"](state, first_case, "Dish soap bottle", "B-12", "", GROUP, "hold", "f", "r", "")
 
-    updates = list(callbacks["confirm_and_rerun"](state, state.corrections, True))
+    updates = callbacks["confirm_and_rerun"](state, state.corrections, True)
     result = state.result
     assert backend.requests[-1].corrections is not None and result.mode == "assisted"
     assert result.provenance["input_source"] == "synthetic_test"
     assert result.ranking and state.case.inspection_number == 2 and state.case.corrections
-    assert any("Synthetic test data" in str(value) for output in updates for value in output.values())
+    assert any("Synthetic test data" in str(value) for value in updates.values())
     calls = dict(backend.stages.calls)
     requests = len(backend.requests)
 
@@ -617,7 +617,11 @@ def test_ui_reads_case_fields_at_each_action_without_relying_on_blur(tmp_path):
     button = next(c["id"] for c in app.config["components"] if c.get("props", {}).get("elem_id") == "inspect-button")
     first = next(d for d in app.config["dependencies"] if [button, "click"] in [list(t) for t in d["targets"]])
     then = next(d for d in app.config["dependencies"] if d["trigger_after"] == first["id"])
-    assert (names[first["id"]], names[then["id"]]) == ("edit_case", "do_inspect")
+    run = next(d for d in app.config["dependencies"] if d["trigger_after"] == then["id"])
+    assert (names[first["id"]], names[then["id"]], names[run["id"]]) == (
+        "edit_case", "prepare_inspection", "do_inspect"
+    )
+    assert then["trigger_only_on_success"] and run["trigger_only_on_success"]
 
     fresh = live(callbacks["start_new_case"](state, "LOT-7", "Bottles", "B-2", "Operator D"))
     assert fresh.case.case_id != "LOT-7" and fresh.case.operator == "Operator D" and fresh.case.item == ""
@@ -629,8 +633,8 @@ def test_ui_tied_result_stays_open_and_bad_case_file_is_reported(tmp_path, clean
     backend = SyntheticBackend(tmp_path / "cache")
     callbacks = {f.fn.__name__: f.fn for f in build_app(backend).fns.values() if f.fn}
     state = live(callbacks["prepare_uploads"](scene(tmp_path, odd=False), Session()))
-    list(callbacks["do_inspect"](state))
-    list(callbacks["confirm_and_rerun"](state, state.corrections, True))
+    callbacks["do_inspect"](state)
+    callbacks["confirm_and_rerun"](state, state.corrections, True)
     result = state.result
     assert result.selected_identity_id is None and result.review_state == "review_required"
     assert "No unique selection" in summary_html(state)

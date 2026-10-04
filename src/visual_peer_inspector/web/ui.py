@@ -44,7 +44,6 @@ from .case import (
     update_details,
 )
 from .help_panel import app_header
-from .groq_explanation import ExplanationUnavailable, explain_result
 from .presentation import (
     RANK_HEADERS,
     SCORE_HEADERS,
@@ -60,7 +59,7 @@ from .presentation import (
 
 CSS = Path(__file__).with_name("styles.css").read_text(encoding="utf-8")
 LOG = logging.getLogger(__name__)
-HEADERS = ["View ID", "Object ID", "Identity ID", "Left", "Top", "Right", "Bottom"]
+HEADERS = ["View", "Object ID", "Identity ID", "Left", "Top", "Right", "Bottom"]
 DECISION_HINT = '<p class="empty-notice">Run an inspection, check the items physically, then record your decision here.</p>'
 
 
@@ -107,8 +106,15 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
         # A reopened case is kept apart from the live session and never reaches a backend.
         opened = gr.State(None, time_to_live=1800)
         app_header(connected)
+        readiness = gr.Markdown(
+            "" if connected else "Inspection is not connected yet.", elem_id="readiness"
+        )
+        cancel_run = gr.Button(
+            "Cancel inspection", visible=False, elem_id="cancel-inspection"
+        )
         with gr.Tabs(selected="scene", elem_id="inspection-tabs") as tabs:
-            with gr.Tab("Images", id="scene"):
+            # Keep inactive controls mounted so cross-tab updates retain their values.
+            with gr.Tab("Images", id="scene", render_children=True):
                 gr.HTML(
                     '<div class="section-intro"><h2>New inspection</h2><p>Upload 2–5 clear images of the same group of objects from different angles.</p></div>'
                 )
@@ -176,18 +182,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                         scale=0,
                         min_width=115,
                     )
-                    cancel_run = gr.Button(
-                        "Cancel inspection",
-                        visible=False,
-                        elem_id="cancel-inspection",
-                        scale=0,
-                        min_width=135,
-                    )
-                readiness = gr.Markdown(
-                    "" if connected else "Inspection is not connected yet.",
-                    elem_id="readiness",
-                )
-            with gr.Tab("Results", id="results"):
+            with gr.Tab("Results", id="results", render_children=True):
                 overview = gr.HTML(summary_html(Session()))
                 with gr.Column(
                     visible=False, elem_id="result-controls"
@@ -219,25 +214,6 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                         "Scores compare objects; they are not probabilities. A missing link means the app could not match that object in a view. Masks show objects and heatmaps show coarse evidence, not defect outlines.",
                         elem_classes="quiet",
                     )
-                    with gr.Accordion("Explain the ranking (optional)", open=False, elem_id="explanation-panel"):
-                        gr.Markdown(
-                            "Clicking sends only anonymous score summaries and view counts to Groq. Photos, case details and decisions stay here. This explanation cannot change the ranking.",
-                            elem_classes="quiet",
-                        )
-                        explain_button = gr.Button(
-                            "Write a short explanation",
-                            interactive=bool(os.environ.get("GROQ_API_KEY")),
-                            elem_id="explain-button",
-                        )
-                        explanation = gr.Textbox(
-                            label="Explanation",
-                            interactive=False,
-                            lines=3,
-                            max_lines=6,
-                            elem_id="explanation-text",
-                        )
-                        if not os.environ.get("GROQ_API_KEY"):
-                            gr.Markdown("Optional explanation is unavailable until Groq is configured.", elem_classes="quiet")
                     with gr.Accordion("Score tables and components", open=False, elem_id="score-details"):
                         rankings = gr.Dataframe(
                             headers=RANK_HEADERS,
@@ -256,7 +232,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                             "**Observation scores:** Automatic averages the normalized ranks of its component scores. Assisted measures patch mismatch against other confirmed objects. Within-view ranks are used to combine views. Compact labels on images map to the full object IDs in the tables.",
                             elem_classes="quiet",
                         )
-            with gr.Tab("Review", id="review"):
+            with gr.Tab("Review", id="review", render_children=True):
                 review_notice = gr.Markdown(
                     "Run an inspection to review and correct objects.",
                     elem_classes="empty-notice",
@@ -323,7 +299,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     rerun = gr.Button(
                         "Confirm identities and rerank", interactive=False, variant="primary"
                     )
-            with gr.Tab("Decision", id="decision"):
+            with gr.Tab("Decision", id="decision", render_children=True):
                 decision_case = gr.HTML("", elem_id="decision-case")
                 decision_notice = gr.HTML(
                     DECISION_HINT
@@ -357,7 +333,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     decision_status = gr.Markdown("", elem_id="decision-status")
                 follow_up_panel = gr.HTML("", elem_id="follow-up-panel")
                 timeline = gr.HTML("", elem_id="case-timeline")
-            with gr.Tab("Report", id="report"):
+            with gr.Tab("Report", id="report", render_children=True):
                 report_note = gr.Markdown(
                     "Run an inspection to create a report.", elem_classes="empty-notice"
                 )
@@ -385,7 +361,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     json_file = gr.File(
                         label="JSON result", interactive=False, visible=False
                     )
-            with gr.Tab("Saved cases", id="cases"):
+            with gr.Tab("Saved cases", id="cases", render_children=True):
                 gr.HTML(
                     '<div class="section-intro"><h2>Open a saved case</h2><p>Upload a case ZIP you downloaded earlier. It opens for review without running the models again.</p></div>'
                 )
@@ -442,7 +418,6 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             evidence,
             rankings,
             scores,
-            explanation,
             review_evidence,
             review_view,
             review_image,
@@ -503,7 +478,6 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 evidence: [],
                 rankings: [],
                 scores: [],
-                explanation: "",
                 review_evidence: [],
                 review_view: gr.update(choices=[], value=None, interactive=False),
                 review_image: None,
@@ -640,6 +614,37 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
 
         progress_tracker = gr.Progress()
 
+        def prepare_inspection(current, rows=None, checked=None):
+            if backend is None:
+                raise gr.Error("Inspection is not connected yet.")
+            if len(current.views) < MIN_VIEWS:
+                raise gr.Error("Add at least two different views before inspecting.")
+            if rows is not None:
+                if not checked:
+                    raise gr.Error("Check the object identities across all views, then confirm them before reranking.")
+                try:
+                    parse_corrections(rows, current.views)
+                except InspectionError as error:
+                    raise gr.Error(str(error)) from error
+            # Show cancellation before the model callback returns its complete result.
+            return {
+                **case_view(current), session: current,
+                overview: summary_html(Session()), board: "", machine_card: "",
+                # Hiding a mounted parent resets child values in Gradio's client.
+                # Keep correction inputs mounted while clearing prior evidence.
+                evidence: [], rankings: [], scores: [],
+                case_file: gr.update(value=None, visible=False),
+                report_file: gr.update(value=None, visible=False),
+                json_file: gr.update(value=None, visible=False),
+                export: gr.update(interactive=False),
+                report_note: "Inspection in progress. Save a fresh report after reranking.",
+                readiness: "Inspection in progress…",
+                inspect: gr.update(interactive=False), files: gr.update(interactive=False),
+                reset: gr.update(interactive=False), mode: gr.update(interactive=False),
+                cancel_run: gr.update(value="Cancel inspection", interactive=True,
+                                      visible=callable(getattr(backend, "cancel", None))),
+            }
+
         def do_inspect(current, rows=None, progress=progress_tracker):
             if backend is None:
                 raise gr.Error(
@@ -662,21 +667,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 mode="assisted" if corrected is not None else current.mode,
             )
             current.active_request_id = request.request_id
-            yield {
-                **empty_results(),
-                **case_view(current),
-                session: current,
-                readiness: "Inspection in progress…",
-                inspect: gr.update(interactive=False),
-                files: gr.update(interactive=False),
-                reset: gr.update(interactive=False),
-                mode: gr.update(interactive=False),
-                cancel_run: gr.update(
-                    value="Cancel inspection",
-                    visible=callable(getattr(backend, "cancel", None)),
-                    interactive=True,
-                ),
-            }
+            completion_update = {}
             try:
 
                 def report_progress(stage):
@@ -693,25 +684,29 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     (row["view_id"], row["candidate_id"]): row.get("identity_id", "")
                     for row in result.score_metadata.get("suggested_identities", [])
                 }
+                view_labels = {view.view_id: f"View {i}" for i, view in enumerate(current.views, 1)}
+                view_order = {view.view_id: i for i, view in enumerate(current.views)}
                 current.corrections = [
-                    [o.box.view_id, o.box.object_id,
+                    [view_labels[o.box.view_id], o.box.object_id,
                      suggestions.get((o.box.view_id, o.box.object_id), "" if o.identity_status == "unknown" else o.box.identity_id),
                      *o.box.xyxy]
-                    for o in result.observations
+                    for o in sorted(result.observations, key=lambda o: (view_order[o.box.view_id], o.box.object_id))
                 ]
                 choices = ["All objects", *dict.fromkeys(
                     [r.identity_id for r in result.ranking] + [o.box.identity_id for o in result.observations]
                 )]
                 selected = "All objects"
                 first_view = current.views[0]
-                yield {
+                completion_update = {
                     session: current,
                     result_controls: gr.update(visible=True),
                     review_controls: gr.update(visible=True),
                     report_controls: gr.update(visible=True),
                     review_notice: gr.update(value="Check the proposed object identities across your views.", visible=False),
                     overview: summary_html(current),
-                    readiness: "",
+                    readiness: ("**Objects found.** Open **Review** to confirm the physical object IDs, then rerank."
+                                if request.decision_mode == "assisted" and corrected is None
+                                else "**Inspection complete.** Open **Results** to see the combined ranking."),
                     identity: gr.update(
                         choices=choices, value=selected, interactive=True
                     ),
@@ -719,7 +714,6 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     evidence: evidence_gallery(current, selected, "Boxes"),
                     rankings: ranking_rows(current),
                     scores: observation_rows(current),
-                    explanation: "",
                     review_evidence: review_gallery(current, current.corrections),
                     review_view: gr.update(
                         choices=[
@@ -745,7 +739,6 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     decision_object: gr.update(choices=decision_choices(result), value=None),
                     decision_status: "",
                     **case_view(current),
-                    tabs: gr.update(selected="review" if request.decision_mode == "assisted" and corrected is None else "results"),
                 }
             except Exception as error:  # noqa: BLE001 - contain failures at the backend boundary
                 # Do not expose model errors, file paths or uploaded data in UI/logs.
@@ -758,25 +751,27 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     if isinstance(error, InspectionError)
                     else "The inspection could not finish. Your images are still here; try again."
                 )
-                yield {
+                completion_update = {
                     **empty_results(),
                     **case_view(current),
                     session: current,
                     readiness: message
                     if isinstance(error, InspectionCancelled)
                     else f"**Inspection failed.** {message}",
-                    tabs: gr.update(selected="scene"),
                 }
             finally:
                 current.active_request_id = None
-                yield {
-                    session: current,
-                    inspect: gr.update(interactive=True),
-                    files: gr.update(interactive=True),
-                    reset: gr.update(interactive=True),
-                    mode: gr.update(interactive=True),
-                    cancel_run: gr.update(visible=False),
-                }
+            # The preparation event already exposed progress and cancellation.
+            # Return all result/visibility updates once, without stream deltas.
+            return {
+                **completion_update,
+                session: current,
+                inspect: gr.update(interactive=True),
+                files: gr.update(interactive=True),
+                reset: gr.update(interactive=True),
+                mode: gr.update(interactive=True),
+                cancel_run: gr.update(visible=False),
+            }
 
         def cancel_inspection(current):
             cancel = getattr(backend, "cancel", None)
@@ -788,10 +783,10 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 return gr.update(value="Cancelling…", interactive=False)
             return gr.update(value="Cancel inspection", interactive=True)
 
-        def confirm_and_rerun(current, rows, checked):
+        def confirm_and_rerun(current, rows, checked, progress=progress_tracker):
             if not checked:
                 raise gr.Error("Check the object identities across all views, then confirm them before reranking.")
-            yield from do_inspect(current, rows)
+            return do_inspect(current, rows, progress)
 
         def edit_identities(current, view_id, rows):
             current, preview, notice = review_preview(current, view_id, rows)
@@ -848,8 +843,9 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             )
             object_id = f"manual_{uuid4().hex[:8]}"
             box = Box(view_id, object_id, identity_id.strip(), xyxy)
+            view_label = next(f"View {i}" for i, v in enumerate(current.views, 1) if v.view_id == view_id)
             updated = [list(row) for row in rows] + [
-                [view_id, object_id, box.identity_id, *xyxy]
+                [view_label, object_id, box.identity_id, *xyxy]
             ]
             try:
                 boxes = parse_corrections(
@@ -952,12 +948,6 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
         def opened_gallery(earlier, value):
             return evidence_gallery(earlier.session, "All objects", value) if earlier else []
 
-        def explain_inspection(current):
-            try:
-                return explain_result(current)
-            except ExplanationUnavailable as error:
-                return str(error)
-
         def begin_follow_up(current, earlier, *details):
             if earlier is None:
                 raise gr.Error("Open a saved case first.")
@@ -983,12 +973,18 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
         reset.click(
             start_over, [session], [*all_outputs, files, title, tabs], **event_options
         )
-        run_outputs = [*all_outputs, files, reset, tabs, cancel_run, mode]
+        run_outputs = [*all_outputs, files, reset, cancel_run, mode]
+        # Keep the cancel button and uploaded images usable while the worker runs.
+        run_options = {**event_options, "show_progress": "minimal", "show_progress_on": readiness}
         # Store the case fields as shown before inspecting, so a missed blur event cannot lose them.
         inspect.click(
             edit_case, [session, *case_fields], [session, case_id, *case_outputs], **event_options
-        ).then(do_inspect, [session], run_outputs, **event_options)
-        rerun.click(confirm_and_rerun, [session, corrections, confirmed], run_outputs, **event_options)
+        ).success(prepare_inspection, [session], run_outputs, **event_options).success(
+            do_inspect, [session], run_outputs, **run_options
+        )
+        rerun.click(
+            prepare_inspection, [session, corrections, confirmed], run_outputs, **event_options
+        ).success(confirm_and_rerun, [session, corrections, confirmed], run_outputs, **run_options)
         confirmed.change(lambda checked: gr.update(interactive=bool(checked)), [confirmed], [rerun], **event_options)
         corrections.change(
             edit_identities, [session, review_view, corrections],
@@ -1000,9 +996,6 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             [session, identity, layer],
             evidence,
             **event_options,
-        )
-        explain_button.click(
-            explain_inspection, [session], [explanation], **event_options
         )
         review_view.change(
             review_preview,

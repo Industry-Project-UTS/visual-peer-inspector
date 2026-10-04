@@ -39,7 +39,7 @@ def package(output: Path):
             for p in directory.rglob("*")
             if p.is_file()
             and "__pycache__" not in p.parts
-            and p.suffix in {".py", ".json", ".css", ".svg", ".txt", ".md"}
+            and p.suffix in {".py", ".json", ".css", ".svg", ".txt", ".md", ".sh"}
         )
     if any(p.is_symlink() for p in sources):
         raise ValueError("Deployment input may not contain symbolic links.")
