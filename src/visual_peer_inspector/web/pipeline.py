@@ -39,6 +39,7 @@ from .core import (
     validate_result,
 )
 from .deployment import load_review_policy, pipeline_config, pipeline_fingerprint
+from .heatmaps import HEATMAP_STYLE, heatmap_overlay
 
 
 class ModelStages(Protocol):
@@ -312,10 +313,8 @@ class UploadPipeline:
             heatmap = None
             if patchmap is not None and c.crop is not None:
                 projected = project_crop_heatmap(patchmap,c.crop,c.mask)
-                finite = projected[np.isfinite(projected)]
-                strength = np.clip(np.nan_to_num(projected,nan=0)/max(float(finite.max()) if len(finite) else 0,1e-12),0,1)
                 image = next(v.image for v in request.views if v.view_id == c.box.view_id)
-                heatmap = Image.composite(Image.new('RGB',image.size,'#ec7c36'),image,Image.fromarray((strength*255).astype(np.uint8)))
+                heatmap = heatmap_overlay(image, projected, c.mask)
             output.append(Observation(Box(c.box.view_id,c.box.object_id,identity,c.box.xyxy),components.get('P1_current'),
                 Image.fromarray(c.mask.astype(np.uint8)*255),heatmap,score,
                 'object_bank' if request.decision_mode=='assisted' else 'winner_consensus_components', components,
@@ -339,6 +338,7 @@ class UploadPipeline:
              'missing_links':[v for v in views if selected and v not in ranking[0].view_ids],
              'suggested_identities':decision['suggested_identities'] if request.decision_mode=='automatic' or request.corrections is None else
                 [{'view_id':c.box.view_id,'candidate_id':c.box.object_id,'identity_id':c.box.identity_id,'status':'confirmed' if c.box.identity_id else 'unknown'} for c in candidates],
-             'all_object_rankings':raw_rankings,'heatmap_scope':'coarse foreground patch evidence; independently scaled for display'})
+             'all_object_rankings':raw_rankings,'heatmap_scope':'coarse foreground patch evidence; independently scaled for display',
+             'heatmap_style':HEATMAP_STYLE})
         validate_result(result,request)
         return result

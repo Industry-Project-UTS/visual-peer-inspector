@@ -1,0 +1,94 @@
+{
+  "schema": "vpi-hosted-feature-validation-v1",
+  "base_commit": "80eb96ccfec8cbf41972840ac8df4e697a0812ca",
+  "local_tests": {
+    "passed": 155,
+    "skipped_private_cache": 1,
+    "subtests_passed": 12
+  },
+  "science_and_review_policy_changed": false,
+  "live_checks": [
+    "Fresh three-view automatic and assisted inference",
+    "Initial Review preview after completion",
+    "All five evidence layers and single-object filtering",
+    "Missing-link black-background fallback",
+    "Gallery fullscreen and close",
+    "Duplicate identity rejection and correction",
+    "First-corner drawing cancellation",
+    "Two-corner box creation in original pixels and row removal",
+    "Four operator actions and validation without Error badges",
+    "ZIP/HTML/JSON generation",
+    "Saved-case five-layer reopening without inference",
+    "Opening saved case preserves live inspection",
+    "Follow-up parent link with cleared uploads and results",
+    "New case clears old download links"
+  ],
+  "fresh_examples": [
+    {
+      "scene": "curated development dinosaurs",
+      "route": "automatic",
+      "views": 3,
+      "selected_support": 1,
+      "ranking_confidence_index_rounded": 0.007,
+      "suitable_all_view_demo": false
+    },
+    {
+      "scene": "curated development fish",
+      "route": "automatic",
+      "views": 3,
+      "selected_support": 2,
+      "ranking_confidence_index_rounded": 0.345,
+      "review_state": "review_required",
+      "selected_object": "fish missing dorsal fin"
+    },
+    {
+      "scene": "curated development fish",
+      "route": "assisted",
+      "views": 3,
+      "selected_support": 3,
+      "ranking_confidence_index_rounded": 0.273,
+      "relative_score": 1.0,
+      "review_state": "result_ready",
+      "selected_object": "fish missing dorsal fin",
+      "cache": {
+        "reused_candidates": 9,
+        "encoded_candidates": 0
+      }
+    }
+  ],
+  "correspondence_correction": "First fish assisted input incorrectly matched View 2 object_2 with I001. Original-image review corrected View 2 object_2 to I003 and object_3 to I001. The first attempt is excluded from valid assisted conclusions.",
+  "remote_exports": {
+    "reopened_without_inference": true,
+    "cases": [
+      "VPI-20261004-1F1D",
+      "VPI-20261004-8488",
+      "VPI-20261004-DB6B"
+    ],
+    "all_five_layers_valid": true
+  },
+  "download_limit": "Chrome blocked both attempted new ZIP downloads by organisation policy. No override attempted. Exports preserved in the Space.",
+  "sharing": {
+    "fixed_free_domain_prepared": true,
+    "official_agent_installed": true,
+    "private_token_configured": true,
+    "new_demo_password_configured": false,
+    "public_tunnel_opened": false,
+    "external_login_verified": false,
+    "local_auth_preflight_passed": true
+  },
+  "limits": [
+    "Curated examples are not an accuracy cohort",
+    "Assisted depends on correct physical correspondence",
+    "Automatic matching still fragments objects",
+    "Large concurrent load not tested",
+    "Public activation and restart roundtrip pending user password entry"
+  ],
+  "final_source_verification": {
+    "source_files_verified": 151,
+    "mismatches": 0,
+    "manifest_sha256": "a2e88e5593c71bc86e574c0b294bd65fc93ec05c68d0f94d4eb5f112a0973b2d",
+    "running_pid": 4345,
+    "http_ready": true,
+    "public_tunnel_opened": false
+  }
+}

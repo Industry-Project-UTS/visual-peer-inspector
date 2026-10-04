@@ -50,6 +50,7 @@ from .presentation import (
     discard_exports,
     draw_boxes,
     evidence_gallery,
+    evidence_note,
     identity_aliases,
     object_board_html,
     observation_rows,
@@ -210,8 +211,8 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                         buttons=["fullscreen"],
                         elem_id="result-evidence",
                     )
-                    gr.Markdown(
-                        "Scores compare objects; they are not probabilities. A missing link means the app could not match that object in a view. Masks show objects and heatmaps show coarse evidence, not defect outlines.",
+                    layer_note = gr.Markdown(
+                        "",
                         elem_classes="quiet",
                     )
                     with gr.Accordion("Score tables and components", open=False, elem_id="score-details"):
@@ -312,6 +313,10 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                         '<div class="section-intro compact"><h2>Record your finding</h2><p>'
                         + SEPARATION_NOTE + '</p></div>'
                     )
+                    decision_operator = gr.Textbox(
+                        label="Your name (required to record a decision)",
+                        max_length=80, max_lines=1, elem_id="decision-operator",
+                    )
                     decision_object = gr.Dropdown(
                         label="Object your finding refers to", choices=[], value=None, elem_id="decision-object"
                     )
@@ -386,6 +391,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                             label="Saved evidence by view", columns=2, height="auto", object_fit="contain",
                             interactive=False, buttons=["fullscreen"], elem_id="opened-evidence",
                         )
+                        opened_layer_note = gr.Markdown("", elem_classes="quiet")
                         opened_rankings = gr.Dataframe(
                             headers=RANK_HEADERS, datatype=["number", "str", "number", "str", "str"],
                             value=[], interactive=False, label="Object ranking", type="array",
@@ -416,6 +422,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             identity,
             layer,
             evidence,
+            layer_note,
             rankings,
             scores,
             review_evidence,
@@ -438,6 +445,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             machine_card,
             decision_object,
             decision_status,
+            decision_operator,
             case_banner,
             decision_case,
             human_card,
@@ -445,7 +453,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             timeline,
         ]
         case_fields = [case_id, item, batch, operator]
-        case_outputs = [case_banner, decision_case, human_card, follow_up_panel, timeline]
+        case_outputs = [case_banner, decision_case, human_card, follow_up_panel, timeline, decision_operator]
 
         def case_view(current, message=""):
             case = ensure_case(current)
@@ -455,6 +463,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 human_card: decision_card_html(case, current.result),
                 follow_up_panel: follow_up_html(case, current.result),
                 timeline: timeline_html(case),
+                decision_operator: case.operator,
             }
 
         def empty_results():
@@ -476,6 +485,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 ),
                 layer: gr.update(value="Boxes", interactive=False),
                 evidence: [],
+                layer_note: "",
                 rankings: [],
                 scores: [],
                 review_evidence: [],
@@ -710,8 +720,9 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                     identity: gr.update(
                         choices=choices, value=selected, interactive=True
                     ),
-                    layer: gr.update(interactive=True),
+                    layer: gr.update(value="Boxes", interactive=True),
                     evidence: evidence_gallery(current, selected, "Boxes"),
+                    layer_note: evidence_note(current),
                     rankings: ranking_rows(current),
                     scores: observation_rows(current),
                     review_evidence: review_gallery(current, current.corrections),
@@ -868,20 +879,26 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
         saved_outputs = [report_file, json_file, case_file]
 
         def record_finding(current, case_id_value, item_value, batch_value, operator_value,
-                           scope, action, finding_text, reason_text, responsible_text):
+                           scope, action, finding_text, reason_text, responsible_text,
+                           decision_operator_value=None):
             if current.result is None:
-                raise gr.Error("Run an inspection before recording a decision.")
+                return {decision_status: "**Decision not recorded:** Run an inspection first."}
             case = ensure_case(current)
             try:
+                if decision_operator_value is not None:
+                    operator_value = decision_operator_value
                 update_details(case, case_id_value, item_value, batch_value, operator_value)
                 record_decision(case, current.result, action=action, finding=finding_text, reason=reason_text,
                                 object_scope=scope, responsible=responsible_text)
             except InspectionError as error:
-                raise gr.Error(str(error)) from error
+                # Expected form validation must not replace the result cards with
+                # Gradio's generic Error overlays or discard entered findings.
+                return {decision_status: f"**Decision not recorded:** {error}"}
             # Earlier downloads no longer contain the latest human record.
             discard_exports(current)
             return {
                 session: current,
+                operator: case.operator,
                 **case_view(current),
                 **{component: gr.update(value=None, visible=False) for component in saved_outputs},
                 report_note: "Save the case again to include your latest decision.",
@@ -914,7 +931,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
         opened_outputs = [
             opened, opened_view, opened_status, opened_header, opened_machine, opened_human,
             opened_follow_up, opened_board, opened_layer, opened_evidence, opened_rankings,
-            opened_scores, opened_timeline,
+            opened_scores, opened_timeline, opened_layer_note,
         ]
 
         def open_saved_case(path):
@@ -940,6 +957,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
                 opened_board: object_board_html(view),
                 opened_layer: "Boxes",
                 opened_evidence: evidence_gallery(view, "All objects", "Boxes"),
+                opened_layer_note: evidence_note(view),
                 opened_rankings: ranking_rows(view),
                 opened_scores: observation_rows(view),
                 opened_timeline: timeline_html(earlier.case),
@@ -986,18 +1004,20 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
             prepare_inspection, [session, corrections, confirmed], run_outputs, **event_options
         ).success(confirm_and_rerun, [session, corrections, confirmed], run_outputs, **run_options)
         confirmed.change(lambda checked: gr.update(interactive=bool(checked)), [confirmed], [rerun], **event_options)
-        corrections.change(
+        # Only user edits trigger these callbacks. Programmatic completion updates
+        # otherwise race with old dropdown values and erase the Review preview.
+        corrections.input(
             edit_identities, [session, review_view, corrections],
             [session, review_image, drawing_status, review_evidence, confirmed, rerun], **event_options,
         )
         gr.on(
-            [identity.change, layer.change],
+            [identity.input, layer.input],
             evidence_gallery,
             [session, identity, layer],
             evidence,
             **event_options,
         )
-        review_view.change(
+        review_view.input(
             review_preview,
             [session, review_view, corrections],
             [session, review_image, drawing_status],
@@ -1023,9 +1043,9 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
         )
         record.click(
             record_finding,
-            [session, *case_fields, decision_object, decision_action, finding, reason, responsible],
+            [session, *case_fields, decision_object, decision_action, finding, reason, responsible, decision_operator],
             [session, *case_outputs, *saved_outputs, report_note, decision_object, decision_action,
-             finding, reason, responsible, decision_status],
+             finding, reason, responsible, decision_status, operator],
             **event_options,
         )
         export.click(
@@ -1037,7 +1057,7 @@ def build_app(backend: InspectionBackend | None = None) -> gr.Blocks:
         # Reading a saved case never touches the live session or a backend.
         saved_options = {"concurrency_limit": 1, "concurrency_id": "saved-cases", "api_visibility": "private"}
         case_upload.change(open_saved_case, [case_upload], opened_outputs, **saved_options)
-        opened_layer.change(opened_gallery, [opened, opened_layer], opened_evidence, **saved_options)
+        opened_layer.input(opened_gallery, [opened, opened_layer], opened_evidence, **saved_options)
         follow_up_button.click(
             begin_follow_up, [session, opened, *case_fields],
             [*all_outputs, files, title, opened_status, *case_fields],

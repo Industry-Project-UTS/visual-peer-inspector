@@ -120,6 +120,12 @@ class PhysicalObjectPresentationTests(unittest.TestCase):
         self.assertNotEqual(heatmap.getpixel((45, 80)), self.views[0].image.getpixel((45, 80)))
         self.assertEqual(before, self.views[0].image.tobytes())
 
+    def test_missing_mask_does_not_render_a_misleading_blank_black_image(self):
+        self.session.result = replace(self.result, observations=tuple(replace(o, mask=None) for o in self.observations))
+        gallery = evidence_gallery(self.session, "All objects", "Objects on black")
+        self.assertIn("original image shown", gallery[0][1])
+        self.assertEqual(gallery[0][0].getpixel((45, 80)), self.views[0].image.getpixel((45, 80)))
+
     def test_scores_show_real_components_and_fusion_contributors(self):
         rows = observation_rows(self.session)
         self.assertEqual(rows[0][4:7], [.35, .8, "used"])
@@ -129,6 +135,10 @@ class PhysicalObjectPresentationTests(unittest.TestCase):
         unknown = replace(self.observations[0], score=None, normalized_rank=None, identity_status="unknown")
         self.session.result = replace(self.result, observations=(unknown,))
         self.assertIsNone(observation_rows(self.session)[0][4])
+
+    def test_score_rows_follow_upload_order_even_when_worker_records_do_not(self):
+        self.session.result = replace(self.result, observations=tuple(reversed(self.observations)))
+        self.assertEqual([row[0] for row in observation_rows(self.session)], ["View 1", "View 2"])
 
     def test_report_contains_evidence_and_provenance_without_cache_or_tensors(self):
         self.session.result = replace(self.result, provenance={

@@ -61,3 +61,42 @@ Automatic matching remains reviewable. Assisted matching confirms physical
 identities before the frozen scorer ranks objects. A saved case preserves the
 model result separately from the operator's finding. Test the intended photos
 before presenting a demonstration; the score is not a correctness probability.
+
+## Optional fixed free ngrok address
+
+This route forwards only the app on port 7860. It requires the account's assigned
+free HTTPS development domain and the official Linux ngrok agent installed at
+`.runtime/ngrok/ngrok`. Keep its minimal token configuration in
+`.runtime/ngrok/ngrok.yml` with mode 600. Keep `.runtime/ngrok` owner-only and
+outside Git. Do not upload a token or demo password in the application package.
+
+The account owner enters the separate demo password at a hidden prompt:
+
+```bash
+python apps/web/sagemaker/configure_demo.py \
+  --url https://YOUR-ASSIGNED-DOMAIN.ngrok-free.dev --username demo
+```
+
+Once an inspection is saved and the app is idle, switch to protected mode:
+
+```bash
+python apps/web/sagemaker/service.py stop
+python apps/web/sagemaker/fixed_demo.py start-app --settings .runtime/ngrok/demo.json
+nohup python apps/web/sagemaker/fixed_demo.py start-tunnel \
+  --settings .runtime/ngrok/demo.json > logs/ngrok.log 2>&1 < /dev/null &
+```
+
+The helper refuses public forwarding if the app accepts anonymous configuration
+requests, the configured login fails, or Gradio's download root differs from the
+fixed URL. Request inspection is disabled. Verify the external login, upload and
+download flow before sharing the address. The local authentication check alone
+does not verify public connectivity.
+
+After a Space restart, run `start-app` and `start-tunnel` again. The same assigned
+domain is reused; the Space, app and tunnel must all be running. This is a
+supervised demo subject to the free plan's limits, not always-on hosting. Do not
+start multiple tunnel agents for the same address. Stop the owned ngrok process
+before returning to private Studio mode with `service.py stop` / `start`.
+
+References: [ngrok free plan](https://ngrok.com/docs/pricing-limits/free-plan-limits)
+and [Gradio authentication](https://www.gradio.app/guides/sharing-your-app).

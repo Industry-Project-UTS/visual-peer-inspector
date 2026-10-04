@@ -16,6 +16,7 @@ from pathlib import Path
 from PIL import Image, ImageChops, ImageDraw
 
 from .core import Box, Session
+from .heatmaps import HEATMAP_STYLE
 
 LABELS = {
     "result_ready": "Result ready",
@@ -175,6 +176,16 @@ def draw_boxes(image: Image.Image, boxes: list[Box], winner: str | None = None,
     return canvas
 
 
+def evidence_note(session: Session) -> str:
+    base = ("Scores are not probabilities. Masks cover whole objects; Objects on black removes the background. "
+            "Heatmaps show coarse patch mismatch, not defect boundaries.")
+    if session.result and session.result.mode == "automatic":
+        base += " Automatic heatmaps show the forward-patch component; the final ranking also uses other components."
+    if session.result and session.result.score_metadata.get("heatmap_style") == HEATMAP_STYLE:
+        return base + " **Heatmap scale: blue → cyan → yellow → red = lower → higher mismatch.** Scaled separately for each object; compare objects using the score tables."
+    return base + " Earlier saved cases use orange intensity for their heatmap; stronger orange means higher mismatch."
+
+
 def evidence_gallery(session: Session, identity: str | None, layer: str):
     if not session.result:
         return []
@@ -195,9 +206,10 @@ def evidence_gallery(session: Session, identity: str | None, layer: str):
             for observation in observations:
                 if observation.mask is not None:
                     combined = ImageChops.lighter(combined, observation.mask.convert("L"))
-            canvas = Image.composite(canvas, Image.new("RGB", canvas.size), combined)
-            if observations and not any(o.mask is not None for o in observations):
-                note += " · Object masks unavailable"
+            if combined.getbbox() is not None:
+                canvas = Image.composite(canvas, Image.new("RGB", canvas.size), combined)
+            else:
+                note += " · No foreground mask; original image shown"
         elif layer in {"Masks", "Heatmaps"}:
             applied = False
             for observation in observations:
@@ -212,8 +224,9 @@ def evidence_gallery(session: Session, identity: str | None, layer: str):
                     support = observation.mask.convert("L") if observation.mask is not None else Image.new("L", canvas.size)
                     if observation.mask is None:
                         ImageDraw.Draw(support).rectangle(observation.box.xyxy, fill=255)
-                    alpha = support.point(lambda value: int(value * 0.45))
-                    canvas = Image.composite(overlay.convert("RGB"), canvas, alpha)
+                    # Heatmaps already include the photo. Blending a second time
+                    # hid mismatch on similarly coloured objects such as bottles.
+                    canvas = Image.composite(overlay.convert("RGB"), canvas, support)
                 applied = True
             if observations and not applied:
                 note += " · This evidence layer is unavailable"
@@ -249,7 +262,9 @@ def observation_rows(session: Session):
             key = (item.get("view_id"), item.get("candidate_id", item.get("object_id")))
             contributors[key] = bool(item.get("used_in_fusion", True))
     rows = []
-    for observation in session.result.observations:
+    order = {view.view_id: index for index, view in enumerate(session.views)}
+    for observation in sorted(session.result.observations,
+                              key=lambda o: (order[o.box.view_id], o.box.object_id)):
         box = observation.box
         status = getattr(observation, "identity_status", "") or "not recorded"
         source = SOURCES.get(getattr(observation, "identity_source", ""), "")
@@ -281,14 +296,16 @@ def ranking_rows(session: Session):
         return []
     rows = []
     names = _view_names(session)
+    order = {view.view_id: index for index, view in enumerate(session.views)}
     aliases = _session_aliases(session)
     positions = _positions(session.result)
     for ranked in session.result.ranking:
-        contributions = [names.get(item.get("view_id"), item.get("view_id", ""))
-                         for item in getattr(ranked, "contributors", ()) if item.get("used_in_fusion", True)]
+        contributions = [item.get("view_id", "") for item in getattr(ranked, "contributors", ())
+                         if item.get("used_in_fusion", True)]
         rows.append([positions[ranked.identity_id], _legend_name(ranked.identity_id, aliases), _number(ranked.relative_score),
-                     ", ".join(names.get(view, view) for view in ranked.view_ids),
-                     ", ".join(contributions) if contributions else "not recorded"])
+                     ", ".join(names.get(view, view) for view in sorted(ranked.view_ids, key=lambda v: order.get(v, len(order)))),
+                     ", ".join(names.get(view, view) for view in sorted(contributions, key=lambda v: order.get(v, len(order))))
+                     if contributions else "not recorded"])
     return rows
 
 
@@ -614,7 +631,8 @@ def export_report(session: Session, title: str) -> tuple[str, str]:
             image.save(buffer, format="PNG")
             encoded = base64.b64encode(buffer.getvalue()).decode("ascii")
             figures.append(f'<figure><img alt="{html.escape(caption)}" src="data:image/png;base64,{encoded}"><figcaption>{html.escape(caption)}</figcaption></figure>')
-        sections.append(f'<section><h2>{layer}</h2><div class="evidence-grid">' + ''.join(figures) + '</div></section>')
+        note = f'<p>{html.escape(evidence_note(session).replace("**", ""))}</p>' if layer == "Heatmaps" else ""
+        sections.append(f'<section><h2>{layer}</h2>{note}<div class="evidence-grid">' + ''.join(figures) + '</div></section>')
     metadata = {key: record[key] for key in ('method_version', 'policy_version', 'score_definitions', 'overlay_aliases', 'score_metadata', 'provenance')}
     limits = ''.join(f'<li>{html.escape(item)}</li>' for item in record['claim_limits'])
     document = (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(record["title"])}</title><style>{REPORT_CSS}</style></head><body>'

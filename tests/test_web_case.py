@@ -564,8 +564,9 @@ def test_ui_workflow_from_upload_through_assisted_review_decision_save_and_reope
     assert state.result.mode == "assisted" and not state.result.ranking
     assert state.result.review_state == "insufficient_evidence"
     assert state.case.inspection_number == 1
-    with pytest.raises(gr.Error, match="operator name"):
-        callbacks["record_finding"](state, first_case, "Dish soap bottle", "B-12", "", GROUP, "hold", "f", "r", "")
+    failed = callbacks["record_finding"](state, first_case, "Dish soap bottle", "B-12", "", GROUP, "hold", "f", "r", "")
+    assert "operator name" in component(failed, "decision-status")
+    assert len(failed) == 1 and not state.case.decisions
 
     updates = callbacks["confirm_and_rerun"](state, state.corrections, True)
     result = state.result
@@ -577,8 +578,9 @@ def test_ui_workflow_from_upload_through_assisted_review_decision_save_and_reope
     requests = len(backend.requests)
 
     top = result.ranking[0].identity_id
-    output = callbacks["record_finding"](state, first_case, "Dish soap bottle", "B-12", "Operator A", top,
-                                         "correct_rework", "Cap is a different part", "Mixed parts bin", "Bench 2")
+    output = callbacks["record_finding"](state, first_case, "Dish soap bottle", "B-12", "", top,
+                                         "correct_rework", "Cap is a different part", "Mixed parts bin", "Bench 2", "Operator A")
+    assert state.case.operator == "Operator A"
     assert state.result is result and result.ranking[0].identity_id == top
     assert case_status(state.case) == ("rework", "Rework required")
     assert "Correct / rework" in component(output, "human-card")
