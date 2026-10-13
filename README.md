@@ -31,6 +31,7 @@ calibration and one-shot internal-lock evaluation are complete through Notebook
 | 08F.1 to 09D Protected Evaluation | Complete for 1,000 development, 600 calibration and 400 internal-lock scenes |
 | 10R to 10B Official Evaluation | Built and locally checked; execution remains pending |
 | 11R to 11B Full-pool Sensitivity | Three optional post-official stages built and locally checked; execution remains optional |
+| Team-collected Real Photos | Complete on 13 October 2026: 29 scenes, 231 photos and 58 Automatic inspections; supplementary qualitative findings |
 
 The frozen pipeline uses LocateAnything-3B, SAM 2.1 Hiera-large and
 DINOv2-small. The automatic decision route uses `winner_cluster_consensus`
@@ -123,6 +124,7 @@ data or credentials.
 - [DS0 LocateAnything evidence](reports/detection-and-segmentation/toysad8k-ds0-locateanything/README.md)
 - [DS0 SAM 2.1 evidence](reports/detection-and-segmentation/toysad8k-ds0-sam21/README.md)
 - [DS0 proposal and mask evaluation](reports/detection-and-segmentation/toysad8k-ds0-mask-evaluation/README.md)
+- [Team-collected real-photo study and executed notebooks](reports/real-photo-evaluation/README.md)
 - [Contribution rules](CONTRIBUTING.md)
 
 ## Claim boundary

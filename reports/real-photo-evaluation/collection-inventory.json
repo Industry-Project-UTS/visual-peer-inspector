@@ -1,0 +1,1836 @@
+{
+  "additional_scenes": 27,
+  "attribution_source": "Sreekar direct confirmation on 13 October 2026",
+  "capture_dates_verified": false,
+  "collection_design": "Team-collected controlled peer arrangements; qualitative supplementary study.",
+  "earlier_demo_scenes": 2,
+  "excluded_exact_duplicates": 1,
+  "kaggle_execution_and_evidence_integration": "Sreekar Reddy Edulapalli",
+  "photographs_supplied": 232,
+  "photography_and_source_organisation": "Vaibhav Bairathi",
+  "scene_count": 29,
+  "scenes": [
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "a03bb6d2182ddd898df98622ec5de5a736b95c6f74401963aca8dc1198b7f868",
+          "rgb_path": "rgb/S001/v01.jpg",
+          "rgb_sha256": "329b908c91a5ff83ec776d3aedae9cacc1a22e6a6a22d915ff6d37d31a0a6e34",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "270282d36bfcc9a065052cbac7b2fe3d4649ed0d903add276a77813849eb8615",
+          "rgb_path": "rgb/S001/v02.jpg",
+          "rgb_sha256": "de9b3853fb017dec8ac01ba8d5a5256d26ee9e9f6f2df887f0402be7df2c5524",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "74e44133830b4aac346d7f25432bb319737c3d94bfea55d5db791df9f0c8778b",
+          "rgb_path": "rgb/S001/v03.jpg",
+          "rgb_sha256": "fab8f4fa4fdb6b894473b50e9fad00cceede377eac237328745bff2ce8b6dcb2",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "68ad007301b51669a476dc3872bc99970f12a8745666752c1da336239d5d6f40",
+          "rgb_path": "rgb/S001/v04.jpg",
+          "rgb_sha256": "e287633e9d22e9a1688267ebffcd8979d09cf5b8f6a50583ec0ed6f0c237b323",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "c44128cabd9aa271bd2a881d2140052992d51b6e59ba9e65c9c01d60d4e0baf0",
+          "rgb_path": "rgb/S001/v05.jpg",
+          "rgb_sha256": "21c92ddf36a636969562a719c40928c50d5658b37c2f619acdb9d46dd8b9b264",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "298d7269101f3485e4d043165c290fe1380e690330dba852fa76f70f81aa79b8",
+          "rgb_path": "rgb/S001/v06.jpg",
+          "rgb_sha256": "4939ac2c0533ecffcc520e0fad96c83fc205f61058fffcbef5b5faf8b90b2a56",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "47a0633564d196eeac01d615deb79e60bab47f501e632908133298207541c3dc",
+          "rgb_path": "rgb/S001/v07.jpg",
+          "rgb_sha256": "30ea9878c88fe428dec72f3bb88b365f1df69f47956ff92f113362145fbf9a96",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "a691597a0444f6f3913955ef58df43ca5c8bfcdc53f3bb346e5e17a3867f4aa4",
+          "rgb_path": "rgb/S001/v08.jpg",
+          "rgb_sha256": "53ade4ffd2c5e044d97cbe88ed14002fa63aefe344d24b96a47065ccf7ab5e95",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": true,
+      "scene_id": "S001",
+      "source_scene_folder": "01-dishwashing-bottles-missing-cap"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "3d1e1c29292e35dd23fe87c9c1537f787dfc764f9d90cb9fe535a0bdc6128370",
+          "rgb_path": "rgb/S002/v01.jpg",
+          "rgb_sha256": "9e74f810f5dbf95779cf8744e5771e9589cdbefd9954e8ab6e73ab9e9ec38690",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "7fb9e979dfbf58393e36b6d5f4d46c56c82cac7b9c43402ed66c76da02981ed1",
+          "rgb_path": "rgb/S002/v02.jpg",
+          "rgb_sha256": "b53c0a36b2ce6702b17cf1ed13ba1377adc90e690277627e3ad0d80ca3abdfe0",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "cebfb8d78bcfafad10b27780c4fab626e737c14d7079118e3a8babe488f92ea0",
+          "rgb_path": "rgb/S002/v03.jpg",
+          "rgb_sha256": "4508a463235aeaab685f9cbb8aa7b8ab57c03070ef829b5fd8a313d4f18c933e",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "938b2dbdc7dfa44d86ca129fc355ff8922e0a2494f84ceced8707146c0175ee6",
+          "rgb_path": "rgb/S002/v04.jpg",
+          "rgb_sha256": "b76e157225c04355bed345ab02008f122f6e2500e0ca91901a310fafd7c959b7",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "c45ee32ef78b1a3d3c65ad127195d25e0356db0f06b996d083c929ec9ddb0854",
+          "rgb_path": "rgb/S002/v05.jpg",
+          "rgb_sha256": "2426db09b759c545b658ed83a18106e56834373e86448bacea845e4affa14266",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "b37875b9ab6cf13360456e7259b87af0e5963b1fea5abf6cfc854fe78ca2b132",
+          "rgb_path": "rgb/S002/v06.jpg",
+          "rgb_sha256": "101389d84673c3ac4e4e600538c10ff5818effe87e03f7aedc51d427903f7285",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "7639fab01deb2663dd44f07f6e5f4fa5b41afe11038d14f84f826d53b165c0ac",
+          "rgb_path": "rgb/S002/v07.jpg",
+          "rgb_sha256": "9e115287f1018407bf688ac335b6037b2c18f7108f3337fc7925a8ca5614405c",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "d92c7f60da55772e66a84c15f30c02001869c76cdebc7639eade91a24f2b2ef0",
+          "rgb_path": "rgb/S002/v08.jpg",
+          "rgb_sha256": "e2e473f23cbf1c65bdd641ef9607b21a5731c8774af4c17c7fd17d99e4545210",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": true,
+      "scene_id": "S002",
+      "source_scene_folder": "02-scrub-pads-cut-pad"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "ff0cd79faf6cd83db00cf23afab10fcb88404346366d0a680a65c3872985fea8",
+          "rgb_path": "rgb/S003/v01.jpg",
+          "rgb_sha256": "69401b1dab4358e4d0bd2001f458e51c37d7565b6cce986a6e279c9bb6109bb2",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "ad2d02123b5e66a859de05dfc05c006a2339f6cefc81a0962edf0a95c542b780",
+          "rgb_path": "rgb/S003/v02.jpg",
+          "rgb_sha256": "23ee6be4f3adbd34bfdd4eb9af97620809d30124fcf1a8e4552946c4e85507cd",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "3d91fe160f4fdc9a99ccc57e5e240c3547efc3c1ae13a51fede42dc193fbd77f",
+          "rgb_path": "rgb/S003/v03.jpg",
+          "rgb_sha256": "63b7798971ebd276898f0145b1230d0a757b2de5cf1bb2ff59824530be284854",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "673d58c18fbe4ad82ee2e75ab6a53a75033eeb88ddeecbb3b2dbec785af584b8",
+          "rgb_path": "rgb/S003/v04.jpg",
+          "rgb_sha256": "43bfc6a4631a422e3295882212c3ae4b9bd2f0a51196ca4eb2b13bfbc6797fca",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "14a547260c2b8bc70736ddfcfaf91e3acda2a3bdcb98633a930b8e2d8abe464a",
+          "rgb_path": "rgb/S003/v05.jpg",
+          "rgb_sha256": "991c133d104fc4b57db80bfceaa9aaf694dbbdeffa87ee2983ebfa833a2a8ff3",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "d33f65caf9c9ae8a97d71c23cf6af3c1378f9f73cf1971e011e898d1b26e3f5c",
+          "rgb_path": "rgb/S003/v06.jpg",
+          "rgb_sha256": "b648f47b07955bc1deab5aa5d4324c675b16dd9054a8eccf26fc156d8bb4c32e",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "8a1d104324b150bc1601084cf94e6a18e60b874fef6dee31d4181c8393045a87",
+          "rgb_path": "rgb/S003/v07.jpg",
+          "rgb_sha256": "23c2428eacd602995b6cc4205e780154073ff7f3c9bb84d31ae8eef5db3c025b",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "eeebaae913608815be467801b4a82049c27f074e6a980ee22967a1780240576e",
+          "rgb_path": "rgb/S003/v08.jpg",
+          "rgb_sha256": "93b5ddaa149206443b39c6891d0ce1f2658a8897d768136f9e4a3979c799b4f7",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S003",
+      "source_scene_folder": "03-moisture-absorbers-one-plain-top"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "e46df6713bd5392a463b2bde2c9f0edd78d4c396be7bbca62e7096e6c1782015",
+          "rgb_path": "rgb/S004/v01.jpg",
+          "rgb_sha256": "4f91ba11512c13d3273ed3866ef2b84afe7c304129b9daf42e62c0ece0f03756",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "ab98e44ee4815c6741e88cb108e06c8bd31503becffcda4833a3f0f0925f7cac",
+          "rgb_path": "rgb/S004/v02.jpg",
+          "rgb_sha256": "0e598496a7ad15fdcbdbfcb557869dfe12a6fa0032a3078b0951f3b6aed943b8",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "719366561d42f1c785dd1fff00cb5371df63050beed4b6d6bc1c7d6cd5a16cab",
+          "rgb_path": "rgb/S004/v03.jpg",
+          "rgb_sha256": "deb331fdbcb17fc3e3b0281e4189cca4174d813c8da9f506a738661890938df1",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "da8f48eb2e48da46ce8253769f0854193111a7054defd32924af376c7c508f6d",
+          "rgb_path": "rgb/S004/v04.jpg",
+          "rgb_sha256": "69fbfba497af2423688f6ce7cd54cac79d7215b080e41fa85481cea470aa022b",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "2c78f13f02b3ff27aacb7d428543f5ac737f330277fd874fcbcb5a98498775dd",
+          "rgb_path": "rgb/S004/v05.jpg",
+          "rgb_sha256": "5a307c1d9a5895e5edef17832f6bebd8296b495ad9ba6f90a1d01d7e49c9c320",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "7728962cf4adac193a6b662e169b4bf82b8783aab94033272ec33735a1e96a3c",
+          "rgb_path": "rgb/S004/v06.jpg",
+          "rgb_sha256": "77a40ae3c9a30cae76681b48d0412a2987430622905307acb1c0dd2600b5e942",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "326f90cb32526258afa2478eccfc35f411a000ce8efac7316098570e00e04106",
+          "rgb_path": "rgb/S004/v07.jpg",
+          "rgb_sha256": "83c65ad00bbd324898d6c2f7cfbd3ab3eab8a1aaaaed9fb5d5ddd71871674e31",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "44ea82042faafb65ebbc2a104910561d8392419a345c42ee325180b8b5f097b8",
+          "rgb_path": "rgb/S004/v08.jpg",
+          "rgb_sha256": "15be42102b3c510475d2492cb70a73ccb76da818f5e14225b037d5c9f9941609",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S004",
+      "source_scene_folder": "04-clothes-hangers-broken-frame"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "475aa0194e46b90cb7278fb31e802c02ba597e6e2cb12daaaa663f7b8fb3c88d",
+          "rgb_path": "rgb/S005/v01.jpg",
+          "rgb_sha256": "07ce468c2070db5d5d03ae0a38d75d683d048be31e0a8dfe1c0f13d39afa3e04",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "693f9260c9d2a972ac0f720652c00b1a0101ad2e221e8b907ff1e99a54494521",
+          "rgb_path": "rgb/S005/v02.jpg",
+          "rgb_sha256": "c892fdf99ec3aea208cc33385b49de25d6ffca4344d51d878bdc7ada778c2812",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "7d93cc59a6cda96fc0c9e16272f10c95c3f566f24c9e95fa33c11aa5938ad3c9",
+          "rgb_path": "rgb/S005/v03.jpg",
+          "rgb_sha256": "5c7d9c8ffaaf6e614ebd35687ce502d75ea2da9f536fce5b2231b21ef6a7e796",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "8138e2982ffbc6fe7368ffb8f64851b24609b369caa80579bf37b2f3b8cdd40f",
+          "rgb_path": "rgb/S005/v04.jpg",
+          "rgb_sha256": "533bcd684dcba37049edba0e8eea065c71c7d42cec6c46b4e5b41f173e7e548c",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "07e7cc1ff8bca32cbea47cbef834ccb2b18fac866e25c2fe1d423e430586f122",
+          "rgb_path": "rgb/S005/v05.jpg",
+          "rgb_sha256": "2658de2d5116f3a8d816dc38f229fce373f3d134086eae532bac602d27f397be",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "aca08faa105290a089d85fe725f82766d78c05e0c19b66e8470c2dd4d12496e5",
+          "rgb_path": "rgb/S005/v06.jpg",
+          "rgb_sha256": "9b9cbdb489dcb2302d7b0be42916340f757fa982b9d79bbba14218862f5ff075",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "5ef61c0ca358069642ff6da96924f6b332be1a69a0426f70a00869ba3b549f82",
+          "rgb_path": "rgb/S005/v07.jpg",
+          "rgb_sha256": "20fa2a6d10b95f6c588c5aaaf49f94dfa4326f137290a6126905dcde9e403e57",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "264fef11e7d62ac1033a96e6eecb270b6e7a84b8de6c0d887bd6fbc16e355209",
+          "rgb_path": "rgb/S005/v08.jpg",
+          "rgb_sha256": "eb08933e7cb9ec7e07bc5207905fb738ea66b945e9b6a698b03460327d7f5854",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S005",
+      "source_scene_folder": "05-white-balls-dented"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "eb285c2550ae90fe4f60e3b738bfec1fe823c366167d9960894745078ba8ec6b",
+          "rgb_path": "rgb/S006/v01.jpg",
+          "rgb_sha256": "32c5dffc3920abb04945bb5767904ecdd84551df75358b0acb97dc282a21caf0",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "9ee68734311634b278ffca510bba926fac1e43fdf50ae13edf9b2c7c31aad08e",
+          "rgb_path": "rgb/S006/v02.jpg",
+          "rgb_sha256": "b1b9c5f54ccb05f6644a307b7aacccfd8473c1abe4dc38c5bccf0329a622ed49",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "2a867b0b9f782f25d14502071d1c75702f095490ce9d99834d16a81df6d17709",
+          "rgb_path": "rgb/S006/v03.jpg",
+          "rgb_sha256": "ba62bbefc8651fb2854d56ecd3794566ab0caf9454ddc49eac482deef2234d37",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "542679f56e5893578f0c5dac0f9ea90e5b05837fce45c0d5d12d7efc56814566",
+          "rgb_path": "rgb/S006/v04.jpg",
+          "rgb_sha256": "dd4aaa508f1e9b2599fa0f9b47ae43eaca2618a0c1eed47fd5dca2c62617aafe",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "277c595191da49fba1d1f86aa37aa5f72e9bfd67c6d29162d2511f37416e9dbf",
+          "rgb_path": "rgb/S006/v05.jpg",
+          "rgb_sha256": "702ff3e637104d2b1b8e40a66477fdf183700e3e29183dd418a521ffa83a297b",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "c6c21a802364e87f800417f8d2c7b0d4776c15e670937f3eaf2dec320c7d0238",
+          "rgb_path": "rgb/S006/v06.jpg",
+          "rgb_sha256": "eaec11b0c1b189cb3adc1e9eb0db22d3749b2642420f443612d32f078b0cea34",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "0333a1f5b2d7e1bff4569b33ce9bb8473912089101067d2353d6e9a621f15120",
+          "rgb_path": "rgb/S006/v07.jpg",
+          "rgb_sha256": "22ec9234dce87491b0f5f406a0a53f4d362b04cccf1fafbb79d08f96887a3e71",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "78e11a34c31ffbf47f1d51fd70c0bc2b269b8bf5f8c2f7b5246677f8618e67c0",
+          "rgb_path": "rgb/S006/v08.jpg",
+          "rgb_sha256": "e392cedb4f238aa750e5f6f6eefe509a5a52f9af269ea2bd8f68ed941d04b68f",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S006",
+      "source_scene_folder": "06-clothes-pegs-broken"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "c7a24d7ad71a00e40d0cc04e51cd4ade4c0a4800a2172d98f90857f11eb539ec",
+          "rgb_path": "rgb/S007/v01.jpg",
+          "rgb_sha256": "56aef048e659a9f9017d91aa8f5ea00561cda74c8414918079857dfa054ff42e",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "7e6ead6c8c3510d6775aabb61c8bd9c1c3929af33d887448b43da1fdfbc9842e",
+          "rgb_path": "rgb/S007/v02.jpg",
+          "rgb_sha256": "f097b100a72f98801848463c39c10b3d99af57b8fcfeeef518c7b58f22c68f7c",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "03eb71ec4018d0407e00cf5666af9d4e225dd8974744d9ae9f5fb765a8b62c99",
+          "rgb_path": "rgb/S007/v03.jpg",
+          "rgb_sha256": "a56ba5bac5bb1ab6ccf741b5d90ee102fd4446fe3c621caebf3df9c128114095",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "258d5be010697c82dfd36337ff3a509939e7b520f4738b045942cb64253d4037",
+          "rgb_path": "rgb/S007/v04.jpg",
+          "rgb_sha256": "84b7fdc65f552825c258a14937fb3855c2ac16ab483ed6edfb3178ae78a30968",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "4583cff155b12b9b181362bee9dcb48d5b5a6bcf2d7daa5cce635f38ba6591fa",
+          "rgb_path": "rgb/S007/v05.jpg",
+          "rgb_sha256": "d3cb14d1d17ff28e1a71375c56e69645171eb52ca9d1198686dd1b78f6229a7e",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "ad31c28ac4211568506e3303dde82c8a3d5f759b5b5ac2aaf6659d418f59d448",
+          "rgb_path": "rgb/S007/v06.jpg",
+          "rgb_sha256": "0bdecbcc8bee5fdb85f122dbd5c2b699531e45c0f7d32ba01cf2e025112c588c",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "fbae765104815210e17ca88115ad8d8959355f76e6cb363bd1d41ee0aeeec938",
+          "rgb_path": "rgb/S007/v07.jpg",
+          "rgb_sha256": "dc6699cb88441a846b3ea12c710227495978fc24ed1f442da0d3e6b80b798a0b",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "6e533fd2892fc0a07e617ceb25ec64a24cdcce2bb1be87dcfbb63836dca19759",
+          "rgb_path": "rgb/S007/v08.jpg",
+          "rgb_sha256": "d0300682e0e6b69a17cbab700035cfe8a606b55f6e171f5920639645e3317ee9",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S007",
+      "source_scene_folder": "07-mini-bins-one-black"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "34edf234e692e7807252bc9fd97ac0d1233b5c449e9fc73e3f4f0fa3b5ce5b5a",
+          "rgb_path": "rgb/S008/v01.jpg",
+          "rgb_sha256": "a5c45604e36d18aa85b03de8d09e02b72e6605d489945ef1b19fd2783ed320e4",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "850ed94c7e9b2e20a25d7691df74dd46ca638364eda2f293994cbcdf07609b44",
+          "rgb_path": "rgb/S008/v02.jpg",
+          "rgb_sha256": "a57f556a293eed0cf9491582c01500087ecf16de4b25fc6056e5eeb2cc2d587d",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "141bebc4e76d4d93c42b82c84a61d7c25ab63d1be0461d6a681c50230836e789",
+          "rgb_path": "rgb/S008/v03.jpg",
+          "rgb_sha256": "b17ba1ccee3ad8814488bfbd93d47b269ce7338b29c746614b9300349c3929d9",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "545ed4c6e5f6cb8bd6ff98788a128badaf0f889c8c90711e8836aa288093c955",
+          "rgb_path": "rgb/S008/v04.jpg",
+          "rgb_sha256": "3e628b12b71dc71d5fd08ab90762fa801d8f4e91d5c1312e7785903ce4f241ac",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "935eb23f3f11970e8c62b13646024f9273f30aa98339439f89e2547f7b9fea03",
+          "rgb_path": "rgb/S008/v05.jpg",
+          "rgb_sha256": "045325a862d6eb4faa96bb420390ea5ba9295f7bb6ac181a7a9865d2304ea613",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "36647d8e6c892fd12d8dfbe12464085dd4129fa4a2466f1bb76eabc46f61eeff",
+          "rgb_path": "rgb/S008/v06.jpg",
+          "rgb_sha256": "30a306b7c1c27400f85cad92286d301c382961a49a7ba334de826b01a01a0d39",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "759d21932610a485307780dab2262d6f744a6c3b1e88af556995cf454c2ebc59",
+          "rgb_path": "rgb/S008/v07.jpg",
+          "rgb_sha256": "59fcf58468e2f51bf8d985c49688da82ae6543c47ac2da4ab46dfd86cccf1c27",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "62b6e3de211c7748ab416039fcf9cfbf52c25ade353038cf912552c5eb3a3344",
+          "rgb_path": "rgb/S008/v08.jpg",
+          "rgb_sha256": "42f04b61eb3c830de05334f442d4c4bebccef3aabfc8876efaf7aa2a606ab13d",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S008",
+      "source_scene_folder": "08-brownies-open-wrapper"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "113ab0da8b20635d64fcd3f34bfa20c682d71bb1fe5044ac3c1a56c5eec7d6b1",
+          "rgb_path": "rgb/S009/v01.jpg",
+          "rgb_sha256": "ef87474919b008a1dce7b29c02ee62fc6919b02e747959e4349e563a4ef1f636",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "764381dd9da71ef841bf871d68acac8d366bfd3ce234531527b163f7a04931b4",
+          "rgb_path": "rgb/S009/v02.jpg",
+          "rgb_sha256": "8a68c1750b0141cfa249136407902aca751eab11619c32324157ec5c09dcb02d",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "d08646eb031a54fe74153d205183c88ecda49581d1246f19410607d65d15ac03",
+          "rgb_path": "rgb/S009/v03.jpg",
+          "rgb_sha256": "ab50b665412199aaae99973a250254d5ac00dd4619e87b6443ef338762e0d811",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "4ecf194592364255e9f870023b0f357f3fe835cccb99d2247e5ed630c908de44",
+          "rgb_path": "rgb/S009/v04.jpg",
+          "rgb_sha256": "7cef909c0e0eb8b458fabce1c96f70862d6669619598369a4009828fcd7dd6bd",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "2bc9fd9d1117821c37264dde394720179770c7817ef917250ba3fbdcb05f45f6",
+          "rgb_path": "rgb/S009/v05.jpg",
+          "rgb_sha256": "fc3a0875cfccad06742c8cb10bf4a5360d5860819100eec79f4518af7e221f60",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "b7d9ab63155d66b161003c6e3b3ac2a9c29cd5d7cfa08a2b8714702c7eb38df4",
+          "rgb_path": "rgb/S009/v06.jpg",
+          "rgb_sha256": "b15a9737ee8fcd4b5aed31028ce0b7f21fe98b89ce5e7cb91c5545bb0e5e7119",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "b3016b0a74153db6a7f903526c888623ae591c68a9a9c56104f28fd496a41900",
+          "rgb_path": "rgb/S009/v07.jpg",
+          "rgb_sha256": "fa55721110b320d8ffd3fd2759b4e499ed5673b0a331c74ae74ec43e00eabd46",
+          "view": 7
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S009",
+      "source_scene_folder": "09-wooden-spoons-broken-handle"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "1dbc6e2f70dc92ad70a675b22aaa5f76eef1f0c844c2d6584ad771809243c358",
+          "rgb_path": "rgb/S010/v01.jpg",
+          "rgb_sha256": "6e79cb765a3fad469f18a4a7518400b398c0f79662de423ff08ed2a654bf7e7c",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "7843e5a073765f742c1ce1b4935fc003e50dae8c44419330c097554eb5612889",
+          "rgb_path": "rgb/S010/v02.jpg",
+          "rgb_sha256": "aa95bcf00ccebb6b21425ff0fa9524d277a9e4276c22c4f9972b72b313444dda",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "5b14d7c477acffcf89cbcb06c67721f3886cf4b54d4bc98861d4fffb8ccdb111",
+          "rgb_path": "rgb/S010/v03.jpg",
+          "rgb_sha256": "745f654e0faea01304f4a955939559cb65628365c63322ff6ad255baf0f2a4bd",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "870fbecdf71f2e18b663c148c066f31f3c52238c242cbbe2c0baef1c6806bdd8",
+          "rgb_path": "rgb/S010/v04.jpg",
+          "rgb_sha256": "ff5b8565aa89708dec493fe26f85d817d93259469833f2142c708495ecf2621c",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "1130bcac9145cb837219bb39b42f324adc31db739c75462f584fdd2e3e3ec573",
+          "rgb_path": "rgb/S010/v05.jpg",
+          "rgb_sha256": "1c21d75cab83c76af7c43d73e859e65f1dfd983e7586fea7c0bb20ba600a8353",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "9b08a4b566f14c09a84527485248057e6066c72434b366c70e71390540f5d45d",
+          "rgb_path": "rgb/S010/v06.jpg",
+          "rgb_sha256": "117aa5d769f4fd62997e3e0ff4d959ede4959068ea11315d09d753574a484ee8",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "8ac36f7299a6f8616196ff4a307a0b49978b505b24259fc30b50ae307bb78f4e",
+          "rgb_path": "rgb/S010/v07.jpg",
+          "rgb_sha256": "c7565416c7625e9194d8656d2fe9ec408b7dc7849261c006809bdf60ff5738fe",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "8acb22e2b1828c41b17fcd6c05e3743949c3289fc7fdc54217fe46ac2514d073",
+          "rgb_path": "rgb/S010/v08.jpg",
+          "rgb_sha256": "fecf3a537923b49d6878eb9af26927fa4e300eda166a96054e15c2c7d4b92609",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S010",
+      "source_scene_folder": "10-takeaway-cups-crushed"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "161be8fcc2a84b991cd74b310636d74a9b66932cfcc3b30536e048a5a14a07e8",
+          "rgb_path": "rgb/S011/v01.jpg",
+          "rgb_sha256": "7b569c0157043e9101ce31b33840b82be52d66f2505bb109ed4367130ab1b921",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "50e58095c26574601902c2532d8d7ef9af8b005cb7089f0cf4e249a0998d9141",
+          "rgb_path": "rgb/S011/v02.jpg",
+          "rgb_sha256": "539c2ad9ac353867bfd677bcfc62b243d23a92c35f8132a036909d7e2ef4f844",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "c2d1b7e92cc4f3c826bc8da2dcd8e909a24c056ebf43e83f3eceaf929bb8f391",
+          "rgb_path": "rgb/S011/v03.jpg",
+          "rgb_sha256": "30b65831f1c99b01d5c19abf7b6b0a85531c81b67de5c8932b76e7a8b2c2b0b8",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "a9b2f14dcfc38168635791d93c68af394093992738ba2bcf08cc99c6289aea81",
+          "rgb_path": "rgb/S011/v04.jpg",
+          "rgb_sha256": "64154a5a6a8ae435ab20487ffa308637b2de7522f732c8cd1c2c103c551870c2",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "95d49ed16d3975047d44951cea29b7c3399ff30c3f180e7b5d3f2d7a1a52d8f1",
+          "rgb_path": "rgb/S011/v05.jpg",
+          "rgb_sha256": "f08ed7f4b1dc02d286fc4171b3c6b87f4f5a6b152570327115390cda1515e40c",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "9241c477f3b5f82cb45fe882c2ad926d0fae62a5821aad12dc5d3432dc0ddd87",
+          "rgb_path": "rgb/S011/v06.jpg",
+          "rgb_sha256": "22f9241026d5b250c168da0e1a67dd65df2034578a6a2fc32bb121142fe42b92",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "fdb6843e0c161974e8eab2e43564896fad55fb0db5ef07bc337ac82762a01f4b",
+          "rgb_path": "rgb/S011/v07.jpg",
+          "rgb_sha256": "429b91b77f53eed00352b4cf3647c55f4d9f27450d72b642c866de5c0bdeed98",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "477d49aae56629f6a90cf9e9579ae36399f5cd24958d9df8026a149bf3558ccb",
+          "rgb_path": "rgb/S011/v08.jpg",
+          "rgb_sha256": "74c6e15bab9011d5a9caf0ef3f96419a4419fd58983a6ea3cd78c6892bc7f2ca",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S011",
+      "source_scene_folder": "11-crisp-packets-one-chilli"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "dfc0a7e73fdee7386fc72cae952798a2c63aa625e413d05355083eded19c391a",
+          "rgb_path": "rgb/S012/v01.jpg",
+          "rgb_sha256": "e351b1f70eaecf7768b4f596ce3b016ebd4688d233acfec0408ddbaeb5d3bc52",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "48e924319edb55beaf658294a52f7461a44fdb71245b055ce76600f8fafdf696",
+          "rgb_path": "rgb/S012/v02.jpg",
+          "rgb_sha256": "285e8617e1cbf2afc7b1e25c9a1cc911475f65eea5d190d56e79638245bc4adc",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "b830143293b9eda34d715309542bf192bb95bd40d798ebf89b6a0af53fe8f311",
+          "rgb_path": "rgb/S012/v03.jpg",
+          "rgb_sha256": "ac0bdc3c0d46d665aeb26c562c2dec9dc8cc7d93dcff587963dbb5e2acbb321a",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "28487b4fd7b8471d0b0e440ca578303ba87305adb81cb4244761280404d1f889",
+          "rgb_path": "rgb/S012/v04.jpg",
+          "rgb_sha256": "258155d5be2f70effa02434f1d47e23bab6f27534bce97c51a9fcc33cbd62b90",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "512efd37bb36e64073be82b357a31c07f94575b71410254520736172c542ff6b",
+          "rgb_path": "rgb/S012/v05.jpg",
+          "rgb_sha256": "41114566bcb1ce2668f5009445cf277daf95582819066893856ccf3ac34edea0",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "075e68f3d3c72559ea8c36d3e790266cf47431c4cb54ddc8861eaf5c647bff83",
+          "rgb_path": "rgb/S012/v06.jpg",
+          "rgb_sha256": "e654e5c4233f2d6536551c2176aaca8e60942fb73205636fcaef245149474f1a",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "adcd2a5e99e8f556f146b974771bca1c25b7b81563ad9eff503c3c0a6932c1d9",
+          "rgb_path": "rgb/S012/v07.jpg",
+          "rgb_sha256": "28c9005817d79fbbadbe359be13bdf08af7a75b83df706b5df8d864527b4e576",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "64262980ec4de4af86ffd89498d10c1c9d65c981da5c6875d95c82dd9362776d",
+          "rgb_path": "rgb/S012/v08.jpg",
+          "rgb_sha256": "871ae83a655572318cc2086c4097c6ccc231bf1f3a05f9fdf58d666f9831aadb",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S012",
+      "source_scene_folder": "12-coffee-bottles-missing-cap"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "ab3f139c26bc6c95dcac41a5d83911dcab6b27c62696fb4c15b6b3146104647c",
+          "rgb_path": "rgb/S013/v01.jpg",
+          "rgb_sha256": "532db25c57881ac7bf4e726f85c5faaa53235dfcccb7f80f659b2436592fe933",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "79add300133880e79cbc494cf7ed9a6c753334eb244df7db2718c3b9fad2cb3a",
+          "rgb_path": "rgb/S013/v02.jpg",
+          "rgb_sha256": "0b0c2fd5aa82e8efbcfcca56a55e19455a1dc9a96e3f3dfcae16f81a216c0a8c",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "91478c4ebd2c2367d7a42302e244c9ddeb3a90296df1effd108a0290cb362bcb",
+          "rgb_path": "rgb/S013/v03.jpg",
+          "rgb_sha256": "1da39c004269105adb215527a092ce392a8c220b66323134bcc3de4cc604ca5d",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "90234d823b4bedcb817d0f4646f47e8155e144668adcc485b7a1f05b95bcd007",
+          "rgb_path": "rgb/S013/v04.jpg",
+          "rgb_sha256": "fa3f002c481ce21385e826bf6839452ab3604e49b781a80c905336fbe2addbda",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "56a281b39266c452388ae718fa4d8a2a057009ba950b68453c6dcdda95835c71",
+          "rgb_path": "rgb/S013/v05.jpg",
+          "rgb_sha256": "13b6940cf00098fc703ea1bebb164edc763e805c3265d7df615ac9bc4450966b",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "8b0ca633e3e3fe4c223a1ab2117374781a329e6b093e7bcd86d09d33edc4915e",
+          "rgb_path": "rgb/S013/v06.jpg",
+          "rgb_sha256": "5e4207a497d35b1b830d6bf844b8986a64ed4cedcfb15da2ed69a3c1b8e1ae15",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "c73038fc8195d36da91b6df78a90b15f6832a53c8f2d20ec483be3c11eececff",
+          "rgb_path": "rgb/S013/v07.jpg",
+          "rgb_sha256": "90098362cf5daef3ac2f3495b2b1ee6dd6e85c57e09ddad53b945077091b0999",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "b8a77f4bd606568f0e9eef907fc14480bca7de20f975522add8a43c419da79f1",
+          "rgb_path": "rgb/S013/v08.jpg",
+          "rgb_sha256": "80e8452a859cfe77ad380767b800b91d9516d690204980df9c29713c90addaec",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S013",
+      "source_scene_folder": "13-price-label-guns-one-red"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "b1015ffa72a778afca98010069b3c05a6aca88d3b9dfe2b9e084d442c61565c7",
+          "rgb_path": "rgb/S014/v01.jpg",
+          "rgb_sha256": "f98061e4d38aca2108b6f9f838751f4bf8038aa3f551a56b408dabd84e890369",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "5a318958b8ef242212881badf46e561a8586de7f28e068498cdd1e6d85c1cf03",
+          "rgb_path": "rgb/S014/v02.jpg",
+          "rgb_sha256": "b433f81d28c5d5691aebf48ff6a09f7a6c1bd3d2cfcc0ebcd5e55b1bb8f34ae4",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "8d6d83c1845b78bddf69a5df48841055a71548e57ff5b23c7302d66d65a2f738",
+          "rgb_path": "rgb/S014/v03.jpg",
+          "rgb_sha256": "c37d3cacd1dbd22992f644956450db78cfe24676d34c1df4d9d2cb0a3a1fe571",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "2efe9f63a59952cc9e3886b0e130d355f8ed1531712efa1f4dbf529778cb50df",
+          "rgb_path": "rgb/S014/v04.jpg",
+          "rgb_sha256": "ca4928e4e90e3961e19522a0c76d87f6ef3498347264d56e928c621ce27fe40b",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "5aecd25d012e63cdc087acdfbfee36242344b1c2e7b146a493f60caca28de2f0",
+          "rgb_path": "rgb/S014/v05.jpg",
+          "rgb_sha256": "ee2594c3c3410da1b47d2b0b1812235412089bfdfa7091707a826b5d5ef60341",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "f9c4bfe76d2af446994fc8c1d96747bb153a1a4ffca591510e5260a3e0f7ce8d",
+          "rgb_path": "rgb/S014/v06.jpg",
+          "rgb_sha256": "6ff62fe5967539a2f4d3bdc8018ed07f9b51fcd8829c8891de8a2ab4bf168715",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "344b7c31fe5bd92e172cb0132aa2b1e10f3034391454bf3182ec50771255b63c",
+          "rgb_path": "rgb/S014/v07.jpg",
+          "rgb_sha256": "c6cc494b5b6623dc00bbaeade6475b804b7578bb527698e79c3562db6c98a8d3",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "465f3acf16712cf684e58736b3f16aa847c38323a2d7af45af432a824c9f1f94",
+          "rgb_path": "rgb/S014/v08.jpg",
+          "rgb_sha256": "b58f76d3f82cb4d3b2d775fb8b84e78e5acc3f69f9f2d0245ac49db9a88f4637",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S014",
+      "source_scene_folder": "14-dough-bases-torn"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "2b8e37dc56633efb479fce014f920dc46c3faabe7b8d7788e92a246b629893f2",
+          "rgb_path": "rgb/S015/v01.jpg",
+          "rgb_sha256": "53a57ef1cad60fc8fb3021a79baf81263ec62b2dcd91e7c4457d2bc5e53bb9cd",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "3c5587fe043c6040765f1808016acd6a1db96ef84694afde0cbfec05a2e4e96e",
+          "rgb_path": "rgb/S015/v02.jpg",
+          "rgb_sha256": "ac654a509ec831cbfd6c4cb34cb197829a14df8252be2bee4afc34aace691225",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "58b76a8603bc6645d318a4565f7529a727c2652a43a5297bfccc8e248b5a0711",
+          "rgb_path": "rgb/S015/v03.jpg",
+          "rgb_sha256": "e247d500b6997846938b7df4c69625520772e860a0dbc3fe1e15b4af754434b3",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "11abf8c787262dcd78aac59cf094f9ecfa166a25aaf43e664f3fa432e1fc9d96",
+          "rgb_path": "rgb/S015/v04.jpg",
+          "rgb_sha256": "cd69b9973dc4b1758b18959d139d9865530be4273bc625addd62b2ec8ee639dc",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "767a27e0f477c3d38aab994bee0a6e16d5e9f2d0a6e8949155b43898899d29fe",
+          "rgb_path": "rgb/S015/v05.jpg",
+          "rgb_sha256": "8f41fb5dc75c123656902939dc56c84d830f51fe57e99a5dc13f7e48e940f871",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "122652736e04681ba28b2bc9c9ad7d1ec256acf7ff881d0b5b7b66a8d8cf0dcb",
+          "rgb_path": "rgb/S015/v06.jpg",
+          "rgb_sha256": "5e5276857ff1cace66234a0d1f46de97903753f72f998412234d47040ce172a7",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "a6ff23578f789c4de87b49aa9f269636597e3ecf6b0bbb5c88a3b15ee7497c6d",
+          "rgb_path": "rgb/S015/v07.jpg",
+          "rgb_sha256": "2641105a20ec4c9dbfcdcfe0ff31fca8e32dbbc258678bf259f543e8f3e3f857",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "e4061c9634196ec0e4ab8e6c25885320c7b5108216e2dc85e9f2ebe5523fe182",
+          "rgb_path": "rgb/S015/v08.jpg",
+          "rgb_sha256": "910bc39229e61343ca3c05f5397f22f1f2d51dee84349494d3603e514c735eaa",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S015",
+      "source_scene_folder": "15-yeast-packets-crushed"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "988a9b8eec7a340ed2150e6d2bfb5d0188995d2fc693e2b8f8db0bc7b63407fe",
+          "rgb_path": "rgb/S016/v01.jpg",
+          "rgb_sha256": "9c1122ae3b7ab8e592e494e749cd14a2147ee6797a56dcaa0cfff4dd6a49a1eb",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "5491dfcd8ffebd304ecf3af7f19f4684fdf7996f324517554f6e014285c7217b",
+          "rgb_path": "rgb/S016/v02.jpg",
+          "rgb_sha256": "37576f2f8bed5285022de72c4c501b8cc8b46339d63724f40ee98621318deff4",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "dbb29a296cb335313429978a447b8984977d28189c44c7a877cf9399bb9ef65a",
+          "rgb_path": "rgb/S016/v03.jpg",
+          "rgb_sha256": "22962cd8b4c6e1683678a8d1f0d95d0a8be5f7370a3c25f0ef5aa71d84eb97fd",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "d8529df5bc2f3fc3afdfcb1305729605b725bf23515ed74170149059bcb68584",
+          "rgb_path": "rgb/S016/v04.jpg",
+          "rgb_sha256": "40a6387b08667f09abbec533c1ffe0f43f705078147e761eee4be86c1657bf94",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "8b4c4e91ecc4e51acc85519ad95338013fd1beaa253b718ad01a19be67c80a25",
+          "rgb_path": "rgb/S016/v05.jpg",
+          "rgb_sha256": "a935e2c98feb4c3f96510b75f0467509984ea402e669a726da46a0f6a7105ff7",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "83e2f0f62a1c5574590ff102a84bab200062f109b4927d58d7ebf00724d128dd",
+          "rgb_path": "rgb/S016/v06.jpg",
+          "rgb_sha256": "9363b7d76a2bc0c3e77484d55a5e89332642a015d545238ba5c6b7dbd3dad72f",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "dfd431b2df2819257164287a84165596e3003bf579c8f3f8319d49c19ed0ce56",
+          "rgb_path": "rgb/S016/v07.jpg",
+          "rgb_sha256": "1c5a6d21366aa159e69bc6b38fd5b3c70b4d6ad70e0fe636f5a3568599bdfd5f",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "78cd3695e8df4146167bfc24262485cdbbffe3f7e4f6c542d40ae1a356e798c2",
+          "rgb_path": "rgb/S016/v08.jpg",
+          "rgb_sha256": "0183fab88551b3237425cdeface19d3de2d1077894a8a7ae49999ef13f932294",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S016",
+      "source_scene_folder": "16-green-capped-bottles-missing-cap"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "40c03d61ed728151911941b7493601767ba5ac1cba4e9c27a4145f182112bc33",
+          "rgb_path": "rgb/S017/v01.jpg",
+          "rgb_sha256": "8ace704273bea2d5021143020f150eaba4cb04bf90f0aafe9ca142bb630d4bf2",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "555cb9e84e41524b9ee3c1a546af43921c712414efa2c4f8e5e6dd7297737caf",
+          "rgb_path": "rgb/S017/v02.jpg",
+          "rgb_sha256": "404d6fe51924d41618399bee249a55aa681bc0fc83ea8e489f104815fc812872",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "1c6f7b0bc763bb4c8a654961da807ab397a7ee53e2a0bba6c126fd5c5400c6fe",
+          "rgb_path": "rgb/S017/v03.jpg",
+          "rgb_sha256": "00d8a2502342f9253d4384f3443f46939dd7f9275deb864d142a485cedd3ca35",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "f1d461a2da0cda9cd4d5482c01abbf999177df7c55895cf7ea966b066e89b1d6",
+          "rgb_path": "rgb/S017/v04.jpg",
+          "rgb_sha256": "c7d65ac56dfbe40a59f5e70c4af99452f8939747d31a8d4258742a4558fac89a",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "4186dc1cbd092a97ed2317ac32f860ac3f0319035b32f163b16a460eaaedc792",
+          "rgb_path": "rgb/S017/v05.jpg",
+          "rgb_sha256": "26e72642a983d804807d18db0b523f9acd15cb72013c634b32c25cc893153a91",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "63c082ea7b606519f18d0b1674132888bfedfd1c72be9c1f987f0a2447f9ab77",
+          "rgb_path": "rgb/S017/v06.jpg",
+          "rgb_sha256": "eac3247d787d14b9cd5b32e65e2b8393f97dc539954ab87fdbd9bb03514a783a",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "e495f986f6bebc6c02ad68f608dad0e849df98838c099aa0b258f4a6f231cec3",
+          "rgb_path": "rgb/S017/v07.jpg",
+          "rgb_sha256": "a7bdd5fe97ae46a542f1d911aae32b779bd644405bde725b748c2ef89e1f785f",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "e11a4e65c9f92939451ad6266ceae9ff01a61cbf2512a9a8f99d32c6c1117041",
+          "rgb_path": "rgb/S017/v08.jpg",
+          "rgb_sha256": "6e22b88e68bce5ead9e0ac6fe2b9892e408bcc34283725f3b11147e657ba6c64",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S017",
+      "source_scene_folder": "17-chocolate-caramel-brownies-open-wrapper"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "c05577719489b010c189277e01d54f71bf4735415dd3cd40ebdf8facaa18bbd5",
+          "rgb_path": "rgb/S018/v01.jpg",
+          "rgb_sha256": "720ce9da1c7b66f536a31abe6ca21f546e428ae27248779dba2ff9348c164226",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "21949f8a880aea1354fb15d69ae0f05491324f378106cfd29f8b72b2cf5a6f3b",
+          "rgb_path": "rgb/S018/v02.jpg",
+          "rgb_sha256": "f62cf7f7332b853728c85683b13c2f3af67e6eefe69aac64234fafa471cab828",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "9e5c086973e2baac63a7d7afc6bc0e87a205b8c549df8b0cc349a002180d2b4d",
+          "rgb_path": "rgb/S018/v03.jpg",
+          "rgb_sha256": "8d378c5daf18dc651a22cdce3dfc7956acb8fc45a8c917e38e49a4d90a34e506",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "4ea51f21a8432cc59632d6b655e21069c323bda34d89cbf14045723a9fc50543",
+          "rgb_path": "rgb/S018/v04.jpg",
+          "rgb_sha256": "bbe720ce4f15d1672fa3fb0da091f128d79f973403d767d8fb40e76a8944b8c3",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "9cce30535afc14a80043740c209dc6fc6fd907ea72d4d2bca098af5a4ffcb227",
+          "rgb_path": "rgb/S018/v05.jpg",
+          "rgb_sha256": "ec647e721b4a9e875aa92b2e81ae7fb2383bcb1bf04e35a1380e358c54affba6",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "92d388ec53a81a40c07850630d2061b88cecde5e3b1dac7c17762545c32be372",
+          "rgb_path": "rgb/S018/v06.jpg",
+          "rgb_sha256": "fb58d181590ee182884dbeb5142760b85b95dc24f9cb983caac3100251307704",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "7e6147a9239f213067d06d3162fbd36a9f7b45a8721ad6b37140c240bb1f2189",
+          "rgb_path": "rgb/S018/v07.jpg",
+          "rgb_sha256": "8279571b6a7433673dd632e7f81c724c98f1485232890e305d347a90fca8698d",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "3c2653c12d006ad864d9e380d25b1e25f69e9f878e84dc876d423c626d630940",
+          "rgb_path": "rgb/S018/v08.jpg",
+          "rgb_sha256": "96f67dd94b1c5f7ee22bb6140e1b22c1825415e41280f8d5ad602402eae78591",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S018",
+      "source_scene_folder": "18-oat-cookies-broken"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "3f54082f1cba73b4a494352cea73fa8313feb78c284d1bdd055a1d20b8e3eaae",
+          "rgb_path": "rgb/S019/v01.jpg",
+          "rgb_sha256": "e01612f5a809e6345cb1cd7e288df25d775259e04a31c74f1737ec13554cf191",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "8429964490834a48560bbf0afd8532fc0242139c0414e27f2473aa2d47104eab",
+          "rgb_path": "rgb/S019/v02.jpg",
+          "rgb_sha256": "7272ff7265fd471a341f4c388f1354f33cf61ee9a25068f5a1a7036b1243f0d7",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "1f18dcacd043d830349354b043c11e7f19a357e60bba73b3b0a944c29f4eae43",
+          "rgb_path": "rgb/S019/v03.jpg",
+          "rgb_sha256": "e8ea859e1538137eb5034691235b60ae3faf72173f0897446c9786451eaad4e0",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "f1df79e2cf9b16fb00e1aeb27b7ce786ad2fa7b849a708cb2e7033f53fe238ec",
+          "rgb_path": "rgb/S019/v04.jpg",
+          "rgb_sha256": "bf43f6f2f4d9015ad6931e7d5a931cfe17e353b2848dcaa1f9fbbea1afea1349",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "59991e7350adbfb5a4ad5c6a17d36f6167d813fc0cf33c52bbb7d4950ed7a00c",
+          "rgb_path": "rgb/S019/v05.jpg",
+          "rgb_sha256": "260a5a5bc3b8fa87534c9aa2bd3ad284a20d7e618c9de79328d533fc631d0869",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "14ba68ff3c87713929b4492ccd89ec8fa92cc9f42982b485aa2ec8f5764393e3",
+          "rgb_path": "rgb/S019/v06.jpg",
+          "rgb_sha256": "c4304e5a233e93ed4f52f9ba5cc728686942fb9712f23b9e27096455bb9e6638",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "3d4d8b5a561f9b198b7c22c6a2d33be0c36a3a7895ef1c19c1e535f6fe5c9d4b",
+          "rgb_path": "rgb/S019/v07.jpg",
+          "rgb_sha256": "1f8fa86e5a1ce664b2986d23ed0548986c4a4a876a4f674589eae9f5c81a634e",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "bbc9600046c3c39a69a390e023505832cd0823f8a3025fe1db82c8366d6ec7c4",
+          "rgb_path": "rgb/S019/v08.jpg",
+          "rgb_sha256": "93dbd87b93463e848ecf11a6768bbaee367cb6662351e4373affa9528a0c0049",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S019",
+      "source_scene_folder": "19-plain-doughnuts-bitten"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "852137b27360cdec9e8e39bc56bffc671da8168b64ec1e9d251706acbe071af0",
+          "rgb_path": "rgb/S020/v01.jpg",
+          "rgb_sha256": "ad017636f7cd50d7971da74f966fc8cd9d85f21d34eff086d8fa2859ac341975",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "6653244ed98fe36805ff7ad473ce55a86ad9a51ef1c0a02d9892ceb1c3f1d0d5",
+          "rgb_path": "rgb/S020/v02.jpg",
+          "rgb_sha256": "d5bda8229e8fdde180467653975733e87c56419bb7415ed2a6d0b205c3b4256a",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "443caf344bd907bcc57cd4324b2ca15c2e83a16e768fce096a15810e1fd523fb",
+          "rgb_path": "rgb/S020/v03.jpg",
+          "rgb_sha256": "e91e21d03c96790438004dbaeee9c5425178c6203534d636e253c8a3c29b7c48",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "31de906d5dcd975885a97658e5aeaecdf4466480a3fad43c84e4129806316d58",
+          "rgb_path": "rgb/S020/v04.jpg",
+          "rgb_sha256": "8b1a84bf6f7a54a17c22b6244e515325f1a65df1dd616d287ad5a267d5097309",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "ffb84d73ee2e6940ebb89d8178556a0f2168f538a792b31c73dd222c8f448d4a",
+          "rgb_path": "rgb/S020/v05.jpg",
+          "rgb_sha256": "44333ec84caa34345077041d2950a24d2b12ae2bed01470502aad8c394d564b6",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "186a4b86ef8e1ce223a5e783883a2a10393838b0e129266532353fa88347d66c",
+          "rgb_path": "rgb/S020/v06.jpg",
+          "rgb_sha256": "59703d377ce196bbf9d9b0ed50632b69fa24a66ef70c469c53dfff964364e562",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "9f641f7a16abefa5637201b6ebb1d896f8328a11255d8a16a5dd66b9525a52a0",
+          "rgb_path": "rgb/S020/v07.jpg",
+          "rgb_sha256": "4ea64b558e46695ebdbd5e4c464d021f790fb0201058fb3fc2e8553060612d45",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "e5760944ad5485f292797574fdd3afaa7e8cbad5ab2e6613e5400c9f4cfc763f",
+          "rgb_path": "rgb/S020/v08.jpg",
+          "rgb_sha256": "7f2c42860d2d53eb2a414b5de73ad6a1cac3b4d85f169b35c1ea3f8e9d65b88b",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S020",
+      "source_scene_folder": "20-white-iced-buns-missing-icing"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "ecc0a5872bb5b5b6ba79445ab2b6ef3c8a0771187caebdb04fd9248ff559c0d0",
+          "rgb_path": "rgb/S021/v01.jpg",
+          "rgb_sha256": "233ecbce326a20e045d66269ed920d017d89a857d498d60d105c3644cb1c7ce6",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "1067f64e483334e1b1d996f9d5bd33b87a6dd1f6ed8a9c0b7c4a6b9b5450aea0",
+          "rgb_path": "rgb/S021/v02.jpg",
+          "rgb_sha256": "81dc141c228fe3e988c82b7cc093ebd2a282ca832c432477ca4a8229788110fa",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "195b226c2d621df841e3582ddbe6a58ef866d1897099be1855da88a96eb1806d",
+          "rgb_path": "rgb/S021/v03.jpg",
+          "rgb_sha256": "05bc003b4d43288a8724b5ed33774bd556f3e343c1783f535375c156df8db8f9",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "f08e5367accdc122eae28243cfa3d3c4916e0d11beed75d93923fd658fce5d7d",
+          "rgb_path": "rgb/S021/v04.jpg",
+          "rgb_sha256": "9df4fb5b857aeaecab4b1ce366dcd206789bbbe1fc5aedd2e98e7cf0b4a6aca4",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "5cc1b27face2d7760e2da85baf14b617c227c583df60eb4cfcfd7964e931ddeb",
+          "rgb_path": "rgb/S021/v05.jpg",
+          "rgb_sha256": "e9cc9a11963ddb2d82833afc2e11e01f41f0f7249ce9b6d68b341c1cae0e5e7f",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "afb3c8a963777954d724cf8455e5f4952b3bf7ad437905b70119c5551ceebf22",
+          "rgb_path": "rgb/S021/v06.jpg",
+          "rgb_sha256": "f671b743d0e14ab7fc8f21286821f96772d00bcaa39947eb72fe39399096a7ec",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "cdf36d898d5bc349d19d38cc79984b955ccf97a5f06c5bfa256e35ef41868aeb",
+          "rgb_path": "rgb/S021/v07.jpg",
+          "rgb_sha256": "e76a1c43012d4cfbcd1a9d4ffef75b97f5fc838c24740ca0c8f17226a9f1c134",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "db676eceb7ccf086d423cefb9aa6bd0dbd9f86d3a82d0f7f7646396dfc8ddc48",
+          "rgb_path": "rgb/S021/v08.jpg",
+          "rgb_sha256": "1b5d4a576cb7d856986226542f8d8a90df9c19e06e39b22ae7bf00ea07760e36",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S021",
+      "source_scene_folder": "21-pink-doughnuts-bitten"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "9086ff07f2cc4fa0ddb2590b6a659ade2547811260544e6c5f0d6bce38960368",
+          "rgb_path": "rgb/S022/v01.jpg",
+          "rgb_sha256": "92de741b6697dd804bed6d1f50431fc6675e39f3241465ce0b65782c318d91e9",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "133130ee4537a3b3f9676319572af9577a0eb30ef6ca05a441c4144bd671bacf",
+          "rgb_path": "rgb/S022/v02.jpg",
+          "rgb_sha256": "437fc7de2a798f66713c841ca27a3df7da11c83b2d7d9810a62e6839361e50c1",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "283af7d4df0bb2ee3e592a188d7eaadcf565f80ac4a27402008a19bc7eba2385",
+          "rgb_path": "rgb/S022/v03.jpg",
+          "rgb_sha256": "f100441e1bf4556b08fb2cff05e9738580dd24d1192bc0bdc59a80d3ae924e8c",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "693861fcf8a1cb5061c04c41f8698d510f32b66420bf4e9f33b674b240b2c6ab",
+          "rgb_path": "rgb/S022/v04.jpg",
+          "rgb_sha256": "0361c383c707e30337c8019c06d85da847d1e88bcb11a9a7e523ce31d59ee965",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "465cc51ecbb4b46c824bb5d9af36767f6c6d82515ed7707d32a624d53438e975",
+          "rgb_path": "rgb/S022/v05.jpg",
+          "rgb_sha256": "04266eb4a36d926893afb40d4e6b94432b2b6815fd2aca27917293093ed0ee96",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "6df10da935f1bde1baabfa4cc5ba92ef0ae8ae6e288e6dfba117e93a4128969c",
+          "rgb_path": "rgb/S022/v06.jpg",
+          "rgb_sha256": "5d4a7323705023cc4aba1b9eb76a76fe63003287fad99d0b220cc4716b1cc0a4",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "ca89a90590b192c8e6dee2032525582367c52b683d2d51f709eec713807f2d70",
+          "rgb_path": "rgb/S022/v07.jpg",
+          "rgb_sha256": "2c5fc1084a160ef8a0f600f7cf53199a78688026f259b97b7b7db330de2ad374",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "978265b16ff5ed68764219885a9bc3645961f400f314925d8a90b026d1a37b31",
+          "rgb_path": "rgb/S022/v08.jpg",
+          "rgb_sha256": "9570e79e969e9b1a931d5758f8383afb02c02286425bda41d894f0df08d9d0b4",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S022",
+      "source_scene_folder": "22-mini-pies-one-red-label"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "200dfc2decabbadc007962093c41472cb6e866af9f3c0d9bae33d26d4dc93a23",
+          "rgb_path": "rgb/S023/v01.jpg",
+          "rgb_sha256": "158155c50fc5d46aff262ad00a97aff3d5b599d4e5335377e4bcb82a03d04bbd",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "f02bb293ea84a8c2beda77582cb41246533fc9d5ffcf6caeb341ce9554e2e07e",
+          "rgb_path": "rgb/S023/v02.jpg",
+          "rgb_sha256": "12ea83b84699a90f8dd39dd111193433c599f9ab2b7d14c5ba25e2cf9a623388",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "95ae5685947fc674911d297b1c652669b87caa85ed7632ce5f99d26be1387b71",
+          "rgb_path": "rgb/S023/v03.jpg",
+          "rgb_sha256": "98feb25bcbaaf9051109d6b187b99ae943d6d5bf9df3ca49aa369f0968e0a845",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "cc23cad3a992a2f606349024f3cf4352c7f946d89efd60da7344205cf68c440f",
+          "rgb_path": "rgb/S023/v04.jpg",
+          "rgb_sha256": "cc07dae552b95abfe5e92ee1bdda840b9e3aa07933c4f81cbb8350d162620e8f",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "870571ba9c3751c59826cb9428c95912ec5d36b0fc7a85f7ba0d001ad7ddb68d",
+          "rgb_path": "rgb/S023/v05.jpg",
+          "rgb_sha256": "e5a2a7db96e7520bcd944211f559f952ee96e70a14f982484f3871e95f1a5020",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "d76333a46635b61b5ea9005777245e4a104e50a6480dd9ae69cd4ebd7fecb3b6",
+          "rgb_path": "rgb/S023/v06.jpg",
+          "rgb_sha256": "997d213bcfefe732ab01bbf18d1ef66d5f4549f60a2bab765edb886a5c1e7787",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "769b9fbb1ad59f9e4cc9e3db2596bd993a45e6ff7ff949f92697c2aa6007a870",
+          "rgb_path": "rgb/S023/v07.jpg",
+          "rgb_sha256": "dc556d4b5fb53879d8840fecd7b8b9ff712a1673dcc2c32577baad9a54af8d5d",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "7e29cec27b48684c9d82d3fa6a7622b86199451c70ccd92a892a8608cbfc860b",
+          "rgb_path": "rgb/S023/v08.jpg",
+          "rgb_sha256": "d59ba7d086d6b9a6cd78bcd98c3c1c9ef86ca271e1594098fdd7469ed26cc6cb",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S023",
+      "source_scene_folder": "23-wooden-sporks-broken-tines"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "2024d10f4d8f7347762366033cab63d3c0aeeda469775455e8e42eb7d7590879",
+          "rgb_path": "rgb/S024/v01.jpg",
+          "rgb_sha256": "f48d9fab725ddc83da0f5138c1a648a1c846dbd9c78a1299406cedafa6f4a1e1",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "0fa8ab724325fe10f794dcc58dc540a05fd7874e087f290f7df49bd1c9ea1f21",
+          "rgb_path": "rgb/S024/v02.jpg",
+          "rgb_sha256": "339c59b89101915919a118d54962af754a72a2318f849670974ed17e0f5d80b0",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "73fcedbd77c0e1eb470e9a8a589663a8c5bf08ef32e256c5ad526a772b87e3f3",
+          "rgb_path": "rgb/S024/v03.jpg",
+          "rgb_sha256": "76c40d1185c3e847f1e1d2dadabdb1ae8bdfcbda0c0ff953a3f36df3130fb170",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "a2a55c1b809bbf40217264fbf988306b54028703d923a23e34d74ff1a8cb0257",
+          "rgb_path": "rgb/S024/v04.jpg",
+          "rgb_sha256": "2703bc1456291588c9a4aa58d13cc77b6b4baed15e2d28cd8e946b0ac737c8a4",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "c6f82a834b8640598fc82d938d793f497a928ae8ebe3401dea160b2315cf2601",
+          "rgb_path": "rgb/S024/v05.jpg",
+          "rgb_sha256": "f4714aedbaebc5526cccfa7f5b28cc22a559a8c086c49d6fdc0383437e1af7c0",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "7b150a09da10a3d32f229d96ef28a95c9169e97cbff97d994d625bf5c594b843",
+          "rgb_path": "rgb/S024/v06.jpg",
+          "rgb_sha256": "8ab3c84df5ebb1c9195f37e37f7bc8b24f17f3cfb5ad2ac1f8eb8a60d2bc6207",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "f76bd13d7c9ded9d8bdfd30b4a5d67c8b3318e27b7d48ded614439b5edb03101",
+          "rgb_path": "rgb/S024/v07.jpg",
+          "rgb_sha256": "6aada96fda72cc646d33ac6d674afd1e682cec0e4a8a095ada53493c3369d227",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "48f6d0e29f85cf58078554af8b0a17d4bdf74da7a9ccf2cffb576e10f947bf56",
+          "rgb_path": "rgb/S024/v08.jpg",
+          "rgb_sha256": "6ba19a2b628b6a4f7d35bf94631241b7c7c39926b02ea70f3000e1baf19a6255",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S024",
+      "source_scene_folder": "24-sausage-rolls-open-wrapper"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "dc829a81167a8509a0314db8e88f5b577488eaf01cef9c2646b075da9a2349f3",
+          "rgb_path": "rgb/S025/v01.jpg",
+          "rgb_sha256": "41c14934abb11b3f9c552d8109209cafd23a4223e5baa7a26675b6a4007bbb3b",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "45430f2817cf5cdd9741f403e658f15257006e588f5bd7a9d4d234bdd9df8c22",
+          "rgb_path": "rgb/S025/v02.jpg",
+          "rgb_sha256": "9686fc79360402958b40232a39b82a265f58da788f9fec12df4bb93e0e3e2157",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "ec9a5e8f8a2a24758aab7f4ac2a2e4e3e60a2c6ceef8fbce7fb3412f7dd8c691",
+          "rgb_path": "rgb/S025/v03.jpg",
+          "rgb_sha256": "d68f6632f76a8c823e4fd49fc76b7079d064d3a68aedf54207d9ac5f69c2ab55",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "bcc7dc5e82a858a4a87bb38dbf636f4092b77f5a4bb38c10b50e3aad57b2098c",
+          "rgb_path": "rgb/S025/v04.jpg",
+          "rgb_sha256": "dedef9d1f1e4cade371cd7b1ce404156d09a9ed6dac8ba3205ec618e5d654478",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "312b308b00089032d6e9eef709e3c3da2e328b1e2007fba9c3bdb22b495d588f",
+          "rgb_path": "rgb/S025/v05.jpg",
+          "rgb_sha256": "c4543d9eeedbab30b6052543f8a49360b077724c9a216bfda346a55a566cb636",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "78729434cee4a0628150c3f3d3a2a0c8620b3de09105aab3f169fb0967fc75a6",
+          "rgb_path": "rgb/S025/v06.jpg",
+          "rgb_sha256": "5652e73d8bc80628831f6ffdf2c9330e2e18f6f06f1997409521dfb47f7576a0",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "7811db85f18ea7e15d27e38ebc23db8d8acb82b217017d1ed13eb8be4c949e31",
+          "rgb_path": "rgb/S025/v07.jpg",
+          "rgb_sha256": "540c77cb249a35ffdfbd962eba4a6e708936daa115895cd0fd1ac50eaeeec7e9",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "91750cce04eef21ce7ce4c52420e2b869b94efb44e277eb20b4c53e1a3f2f036",
+          "rgb_path": "rgb/S025/v08.jpg",
+          "rgb_sha256": "bddffcc4a4d04384355a6a2f97a08d0d4e48e357d188ef0dee6f634d3b2083a5",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S025",
+      "source_scene_folder": "25-pastry-boxes-one-empty"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "8b8a51322e5e42f87421e45e08535d52acd63580a39185febd7481cfc0f985fd",
+          "rgb_path": "rgb/S026/v01.jpg",
+          "rgb_sha256": "79fd968cec37553d8a5a4fe3611bce68044520c3268ed888ae9a108e58f3121c",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "5e61b7f6632a9becac835fdce0574f2a5c2c838582000692011f81c634098546",
+          "rgb_path": "rgb/S026/v02.jpg",
+          "rgb_sha256": "695cde69f17c16a2d9a76d67c8a30bdf3880e067d46916eacd78bcf924d2cbf0",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "39b2938820fb436d95526d768e248a58b4f4acc8b349bd1229bc739f3cdf5d14",
+          "rgb_path": "rgb/S026/v03.jpg",
+          "rgb_sha256": "d5967a1b03c2ad4be3f929eadee6401f1aca4ce5d772d79f0af952d9eb33dcc7",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "74a3e5145cc69b7e1e47f29219af3e9f20da098fc6c04c7938b285078895545e",
+          "rgb_path": "rgb/S026/v04.jpg",
+          "rgb_sha256": "3b68b1267fb1e1f6032e3fe75cf21908a20397a75e77f1aa58d51c3cb7bfacd1",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "496819c7bb1bbf5b843ac8d5a7fe96bdcab8a374c7e3aba6ada77fe45e5c2e80",
+          "rgb_path": "rgb/S026/v05.jpg",
+          "rgb_sha256": "243ea232a1a20fd429abfe9ed81be639e3578a61dbda9b643baeab2756832fcf",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "ebb004b60d977acb6e3151c14342799cc59ac94da67d0de3dfea7b13a8cb19c2",
+          "rgb_path": "rgb/S026/v06.jpg",
+          "rgb_sha256": "3ad26ccfcd76ac3aacc2346210c77e2ea62098c012b1f20e2bd427ab8aa60aa0",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "3bb9283efa301af13bda81d0472351a77df35147dce0245aa6087ed16f21d005",
+          "rgb_path": "rgb/S026/v07.jpg",
+          "rgb_sha256": "55974b14863c9e1eef460a355d8924bbb6cefa353d9bef58261eb2d6c928d844",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "56a1242d8d73a5792cf98abb6494d8d82ae7f9da9127b3438dc013f9bfae214f",
+          "rgb_path": "rgb/S026/v08.jpg",
+          "rgb_sha256": "a981e072f4af7b955870b1e6278819c543c6968501b4e4e9d8f69662cb667468",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S026",
+      "source_scene_folder": "26-jam-portions-torn-lid"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "368db91d9b3373b8888966041555564f1e9dd91462ba28df1b354ddce826a92e",
+          "rgb_path": "rgb/S027/v01.jpg",
+          "rgb_sha256": "ad7a953083472e5b276e894e707bce6abc8096a9e2b13c22b360efc220371338",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "f0e3814dd7f9cc89982ae63707c96a66d2a0854a31b4b5fe9490fb75d18ec98c",
+          "rgb_path": "rgb/S027/v02.jpg",
+          "rgb_sha256": "9f3bde849a967ac0918dae4ae683382683f96b1553daa76d6d8da092879bdcff",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "e2231cf53309f5bedb37c24bb80b259c1cbb3e1a6203bd6c2e7618edde422223",
+          "rgb_path": "rgb/S027/v03.jpg",
+          "rgb_sha256": "3ce69d661719a26e50675001764d469635974f53921996144afc13924ad2b011",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "a26a319e7aed5411f47dec1544e834d01ebb148100505e5924888e63f2f26d0b",
+          "rgb_path": "rgb/S027/v04.jpg",
+          "rgb_sha256": "828f4aba2d03b3f8ff7125fbc534d65c2bb60441b754f7cac4f9da5f9af27846",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "c07323d88fb0fb05cc0f3274fba2f5702007acb0aabd08f07ba603c85c236e15",
+          "rgb_path": "rgb/S027/v05.jpg",
+          "rgb_sha256": "8c7fa946df587cbbbfed064feb60e17e854704b5940882f692df317e9fa042c5",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "7743b980c7f6440cd20c3bf7e296c81866e72b52e7b6189f4b86c18776d8d8eb",
+          "rgb_path": "rgb/S027/v06.jpg",
+          "rgb_sha256": "7c8b5666e44cb20dd5f601694f6cb1e81f760a3edd7355dab426ffd368a3f16f",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "0c36981a041a851e7ba3b14387fb407f81e63e029bf087aa56cce76b0ccc8db8",
+          "rgb_path": "rgb/S027/v07.jpg",
+          "rgb_sha256": "424ff168a9be31a39db42df0819cbea4f1df21aa8b8196fe2e070efd1a675c6f",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "0ac70d465043ee09f4df9df5d900bb4546360e1aebfd33952b5382957d64841a",
+          "rgb_path": "rgb/S027/v08.jpg",
+          "rgb_sha256": "1a146adc20ec0f32d6e10962a0bb51cbf0c45f0a301a9be0f4aea665a53f4fb6",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S027",
+      "source_scene_folder": "27-teal-boxes-torn-top"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "e70c234f3ee97703f118526344b4bef1b584cc522ea811ac4afdcdba137dc39f",
+          "rgb_path": "rgb/S028/v01.jpg",
+          "rgb_sha256": "b033056ca882962a88f8dd2750d96cfed34c973e608fe8dfae2ab03ac2128bc3",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "ed2f3ac561e5393af31a5e2aef65d5f2ff4f108164407cd8f5bbd1ca2882dad4",
+          "rgb_path": "rgb/S028/v02.jpg",
+          "rgb_sha256": "f2fa07bf66229b57771cdbf6c61b56acedd968a87814e7f16b4a3234f833a174",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "815a4e7f7818786ee8f13f0e7fcff8974cfbfa94058f9e3acf564314a5455305",
+          "rgb_path": "rgb/S028/v03.jpg",
+          "rgb_sha256": "2165f0cd2e527a319868590267b3061eead5a7ed9443d5e3272e0fe0414e0125",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "1ec8ea4325eac809f4605acb861ba03079895cf4e76785ab5c6bcb49bb004d33",
+          "rgb_path": "rgb/S028/v04.jpg",
+          "rgb_sha256": "6a0f30893cdf8cac9129a9e03f848d087194890d64c81bc77fe75d0d7221479c",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "11215bf300dc8628713e6003ce2f074681771596329c63020606bbe4482f54ca",
+          "rgb_path": "rgb/S028/v05.jpg",
+          "rgb_sha256": "1da03dac31dbf1dcca60260a8fffb13b45a573d29daad454254c859b42a2407a",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "8c140e7bcd60b5e39a33fd91f28b72ef88b75b4fd12a35ab846406833f5d8c5a",
+          "rgb_path": "rgb/S028/v06.jpg",
+          "rgb_sha256": "fc8fa71d21ca699f504819c62ebd24d558171463e91cde6ffeafc937276ec11e",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "aa4565aeace34d2ad1682da8328720da5edd3f5e2c0656d29c6e4f6ba3b27619",
+          "rgb_path": "rgb/S028/v07.jpg",
+          "rgb_sha256": "9ec06f9b414a160e78f41381359b308d0ea07a18b3f0b2a7c2a027741c1e2a09",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "699cbdca4fba640f2d0c0ba8a1e4904686ed180705dd40f16839b4bb64483b27",
+          "rgb_path": "rgb/S028/v08.jpg",
+          "rgb_sha256": "f634a4b10b46da7284120eafe9aafd27f4992583a390ed8cdade33059c333e39",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S028",
+      "source_scene_folder": "28-cookies-and-cream-bars-open-wrapper"
+    },
+    {
+      "photos": [
+        {
+          "original_filename": "view-01.jpg",
+          "original_sha256": "f413702d7b2acaf1f7377eec07b1e9a03180f1039fceb93ea69edb21d53d950e",
+          "rgb_path": "rgb/S029/v01.jpg",
+          "rgb_sha256": "168ca98271abb6e1d1e9548f58458d2cf5568d6b1905454319f85ac79a4e05b3",
+          "view": 1
+        },
+        {
+          "original_filename": "view-02.jpg",
+          "original_sha256": "5245ffdb2cdb21667e6525364e2bca87b55d43a5c91689707f115fb0d7c20885",
+          "rgb_path": "rgb/S029/v02.jpg",
+          "rgb_sha256": "64be027415ef267e04e10545d127e1fea78c3da4d00f67219cea3475997bca6a",
+          "view": 2
+        },
+        {
+          "original_filename": "view-03.jpg",
+          "original_sha256": "2fcc977ce33943279f7b3121fabe8f6d8a8a99e231deafd207567220cecc32d1",
+          "rgb_path": "rgb/S029/v03.jpg",
+          "rgb_sha256": "108f4d059648e20eca3df4fed86a51ddb4c156298c6ffaa3dc3b56672b30903a",
+          "view": 3
+        },
+        {
+          "original_filename": "view-04.jpg",
+          "original_sha256": "8976d8e337e2dfc4488e26b19ef1b7b330ee43b3f9eb3dae1f7dcac50ae0e99d",
+          "rgb_path": "rgb/S029/v04.jpg",
+          "rgb_sha256": "fd0d21177c9d1aae1d78fb43addafed71c1fdf754bb27b12141afd63cbaedde5",
+          "view": 4
+        },
+        {
+          "original_filename": "view-05.jpg",
+          "original_sha256": "d5e74ea534d8972d2cb9fbf2f243b0de8bf439a31755dbd84e7148079999df0e",
+          "rgb_path": "rgb/S029/v05.jpg",
+          "rgb_sha256": "ca461bc944807571e50a70a488b3966d752641d16650db976b27808d602b2592",
+          "view": 5
+        },
+        {
+          "original_filename": "view-06.jpg",
+          "original_sha256": "23b5446c3ce1179239fee80e8823dd88604e34696fd623490d81186e70e25b5c",
+          "rgb_path": "rgb/S029/v06.jpg",
+          "rgb_sha256": "74a86715d12fe4535d4e2c02f6e7b8c3212a75a2899f28cefdaabd217e9f46dd",
+          "view": 6
+        },
+        {
+          "original_filename": "view-07.jpg",
+          "original_sha256": "cf9362cc842cf8b88c492773c5c149b048ab2941433705939f8f83d4a0a4681d",
+          "rgb_path": "rgb/S029/v07.jpg",
+          "rgb_sha256": "e9d4e5ba4aa34e572bfc8d45f6db52a5dbf2ab2393c77f511b25d489bc9303bd",
+          "view": 7
+        },
+        {
+          "original_filename": "view-08.jpg",
+          "original_sha256": "9af6b7920dc03664c011f3b0db92ae0568d0c674b13f1f944f9a34b2a6e22159",
+          "rgb_path": "rgb/S029/v08.jpg",
+          "rgb_sha256": "97dab6f50898b1d2ee5de2149b2328c7c8665f06df7b24c6e3b3487e5076bb2e",
+          "view": 8
+        }
+      ],
+      "previous_demo_repeat": false,
+      "scene_id": "S029",
+      "source_scene_folder": "29-chocolate-bars-one-dark"
+    }
+  ],
+  "schema": "vpi-real-photo-collection/v1",
+  "unique_photographs_evaluated": 231
+}

@@ -1,0 +1,1430 @@
+{
+  "case_count": 58,
+  "cases": [
+    {
+      "case_id": "S001-A",
+      "scene_id": "S001",
+      "shard": 0,
+      "views": [
+        "rgb/S001/v01.jpg",
+        "rgb/S001/v02.jpg",
+        "rgb/S001/v03.jpg",
+        "rgb/S001/v04.jpg",
+        "rgb/S001/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S001-B",
+      "scene_id": "S001",
+      "shard": 0,
+      "views": [
+        "rgb/S001/v06.jpg",
+        "rgb/S001/v07.jpg",
+        "rgb/S001/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S002-A",
+      "scene_id": "S002",
+      "shard": 0,
+      "views": [
+        "rgb/S002/v01.jpg",
+        "rgb/S002/v02.jpg",
+        "rgb/S002/v03.jpg",
+        "rgb/S002/v04.jpg",
+        "rgb/S002/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S002-B",
+      "scene_id": "S002",
+      "shard": 0,
+      "views": [
+        "rgb/S002/v06.jpg",
+        "rgb/S002/v07.jpg",
+        "rgb/S002/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S003-A",
+      "scene_id": "S003",
+      "shard": 0,
+      "views": [
+        "rgb/S003/v01.jpg",
+        "rgb/S003/v02.jpg",
+        "rgb/S003/v03.jpg",
+        "rgb/S003/v04.jpg",
+        "rgb/S003/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S003-B",
+      "scene_id": "S003",
+      "shard": 0,
+      "views": [
+        "rgb/S003/v06.jpg",
+        "rgb/S003/v07.jpg",
+        "rgb/S003/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S004-A",
+      "scene_id": "S004",
+      "shard": 0,
+      "views": [
+        "rgb/S004/v01.jpg",
+        "rgb/S004/v02.jpg",
+        "rgb/S004/v03.jpg",
+        "rgb/S004/v04.jpg",
+        "rgb/S004/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S004-B",
+      "scene_id": "S004",
+      "shard": 0,
+      "views": [
+        "rgb/S004/v06.jpg",
+        "rgb/S004/v07.jpg",
+        "rgb/S004/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S005-A",
+      "scene_id": "S005",
+      "shard": 0,
+      "views": [
+        "rgb/S005/v01.jpg",
+        "rgb/S005/v02.jpg",
+        "rgb/S005/v03.jpg",
+        "rgb/S005/v04.jpg",
+        "rgb/S005/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S005-B",
+      "scene_id": "S005",
+      "shard": 0,
+      "views": [
+        "rgb/S005/v06.jpg",
+        "rgb/S005/v07.jpg",
+        "rgb/S005/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S006-A",
+      "scene_id": "S006",
+      "shard": 0,
+      "views": [
+        "rgb/S006/v01.jpg",
+        "rgb/S006/v02.jpg",
+        "rgb/S006/v03.jpg",
+        "rgb/S006/v04.jpg",
+        "rgb/S006/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S006-B",
+      "scene_id": "S006",
+      "shard": 0,
+      "views": [
+        "rgb/S006/v06.jpg",
+        "rgb/S006/v07.jpg",
+        "rgb/S006/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S007-A",
+      "scene_id": "S007",
+      "shard": 0,
+      "views": [
+        "rgb/S007/v01.jpg",
+        "rgb/S007/v02.jpg",
+        "rgb/S007/v03.jpg",
+        "rgb/S007/v04.jpg",
+        "rgb/S007/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S007-B",
+      "scene_id": "S007",
+      "shard": 0,
+      "views": [
+        "rgb/S007/v06.jpg",
+        "rgb/S007/v07.jpg",
+        "rgb/S007/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S008-A",
+      "scene_id": "S008",
+      "shard": 0,
+      "views": [
+        "rgb/S008/v01.jpg",
+        "rgb/S008/v02.jpg",
+        "rgb/S008/v03.jpg",
+        "rgb/S008/v04.jpg",
+        "rgb/S008/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S008-B",
+      "scene_id": "S008",
+      "shard": 0,
+      "views": [
+        "rgb/S008/v06.jpg",
+        "rgb/S008/v07.jpg",
+        "rgb/S008/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S009-A",
+      "scene_id": "S009",
+      "shard": 0,
+      "views": [
+        "rgb/S009/v01.jpg",
+        "rgb/S009/v02.jpg",
+        "rgb/S009/v03.jpg",
+        "rgb/S009/v04.jpg",
+        "rgb/S009/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S009-B",
+      "scene_id": "S009",
+      "shard": 0,
+      "views": [
+        "rgb/S009/v06.jpg",
+        "rgb/S009/v07.jpg"
+      ]
+    },
+    {
+      "case_id": "S010-A",
+      "scene_id": "S010",
+      "shard": 0,
+      "views": [
+        "rgb/S010/v01.jpg",
+        "rgb/S010/v02.jpg",
+        "rgb/S010/v03.jpg",
+        "rgb/S010/v04.jpg",
+        "rgb/S010/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S010-B",
+      "scene_id": "S010",
+      "shard": 0,
+      "views": [
+        "rgb/S010/v06.jpg",
+        "rgb/S010/v07.jpg",
+        "rgb/S010/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S011-A",
+      "scene_id": "S011",
+      "shard": 0,
+      "views": [
+        "rgb/S011/v01.jpg",
+        "rgb/S011/v02.jpg",
+        "rgb/S011/v03.jpg",
+        "rgb/S011/v04.jpg",
+        "rgb/S011/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S011-B",
+      "scene_id": "S011",
+      "shard": 0,
+      "views": [
+        "rgb/S011/v06.jpg",
+        "rgb/S011/v07.jpg",
+        "rgb/S011/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S012-A",
+      "scene_id": "S012",
+      "shard": 0,
+      "views": [
+        "rgb/S012/v01.jpg",
+        "rgb/S012/v02.jpg",
+        "rgb/S012/v03.jpg",
+        "rgb/S012/v04.jpg",
+        "rgb/S012/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S012-B",
+      "scene_id": "S012",
+      "shard": 0,
+      "views": [
+        "rgb/S012/v06.jpg",
+        "rgb/S012/v07.jpg",
+        "rgb/S012/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S013-A",
+      "scene_id": "S013",
+      "shard": 0,
+      "views": [
+        "rgb/S013/v01.jpg",
+        "rgb/S013/v02.jpg",
+        "rgb/S013/v03.jpg",
+        "rgb/S013/v04.jpg",
+        "rgb/S013/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S013-B",
+      "scene_id": "S013",
+      "shard": 0,
+      "views": [
+        "rgb/S013/v06.jpg",
+        "rgb/S013/v07.jpg",
+        "rgb/S013/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S014-A",
+      "scene_id": "S014",
+      "shard": 0,
+      "views": [
+        "rgb/S014/v01.jpg",
+        "rgb/S014/v02.jpg",
+        "rgb/S014/v03.jpg",
+        "rgb/S014/v04.jpg",
+        "rgb/S014/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S014-B",
+      "scene_id": "S014",
+      "shard": 0,
+      "views": [
+        "rgb/S014/v06.jpg",
+        "rgb/S014/v07.jpg",
+        "rgb/S014/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S015-A",
+      "scene_id": "S015",
+      "shard": 0,
+      "views": [
+        "rgb/S015/v01.jpg",
+        "rgb/S015/v02.jpg",
+        "rgb/S015/v03.jpg",
+        "rgb/S015/v04.jpg",
+        "rgb/S015/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S015-B",
+      "scene_id": "S015",
+      "shard": 0,
+      "views": [
+        "rgb/S015/v06.jpg",
+        "rgb/S015/v07.jpg",
+        "rgb/S015/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S016-A",
+      "scene_id": "S016",
+      "shard": 1,
+      "views": [
+        "rgb/S016/v01.jpg",
+        "rgb/S016/v02.jpg",
+        "rgb/S016/v03.jpg",
+        "rgb/S016/v04.jpg",
+        "rgb/S016/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S016-B",
+      "scene_id": "S016",
+      "shard": 1,
+      "views": [
+        "rgb/S016/v06.jpg",
+        "rgb/S016/v07.jpg",
+        "rgb/S016/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S017-A",
+      "scene_id": "S017",
+      "shard": 1,
+      "views": [
+        "rgb/S017/v01.jpg",
+        "rgb/S017/v02.jpg",
+        "rgb/S017/v03.jpg",
+        "rgb/S017/v04.jpg",
+        "rgb/S017/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S017-B",
+      "scene_id": "S017",
+      "shard": 1,
+      "views": [
+        "rgb/S017/v06.jpg",
+        "rgb/S017/v07.jpg",
+        "rgb/S017/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S018-A",
+      "scene_id": "S018",
+      "shard": 1,
+      "views": [
+        "rgb/S018/v01.jpg",
+        "rgb/S018/v02.jpg",
+        "rgb/S018/v03.jpg",
+        "rgb/S018/v04.jpg",
+        "rgb/S018/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S018-B",
+      "scene_id": "S018",
+      "shard": 1,
+      "views": [
+        "rgb/S018/v06.jpg",
+        "rgb/S018/v07.jpg",
+        "rgb/S018/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S019-A",
+      "scene_id": "S019",
+      "shard": 1,
+      "views": [
+        "rgb/S019/v01.jpg",
+        "rgb/S019/v02.jpg",
+        "rgb/S019/v03.jpg",
+        "rgb/S019/v04.jpg",
+        "rgb/S019/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S019-B",
+      "scene_id": "S019",
+      "shard": 1,
+      "views": [
+        "rgb/S019/v06.jpg",
+        "rgb/S019/v07.jpg",
+        "rgb/S019/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S020-A",
+      "scene_id": "S020",
+      "shard": 1,
+      "views": [
+        "rgb/S020/v01.jpg",
+        "rgb/S020/v02.jpg",
+        "rgb/S020/v03.jpg",
+        "rgb/S020/v04.jpg",
+        "rgb/S020/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S020-B",
+      "scene_id": "S020",
+      "shard": 1,
+      "views": [
+        "rgb/S020/v06.jpg",
+        "rgb/S020/v07.jpg",
+        "rgb/S020/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S021-A",
+      "scene_id": "S021",
+      "shard": 1,
+      "views": [
+        "rgb/S021/v01.jpg",
+        "rgb/S021/v02.jpg",
+        "rgb/S021/v03.jpg",
+        "rgb/S021/v04.jpg",
+        "rgb/S021/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S021-B",
+      "scene_id": "S021",
+      "shard": 1,
+      "views": [
+        "rgb/S021/v06.jpg",
+        "rgb/S021/v07.jpg",
+        "rgb/S021/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S022-A",
+      "scene_id": "S022",
+      "shard": 1,
+      "views": [
+        "rgb/S022/v01.jpg",
+        "rgb/S022/v02.jpg",
+        "rgb/S022/v03.jpg",
+        "rgb/S022/v04.jpg",
+        "rgb/S022/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S022-B",
+      "scene_id": "S022",
+      "shard": 1,
+      "views": [
+        "rgb/S022/v06.jpg",
+        "rgb/S022/v07.jpg",
+        "rgb/S022/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S023-A",
+      "scene_id": "S023",
+      "shard": 1,
+      "views": [
+        "rgb/S023/v01.jpg",
+        "rgb/S023/v02.jpg",
+        "rgb/S023/v03.jpg",
+        "rgb/S023/v04.jpg",
+        "rgb/S023/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S023-B",
+      "scene_id": "S023",
+      "shard": 1,
+      "views": [
+        "rgb/S023/v06.jpg",
+        "rgb/S023/v07.jpg",
+        "rgb/S023/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S024-A",
+      "scene_id": "S024",
+      "shard": 1,
+      "views": [
+        "rgb/S024/v01.jpg",
+        "rgb/S024/v02.jpg",
+        "rgb/S024/v03.jpg",
+        "rgb/S024/v04.jpg",
+        "rgb/S024/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S024-B",
+      "scene_id": "S024",
+      "shard": 1,
+      "views": [
+        "rgb/S024/v06.jpg",
+        "rgb/S024/v07.jpg",
+        "rgb/S024/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S025-A",
+      "scene_id": "S025",
+      "shard": 1,
+      "views": [
+        "rgb/S025/v01.jpg",
+        "rgb/S025/v02.jpg",
+        "rgb/S025/v03.jpg",
+        "rgb/S025/v04.jpg",
+        "rgb/S025/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S025-B",
+      "scene_id": "S025",
+      "shard": 1,
+      "views": [
+        "rgb/S025/v06.jpg",
+        "rgb/S025/v07.jpg",
+        "rgb/S025/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S026-A",
+      "scene_id": "S026",
+      "shard": 1,
+      "views": [
+        "rgb/S026/v01.jpg",
+        "rgb/S026/v02.jpg",
+        "rgb/S026/v03.jpg",
+        "rgb/S026/v04.jpg",
+        "rgb/S026/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S026-B",
+      "scene_id": "S026",
+      "shard": 1,
+      "views": [
+        "rgb/S026/v06.jpg",
+        "rgb/S026/v07.jpg",
+        "rgb/S026/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S027-A",
+      "scene_id": "S027",
+      "shard": 1,
+      "views": [
+        "rgb/S027/v01.jpg",
+        "rgb/S027/v02.jpg",
+        "rgb/S027/v03.jpg",
+        "rgb/S027/v04.jpg",
+        "rgb/S027/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S027-B",
+      "scene_id": "S027",
+      "shard": 1,
+      "views": [
+        "rgb/S027/v06.jpg",
+        "rgb/S027/v07.jpg",
+        "rgb/S027/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S028-A",
+      "scene_id": "S028",
+      "shard": 1,
+      "views": [
+        "rgb/S028/v01.jpg",
+        "rgb/S028/v02.jpg",
+        "rgb/S028/v03.jpg",
+        "rgb/S028/v04.jpg",
+        "rgb/S028/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S028-B",
+      "scene_id": "S028",
+      "shard": 1,
+      "views": [
+        "rgb/S028/v06.jpg",
+        "rgb/S028/v07.jpg",
+        "rgb/S028/v08.jpg"
+      ]
+    },
+    {
+      "case_id": "S029-A",
+      "scene_id": "S029",
+      "shard": 1,
+      "views": [
+        "rgb/S029/v01.jpg",
+        "rgb/S029/v02.jpg",
+        "rgb/S029/v03.jpg",
+        "rgb/S029/v04.jpg",
+        "rgb/S029/v05.jpg"
+      ]
+    },
+    {
+      "case_id": "S029-B",
+      "scene_id": "S029",
+      "shard": 1,
+      "views": [
+        "rgb/S029/v06.jpg",
+        "rgb/S029/v07.jpg",
+        "rgb/S029/v08.jpg"
+      ]
+    }
+  ],
+  "image_count": 231,
+  "image_files": {
+    "rgb/S001/v01.jpg": "329b908c91a5ff83ec776d3aedae9cacc1a22e6a6a22d915ff6d37d31a0a6e34",
+    "rgb/S001/v02.jpg": "de9b3853fb017dec8ac01ba8d5a5256d26ee9e9f6f2df887f0402be7df2c5524",
+    "rgb/S001/v03.jpg": "fab8f4fa4fdb6b894473b50e9fad00cceede377eac237328745bff2ce8b6dcb2",
+    "rgb/S001/v04.jpg": "e287633e9d22e9a1688267ebffcd8979d09cf5b8f6a50583ec0ed6f0c237b323",
+    "rgb/S001/v05.jpg": "21c92ddf36a636969562a719c40928c50d5658b37c2f619acdb9d46dd8b9b264",
+    "rgb/S001/v06.jpg": "4939ac2c0533ecffcc520e0fad96c83fc205f61058fffcbef5b5faf8b90b2a56",
+    "rgb/S001/v07.jpg": "30ea9878c88fe428dec72f3bb88b365f1df69f47956ff92f113362145fbf9a96",
+    "rgb/S001/v08.jpg": "53ade4ffd2c5e044d97cbe88ed14002fa63aefe344d24b96a47065ccf7ab5e95",
+    "rgb/S002/v01.jpg": "9e74f810f5dbf95779cf8744e5771e9589cdbefd9954e8ab6e73ab9e9ec38690",
+    "rgb/S002/v02.jpg": "b53c0a36b2ce6702b17cf1ed13ba1377adc90e690277627e3ad0d80ca3abdfe0",
+    "rgb/S002/v03.jpg": "4508a463235aeaab685f9cbb8aa7b8ab57c03070ef829b5fd8a313d4f18c933e",
+    "rgb/S002/v04.jpg": "b76e157225c04355bed345ab02008f122f6e2500e0ca91901a310fafd7c959b7",
+    "rgb/S002/v05.jpg": "2426db09b759c545b658ed83a18106e56834373e86448bacea845e4affa14266",
+    "rgb/S002/v06.jpg": "101389d84673c3ac4e4e600538c10ff5818effe87e03f7aedc51d427903f7285",
+    "rgb/S002/v07.jpg": "9e115287f1018407bf688ac335b6037b2c18f7108f3337fc7925a8ca5614405c",
+    "rgb/S002/v08.jpg": "e2e473f23cbf1c65bdd641ef9607b21a5731c8774af4c17c7fd17d99e4545210",
+    "rgb/S003/v01.jpg": "69401b1dab4358e4d0bd2001f458e51c37d7565b6cce986a6e279c9bb6109bb2",
+    "rgb/S003/v02.jpg": "23ee6be4f3adbd34bfdd4eb9af97620809d30124fcf1a8e4552946c4e85507cd",
+    "rgb/S003/v03.jpg": "63b7798971ebd276898f0145b1230d0a757b2de5cf1bb2ff59824530be284854",
+    "rgb/S003/v04.jpg": "43bfc6a4631a422e3295882212c3ae4b9bd2f0a51196ca4eb2b13bfbc6797fca",
+    "rgb/S003/v05.jpg": "991c133d104fc4b57db80bfceaa9aaf694dbbdeffa87ee2983ebfa833a2a8ff3",
+    "rgb/S003/v06.jpg": "b648f47b07955bc1deab5aa5d4324c675b16dd9054a8eccf26fc156d8bb4c32e",
+    "rgb/S003/v07.jpg": "23c2428eacd602995b6cc4205e780154073ff7f3c9bb84d31ae8eef5db3c025b",
+    "rgb/S003/v08.jpg": "93b5ddaa149206443b39c6891d0ce1f2658a8897d768136f9e4a3979c799b4f7",
+    "rgb/S004/v01.jpg": "4f91ba11512c13d3273ed3866ef2b84afe7c304129b9daf42e62c0ece0f03756",
+    "rgb/S004/v02.jpg": "0e598496a7ad15fdcbdbfcb557869dfe12a6fa0032a3078b0951f3b6aed943b8",
+    "rgb/S004/v03.jpg": "deb331fdbcb17fc3e3b0281e4189cca4174d813c8da9f506a738661890938df1",
+    "rgb/S004/v04.jpg": "69fbfba497af2423688f6ce7cd54cac79d7215b080e41fa85481cea470aa022b",
+    "rgb/S004/v05.jpg": "5a307c1d9a5895e5edef17832f6bebd8296b495ad9ba6f90a1d01d7e49c9c320",
+    "rgb/S004/v06.jpg": "77a40ae3c9a30cae76681b48d0412a2987430622905307acb1c0dd2600b5e942",
+    "rgb/S004/v07.jpg": "83c65ad00bbd324898d6c2f7cfbd3ab3eab8a1aaaaed9fb5d5ddd71871674e31",
+    "rgb/S004/v08.jpg": "15be42102b3c510475d2492cb70a73ccb76da818f5e14225b037d5c9f9941609",
+    "rgb/S005/v01.jpg": "07ce468c2070db5d5d03ae0a38d75d683d048be31e0a8dfe1c0f13d39afa3e04",
+    "rgb/S005/v02.jpg": "c892fdf99ec3aea208cc33385b49de25d6ffca4344d51d878bdc7ada778c2812",
+    "rgb/S005/v03.jpg": "5c7d9c8ffaaf6e614ebd35687ce502d75ea2da9f536fce5b2231b21ef6a7e796",
+    "rgb/S005/v04.jpg": "533bcd684dcba37049edba0e8eea065c71c7d42cec6c46b4e5b41f173e7e548c",
+    "rgb/S005/v05.jpg": "2658de2d5116f3a8d816dc38f229fce373f3d134086eae532bac602d27f397be",
+    "rgb/S005/v06.jpg": "9b9cbdb489dcb2302d7b0be42916340f757fa982b9d79bbba14218862f5ff075",
+    "rgb/S005/v07.jpg": "20fa2a6d10b95f6c588c5aaaf49f94dfa4326f137290a6126905dcde9e403e57",
+    "rgb/S005/v08.jpg": "eb08933e7cb9ec7e07bc5207905fb738ea66b945e9b6a698b03460327d7f5854",
+    "rgb/S006/v01.jpg": "32c5dffc3920abb04945bb5767904ecdd84551df75358b0acb97dc282a21caf0",
+    "rgb/S006/v02.jpg": "b1b9c5f54ccb05f6644a307b7aacccfd8473c1abe4dc38c5bccf0329a622ed49",
+    "rgb/S006/v03.jpg": "ba62bbefc8651fb2854d56ecd3794566ab0caf9454ddc49eac482deef2234d37",
+    "rgb/S006/v04.jpg": "dd4aaa508f1e9b2599fa0f9b47ae43eaca2618a0c1eed47fd5dca2c62617aafe",
+    "rgb/S006/v05.jpg": "702ff3e637104d2b1b8e40a66477fdf183700e3e29183dd418a521ffa83a297b",
+    "rgb/S006/v06.jpg": "eaec11b0c1b189cb3adc1e9eb0db22d3749b2642420f443612d32f078b0cea34",
+    "rgb/S006/v07.jpg": "22ec9234dce87491b0f5f406a0a53f4d362b04cccf1fafbb79d08f96887a3e71",
+    "rgb/S006/v08.jpg": "e392cedb4f238aa750e5f6f6eefe509a5a52f9af269ea2bd8f68ed941d04b68f",
+    "rgb/S007/v01.jpg": "56aef048e659a9f9017d91aa8f5ea00561cda74c8414918079857dfa054ff42e",
+    "rgb/S007/v02.jpg": "f097b100a72f98801848463c39c10b3d99af57b8fcfeeef518c7b58f22c68f7c",
+    "rgb/S007/v03.jpg": "a56ba5bac5bb1ab6ccf741b5d90ee102fd4446fe3c621caebf3df9c128114095",
+    "rgb/S007/v04.jpg": "84b7fdc65f552825c258a14937fb3855c2ac16ab483ed6edfb3178ae78a30968",
+    "rgb/S007/v05.jpg": "d3cb14d1d17ff28e1a71375c56e69645171eb52ca9d1198686dd1b78f6229a7e",
+    "rgb/S007/v06.jpg": "0bdecbcc8bee5fdb85f122dbd5c2b699531e45c0f7d32ba01cf2e025112c588c",
+    "rgb/S007/v07.jpg": "dc6699cb88441a846b3ea12c710227495978fc24ed1f442da0d3e6b80b798a0b",
+    "rgb/S007/v08.jpg": "d0300682e0e6b69a17cbab700035cfe8a606b55f6e171f5920639645e3317ee9",
+    "rgb/S008/v01.jpg": "a5c45604e36d18aa85b03de8d09e02b72e6605d489945ef1b19fd2783ed320e4",
+    "rgb/S008/v02.jpg": "a57f556a293eed0cf9491582c01500087ecf16de4b25fc6056e5eeb2cc2d587d",
+    "rgb/S008/v03.jpg": "b17ba1ccee3ad8814488bfbd93d47b269ce7338b29c746614b9300349c3929d9",
+    "rgb/S008/v04.jpg": "3e628b12b71dc71d5fd08ab90762fa801d8f4e91d5c1312e7785903ce4f241ac",
+    "rgb/S008/v05.jpg": "045325a862d6eb4faa96bb420390ea5ba9295f7bb6ac181a7a9865d2304ea613",
+    "rgb/S008/v06.jpg": "30a306b7c1c27400f85cad92286d301c382961a49a7ba334de826b01a01a0d39",
+    "rgb/S008/v07.jpg": "59fcf58468e2f51bf8d985c49688da82ae6543c47ac2da4ab46dfd86cccf1c27",
+    "rgb/S008/v08.jpg": "42f04b61eb3c830de05334f442d4c4bebccef3aabfc8876efaf7aa2a606ab13d",
+    "rgb/S009/v01.jpg": "ef87474919b008a1dce7b29c02ee62fc6919b02e747959e4349e563a4ef1f636",
+    "rgb/S009/v02.jpg": "8a68c1750b0141cfa249136407902aca751eab11619c32324157ec5c09dcb02d",
+    "rgb/S009/v03.jpg": "ab50b665412199aaae99973a250254d5ac00dd4619e87b6443ef338762e0d811",
+    "rgb/S009/v04.jpg": "7cef909c0e0eb8b458fabce1c96f70862d6669619598369a4009828fcd7dd6bd",
+    "rgb/S009/v05.jpg": "fc3a0875cfccad06742c8cb10bf4a5360d5860819100eec79f4518af7e221f60",
+    "rgb/S009/v06.jpg": "b15a9737ee8fcd4b5aed31028ce0b7f21fe98b89ce5e7cb91c5545bb0e5e7119",
+    "rgb/S009/v07.jpg": "fa55721110b320d8ffd3fd2759b4e499ed5673b0a331c74ae74ec43e00eabd46",
+    "rgb/S010/v01.jpg": "6e79cb765a3fad469f18a4a7518400b398c0f79662de423ff08ed2a654bf7e7c",
+    "rgb/S010/v02.jpg": "aa95bcf00ccebb6b21425ff0fa9524d277a9e4276c22c4f9972b72b313444dda",
+    "rgb/S010/v03.jpg": "745f654e0faea01304f4a955939559cb65628365c63322ff6ad255baf0f2a4bd",
+    "rgb/S010/v04.jpg": "ff5b8565aa89708dec493fe26f85d817d93259469833f2142c708495ecf2621c",
+    "rgb/S010/v05.jpg": "1c21d75cab83c76af7c43d73e859e65f1dfd983e7586fea7c0bb20ba600a8353",
+    "rgb/S010/v06.jpg": "117aa5d769f4fd62997e3e0ff4d959ede4959068ea11315d09d753574a484ee8",
+    "rgb/S010/v07.jpg": "c7565416c7625e9194d8656d2fe9ec408b7dc7849261c006809bdf60ff5738fe",
+    "rgb/S010/v08.jpg": "fecf3a537923b49d6878eb9af26927fa4e300eda166a96054e15c2c7d4b92609",
+    "rgb/S011/v01.jpg": "7b569c0157043e9101ce31b33840b82be52d66f2505bb109ed4367130ab1b921",
+    "rgb/S011/v02.jpg": "539c2ad9ac353867bfd677bcfc62b243d23a92c35f8132a036909d7e2ef4f844",
+    "rgb/S011/v03.jpg": "30b65831f1c99b01d5c19abf7b6b0a85531c81b67de5c8932b76e7a8b2c2b0b8",
+    "rgb/S011/v04.jpg": "64154a5a6a8ae435ab20487ffa308637b2de7522f732c8cd1c2c103c551870c2",
+    "rgb/S011/v05.jpg": "f08ed7f4b1dc02d286fc4171b3c6b87f4f5a6b152570327115390cda1515e40c",
+    "rgb/S011/v06.jpg": "22f9241026d5b250c168da0e1a67dd65df2034578a6a2fc32bb121142fe42b92",
+    "rgb/S011/v07.jpg": "429b91b77f53eed00352b4cf3647c55f4d9f27450d72b642c866de5c0bdeed98",
+    "rgb/S011/v08.jpg": "74c6e15bab9011d5a9caf0ef3f96419a4419fd58983a6ea3cd78c6892bc7f2ca",
+    "rgb/S012/v01.jpg": "e351b1f70eaecf7768b4f596ce3b016ebd4688d233acfec0408ddbaeb5d3bc52",
+    "rgb/S012/v02.jpg": "285e8617e1cbf2afc7b1e25c9a1cc911475f65eea5d190d56e79638245bc4adc",
+    "rgb/S012/v03.jpg": "ac0bdc3c0d46d665aeb26c562c2dec9dc8cc7d93dcff587963dbb5e2acbb321a",
+    "rgb/S012/v04.jpg": "258155d5be2f70effa02434f1d47e23bab6f27534bce97c51a9fcc33cbd62b90",
+    "rgb/S012/v05.jpg": "41114566bcb1ce2668f5009445cf277daf95582819066893856ccf3ac34edea0",
+    "rgb/S012/v06.jpg": "e654e5c4233f2d6536551c2176aaca8e60942fb73205636fcaef245149474f1a",
+    "rgb/S012/v07.jpg": "28c9005817d79fbbadbe359be13bdf08af7a75b83df706b5df8d864527b4e576",
+    "rgb/S012/v08.jpg": "871ae83a655572318cc2086c4097c6ccc231bf1f3a05f9fdf58d666f9831aadb",
+    "rgb/S013/v01.jpg": "532db25c57881ac7bf4e726f85c5faaa53235dfcccb7f80f659b2436592fe933",
+    "rgb/S013/v02.jpg": "0b0c2fd5aa82e8efbcfcca56a55e19455a1dc9a96e3f3dfcae16f81a216c0a8c",
+    "rgb/S013/v03.jpg": "1da39c004269105adb215527a092ce392a8c220b66323134bcc3de4cc604ca5d",
+    "rgb/S013/v04.jpg": "fa3f002c481ce21385e826bf6839452ab3604e49b781a80c905336fbe2addbda",
+    "rgb/S013/v05.jpg": "13b6940cf00098fc703ea1bebb164edc763e805c3265d7df615ac9bc4450966b",
+    "rgb/S013/v06.jpg": "5e4207a497d35b1b830d6bf844b8986a64ed4cedcfb15da2ed69a3c1b8e1ae15",
+    "rgb/S013/v07.jpg": "90098362cf5daef3ac2f3495b2b1ee6dd6e85c57e09ddad53b945077091b0999",
+    "rgb/S013/v08.jpg": "80e8452a859cfe77ad380767b800b91d9516d690204980df9c29713c90addaec",
+    "rgb/S014/v01.jpg": "f98061e4d38aca2108b6f9f838751f4bf8038aa3f551a56b408dabd84e890369",
+    "rgb/S014/v02.jpg": "b433f81d28c5d5691aebf48ff6a09f7a6c1bd3d2cfcc0ebcd5e55b1bb8f34ae4",
+    "rgb/S014/v03.jpg": "c37d3cacd1dbd22992f644956450db78cfe24676d34c1df4d9d2cb0a3a1fe571",
+    "rgb/S014/v04.jpg": "ca4928e4e90e3961e19522a0c76d87f6ef3498347264d56e928c621ce27fe40b",
+    "rgb/S014/v05.jpg": "ee2594c3c3410da1b47d2b0b1812235412089bfdfa7091707a826b5d5ef60341",
+    "rgb/S014/v06.jpg": "6ff62fe5967539a2f4d3bdc8018ed07f9b51fcd8829c8891de8a2ab4bf168715",
+    "rgb/S014/v07.jpg": "c6cc494b5b6623dc00bbaeade6475b804b7578bb527698e79c3562db6c98a8d3",
+    "rgb/S014/v08.jpg": "b58f76d3f82cb4d3b2d775fb8b84e78e5acc3f69f9f2d0245ac49db9a88f4637",
+    "rgb/S015/v01.jpg": "53a57ef1cad60fc8fb3021a79baf81263ec62b2dcd91e7c4457d2bc5e53bb9cd",
+    "rgb/S015/v02.jpg": "ac654a509ec831cbfd6c4cb34cb197829a14df8252be2bee4afc34aace691225",
+    "rgb/S015/v03.jpg": "e247d500b6997846938b7df4c69625520772e860a0dbc3fe1e15b4af754434b3",
+    "rgb/S015/v04.jpg": "cd69b9973dc4b1758b18959d139d9865530be4273bc625addd62b2ec8ee639dc",
+    "rgb/S015/v05.jpg": "8f41fb5dc75c123656902939dc56c84d830f51fe57e99a5dc13f7e48e940f871",
+    "rgb/S015/v06.jpg": "5e5276857ff1cace66234a0d1f46de97903753f72f998412234d47040ce172a7",
+    "rgb/S015/v07.jpg": "2641105a20ec4c9dbfcdcfe0ff31fca8e32dbbc258678bf259f543e8f3e3f857",
+    "rgb/S015/v08.jpg": "910bc39229e61343ca3c05f5397f22f1f2d51dee84349494d3603e514c735eaa",
+    "rgb/S016/v01.jpg": "9c1122ae3b7ab8e592e494e749cd14a2147ee6797a56dcaa0cfff4dd6a49a1eb",
+    "rgb/S016/v02.jpg": "37576f2f8bed5285022de72c4c501b8cc8b46339d63724f40ee98621318deff4",
+    "rgb/S016/v03.jpg": "22962cd8b4c6e1683678a8d1f0d95d0a8be5f7370a3c25f0ef5aa71d84eb97fd",
+    "rgb/S016/v04.jpg": "40a6387b08667f09abbec533c1ffe0f43f705078147e761eee4be86c1657bf94",
+    "rgb/S016/v05.jpg": "a935e2c98feb4c3f96510b75f0467509984ea402e669a726da46a0f6a7105ff7",
+    "rgb/S016/v06.jpg": "9363b7d76a2bc0c3e77484d55a5e89332642a015d545238ba5c6b7dbd3dad72f",
+    "rgb/S016/v07.jpg": "1c5a6d21366aa159e69bc6b38fd5b3c70b4d6ad70e0fe636f5a3568599bdfd5f",
+    "rgb/S016/v08.jpg": "0183fab88551b3237425cdeface19d3de2d1077894a8a7ae49999ef13f932294",
+    "rgb/S017/v01.jpg": "8ace704273bea2d5021143020f150eaba4cb04bf90f0aafe9ca142bb630d4bf2",
+    "rgb/S017/v02.jpg": "404d6fe51924d41618399bee249a55aa681bc0fc83ea8e489f104815fc812872",
+    "rgb/S017/v03.jpg": "00d8a2502342f9253d4384f3443f46939dd7f9275deb864d142a485cedd3ca35",
+    "rgb/S017/v04.jpg": "c7d65ac56dfbe40a59f5e70c4af99452f8939747d31a8d4258742a4558fac89a",
+    "rgb/S017/v05.jpg": "26e72642a983d804807d18db0b523f9acd15cb72013c634b32c25cc893153a91",
+    "rgb/S017/v06.jpg": "eac3247d787d14b9cd5b32e65e2b8393f97dc539954ab87fdbd9bb03514a783a",
+    "rgb/S017/v07.jpg": "a7bdd5fe97ae46a542f1d911aae32b779bd644405bde725b748c2ef89e1f785f",
+    "rgb/S017/v08.jpg": "6e22b88e68bce5ead9e0ac6fe2b9892e408bcc34283725f3b11147e657ba6c64",
+    "rgb/S018/v01.jpg": "720ce9da1c7b66f536a31abe6ca21f546e428ae27248779dba2ff9348c164226",
+    "rgb/S018/v02.jpg": "f62cf7f7332b853728c85683b13c2f3af67e6eefe69aac64234fafa471cab828",
+    "rgb/S018/v03.jpg": "8d378c5daf18dc651a22cdce3dfc7956acb8fc45a8c917e38e49a4d90a34e506",
+    "rgb/S018/v04.jpg": "bbe720ce4f15d1672fa3fb0da091f128d79f973403d767d8fb40e76a8944b8c3",
+    "rgb/S018/v05.jpg": "ec647e721b4a9e875aa92b2e81ae7fb2383bcb1bf04e35a1380e358c54affba6",
+    "rgb/S018/v06.jpg": "fb58d181590ee182884dbeb5142760b85b95dc24f9cb983caac3100251307704",
+    "rgb/S018/v07.jpg": "8279571b6a7433673dd632e7f81c724c98f1485232890e305d347a90fca8698d",
+    "rgb/S018/v08.jpg": "96f67dd94b1c5f7ee22bb6140e1b22c1825415e41280f8d5ad602402eae78591",
+    "rgb/S019/v01.jpg": "e01612f5a809e6345cb1cd7e288df25d775259e04a31c74f1737ec13554cf191",
+    "rgb/S019/v02.jpg": "7272ff7265fd471a341f4c388f1354f33cf61ee9a25068f5a1a7036b1243f0d7",
+    "rgb/S019/v03.jpg": "e8ea859e1538137eb5034691235b60ae3faf72173f0897446c9786451eaad4e0",
+    "rgb/S019/v04.jpg": "bf43f6f2f4d9015ad6931e7d5a931cfe17e353b2848dcaa1f9fbbea1afea1349",
+    "rgb/S019/v05.jpg": "260a5a5bc3b8fa87534c9aa2bd3ad284a20d7e618c9de79328d533fc631d0869",
+    "rgb/S019/v06.jpg": "c4304e5a233e93ed4f52f9ba5cc728686942fb9712f23b9e27096455bb9e6638",
+    "rgb/S019/v07.jpg": "1f8fa86e5a1ce664b2986d23ed0548986c4a4a876a4f674589eae9f5c81a634e",
+    "rgb/S019/v08.jpg": "93dbd87b93463e848ecf11a6768bbaee367cb6662351e4373affa9528a0c0049",
+    "rgb/S020/v01.jpg": "ad017636f7cd50d7971da74f966fc8cd9d85f21d34eff086d8fa2859ac341975",
+    "rgb/S020/v02.jpg": "d5bda8229e8fdde180467653975733e87c56419bb7415ed2a6d0b205c3b4256a",
+    "rgb/S020/v03.jpg": "e91e21d03c96790438004dbaeee9c5425178c6203534d636e253c8a3c29b7c48",
+    "rgb/S020/v04.jpg": "8b1a84bf6f7a54a17c22b6244e515325f1a65df1dd616d287ad5a267d5097309",
+    "rgb/S020/v05.jpg": "44333ec84caa34345077041d2950a24d2b12ae2bed01470502aad8c394d564b6",
+    "rgb/S020/v06.jpg": "59703d377ce196bbf9d9b0ed50632b69fa24a66ef70c469c53dfff964364e562",
+    "rgb/S020/v07.jpg": "4ea64b558e46695ebdbd5e4c464d021f790fb0201058fb3fc2e8553060612d45",
+    "rgb/S020/v08.jpg": "7f2c42860d2d53eb2a414b5de73ad6a1cac3b4d85f169b35c1ea3f8e9d65b88b",
+    "rgb/S021/v01.jpg": "233ecbce326a20e045d66269ed920d017d89a857d498d60d105c3644cb1c7ce6",
+    "rgb/S021/v02.jpg": "81dc141c228fe3e988c82b7cc093ebd2a282ca832c432477ca4a8229788110fa",
+    "rgb/S021/v03.jpg": "05bc003b4d43288a8724b5ed33774bd556f3e343c1783f535375c156df8db8f9",
+    "rgb/S021/v04.jpg": "9df4fb5b857aeaecab4b1ce366dcd206789bbbe1fc5aedd2e98e7cf0b4a6aca4",
+    "rgb/S021/v05.jpg": "e9cc9a11963ddb2d82833afc2e11e01f41f0f7249ce9b6d68b341c1cae0e5e7f",
+    "rgb/S021/v06.jpg": "f671b743d0e14ab7fc8f21286821f96772d00bcaa39947eb72fe39399096a7ec",
+    "rgb/S021/v07.jpg": "e76a1c43012d4cfbcd1a9d4ffef75b97f5fc838c24740ca0c8f17226a9f1c134",
+    "rgb/S021/v08.jpg": "1b5d4a576cb7d856986226542f8d8a90df9c19e06e39b22ae7bf00ea07760e36",
+    "rgb/S022/v01.jpg": "92de741b6697dd804bed6d1f50431fc6675e39f3241465ce0b65782c318d91e9",
+    "rgb/S022/v02.jpg": "437fc7de2a798f66713c841ca27a3df7da11c83b2d7d9810a62e6839361e50c1",
+    "rgb/S022/v03.jpg": "f100441e1bf4556b08fb2cff05e9738580dd24d1192bc0bdc59a80d3ae924e8c",
+    "rgb/S022/v04.jpg": "0361c383c707e30337c8019c06d85da847d1e88bcb11a9a7e523ce31d59ee965",
+    "rgb/S022/v05.jpg": "04266eb4a36d926893afb40d4e6b94432b2b6815fd2aca27917293093ed0ee96",
+    "rgb/S022/v06.jpg": "5d4a7323705023cc4aba1b9eb76a76fe63003287fad99d0b220cc4716b1cc0a4",
+    "rgb/S022/v07.jpg": "2c5fc1084a160ef8a0f600f7cf53199a78688026f259b97b7b7db330de2ad374",
+    "rgb/S022/v08.jpg": "9570e79e969e9b1a931d5758f8383afb02c02286425bda41d894f0df08d9d0b4",
+    "rgb/S023/v01.jpg": "158155c50fc5d46aff262ad00a97aff3d5b599d4e5335377e4bcb82a03d04bbd",
+    "rgb/S023/v02.jpg": "12ea83b84699a90f8dd39dd111193433c599f9ab2b7d14c5ba25e2cf9a623388",
+    "rgb/S023/v03.jpg": "98feb25bcbaaf9051109d6b187b99ae943d6d5bf9df3ca49aa369f0968e0a845",
+    "rgb/S023/v04.jpg": "cc07dae552b95abfe5e92ee1bdda840b9e3aa07933c4f81cbb8350d162620e8f",
+    "rgb/S023/v05.jpg": "e5a2a7db96e7520bcd944211f559f952ee96e70a14f982484f3871e95f1a5020",
+    "rgb/S023/v06.jpg": "997d213bcfefe732ab01bbf18d1ef66d5f4549f60a2bab765edb886a5c1e7787",
+    "rgb/S023/v07.jpg": "dc556d4b5fb53879d8840fecd7b8b9ff712a1673dcc2c32577baad9a54af8d5d",
+    "rgb/S023/v08.jpg": "d59ba7d086d6b9a6cd78bcd98c3c1c9ef86ca271e1594098fdd7469ed26cc6cb",
+    "rgb/S024/v01.jpg": "f48d9fab725ddc83da0f5138c1a648a1c846dbd9c78a1299406cedafa6f4a1e1",
+    "rgb/S024/v02.jpg": "339c59b89101915919a118d54962af754a72a2318f849670974ed17e0f5d80b0",
+    "rgb/S024/v03.jpg": "76c40d1185c3e847f1e1d2dadabdb1ae8bdfcbda0c0ff953a3f36df3130fb170",
+    "rgb/S024/v04.jpg": "2703bc1456291588c9a4aa58d13cc77b6b4baed15e2d28cd8e946b0ac737c8a4",
+    "rgb/S024/v05.jpg": "f4714aedbaebc5526cccfa7f5b28cc22a559a8c086c49d6fdc0383437e1af7c0",
+    "rgb/S024/v06.jpg": "8ab3c84df5ebb1c9195f37e37f7bc8b24f17f3cfb5ad2ac1f8eb8a60d2bc6207",
+    "rgb/S024/v07.jpg": "6aada96fda72cc646d33ac6d674afd1e682cec0e4a8a095ada53493c3369d227",
+    "rgb/S024/v08.jpg": "6ba19a2b628b6a4f7d35bf94631241b7c7c39926b02ea70f3000e1baf19a6255",
+    "rgb/S025/v01.jpg": "41c14934abb11b3f9c552d8109209cafd23a4223e5baa7a26675b6a4007bbb3b",
+    "rgb/S025/v02.jpg": "9686fc79360402958b40232a39b82a265f58da788f9fec12df4bb93e0e3e2157",
+    "rgb/S025/v03.jpg": "d68f6632f76a8c823e4fd49fc76b7079d064d3a68aedf54207d9ac5f69c2ab55",
+    "rgb/S025/v04.jpg": "dedef9d1f1e4cade371cd7b1ce404156d09a9ed6dac8ba3205ec618e5d654478",
+    "rgb/S025/v05.jpg": "c4543d9eeedbab30b6052543f8a49360b077724c9a216bfda346a55a566cb636",
+    "rgb/S025/v06.jpg": "5652e73d8bc80628831f6ffdf2c9330e2e18f6f06f1997409521dfb47f7576a0",
+    "rgb/S025/v07.jpg": "540c77cb249a35ffdfbd962eba4a6e708936daa115895cd0fd1ac50eaeeec7e9",
+    "rgb/S025/v08.jpg": "bddffcc4a4d04384355a6a2f97a08d0d4e48e357d188ef0dee6f634d3b2083a5",
+    "rgb/S026/v01.jpg": "79fd968cec37553d8a5a4fe3611bce68044520c3268ed888ae9a108e58f3121c",
+    "rgb/S026/v02.jpg": "695cde69f17c16a2d9a76d67c8a30bdf3880e067d46916eacd78bcf924d2cbf0",
+    "rgb/S026/v03.jpg": "d5967a1b03c2ad4be3f929eadee6401f1aca4ce5d772d79f0af952d9eb33dcc7",
+    "rgb/S026/v04.jpg": "3b68b1267fb1e1f6032e3fe75cf21908a20397a75e77f1aa58d51c3cb7bfacd1",
+    "rgb/S026/v05.jpg": "243ea232a1a20fd429abfe9ed81be639e3578a61dbda9b643baeab2756832fcf",
+    "rgb/S026/v06.jpg": "3ad26ccfcd76ac3aacc2346210c77e2ea62098c012b1f20e2bd427ab8aa60aa0",
+    "rgb/S026/v07.jpg": "55974b14863c9e1eef460a355d8924bbb6cefa353d9bef58261eb2d6c928d844",
+    "rgb/S026/v08.jpg": "a981e072f4af7b955870b1e6278819c543c6968501b4e4e9d8f69662cb667468",
+    "rgb/S027/v01.jpg": "ad7a953083472e5b276e894e707bce6abc8096a9e2b13c22b360efc220371338",
+    "rgb/S027/v02.jpg": "9f3bde849a967ac0918dae4ae683382683f96b1553daa76d6d8da092879bdcff",
+    "rgb/S027/v03.jpg": "3ce69d661719a26e50675001764d469635974f53921996144afc13924ad2b011",
+    "rgb/S027/v04.jpg": "828f4aba2d03b3f8ff7125fbc534d65c2bb60441b754f7cac4f9da5f9af27846",
+    "rgb/S027/v05.jpg": "8c7fa946df587cbbbfed064feb60e17e854704b5940882f692df317e9fa042c5",
+    "rgb/S027/v06.jpg": "7c8b5666e44cb20dd5f601694f6cb1e81f760a3edd7355dab426ffd368a3f16f",
+    "rgb/S027/v07.jpg": "424ff168a9be31a39db42df0819cbea4f1df21aa8b8196fe2e070efd1a675c6f",
+    "rgb/S027/v08.jpg": "1a146adc20ec0f32d6e10962a0bb51cbf0c45f0a301a9be0f4aea665a53f4fb6",
+    "rgb/S028/v01.jpg": "b033056ca882962a88f8dd2750d96cfed34c973e608fe8dfae2ab03ac2128bc3",
+    "rgb/S028/v02.jpg": "f2fa07bf66229b57771cdbf6c61b56acedd968a87814e7f16b4a3234f833a174",
+    "rgb/S028/v03.jpg": "2165f0cd2e527a319868590267b3061eead5a7ed9443d5e3272e0fe0414e0125",
+    "rgb/S028/v04.jpg": "6a0f30893cdf8cac9129a9e03f848d087194890d64c81bc77fe75d0d7221479c",
+    "rgb/S028/v05.jpg": "1da03dac31dbf1dcca60260a8fffb13b45a573d29daad454254c859b42a2407a",
+    "rgb/S028/v06.jpg": "fc8fa71d21ca699f504819c62ebd24d558171463e91cde6ffeafc937276ec11e",
+    "rgb/S028/v07.jpg": "9ec06f9b414a160e78f41381359b308d0ea07a18b3f0b2a7c2a027741c1e2a09",
+    "rgb/S028/v08.jpg": "f634a4b10b46da7284120eafe9aafd27f4992583a390ed8cdade33059c333e39",
+    "rgb/S029/v01.jpg": "168ca98271abb6e1d1e9548f58458d2cf5568d6b1905454319f85ac79a4e05b3",
+    "rgb/S029/v02.jpg": "64be027415ef267e04e10545d127e1fea78c3da4d00f67219cea3475997bca6a",
+    "rgb/S029/v03.jpg": "108f4d059648e20eca3df4fed86a51ddb4c156298c6ffaa3dc3b56672b30903a",
+    "rgb/S029/v04.jpg": "fd0d21177c9d1aae1d78fb43addafed71c1fdf754bb27b12141afd63cbaedde5",
+    "rgb/S029/v05.jpg": "ca461bc944807571e50a70a488b3966d752641d16650db976b27808d602b2592",
+    "rgb/S029/v06.jpg": "74a86715d12fe4535d4e2c02f6e7b8c3212a75a2899f28cefdaabd217e9f46dd",
+    "rgb/S029/v07.jpg": "e9d4e5ba4aa34e572bfc8d45f6db52a5dbf2ab2393c77f511b25d489bc9303bd",
+    "rgb/S029/v08.jpg": "97dab6f50898b1d2ee5de2149b2328c7c8665f06df7b24c6e3b3487e5076bb2e"
+  },
+  "method_config_sha256": "498beffae36101388024a95ba9ff9e3503fde66fc7a7903b6ca0c0113760e842",
+  "mode": "automatic",
+  "resizing": {
+    "exif_removed": true,
+    "jpeg_quality": 95,
+    "longest_edge": 3072,
+    "orientation_baked": true,
+    "resampler": "LANCZOS",
+    "subsampling": 0
+  },
+  "review_policy_sha256": "f36e3a61ac993602611ca01fdd5cc0f053c80a632ea3c215f8654931814ca8ff",
+  "runner_sha256": "90691b7c0037faa200473e735917fe8f0028ae1c3b025f38150eb71b7c42affa",
+  "scene_count": 29,
+  "scenes": [
+    {
+      "scene_id": "S001",
+      "views": [
+        "rgb/S001/v01.jpg",
+        "rgb/S001/v02.jpg",
+        "rgb/S001/v03.jpg",
+        "rgb/S001/v04.jpg",
+        "rgb/S001/v05.jpg",
+        "rgb/S001/v06.jpg",
+        "rgb/S001/v07.jpg",
+        "rgb/S001/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S002",
+      "views": [
+        "rgb/S002/v01.jpg",
+        "rgb/S002/v02.jpg",
+        "rgb/S002/v03.jpg",
+        "rgb/S002/v04.jpg",
+        "rgb/S002/v05.jpg",
+        "rgb/S002/v06.jpg",
+        "rgb/S002/v07.jpg",
+        "rgb/S002/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S003",
+      "views": [
+        "rgb/S003/v01.jpg",
+        "rgb/S003/v02.jpg",
+        "rgb/S003/v03.jpg",
+        "rgb/S003/v04.jpg",
+        "rgb/S003/v05.jpg",
+        "rgb/S003/v06.jpg",
+        "rgb/S003/v07.jpg",
+        "rgb/S003/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S004",
+      "views": [
+        "rgb/S004/v01.jpg",
+        "rgb/S004/v02.jpg",
+        "rgb/S004/v03.jpg",
+        "rgb/S004/v04.jpg",
+        "rgb/S004/v05.jpg",
+        "rgb/S004/v06.jpg",
+        "rgb/S004/v07.jpg",
+        "rgb/S004/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S005",
+      "views": [
+        "rgb/S005/v01.jpg",
+        "rgb/S005/v02.jpg",
+        "rgb/S005/v03.jpg",
+        "rgb/S005/v04.jpg",
+        "rgb/S005/v05.jpg",
+        "rgb/S005/v06.jpg",
+        "rgb/S005/v07.jpg",
+        "rgb/S005/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S006",
+      "views": [
+        "rgb/S006/v01.jpg",
+        "rgb/S006/v02.jpg",
+        "rgb/S006/v03.jpg",
+        "rgb/S006/v04.jpg",
+        "rgb/S006/v05.jpg",
+        "rgb/S006/v06.jpg",
+        "rgb/S006/v07.jpg",
+        "rgb/S006/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S007",
+      "views": [
+        "rgb/S007/v01.jpg",
+        "rgb/S007/v02.jpg",
+        "rgb/S007/v03.jpg",
+        "rgb/S007/v04.jpg",
+        "rgb/S007/v05.jpg",
+        "rgb/S007/v06.jpg",
+        "rgb/S007/v07.jpg",
+        "rgb/S007/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S008",
+      "views": [
+        "rgb/S008/v01.jpg",
+        "rgb/S008/v02.jpg",
+        "rgb/S008/v03.jpg",
+        "rgb/S008/v04.jpg",
+        "rgb/S008/v05.jpg",
+        "rgb/S008/v06.jpg",
+        "rgb/S008/v07.jpg",
+        "rgb/S008/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S009",
+      "views": [
+        "rgb/S009/v01.jpg",
+        "rgb/S009/v02.jpg",
+        "rgb/S009/v03.jpg",
+        "rgb/S009/v04.jpg",
+        "rgb/S009/v05.jpg",
+        "rgb/S009/v06.jpg",
+        "rgb/S009/v07.jpg"
+      ]
+    },
+    {
+      "scene_id": "S010",
+      "views": [
+        "rgb/S010/v01.jpg",
+        "rgb/S010/v02.jpg",
+        "rgb/S010/v03.jpg",
+        "rgb/S010/v04.jpg",
+        "rgb/S010/v05.jpg",
+        "rgb/S010/v06.jpg",
+        "rgb/S010/v07.jpg",
+        "rgb/S010/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S011",
+      "views": [
+        "rgb/S011/v01.jpg",
+        "rgb/S011/v02.jpg",
+        "rgb/S011/v03.jpg",
+        "rgb/S011/v04.jpg",
+        "rgb/S011/v05.jpg",
+        "rgb/S011/v06.jpg",
+        "rgb/S011/v07.jpg",
+        "rgb/S011/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S012",
+      "views": [
+        "rgb/S012/v01.jpg",
+        "rgb/S012/v02.jpg",
+        "rgb/S012/v03.jpg",
+        "rgb/S012/v04.jpg",
+        "rgb/S012/v05.jpg",
+        "rgb/S012/v06.jpg",
+        "rgb/S012/v07.jpg",
+        "rgb/S012/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S013",
+      "views": [
+        "rgb/S013/v01.jpg",
+        "rgb/S013/v02.jpg",
+        "rgb/S013/v03.jpg",
+        "rgb/S013/v04.jpg",
+        "rgb/S013/v05.jpg",
+        "rgb/S013/v06.jpg",
+        "rgb/S013/v07.jpg",
+        "rgb/S013/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S014",
+      "views": [
+        "rgb/S014/v01.jpg",
+        "rgb/S014/v02.jpg",
+        "rgb/S014/v03.jpg",
+        "rgb/S014/v04.jpg",
+        "rgb/S014/v05.jpg",
+        "rgb/S014/v06.jpg",
+        "rgb/S014/v07.jpg",
+        "rgb/S014/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S015",
+      "views": [
+        "rgb/S015/v01.jpg",
+        "rgb/S015/v02.jpg",
+        "rgb/S015/v03.jpg",
+        "rgb/S015/v04.jpg",
+        "rgb/S015/v05.jpg",
+        "rgb/S015/v06.jpg",
+        "rgb/S015/v07.jpg",
+        "rgb/S015/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S016",
+      "views": [
+        "rgb/S016/v01.jpg",
+        "rgb/S016/v02.jpg",
+        "rgb/S016/v03.jpg",
+        "rgb/S016/v04.jpg",
+        "rgb/S016/v05.jpg",
+        "rgb/S016/v06.jpg",
+        "rgb/S016/v07.jpg",
+        "rgb/S016/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S017",
+      "views": [
+        "rgb/S017/v01.jpg",
+        "rgb/S017/v02.jpg",
+        "rgb/S017/v03.jpg",
+        "rgb/S017/v04.jpg",
+        "rgb/S017/v05.jpg",
+        "rgb/S017/v06.jpg",
+        "rgb/S017/v07.jpg",
+        "rgb/S017/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S018",
+      "views": [
+        "rgb/S018/v01.jpg",
+        "rgb/S018/v02.jpg",
+        "rgb/S018/v03.jpg",
+        "rgb/S018/v04.jpg",
+        "rgb/S018/v05.jpg",
+        "rgb/S018/v06.jpg",
+        "rgb/S018/v07.jpg",
+        "rgb/S018/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S019",
+      "views": [
+        "rgb/S019/v01.jpg",
+        "rgb/S019/v02.jpg",
+        "rgb/S019/v03.jpg",
+        "rgb/S019/v04.jpg",
+        "rgb/S019/v05.jpg",
+        "rgb/S019/v06.jpg",
+        "rgb/S019/v07.jpg",
+        "rgb/S019/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S020",
+      "views": [
+        "rgb/S020/v01.jpg",
+        "rgb/S020/v02.jpg",
+        "rgb/S020/v03.jpg",
+        "rgb/S020/v04.jpg",
+        "rgb/S020/v05.jpg",
+        "rgb/S020/v06.jpg",
+        "rgb/S020/v07.jpg",
+        "rgb/S020/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S021",
+      "views": [
+        "rgb/S021/v01.jpg",
+        "rgb/S021/v02.jpg",
+        "rgb/S021/v03.jpg",
+        "rgb/S021/v04.jpg",
+        "rgb/S021/v05.jpg",
+        "rgb/S021/v06.jpg",
+        "rgb/S021/v07.jpg",
+        "rgb/S021/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S022",
+      "views": [
+        "rgb/S022/v01.jpg",
+        "rgb/S022/v02.jpg",
+        "rgb/S022/v03.jpg",
+        "rgb/S022/v04.jpg",
+        "rgb/S022/v05.jpg",
+        "rgb/S022/v06.jpg",
+        "rgb/S022/v07.jpg",
+        "rgb/S022/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S023",
+      "views": [
+        "rgb/S023/v01.jpg",
+        "rgb/S023/v02.jpg",
+        "rgb/S023/v03.jpg",
+        "rgb/S023/v04.jpg",
+        "rgb/S023/v05.jpg",
+        "rgb/S023/v06.jpg",
+        "rgb/S023/v07.jpg",
+        "rgb/S023/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S024",
+      "views": [
+        "rgb/S024/v01.jpg",
+        "rgb/S024/v02.jpg",
+        "rgb/S024/v03.jpg",
+        "rgb/S024/v04.jpg",
+        "rgb/S024/v05.jpg",
+        "rgb/S024/v06.jpg",
+        "rgb/S024/v07.jpg",
+        "rgb/S024/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S025",
+      "views": [
+        "rgb/S025/v01.jpg",
+        "rgb/S025/v02.jpg",
+        "rgb/S025/v03.jpg",
+        "rgb/S025/v04.jpg",
+        "rgb/S025/v05.jpg",
+        "rgb/S025/v06.jpg",
+        "rgb/S025/v07.jpg",
+        "rgb/S025/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S026",
+      "views": [
+        "rgb/S026/v01.jpg",
+        "rgb/S026/v02.jpg",
+        "rgb/S026/v03.jpg",
+        "rgb/S026/v04.jpg",
+        "rgb/S026/v05.jpg",
+        "rgb/S026/v06.jpg",
+        "rgb/S026/v07.jpg",
+        "rgb/S026/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S027",
+      "views": [
+        "rgb/S027/v01.jpg",
+        "rgb/S027/v02.jpg",
+        "rgb/S027/v03.jpg",
+        "rgb/S027/v04.jpg",
+        "rgb/S027/v05.jpg",
+        "rgb/S027/v06.jpg",
+        "rgb/S027/v07.jpg",
+        "rgb/S027/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S028",
+      "views": [
+        "rgb/S028/v01.jpg",
+        "rgb/S028/v02.jpg",
+        "rgb/S028/v03.jpg",
+        "rgb/S028/v04.jpg",
+        "rgb/S028/v05.jpg",
+        "rgb/S028/v06.jpg",
+        "rgb/S028/v07.jpg",
+        "rgb/S028/v08.jpg"
+      ]
+    },
+    {
+      "scene_id": "S029",
+      "views": [
+        "rgb/S029/v01.jpg",
+        "rgb/S029/v02.jpg",
+        "rgb/S029/v03.jpg",
+        "rgb/S029/v04.jpg",
+        "rgb/S029/v05.jpg",
+        "rgb/S029/v06.jpg",
+        "rgb/S029/v07.jpg",
+        "rgb/S029/v08.jpg"
+      ]
+    }
+  ],
+  "schema": "vpi-real-photo-batch/v1",
+  "source_commit": "5b78942e29fe7186458c6a13306eeba2657fc3e6",
+  "source_files": {
+    "scripts/current_notebook_runtime.py": "d9d94743d83d9ff070030bb6212f6bfe00d71822eec489a00b2db66d69eb1d2b",
+    "src/visual_peer_inspector/__init__.py": "bd23e2f062b88ce841177766422cbe7166978d5bd9c9a818b79e76c99ddd6de5",
+    "src/visual_peer_inspector/baseline.py": "85d581dd1371852db0e3cdd77af021d9e2a6955c2fac079e7b9f103d29abc54f",
+    "src/visual_peer_inspector/chunks.py": "71552847b58bcd9e52677149e59856bfc041a929014184c251c335eca22289cd",
+    "src/visual_peer_inspector/data/__init__.py": "dcc856c90cec7c20c025afd9c3f0203b6c5c69046d0d2f289e008fc4fb6cf868",
+    "src/visual_peer_inspector/data/archive_index.py": "6cc87d87a6e162b8b92caf3892e3f2e289f2ffcd3e0f9fd5cbbc7eede5ff7b5c",
+    "src/visual_peer_inspector/data/archive_members.py": "6fb581879f486473188d4c3e7f96ebf5549d75e0b1e7e0f59358f7aaaff5756b",
+    "src/visual_peer_inspector/data/cohort_contract.py": "e78455f81af5d80043565a0ba6e576e7369086d010a419fecd42aeffed5a7e5b",
+    "src/visual_peer_inspector/data/confirmation_mask_routes.py": "f23b3e186fba08af5ec1eaa9502f4d3d073acaebbf17d2d304eea34a81dad42d",
+    "src/visual_peer_inspector/data/ds1_mask_route_package.py": "1c9a80b1be8a909f950c70247f79b23c2a39d93355ae21abd95ed5aae88f46db",
+    "src/visual_peer_inspector/data/ds2_reuse_input.py": "ba86079e801272e419b312fb2069605006322cd44136fb0f036504efbf6967eb",
+    "src/visual_peer_inspector/data/integrity.py": "17f08eb7a34f462bec12c0376bc97558c7feded7102f1bc0eea8ecbe206e0f24",
+    "src/visual_peer_inspector/data/mask_route_package.py": "49458ba7a4ed180c77d7e546db680dcf825445c30fe949f5711607b3e6fe2030",
+    "src/visual_peer_inspector/data/model_safe_package.py": "c5c7bac5072ad54fae579fe36a9378907289713140a339567bf2ed6c3dce313e",
+    "src/visual_peer_inspector/data/representation_package.py": "00809896414ff45e03d9b9023b95558bdc2e0d29dc90b0b6ffcb6727106b2635",
+    "src/visual_peer_inspector/data/representation_package_ds1.py": "547a8829d0dc2b084797dee5757828c7732707452229e7961f315be5808b444a",
+    "src/visual_peer_inspector/data/sam_prompt_package.py": "24cf9baaa9b138103b37134a927f3484589c86649e2988c0ec7249bcaebc3ebc",
+    "src/visual_peer_inspector/data/sam_prompt_package_ds1.py": "3afa3fe422bfdfeb02efb442b08684c64e8cac20bf25e6766b0ce92e11310e9a",
+    "src/visual_peer_inspector/data/scene_catalog.py": "8f2235926ad36f4376865c9e5ec18f740a6a4dc025740bc71fb03acbffa3cde0",
+    "src/visual_peer_inspector/data/segmented_file.py": "02a1f469df2e758d1b53eab863fae9086113889e20bcaf3efbdde250c117f109",
+    "src/visual_peer_inspector/data/selected_examples.py": "7067fefe1d81c88f26d6c7963b0aa4797b7abcc4138554b194f734e53bc53553",
+    "src/visual_peer_inspector/data/source_storage.py": "c9fe2bf7ab65f5961671f3b193cf9b631f7f287dbbdd8550c17db77301ebcbd0",
+    "src/visual_peer_inspector/data/toysad_selection.py": "635ce13a0844e38dc96a1df5b7086b5ed6cce1e24d58cd90461f362de48cfcc3",
+    "src/visual_peer_inspector/dataset.py": "122b82e08af9e8f042329531ba56d32cdd3ff9f1c70480e2f461cbcb98ea4cdd",
+    "src/visual_peer_inspector/evaluation/__init__.py": "6fa733119a23bb3b0ae99fa9b89faccb9a7ef9659596b417f2a392f321c1751c",
+    "src/visual_peer_inspector/evaluation/confirmation_reference.py": "61739c766aa6f1066556406241148287e833a5104ea73f17262c63d3986d3a1c",
+    "src/visual_peer_inspector/evaluation/context_ranker.py": "23fba18dc99e4e622efc899a5542d405c491e25e4490643251dba4e88a5d1c2f",
+    "src/visual_peer_inspector/evaluation/ds1_evaluator_package.py": "be0678bfab4ba461d736c564f7512d77f9c34ac274a52f71e55df73dff25470c",
+    "src/visual_peer_inspector/evaluation/masks.py": "2f7e3343685b34d5ce5d72d42dfd738bbcb37c1115f64c84a200864d580e8bbd",
+    "src/visual_peer_inspector/evaluation/proposal_history.py": "5dd536c76996f88773285f68f4da696004986e6a29910bd5a1974ed65c9a5697",
+    "src/visual_peer_inspector/evaluation/proposal_reference.py": "4264e3c3194006eed63fa2b567bbff5fb6b3bce0f3029bc9f4a1fd8143c4ac35",
+    "src/visual_peer_inspector/evaluation/proposal_reference_ds1.py": "bb9cb4d08b44796da50b4192e97296f1b842b1090a472c45150f7272790e40dd",
+    "src/visual_peer_inspector/evaluation/proposals.py": "83fb730c955151a07e8f914c50dd1cc9d9888fc930c52fbe2ad82e7deca36920",
+    "src/visual_peer_inspector/evaluation/ranking.py": "0cde673756ce21f2575eee459a5a6117b471d4de07e393de72951e6f4f273c15",
+    "src/visual_peer_inspector/evaluation/sam_crosswalk.py": "9f0e7d89ea25583f4e0f931090c9a694d7a2c1dbe17783a2f6ade444c6082057",
+    "src/visual_peer_inspector/evaluation/sam_crosswalk_ds1.py": "3ba2f7b43bcfb145ba887f8d7917943f05b987358878ea394610616caf959e49",
+    "src/visual_peer_inspector/evaluation/sam_mask_package.py": "f5d7489b4b1d5a5a99e85c543c9fcd717add9c1c4e1e482ca5138862f4624e87",
+    "src/visual_peer_inspector/evidence.py": "5f7384a590a9da1e7ed779a930ff21ba37810efaec60a351c65e406d1774027a",
+    "src/visual_peer_inspector/extraction.py": "514fe372391fe9f13186f00d1d365e7e75612303f27f0da8b2b3705b35e0474d",
+    "src/visual_peer_inspector/frozen_resource.py": "0b4c45970f1a5e158df55ad3d40a61e490bacab1ec889d9652793f43a1c4bd0b",
+    "src/visual_peer_inspector/models/__init__.py": "1586f8682aa2ffa807c4b138d17930d2104665163930d2d5e6c416519c698aea",
+    "src/visual_peer_inspector/models/locateanything.py": "00424350dd8964a0ccd0fdb7d17b53e5a2e8120bf80e0b453cb1f3cbfea40e0d",
+    "src/visual_peer_inspector/models/sam2.py": "943cfe35e2ee9f9490b6644e8ba67852103367ba22c9b343b89159716002971e",
+    "src/visual_peer_inspector/models/visual_encoder.py": "fac95f88646228dca547bcd2c0e402ca8fe1da39ee4e1de8cd376b79911c656b",
+    "src/visual_peer_inspector/notebook_provenance.py": "0d73e1f6efcaef4c258f990fcca271340ef001d2146348dfa4d0170e7f09ee8a",
+    "src/visual_peer_inspector/qualitative_reporting.py": "6447a31995b045799b195d97929a40edd2b61f55280f06d0288c73a52fd86238",
+    "src/visual_peer_inspector/representation/__init__.py": "22743dd356e41a51ef1533859c2a716058456fb6ccb7c950af6ebdad1fc30cb0",
+    "src/visual_peer_inspector/representation/crops.py": "80071e26acf37ac0c0963e458831d1bdfab4c1fe2c71ec3cc80ace6fa02e5fa3",
+    "src/visual_peer_inspector/representation/cross_view_identity.py": "949c4f5cecf653a2bb83d3f8bdfcba6a6652d637c7a5d2b435a688f682d691a2",
+    "src/visual_peer_inspector/representation/geometry.py": "14c21d25d3ffa4cb1e22d2db1adcb5d5f68bbbdac63e8c9ec6ee4d0cffa61419",
+    "src/visual_peer_inspector/representation/identity_association.py": "16e45571230d5c66c97a8476f1979877e2ca83c8dcb3441c228e49e1b8ff2e8e",
+    "src/visual_peer_inspector/representation/identity_patch_matching.py": "a9b34ff047f113945bb59643cc941fd82cd278c614032ab740cb44dec4429ea5",
+    "src/visual_peer_inspector/representation/patch_correspondence.py": "b81093c988c4ef1f9a4554b09b788d83e87ca5d270a7c6e2b9face240f1491cb",
+    "src/visual_peer_inspector/review_policy.py": "52bad4f51f3a620bc65b1970f513e74bce8a3d3f0293cf7bb8839d6459fd2b4b",
+    "src/visual_peer_inspector/scoring/__init__.py": "14d57d355849a50ead3596dc62d5d915324bb73b6bb4c39d5425fa1a05edab9a",
+    "src/visual_peer_inspector/scoring/forward_patch.py": "f08d2323ce906dbeb70033d61d02ad2074e52d060661286059aa298ac3af5bb4",
+    "src/visual_peer_inspector/scoring/peer.py": "178b3e9fae853c6dbcec79f9d27c5457b5e91cd48b4cc53991b488de35e6fe8a",
+    "src/visual_peer_inspector/scoring/peer_support.py": "1ddd5422b15927e8f6bc81f1c9d58f5f68eda01a6baff8c336a9b8b2b59caf22",
+    "src/visual_peer_inspector/segments.py": "f48c7d043b6a758a18524698d9deeb7f085092ce045a2f8d9005e749a2a30aff",
+    "src/visual_peer_inspector/tracking.py": "ec138ac1f7933197e50848d03e28ca0c542508d345d5a23158bd033d800797a7",
+    "src/visual_peer_inspector/tracking_safe_artifacts.py": "c3c2235b4aa32ed5bc179907a61e6c768bd3315139c75e726d444225c8411eb0",
+    "src/visual_peer_inspector/verification.py": "6e46a6d6573ba1756af4e5f95f4d1e1765148191f9f0bfe779cbcb632ae548cf",
+    "src/visual_peer_inspector/web/__init__.py": "573039c9ccd2e037ddc95c3c0a38b44b062917dcbcf22c387e21e0a436ba57c2",
+    "src/visual_peer_inspector/web/backend.py": "28dec9ec963ec209c77e5baeeb1f7d54e07f2ca30c81aa730fd8e97312f4550d",
+    "src/visual_peer_inspector/web/case.py": "1d81e33bcf3b942a05e8a212c7d57d02985527f398426a3f22c2ccad6952af4f",
+    "src/visual_peer_inspector/web/core.py": "c474c194560607b270fdd9d40156513fa8edc9af70d0b611b2b9ebe1fb85c9cb",
+    "src/visual_peer_inspector/web/decision.py": "590838fe3deb20600be2f94c3c7b98f1619e4854c86615dbef80e8fc7956e942",
+    "src/visual_peer_inspector/web/deployment.py": "03ca62304b17e5149d6b983857aa6fc66775c53cfe77ab33a68b6b79bd26bfd1",
+    "src/visual_peer_inspector/web/encoder_worker.py": "f893c741367f1c98d3de7017a13ac3aca4734713fdfcfd0f44bcb09d74e9f9f1",
+    "src/visual_peer_inspector/web/frozen_policy.py": "95db62806e1684563d49ebf1a02f4635585448e91d2acc0186a0a88774d63b73",
+    "src/visual_peer_inspector/web/frozen_review_policy.json": "f36e3a61ac993602611ca01fdd5cc0f053c80a632ea3c215f8654931814ca8ff",
+    "src/visual_peer_inspector/web/groq_explanation.py": "da28396d20b190617a970a6bd9a92469bd85f1d66e0562cf9ac1205980ce2ca8",
+    "src/visual_peer_inspector/web/heatmaps.py": "0e4be330254e1c09247ee8b23e72aff2b10da9628ad51003c7b555a35ebf9c60",
+    "src/visual_peer_inspector/web/help_panel.py": "4f9639486c6422a3bbae724b599d59b5adde3c63f9b5729a27773fbd51296679",
+    "src/visual_peer_inspector/web/model_runtime.py": "3582125a6b3d2ca5d7cbbf3b37bb01733115f30213b927d1e30bb7cd69b72cb8",
+    "src/visual_peer_inspector/web/pipeline.py": "7506ccfd47e895dc10bb55e02ae658e0ca837cc40f8d703b166d464b23e42e5e",
+    "src/visual_peer_inspector/web/pipeline_config.json": "498beffae36101388024a95ba9ff9e3503fde66fc7a7903b6ca0c0113760e842",
+    "src/visual_peer_inspector/web/presentation.py": "602dd86277e15e9f9863c1127191215570c3f60697098d921106ef6946e05786",
+    "src/visual_peer_inspector/web/session_cache.py": "35c50f060e4b250150d8e2aab16948f480428475d7d58b48456dface4a42d417",
+    "src/visual_peer_inspector/web/transport.py": "458f77106acfd1ccbfae3f36dc7f398d884df776e59e2d46825cf57d29531e57",
+    "src/visual_peer_inspector/web/ui.py": "4da7ca933e74ef5680a78e4310c2397edb64be7ff127074f43fcbb2a3cf19f72",
+    "src/visual_peer_inspector/web/worker.py": "4bdd68e0028572bd9baea94ecad0fe2ca171fc1b70aa9b99af2066be3b102760",
+    "src/visual_peer_inspector/workflows/__init__.py": "9851e7a69c75c5f1efb90e9d6579c0f2af193f77f334c55d5334f97113831ad8",
+    "src/visual_peer_inspector/workflows/calibration_review_policy.py": "61003fd36a3b0d5f88c80e63fba5242972a6c89404e579a9294f5ed4be68b8ef",
+    "src/visual_peer_inspector/workflows/comparison_evaluation.py": "8dcf65b2458d562ca0a8ca372fc229bf891d29ec1b8584e36328b598d57a2043",
+    "src/visual_peer_inspector/workflows/comparison_figures.py": "d9e796857ef5de352d1dbb99bf2d06a0d5258cb68ac13393f41d8a47417e82a4",
+    "src/visual_peer_inspector/workflows/comparison_io.py": "f157c7aec1f10d7d28cf5b9a3a67e9f19d4487bde2e331d3b06ff177e8b345ea",
+    "src/visual_peer_inspector/workflows/comparison_prediction_figures.py": "7c59e9da0dcdafa438120d6f2fb59e8067ad7109b3db78cc9c8b150ab8feaf16",
+    "src/visual_peer_inspector/workflows/cross_view_identity_freeze.py": "b2b2b041ab6e09399ac4ded430b538cb0a2512f769dff321cd9c7b88910650b3",
+    "src/visual_peer_inspector/workflows/frozen_development_pipeline.py": "b2d8ef419203240681e320934ccfd56d43ba2b8ba17e0cab239661622278c248",
+    "src/visual_peer_inspector/workflows/full_pool_sensitivity.py": "953cc56f439347a2ac669f86cf0e239f82a5e693658a6eb3fa209aef12ae025f",
+    "src/visual_peer_inspector/workflows/identity_association_study.py": "3225499ac13e57a8f4a779d9c844bb930017d5be5668ea143fc47417c37710c7",
+    "src/visual_peer_inspector/workflows/identity_patch_association_study.py": "081bf2cc970d5c713537c3484fcf7afe0bf61d779742d871d884f5dbb2456f58",
+    "src/visual_peer_inspector/workflows/identity_refinement.py": "c9d5af3c715db30000e6a7f4e7bb9d8683889220ad8acffe2f3dde13162a03ef",
+    "src/visual_peer_inspector/workflows/kaggle_recovery.py": "d7af04a930261f03d4f6f33dacf475b5f76cc939cde4d70c8f13096f4894009f",
+    "src/visual_peer_inspector/workflows/learned_peer_evaluation.py": "105aba4ca030ac53a94b5cd64b2c7ca200617ebf395a572aba647bc893eda41f",
+    "src/visual_peer_inspector/workflows/learned_peer_features.py": "c76e886d3123f405eda7a0a1f467b4f3f0d0f40943bb444de729ee9b80e52a93",
+    "src/visual_peer_inspector/workflows/locateanything_confirmation_ds2.py": "496161c82178dae4c8aba1d2fbd609cc64398e48f21aa79e79fee8b1a6919cee",
+    "src/visual_peer_inspector/workflows/locateanything_ds1.py": "260997e2cdad5c165f76d89218120da8c3d5de7c249e9b29f65cfd4b9d37f5dd",
+    "src/visual_peer_inspector/workflows/locateanything_prompt_freeze_ds1.py": "dcfdccc27d403a9da8feccc7ca1283906813a9ca889665a31d501166f54aaa4a",
+    "src/visual_peer_inspector/workflows/mask_evaluation_ds0.py": "20c7086b5c4e334742af59f613867a9c6605bef5fcadcabec544972bce538f46",
+    "src/visual_peer_inspector/workflows/mask_evaluation_ds1.py": "5eadbdec7ef6e8fc0a3f1393e18d71e9ae0347a5f8256e3ed8bd805c9ef255e1",
+    "src/visual_peer_inspector/workflows/multiview_confirmation_ds2.py": "3b4d909ea9ce549d5f7df6e3aeeea5f5a9731281401a2d4a2d0d05880e9d64d8",
+    "src/visual_peer_inspector/workflows/official_inference.py": "bbc28cf5fd4822c51063ddc35ed90327805ee021dbcc83bebc6563f79aa1a501",
+    "src/visual_peer_inspector/workflows/official_release.py": "6057b22d1698991feec2abcd96bc1487073e72df5aba6625454a9fd35570d6c5",
+    "src/visual_peer_inspector/workflows/one_shot_evaluation.py": "164e99ecc7545fae85d758d169a305c05df9d16db767db48f6f64531b9b325e1",
+    "src/visual_peer_inspector/workflows/primary_protocol_release.py": "9a66fcd930b031dbd22bcf492325e786e616769162879564ce7ef1697c181309",
+    "src/visual_peer_inspector/workflows/primary_resource_release.py": "9beaaaba972788f95fcd349302f6052c21426dd056d640bec3b69586d3e045b2",
+    "src/visual_peer_inspector/workflows/proposal_refinement_ds1.py": "6532f0af036da147b18d8e2fff7f7738e812b2256e8c0d04f6915a999efd59e8",
+    "src/visual_peer_inspector/workflows/protected_cohort_inference.py": "a771c721c4e9491b794887819a67d328bffb6a66a96e1cce126a4e6ba28962f8",
+    "src/visual_peer_inspector/workflows/representation_confirmation_ds2.py": "a51832f6daede44f81f8316ba0837404e6de6c850d11c14ad3b8b3c3092bfb08",
+    "src/visual_peer_inspector/workflows/representation_ds0.py": "28e3d372149ce77ffcc7dc7aea2c165b36762bed8f7260e861e97bbdefeeaa72",
+    "src/visual_peer_inspector/workflows/representation_ds1.py": "50ecc5408c08ffe7fc21384429358f148b2ff83c582c8da688db983cd23d4c87",
+    "src/visual_peer_inspector/workflows/runtime_failures.py": "030c43705d9c206b3632cbc8f7aa86921ab335bc3a4818b49a7eb5333c509a23",
+    "src/visual_peer_inspector/workflows/sam_confirmation_ds2.py": "46836909991cfa5d558b45b530dd5d63de5af7f19c2d2cb7dbaa4c52a76def3c",
+    "src/visual_peer_inspector/workflows/sam_ds0.py": "68cfbc71128529cce39b45ca28598d3d04331062c5adf115c0889b1c76b8faba",
+    "src/visual_peer_inspector/workflows/sam_ds1.py": "66136e41a96b44e1cf2ca9ac2dd9b3c4a29584a0302f2040eba96f95ee08c501",
+    "src/visual_peer_inspector/workflows/scoring_comparison.py": "2558291c0282501975b6a522f642ca7e19ccc7fcc6182f5881e5046a3691eefd",
+    "src/vpi_next_evaluation/__init__.py": "926ab7c3f994174ff7bbdeba37ae7a130b9643f985ee2c0871a8f593716b4dbe",
+    "src/vpi_next_evaluation/cache_shards.py": "bd95fafe8a6ad4f35feb21685d3216dd6e3ed14c53d5bc1acf2a239265f9eae8",
+    "src/vpi_next_evaluation/contracts.py": "3c601283a88c49468198bd8e1911af847dd46a5d5b246eddcb25f9cbdc2caaa1",
+    "src/vpi_next_evaluation/diagnostic_figures.py": "b226dbf61a20e49a941480b95552022d541ea10f4666cd845655de5d524d0a4a",
+    "src/vpi_next_evaluation/exposure.py": "e15e3423828a8fe9e787d348e59487d87ba4b55bf943db1cbf7a1261134d0e82",
+    "src/vpi_next_evaluation/feature_remap.py": "46bc65ec6a907c7f518c1bc12065b52806fb803b3bc953315ef02f3d25aabf67",
+    "src/vpi_next_evaluation/gpu_compatibility.py": "f721a0341d4c992eecdde093a353ba89d67162e63f92c3483556a68fa3c4d6be",
+    "src/vpi_next_evaluation/native_cache.py": "742361a07344a425e0f0ea52d4b07205611596d2f64519b47f11cea7c6d2de43",
+    "src/vpi_next_evaluation/native_evaluator.py": "dff93904c591cd4137aa976484bb7c1e3e1017a4c89025090b09246e3d14ad3b",
+    "src/vpi_next_evaluation/native_regions.py": "bfc3834864b91e355cc5ac56433723dd9de958fc390ae2e0941bd2ee69d8d7ce",
+    "src/vpi_next_evaluation/native_rgb.py": "dc15cc1426028c3e6f8bd485b68fda9530f2dc166678aa443db0040e43c7fcc4",
+    "src/vpi_next_evaluation/official.py": "75ce19788698312d5c5e7563fd13ce2d04f5668864b882a6c3bab98604ae53d7",
+    "src/vpi_next_evaluation/official_evaluation.py": "d67c68a80c0266dfc34b7c28faca630a36dc11cfb31208c4246392610a58b482",
+    "src/vpi_next_evaluation/official_reporting.py": "92c2889f12bec67070c7b1cff7907465b4b28cc9181d08fe9cd699ad54fbde08",
+    "src/vpi_next_evaluation/original.py": "f1ab06f9421f4fcdb36a7155d69190593f7b3247cf5d19049d0168a8b32595c8",
+    "src/vpi_next_evaluation/raw_reference.py": "a35e9fe018c4100b0b74ef0c69c7947afb1548dca79d77322a5101e3efcb0f58",
+    "src/vpi_next_evaluation/region_shards.py": "fb42dcc31f0da7ee993718d51a0ce5bba615dd14d3a02cb793e266a177a2c6c3",
+    "src/vpi_next_evaluation/reporting.py": "04858d9094bd0d22a4d76915d13023f65174451dc6f214c4c70ec0f0e2497461",
+    "src/vpi_next_evaluation/tensor_cache.py": "451717cadbb5af1d3389d2ff27bdc81718cfec8d2a3c02a3a2ee45eeae3e2b4c",
+    "src/vpi_object_bank/__init__.py": "7bfaddaea92e6ef168da1351e6de074994d99deff6dba50c2087f62cd589af5e",
+    "src/vpi_object_bank/evaluation.py": "e55d92d5f72d25ca52267be1759aed8c0d8f5095361457fdfac0f666502ec0af",
+    "src/vpi_object_bank/extraction.py": "c03a3dd13772e9ba4bd6a6a873ac2d58ccf90599430dc975795890ab42de0541",
+    "src/vpi_object_bank/inputs.py": "73189a22f398945911ea1ecce1f9a3eb4648f41095ed58f00189ff4a71143584",
+    "src/vpi_object_bank/prediction.py": "f6774700e16f4704ed5d31e9bdc78381d9edb83a41d6e11302f8bf4be784a0c1",
+    "src/vpi_object_bank/protocol.py": "205b5515fcc3f3f025335aa45d83c6fe22e3e449bae8242d75fd64f1acf8b233",
+    "src/vpi_object_bank/reporting.py": "c11b2b27710bd95e54c568ee392cbff6481df224a0627ab13e459203226f20fd",
+    "src/vpi_object_bank/scoring.py": "d02b53263a5eeaf1a3128a1dab9bdd21f4e15041ab08445142b884e355f350bf",
+    "src/vpi_object_bank/selected_demo.py": "cd27a6569a0452f0b8e5fc7ee4fdb329a94b3318a3b1794f17768464e2fc511f",
+    "src/vpi_object_bank/storage.py": "6271149081154f7eaefa3a20e799d46ec4e00fb967fe5186a6eb45f70dfd576f",
+    "src/vpi_object_mapping/__init__.py": "033ca8805f205f310b5a4062caf0431ac1a57dc6738966af63f3074e4601866a",
+    "src/vpi_object_mapping/evaluation.py": "d3f35199981a273847968c949d7ef7506854ab3d66d309df1e503eb2c7ab6e6a",
+    "src/vpi_object_mapping/matching.py": "83e18b46aec1644076007ef89253c2e45917f71dd8e93fee2c0d6fc9b3d46d8a",
+    "src/vpi_object_mapping/prediction.py": "1d5100fc976c1404f51a67d6f0774a8907ac6551437d8daf675087838f2d85e6",
+    "src/vpi_object_mapping/protocol.py": "d20deeb7de4f690163793bdf480de30f517e6590214e4ac88007fd8e9d769f51",
+    "src/vpi_object_mapping/reporting.py": "d3d2efc8c3635076cda126c199c16491f9c05d76a5348db2453ce0ee6738d0c5",
+    "src/vpi_remaining_evaluation/__init__.py": "793dd7cce868c8f8e27852b32aadc45b6e6784530830d507312775789d47d071",
+    "src/vpi_remaining_evaluation/cohort.py": "0946741c05ac8923e67a07253c37e4e999df6a36b01e56d95b09e284c76e0ea2",
+    "src/vpi_remaining_evaluation/gates.py": "e4ba9c6a11d9cad8249441bc93d8f53296c1aff1b93078a9c0b1b413f4477975",
+    "src/vpi_remaining_evaluation/reporting.py": "ee21eab9b293e4ddc5e52f24d6bb579f2057297777dda0a90cd465fa36087ca5",
+    "src/vpi_remaining_evaluation/workbench.py": "ae7d8fa73900a43b3c77a23047bec891b670743433dc30438d1d97e77e89c792"
+  },
+  "view_rule": "capture-order first five, then remaining two or three"
+}

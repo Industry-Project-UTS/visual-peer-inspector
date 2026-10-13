@@ -66,6 +66,16 @@ internal-lock cohort, five-view tie-aware top-1 was 22.00% automatic and
 61.72% assisted. Automatic results require review; assisted readiness follows
 the calibration-fitted policy. The official 10-series remains pending.
 
+## Supplementary team-collected real-photo study
+
+The two [real-photo notebooks and evidence](../reports/real-photo-evaluation/README.md)
+completed 58 Automatic inspections over 29 scenes and 231 unique team-collected
+photos on 13 October 2026. Runnable sources are under `real-photo-evaluation/a/`
+and `real-photo-evaluation/b/`; unchanged successful exports are under
+`executed/real-photo-evaluation/`. This qualitative study reuses the frozen
+method and reports both visible successes and correspondence/selection failures.
+It does not supply independently labelled real-photo accuracy.
+
 ## Dependency flow
 
 ```mermaid

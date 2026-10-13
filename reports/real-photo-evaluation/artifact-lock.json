@@ -1,0 +1,29 @@
+{
+  "files": {
+    "notebooks/executed/real-photo-evaluation/vpi-real-photo-29-part-a-20261013.ipynb": "73a65ada98e510443b636b763cde51f6c6be49ea6351a346a5384e9a3e20d307",
+    "notebooks/executed/real-photo-evaluation/vpi-real-photo-29-part-b-20261013.ipynb": "cffe754113de3c64b163628c830ff296db1b19f38bd26e59d4513c90b6d012b4",
+    "notebooks/real-photo-evaluation/a/kernel-metadata.json": "3bac3df2be09ce261a1bf0f0ade8e6ded99b0285b6f456536696b7fc886deb20",
+    "notebooks/real-photo-evaluation/a/real-photo-batch.ipynb": "09d9588b4c0e9d9ea4e681400917be9424baf698e7c51ba87ea62f02d1dcf7a9",
+    "notebooks/real-photo-evaluation/b/kernel-metadata.json": "175b026db793773af1b5e150bd923732da0d3e8cadc9fc16bfbbd0783b13dec1",
+    "notebooks/real-photo-evaluation/b/real-photo-batch.ipynb": "4b8360c1706391eb2589e64f676a49cb0e286b17839fb6b8407e24d285d3eb80",
+    "reports/real-photo-evaluation/README.md": "8332b319d7f1a838c88f333c233afd3a5feeac39ca5da4cf1ba287ea11b7b51d",
+    "reports/real-photo-evaluation/automatic-inspection-results.csv": "df8914ba1e0b6047c92c50d85ce03e81e8ab00bab5a8e9cedaf30bc8c13786e7",
+    "reports/real-photo-evaluation/case-results.json": "6753d509d3c34edeb562cfc3ad13bab2f35fa9dc332924aac99e0050735a7637",
+    "reports/real-photo-evaluation/collection-inventory.json": "899e575055d2b30ee114779986603029d6fe06a3dbac36801b26a880634983a0",
+    "reports/real-photo-evaluation/descriptive-summary.json": "5e3a14e666afb82950c0603a265fcf3f320e6d36627b82bc89b12d3f481f772b",
+    "reports/real-photo-evaluation/input-manifest.json": "c9e3b280fbccf6dc0fbe0b0972b52a936efb038733b999a35951fe72eaaf9d7a",
+    "reports/real-photo-evaluation/inspection-figures/S004-A.png": "b8065b7113dce626461f8e24af2242a7398a012f9cd8734190c4600c709f5b20",
+    "reports/real-photo-evaluation/inspection-figures/S005-B.png": "53af825056c9686ea94843b1bfa79dcdb7aa1eb0e8b109bf40bcb86674af2172",
+    "reports/real-photo-evaluation/inspection-figures/S014-B.png": "d736e0f4a2638b3a97b41f2094a603f22f02888d1d706fac26fb86dc0603a49a",
+    "reports/real-photo-evaluation/inspection-figures/S019-B.png": "3117dff09c6ce25f62f12031e7a26d9efa3b23a4dce42283635833ffa06cb01e",
+    "reports/real-photo-evaluation/inspection-figures/S027-B.png": "7fb99a9bfa4214afaba3b22e67f77b98d32d153f0c2ce2e0e42d3d60ea3ee1a0",
+    "reports/real-photo-evaluation/publication-receipt.json": "ca978a82412a561654a6fcf5737eda9f0e322436f0afb4bdf09ff189d9ca833e",
+    "reports/real-photo-evaluation/scene-review.csv": "939ee8ba3083fbf514b28b9daf54f26f8bb78a211c8e9cd81c293ead4e3ed50d",
+    "reports/real-photo-evaluation/visual-review.csv": "0eff8620c0e687133f223508ad2bfd196022fdf041503a58843bcb164531bc1c",
+    "scripts/real_photo/prepare_input_package.py": "85bda5ebeb84392b835eebe3f042b754e133c096a9ee518b065412519d2bd5f7",
+    "scripts/real_photo/run_batch.py": "90691b7c0037faa200473e735917fe8f0028ae1c3b025f38150eb71b7c42affa"
+  },
+  "manifest_sha256": "c9e3b280fbccf6dc0fbe0b0972b52a936efb038733b999a35951fe72eaaf9d7a",
+  "schema": "vpi-real-photo-compact-evidence-lock/v1",
+  "scope": "Only the compact publication files. Full per-case media and original run locks remain outside Git."
+}

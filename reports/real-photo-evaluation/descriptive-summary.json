@@ -1,0 +1,51 @@
+{
+  "accuracy_evaluated": false,
+  "assisted_executed": false,
+  "descriptive_filename_corrections": {
+    "S017": "Photos show muffins, despite source brownie folder name.",
+    "S021": "Pink doughnut has broken or missing icing; a bite is not clearly established.",
+    "S026": "Photos show barbecue sauce portions, despite source jam folder name.",
+    "S029": "Photos show an opened wrapper and broken bar."
+  },
+  "early_preview_matches_verified_evidence": 58,
+  "evidence_locks": {
+    "a": "fc9578ebc5d9c442a2920e2820472b89c61dd6085145a313483dd3ae25cc68d4",
+    "b": "a20b283774e5580ef0a334b65c5f103cedfee784ae3fb1ef6c6c976ae43bf666"
+  },
+  "final_report_changed_by_this_publication": false,
+  "full_study_scene_count": 29,
+  "inspections_attempted": 58,
+  "inspections_complete": 58,
+  "inspections_failed": 0,
+  "interpretation": "Support measures matching coverage, not correctness. All cases retained.",
+  "limitations": [
+    "No independent annotations or image/pixel ground truth; these counts are not accuracy metrics.",
+    "58 inspections reuse 29 scenes; they are not 58 independent scenes.",
+    "S001 and S002 repeat earlier demo scenes; 27 scenes are additional.",
+    "All 58 inspections require review under the unchanged Automatic policy.",
+    "All views were evaluated; shortlisted examples are retrospective selections.",
+    "Assisted mode and the deployed web app were not tested."
+  ],
+  "manifest_sha256": "c9e3b280fbccf6dc0fbe0b0972b52a936efb038733b999a35951fe72eaaf9d7a",
+  "partial_coverage": false,
+  "qualitative_judgement_counts": {
+    "different_normal_object_selected": 6,
+    "mixed_normal_and_anomalous_objects_selected": 2,
+    "no_unique_selection": 2,
+    "visible_anomaly_selected_all_supported_views": 10,
+    "visible_anomaly_selected_partial_support": 38
+  },
+  "qualitative_reviewed_inspections": 58,
+  "report_recommendation": "Optional supplementary qualitative case study, including strong selections and matching/selection failures. Keep the existing benchmark central; do not claim real-photo accuracy.",
+  "review_states": {
+    "insufficient_evidence": 0,
+    "result_ready": 0,
+    "review_required": 58
+  },
+  "reviewer": "Codex qualitative image review",
+  "scene_count": 29,
+  "schema": "vpi-real-photo-descriptive-analysis/v1",
+  "selected_mask_reviewed_inspections": 10,
+  "unique_selection_with_all_view_support": 10,
+  "views_attempted": 231
+}
