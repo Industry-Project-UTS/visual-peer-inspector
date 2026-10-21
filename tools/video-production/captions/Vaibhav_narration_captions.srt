@@ -1,0 +1,135 @@
+1
+00:00:01,140 --> 00:00:03,560
+One of these bottles is missing its cap.
+
+2
+00:00:03,990 --> 00:00:07,284
+From another angle, the same bottle appears in a
+different position.
+
+3
+00:00:07,843 --> 00:00:09,873
+Our project, Visual Peer Inspector,
+
+4
+00:00:10,233 --> 00:00:14,224
+explores how to identify an unusual item among
+similar products
+
+5
+00:00:14,684 --> 00:00:17,404
+and show the evidence across several
+photographs.
+
+6
+00:00:17,944 --> 00:00:20,524
+The intended setting is small-batch inspection.
+
+7
+00:00:21,242 --> 00:00:24,782
+The system uses the other objects in the scene
+as its reference.
+
+8
+00:00:25,172 --> 00:00:27,312
+LocateAnything finds candidate objects,
+
+9
+00:00:27,732 --> 00:00:29,312
+SAM separates their foreground,
+
+10
+00:00:29,762 --> 00:00:32,152
+and DINOv2 extracts visual features.
+
+11
+00:00:32,532 --> 00:00:36,272
+Our pipeline compares the objects and combines
+evidence across views.
+
+12
+00:00:36,922 --> 00:00:39,792
+Sreekar will now show how this works in the web
+app.
+
+13
+00:02:41,263 --> 00:02:45,003
+Our main study used 2,000 selected ToysAD-8K
+scenes:
+
+14
+00:02:45,313 --> 00:02:46,723
+1,000 for development,
+
+15
+00:02:46,923 --> 00:02:50,653
+600 for calibration and 400 for internal
+evaluation.
+
+16
+00:02:51,133 --> 00:02:56,133
+With five views, assisted top-1 accuracy was
+61.72%,
+
+17
+00:02:56,513 --> 00:02:59,213
+compared with 22% for Automatic.
+
+18
+00:02:59,633 --> 00:03:03,583
+These are tie-aware averages across predefined
+view combinations.
+
+19
+00:03:04,183 --> 00:03:09,303
+The assisted benchmark used dataset-supplied
+object matches, rather than a human-user study.
+
+20
+00:03:09,963 --> 00:03:14,168
+The routes also use different scoring rules, so
+matching alone does not explain the gap.
+
+21
+00:03:15,513 --> 00:03:19,703
+Automatic matching remains unreliable, and
+supplementary dataset results were lower.
+
+22
+00:03:19,933 --> 00:03:23,773
+Historical exposure to related dataset objects
+also limits the evaluation.
+
+23
+00:03:24,333 --> 00:03:27,643
+We have not established false-alarm rates for
+all-normal batches
+
+24
+00:03:27,643 --> 00:03:29,843
+or measured operator time savings.
+
+25
+00:03:30,253 --> 00:03:33,263
+The potential value is a clearer inspection
+review process,
+
+26
+00:03:33,593 --> 00:03:37,086
+but the current prototype cannot certify that a
+batch is defect-free.
+
+27
+00:03:38,863 --> 00:03:43,083
+Next, we would improve matching and
+independently test normal and unusual groups.
+
+28
+00:03:43,453 --> 00:03:45,983
+We delivered a working prototype with measured
+limits,
+
+29
+00:03:46,484 --> 00:03:49,314
+turning photographs into evidence an operator
+can review.
