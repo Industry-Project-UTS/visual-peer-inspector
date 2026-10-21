@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "duration_seconds": 240.366667,
+  "video_url": "https://drive.google.com/file/d/1LR95jNu69FzyNajPrL7KpzZ4HSMU7vIl/view",
+  "video_sha256": "0084c7d90a4664d3cb4368981b70cdbcdf774537f06efa4d1bd8eb11eb14f2d2",
+  "video_format": {
+    "width": 1280,
+    "height": 720,
+    "frames_per_second": 30
+  },
+  "scope": "Vaibhav narration only; Sreekar narration and credits are not transcribed here.",
+  "alignment_method": "Each original cue start and end was located independently by normalized waveform cross-correlation between the private narration recording and the final MP4, decoded to mono 8000 Hz. Boundaries are rounded to milliseconds. Private recordings and video are excluded.",
+  "alignment_window_seconds": 0.8,
+  "cues": [
+    {
+      "segment": "V01",
+      "start": 1.14,
+      "end": 3.56,
+      "text": "One of these bottles is missing its cap.",
+      "start_correlation": 0.9999,
+      "end_correlation": 0.9999
+    },
+    {
+      "segment": "V01",
+      "start": 3.99,
+      "end": 7.284,
+      "text": "From another angle, the same bottle appears in a different position.",
+      "start_correlation": 0.9999,
+      "end_correlation": 0.9999
+    },
+    {
+      "segment": "V01",
+      "start": 7.843,
+      "end": 9.873,
+      "text": "Our project, Visual Peer Inspector,",
+      "start_correlation": 0.9999,
+      "end_correlation": 0.9999
+    },
+    {
+      "segment": "V01",
+      "start": 10.233,
+      "end": 14.224,
+      "text": "explores how to identify an unusual item among similar products",
+      "start_correlation": 1.0,
+      "end_correlation": 0.9999
+    },
+    {
+      "segment": "V01",
+      "start": 14.684,
+      "end": 17.404,
+      "text": "and show the evidence across several photographs.",
+      "start_correlation": 0.9999,
+      "end_correlation": 0.9999
+    },
+    {
+      "segment": "V01",
+      "start": 17.944,
+      "end": 20.524,
+      "text": "The intended setting is small-batch inspection.",
+      "start_correlation": 0.9999,
+      "end_correlation": 0.9998
+    },
+    {
+      "segment": "V02",
+      "start": 21.242,
+      "end": 24.782,
+      "text": "The system uses the other objects in the scene as its reference.",
+      "start_correlation": 0.9999,
+      "end_correlation": 0.9999
+    },
+    {
+      "segment": "V02",
+      "start": 25.172,
+      "end": 27.312,
+      "text": "LocateAnything finds candidate objects,",
+      "start_correlation": 1.0,
+      "end_correlation": 0.9999
+    },
+    {
+      "segment": "V02",
+      "start": 27.732,
+      "end": 29.312,
+      "text": "SAM separates their foreground,",
+      "start_correlation": 0.9999,
+      "end_correlation": 0.9999
+    },
+    {
+      "segment": "V02",
+      "start": 29.762,
+      "end": 32.152,
+      "text": "and DINOv2 extracts visual features.",
+      "start_correlation": 0.9999,
+      "end_correlation": 1.0
+    },
+    {
+      "segment": "V02",
+      "start": 32.532,
+      "end": 36.272,
+      "text": "Our pipeline compares the objects and combines evidence across views.",
+      "start_correlation": 0.9998,
+      "end_correlation": 0.9999
+    },
+    {
+      "segment": "V02",
+      "start": 36.922,
+      "end": 39.792,
+      "text": "Sreekar will now show how this works in the web app.",
+      "start_correlation": 0.9999,
+      "end_correlation": 0.9998
+    },
+    {
+      "segment": "V03",
+      "start": 161.263,
+      "end": 165.003,
+      "text": "Our main study used 2,000 selected ToysAD-8K scenes:",
+      "start_correlation": 0.9741,
+      "end_correlation": 0.9947
+    },
+    {
+      "segment": "V03",
+      "start": 165.313,
+      "end": 166.723,
+      "text": "1,000 for development,",
+      "start_correlation": 0.9877,
+      "end_correlation": 0.993
+    },
+    {
+      "segment": "V03",
+      "start": 166.923,
+      "end": 170.653,
+      "text": "600 for calibration and 400 for internal evaluation.",
+      "start_correlation": 0.9903,
+      "end_correlation": 0.9735
+    },
+    {
+      "segment": "V03",
+      "start": 171.133,
+      "end": 176.133,
+      "text": "With five views, assisted top-1 accuracy was 61.72%,",
+      "start_correlation": 0.9908,
+      "end_correlation": 0.9956
+    },
+    {
+      "segment": "V03",
+      "start": 176.513,
+      "end": 179.213,
+      "text": "compared with 22% for Automatic.",
+      "start_correlation": 0.9904,
+      "end_correlation": 0.9919
+    },
+    {
+      "segment": "V03",
+      "start": 179.633,
+      "end": 183.583,
+      "text": "These are tie-aware averages across predefined view combinations.",
+      "start_correlation": 0.9877,
+      "end_correlation": 0.9847
+    },
+    {
+      "segment": "V03",
+      "start": 184.183,
+      "end": 189.303,
+      "text": "The assisted benchmark used dataset-supplied object matches, rather than a human-user study.",
+      "start_correlation": 0.9901,
+      "end_correlation": 0.9952
+    },
+    {
+      "segment": "V03",
+      "start": 189.963,
+      "end": 194.168,
+      "text": "The routes also use different scoring rules, so matching alone does not explain the gap.",
+      "start_correlation": 0.9931,
+      "end_correlation": 0.9904
+    },
+    {
+      "segment": "V04",
+      "start": 195.513,
+      "end": 199.703,
+      "text": "Automatic matching remains unreliable, and supplementary dataset results were lower.",
+      "start_correlation": 0.987,
+      "end_correlation": 0.9953
+    },
+    {
+      "segment": "V04",
+      "start": 199.933,
+      "end": 203.773,
+      "text": "Historical exposure to related dataset objects also limits the evaluation.",
+      "start_correlation": 0.9901,
+      "end_correlation": 0.9858
+    },
+    {
+      "segment": "V04",
+      "start": 204.333,
+      "end": 207.643,
+      "text": "We have not established false-alarm rates for all-normal batches",
+      "start_correlation": 0.9843,
+      "end_correlation": 0.9917
+    },
+    {
+      "segment": "V04",
+      "start": 207.643,
+      "end": 209.843,
+      "text": "or measured operator time savings.",
+      "start_correlation": 0.9892,
+      "end_correlation": 0.9721
+    },
+    {
+      "segment": "V04",
+      "start": 210.253,
+      "end": 213.263,
+      "text": "The potential value is a clearer inspection review process,",
+      "start_correlation": 0.9881,
+      "end_correlation": 0.9966
+    },
+    {
+      "segment": "V04",
+      "start": 213.593,
+      "end": 217.086,
+      "text": "but the current prototype cannot certify that a batch is defect-free.",
+      "start_correlation": 0.9926,
+      "end_correlation": 0.994
+    },
+    {
+      "segment": "V05",
+      "start": 218.863,
+      "end": 223.083,
+      "text": "Next, we would improve matching and independently test normal and unusual groups.",
+      "start_correlation": 0.9825,
+      "end_correlation": 0.9939
+    },
+    {
+      "segment": "V05",
+      "start": 223.453,
+      "end": 225.983,
+      "text": "We delivered a working prototype with measured limits,",
+      "start_correlation": 0.9904,
+      "end_correlation": 0.9907
+    },
+    {
+      "segment": "V05",
+      "start": 226.484,
+      "end": 229.314,
+      "text": "turning photographs into evidence an operator can review.",
+      "start_correlation": 0.9927,
+      "end_correlation": 0.9941
+    }
+  ]
+}

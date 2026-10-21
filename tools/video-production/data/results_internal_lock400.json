@@ -1,0 +1,67 @@
+{
+ "source": "reports/remaining-cohort-workbench/internal-lock400/tables (commit 12cee36)",
+ "routes": {
+  "assisted_correspondence": {
+   "method": "object_bank_top2",
+   "views": {
+    "1": [
+     42.38,
+     39.03,
+     45.84
+    ],
+    "2": [
+     52.34,
+     48.4,
+     56.01
+    ],
+    "3": [
+     57.9,
+     53.45,
+     62.26
+    ],
+    "5": [
+     61.72,
+     57.1,
+     66.14
+    ]
+   },
+   "five_view_schedules": {
+    "five-primary": 62.77,
+    "five-rotated-01": 59.64,
+    "five-rotated-02": 63.21,
+    "five-rotated-03": 61.27
+   }
+  },
+  "automatic_predicted": {
+   "method": "winner_cluster_consensus",
+   "views": {
+    "1": [
+     41.32,
+     37.73,
+     44.97
+    ],
+    "2": [
+     32.98,
+     30.02,
+     36.13
+    ],
+    "3": [
+     25.88,
+     23.04,
+     29.0
+    ],
+    "5": [
+     22.0,
+     18.87,
+     25.26
+    ]
+   },
+   "five_view_schedules": {
+    "five-primary": 19.92,
+    "five-rotated-01": 22.12,
+    "five-rotated-02": 25.04,
+    "five-rotated-03": 20.93
+   }
+  }
+ }
+}
